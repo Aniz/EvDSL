@@ -1,0 +1,161 @@
+package rise.splcc.repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import rise.splcc.data.{{entity.name}};
+import rise.splcc.exception.{{entity.name}}Exception;
+import rise.splcc.exception.RepositoryException;
+import rise.splcc.util.PersistenceMechanismException;
+import rise.splcc.util.PersistenceMechanismRDBMS;
+
+public class {{entity.name}}BDR implements {{entity.name}}{
+
+	
+	private static {{entity.name}}BDR instance;
+	private PersistenceMechanismRDBMS pm;
+	
+	public {{entity.name}}BDR(){
+		try{
+			pm = PersistenceMechanismRDBMS.getInstance();
+			pm.connect();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+	
+	public synchronized static {{entity.name}}BDR getInstance(){
+		if(instance == null){
+			instance = new {{entity.name}}BDR();
+		}
+		return instance;
+	}
+	
+	@Override
+	public void insert({{entity.name}} {{entity.name}}) throws RepositoryException{
+		try {
+			Statement statement = (Statement) pm.getCommunicationChannel();
+			statement.executeUpdate("INSERT INTO {{entity.name}} (idEntity,IdUser) "
+					+ "Values('"+{{entity.name}}.getIdEntity() +"', '"
+					            +{{entity.name}}.getIdOrganizer()+"')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PersistenceMechanismException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+		
+	}
+
+	@Override
+	public void remove({{entity.name}} {{entity.name}}) throws {{entity.name}}NotFoundException,
+			RepositoryException {
+		try{
+            Statement statement = (Statement) pm.getCommunicationChannel();
+		    int i = statement.executeUpdate("DELETE FROM {{entity.name}} WHERE id{{entity.name}} = '"+ {{entity.name}}.getIdEntity() +"'AND idUser ='"+{{entity.name}}.getIdOrganizer()+"'");
+            if (i == 0) {
+            	throw new {{entity.name}}NotFoundException({{entity.name}}.getIdEntity());
+            }
+		} catch(PersistenceMechanismException e){
+            throw new RepositoryException(e);
+		} catch(SQLException e){
+            throw new RepositoryException(e);            
+		} finally {
+			try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+		
+	}
+
+	@Override
+	public {{entity.name}} search(int idEntity) throws {{entity.name}}NotFoundException,
+			RepositoryException {
+		{{entity.name}} {{entity.name}} = null;
+		{{entity.name}} = new {{entity.name}}();
+        try {
+            Statement statement = (Statement) pm.getCommunicationChannel();
+            ResultSet resultset = statement.executeQuery("Select * from {{entity.name}} WHERE idEntity =" + idEntity);
+            if (resultset.next()) { 
+            	
+            	{{entity.name}}.setIdEntity(resultset.getInt("idEntity"));
+            	{{entity.name}}.setIdOrganizer(resultset.getInt("idUser"));
+            	
+            } else {
+            	throw new {{entity.name}}NotFoundException(idEntity);
+            }
+			resultset.close();
+		} catch(PersistenceMechanismException e){
+            throw new RepositoryException(e);
+        } catch (SQLException e) {
+			throw new RepositoryException(e);
+		} finally {
+			try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+		return {{entity.name}};
+	}
+
+	@Override
+	public void update({{entity.name}} {{entity.name}}) throws {{entity.name}}NotFoundException,
+			RepositoryException {
+		try {
+    	    Statement statement = (Statement) pm.getCommunicationChannel();
+
+    	    statement.executeUpdate("UPDATE {{entity.name}} SET id{{entity.name}} = '"+ {{entity.name}}.getIdEntity() +
+    	    		                                 "', idUser = '" + {{entity.name}}.getIdOrganizer() +"'");
+
+		} catch(PersistenceMechanismException e){
+            throw new RepositoryException(e);
+		} catch (SQLException e) {
+		    throw new RepositoryException(e);
+	    } finally {
+	    	try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+		
+	}
+
+	@Override
+	public boolean isThere({{entity.name}} {{entity.name}}) throws RepositoryException {
+		boolean answer = false;
+        try {
+            Statement statement = (Statement) pm.getCommunicationChannel();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM {{entity.name}} WHERE idEntity = '" + {{entity.name}}.getIdEntity() + "'AND idUser='" + {{entity.name}}.getIdOrganizer() +"'");
+            //ResultSet resultset = statement.executeQuery("select * from {{entity.name}} where idEntity = 1 AND idUser = 2;");
+            answer = resultset.next();
+			resultset.close();
+		} catch(PersistenceMechanismException e){
+            throw new RepositoryException(e);
+        } catch (SQLException e) {
+			throw new RepositoryException(e);
+		} finally {
+			try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+        return answer;
+	}
+
+}
+//#endif

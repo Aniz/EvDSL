@@ -1,0 +1,15 @@
+Create eventManager 
+
+add Speaker 
+    +banana : integer
+    banana : integer
+    
+    show Insert Update Remove
+
+add Organizer 
+    +banana : integer
+    banana : integer
+    
+    show Insert Update Remove ListAll
+    define Conflict
+    

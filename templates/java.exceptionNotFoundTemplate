@@ -1,0 +1,17 @@
+package rise.splcc.exception;
+
+public class {{entity.name}}FoundException extends Exception {
+
+    private int idEntity;
+
+    public {{entity.name}}NotFoundException(int idEntity){
+        super (EXC_NOT_FOUND);
+        this.idEntity = idEntity;
+    }
+
+    public int get{{entity.name}}(){
+        return idEntity;
+    }
+
+}
+//#endif
