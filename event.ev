@@ -1,15 +1,21 @@
 Create eventManager 
 
+add User
+	+bbbb : integer
+	show Insert
+
 add Speaker 
-    +banana : integer
-    banana : integer
-    
+    +nanica : integer
     show Insert Update Remove
 
 add Organizer 
     +banana : integer
-    banana : integer
-    
     show Insert Update Remove ListAll
-    define Conflict
-    
+
+add Event 
+    show Insert Update Remove ListAll
+		
+
+include Conflit
+include UserTypes a12 Avista
+include EventTypes a13

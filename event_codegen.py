@@ -89,24 +89,24 @@ def main(debug=False):
         componentDict = {"option":optionItem,"entity":entityItem}
         componentsArray.append(componentDict)
 
-    avaliableOptions = ["Speaker","Organizer"]
+    avaliableOptions = ["User","Speaker","Organizer","Event"]
     avaliableFunctions = ["Insert","Delete","Update"]
     chosenEntities = []
     chosenFunctions = []
     
     # Load Java template
-    copyCodeFile(entityCodeFolder,entityFolder,"User",jinja_env,entity)
-    copyCodeFile(controllerCodeFolder,controllerFolder,"UserControl",jinja_env,entity)    
-    copyCodeFile(repositoryCodeFolder,repositoryFolder,"UserRepository",jinja_env,entity)
-    copyCodeFile(repositoryCodeFolder,repositoryFolder,"UserRepositoryBDR",jinja_env,entity)
-    copyCodeFile(exceptionCodeFolder,exceptionFolder,"UserAlreadyInsertedException",jinja_env,entity)
-    copyCodeFile(exceptionCodeFolder,exceptionFolder,"UserNotFoundException",jinja_env,entity)
-    copyCodeFile(tableCodeFolder,tableFolder,"UserTableModel",jinja_env,entity)
-    copyCodeFile(tableCodeFolder,tableFolder,"UserTableRender",jinja_env,entity)
-    copyCodeFile(viewCodeFolder,viewFolder,"UserListAllScreenP",jinja_env,entity)
-    copyCodeFile(viewCodeFolder,viewFolder,"UserInsertScreenP",jinja_env,entity)
-    copyCodeFile(viewCodeFolder,viewFolder,"UserUpdateScreenP",jinja_env,entity)
-    copyCodeFile(viewCodeFolder,viewFolder,"UserRemoveScreenP",jinja_env,entity)
+    # copyCodeFile(entityCodeFolder,entityFolder,"User",jinja_env,entity)
+    # copyCodeFile(controllerCodeFolder,controllerFolder,"UserControl",jinja_env,entity)    
+    # copyCodeFile(repositoryCodeFolder,repositoryFolder,"UserRepository",jinja_env,entity)
+    # copyCodeFile(repositoryCodeFolder,repositoryFolder,"UserRepositoryBDR",jinja_env,entity)
+    # copyCodeFile(exceptionCodeFolder,exceptionFolder,"UserAlreadyInsertedException",jinja_env,entity)
+    # copyCodeFile(exceptionCodeFolder,exceptionFolder,"UserNotFoundException",jinja_env,entity)
+    # copyCodeFile(tableCodeFolder,tableFolder,"UserTableModel",jinja_env,entity)
+    # copyCodeFile(tableCodeFolder,tableFolder,"UserTableRender",jinja_env,entity)
+    # copyCodeFile(viewCodeFolder,viewFolder,"UserListAllScreenP",jinja_env,entity)
+    # copyCodeFile(viewCodeFolder,viewFolder,"UserInsertScreenP",jinja_env,entity)
+    # copyCodeFile(viewCodeFolder,viewFolder,"UserUpdateScreenP",jinja_env,entity)
+    # copyCodeFile(viewCodeFolder,viewFolder,"UserRemoveScreenP",jinja_env,entity)
 
     for op in optionsArray:
         if op.entity in avaliableOptions:

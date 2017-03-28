@@ -5,17 +5,24 @@
 EventModel:
     "Create" name=ID 
     components *= Component
-    actions *= Action
 ;
 
 Component:  
-     Option 
+     Option | Action
+;
+
+Option:
+  'add' entity=Entity '+'?
+  properties*=Property     
+  "show" views*=View 
+;
+
+Entity:
+  'Speaker'|'Organizer'|'User'|'Event'
 ;
 
 Property:
-    name=ID ':' type=[Type]     // type is a reference to Type instance.
-                                // There are two built-in simple types 
-                                // registered on meta-model in entity_test.py
+    name=ID ':' type=[Type]  
 ;
 
 // Type can be SimpleType or Entity
@@ -27,32 +34,21 @@ SimpleType:
     'type' name=ID
 ;
 
-Option:
-  'add' entity=Entity '+'?
-  properties*=Property     
-  "show" views*=View 
-  ("define" categories*=Category)?  
-;
-
-Action:
-  'include' actionType=[ActionType]
-  params*=Property
-;
-
-ActionType:
-  'Report Track' | 'Generate List' | 'Conflict' 
-;
-
-Entity:
-  'Speaker'|'Organizer'
-;
-
 View:
   'Insert' | 'Remove' | 'Update' | 'Search' | 'ListAll'
 ;
 
-Category:
+Action:
+  'include' actionType=[ActionType]
+  params*=Param
+;
+
+Param:
   name=ID
+;
+
+ActionType:
+  'UserTypes' | 'EventTypes' | 'Conflict' | 'Payment' 
 ;
 
 // Special rule for comments. Comments start with //
