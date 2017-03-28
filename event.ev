@@ -3,19 +3,55 @@ Create eventManager
 add User
 	+bbbb : integer
 	show Insert
+	define 	Associado,Profissional,Estudante.
 
 add Speaker 
     +nanica : integer
     show Insert Update Remove
-
+    
 add Organizer 
     +banana : integer
+    show Insert Update Remove ListAll
+    define GeneralChair, 
+		ProgramChair, 
+		WorkshopChair, 
+		TutorialChair,
+		ProceedingsChair,
+		PanelChair.
+
+add Reviewer 
     show Insert Update Remove ListAll
 
 add Event 
     show Insert Update Remove ListAll
 		
+add Payment
+	show Insert 
+	define Avista,Debito,Credito.
 
-include Conflit
-include UserTypes a12 Avista
-include EventTypes a13
+add Activity
+	show Insert 
+	define MiniCurso, 
+		Tutorial, 
+		Painel, 
+		Workshop,
+		MainTrack.
+
+add Assignment
+	show Insert
+
+add Submission
+	show Insert
+	define Completa,Parcial.
+
+add Author
+	show Insert
+
+include Conflit.
+include UserTypes a12 Avista.
+include EventTypes a13.
+include askCardInfo a13.
+
+if User.Avista -> askCardInfo 
+
+

@@ -8,17 +8,30 @@ EventModel:
 ;
 
 Component:  
-     Option | Action
+     Option | Action | Statment
+;
+
+Statment: 
+  condition=Condition entity=[Entity] '.' category=[Category] '->' actionType=[ActionType]
+;
+
+Condition:
+  "if" | "else"
 ;
 
 Option:
-  'add' entity=Entity '+'?
-  properties*=Property     
+  'add' entity=Entity 
+  ('+' properties*=Property)*     
   "show" views*=View 
+  ("define" categories*=Category[',']".")*
+;
+
+Category: 
+  name=ID
 ;
 
 Entity:
-  'Speaker'|'Organizer'|'User'|'Event'
+  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'CheckingCopy'|'Author'
 ;
 
 Property:
@@ -40,7 +53,7 @@ View:
 
 Action:
   'include' actionType=[ActionType]
-  params*=Param
+  params*=Param + "."
 ;
 
 Param:
@@ -48,7 +61,7 @@ Param:
 ;
 
 ActionType:
-  'UserTypes' | 'EventTypes' | 'Conflict' | 'Payment' 
+  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' 
 ;
 
 // Special rule for comments. Comments start with //

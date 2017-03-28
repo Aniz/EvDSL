@@ -69,63 +69,71 @@ def main(debug=False):
     jinja_env.filters['javatype'] = javatype
 
     entity = ""
-    
     optionItem = ""
     entityItem = ""
+    actionItem = ""
+    statmentItem = ""
 
     entitiesArray = []
     optionsArray = []
+    actionsArray = []
+    statmentsArray = []
     componentsArray = []
-    
+    componentOptionsArray = []
+    componentDict = {}
+    statmentDict = {}
+
     for component in event_model.components:
-        if component.__class__.__name__ == 'Entity':
-            entityItem = component
-            entitiesArray.append(component)
-            
+        if component.__class__.__name__ == 'Action':
+            actionItem = component
+            actionsArray.append(component)
+        
         elif component.__class__.__name__ == 'Option':
             optionItem = component
             optionsArray.append(component)
+            componentDict[optionItem.entity] = {"option":optionItem}
+            
+        elif component.__class__.__name__ == 'Statment':
+            statmentItem = component
+            statmentsArray.append(component)
         
-        componentDict = {"option":optionItem,"entity":entityItem}
-        componentsArray.append(componentDict)
+    for key,value in componentDict.items(): 
+        for statment in statmentsArray:
+            if key == statment.entity:
+                statmentDict[statment.actionType] = statment
+    
+        componentDict[key]["statments"] = statmentDict    
 
-    avaliableOptions = ["User","Speaker","Organizer","Event"]
+    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","CheckingCopy","Author"]
     avaliableFunctions = ["Insert","Delete","Update"]
     chosenEntities = []
     chosenFunctions = []
     
-    # Load Java template
-    # copyCodeFile(entityCodeFolder,entityFolder,"User",jinja_env,entity)
-    # copyCodeFile(controllerCodeFolder,controllerFolder,"UserControl",jinja_env,entity)    
-    # copyCodeFile(repositoryCodeFolder,repositoryFolder,"UserRepository",jinja_env,entity)
-    # copyCodeFile(repositoryCodeFolder,repositoryFolder,"UserRepositoryBDR",jinja_env,entity)
-    # copyCodeFile(exceptionCodeFolder,exceptionFolder,"UserAlreadyInsertedException",jinja_env,entity)
-    # copyCodeFile(exceptionCodeFolder,exceptionFolder,"UserNotFoundException",jinja_env,entity)
-    # copyCodeFile(tableCodeFolder,tableFolder,"UserTableModel",jinja_env,entity)
-    # copyCodeFile(tableCodeFolder,tableFolder,"UserTableRender",jinja_env,entity)
-    # copyCodeFile(viewCodeFolder,viewFolder,"UserListAllScreenP",jinja_env,entity)
-    # copyCodeFile(viewCodeFolder,viewFolder,"UserInsertScreenP",jinja_env,entity)
-    # copyCodeFile(viewCodeFolder,viewFolder,"UserUpdateScreenP",jinja_env,entity)
-    # copyCodeFile(viewCodeFolder,viewFolder,"UserRemoveScreenP",jinja_env,entity)
-
-    for op in optionsArray:
-        if op.entity in avaliableOptions:
-            copyCodeFile(entityCodeFolder,entityFolder,op.entity,jinja_env,op)
-            copyCodeFile(controllerCodeFolder,controllerFolder,op.entity+"Control",jinja_env,op)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,op.entity+"Repository",jinja_env,op)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,op.entity+"RepositoryBDR",jinja_env,op)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,op.entity+"AlreadyInsertedException",jinja_env,op)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,op.entity+"NotFoundException",jinja_env,op)
-            copyCodeFile(tableCodeFolder,tableFolder,op.entity+"TableModel",jinja_env,op)
-            copyCodeFile(tableCodeFolder,tableFolder,op.entity+"TableRender",jinja_env,op)
+    for key,value in componentDict.items():
+        if key in avaliableOptions:
+            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value)
+            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value)
+            copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,value)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,value)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value)
+            
+            if key not in ["Author"]:
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value)
+            
+            if key not in ["Assignment","Author"]:
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value)
     
-            for view in op.views:
-                copyCodeFile(viewCodeFolder,viewFolder,op.entity+view+"ScreenP",jinja_env,op)
+            # for view in op.views:
+            #     copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value)
+        else :
+            print("Option %s not found" % key)
 
-    facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
-    with open(join(facadeFolder,
-                   "%s.java" % ("RiSEventFacade")), 'w') as f:
-        f.write(facadeTemplate.render(entitiesArray=entitiesArray))
+    # facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
+    # with open(join(facadeFolder,
+    #                "%s.java" % ("RiSEventFacade")), 'w') as f:
+    #     f.write(facadeTemplate.render(entitiesArray=entitiesArray))
 
     # dot = pydot.Dot()
     # dot = pydot.graph_from_dot_file('Model_parse_tree.dot')
@@ -134,7 +142,7 @@ def main(debug=False):
 def copyCodeFile(src,dest,nameFile,jinja_env,var):
     codeFileTemplate = jinja_env.get_template(join(src,nameFile+'.java'))
     with open(join(dest,
-                       "%s.java" % nameFile), 'w') as f:
+                      "%s.java" % nameFile), 'w') as f:
             f.write(codeFileTemplate.render(data=var))
 
 def createFolder(dest,name):
