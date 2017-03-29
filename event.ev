@@ -50,9 +50,10 @@ add Author
 add CheckingCopy
 	show Insert
 
+add Receipt
+	show Insert
+
 include Conflit.
-include Receipt.
-include askCardInfo a13.
 
 if Payment.Credito -> askCardInfo 
 if Payment.Debito -> generateCarne

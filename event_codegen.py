@@ -9,7 +9,7 @@ import pydot
 from event_test import get_event_mm
 from pprint import pprint
 import shutil
-
+import sys
 def main(debug=False):
 
     this_folder = dirname(__file__)
@@ -95,7 +95,8 @@ def main(debug=False):
 
         componentDict[key]["statments"] = statmentDict    
     
-    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","CheckingCopy","Author"]
+    # sys.exit()  
+    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","CheckingCopy","Author","Receipt"]
     avaliableFunctions = ["Insert","Delete","Update"]
     chosenEntities = []
     chosenFunctions = []
@@ -113,7 +114,7 @@ def main(debug=False):
             if key not in ["Author"]:
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value)
             
-            if key not in ["Assignment","Author","CheckingCopy"]:
+            if key not in ["Assignment","Author","CheckingCopy","Receipt"]:
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value)
     
             # for view in op.views:

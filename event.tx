@@ -33,7 +33,7 @@ Category:
 ;
 
 Entity:
-  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy'
+  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy' | 'Receipt'
 ;
 
 Property:
