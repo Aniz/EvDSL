@@ -63,7 +63,7 @@ Param:
 ;
 
 ActionType:
-  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'gerarCarne' | 'gerarBoleto' 
+  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' 
 ;
 
 // Special rule for comments. Comments start with //

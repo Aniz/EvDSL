@@ -55,8 +55,8 @@ include Receipt.
 include askCardInfo a13.
 
 if Payment.Credito -> askCardInfo 
-if Payment.Debito -> gerarCarne
-if Payment.Avista -> gerarBoleto
+if Payment.Debito -> generateCarne
+if Payment.Avista -> generateBoleto
 
 def Activity -> reportsListofAuthors 
 def Activity -> reportsFrequencyperActivity 

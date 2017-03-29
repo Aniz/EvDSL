@@ -87,12 +87,14 @@ def main(debug=False):
             statmentsArray.append(component)
         
     for key,value in componentDict.items(): 
+        statmentDict = {}
         for statment in statmentsArray:
             if key == statment.entity:
                 statmentDict[statment.actionType] = statment
-    
-        componentDict[key]["statments"] = statmentDict    
+        
 
+        componentDict[key]["statments"] = statmentDict    
+    
     avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","CheckingCopy","Author"]
     avaliableFunctions = ["Insert","Delete","Update"]
     chosenEntities = []
