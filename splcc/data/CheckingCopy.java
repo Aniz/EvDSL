@@ -72,7 +72,7 @@ public class CheckingCopy {
 		return "CheckingCopy Id:"+ idCheckingCopy + "\nRegistration Id:" + idRegistration + "\nUser Id:" + idUser + "\nType:" + checkingCopyType.toString() + "\nDate of Issue:" + dateOfIssue;
 	}
 	
-	//#if ${CheckingCopyAtestado} == "T"
+	{% if 'reportsListofAuthors' in data.statments %}
 	public boolean emitirAtestado(String nome, String evento, String periodo) {
         Document documento = new Document();
      
@@ -115,9 +115,9 @@ public class CheckingCopy {
             return false;
         }
     }
-	//#endif
+	{% endif %}
 	
-	//#if ${CheckingCopyCertificado} == "T"
+	{% if 'checkingCopyCertificado' in data.statments %}
 	public boolean emitirCertificado(String nome, String evento, String periodo, String atividade) throws DocumentException, IOException {
         Document documento = new Document();
        
@@ -165,7 +165,7 @@ public class CheckingCopy {
             outputStream.flush();           
             return true;
     }
-	
+	{% endif %}
 	 private String getTexto(String evento, String periodo, String atividade) {
 		 String lista_minicursos = "\n\n";
 		 String texto = "";

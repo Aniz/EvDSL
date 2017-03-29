@@ -3,7 +3,7 @@ Create eventManager
 add User
 	+bbbb : integer
 	show Insert
-	define 	Associado,Profissional,Estudante.
+	types Associado,Profissional,Estudante.
 
 add Speaker 
     +nanica : integer
@@ -12,7 +12,7 @@ add Speaker
 add Organizer 
     +banana : integer
     show Insert Update Remove ListAll
-    define GeneralChair, 
+    types GeneralChair, 
 		ProgramChair, 
 		WorkshopChair, 
 		TutorialChair,
@@ -27,11 +27,11 @@ add Event
 		
 add Payment
 	show Insert 
-	define Avista,Debito,Credito.
+	types Avista,Debito,Credito.
 
 add Activity
 	show Insert 
-	define MiniCurso, 
+	types MiniCurso, 
 		Tutorial, 
 		Painel, 
 		Workshop,
@@ -42,16 +42,30 @@ add Assignment
 
 add Submission
 	show Insert
-	define Completa,Parcial.
+	types Completa,Parcial.
 
 add Author
 	show Insert
 
+add CheckingCopy
+	show Insert
+
 include Conflit.
-include UserTypes a12 Avista.
-include EventTypes a13.
+include Receipt.
 include askCardInfo a13.
 
-if User.Avista -> askCardInfo 
+if Payment.Credito -> askCardInfo 
+if Payment.Debito -> gerarCarne
+if Payment.Avista -> gerarBoleto
+
+def Activity -> reportsListofAuthors 
+def Activity -> reportsFrequencyperActivity 
+def CheckingCopy -> checkingCopyAtestado
+def CheckingCopy -> checkingCopyCertificado 
+def Event -> eventProgram
+def Event -> eventImportantDates
+def Event -> reportsFrequencyperEvent 
+
+
 
 

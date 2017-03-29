@@ -12,18 +12,20 @@ Component:
 ;
 
 Statment: 
-  condition=Condition entity=[Entity] '.' category=[Category] '->' actionType=[ActionType]
+  condition=Condition entity=[Entity] 
+  ('.' category=[Category])*
+  '->' actionType=ActionType
 ;
 
 Condition:
-  "if" | "else"
+  "if" | "else" | "def"
 ;
 
 Option:
   'add' entity=Entity 
   ('+' properties*=Property)*     
   "show" views*=View 
-  ("define" categories*=Category[',']".")*
+  ("types" categories*=Category[',']".")*
 ;
 
 Category: 
@@ -31,7 +33,7 @@ Category:
 ;
 
 Entity:
-  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'CheckingCopy'|'Author'
+  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy'
 ;
 
 Property:
@@ -61,7 +63,7 @@ Param:
 ;
 
 ActionType:
-  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' 
+  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'gerarCarne' | 'gerarBoleto' 
 ;
 
 // Special rule for comments. Comments start with //

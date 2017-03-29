@@ -145,7 +145,7 @@ public class Activity {
 	public String toString(){
 		return "Activity Id:"+ idActivity + "\nName:" + nameActivity + "\nDescription:" + descriptionActivity + "\nType:" + typeActivity.toString() + "\nValeu:" + value + "\nHourly Load:" + hourlyLoad + "\nDate:" + date + "\nHour:" + hour+ "\nN Of Part.::" + numberOfParticipants+ "\nReg. Limit:" + registrationLimit;
 	}
-	//#if ${ReportsFrequencyperActivity} == "T"
+	{% if 'reportsFrequencyperActivity' in data.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, String eventName) throws DocumentException, IOException{
         Document documento = new Document();
         String nomePasta = "doc_frequencia";
@@ -189,8 +189,9 @@ public class Activity {
             outputStream.close();
             outputStream.flush();
 	}
-	//#endif
-	//#if ${ReportsListofAuthors} == "T"
+	{% endif %}
+
+	{% if 'reportsListofAuthors' in data.statments %}
 	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity) throws DocumentException, IOException{
 		
 		List<String> authors = new ArrayList<String>(authorsPerActivity);
@@ -239,6 +240,6 @@ public class Activity {
             outputStream.close();
             outputStream.flush();
 	}
-	//#endif
+	{% endif %}
 }
 //#endif

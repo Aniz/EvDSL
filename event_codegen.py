@@ -68,33 +68,22 @@ def main(debug=False):
     # Register filter for mapping event type names to Java type names.
     jinja_env.filters['javatype'] = javatype
 
-    entity = ""
-    optionItem = ""
-    entityItem = ""
-    actionItem = ""
-    statmentItem = ""
-
-    entitiesArray = []
-    optionsArray = []
+    empty = ""
+    selectedOptionsArray = []
     actionsArray = []
     statmentsArray = []
-    componentsArray = []
-    componentOptionsArray = []
     componentDict = {}
     statmentDict = {}
 
     for component in event_model.components:
         if component.__class__.__name__ == 'Action':
-            actionItem = component
             actionsArray.append(component)
         
         elif component.__class__.__name__ == 'Option':
-            optionItem = component
-            optionsArray.append(component)
-            componentDict[optionItem.entity] = {"option":optionItem}
+            selectedOptionsArray.append(component.entity)
+            componentDict[component.entity] = {"option":component}
             
         elif component.__class__.__name__ == 'Statment':
-            statmentItem = component
             statmentsArray.append(component)
         
     for key,value in componentDict.items(): 
@@ -109,9 +98,9 @@ def main(debug=False):
     chosenEntities = []
     chosenFunctions = []
     
+    #Classes Definition
     for key,value in componentDict.items():
         if key in avaliableOptions:
-            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value)
             copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value)
             copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value)
             copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value)
@@ -122,13 +111,36 @@ def main(debug=False):
             if key not in ["Author"]:
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value)
             
-            if key not in ["Assignment","Author"]:
+            if key not in ["Assignment","Author","CheckingCopy"]:
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value)
     
             # for view in op.views:
             #     copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value)
         else :
             print("Option %s not found" % key)
+
+    #DepedentClassses
+    dependencesDict = {} 
+    dependencesDict["Review"] = "Reviewer","Submission"
+    dependencesDict["ActivityUser"] = "User","Activity"
+    dependencesDict["ActivitySpeaker"] = "Speaker","Activity"
+    dependencesDict["ActivityOrganizer"] = "Organizer","Activity"
+    dependencesDict["SubmissionAuthor"] = "Submission","Author"
+    dependencesDict["SubmissionUser"] = "Submission","User"
+    dependencesDict["Registration"] = "User","Event"
+   
+    for key,value in dependencesDict.items():
+        if all((w in selectedOptionsArray for w in value)):
+            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,empty)
+            copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,empty)    
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,empty)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,empty)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,empty)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,empty)
+           
+        if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
+            copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,empty)
+            copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,empty)
 
     # facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
     # with open(join(facadeFolder,
