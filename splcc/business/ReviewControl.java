@@ -22,7 +22,6 @@ public class ReviewControl {
 		this.reviews = repository;
 	}
 
-	
 	public void insert(Review review) throws ReviewAlreadyInsertedException, RepositoryException{
 		if (review != null) {
 			if (!reviews.isThere(review.getIdReview())) 
@@ -41,7 +40,6 @@ public class ReviewControl {
 	public void update(Review review) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
 		reviews.update(review);
 	}
-	
 	
 	public List<Review> getReviews() throws RepositoryException {
 		return reviews.getReviews();  

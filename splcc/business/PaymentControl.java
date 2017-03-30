@@ -33,8 +33,6 @@ public class PaymentControl {
         }
 	}
 	
-	
-	
 	public List<Payment> getPayments() throws RepositoryException {
 		return payments.getPayments();  
 	}

@@ -24,7 +24,7 @@ Condition:
 Option:
   'add' entity=Entity 
   ('+' properties*=Property)*     
-  "show" views*=View 
+  "show" commands*=Commands 
   ("types" categories*=Category[',']".")*
 ;
 
@@ -49,7 +49,7 @@ SimpleType:
     'type' name=ID
 ;
 
-View:
+Commands:
   'Insert' | 'Remove' | 'Update' | 'Search' | 'ListAll'
 ;
 
@@ -63,7 +63,8 @@ Param:
 ;
 
 ActionType:
-  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' 
+  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
+   | 'notificationsDeadline' | 'inserAttachmanet' | 'notificationsPaperAssignemnt' 
 ;
 
 // Special rule for comments. Comments start with //

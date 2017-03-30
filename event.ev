@@ -30,6 +30,7 @@ add Payment
 	types Avista,Debito,Credito.
 
 add Activity
+	+ ooii:string
 	show Insert 
 	types MiniCurso = Mini, 
 		Tutorial, 
@@ -67,6 +68,9 @@ def CheckgCopy -> checkingCopyCertificado
 def Event -> eventProgram
 def Event -> eventImportantDates
 def Event -> reportsFrequencyperEvent 
+def Submission -> inserAttachmanet
+def Assignment -> notificationsDeadline
+def Assignment -> notificationsPaperAssignemnt 
 
 
 

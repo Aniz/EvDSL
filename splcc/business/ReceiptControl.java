@@ -18,7 +18,6 @@ public class ReceiptControl {
 		this.receipts = repository;
 	}
 
-	
 	public void insert(Receipt receipt) throws ReceiptAlreadyInsertedException, RepositoryException{
 		if (receipt != null) {
 			if (!receipts.isThere(receipt.getIdReceipt())) 
@@ -29,7 +28,6 @@ public class ReceiptControl {
             throw new IllegalArgumentException();
         }
 	}
-
 
 	public List<Receipt> getReceipts() throws RepositoryException{
 		return receipts.getReceipts();  
