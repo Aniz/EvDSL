@@ -10,6 +10,9 @@ from event_test import get_event_mm
 from pprint import pprint
 import shutil
 import sys
+from textx.metamodel import metamodel_from_file
+from textx.export import metamodel_export, model_export
+
 def main(debug=False):
 
     this_folder = dirname(__file__)
@@ -34,6 +37,9 @@ def main(debug=False):
 
     srcgen_folder = createFolder(this_folder, 'srcgen')
     
+    dotFolder = createFolder(srcgen_folder, 'dot')
+    createDotFiles(event_mm,event_model,dotFolder)
+    
     entityFolder = createFolder(srcgen_folder, 'data')
     controllerFolder = createFolder(srcgen_folder, 'business')
     exceptionFolder = createFolder(srcgen_folder, 'exception')
@@ -41,8 +47,7 @@ def main(debug=False):
     tableFolder = createFolder(srcgen_folder, 'table')
     facadeFolder = createFolder(srcgen_folder, 'facade')
     viewFolder = createFolder(srcgen_folder, 'ui2')
-    dotFolder = createFolder(srcgen_folder, 'dot')
-
+    
     codeFolder = join(this_folder, 'splcc')
     entityCodeFolder = createFolder(codeFolder, 'data')
     controllerCodeFolder = createFolder(codeFolder, 'business')
@@ -51,8 +56,7 @@ def main(debug=False):
     tableCodeFolder = createFolder(codeFolder, 'table')
     facadeCodeFolder = createFolder(codeFolder, 'facade')
     viewCodeFolder = createFolder(codeFolder, 'ui2')
-    dotCodeFolder = createFolder(codeFolder, 'dot')
-
+    
     # Get template folders
     templateFolder = join(this_folder, 'templates')
     #copy files
@@ -68,13 +72,18 @@ def main(debug=False):
     # Register filter for mapping event type names to Java type names.
     jinja_env.filters['javatype'] = javatype
 
-    empty = ""
+    componentData = ""
+    componentExtraData = ""
     selectedOptionsArray = []
     actionsArray = []
     statmentsArray = []
     componentDict = {}
     statmentDict = {}
 
+    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","Author","Receipt","CheckingCopy"]
+    avaliableFunctions = ["Insert","Delete","Update"]
+    chosenFunctions = []
+    
     for component in event_model.components:
         if component.__class__.__name__ == 'Action':
             actionsArray.append(component)
@@ -85,42 +94,47 @@ def main(debug=False):
             
         elif component.__class__.__name__ == 'Statment':
             statmentsArray.append(component)
-        
-    for key,value in componentDict.items(): 
-        statmentDict = {}
-        for statment in statmentsArray:
-            if key == statment.entity:
-                statmentDict[statment.actionType] = statment
-        
-
-        componentDict[key]["statments"] = statmentDict    
     
-    # sys.exit()  
-    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","CheckingCopy","Author","Receipt"]
-    avaliableFunctions = ["Insert","Delete","Update"]
-    chosenEntities = []
-    chosenFunctions = []
+    statmentDict = {}
+    for statment in statmentsArray:
+        if statment.entity in selectedOptionsArray:
+            statmentDict[statment.actionType] = statment
+            componentDict[statment.entity]["statments"] = statmentDict    
+        else:
+            print("[warning] Option '%s' of method '%s' not found" % (statment.entity,statment.actionType)) 
     
+    #sys.exit()  
     #Classes Definition
     for key,value in componentDict.items():
+        componentData = ""
+        componentExtraData = ""
+        
+        #Remove Option if the dependence is not avaliable and print a error
+        if key == "CheckingCopy":
+            if componentDict.get("Activity"):
+                componentExtraData = componentDict["Activity"]
+            else:
+               avaliableOptions.remove("CheckingCopy")
+               print("[Dependence Error] 'CheckingCopy' defined whitout Option 'Activity'")
+                 
         if key in avaliableOptions:
-            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value)
-            copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,value)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,value)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value)
+            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value,componentExtraData)
+            copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value,componentExtraData)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value,componentExtraData)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,value,componentExtraData)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,value,componentExtraData)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value,componentExtraData)
             
             if key not in ["Author"]:
-                copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value)
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData)
             
-            if key not in ["Assignment","Author","CheckingCopy","Receipt"]:
-                copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value)
+            if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData)
     
             # for view in op.views:
-            #     copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value)
+            #     copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,extraData)
         else :
-            print("Option %s not found" % key)
+            print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
 
     #DepedentClassses
     dependencesDict = {} 
@@ -131,34 +145,46 @@ def main(debug=False):
     dependencesDict["SubmissionAuthor"] = "Submission","Author"
     dependencesDict["SubmissionUser"] = "Submission","User"
     dependencesDict["Registration"] = "User","Event"
-   
+    
     for key,value in dependencesDict.items():
+        
         if all((w in selectedOptionsArray for w in value)):
-            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,empty)
-            copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,empty)    
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,empty)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,empty)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,empty)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,empty)
+            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData)
+            copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData) 
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,componentData,componentExtraData)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,componentData,componentExtraData)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,componentData,componentExtraData)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,componentData,componentExtraData)
            
         if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
-            copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,empty)
-            copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,empty)
+            copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData)
+            copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData)
 
     # facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
     # with open(join(facadeFolder,
     #                "%s.java" % ("RiSEventFacade")), 'w') as f:
     #     f.write(facadeTemplate.render(entitiesArray=entitiesArray))
 
-    # dot = pydot.Dot()
-    # dot = pydot.graph_from_dot_file('Model_parse_tree.dot')
-    # dot.write_png('somefile.png')
- 
-def copyCodeFile(src,dest,nameFile,jinja_env,var):
+def createDotFiles(event_mm,event_model,dotFolder):
+    # Export to .dot file for visualization
+    metamodel_export(event_mm, join(dotFolder, 'event_meta.dot'))
+    # Export to .dot file for visualization
+    model_export(event_model, join(dotFolder, 'event.dot'))
+
+    (graph,) = pydot.graph_from_dot_file(join(dotFolder,'event_meta.dot'))
+    graph.write_png(join(dotFolder,'event_meta.png'))
+    
+    (graph,) = pydot.graph_from_dot_file(join(dotFolder,'event.dot'))
+    graph.write_png(join(dotFolder,'event.png'))
+    
+    # dot = pydot.graph_from_dot_file(join(dotFolder,'event.dot'))
+    # dot.write_png('event.png')
+    
+def copyCodeFile(src,dest,nameFile,jinja_env,var,extraVar):
     codeFileTemplate = jinja_env.get_template(join(src,nameFile+'.java'))
     with open(join(dest,
                       "%s.java" % nameFile), 'w') as f:
-            f.write(codeFileTemplate.render(data=var))
+            f.write(codeFileTemplate.render(data=var,extraData=extraVar))
 
 def createFolder(dest,name):
     folder = join(dest, name)

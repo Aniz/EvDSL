@@ -31,11 +31,11 @@ add Payment
 
 add Activity
 	show Insert 
-	types MiniCurso, 
+	types MiniCurso = Mini, 
 		Tutorial, 
 		Painel, 
 		Workshop,
-		MainTrack.
+		MainTrack = hidden.
 
 add Assignment
 	show Insert
@@ -47,11 +47,12 @@ add Submission
 add Author
 	show Insert
 
-add CheckingCopy
-	show Insert
-
 add Receipt
 	show Insert
+
+add CheckingCopy
+	show Insert
+	types Atestado,Certificado.
 
 include Conflit.
 
@@ -62,7 +63,7 @@ if Payment.Avista -> generateBoleto
 def Activity -> reportsListofAuthors 
 def Activity -> reportsFrequencyperActivity 
 def CheckingCopy -> checkingCopyAtestado
-def CheckingCopy -> checkingCopyCertificado 
+def CheckgCopy -> checkingCopyCertificado 
 def Event -> eventProgram
 def Event -> eventImportantDates
 def Event -> reportsFrequencyperEvent 

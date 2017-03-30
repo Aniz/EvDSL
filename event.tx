@@ -29,7 +29,7 @@ Option:
 ;
 
 Category: 
-  name=ID
+  name=ID ('='alias=ID)*
 ;
 
 Entity:

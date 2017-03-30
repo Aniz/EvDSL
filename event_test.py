@@ -32,8 +32,7 @@ def get_event_mm(debug=False):
     # these will not be a part of `types` list of EntityModel.
     type_builtins = {
             'integer': SimpleType(None, 'integer'),
-            'string': SimpleType(None, 'string'),
-            'file': SimpleType(None, 'file')
+            'string': SimpleType(None, 'string')
     }
     entity_mm = metamodel_from_file(join(this_folder, 'event.tx'),
                                     classes=[SimpleType],
