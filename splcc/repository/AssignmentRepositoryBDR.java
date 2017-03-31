@@ -39,11 +39,18 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 	public void insert(Assignment assignment) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission) "
-					+ "Values('"+assignment.getIdReviwerUser() +"', '"
+			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission
+									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+										,{{property.name}}  
+									{% endfor %}{% endif %}
+				) "+ "Values('"+assignment.getIdReviwerUser() +"', '"
 					            +assignment.getIdReview()+"', '"
 					            +assignment.getDate()+"', '"
-					            +assignment.getIdReviewSubmission()+"')");
+					            +assignment.getIdReviewSubmission()
+							{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+								+"', '"+{{data.option.entity|lower}}.get{{property.name}}()   
+							{% endfor %}{% endif %}	        
+					            +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,6 +103,9 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
+            {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}
             	
             } else {
             	throw new AssignmentNotFoundException(assignment.getIdReview());
@@ -128,6 +138,9 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
+    		{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
 				list.add(assignment);
             } 
 			resultset.close();
@@ -155,6 +168,9 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
     	    										 "', idSubmission = '" + assignment.getIdReviewSubmission()+
     	    		                                 "', idUser = '" + assignment.getIdReviwerUser() +
     	    		                                 "', date = '"+ assignment.getDate() + 
+    		                                 	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+											         "', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name}}() +
+												{% endfor %}{% endif %}
     	    		                                 "' WHERE idUser = '"+ assignment.getIdReviwerUser() +"' AND idReview = '"+ assignment.getIdReview() +"' AND idSubmission = '"+ assignment.getIdReviewSubmission() +"' ");
 
 		} catch(PersistenceMechanismException e){
@@ -192,6 +208,5 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 		}
         return answer;
 	}
-	
 }
 //#endif

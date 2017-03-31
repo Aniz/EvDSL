@@ -39,10 +39,17 @@ public class AuthorRepositoryBDR implements AuthorRepository {
 	public void insert(Author author) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email) "
-					+ "Values('"+author.getName()+"', '"
+			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email
+									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+										,{{property.name}}  
+									{% endfor %}{% endif %}
+				) " + "Values('"+author.getName()+"', '"
 					            +author.getEmail()+"', '"
-					            +author.getFiliation()+"')");
+					            +author.getFiliation()
+							{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+								+"', '"+{{data.option.entity|lower}}.get{{property.name}}()   
+							{% endfor %}{% endif %}	        
+					            +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,7 +102,10 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));
-            	
+           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}
+         
             } else {
             	throw new AuthorNotFoundException(idAuthor);
             }
@@ -126,7 +136,10 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setIdAuthor(resultset.getInt("idAuthor"));
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
-            	author.setFiliation(resultset.getString("filiation"));
+            	author.setFiliation(resultset.getString("filiation"));				
+		   	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}
 				list.add(author);
             } 
 			resultset.close();
@@ -153,6 +166,9 @@ public class AuthorRepositoryBDR implements AuthorRepository {
     	    statement.executeUpdate("UPDATE author SET nameAuthor = '"+ author.getName() +
     	    		                                 "', filiation = '" + author.getFiliation() +
     	    		                                 "', email = '"+ author.getEmail() +
+    	    		                            {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+											         "', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name}}() +
+												{% endfor %}{% endif %}
     	    		                                 "' WHERE idAuthor = '"+ author.getIdAuthor()+"'");
 
 		} catch(PersistenceMechanismException e){

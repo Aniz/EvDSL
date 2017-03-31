@@ -21,7 +21,5 @@ public interface SubmissionUserRepository {
 
 	public boolean isThere(SubmissionUser submissionUser) throws RepositoryException;
 	
-	
-	
 }
 //#endif

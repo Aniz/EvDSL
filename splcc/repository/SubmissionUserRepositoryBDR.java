@@ -185,9 +185,5 @@ public class SubmissionUserRepositoryBDR implements SubmissionUserRepository{
         return answer;
 	}
 	
-
-	
-
-	
 }
 //#endif

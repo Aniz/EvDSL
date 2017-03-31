@@ -16,8 +16,6 @@ import rise.splcc.util.PersistenceMechanismRDBMS;
 
 public class UserRepositoryBDR implements UserRepository {
 
-	
-	
 	private static UserRepositoryBDR instance;
 	private PersistenceMechanismRDBMS pm;
 	
@@ -37,12 +35,20 @@ public class UserRepositoryBDR implements UserRepository {
 		return instance;
 	}
 	
-	
 	@Override
 	public void insert(User user) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+user.getIdUser()+"','" + user.getPassword()+ "', '"+user.getNameUser()+"', '"+user.getTypeUser()+"', '"+user.getEmail() +"', '"+user.getFiliation()+"')");
+			statement.executeUpdate("INSERT INTO User Values('"+user.getIdUser()
+				+"','" + user.getPassword()
+				+"', '"+user.getNameUser()
+				+"', '"+user.getTypeUser()
+				+"', '"+user.getEmail() 
+				+"', '"+user.getFiliation()
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				+"', '"+user.get{{property.name}}()   
+			{% endfor %}{% endif %}
+				+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,6 +101,9 @@ public class UserRepositoryBDR implements UserRepository {
             	user.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	user.setEmail(resultset.getString("email"));
             	user.setFiliation(resultset.getString("filiation"));
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				user.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}
             	resultset.close();
             } else {
             	throw new UserNotFoundException(idUser);
@@ -128,7 +137,9 @@ public class UserRepositoryBDR implements UserRepository {
             	user.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	user.setEmail(resultset.getString("email"));
             	user.setFiliation(resultset.getString("filiation"));
-            	
+        	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				user.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}
 				list.add(user);
 				
             } 
@@ -155,6 +166,9 @@ public class UserRepositoryBDR implements UserRepository {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
             int i = statement.executeUpdate("UPDATE User SET password = '"+ 
     	                                     user.getPassword() +
+										{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+											"', {{property.name}} = '"+ user.get{{property.name}}() + 
+										{% endfor %}{% endif %}
     	                                     "', nameUser = '"+ user.getNameUser() +
     	                                     "', typeUser = '"+ user.getTypeUser() +
     	                                     "',email = '"+ user.getEmail() +
