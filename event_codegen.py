@@ -108,7 +108,6 @@ def main(debug=False):
     for key,value in componentDict.items():
         componentData = ""
         componentExtraData = ""
-        
         #Remove Option if the dependence is not avaliable and print a error
         if key == "CheckingCopy":
             if componentDict.get("Activity"):
@@ -116,6 +115,13 @@ def main(debug=False):
             else:
                avaliableOptions.remove("CheckingCopy")
                print("[Dependence Error] 'CheckingCopy' defined whitout Option 'Activity'")
+       
+        if key in ["Speaker","Organizer","Reviewer"]:
+            if componentDict.get("User"):
+                componentExtraData = componentDict["User"]
+            else:
+               avaliableOptions.remove(key)
+               print("[Dependence Error] '%s' defined whitout Option 'Activity'"%key)
                  
         if key in avaliableOptions:
             copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value,componentExtraData)

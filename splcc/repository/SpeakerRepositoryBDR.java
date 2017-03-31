@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rise.splcc.data.Speaker;
-import rise.splcc.data.User.TypeUser;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.exception.SpeakerNotFoundException;
 import rise.splcc.util.PersistenceMechanismException;
@@ -40,8 +42,29 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 	public void insert(Speaker speaker) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+speaker.getIdUser()+"','" + speaker.getPassword()+ "', '"+speaker.getNameUser()+"', '"+speaker.getTypeUser()+"', '"+speaker.getEmail() +"', '"+speaker.getFiliation()+"')");
-			statement.executeUpdate("INSERT INTO speaker Values('"+speaker.getIdUser()+"','" + speaker.getBiography() +"')");
+			statement.executeUpdate("INSERT INTO User Values('"+speaker.getIdUser()
+				+"','" + speaker.getPassword()
+				+"', '"+speaker.getNameUser()
+				+"', '"+speaker.getTypeUser()
+				+"', '"+speaker.getEmail() 
+				+"', '"+speaker.getFiliation()
+			{% if extraData.option.categories|length > 0 %}
+				+"', '"+{{data.option.entity|lower}}.getType{{extraData.option.entity}}()
+			{% endif %}
+			{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+			{% endfor %}{% endif %}
+				+"')");
+
+			statement.executeUpdate("INSERT INTO speaker Values('"+speaker.getIdUser()
+				+"','" + speaker.getBiography()
+			{% if data.option.categories|length > 0 %}
+				+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+			{% endif %}
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+			{% endfor %}{% endif %}
+				+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,9 +117,23 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
             	speaker.setBiography(resultset.getString("biography"));
             	speaker.setPassword(resultset.getString("password"));
             	speaker.setNameUser(resultset.getString("nameUser"));       	
-            	speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	speaker.setEmail(resultset.getString("email"));
             	speaker.setFiliation(resultset.getString("filiation"));
+
+			{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+        	{% endif %}
+           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+        
+        	{% if extraData.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}(resultset.getString("type{{extraData.option.entity}}")));
+        	{% endif %}
+           	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+
             } else {
             	throw new SpeakerNotFoundException(idUser);
             }
@@ -128,10 +165,23 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
             	speaker.setIdUser(resultset.getInt("idUser"));
             	speaker.setPassword(resultset.getString("password"));
             	speaker.setNameUser(resultset.getString("nameUser"));
-            	speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	speaker.setEmail(resultset.getString("email"));
             	speaker.setFiliation(resultset.getString("filiation"));
             	speaker.setBiography(resultset.getString("biography"));
+    		{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+        	{% endif %}
+           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+        	
+        	{% if extraData.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}(resultset.getString("type{{extraData.option.entity}}")));
+        	{% endif %}
+           	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+        
 				list.add(speaker);
             } 
 			resultset.close();
@@ -155,13 +205,28 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
     	    statement.executeUpdate("UPDATE User SET password = '"+ 
-    	    		speaker.getPassword() +
-                    "', nameUser = '"+ speaker.getNameUser() +
-                    "', typeUser = '"+ speaker.getTypeUser() +
-                    "',email = '"+ speaker.getEmail() +
-                    "', filiation = '" + speaker.getFiliation() +
-                    "' WHERE idUser = '"+ speaker.getIdUser()+"'");
-            statement.executeUpdate("UPDATE speaker SET biography = '"+ speaker.getBiography() +"' WHERE idUser = '"+ speaker.getIdUser()+"'");   
+	    		speaker.getPassword() +
+                "', nameUser = '"+ speaker.getNameUser() +
+                "',email = '"+ speaker.getEmail() +
+                "', filiation = '" + speaker.getFiliation() +
+
+			{% if extraData.option.categories|length > 0 %}
+				"', type{{extraData.option.entity}} = '"+ {{extraData.option.entity|lower}}.getType{{extraData.option.entity}}() + 
+			{% endif %}
+			{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() + 
+			{% endfor %}{% endif %}
+                "' WHERE idUser = '"+ speaker.getIdUser()+"'");
+
+            statement.executeUpdate("UPDATE speaker SET biography = '"+ 
+            	speaker.getBiography() +
+            	{% if data.option.categories|length > 0 %}
+					"', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() + 
+				{% endif %}
+				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() + 
+				{% endfor %}{% endif %}
+            	"' WHERE idUser = '"+ speaker.getIdUser()+"'");   
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
 		} catch (SQLException e) {

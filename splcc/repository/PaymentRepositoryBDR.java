@@ -9,7 +9,9 @@ import java.util.List;
 
 import rise.splcc.data.Payment;
 import rise.splcc.data.Payment.StatusPayment;
-import rise.splcc.data.Payment.TypePayment;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import rise.splcc.exception.PaymentNotFoundException;
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.util.PersistenceMechanismException;
@@ -41,7 +43,22 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 	public void insert(Payment payment) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status) Values('"+payment.getIdPayment()+"', '"+payment.getIdRegistration()+"', '"+ payment.getPaymentType() +"', '" + payment.getBarcode()+ "', '"+payment.getDate()+"',  '"+payment.getValue() +"', '"+ payment.getStatus() +"')");
+			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status
+				{% if data.option.categories|length > 0 %}
+					,type{{data.option.entity}}
+				{% endif %}
+				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					,{{property.name}}  
+				{% endfor %}{% endif %}
+
+				) Values('"+payment.getIdPayment()+"', '"+payment.getIdRegistration()+"', '"+ payment.getPaymentType() +"', '" + payment.getBarcode()+ "', '"+payment.getDate()+"',  '"+payment.getValue() +"', '"+ payment.getStatus() 
+				{% if data.option.categories|length > 0 %}
+					+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+				{% endif %}				
+				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+				{% endfor %}{% endif %}	        
+		            +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,7 +92,13 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                 payment.setDate(resultset.getString("date"));
                 payment.setValue(resultset.getFloat("value"));
                 payment.setBarcode(resultset.getString("barcode"));
-            
+             {% if data.option.categories|length > 0 %}
+            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+            {% endif %}
+            {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}
+          
 				list.add(payment);
             } 
 			resultset.close();
@@ -149,6 +172,12 @@ public class PaymentRepositoryBDR implements PaymentRepository {
     	    		                                 "', barcode = '"+ payment.getBarcode()+ 
     	    		                                 "', date = '"+ payment.getDate() + 
     	    		                                 "', value = '"+ payment.getValue() +
+    	    		                            {% if data.option.categories|length > 0 %}
+									                 "', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +						
+									            {% endif %}    
+    		                                 	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+											         "', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() +
+												{% endfor %}{% endif %}
     	    		                                 "' WHERE idPayment = '"+ payment.getIdPayment()+"'");
 
 		} catch(PersistenceMechanismException e){
@@ -200,12 +229,17 @@ public class PaymentRepositoryBDR implements PaymentRepository {
             if (resultset.next()) {   
                  payment.setIdPayment(resultset.getInt("idPayment"));
                  payment.setIdRegistration(resultset.getInt("idRegistration"));
-                 payment.setPaymentType(TypePayment.valueOf(resultset.getString("paymentType")));
                  payment.setStatus(StatusPayment.valueOf(resultset.getString("status")));
                  payment.setDate(resultset.getString("date"));
                  payment.setValue(resultset.getFloat("value"));
                  payment.setBarcode(resultset.getString("barcode"));
-            	
+           	{% if data.option.categories|length > 0 %}
+            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+            {% endif %}
+            {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}
+           
             } else {
             	throw new PaymentNotFoundException(idPayment);
             }

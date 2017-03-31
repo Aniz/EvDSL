@@ -7,7 +7,9 @@ import java.util.List;
 import rise.splcc.data.Submission;
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.exception.SubmissionNotFoundException;
-
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 
 public interface SubmissionRepository {
 

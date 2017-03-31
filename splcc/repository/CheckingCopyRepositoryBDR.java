@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rise.splcc.data.CheckingCopy;
-import rise.splcc.data.CheckingCopy.TypeCheckingCopy;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import rise.splcc.exception.CheckingCopyNotFoundException;
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.util.PersistenceMechanismException;
@@ -39,7 +41,23 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
 	public void insert(CheckingCopy checkingCopy) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue, checkingCopytype) Values('"+checkingCopy.getIdRegistration()+"', '"+checkingCopy.getIdUser()+"', '"+checkingCopy.getDateOfIssue()+"', '"+checkingCopy.getCheckingCopyType()+"')");
+			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue
+									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+										,{{property.name}}  
+									{% endfor %}{% endif %}
+									{% if data.option.categories|length > 0 %}
+										,type{{data.option.entity}}
+									{% endif %}
+					) " + "Values('"+checkingCopy.getIdRegistration()+"', '"
+					+checkingCopy.getIdUser()+"', '"
+					+checkingCopy.getDateOfIssue()
+				{% if data.option.categories|length > 0 %}
+					+"', '"+checkingCopy.getType{{data.option.entity}}()
+				{% endif %}
+				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					+"', '"+checkingCopy.get{{property.name|capitalize}}()   
+				{% endfor %}{% endif %}					        
+					+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,10 +87,12 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
                 checkingCopy.setIdUser(resultset.getInt("idUser"));
                 checkingCopy.setDateOfIssue(resultset.getString("dateOfIssue"));
                 checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(resultset.getString("checkingCopytype")));
+        	{% if data.option.categories|length > 0 %}
+				checkingCopy.setType{{data.option.entity}}(resultset.getString("type{{data.option.entity}}"));
+        	{% endif %}
         	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				checkingCopy.set{{property.name}}(resultset.getString("{{property.name}}"));
+				checkingCopy.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}			
-	
 				list.add(checkingCopy);
             } 
 			resultset.close();
@@ -163,13 +183,16 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
 			RepositoryException {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
-
-            		statement.executeUpdate("UPDATE CheckingCopy SET idRegistration = '"+checkingCopy.getIdRegistration()+"', idUser = '"+checkingCopy.getIdUser()+"', dateOfIssue = '"+ checkingCopy.getDateOfIssue() +"', checkingCopyType = '" + checkingCopy.getCheckingCopyType()+ 
-        					{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-						         "', {{property.name}} = '"+ {{data.option.entity|capitalize}}.get{{property.name}}() +
-							{% endfor %}{% endif %}     
-            			"' WHERE idCheckingCopy = '"+ checkingCopy.getIdCheckingCopy()+"'");
-            	
+    		statement.executeUpdate("UPDATE CheckingCopy SET idRegistration = '"+checkingCopy.getIdRegistration()+"', idUser = '"+checkingCopy.getIdUser()+
+    					"', dateOfIssue = '"+ checkingCopy.getDateOfIssue() +
+    				{% if data.option.categories|length > 0 %}
+						"', type{{data.option.entity}} = '"+ checkingCopy.getType{{data.option.entity}}() +
+					{% endif %}
+					{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				         "', {{property.name}} = '"+ checkingCopy.get{{property.name|capitalize}}() +
+					{% endfor %}{% endif %}     
+    					"' WHERE idCheckingCopy = '"+ checkingCopy.getIdCheckingCopy()+"'");
+        	
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
 		} catch (SQLException e) {
@@ -197,11 +220,12 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
             	checkingCopy.setIdRegistration(resultset.getInt("idRegistration"));
             	checkingCopy.setIdUser(resultset.getInt("idUser"));
             	checkingCopy.setDateOfIssue(resultset.getString("dateOfIssue"));
-            	checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(resultset.getString("checkingCopyType")));
+            {% if data.option.categories|length > 0 %}
+				checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+        	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				checkingCopy.set{{property.name}}(resultset.getString("{{property.name}}"));
+				checkingCopy.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}			
-		
             } else {
             	throw new CheckingCopyNotFoundException(idCheckingCopy);
             }

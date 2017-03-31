@@ -8,6 +8,9 @@ import java.util.List;
 
 import rise.splcc.data.Activity;
 import rise.splcc.data.Event;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import rise.splcc.exception.EventNotFoundException;
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.util.PersistenceMechanismException;
@@ -40,7 +43,25 @@ public class EventRepositoryBDR implements EventRepository {
 		//removi idOrganizdor. de acordo com o modelo relacional nao temos o  atributo idOrganizador dentro de Eventos
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors) Values('"+event.getEventName()+"', '"+event.getPeriod()+"', '"+event.getPlace()+"', '"+event.getInstitution() +"', '"+event.getSponsors() +"')");
+			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors
+						{% if data.option.categories|length > 0 %}
+							,type{{data.option.entity}}
+						{% endif %}
+						{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+							,{{property.name}}  
+						{% endfor %}{% endif %}
+				) Values('"+event.getEventName()
+					+"', '"+event.getPeriod()
+					+"', '"+event.getPlace()
+					+"', '"+event.getInstitution() 
+					+"', '"+event.getSponsors() 
+				{% if data.option.categories|length > 0 %}
+				     +"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+				{% endif %}
+				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+				{% endfor %}{% endif %}	        
+		            +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,9 +75,7 @@ public class EventRepositoryBDR implements EventRepository {
 				throw new RepositoryException(ex);
 			}
 		}
-		
 	}
-
 
 	@Override
 	public void remove(int idEvent) throws EventNotFoundException,
@@ -96,6 +115,12 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setPlace(resultset.getString("place"));
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
+	    	{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+			{% endif %}
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"))   
+			{% endfor %}{% endif %}					        
             } else {
             	throw new EventNotFoundException(idEvent);
             }
@@ -129,6 +154,12 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setPlace(resultset.getString("place"));
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
+			{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+			{% endif %}
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"))   
+			{% endfor %}{% endif %}					        
 				list.add(event);
             } 
 			resultset.close();

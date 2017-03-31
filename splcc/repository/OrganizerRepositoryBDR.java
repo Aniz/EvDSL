@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rise.splcc.data.Organizer;
-import rise.splcc.data.Organizer.TypeOrganizer;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import rise.splcc.data.User.TypeUser;
 import rise.splcc.exception.OrganizerNotFoundException;
 import rise.splcc.exception.RepositoryException;
@@ -40,9 +42,30 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 	public void insert(Organizer organizer) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+organizer.getIdUser()+"','" + organizer.getPassword()+ "', '"+organizer.getNameUser()+"', '"+organizer.getTypeUser()+"', '"+organizer.getEmail() +"', '"+organizer.getFiliation()+"')");
-			statement.executeUpdate("INSERT INTO Organizer Values('"+organizer.getIdUser()+
-					                "','" + organizer.getTypeOrganizer()+"')");
+			statement.executeUpdate("INSERT INTO User Values('"+organizer.getIdUser()
+				+"','" + organizer.getPassword()
+				+"', '"+organizer.getNameUser()
+				+"', '"+organizer.getTypeUser()
+				+"', '"+organizer.getEmail() 
+				+"', '"+organizer.getFiliation()
+			{% if extraData.option.categories|length > 0 %}
+				+"', '"+{{data.option.entity|lower}}.getType{{extraData.option.entity}}()
+			{% endif %}
+			{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				+"', '"+{{extraData.option.entity|lower}}.get{{property.name|capitalize}}()   
+			{% endfor %}{% endif %}
+				+"')");
+
+			{% if data.option.properties|length > 0 or data.option.categories|length > 0 %}
+           	statement.executeUpdate("INSERT INTO organizer Values('"+organizer.getIdUser()
+			{% if data.option.categories|length > 0 %}
+				+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+			{% endif %}
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+			{% endfor %}{% endif %}
+				+"')");
+			{% endif %}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,6 +120,20 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             	organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
+            {% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(resultset.getString("type{{data.option.entity}}"));
+        	{% endif %}
+           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+        
+        	{% if extraData.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(resultset.getString("type{{extraData.option.entity}}"));
+        	{% endif %}
+           	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+
             } else {
             	throw new OrganizerNotFoundException(idUser);
             }
@@ -131,6 +168,20 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
             	organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
+			{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+        	{% endif %}
+           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+        
+        	{% if extraData.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(resultset.getString("type{{extraData.option.entity}}"));
+        	{% endif %}
+           	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+
 				list.add(organizer);
             } 
 			resultset.close();
@@ -153,15 +204,31 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			RepositoryException {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
-            statement.executeUpdate("UPDATE Organizer SET typeOrganizer = '"+ organizer.getTypeOrganizer() +"' WHERE idUser = '"+ organizer.getIdUser()+"'");
             statement.executeUpdate("UPDATE User SET password = '"+ 
-            		organizer.getPassword() +
-                    "', nameUser = '"+ organizer.getNameUser() +
-                    "', typeUser = '"+ organizer.getTypeUser() +
-                    "',email = '"+ organizer.getEmail() +
-                    "', filiation = '" + organizer.getFiliation() +
-                    "' WHERE idUser = '"+ organizer.getIdUser()+"'");
-            
+	    		organizer.getPassword() +
+                "', nameUser = '"+ organizer.getNameUser() +
+                "',email = '"+ organizer.getEmail() +
+                "', filiation = '" + organizer.getFiliation() +
+
+			{% if extraData.option.categories|length > 0 %}
+				"', type{{extraData.option.entity}} = '"+ {{extraData.option.entity|lower}}.getType{{extraData.option.entity}}() + 
+			{% endif %}
+			{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() + 
+			{% endfor %}{% endif %}
+                "' WHERE idUser = '"+ organizer.getIdUser()+"'");
+
+            {% if data.option.properties|length > 0 or data.option.categories|length > 0 %}
+            	statement.executeUpdate("UPDATE organizer SET biography = '"+ 
+            	organizer.getBiography() +
+            	{% if data.option.categories|length > 0 %}
+					"', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() + 
+				{% endif %}
+				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() + 
+				{% endfor %}{% endif %}
+            	"' WHERE idUser = '"+ organizer.getIdUser()+"'");   
+			{% endif %}
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
 		} catch (SQLException e) {

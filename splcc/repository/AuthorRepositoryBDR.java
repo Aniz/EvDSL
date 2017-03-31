@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rise.splcc.data.Author;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import rise.splcc.exception.AuthorNotFoundException;
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.util.PersistenceMechanismException;
@@ -40,16 +43,22 @@ public class AuthorRepositoryBDR implements AuthorRepository {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
 			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email
+									{% if data.option.categories|length > 0 %}
+										,type{{data.option.entity}}
+									{% endif %}
 									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 										,{{property.name}}  
 									{% endfor %}{% endif %}
-				) " + "Values('"+author.getName()+"', '"
-					            +author.getEmail()+"', '"
-					            +author.getFiliation()
-							{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-								+"', '"+{{data.option.entity|lower}}.get{{property.name}}()   
-							{% endfor %}{% endif %}	        
-					            +"')");
+						) Values('"+author.getName()+"', '"
+				            +author.getEmail()+"', '"
+				            +author.getFiliation()
+        				{% if data.option.categories|length > 0 %}
+						     +"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+        				{% endif %}
+						{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+							+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+						{% endfor %}{% endif %}	        
+				            +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,11 +111,13 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));
-           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
-			{% endfor %}{% endif %}
-         
-            } else {
+      		{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.getType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+			{% endif %}
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.get{{property.name|capitalize}}(resultset.getString("{{property.name}}"))   
+			{% endfor %}{% endif %}					        
+				  } else {
             	throw new AuthorNotFoundException(idAuthor);
             }
 			resultset.close();
@@ -137,9 +148,12 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));				
-		   	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
-			{% endfor %}{% endif %}
+			{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.getType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+			{% endif %}
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.get{{property.name|capitalize}}(resultset.getString("{{property.name}}"))   
+			{% endfor %}{% endif %}					        
 				list.add(author);
             } 
 			resultset.close();
@@ -164,12 +178,15 @@ public class AuthorRepositoryBDR implements AuthorRepository {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
 
     	    statement.executeUpdate("UPDATE author SET nameAuthor = '"+ author.getName() +
-    	    		                                 "', filiation = '" + author.getFiliation() +
-    	    		                                 "', email = '"+ author.getEmail() +
-    	    		                            {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-											         "', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name}}() +
-												{% endfor %}{% endif %}
-    	    		                                 "' WHERE idAuthor = '"+ author.getIdAuthor()+"'");
+	                     "', filiation = '" + author.getFiliation() +
+	                     "', email = '"+ author.getEmail() +
+	               	{% if data.option.categories|length > 0 %}
+						"', {{data.option.entity}} = '"+ author.getType{{data.option.entity}}() +
+					{% endif %}
+					{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					     "', {{property.name}} = '"+ author.get{{property.name|capitalize}}() +
+					{% endfor %}{% endif %}     
+				      "' WHERE idAuthor = '"+ author.getIdAuthor()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

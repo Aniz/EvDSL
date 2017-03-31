@@ -47,7 +47,25 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 	public void insert(Submission submission) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title) Values('"+submission.getIdActivity()+"', '"+submission.getType()+"', '"+ submission.getAbstractPaper() +"', '" + submission.getKeywords()+ "', '"+submission.getTitle()+"')");
+			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title
+			{% if data.option.categories|length > 0 %}
+				,type{{data.option.entity}}
+			{% endif %}	
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				,{{property.name}}   
+			{% endfor %}{% endif %}
+				) Values('"+submission.getIdActivity()
+				+"', '"+submission.getType()
+				+"', '"+ submission.getAbstractPaper() 
+				+"', '" + submission.getKeywords()
+				+ "', '"+submission.getTitle()
+			{% if data.option.categories|length > 0 %}
+				+ "', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+			{% endif %}
+			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+			{% endfor %}{% endif %}
+				+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,8 +80,6 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 			}
 		}
 	}
-	
-
 
 	@Override
 	public List<Submission> getSubmissions() throws RepositoryException {
@@ -78,9 +94,14 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setIdActivity(resultset.getInt("idActivity"));
                 submission.setAbstractPaper(resultset.getString("abstract"));
                 submission.setKeywords(resultset.getString("keywords"));
-                submission.setType(TypeSubmission.valueOf(resultset.getString("type")));
                 submission.setTitle(resultset.getString("title"));
-            
+            {% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+    		{% endif %}
+           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+           
 				list.add(submission);
             } 
 			resultset.close();
@@ -226,8 +247,14 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setIdActivity(resultset.getInt("idActivity"));
                 submission.setAbstractPaper(resultset.getString("abstract"));
                 submission.setKeywords(resultset.getString("keywords"));
-                submission.setType(TypeSubmission.valueOf(resultset.getString("type")));
                 submission.setTitle(resultset.getString("title"));
+            {% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+        	{% endif %}
+           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+			{% endfor %}{% endif %}			
+           
             } else {
             	throw new SubmissionNotFoundException(idSubmission);
             }

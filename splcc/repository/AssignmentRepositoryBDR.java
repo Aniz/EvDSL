@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rise.splcc.data.Assignment;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
+
 import rise.splcc.exception.AssignmentNotFoundException;
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.util.PersistenceMechanismException;
@@ -40,6 +44,9 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
 			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission
+									{% if data.option.categories|length > 0 %}
+										,type{{data.option.entity}}
+									{% endif %}
 									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 										,{{property.name}}  
 									{% endfor %}{% endif %}
@@ -47,8 +54,11 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 					            +assignment.getIdReview()+"', '"
 					            +assignment.getDate()+"', '"
 					            +assignment.getIdReviewSubmission()
+				            {% if data.option.categories|length > 0 %}
+								+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+							{% endif %}				
 							{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-								+"', '"+{{data.option.entity|lower}}.get{{property.name}}()   
+								+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
 							{% endfor %}{% endif %}	        
 					            +"')");
 		} catch (SQLException e) {
@@ -103,8 +113,11 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
+            {% if data.option.categories|length > 0 %}
+            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+            {% endif %}
             {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}
             	
             } else {
@@ -138,8 +151,11 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
+		    {% if data.option.categories|length > 0 %}
+            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+            {% endif %}     
     		{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}			
 				list.add(assignment);
             } 
@@ -168,8 +184,11 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
     	    										 "', idSubmission = '" + assignment.getIdReviewSubmission()+
     	    		                                 "', idUser = '" + assignment.getIdReviwerUser() +
     	    		                                 "', date = '"+ assignment.getDate() + 
+		                                 	    {% if data.option.categories|length > 0 %}
+									                 "', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +						
+									            {% endif %}    
     		                                 	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-											         "', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name}}() +
+											         "', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() +
 												{% endfor %}{% endif %}
     	    		                                 "' WHERE idUser = '"+ assignment.getIdReviwerUser() +"' AND idReview = '"+ assignment.getIdReview() +"' AND idSubmission = '"+ assignment.getIdReviewSubmission() +"' ");
 

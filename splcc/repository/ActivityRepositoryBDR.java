@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rise.splcc.data.Activity;
-import rise.splcc.data.Activity.TypeActivity;
+{% if data.option.categories|length > 0 %}
+import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import rise.splcc.exception.ActivityNotFoundException;
 import rise.splcc.exception.RepositoryException;
 import rise.splcc.util.PersistenceMechanismException;
@@ -40,22 +42,27 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	public void insert(Activity activity) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, activityType, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit
+			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit
+									{% if data.option.categories|length > 0 %}
+										,type{{data.option.entity}}
+									{% endif %}
 									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 										,{{property.name}}  
 									{% endfor %}{% endif %}
 					) " + "Values('"+activity.getIdEvent() +"', '"
 					            +activity.getNameActivity()+"', '"
 					            +activity.getDescriptionActivity()+"', '"
-					            +activity.getTypeActivity()+"', '"
 					            +activity.getValue() + "', '" 
 					            +activity.getHourlyLoad()+ "', '" 
 					            +activity.getDate()+ "', '" 
 					            +activity.getHour()+ "', '" 
 					            +activity.getNumberOfParticipants()+ "', '" 
 					            +activity.getRegistrationLimit()
+				            {% if data.option.categories|length > 0 %}
+							    +"', '"+activity.getType{{data.option.entity}}()
+				         	{% endif %}	
 							{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-								+"', '"+activity.get{{property.name}}()   
+								+"', '"+activity.get{{property.name|capitalize}}()   
 							{% endfor %}{% endif %}
 					            +"')");
 		} catch (SQLException e) {
@@ -110,15 +117,17 @@ public class ActivityRepositoryBDR implements ActivityRepository {
             	activity.setIdEvent(resultset.getInt("idEvent"));
             	activity.setNameActivity(resultset.getString("nameActivity"));
             	activity.setDescriptionActivity(resultset.getString("descriptionActivity"));
-            	activity.setTypeActivity(TypeActivity.valueOf(resultset.getString("activityType")));
             	activity.setValue(resultset.getFloat("value"));
             	activity.setHourlyLoad(resultset.getFloat("hourlyLoad"));
             	activity.setDate(resultset.getString("date"));
             	activity.setHour(resultset.getString("hour"));
             	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
             	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));
+    		{% if data.option.categories|length > 0 %}
+    			activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+    		{% endif %}
     		{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				activity.set{{property.name}}(resultset.getString("{{property.name}}"));
+				activity.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}
             } else {
             	throw new ActivityNotFoundException(idActivity);
@@ -151,15 +160,17 @@ public class ActivityRepositoryBDR implements ActivityRepository {
             	activity.setIdEvent(resultset.getInt("idEvent"));
             	activity.setNameActivity(resultset.getString("nameActivity"));
             	activity.setDescriptionActivity(resultset.getString("descriptionActivity"));
-            	activity.setTypeActivity(TypeActivity.valueOf(resultset.getString("activityType")));
             	activity.setValue(resultset.getFloat("value"));
             	activity.setHourlyLoad(resultset.getFloat("hourlyLoad"));
             	activity.setDate(resultset.getString("date"));
             	activity.setHour(resultset.getString("hour"));
             	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
             	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));
+			{% if data.option.categories|length > 0 %}
+    			activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+    		{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				activity.set{{property.name}}(resultset.getString("{{property.name}}"));
+				activity.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}	
 				list.add(activity);
             } 
@@ -194,10 +205,13 @@ public class ActivityRepositoryBDR implements ActivityRepository {
     	    		                                 "', hour = '"+ activity.getHour() +
     	    		                                 "', numberOfParticipants = '"+ activity.getNumberOfParticipants() +
     	    		                                 "', registrationLimit = '"+ activity.getRegistrationLimit() +
-												{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-											         "', {{property.name}} = '"+ activity.get{{property.name}}() +
+												{% if data.option.categories|length > 0 %}
+									    	        "', type{{data.option.entity}} = '"+ activity.getType{{data.option.entity}}() +
+												{% endif %}
+    	    		                        	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+											         "', {{property.name}} = '"+ activity.get{{property.name|capitalize}}() +
 												{% endfor %}{% endif %}
-    	    		                                 "' WHERE idActivity = '"+ activity.getIdActivity()+"'");
+											         "' WHERE idActivity = '"+ activity.getIdActivity()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -210,7 +224,6 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 				throw new RepositoryException(ex);
 			}
 		}
-		
 	}
 
 	@Override
@@ -315,15 +328,17 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	            	activity.setIdEvent(resultset.getInt("idEvent"));
 	            	activity.setNameActivity(resultset.getString("nameActivity"));
 	            	activity.setDescriptionActivity(resultset.getString("descriptionActivity"));
-	            	activity.setTypeActivity(TypeActivity.valueOf(resultset.getString("activityType")));
 	            	activity.setValue(resultset.getFloat("value"));
 	            	activity.setHourlyLoad(resultset.getFloat("hourlyLoad"));
 	            	activity.setDate(resultset.getString("date"));
 	            	activity.setHour(resultset.getString("hour"));
 	            	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
 	            	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));			
+				{% if data.option.categories|length > 0 %}
+					activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(getString("type{{data.option.entity}}")));						    	    
+				{% endif %}
 				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-					activity.set{{property.name}}(resultset.getString("{{property.name}}"));
+					activity.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 				{% endfor %}{% endif %}	
 					list.add(activity);
 	            } 
@@ -395,7 +410,6 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	            Statement statement = (Statement) pm.getCommunicationChannel();           
 	            ResultSet resultset = statement.executeQuery("select Author.nameAuthor from Author inner join submissionAuthor on Author.idAuthor = submissionAuthor.idAuthor inner join submission on Submission.idSubmission = submissionAuthor.idSubmission inner join Activity on Submission.idActivity = '"+ idActivity+ "'");
 	            while (resultset.next()) {
-
 					list.add(resultset.getString("nameAuthor"));
 	            } 
 				resultset.close();
