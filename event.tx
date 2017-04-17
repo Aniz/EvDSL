@@ -24,8 +24,16 @@ Condition:
 Option:
   'add' entity=Entity 
   ('+' properties*=Property)*     
-  "show" commands*=Commands 
+  "show" command=Command
   ("types" categories*=Category[',']".")*
+;
+
+Command:
+  CommandOption | SubCommandInOption
+;
+
+SubCommandInOption:
+  "in" entity=[Entity]
 ;
 
 Category: 
@@ -49,8 +57,12 @@ SimpleType:
     'type' name=ID
 ;
 
-Commands:
-  'Insert' | 'Remove' | 'Update' | 'Search' | 'ListAll'
+CommandOption:
+  commandsOption *= CommandType 
+;
+
+CommandType:
+  'Insert' | 'Remove' | 'Update' | 'Search' | 'ListAll' | 'Search' | 'Management'
 ;
 
 Action:
@@ -64,7 +76,7 @@ Param:
 
 ActionType:
   'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
-   | 'notificationsDeadline' | 'inserAttachmanet' | 'notificationsPaperAssignemnt' 
+   | 'notificationsDeadline' | 'inserAttachmanet' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection'
 ;
 
 // Special rule for comments. Comments start with //

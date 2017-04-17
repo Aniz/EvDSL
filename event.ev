@@ -1,17 +1,18 @@
-Create eventManager 
+Create RiseEvents 
 
 add User
-	+bbbb : integer
-	show Insert
+	+contato : integer
+	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
 add Speaker 
-    +nanica : integer
+    +nacionalidade : integer
     show Insert Update Remove
+    types GeneralChair.
     
 add Organizer 
-    +banana : integer
-    show Insert Update Remove ListAll
+    +contato : string
+    show Insert Update Search Remove ListAll
     types GeneralChair, 
 		ProgramChair, 
 		WorkshopChair, 
@@ -20,39 +21,48 @@ add Organizer
 		PanelChair.
 
 add Reviewer 
-    show Insert Update Remove ListAll
+	show Insert Update Search Remove ListAll
+	types Associado,Profissional,Estudante.
 
 add Event 
-    show Insert Update Remove ListAll
+	+ link:string
+    show Insert Update Search Remove ListAll
+	types Associado,Profissional,Estudante.
 		
 add Payment
-	show Insert 
+	+ ooii:string
+	show Insert Update Search Remove ListAll 
 	types Avista,Debito,Credito.
 
 add Activity
-	+ ooii:string
-	show Insert 
+	+ description:string
+	show Insert Update Search Remove ListAll 
 	types MiniCurso = Mini, 
 		Tutorial, 
 		Painel, 
 		Workshop,
 		MainTrack = hidden.
 
+//update
 add Assignment
-	show Insert
++newAssigmentField : integer
+	show Insert Search Remove ListAll
+	types Associado,Profissional,Estudante.
 
+//insert Update
 add Submission
-	show Insert
+	+ newSubmissionField:string
+	show Search Remove ListAll
 	types Completa,Parcial.
 
 add Author
-	show Insert
-
-add Receipt
-	show Insert
+	+lattes:string
+	show in User
+	types Associado,Profissional,Estudante.
 
 add CheckingCopy
-	show Insert
++banana : string
+show Insert Update Remove Search ListAll
 	types Atestado,Certificado.
 
 include Conflit.
@@ -63,14 +73,15 @@ if Payment.Avista -> generateBoleto
 
 def Activity -> reportsListofAuthors 
 def Activity -> reportsFrequencyperActivity 
-def CheckingCopy -> checkingCopyAtestado
-def CheckgCopy -> checkingCopyCertificado 
-def Event -> eventProgram
-def Event -> eventImportantDates
+if CheckingCopy.Atestado -> checkingCopyAtestado
+if CheckiCopy.Certificado -> checkingCopyCertificado 
+if Event -> eventProgram
+if Event -> eventImportantDates
 def Event -> reportsFrequencyperEvent 
-def Submission -> inserAttachmanet
+if Submission.Completa -> inserAttachmanet
 def Assignment -> notificationsDeadline
 def Assignment -> notificationsPaperAssignemnt 
+def Assignment -> notificationsAceptanceRejection 
 
 
 

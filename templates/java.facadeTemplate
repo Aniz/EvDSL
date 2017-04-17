@@ -8,12 +8,11 @@ import java.util.Set;
 import org.apache.commons.mail.EmailException;
 import rise.splcc.util.Email;
 
-{% for entity in entities %}
-import rise.splcc.business.{{entity.name}}Control;
-import rise.splcc.exception.{{entity.name}}Exception;
-import rise.splcc.repository.{{entity.name}}Repository;
-import rise.splcc.repository.{{entity.name}}RepositoryBDR;
-
+{% for key,value in data.items() %}
+import rise.splcc.business.{{key}}Control;
+import rise.splcc.exception.{{key}}Exception;
+import rise.splcc.repository.{{key}}Repository;
+import rise.splcc.repository.{{key}}RepositoryBDR;
 {% endfor %}
 import com.lowagie.text.DocumentException;
 
@@ -23,9 +22,9 @@ public class RiSEventFacade {
 	private EventControl eventList;
 	private UserControl userList;
 
-	{% for entity in entities %}
-	private {{entity.name}}Control {{entity.name|lower}}List;
-	{% endfor %}
+{% for key,value in data.items() %}
+	private {{key}}Control {{key|lower}}List;
+{% endfor %}
 
 	protected static RiSEventFacade instance;
 	
@@ -33,16 +32,16 @@ public class RiSEventFacade {
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
 		
-		{% for entity in entities %}
-		{{entity.name}}Repository {{entity.name|lower}}Repository = {{entity.name}}RepositoryBDR.getInstance();
-		{% endfor %}
+	{% for key,value in data.items() %}
+		{{key}}Repository {{key|lower}}Repository = {{key}}RepositoryBDR.getInstance();
+	{% endfor %}
 		
 		eventControlList = new EventControl(eventRepository);		
 		userControlList = new UserControl(userRepository);
 	
-		{% for entity in entities %}
-		{{entity.name|lower}}List = new {{entity.name}}Control({{entity.name|lower}}Repository); 
-		{% endfor %}	
+	{% for key,value in data.items() %}
+		{{key|lower}}List = new {{key}}Control({{key|lower}}Repository); 
+	{% endfor %}	
 	}
 	
 	public static RiSEventFacade getInstance()  {
@@ -52,74 +51,66 @@ public class RiSEventFacade {
 		return RiSEventFacade.instance;
 	}
 	
-	{% for entity in entities %}
-	public void insert{{entity.name}}({{entity.name}} entity) throws {{entity.name}}Exception, RepositoryException{
-		this.{{entity.name|lower}}List.insert(entity);
+	{% for key,value in data.items() %}
+	public void insert{{key}}({{key}} entity) throws {{key}}Exception, RepositoryException{
+		this.{{key|lower}}List.insert(entity);
 	}
-	public void remove{{entity.name}}(int idEntity) throws {{entity.name}}Exception, RepositoryException, {{entity.name}}Exception{
-		{{entity.name|lower}}List.remove(idEntity);  
-	}
-	
-	public void update{{entity.name}}({{entity.name}} Entity) throws {{entity.name}}Exception, Exception, {{entity.name}}Exception{
-		{{entity.name|lower}}List.update({{entity.name}});
+	public void remove{{key}}(int idEntity) throws {{key}}Exception, RepositoryException, {{key}}Exception{
+		{{key|lower}}List.remove(idEntity);  
 	}
 	
-	public List<{{entity.name}}> get{{entity.name}}() throws RepositoryException{
-		return {{entity.name}}s.get{{entity.name}}();
+	public void update{{key}}({{key}} Entity) throws {{key}}Exception, Exception, {{key}}Exception{
+		{{key|lower}}List.update({{key}});
 	}
 	
-	public {{entity.name}} search{{entity.name}}(int idEntity) throws {{entity.name}}Exception, RepositoryException, {{entity.name}}Exception{
-		return {{entity.name|lower}}List.search(idEntity);
+	public List<{{key}}> get{{key}}() throws RepositoryException{
+		return {{key}}s.get{{key}}();
 	}
 	
-	public int get{{entity.name}}LastId() throws RepositoryException{
-		return {{entity.name|lower}}List.get{{entity.name}}LastId();
+	public {{key}} search{{key}}(int idEntity) throws {{key}}Exception, RepositoryException, {{key}}Exception{
+		return {{key|lower}}List.search(idEntity);
 	}
 	
-	public int get{{entity.name}}IdByName(String entityName) throws RepositoryException{
-		return {{entity.name|lower}}List.get{{entity.name}}IdByName(entityName);
+	public int get{{key}}LastId() throws RepositoryException{
+		return {{key|lower}}List.get{{key}}LastId();
+	}
+	
+	public int get{{key}}IdByName(String entityName) throws RepositoryException{
+		return {{key|lower}}List.get{{key}}IdByName(entityName);
 	}
 
-	public boolean isThere{{entity.name}}(int idEntity) throws RepositoryException{
-		return {{entity.name|lower}}List.isThere(idEntity);
+	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
+		return {{key|lower}}List.isThere(idEntity);
 	}
-	{% endfor %}
-	
-	//#if ${ReportsFrequencyperEvent} == "T"
-	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
-		return events.getParticipantsPerEvent(idEvent);
-	}
-	//#endif
-	//#if ${EventProgram} == "T"
+{% endfor %}
+{% if 'Event' in data %}
+	{% if 'eventProgram' in data.User.option.statments %}
 	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
 		events.generateProgram(activities, event);
 	}
-	//#endif
-	
-	//#if ${EventImportantDates} == "T"
+	{% endif %}
+	{% if 'eventImportantDates' in data.User.option.statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
 		events.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
-	//#endif
-	//#if ${ReportsFrequencyperEvent} == "T"
+	{% endif %}
+	{% if 'reportsFrequencyperEvent' in data.User.option.statments %}	
+	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
+		return events.getParticipantsPerEvent(idEvent);
+	}
 	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
 		events.frequencyPerEvent(ParticipantsPerEvent, event);
 	}
-	//#endif
-	
-	//#if ${Bugs} == "T"
+	{% endif %}	
+{% endif %}	
+{% if 'User' in data %}
+	{% if 'sendBugTrackEmail' in data.User.option.statments %}
 	public String sendBug(String nome, String assunto, String mensagem, Email email) throws EmailException {
 		return users.sendBug(nome, assunto, mensagem, email);
 	}
-	//#endif
-	
-	//#endif
-	//REVIEWER
-	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		return reviewers.getReviewerByknowledgeArea(knowledgearea);
-	}
-	//#endif
-	
+	{% endif %}	
+{% endif %}	
+{% if 'Activity' in data %}
 	//ACTIVITY
 	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
 		return activities.getActivitiesByEvent(idEvent);
@@ -137,13 +128,13 @@ public class RiSEventFacade {
 		return activities.getEventbyActivity(idActivity);
 	}
 	
-	//#if ${ReportsFrequencyperActivity} == "T"
+	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
 		activities.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
-	//#endif
-	
-	//#if ${ReportsListofAuthors} == "T"
+	{% endif %}
+
+	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
 	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
 		return activities.getListOfAuthorsPerActivity(idActivity);
 	}
@@ -151,60 +142,66 @@ public class RiSEventFacade {
 	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
 		activity.listOfAuthorsPerActivity(authorsPerActivity);
 	}
-	//#endif
-	//#endif
-	
+	{% endif %}
+{% endif %}
+{% if 'Payment' in data %}	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
 		registrations.removeValue(value, idRegistration);
 	}
-	
 	public void addValue(float value, int idRegistration) throws RepositoryException{
 		registrations.addValue(value, idRegistration);
 	}
-	
 	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
 		this.payments.type(payment, paymentout);
 	}
-	//#endif
-	
-	public void emailRoundNotification (Review review, User user, Email email) throws EmailException{
-		reviews.emailRoundNotification(review, user, email);
-	}
-	
-	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
-		return reviews.getReviewsBySubmission(idSubmission);
-	}
-	
-	//#if ${SubmissionCompleta} == "T"
+{% endif %}	
+{% if 'Submission' in data %}	
+	{% if 'insertAttachment' in data.Submission.option.statments %}
 	public void insertAttachment(File attachment, int idActivity) throws RepositoryException, SubmissionAlreadyInsertedException{
 		this.submissions.inserAttachmanet(attachment, idActivity);
 	}
-	//#endif
+	{% endif %}
 	public void pdfRecovey(int idSubmission) throws RepositoryException{
 		this.submissions.pdfRecover(idSubmission);
 	}
-	
 	public List<Submission> getSubmissionsByUser(int idUser) throws RepositoryException{
 		return submissions.getSubmissionsByUser(idUser);
 	}
-	
-	//#if ${CheckingCopyAtestado} == "T"
+{% endif %}
+{% if 'CheckingCopy' in data %}
+	{% if 'checkingCopyAtestado' in data.Reviewer.option.statments %}
 	public void emitirAtestado (String nome, String evento, String periodo, CheckingCopy checkingcopy) throws RepositoryException {
 		checkingCopys.emitirAtestado(nome, evento, periodo, checkingcopy);
 	}
-	//#endif
-	
-	//#if ${CheckingCopyCertificado} == "T"
+	{% endif %}
+	{% if 'checkingCopyCertificado' in data.Reviewer.option.statments %}
 	public void emitirCertificado (String nome, String evento, String periodo, String atividade, CheckingCopy checkingcopy) throws RepositoryException, DocumentException, IOException {
 		checkingCopys.emitirCertificado(nome, evento, periodo, atividade, checkingcopy);
 	}
-	//#endif
-	//#endif
+	{% endif %}
+{% endif %}
+{% if 'Reviewer' in data %}	
 	
-	//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"
+	//if Reviewer and Submission -> Review is enable 
+	//Review Feature
+	{% if 'Submission' in data %}			
+	public void emailRoundNotification (Review review, User user, Email email) throws EmailException{
+		reviews.emailRoundNotification(review, user, email);
+	}
+	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
+		return reviews.getReviewsBySubmission(idSubmission);
+	}
+	{% endif %}
+
+	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		return reviewers.getReviewerByknowledgeArea(knowledgearea);
+	}
+
+	{% if 'notificationsDeadline' in data.Reviewer.option.statments or 'notificationsPaperAssignemnt' in data.Reviewer.option.statments or 'notificationsAceptanceRejection' in data.Reviewer.option.statments%}
 	public void emailNotification (User user, Review review, Email email) throws EmailException{
 		assignments.emailNotification(user, review, email);
 	}
-	//#endif
+	{% endif %}
+{% endif %}
 	
 }

@@ -1,5 +1,5 @@
 """
-An example how to generate java code from textX model using jinja2
+Generate java code from textX model using jinja2
 template engine (http://jinja.pocoo.org/docs/dev/)
 """
 from os import mkdir
@@ -74,16 +74,23 @@ def main(debug=False):
 
     componentData = ""
     componentExtraData = ""
+
     selectedOptionsArray = []
     actionsArray = []
     statmentsArray = []
+    commandsArray = []
+    commandsOptionArray = []
+
     componentDict = {}
     statmentDict = {}
+    commandsDict = {}
+    commandsOptionDict = {}
 
     avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","Author","Receipt","CheckingCopy"]
-    avaliableFunctions = ["Insert","Delete","Update"]
+    avaliableFunctions = ["Insert","Remove","Update","Search","ListAll","Search","Management"]
     chosenFunctions = []
     
+    #Get options from model
     for component in event_model.components:
         if component.__class__.__name__ == 'Action':
             actionsArray.append(component)
@@ -92,9 +99,19 @@ def main(debug=False):
             selectedOptionsArray.append(component.entity)
             componentDict[component.entity] = {"option":component}
             
+            #Get commands from model
+            commandsArray = []
+            if component.command.__class__.__name__ == 'SubCommandInOption':
+                componentDict[component.command.entity]["extraCommand"] = component.entity
+            if component.command.__class__.__name__ == 'CommandOption':
+                for command in component.command.commandsOption:
+                    commandsArray.append(command)
+            componentDict[component.entity]["commands"] = commandsArray
+            
         elif component.__class__.__name__ == 'Statment':
             statmentsArray.append(component)
     
+    #Get statments from model
     statmentDict = {}
     for statment in statmentsArray:
         if statment.entity in selectedOptionsArray:
@@ -103,7 +120,22 @@ def main(debug=False):
         else:
             print("[warning] Option '%s' of method '%s' not found" % (statment.entity,statment.actionType)) 
     
-    #sys.exit()  
+    #Unique files template
+    sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
+    with open(join(srcgen_folder,
+                   "%s.sql" % ("EventsDSL")), 'w') as f:
+        f.write(sqlTemplate.render(data=componentDict))
+
+    facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
+    with open(join(facadeFolder,
+                   "%s.java" % ("RiSEventFacade")), 'w') as f:
+        f.write(facadeTemplate.render(data=componentDict))
+    
+    mainViewTemplate =jinja_env.get_template(join(viewCodeFolder,'RiseEventMainScreenP.java'))
+    with open(join(viewFolder,
+                   "%s.java" % ("RiseEventMainScreenP")), 'w') as f:
+        f.write(mainViewTemplate.render(data=componentDict))
+
     #Classes Definition
     for key,value in componentDict.items():
         componentData = ""
@@ -136,9 +168,9 @@ def main(debug=False):
             
             if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData)
-    
-            # for view in op.views:
-            #     copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,extraData)
+        
+            for keyCommand,view in enumerate(value["commands"]):
+                copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData)
         else :
             print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
 
@@ -153,7 +185,6 @@ def main(debug=False):
     dependencesDict["Registration"] = "User","Event"
     
     for key,value in dependencesDict.items():
-        
         if all((w in selectedOptionsArray for w in value)):
             copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData)
             copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData) 
@@ -161,16 +192,23 @@ def main(debug=False):
             copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,componentData,componentExtraData)
             copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,componentData,componentExtraData)
             copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,componentData,componentExtraData)
-           
+        
         if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
             copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData)
             copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData)
-
-    # facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
-    # with open(join(facadeFolder,
-    #                "%s.java" % ("RiSEventFacade")), 'w') as f:
-    #     f.write(facadeTemplate.render(entitiesArray=entitiesArray))
-
+        
+        if key not in ["SubmissionAuthor","SubmissionUser"]:
+            copyCodeFile(viewCodeFolder,viewFolder,key+'Management'+"ScreenP",jinja_env,value,componentExtraData)
+       
+        for keyCommand,view in enumerate(avaliableFunctions):
+            keyView = key+view
+            if not ((keyView == "ActivityUserInsert") or (key != "ActivitySpeakerRemove") or (key != "ActivityUserRemove")):
+                copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,value,componentExtraData)
+        
+    for keyStatmentView,valueStatment in enumerate(statmentsArray):
+        if (valueStatment.condition == 'def'):
+            copyCodeFile(viewCodeFolder,viewFolder,valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData)
+       
 def createDotFiles(event_mm,event_model,dotFolder):
     # Export to .dot file for visualization
     metamodel_export(event_mm, join(dotFolder, 'event_meta.dot'))
@@ -182,9 +220,6 @@ def createDotFiles(event_mm,event_model,dotFolder):
     
     (graph,) = pydot.graph_from_dot_file(join(dotFolder,'event.dot'))
     graph.write_png(join(dotFolder,'event.png'))
-    
-    # dot = pydot.graph_from_dot_file(join(dotFolder,'event.dot'))
-    # dot.write_png('event.png')
     
 def copyCodeFile(src,dest,nameFile,jinja_env,var,extraVar):
     codeFileTemplate = jinja_env.get_template(join(src,nameFile+'.java'))
