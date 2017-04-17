@@ -7,7 +7,7 @@ add User
 
 add Speaker 
     +nacionalidade : integer
-    show Insert Update Remove
+    show Insert Update Search Remove ListAll
     types GeneralChair.
     
 add Organizer 
@@ -79,9 +79,9 @@ if Event -> eventProgram
 if Event -> eventImportantDates
 def Event -> reportsFrequencyperEvent 
 if Submission.Completa -> inserAttachmanet
-def Assignment -> notificationsDeadline
-def Assignment -> notificationsPaperAssignemnt 
-def Assignment -> notificationsAceptanceRejection 
+if Assignment -> notificationsDeadline
+if Assignment -> notificationsPaperAssignemnt 
+if Assignment -> notificationsAceptanceRejection 
 
 
 

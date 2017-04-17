@@ -131,11 +131,11 @@ def main(debug=False):
                    "%s.java" % ("RiSEventFacade")), 'w') as f:
         f.write(facadeTemplate.render(data=componentDict))
     
-    mainViewTemplate =jinja_env.get_template(join(viewCodeFolder,'RiseEventMainScreenP.java'))
+    mainViewTemplate =jinja_env.get_template(join(templateFolder,'java.mainScreenTemplate'))
     with open(join(viewFolder,
                    "%s.java" % ("RiseEventMainScreenP")), 'w') as f:
         f.write(mainViewTemplate.render(data=componentDict))
-
+    sys.exit()
     #Classes Definition
     for key,value in componentDict.items():
         componentData = ""
