@@ -135,7 +135,7 @@ def main(debug=False):
     with open(join(viewFolder,
                    "%s.java" % ("RiseEventMainScreenP")), 'w') as f:
         f.write(mainViewTemplate.render(data=componentDict))
-    sys.exit()
+    
     #Classes Definition
     for key,value in componentDict.items():
         componentData = ""

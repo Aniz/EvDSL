@@ -2472,8 +2472,8 @@ public class RiSEEventMainScreenP extends JFrame {
 				}
 				
 				//BUGTRACK
-				//#if ${Bugs} == "T"
-				private class BugtrackScreenMenuAction  implements ActionListener{ 
+				{% if 'sendBugTrackEmail' in data.statments %}
+					private class BugtrackScreenMenuAction  implements ActionListener{ 
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -2492,5 +2492,5 @@ public class RiSEEventMainScreenP extends JFrame {
 						}
 					}  
 				}
-				//#endif
+				{% endif %}
 }
