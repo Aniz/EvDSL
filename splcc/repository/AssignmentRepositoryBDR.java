@@ -43,24 +43,18 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 	public void insert(Assignment assignment) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission
-									{% if data.option.categories|length > 0 %}
-										,type{{data.option.entity}}
-									{% endif %}
-									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-										,{{property.name}}  
-									{% endfor %}{% endif %}
-				) "+ "Values('"+assignment.getIdReviwerUser() +"', '"
-					            +assignment.getIdReview()+"', '"
-					            +assignment.getDate()+"', '"
-					            +assignment.getIdReviewSubmission()
-				            {% if data.option.categories|length > 0 %}
-								+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
-							{% endif %}				
-							{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-								+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
-							{% endfor %}{% endif %}	        
-					            +"')");
+			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
+							+assignment.getIdReviwerUser() +"', '"
+				            +assignment.getIdReview()+"', '"
+				            +assignment.getDate()+"', '"
+				            +assignment.getIdReviewSubmission()
+			            {% if data.option.categories|length > 0 %}
+							+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+						{% endif %}				
+						{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+							+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+						{% endfor %}{% endif %}	        
+				            +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

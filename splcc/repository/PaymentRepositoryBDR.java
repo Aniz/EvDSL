@@ -43,22 +43,21 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 	public void insert(Payment payment) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status
+			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
+				+payment.getIdPayment()
+				+ "', '"+payment.getIdRegistration()
+				+ "', '"+payment.getPaymentType()
+				+ "', '"+payment.getBarcode()
+				+ "', '"+payment.getDate()
+				+ "', '"+payment.getValue() 
+				+ "', '"+payment.getStatus() 
 				{% if data.option.categories|length > 0 %}
-					,type{{data.option.entity}}
-				{% endif %}
-				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-					,{{property.name}}  
-				{% endfor %}{% endif %}
-
-				) Values('"+payment.getIdPayment()+"', '"+payment.getIdRegistration()+"', '"+ payment.getPaymentType() +"', '" + payment.getBarcode()+ "', '"+payment.getDate()+"',  '"+payment.getValue() +"', '"+ payment.getStatus() 
-				{% if data.option.categories|length > 0 %}
-					+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+				+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
 				{% endif %}				
 				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-					+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
 				{% endfor %}{% endif %}	        
-		            +"')");
+		        +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

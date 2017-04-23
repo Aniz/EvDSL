@@ -39,12 +39,9 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
 	public void insert(CheckingCopy checkingCopy) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue
-										,banana  
-										,typeCheckingCopy
-					) " + "Values('"+checkingCopy.getIdRegistration()+"', '"
-					+checkingCopy.getIdUser()+"', '"
-					+checkingCopy.getDateOfIssue()
+			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue,banana,typeCheckingCopy) Values('"+checkingCopy.getIdRegistration()+"', '"
+					+checkingCopy.getIdUser()
+					+"', '"+checkingCopy.getDateOfIssue()
 					+"', '"+checkingCopy.getTypeCheckingCopy()
 					+"', '"+checkingCopy.getBanana()   
 					        

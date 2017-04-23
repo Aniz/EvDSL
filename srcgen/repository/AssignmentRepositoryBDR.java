@@ -41,18 +41,16 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 	public void insert(Assignment assignment) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission
-										,typeAssignment
-										,newAssigmentField  
-				) "+ "Values('"+assignment.getIdReviwerUser() +"', '"
-					            +assignment.getIdReview()+"', '"
-					            +assignment.getDate()+"', '"
-					            +assignment.getIdReviewSubmission()
-								+"', '"+assignment.getTypeAssignment()
+			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission,typeAssignment,newAssigmentField) Values('"
+							+assignment.getIdReviwerUser() +"', '"
+				            +assignment.getIdReview()+"', '"
+				            +assignment.getDate()+"', '"
+				            +assignment.getIdReviewSubmission()
+							+"', '"+assignment.getTypeAssignment()
 				
-								+"', '"+assignment.getNewassigmentfield()   
+							+"', '"+assignment.getNewassigmentfield()   
 	        
-					            +"')");
+				            +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

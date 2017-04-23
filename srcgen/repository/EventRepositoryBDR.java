@@ -41,10 +41,8 @@ public class EventRepositoryBDR implements EventRepository {
 		//removi idOrganizdor. de acordo com o modelo relacional nao temos o  atributo idOrganizador dentro de Eventos
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors
-							,typeEvent
-							,link  
-				) Values('"+event.getEventName()
+			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors,typeEvent,link) Values('"
+					+event.getEventName()
 					+"', '"+event.getPeriod()
 					+"', '"+event.getPlace()
 					+"', '"+event.getInstitution() 

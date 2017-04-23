@@ -42,10 +42,10 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	public void insert(Activity activity) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit {% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %} Values('"
-								activity.getIdEvent()
-					            +"', '"+ activity.getNameActivity(
-					            +"', '"+ activity.getDescriptionActivity(
+			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit {% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values ('"
+								+ activity.getIdEvent()
+					            +"', '"+ activity.getNameActivity()
+					            +"', '"+ activity.getDescriptionActivity()
 					            +"', '"+ activity.getValue() 
 					            +"', '"+ activity.getHourlyLoad()
 					            +"', '"+ activity.getDate()

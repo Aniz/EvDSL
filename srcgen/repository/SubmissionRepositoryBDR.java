@@ -47,11 +47,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 	public void insert(Submission submission) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title
-				,typeSubmission
-	
-				,newSubmissionField   
-				) Values('"+submission.getIdActivity()
+			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title,typeSubmission,newSubmissionField) Values('"
+				+submission.getIdActivity()
 				+"', '"+submission.getType()
 				+"', '"+ submission.getAbstractPaper() 
 				+"', '" + submission.getKeywords()

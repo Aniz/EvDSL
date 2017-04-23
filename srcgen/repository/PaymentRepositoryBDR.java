@@ -41,16 +41,19 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 	public void insert(Payment payment) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status
-					,typePayment
-					,ooii  
-
-				) Values('"+payment.getIdPayment()+"', '"+payment.getIdRegistration()+"', '"+ payment.getPaymentType() +"', '" + payment.getBarcode()+ "', '"+payment.getDate()+"',  '"+payment.getValue() +"', '"+ payment.getStatus() 
-					+"', '"+payment.getTypePayment()
+			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status,typePayment,ooii) Values('"
+				+payment.getIdPayment()
+				+ "', '"+payment.getIdRegistration()
+				+ "', '"+payment.getPaymentType()
+				+ "', '"+payment.getBarcode()
+				+ "', '"+payment.getDate()
+				+ "', '"+payment.getValue() 
+				+ "', '"+payment.getStatus() 
+				+"', '"+payment.getTypePayment()
 				
-					+"', '"+payment.getOoii()   
+				+"', '"+payment.getOoii()   
 	        
-		            +"')");
+		        +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

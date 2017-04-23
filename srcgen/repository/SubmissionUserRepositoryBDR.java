@@ -38,8 +38,8 @@ public class SubmissionUserRepositoryBDR implements SubmissionUserRepository{
 	public void insert(SubmissionUser submissionUser) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO SubmissionUser (idUser,idSubmission,idActivity) "
-					+ "Values('"+submissionUser.getIdUser() 
+			statement.executeUpdate("INSERT INTO SubmissionUser (idUser,idSubmission,idActivity) Values('"
+					+submissionUser.getIdUser() 
 					+"', '" + submissionUser.getIdSubmission() 
 					+"', '"  +submissionUser.getIdActivity()+"')");
 		} catch (SQLException e) {

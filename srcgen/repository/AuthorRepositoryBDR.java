@@ -40,13 +40,10 @@ public class AuthorRepositoryBDR implements AuthorRepository {
 	public void insert(Author author) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email
-										,typeAuthor
-										,lattes  
-						) Values('"+author.getName()+"', '"
-				            +author.getEmail()+"', '"
-				            +author.getFiliation()
-						     +"', '"+author.getTypeAuthor()
+			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email,typeAuthor,lattes  ) Values('"+author.getName()+"', '"
+				            +author.getEmail()
+				            +"', '"+author.getFiliation()
+						    +"', '"+author.getTypeAuthor()
 							+"', '"+author.getLattes()   
 	        
 				            +"')");

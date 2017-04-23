@@ -47,14 +47,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 	public void insert(Submission submission) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title
-			{% if data.option.categories|length > 0 %}
-				,type{{data.option.entity}}
-			{% endif %}	
-			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				,{{property.name}}   
-			{% endfor %}{% endif %}
-				) Values('"+submission.getIdActivity()
+			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
+				+submission.getIdActivity()
 				+"', '"+submission.getType()
 				+"', '"+ submission.getAbstractPaper() 
 				+"', '" + submission.getKeywords()

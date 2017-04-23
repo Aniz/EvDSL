@@ -41,16 +41,9 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
 	public void insert(CheckingCopy checkingCopy) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue
-									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-										,{{property.name}}  
-									{% endfor %}{% endif %}
-									{% if data.option.categories|length > 0 %}
-										,type{{data.option.entity}}
-									{% endif %}
-					) " + "Values('"+checkingCopy.getIdRegistration()+"', '"
-					+checkingCopy.getIdUser()+"', '"
-					+checkingCopy.getDateOfIssue()
+			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}) Values('"+checkingCopy.getIdRegistration()+"', '"
+					+checkingCopy.getIdUser()
+					+"', '"+checkingCopy.getDateOfIssue()
 				{% if data.option.categories|length > 0 %}
 					+"', '"+checkingCopy.getType{{data.option.entity}}()
 				{% endif %}
