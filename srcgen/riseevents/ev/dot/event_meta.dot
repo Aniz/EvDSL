@@ -1,0 +1,84 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+140375291217864 -> 140375291219720[arrowtail=diamond, dir=both, headlabel="components 0..*"]
+140375291217864[ label="{EventModel|+name:ID\l}"]
+
+140375291219720[ label="{*Component|}"]
+140375291219720 -> 140375291225288 [dir=back]
+140375291219720 -> 140375290182200 [dir=back]
+140375291219720 -> 140375291221576 [dir=back]
+
+140375291221576 -> 140375290170488[headlabel="category "]
+140375291221576[ label="{Statment|+condition:Condition\l+entity:Entity\l+actionType:ActionType\l}"]
+
+140375291223432[ label="{Condition|if\|else\|def}"]
+
+140375291225288 -> 140375290174200[arrowtail=diamond, dir=both, headlabel="properties 0..*"]
+140375291225288 -> 140375291227144[arrowtail=diamond, dir=both, headlabel="command "]
+140375291225288 -> 140375290170488[arrowtail=diamond, dir=both, headlabel="categories 0..*"]
+140375291225288[ label="{Option|+entity:Entity\l}"]
+
+140375291227144[ label="{*Command|}"]
+140375291227144 -> 140375290178488 [dir=back]
+140375291227144 -> 140375291229000 [dir=back]
+
+140375291229000[ label="{SubCommandInOption|+entity:Entity\l}"]
+
+140375290170488[ label="{Category|+name:ID\l+alias:ID\l}"]
+
+140375290172344[ label="{Entity|Speaker\|Organizer\|User\|Event\|Payment\|Activity\|Assignment\|Submission\|Reviewer\|Author\|CheckingCopy\|Receipt}"]
+
+140375290174200 -> 140375290176056[headlabel="type "]
+140375290174200[ label="{Property|+name:ID\l}"]
+
+140375290176056[ label="{*Type|}"]
+140375290176056 -> 140375290975000 [dir=back]
+
+140375290975000[ label="{SimpleType|+name:ID\l}"]
+
+140375290178488[ label="{CommandOption|commandsOption:list[CommandType]\l}"]
+
+140375290180344[ label="{CommandType|Insert\|Remove\|Update\|Search\|ListAll\|Search\|Management}"]
+
+140375290182200 -> 140375290184056[arrowtail=diamond, dir=both, headlabel="params 0..*"]
+140375290182200[ label="{Action|+actionType:ActionType\l}"]
+
+140375290184056[ label="{Param|+name:ID\l}"]
+
+140375291230856[ label="{ActionType|sendEmailNotification\|assigmentConflictResolver\|askCardInfo\|reportsFrequencyperActivity\|reportsListofAuthors\|checkingCopyAtestado\|checkingCopyCertificado\|eventProgram\|eventImportantDates\|reportsFrequencyperEvent\|generateCarne\|generateBoleto\|sendBugTrackEmail\|notificationsDeadline\|inserAttachmanet\|notificationsPaperAssignemnt\|notificationsAceptanceRejection}"]
+
+140375291232712[ label="{Comment|\\/\\/.*$}"]
+
+140375289918936[ label="{ID|}"]
+
+140375290118360[ label="{STRING|}"]
+
+140375290120216[ label="{BOOL|}"]
+
+140375290122072[ label="{INT|}"]
+
+140375290123928[ label="{FLOAT|}"]
+
+140375290125784[ label="{NUMBER|}"]
+140375290125784 -> 140375290123928 [dir=back]
+140375290125784 -> 140375290122072 [dir=back]
+
+140375290127640[ label="{BASETYPE|}"]
+140375290127640 -> 140375290125784 [dir=back]
+140375290127640 -> 140375290120216 [dir=back]
+140375290127640 -> 140375289918936 [dir=back]
+140375290127640 -> 140375290118360 [dir=back]
+
+
+}

@@ -37,7 +37,8 @@ def main(debug=False):
 
     systemName = event_model.name
     general_folder = createFolder(this_folder, 'srcgen')
-    srcgen_folder = createFolder(this_folder, join(general_folder,systemName.lower()))
+    general_ev_folder = createFolder(general_folder, systemName.lower())
+    srcgen_folder = createFolder(general_ev_folder, 'ev')
     
     dotFolder = createFolder(srcgen_folder, 'dot')
     createDotFiles(event_mm,event_model,dotFolder)
