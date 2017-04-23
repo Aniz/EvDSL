@@ -40,22 +40,20 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	public void insert(Activity activity) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit
-										,typeActivity
-										,description  
-					) " + "Values('"+activity.getIdEvent() +"', '"
-					            +activity.getNameActivity()+"', '"
-					            +activity.getDescriptionActivity()+"', '"
-					            +activity.getValue() + "', '" 
-					            +activity.getHourlyLoad()+ "', '" 
-					            +activity.getDate()+ "', '" 
-					            +activity.getHour()+ "', '" 
-					            +activity.getNumberOfParticipants()+ "', '" 
+			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit ,typeActivity,description Values('"
+								activity.getIdEvent()
+					            +"', '"+ activity.getNameActivity(
+					            +"', '"+ activity.getDescriptionActivity(
+					            +"', '"+ activity.getValue() 
+					            +"', '"+ activity.getHourlyLoad()
+					            +"', '"+ activity.getDate()
+					            +"', '"+ activity.getHour()
+					            +"', '"+ activity.getNumberOfParticipants()
 					            +activity.getRegistrationLimit()
 							    +"', '"+activity.getTypeActivity()
 	
 								+"', '"+activity.getDescription()   
-					            +"')");
+						+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

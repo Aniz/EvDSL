@@ -39,9 +39,7 @@ public class ActivityOrganizerRepositoryBDR implements ActivityOrganizerReposito
 	public void insert(ActivityOrganizer activityOrganizer) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO activityOrganizer (idActivity,IdUser) "
-					+ "Values('"+activityOrganizer.getIdActivity() +"', '"
-					            +activityOrganizer.getIdOrganizer()+"')");
+			statement.executeUpdate("INSERT INTO activityOrganizer (idActivity,IdUser) Values('"+activityOrganizer.getIdActivity() +"', '"+activityOrganizer.getIdOrganizer()+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

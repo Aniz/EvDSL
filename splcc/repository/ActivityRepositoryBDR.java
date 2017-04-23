@@ -42,29 +42,24 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	public void insert(Activity activity) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit
-									{% if data.option.categories|length > 0 %}
-										,type{{data.option.entity}}
-									{% endif %}
-									{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-										,{{property.name}}  
-									{% endfor %}{% endif %}
-					) " + "Values('"+activity.getIdEvent() +"', '"
-					            +activity.getNameActivity()+"', '"
-					            +activity.getDescriptionActivity()+"', '"
-					            +activity.getValue() + "', '" 
-					            +activity.getHourlyLoad()+ "', '" 
-					            +activity.getDate()+ "', '" 
-					            +activity.getHour()+ "', '" 
-					            +activity.getNumberOfParticipants()+ "', '" 
+			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit {% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %} Values('"
+								activity.getIdEvent()
+					            +"', '"+ activity.getNameActivity(
+					            +"', '"+ activity.getDescriptionActivity(
+					            +"', '"+ activity.getValue() 
+					            +"', '"+ activity.getHourlyLoad()
+					            +"', '"+ activity.getDate()
+					            +"', '"+ activity.getHour()
+					            +"', '"+ activity.getNumberOfParticipants()
 					            +activity.getRegistrationLimit()
 				            {% if data.option.categories|length > 0 %}
 							    +"', '"+activity.getType{{data.option.entity}}()
 				         	{% endif %}	
 							{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 								+"', '"+activity.get{{property.name|capitalize}}()   
-							{% endfor %}{% endif %}
-					            +"')");
+							{% endfor %}
+						{% endif %}
+						+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

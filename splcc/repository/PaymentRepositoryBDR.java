@@ -93,7 +93,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                 payment.setValue(resultset.getFloat("value"));
                 payment.setBarcode(resultset.getString("barcode"));
              {% if data.option.categories|length > 0 %}
-            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
             {% endif %}
             {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
@@ -234,7 +234,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                  payment.setValue(resultset.getFloat("value"));
                  payment.setBarcode(resultset.getString("barcode"));
            	{% if data.option.categories|length > 0 %}
-            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
             {% endif %}
             {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));

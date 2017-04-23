@@ -6,7 +6,7 @@ public class SpeakerAlreadyInsertedException extends Exception {
 	private int idUser;
 
 	public SpeakerAlreadyInsertedException(int idUser) {
-		super(super(EXC_ALREADY_EXISTS);
+		super(EXC_ALREADY_EXISTS);
 		this.idUser = idUser;
 	}
 

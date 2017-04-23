@@ -84,7 +84,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                 payment.setDate(resultset.getString("date"));
                 payment.setValue(resultset.getFloat("value"));
                 payment.setBarcode(resultset.getString("barcode"));
-            	payment.setTypePayment(TypePayment.valueOf(resultset.getString("typePayment")))
+            	payment.setTypePayment(TypePayment.valueOf(resultset.getString("typePayment")));
 				payment.setOoii(resultset.getString("ooii"));
           
 				list.add(payment);
@@ -218,7 +218,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                  payment.setDate(resultset.getString("date"));
                  payment.setValue(resultset.getFloat("value"));
                  payment.setBarcode(resultset.getString("barcode"));
-            	payment.setTypePayment(TypePayment.valueOf(resultset.getString("typePayment")))
+            	payment.setTypePayment(TypePayment.valueOf(resultset.getString("typePayment")));
 				payment.setOoii(resultset.getString("ooii"));
            
             } else {

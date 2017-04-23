@@ -106,8 +106,8 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setPlace(resultset.getString("place"));
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
-				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")))
-				event.setLink(resultset.getString("link"))   
+				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
+				event.setLink(resultset.getString("link"));   
 					        
             } else {
             	throw new EventNotFoundException(idEvent);
@@ -142,8 +142,8 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setPlace(resultset.getString("place"));
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
-				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")))
-				event.setLink(resultset.getString("link"))   
+				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
+				event.setLink(resultset.getString("link"));   
 					        
 				list.add(event);
             } 

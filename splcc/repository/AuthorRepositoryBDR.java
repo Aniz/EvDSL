@@ -112,10 +112,10 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));
       		{% if data.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.getType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+				{{data.option.entity|lower}}.getType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
 			{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.get{{property.name|capitalize}}(resultset.getString("{{property.name}}"))   
+				{{data.option.entity|lower}}.get{{property.name|capitalize}}(resultset.getString("{{property.name}}"));   
 			{% endfor %}{% endif %}					        
 				  } else {
             	throw new AuthorNotFoundException(idAuthor);
@@ -149,10 +149,10 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));				
 			{% if data.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.getType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")))
+				{{data.option.entity|lower}}.getType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
 			{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.get{{property.name|capitalize}}(resultset.getString("{{property.name}}"))   
+				{{data.option.entity|lower}}.get{{property.name|capitalize}}(resultset.getString("{{property.name}}"));   
 			{% endfor %}{% endif %}					        
 				list.add(author);
             } 
