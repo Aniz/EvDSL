@@ -1,5 +1,5 @@
 //#if ${RegistrationOrganizerActivity} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class ActivityOrganizerNotFoundException extends Exception {
 

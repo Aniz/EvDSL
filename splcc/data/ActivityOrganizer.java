@@ -1,5 +1,5 @@
 //#if ${RegistrationOrganizerActivity} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 public class ActivityOrganizer {
 	private int idActivity;

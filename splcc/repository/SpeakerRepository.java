@@ -1,11 +1,11 @@
 //#if ${Speaker} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Speaker;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SpeakerNotFoundException;
+import {{systemName|lower}}.ev.data.Speaker;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SpeakerNotFoundException;
 
 public interface SpeakerRepository {
 	

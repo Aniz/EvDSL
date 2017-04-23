@@ -1,5 +1,5 @@
 //#if ${Organizer} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class OrganizerAlreadyInsertedException extends Exception {
 

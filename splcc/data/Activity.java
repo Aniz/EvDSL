@@ -1,6 +1,6 @@
 
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.splcc.data;
 
 import java.awt.Color;
 import java.io.File;

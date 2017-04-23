@@ -1,16 +1,16 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
 
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import rise.splcc.data.Activity;
-import rise.splcc.exception.ActivityAlreadyInsertedException;
-import rise.splcc.exception.ActivityNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.ActivityRepository;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.ActivityRepository;
 
 import com.lowagie.text.DocumentException;
 

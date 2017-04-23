@@ -1,5 +1,5 @@
 //#if ${InsertAuthors} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,11 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import rise.splcc.data.SubmissionAuthor;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SubmissionAuthorNotFoundException;
-import rise.splcc.util.PersistenceMechanismException;
-import rise.splcc.util.PersistenceMechanismRDBMS;
+import {{systemName|lower}}.ev.data.SubmissionAuthor;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SubmissionAuthorNotFoundException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismRDBMS;
 
 public class SubmissionAuthorRepositoryBDR implements SubmissionAuthorRepository {
 

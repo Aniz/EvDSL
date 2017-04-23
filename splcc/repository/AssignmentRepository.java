@@ -1,11 +1,11 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Assignment;
-import rise.splcc.exception.AssignmentNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Assignment;
+import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface AssignmentRepository {
 

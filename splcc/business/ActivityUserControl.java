@@ -1,13 +1,13 @@
 //#if ${RegistrationUserActivity} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.ActivityUser;
-import rise.splcc.exception.ActivityUserAlreadyInsertedException;
-import rise.splcc.exception.ActivityUserNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.ActivityUserRepository;
+import {{systemName|lower}}.ev.data.ActivityUser;
+import {{systemName|lower}}.ev.exception.ActivityUserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityUserNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.ActivityUserRepository;
 
 public class ActivityUserControl {
 

@@ -1,5 +1,5 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 public class PaymentTableModelRender {
 

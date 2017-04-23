@@ -1,5 +1,5 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class SubmissionUserNotFoundException extends Exception {
 

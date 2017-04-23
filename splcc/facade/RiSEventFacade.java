@@ -1,4 +1,4 @@
-package rise.splcc.facade;
+package {{systemName|lower}}.ev.facade;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,231 +7,231 @@ import java.util.Set;
 
 import org.apache.commons.mail.EmailException;
 
-import rise.splcc.business.ActivityControl;
+import {{systemName|lower}}.ev.business.ActivityControl;
 //#if ${RegistrationOrganizerActivity} == "T"
-import rise.splcc.business.ActivityOrganizerControl;
+import {{systemName|lower}}.ev.business.ActivityOrganizerControl;
 //#endif
 //#if ${RegistrationSpeakerActivity} == "T"
-import rise.splcc.business.ActivitySpeakerControl;
+import {{systemName|lower}}.ev.business.ActivitySpeakerControl;
 //#endif
-import rise.splcc.business.ActivityUserControl;
+import {{systemName|lower}}.ev.business.ActivityUserControl;
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-import rise.splcc.business.AssignmentControl;
+import {{systemName|lower}}.ev.business.AssignmentControl;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.business.AuthorControl;
+import {{systemName|lower}}.ev.business.AuthorControl;
 //#endif
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-import rise.splcc.business.CheckingCopyControl;
+import {{systemName|lower}}.ev.business.CheckingCopyControl;
 //#endif
-import rise.splcc.business.EventControl;
+import {{systemName|lower}}.ev.business.EventControl;
 //#if ${Organizer} == "T"
-import rise.splcc.business.OrganizerControl;
+import {{systemName|lower}}.ev.business.OrganizerControl;
 //#endif
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-import rise.splcc.business.PaymentControl;
+import {{systemName|lower}}.ev.business.PaymentControl;
 //#endif
 //#if ${Receipt} == "T"
-import rise.splcc.business.ReceiptControl;
+import {{systemName|lower}}.ev.business.ReceiptControl;
 //#endif
-import rise.splcc.business.RegistrationControl;
+import {{systemName|lower}}.ev.business.RegistrationControl;
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-import rise.splcc.business.ReviewControl;
+import {{systemName|lower}}.ev.business.ReviewControl;
 //#endif
 //#if ${Reviewer} == "T"
-import rise.splcc.business.ReviewerControl;
+import {{systemName|lower}}.ev.business.ReviewerControl;
 //#endif
 //#if ${Speaker} == "T"
-import rise.splcc.business.SpeakerControl;
+import {{systemName|lower}}.ev.business.SpeakerControl;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.business.SubmissionAuthorControl;
+import {{systemName|lower}}.ev.business.SubmissionAuthorControl;
 //#endif
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import rise.splcc.business.SubmissionControl;
-import rise.splcc.business.SubmissionUserControl;
+import {{systemName|lower}}.ev.business.SubmissionControl;
+import {{systemName|lower}}.ev.business.SubmissionUserControl;
 //#endif
-import rise.splcc.business.UserControl;
-import rise.splcc.data.Activity;
+import {{systemName|lower}}.ev.business.UserControl;
+import {{systemName|lower}}.ev.data.Activity;
 //#if ${RegistrationOrganizerActivity} == "T"
-import rise.splcc.data.ActivityOrganizer;
+import {{systemName|lower}}.ev.data.ActivityOrganizer;
 //#endif
 //#if ${RegistrationSpeakerActivity} == "T"
-import rise.splcc.data.ActivitySpeaker;
+import {{systemName|lower}}.ev.data.ActivitySpeaker;
 //#endif
-import rise.splcc.data.ActivityUser;
+import {{systemName|lower}}.ev.data.ActivityUser;
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-import rise.splcc.data.Assignment;
+import {{systemName|lower}}.ev.data.Assignment;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.data.Author;
+import {{systemName|lower}}.ev.data.Author;
 //#endif
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-import rise.splcc.data.CheckingCopy;
+import {{systemName|lower}}.ev.data.CheckingCopy;
 //#endif
-import rise.splcc.data.Event;
+import {{systemName|lower}}.ev.data.Event;
 //#if ${Organizer} == "T"
-import rise.splcc.data.Organizer;
+import {{systemName|lower}}.ev.data.Organizer;
 //#endif
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-import rise.splcc.data.Payment;
+import {{systemName|lower}}.ev.data.Payment;
 //#endif
 //#if ${Receipt} == "T"
-import rise.splcc.data.Receipt;
+import {{systemName|lower}}.ev.data.Receipt;
 //#endif
-import rise.splcc.data.Registration;
+import {{systemName|lower}}.ev.data.Registration;
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-import rise.splcc.data.Review;
+import {{systemName|lower}}.ev.data.Review;
 //#endif
 //#if ${Reviewer} == "T"
-import rise.splcc.data.Reviewer;
+import {{systemName|lower}}.ev.data.Reviewer;
 //#endif
 //#if ${Speaker} == "T"
-import rise.splcc.data.Speaker;
+import {{systemName|lower}}.ev.data.Speaker;
 //#endif
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import rise.splcc.data.Submission;
+import {{systemName|lower}}.ev.data.Submission;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.data.SubmissionAuthor;
+import {{systemName|lower}}.ev.data.SubmissionAuthor;
 //#endif
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import rise.splcc.data.SubmissionUser;
+import {{systemName|lower}}.ev.data.SubmissionUser;
 //#endif
-import rise.splcc.data.User;
+import {{systemName|lower}}.ev.data.User;
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-import rise.splcc.exception.ActivityAlreadyInsertedException;
-import rise.splcc.exception.ActivityNotFoundException;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
 //#endif
 //#if ${RegistrationOrganizerActivity} == "T"
-import rise.splcc.exception.ActivityOrganizerAlreadyInsertedException;
-import rise.splcc.exception.ActivityOrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.ActivityOrganizerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityOrganizerNotFoundException;
 //#endif
 //#if ${RegistrationSpeakerActivity} == "T"
-import rise.splcc.exception.ActivitySpeakerAlreadyInsertedException;
-import rise.splcc.exception.ActivitySpeakerNotFoundException;
+import {{systemName|lower}}.ev.exception.ActivitySpeakerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivitySpeakerNotFoundException;
 //#endif
-import rise.splcc.exception.ActivityUserAlreadyInsertedException;
-import rise.splcc.exception.ActivityUserNotFoundException;
+import {{systemName|lower}}.ev.exception.ActivityUserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityUserNotFoundException;
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-import rise.splcc.exception.AssignmentAlreadyInsertedException;
-import rise.splcc.exception.AssignmentNotFoundException;
+import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.exception.AuthorAlreadyInsertedException;
-import rise.splcc.exception.AuthorNotFoundException;
+import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
 //#endif
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-import rise.splcc.exception.CheckingCopyAlreadyInsertedException;
-import rise.splcc.exception.CheckingCopyNotFoundException;
+import {{systemName|lower}}.ev.exception.CheckingCopyAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.CheckingCopyNotFoundException;
 //#endif
-import rise.splcc.exception.EventAlreadyInsertedException;
-import rise.splcc.exception.EventNotFoundException;
+import {{systemName|lower}}.ev.exception.EventAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.EventNotFoundException;
 //#if ${Organizer} == "T"
-import rise.splcc.exception.OrganizerAlreadyInsertedException;
-import rise.splcc.exception.OrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.OrganizerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.OrganizerNotFoundException;
 //#endif
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-import rise.splcc.exception.PaymentAlreadyInsertedException;
-import rise.splcc.exception.PaymentNotFoundException;
+import {{systemName|lower}}.ev.exception.PaymentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
 //#endif
 //#if ${Receipt} == "T"
-import rise.splcc.exception.ReceiptAlreadyInsertedException;
-import rise.splcc.exception.ReceiptNotFoundException;
+import {{systemName|lower}}.ev.exception.ReceiptAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReceiptNotFoundException;
 //#endif
-import rise.splcc.exception.RegistrationAlreadyInsertedException;
-import rise.splcc.exception.RegistrationNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.RegistrationAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RegistrationNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-import rise.splcc.exception.ReviewAlreadyInsertedException;
-import rise.splcc.exception.ReviewNotFoundException;
+import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewNotFoundException;
 //#endif
 //#if ${Reviewer} == "T"
-import rise.splcc.exception.ReviewerAlreadyInsertedException;
-import rise.splcc.exception.ReviewerNotFoundException;
+import {{systemName|lower}}.ev.exception.ReviewerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewerNotFoundException;
 //#endif
 //#if ${Speaker} == "T"
-import rise.splcc.exception.SpeakerAlreadyInsertedException;
-import rise.splcc.exception.SpeakerNotFoundException;
+import {{systemName|lower}}.ev.exception.SpeakerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SpeakerNotFoundException;
 //#endif
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import rise.splcc.exception.SubmissionAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.exception.SubmissionAuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionAuthorAlreadyInsertedException;
 //#endif
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import rise.splcc.exception.SubmissionNotFoundException;
-import rise.splcc.exception.SubmissionUserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
+import {{systemName|lower}}.ev.exception.SubmissionUserAlreadyInsertedException;
 //#endif
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 //#if ${RegistrationOrganizerActivity} == "T"
-import rise.splcc.repository.ActivityOrganizerRepository;
-import rise.splcc.repository.ActivityOrganizerRepositoryBDR;
+import {{systemName|lower}}.ev.repository.ActivityOrganizerRepository;
+import {{systemName|lower}}.ev.repository.ActivityOrganizerRepositoryBDR;
 //#endif
-import rise.splcc.repository.ActivityRepository;
-import rise.splcc.repository.ActivityRepositoryBDR;
+import {{systemName|lower}}.ev.repository.ActivityRepository;
+import {{systemName|lower}}.ev.repository.ActivityRepositoryBDR;
 //#if ${RegistrationSpeakerActivity} == "T"
-import rise.splcc.repository.ActivitySpeakerRepository;
-import rise.splcc.repository.ActivitySpeakerRepositoryBDR;
+import {{systemName|lower}}.ev.repository.ActivitySpeakerRepository;
+import {{systemName|lower}}.ev.repository.ActivitySpeakerRepositoryBDR;
 //#endif
-import rise.splcc.repository.ActivityUserRepository;
-import rise.splcc.repository.ActivityUserRepositoryBDR;
+import {{systemName|lower}}.ev.repository.ActivityUserRepository;
+import {{systemName|lower}}.ev.repository.ActivityUserRepositoryBDR;
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-import rise.splcc.repository.AssignmentRepository;
-import rise.splcc.repository.AssignmentRepositoryBDR;
+import {{systemName|lower}}.ev.repository.AssignmentRepository;
+import {{systemName|lower}}.ev.repository.AssignmentRepositoryBDR;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.repository.AuthorRepository;
-import rise.splcc.repository.AuthorRepositoryBDR;
+import {{systemName|lower}}.ev.repository.AuthorRepository;
+import {{systemName|lower}}.ev.repository.AuthorRepositoryBDR;
 //#endif
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-import rise.splcc.repository.CheckingCopyRepository;
-import rise.splcc.repository.CheckingCopyRepositoryBDR;
+import {{systemName|lower}}.ev.repository.CheckingCopyRepository;
+import {{systemName|lower}}.ev.repository.CheckingCopyRepositoryBDR;
 //#endif
-import rise.splcc.repository.EventRepository;
-import rise.splcc.repository.EventRepositoryBDR;
+import {{systemName|lower}}.ev.repository.EventRepository;
+import {{systemName|lower}}.ev.repository.EventRepositoryBDR;
 //#if ${Organizer} == "T"
-import rise.splcc.repository.OrganizerRepository;
-import rise.splcc.repository.OrganizerRepositoryBDR;
+import {{systemName|lower}}.ev.repository.OrganizerRepository;
+import {{systemName|lower}}.ev.repository.OrganizerRepositoryBDR;
 //#endif
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-import rise.splcc.repository.PaymentRepository;
-import rise.splcc.repository.PaymentRepositoryBDR;
+import {{systemName|lower}}.ev.repository.PaymentRepository;
+import {{systemName|lower}}.ev.repository.PaymentRepositoryBDR;
 //#endif
 //#if ${Receipt} == "T"
-import rise.splcc.repository.ReceiptRepository;
-import rise.splcc.repository.ReceiptRepositoryBDR;
+import {{systemName|lower}}.ev.repository.ReceiptRepository;
+import {{systemName|lower}}.ev.repository.ReceiptRepositoryBDR;
 //#endif
-import rise.splcc.repository.RegistrationRepository;
-import rise.splcc.repository.RegistrationRepositoryBDR;
+import {{systemName|lower}}.ev.repository.RegistrationRepository;
+import {{systemName|lower}}.ev.repository.RegistrationRepositoryBDR;
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-import rise.splcc.repository.ReviewRepository;
-import rise.splcc.repository.ReviewRepositoryBDR;
+import {{systemName|lower}}.ev.repository.ReviewRepository;
+import {{systemName|lower}}.ev.repository.ReviewRepositoryBDR;
 //#endif
 //#if ${Reviewer} == "T"
-import rise.splcc.repository.ReviewerRepository;
-import rise.splcc.repository.ReviewerRepositoryBDR;
+import {{systemName|lower}}.ev.repository.ReviewerRepository;
+import {{systemName|lower}}.ev.repository.ReviewerRepositoryBDR;
 //#endif
 //#if ${Speaker} == "T"
-import rise.splcc.repository.SpeakerRepository;
-import rise.splcc.repository.SpeakerRepositoryBDR;
+import {{systemName|lower}}.ev.repository.SpeakerRepository;
+import {{systemName|lower}}.ev.repository.SpeakerRepositoryBDR;
 //#endif
 //#if ${InsertAuthors} == "T"
-import rise.splcc.repository.SubmissionAuthorRepository;
-import rise.splcc.repository.SubmissionAuthorRepositoryBDR;
+import {{systemName|lower}}.ev.repository.SubmissionAuthorRepository;
+import {{systemName|lower}}.ev.repository.SubmissionAuthorRepositoryBDR;
 //#endif
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import rise.splcc.repository.SubmissionRepository;
-import rise.splcc.repository.SubmissionRepositoryBDR;
+import {{systemName|lower}}.ev.repository.SubmissionRepository;
+import {{systemName|lower}}.ev.repository.SubmissionRepositoryBDR;
 
-import rise.splcc.repository.SubmissionUserRepository;
-import rise.splcc.repository.SubmissionUserRepositoryBDR;
+import {{systemName|lower}}.ev.repository.SubmissionUserRepository;
+import {{systemName|lower}}.ev.repository.SubmissionUserRepositoryBDR;
 //#endif
-import rise.splcc.repository.UserRepository;
-import rise.splcc.repository.UserRepositoryBDR;
-import rise.splcc.util.Email;
+import {{systemName|lower}}.ev.repository.UserRepository;
+import {{systemName|lower}}.ev.repository.UserRepositoryBDR;
+import {{systemName|lower}}.ev.util.Email;
 
 import com.lowagie.text.DocumentException;
 

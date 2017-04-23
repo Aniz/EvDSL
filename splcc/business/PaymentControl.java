@@ -1,16 +1,16 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.io.IOException;
 import java.util.List;
 
 import com.lowagie.text.DocumentException;
 
-import rise.splcc.data.Payment;
-import rise.splcc.exception.PaymentAlreadyInsertedException;
-import rise.splcc.exception.PaymentNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.PaymentRepository;
+import {{systemName|lower}}.ev.data.Payment;
+import {{systemName|lower}}.ev.exception.PaymentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.PaymentRepository;
 
 
 public class PaymentControl {

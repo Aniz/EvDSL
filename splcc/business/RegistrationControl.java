@@ -1,12 +1,12 @@
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.Registration;
-import rise.splcc.exception.RegistrationAlreadyInsertedException;
-import rise.splcc.exception.RegistrationNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.RegistrationRepository;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.exception.RegistrationAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RegistrationNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.RegistrationRepository;
 
 
 public class RegistrationControl {

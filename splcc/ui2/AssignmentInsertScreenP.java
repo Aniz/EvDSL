@@ -1,5 +1,5 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 
 import java.awt.Dimension;
@@ -24,39 +24,39 @@ import javax.swing.JTextField;
 
 import org.apache.commons.mail.EmailException;
 
-import rise.splcc.data.Assignment;
+import {{systemName|lower}}.ev.data.Assignment;
 //#if ${InsertAuthors} == "T"
-import rise.splcc.data.Author;
+import {{systemName|lower}}.ev.data.Author;
 //#endif
-import rise.splcc.data.Review;
-import rise.splcc.data.Review.StatusReview;
-import rise.splcc.data.Reviewer;
-import rise.splcc.data.Submission;
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.data.Review.StatusReview;
+import {{systemName|lower}}.ev.data.Reviewer;
+import {{systemName|lower}}.ev.data.Submission;
 //#if ${InsertAuthors} == "T"
-import rise.splcc.data.SubmissionAuthor;
+import {{systemName|lower}}.ev.data.SubmissionAuthor;
 //#endif
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import rise.splcc.data.SubmissionUser;
+import {{systemName|lower}}.ev.data.SubmissionUser;
 //#endif
-import rise.splcc.data.User;
-import rise.splcc.exception.AssignmentAlreadyInsertedException;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
 //#if ${InsertAuthors} == "T"
-import rise.splcc.exception.AuthorAlreadyInsertedException;
-import rise.splcc.exception.AuthorNotFoundException;
+import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
 //#endif
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewAlreadyInsertedException;
-import rise.splcc.exception.ReviewerAlreadyInsertedException;
-import rise.splcc.exception.ReviewerNotFoundException;
-import rise.splcc.exception.SubmissionAlreadyInsertedException;
-import rise.splcc.exception.SubmissionNotFoundException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
-import rise.splcc.table.ReviewerTableModel;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewerNotFoundException;
+import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.table.ReviewerTableModel;
 //#if ${ConflictofinterestAutomatic} == "T"
-import rise.splcc.util.Conflict;
+import {{systemName|lower}}.ev.util.Conflict;
 //#endif
-import rise.splcc.util.Email;
+import {{systemName|lower}}.ev.util.Email;
 
 public class AssignmentInsertScreenP extends JInternalFrame{
 

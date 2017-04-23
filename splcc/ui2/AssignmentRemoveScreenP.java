@@ -1,5 +1,5 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -14,12 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import rise.splcc.data.Assignment;
-import rise.splcc.exception.AssignmentAlreadyInsertedException;
-import rise.splcc.exception.AssignmentNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.Assignment;
+import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 
 public class AssignmentRemoveScreenP extends JInternalFrame {
 

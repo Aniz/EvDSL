@@ -1,13 +1,13 @@
 //#if ${RegistrationOrganizerActivity} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.ActivityOrganizer;
-import rise.splcc.exception.ActivityOrganizerAlreadyInsertedException;
-import rise.splcc.exception.ActivityOrganizerNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.ActivityOrganizerRepository;
+import {{systemName|lower}}.ev.data.ActivityOrganizer;
+import {{systemName|lower}}.ev.exception.ActivityOrganizerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityOrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.ActivityOrganizerRepository;
 
 public class ActivityOrganizerControl {
 

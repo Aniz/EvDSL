@@ -1,5 +1,5 @@
 //#if ${RegistrationSpeakerActivity} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -21,15 +21,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.ActivitySpeaker;
-import rise.splcc.data.Event;
-import rise.splcc.data.Speaker;
-import rise.splcc.exception.ActivitySpeakerAlreadyInsertedException;
-import rise.splcc.exception.ActivitySpeakerNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.ActivitySpeakerTableModel;
-import rise.splcc.table.SpeakerTableModel;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.ActivitySpeaker;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.data.Speaker;
+import {{systemName|lower}}.ev.exception.ActivitySpeakerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivitySpeakerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.ActivitySpeakerTableModel;
+import {{systemName|lower}}.ev.table.SpeakerTableModel;
 
 
 public class ActivitySpeakerManagementScreenP extends JInternalFrame {

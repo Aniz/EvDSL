@@ -1,5 +1,5 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.awt.Color;
 import java.awt.Component;

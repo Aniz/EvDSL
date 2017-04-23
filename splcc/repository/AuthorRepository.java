@@ -1,11 +1,11 @@
 //#if ${InsertAuthors} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Author;
-import rise.splcc.exception.AuthorNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Author;
+import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface AuthorRepository {
 	

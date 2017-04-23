@@ -1,5 +1,5 @@
 //#if ${Reviewer} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 public class Reviewer extends User{
 

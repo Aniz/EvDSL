@@ -1,5 +1,5 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class ActivityNotFoundException extends Exception {
 

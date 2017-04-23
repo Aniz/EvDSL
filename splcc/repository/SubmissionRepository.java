@@ -1,14 +1,14 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.io.File;
 import java.util.List;
 
-import rise.splcc.data.Submission;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SubmissionNotFoundException;
+import {{systemName|lower}}.ev.data.Submission;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
 {% if data.option.categories|length > 0 %}
-import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
 {% endif %}
 
 public interface SubmissionRepository {

@@ -1,5 +1,5 @@
 //#if ${SubmissionParcial} == "T" 
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -12,28 +12,28 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
-import rise.splcc.data.Activity;
+import {{systemName|lower}}.ev.data.Activity;
 //#if ${InsertAuthors} == "T"
-import rise.splcc.data.Author;
+import {{systemName|lower}}.ev.data.Author;
 //#endif
-import rise.splcc.data.Submission;
+import {{systemName|lower}}.ev.data.Submission;
 //#if ${InsertAuthors} == "T"
-import rise.splcc.data.SubmissionAuthor;
+import {{systemName|lower}}.ev.data.SubmissionAuthor;
 //#endif
-import rise.splcc.data.SubmissionUser;
-import rise.splcc.data.User;
-import rise.splcc.data.Submission.TypeSubmission;
+import {{systemName|lower}}.ev.data.SubmissionUser;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.data.Submission.TypeSubmission;
 //#if ${InsertAuthors} == "T"
-import rise.splcc.exception.AuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
 //#endif
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
-import rise.splcc.exception.SubmissionAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
 //#if ${InsertAuthors} == "T"
-import rise.splcc.exception.SubmissionAuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionAuthorAlreadyInsertedException;
 
 //#endif
-import rise.splcc.exception.SubmissionUserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionUserAlreadyInsertedException;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;

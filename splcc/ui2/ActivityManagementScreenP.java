@@ -1,5 +1,5 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -24,15 +24,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Event;
-import rise.splcc.data.Activity.TypeActivity;
-import rise.splcc.exception.ActivityAlreadyInsertedException;
-import rise.splcc.exception.ActivityNotFoundException;
-import rise.splcc.exception.EventAlreadyInsertedException;
-import rise.splcc.exception.EventNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.ActivityTableModel;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.data.Activity.TypeActivity;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
+import {{systemName|lower}}.ev.exception.EventAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.EventNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.ActivityTableModel;
 
 public class ActivityManagementScreenP extends JInternalFrame {
 

@@ -1,14 +1,14 @@
 //#if ${Reviewer} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.Reviewer;
-import rise.splcc.data.User;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewerAlreadyInsertedException;
-import rise.splcc.exception.ReviewerNotFoundException;
-import rise.splcc.repository.ReviewerRepository;
+import {{systemName|lower}}.ev.data.Reviewer;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewerNotFoundException;
+import {{systemName|lower}}.ev.repository.ReviewerRepository;
 
 public class ReviewerControl {
 

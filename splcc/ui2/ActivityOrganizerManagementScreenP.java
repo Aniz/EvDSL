@@ -1,5 +1,5 @@
 //#if ${RegistrationOrganizerActivity} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -21,18 +21,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.ActivityOrganizer;
-import rise.splcc.data.Event;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.ActivityOrganizer;
+import {{systemName|lower}}.ev.data.Event;
 
-import rise.splcc.data.Organizer;
+import {{systemName|lower}}.ev.data.Organizer;
 
-import rise.splcc.exception.ActivityOrganizerAlreadyInsertedException;
-import rise.splcc.exception.ActivityOrganizerNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.ActivityOrganizerTableModel;
+import {{systemName|lower}}.ev.exception.ActivityOrganizerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityOrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.ActivityOrganizerTableModel;
 
-import rise.splcc.table.OrganizerTableModel;
+import {{systemName|lower}}.ev.table.OrganizerTableModel;
 
 
 

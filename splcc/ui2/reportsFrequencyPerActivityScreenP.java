@@ -1,5 +1,5 @@
 //#if ${ReportsFrequencyperActivity} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -19,11 +19,11 @@ import javax.swing.JOptionPane;
 
 import com.lowagie.text.DocumentException;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Event;
-import rise.splcc.exception.ActivityAlreadyInsertedException;
-import rise.splcc.exception.ActivityNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public class FrequencyPerActivityScreenP extends JInternalFrame {
 

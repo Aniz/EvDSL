@@ -1,4 +1,4 @@
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -14,10 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import rise.splcc.data.Registration;
-import rise.splcc.exception.RegistrationAlreadyInsertedException;
-import rise.splcc.exception.RegistrationNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.exception.RegistrationAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RegistrationNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public class RegistrationSearchScreenP extends JInternalFrame {
 

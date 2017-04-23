@@ -1,11 +1,11 @@
 //#if ${Reviewer} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.Reviewer;
+import {{systemName|lower}}.ev.data.Reviewer;
 
 public class ReviewerTableModel extends AbstractTableModel{
 

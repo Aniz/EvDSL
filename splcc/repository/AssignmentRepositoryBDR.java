@@ -1,5 +1,5 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,15 +7,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import rise.splcc.data.Assignment;
+import {{systemName|lower}}.ev.data.Assignment;
 {% if data.option.categories|length > 0 %}
-import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
 {% endif %}
 
-import rise.splcc.exception.AssignmentNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.util.PersistenceMechanismException;
-import rise.splcc.util.PersistenceMechanismRDBMS;
+import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismRDBMS;
 
 public class AssignmentRepositoryBDR implements AssignmentRepository {
 	

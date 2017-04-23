@@ -1,5 +1,5 @@
 //#if ${Reviewer} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -15,13 +15,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import rise.splcc.data.Reviewer;
-import rise.splcc.data.User;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewerAlreadyInsertedException;
-import rise.splcc.exception.ReviewerNotFoundException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.Reviewer;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewerNotFoundException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 
 public class ReviewerSearchScreenP extends JInternalFrame {
 

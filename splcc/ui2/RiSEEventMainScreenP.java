@@ -1,4 +1,4 @@
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.facade.RiSEventFacade;
+import {{systemName|lower}}.ev.facade.RiSEventFacade;
 
 public class RiSEEventMainScreenP extends JFrame {
 

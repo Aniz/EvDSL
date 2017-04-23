@@ -1,12 +1,12 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 
-import rise.splcc.data.Payment;
+import {{systemName|lower}}.ev.data.Payment;
 
 public class PaymentTableModel extends AbstractTableModel{
 

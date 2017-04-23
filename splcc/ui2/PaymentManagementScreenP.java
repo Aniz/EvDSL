@@ -1,5 +1,5 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -26,14 +26,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.data.Payment;
-import rise.splcc.data.Payment.StatusPayment;
-import rise.splcc.data.Payment.TypePayment;
-import rise.splcc.data.Registration;
-import rise.splcc.exception.PaymentAlreadyInsertedException;
-import rise.splcc.exception.PaymentNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.PaymentTableModel;
+import {{systemName|lower}}.ev.data.Payment;
+import {{systemName|lower}}.ev.data.Payment.StatusPayment;
+import {{systemName|lower}}.ev.data.Payment.TypePayment;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.exception.PaymentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.PaymentTableModel;
 
 import com.itextpdf.text.pdf.BarcodeEAN;
 import com.lowagie.text.DocumentException;

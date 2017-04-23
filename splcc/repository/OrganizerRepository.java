@@ -1,11 +1,11 @@
 //#if ${Organizer} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Organizer;
-import rise.splcc.exception.OrganizerNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Organizer;
+import {{systemName|lower}}.ev.exception.OrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface OrganizerRepository {
 

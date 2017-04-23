@@ -1,12 +1,12 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.Submission;
-import rise.splcc.data.Submission.TypeSubmission;
+import {{systemName|lower}}.ev.data.Submission;
+import {{systemName|lower}}.ev.data.Submission.TypeSubmission;
 
 public class SubmissionTableModel extends AbstractTableModel{
 

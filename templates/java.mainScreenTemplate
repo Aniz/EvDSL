@@ -18,15 +18,15 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.facade.RiSEventFacade;
+import {{systemName|lower}}.ev.facade.{{systemName}}Facade;
 
-public class RiSEEventMainScreenP extends JFrame {
+public class {{systemName}}MainScreenP extends JFrame {
 
 	private JPanel contentPane;
 	
-    public static RiSEventFacade facade; // caso a variabilidade de tela login seja retirada o sistema deve iniciar dessa tela
+    public static {{systemName}}Facade facade; // caso a variabilidade de tela login seja retirada o sistema deve iniciar dessa tela
 	
-	private static RiSEEventMainScreenP instanceRiSEEventMainScreenP;      
+	private static {{systemName}}MainScreenP instanceRiSEEventMainScreenP;      
 	
 {% for key,value in data.items() %}
 	{% if value.commands %}
@@ -55,8 +55,8 @@ public class RiSEEventMainScreenP extends JFrame {
 	private JDesktopPane desktopPane;
 	
 	
-	public static RiSEventFacade getFacade(){
-		return RiSEventFacade.getInstance();
+	public static {{systemName}}Facade getFacade(){
+		return {{systemName}}Facade.getInstance();
 	}
 	
 	public static RiSEEventMainScreenP getInstanceRiSEEventMainScreenP() {
@@ -112,7 +112,7 @@ public class RiSEEventMainScreenP extends JFrame {
 		BugtrackScreenMenuAction bugtrackAction = new BugtrackScreenMenuAction();
 		//#endif
 		
-		RiSEEventMainScreenP.facade = RiSEventFacade.getInstance();
+		RiSEEventMainScreenP.facade = {{systemName}}Facade.getInstance();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1120, 691);

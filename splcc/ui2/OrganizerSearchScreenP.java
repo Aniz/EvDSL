@@ -1,5 +1,5 @@
 //#if ${Organizer} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -15,13 +15,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import rise.splcc.data.Organizer;
-import rise.splcc.data.User;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.OrganizerAlreadyInsertedException;
-import rise.splcc.exception.OrganizerNotFoundException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.Organizer;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.OrganizerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.OrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 
 public class OrganizerSearchScreenP extends JInternalFrame {
 

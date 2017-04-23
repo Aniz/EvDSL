@@ -1,12 +1,12 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 
-import rise.splcc.data.Review;
+import {{systemName|lower}}.ev.data.Review;
 
 public class ReviewTableModel extends AbstractTableModel{
 

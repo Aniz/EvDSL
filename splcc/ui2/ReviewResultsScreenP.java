@@ -1,5 +1,5 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -17,10 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import rise.splcc.data.Submission;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SubmissionAlreadyInsertedException;
-import rise.splcc.exception.SubmissionNotFoundException;
+import {{systemName|lower}}.ev.data.Submission;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
 
 public class ReviewResultsScreenP extends JInternalFrame {
 	

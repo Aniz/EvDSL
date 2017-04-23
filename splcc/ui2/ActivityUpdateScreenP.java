@@ -1,5 +1,5 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -19,12 +19,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Activity.TypeActivity;
-import rise.splcc.data.Event;
-import rise.splcc.exception.ActivityAlreadyInsertedException;
-import rise.splcc.exception.ActivityNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Activity.TypeActivity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public class ActivityUpdateScreenP extends JInternalFrame {
 

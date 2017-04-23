@@ -1,11 +1,11 @@
 
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.User;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 
 
 

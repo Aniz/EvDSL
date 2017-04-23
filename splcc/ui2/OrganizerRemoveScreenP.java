@@ -1,5 +1,5 @@
 //#if ${Organizer} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.OrganizerAlreadyInsertedException;
-import rise.splcc.exception.OrganizerNotFoundException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.OrganizerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.OrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 
 
 public class OrganizerRemoveScreenP extends JInternalFrame {

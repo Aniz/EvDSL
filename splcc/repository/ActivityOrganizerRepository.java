@@ -1,11 +1,11 @@
 //#if ${RegistrationOrganizerActivity} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.ActivityOrganizer;
-import rise.splcc.exception.ActivityOrganizerNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.ActivityOrganizer;
+import {{systemName|lower}}.ev.exception.ActivityOrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface ActivityOrganizerRepository {
 

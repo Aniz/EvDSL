@@ -1,5 +1,5 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 import java.awt.Color;
 import java.io.FileNotFoundException;

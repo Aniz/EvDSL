@@ -1,12 +1,12 @@
 //#if ${Speaker} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.Speaker;
-import rise.splcc.data.User;
+import {{systemName|lower}}.ev.data.Speaker;
+import {{systemName|lower}}.ev.data.User;
 
 public class SpeakerTableModel extends AbstractTableModel{
 

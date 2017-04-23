@@ -1,11 +1,11 @@
 //#if ${Receipt} == "T" 
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.Receipt;
+import {{systemName|lower}}.ev.data.Receipt;
 
 public class ReceiptTableModel extends AbstractTableModel{
 

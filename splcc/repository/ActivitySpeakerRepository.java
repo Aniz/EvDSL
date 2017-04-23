@@ -1,11 +1,11 @@
 //#if ${RegistrationSpeakerActivity} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.ActivitySpeaker;
-import rise.splcc.exception.ActivitySpeakerNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.ActivitySpeaker;
+import {{systemName|lower}}.ev.exception.ActivitySpeakerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 
 

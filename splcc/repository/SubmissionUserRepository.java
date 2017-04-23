@@ -1,11 +1,11 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.SubmissionUser;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SubmissionUserNotFoundException;
+import {{systemName|lower}}.ev.data.SubmissionUser;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SubmissionUserNotFoundException;
 
 public interface SubmissionUserRepository {
 	

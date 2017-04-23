@@ -1,4 +1,4 @@
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -17,11 +17,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.data.Registration;
-import rise.splcc.exception.RegistrationAlreadyInsertedException;
-import rise.splcc.exception.RegistrationNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.RegistrationTableModel;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.exception.RegistrationAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RegistrationNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.RegistrationTableModel;
 
 public class RegistrationManagementScreenP extends JInternalFrame{
 

@@ -1,6 +1,6 @@
 
 
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -19,10 +19,10 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 
-import rise.splcc.data.User;
-import rise.splcc.data.User.TypeUser;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.data.User.TypeUser;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
 
 public class UserInsertScreenP extends JInternalFrame {
 

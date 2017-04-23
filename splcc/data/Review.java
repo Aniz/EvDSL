@@ -1,5 +1,5 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 import java.sql.Blob;
 

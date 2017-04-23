@@ -1,8 +1,8 @@
 //#if ${ConflictofinterestAutomatic} == "T"
-package rise.splcc.util;
+package {{systemName|lower}}.ev.util;
 
-import rise.splcc.data.Author;
-import rise.splcc.data.User;
+import {{systemName|lower}}.ev.data.Author;
+import {{systemName|lower}}.ev.data.User;
 
 public class Conflict {
 

@@ -1,5 +1,5 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 import java.util.ArrayList;
 import java.util.List;

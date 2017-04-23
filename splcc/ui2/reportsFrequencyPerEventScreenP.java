@@ -1,5 +1,5 @@
 //#if ${ReportsFrequencyperEvent} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -11,10 +11,10 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
-import rise.splcc.data.Event;
-import rise.splcc.exception.EventAlreadyInsertedException;
-import rise.splcc.exception.EventNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.exception.EventAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.EventNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;

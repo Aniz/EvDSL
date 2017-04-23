@@ -1,11 +1,11 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Review;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewNotFoundException;
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewNotFoundException;
 
 
 public interface ReviewRepository {

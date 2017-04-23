@@ -1,4 +1,4 @@
-package rise.splcc.util;
+package {{systemName|lower}}.ev.util;
 
 
 

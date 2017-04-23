@@ -1,5 +1,5 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,12 +14,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import rise.splcc.data.Submission;
-import rise.splcc.data.Submission.TypeSubmission;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SubmissionNotFoundException;
-import rise.splcc.util.PersistenceMechanismException;
-import rise.splcc.util.PersistenceMechanismRDBMS;
+import {{systemName|lower}}.ev.data.Submission;
+import {{systemName|lower}}.ev.data.Submission.TypeSubmission;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismRDBMS;
 
 public class SubmissionRepositoryBDR implements SubmissionRepository {
 	

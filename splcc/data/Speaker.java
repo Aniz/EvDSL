@@ -1,5 +1,5 @@
 //#if ${Speaker} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 public class Speaker extends User{
 	private String biography;

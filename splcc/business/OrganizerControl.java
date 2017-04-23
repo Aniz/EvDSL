@@ -1,13 +1,13 @@
 //#if ${Organizer} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.Organizer;
-import rise.splcc.exception.OrganizerAlreadyInsertedException;
-import rise.splcc.exception.OrganizerNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.OrganizerRepository;
+import {{systemName|lower}}.ev.data.Organizer;
+import {{systemName|lower}}.ev.exception.OrganizerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.OrganizerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.OrganizerRepository;
 
 public class OrganizerControl {
 

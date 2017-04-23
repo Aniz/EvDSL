@@ -1,5 +1,5 @@
 //#if ${Speaker} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class SpeakerNotFoundException extends Exception {
 

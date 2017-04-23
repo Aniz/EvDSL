@@ -35,7 +35,9 @@ def main(debug=False):
     if exists(srcgen_folder):
         shutil.rmtree(srcgen_folder)
 
-    srcgen_folder = createFolder(this_folder, 'srcgen')
+    systemName = event_model.name
+    general_folder = createFolder(this_folder, 'srcgen')
+    srcgen_folder = createFolder(this_folder, join(general_folder,systemName.lower()))
     
     dotFolder = createFolder(srcgen_folder, 'dot')
     createDotFiles(event_mm,event_model,dotFolder)
@@ -74,7 +76,7 @@ def main(debug=False):
 
     componentData = ""
     componentExtraData = ""
-
+    
     selectedOptionsArray = []
     actionsArray = []
     statmentsArray = []
@@ -124,17 +126,17 @@ def main(debug=False):
     sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
     with open(join(srcgen_folder,
                    "%s.sql" % ("EventsDSL")), 'w') as f:
-        f.write(sqlTemplate.render(data=componentDict))
+        f.write(sqlTemplate.render(data=componentDict,systemName=systemName))
 
     facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
     with open(join(facadeFolder,
-                   "%s.java" % ("RiSEventFacade")), 'w') as f:
-        f.write(facadeTemplate.render(data=componentDict))
+                   "%s.java" % (systemName+"Facade")), 'w') as f:
+        f.write(facadeTemplate.render(data=componentDict,systemName=systemName))
     
     mainViewTemplate =jinja_env.get_template(join(templateFolder,'java.mainScreenTemplate'))
     with open(join(viewFolder,
-                   "%s.java" % ("RiseEventMainScreenP")), 'w') as f:
-        f.write(mainViewTemplate.render(data=componentDict))
+                   "%s.java" % (systemName+"MainScreenP")), 'w') as f:
+        f.write(mainViewTemplate.render(data=componentDict,systemName=systemName))
     
     #Classes Definition
     for key,value in componentDict.items():
@@ -156,21 +158,21 @@ def main(debug=False):
                print("[Dependence Error] '%s' defined whitout Option 'Activity'"%key)
                  
         if key in avaliableOptions:
-            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value,componentExtraData)
-            copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value,componentExtraData)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value,componentExtraData)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,value,componentExtraData)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,value,componentExtraData)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value,componentExtraData)
+            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value,componentExtraData,systemName)
+            copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value,componentExtraData,systemName)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value,componentExtraData,systemName)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,value,componentExtraData,systemName)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,value,componentExtraData,systemName)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value,componentExtraData,systemName)
             
             if key not in ["Author"]:
-                copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData)
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData,systemName)
             
             if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
-                copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData)
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData,systemName)
         
             for keyCommand,view in enumerate(value["commands"]):
-                copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData)
+                copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData,systemName)
         else :
             print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
 
@@ -186,28 +188,28 @@ def main(debug=False):
     
     for key,value in dependencesDict.items():
         if all((w in selectedOptionsArray for w in value)):
-            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData)
-            copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData) 
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,componentData,componentExtraData)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,componentData,componentExtraData)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,componentData,componentExtraData)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,componentData,componentExtraData)
+            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData,systemName)
+            copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData,systemName) 
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,componentData,componentExtraData,systemName)
+            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,componentData,componentExtraData,systemName)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,componentData,componentExtraData,systemName)
+            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,componentData,componentExtraData,systemName)
         
         if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
-            copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData)
-            copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData)
+            copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData,systemName)
+            copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData,systemName)
         
         if key not in ["SubmissionAuthor","SubmissionUser"]:
-            copyCodeFile(viewCodeFolder,viewFolder,key+'Management'+"ScreenP",jinja_env,value,componentExtraData)
+            copyCodeFile(viewCodeFolder,viewFolder,key+'Management'+"ScreenP",jinja_env,value,componentExtraData,systemName)
        
         for keyCommand,view in enumerate(avaliableFunctions):
             keyView = key+view
             if not ((keyView == "ActivityUserInsert") or (key != "ActivitySpeakerRemove") or (key != "ActivityUserRemove")):
-                copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,value,componentExtraData)
+                copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,value,componentExtraData,systemName)
         
     for keyStatmentView,valueStatment in enumerate(statmentsArray):
         if (valueStatment.condition == 'def'):
-            copyCodeFile(viewCodeFolder,viewFolder,valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData)
+            copyCodeFile(viewCodeFolder,viewFolder,valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
        
 def createDotFiles(event_mm,event_model,dotFolder):
     # Export to .dot file for visualization
@@ -221,11 +223,11 @@ def createDotFiles(event_mm,event_model,dotFolder):
     (graph,) = pydot.graph_from_dot_file(join(dotFolder,'event.dot'))
     graph.write_png(join(dotFolder,'event.png'))
     
-def copyCodeFile(src,dest,nameFile,jinja_env,var,extraVar):
+def copyCodeFile(src,dest,nameFile,jinja_env,var,extraVar,systemName):
     codeFileTemplate = jinja_env.get_template(join(src,nameFile+'.java'))
     with open(join(dest,
                       "%s.java" % nameFile), 'w') as f:
-            f.write(codeFileTemplate.render(data=var,extraData=extraVar))
+            f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName))
 
 def createFolder(dest,name):
     folder = join(dest, name)

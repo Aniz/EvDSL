@@ -1,5 +1,5 @@
 //#if ${Receipt} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 import java.awt.Color;
 import java.io.FileNotFoundException;
@@ -11,10 +11,10 @@ import java.sql.Blob;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import rise.splcc.exception.PaymentAlreadyInsertedException;
-import rise.splcc.exception.PaymentNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.ui2.RiSEEventMainScreenP;
+import {{systemName|lower}}.ev.exception.PaymentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.ui2.RiSEEventMainScreenP;
 
 import com.itextpdf.text.Element;
 import com.lowagie.text.Document;

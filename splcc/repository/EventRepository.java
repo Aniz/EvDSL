@@ -1,11 +1,11 @@
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Event;
-import rise.splcc.exception.EventNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.exception.EventNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 
 

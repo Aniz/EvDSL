@@ -1,5 +1,5 @@
 //#if ${Receipt} == "T" 
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -24,14 +24,14 @@ import javax.swing.border.EmptyBorder;
 
 import com.lowagie.text.DocumentException;
 
-import rise.splcc.data.Payment;
-import rise.splcc.data.Receipt;
-import rise.splcc.exception.PaymentAlreadyInsertedException;
-import rise.splcc.exception.PaymentNotFoundException;
-import rise.splcc.exception.ReceiptAlreadyInsertedException;
-import rise.splcc.exception.ReceiptNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.ReceiptTableModel;
+import {{systemName|lower}}.ev.data.Payment;
+import {{systemName|lower}}.ev.data.Receipt;
+import {{systemName|lower}}.ev.exception.PaymentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
+import {{systemName|lower}}.ev.exception.ReceiptAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReceiptNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.ReceiptTableModel;
 
 public class ReceiptScreenP extends JInternalFrame{
 

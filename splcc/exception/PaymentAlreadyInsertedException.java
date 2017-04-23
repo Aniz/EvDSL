@@ -1,5 +1,5 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class PaymentAlreadyInsertedException extends Exception {
 

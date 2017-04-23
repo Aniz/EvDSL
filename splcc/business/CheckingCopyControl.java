@@ -1,5 +1,5 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,12 +7,12 @@ import java.util.List;
 
 import com.lowagie.text.DocumentException;
 
-import rise.splcc.data.CheckingCopy;
+import {{systemName|lower}}.ev.data.CheckingCopy;
 
-import rise.splcc.exception.CheckingCopyAlreadyInsertedException;
-import rise.splcc.exception.CheckingCopyNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.CheckingCopyRepository;
+import {{systemName|lower}}.ev.exception.CheckingCopyAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.CheckingCopyNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.CheckingCopyRepository;
 
 
 

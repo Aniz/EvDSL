@@ -1,5 +1,5 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -12,12 +12,12 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Event;
-import rise.splcc.data.Activity.TypeActivity;
-import rise.splcc.exception.ActivityAlreadyInsertedException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.ActivityTableModel;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.data.Activity.TypeActivity;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.ActivityTableModel;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;

@@ -1,14 +1,14 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.io.File;
 import java.util.List;
 
-import rise.splcc.data.Submission;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SubmissionAlreadyInsertedException;
-import rise.splcc.exception.SubmissionNotFoundException;
-import rise.splcc.repository.SubmissionRepository;
+import {{systemName|lower}}.ev.data.Submission;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
+import {{systemName|lower}}.ev.repository.SubmissionRepository;
 
 
 public class SubmissionControl {

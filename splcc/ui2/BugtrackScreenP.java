@@ -1,5 +1,5 @@
 //#if ${Bugs} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,8 +22,8 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.mail.EmailException;
 
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.util.Email;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.util.Email;
 
 public class BugtrackScreenP extends JInternalFrame {
 

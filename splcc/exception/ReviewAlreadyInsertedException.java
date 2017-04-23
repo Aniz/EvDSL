@@ -1,5 +1,5 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class ReviewAlreadyInsertedException extends Exception {
 	

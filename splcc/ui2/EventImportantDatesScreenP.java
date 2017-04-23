@@ -1,5 +1,5 @@
 //#if ${EventImportantDates} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Event;
-import rise.splcc.exception.EventAlreadyInsertedException;
-import rise.splcc.exception.EventNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.exception.EventAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.EventNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 import javax.swing.JComboBox;
 

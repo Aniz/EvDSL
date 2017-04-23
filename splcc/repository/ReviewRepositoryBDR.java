@@ -1,5 +1,5 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,12 +7,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import rise.splcc.data.Review;
-import rise.splcc.data.Review.StatusReview;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewNotFoundException;
-import rise.splcc.util.PersistenceMechanismException;
-import rise.splcc.util.PersistenceMechanismRDBMS;
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.data.Review.StatusReview;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewNotFoundException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismRDBMS;
 
 public class ReviewRepositoryBDR implements ReviewRepository {
 	

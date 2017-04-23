@@ -1,11 +1,11 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.Activity;
+import {{systemName|lower}}.ev.data.Activity;
 
 public class ActivityTableModel extends AbstractTableModel{
 

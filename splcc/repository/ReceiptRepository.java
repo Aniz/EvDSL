@@ -1,11 +1,11 @@
 //#if ${Receipt} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Receipt;
-import rise.splcc.exception.ReceiptNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Receipt;
+import {{systemName|lower}}.ev.exception.ReceiptNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface ReceiptRepository {
 

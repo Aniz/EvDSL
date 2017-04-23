@@ -1,16 +1,16 @@
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.io.IOException;
 import java.util.List;
 
 import com.lowagie.text.DocumentException;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Event;
-import rise.splcc.exception.EventAlreadyInsertedException;
-import rise.splcc.exception.EventNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.EventRepository;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.exception.EventAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.EventNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.EventRepository;
 
 
 public class EventControl {

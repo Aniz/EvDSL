@@ -1,4 +1,4 @@
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 public class Registration {
 	private int idRegistration;

@@ -1,13 +1,13 @@
 //#if ${InsertAuthors} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.Author;
-import rise.splcc.exception.AuthorAlreadyInsertedException;
-import rise.splcc.exception.AuthorNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.AuthorRepository;
+import {{systemName|lower}}.ev.data.Author;
+import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.AuthorRepository;
 
 public class AuthorControl {
 	 private AuthorRepository authors;

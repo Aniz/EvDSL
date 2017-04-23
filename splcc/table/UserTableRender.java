@@ -1,5 +1,5 @@
 
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.awt.Color;
 import java.awt.Component;

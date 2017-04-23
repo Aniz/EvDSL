@@ -1,5 +1,5 @@
 //#if ${Reviewer} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class ReviewerAlreadyInsertedException extends Exception {
 

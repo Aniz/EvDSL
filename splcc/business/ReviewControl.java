@@ -1,17 +1,17 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
 import org.apache.commons.mail.EmailException;
 
-import rise.splcc.data.Review;
-import rise.splcc.data.User;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewAlreadyInsertedException;
-import rise.splcc.exception.ReviewNotFoundException;
-import rise.splcc.repository.ReviewRepository;
-import rise.splcc.util.Email;
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewNotFoundException;
+import {{systemName|lower}}.ev.repository.ReviewRepository;
+import {{systemName|lower}}.ev.util.Email;
 
 
 public class ReviewControl {

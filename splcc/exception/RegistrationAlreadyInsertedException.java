@@ -1,4 +1,4 @@
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class RegistrationAlreadyInsertedException extends Exception {
 

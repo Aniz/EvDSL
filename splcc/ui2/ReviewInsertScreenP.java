@@ -1,5 +1,5 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,19 +20,19 @@ import javax.swing.JTextField;
 
 import org.apache.commons.mail.EmailException;
 
-import rise.splcc.data.Assignment;
-import rise.splcc.data.Review;
-import rise.splcc.data.Review.StatusReview;
-import rise.splcc.data.Submission;
-import rise.splcc.data.User;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewAlreadyInsertedException;
-import rise.splcc.exception.ReviewNotFoundException;
-import rise.splcc.exception.SubmissionAlreadyInsertedException;
-import rise.splcc.exception.SubmissionNotFoundException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
-import rise.splcc.util.Email;
+import {{systemName|lower}}.ev.data.Assignment;
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.data.Review.StatusReview;
+import {{systemName|lower}}.ev.data.Submission;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReviewNotFoundException;
+import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.util.Email;
 
 public class ReviewInsertScreenP extends JInternalFrame  {
 

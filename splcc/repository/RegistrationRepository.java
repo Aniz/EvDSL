@@ -1,10 +1,10 @@
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Registration;
-import rise.splcc.exception.RegistrationNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.exception.RegistrationNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface RegistrationRepository {
 

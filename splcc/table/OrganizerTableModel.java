@@ -1,12 +1,12 @@
 //#if ${Organizer} == "T"
 
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.Organizer;
+import {{systemName|lower}}.ev.data.Organizer;
 
 public class OrganizerTableModel extends AbstractTableModel{
 

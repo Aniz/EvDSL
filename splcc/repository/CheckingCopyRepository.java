@@ -1,13 +1,13 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.CheckingCopy;
-import rise.splcc.data.CheckingCopy;
-import rise.splcc.exception.CheckingCopyNotFoundException;
-import rise.splcc.exception.CheckingCopyNotFoundException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.CheckingCopy;
+import {{systemName|lower}}.ev.data.CheckingCopy;
+import {{systemName|lower}}.ev.exception.CheckingCopyNotFoundException;
+import {{systemName|lower}}.ev.exception.CheckingCopyNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface CheckingCopyRepository {
 

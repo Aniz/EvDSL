@@ -1,5 +1,5 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class CheckingCopyAlreadyInsertedException extends Exception {
 

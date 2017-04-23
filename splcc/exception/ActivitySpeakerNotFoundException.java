@@ -1,5 +1,5 @@
 //#if ${RegistrationSpeakerActivity} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class ActivitySpeakerNotFoundException extends Exception {
 

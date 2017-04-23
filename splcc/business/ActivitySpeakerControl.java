@@ -1,14 +1,14 @@
 //#if ${RegistrationSpeakerActivity} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.ActivitySpeaker;
-import rise.splcc.exception.ActivitySpeakerAlreadyInsertedException;
-import rise.splcc.exception.ActivitySpeakerNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.ActivitySpeakerRepository;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.ActivitySpeaker;
+import {{systemName|lower}}.ev.exception.ActivitySpeakerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivitySpeakerNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.ActivitySpeakerRepository;
 
 
 public class ActivitySpeakerControl {

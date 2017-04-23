@@ -1,11 +1,11 @@
 //#if ${RegistrationUserActivity} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.ActivityUser;
+import {{systemName|lower}}.ev.data.ActivityUser;
 
 public class ActivityUserTableModel extends AbstractTableModel{
 	// Nome das Colunas

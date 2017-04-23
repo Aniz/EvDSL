@@ -1,11 +1,11 @@
 //#if ${RegistrationUserActivity} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.ActivityUser;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ActivityUserNotFoundException;
+import {{systemName|lower}}.ev.data.ActivityUser;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ActivityUserNotFoundException;
 
 public interface ActivityUserRepository {
 	

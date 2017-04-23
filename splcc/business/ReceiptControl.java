@@ -1,13 +1,13 @@
 //#if ${Receipt} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.Receipt;
-import rise.splcc.exception.ReceiptAlreadyInsertedException;
-import rise.splcc.exception.ReceiptNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.ReceiptRepository;
+import {{systemName|lower}}.ev.data.Receipt;
+import {{systemName|lower}}.ev.exception.ReceiptAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ReceiptNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.ReceiptRepository;
 
 
 public class ReceiptControl {

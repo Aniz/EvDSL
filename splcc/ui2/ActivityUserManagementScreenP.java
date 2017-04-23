@@ -1,5 +1,5 @@
 //#if ${RegistrationUserActivity} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -21,19 +21,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.ActivityUser;
-import rise.splcc.data.Event;
-import rise.splcc.data.Registration;
-import rise.splcc.data.User;
-import rise.splcc.exception.ActivityAlreadyInsertedException;
-import rise.splcc.exception.ActivityNotFoundException;
-import rise.splcc.exception.ActivityUserAlreadyInsertedException;
-import rise.splcc.exception.ActivityUserNotFoundException;
-import rise.splcc.exception.RegistrationNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.ActivityUserTableModel;
-import rise.splcc.table.UserTableModel;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.ActivityUser;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
+import {{systemName|lower}}.ev.exception.ActivityUserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityUserNotFoundException;
+import {{systemName|lower}}.ev.exception.RegistrationNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.ActivityUserTableModel;
+import {{systemName|lower}}.ev.table.UserTableModel;
 
 public class ActivityUserManagementScreenP extends JInternalFrame {
 

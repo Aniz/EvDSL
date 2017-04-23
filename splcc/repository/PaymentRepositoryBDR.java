@@ -1,5 +1,5 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,15 +7,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import rise.splcc.data.Payment;
-import rise.splcc.data.Payment.StatusPayment;
+import {{systemName|lower}}.ev.data.Payment;
+import {{systemName|lower}}.ev.data.Payment.StatusPayment;
 {% if data.option.categories|length > 0 %}
-import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
 {% endif %}
-import rise.splcc.exception.PaymentNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.util.PersistenceMechanismException;
-import rise.splcc.util.PersistenceMechanismRDBMS;
+import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismRDBMS;
 
 public class PaymentRepositoryBDR implements PaymentRepository {
 	

@@ -1,25 +1,25 @@
 
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
 import org.apache.commons.mail.EmailException;
 
-import rise.splcc.data.User;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 //#if ${Organizer} == "T"
-import rise.splcc.repository.OrganizerRepository;
+import {{systemName|lower}}.ev.repository.OrganizerRepository;
 //#endif
 //#if ${Reviewer} == "T"
-import rise.splcc.repository.ReviewerRepository;
+import {{systemName|lower}}.ev.repository.ReviewerRepository;
 //#endif
 //#if ${Speaker} == "T"
-import rise.splcc.repository.SpeakerRepository;
+import {{systemName|lower}}.ev.repository.SpeakerRepository;
 //#endif
-import rise.splcc.repository.UserRepository;
-import rise.splcc.util.Email;
+import {{systemName|lower}}.ev.repository.UserRepository;
+import {{systemName|lower}}.ev.util.Email;
 
 public class UserControl {
 

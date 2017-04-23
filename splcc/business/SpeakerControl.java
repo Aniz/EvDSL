@@ -1,13 +1,13 @@
 //#if ${Speaker} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
-import rise.splcc.data.Speaker;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.SpeakerAlreadyInsertedException;
-import rise.splcc.exception.SpeakerNotFoundException;
-import rise.splcc.repository.SpeakerRepository;
+import {{systemName|lower}}.ev.data.Speaker;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.SpeakerAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SpeakerNotFoundException;
+import {{systemName|lower}}.ev.repository.SpeakerRepository;
 
 public class SpeakerControl {
 

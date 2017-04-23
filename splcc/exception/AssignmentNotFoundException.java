@@ -1,5 +1,5 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package rise.splcc.exception;
+package {{systemName|lower}}.ev.exception;
 
 public class AssignmentNotFoundException extends Exception {
 

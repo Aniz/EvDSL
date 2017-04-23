@@ -1,4 +1,4 @@
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 import java.awt.Color;
 import java.io.File;

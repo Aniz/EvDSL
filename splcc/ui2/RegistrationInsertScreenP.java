@@ -1,4 +1,4 @@
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -15,13 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import rise.splcc.data.ActivityUser;
-import rise.splcc.data.Event;
-import rise.splcc.data.Registration;
-import rise.splcc.data.User;
-import rise.splcc.exception.ActivityUserAlreadyInsertedException;
-import rise.splcc.exception.RegistrationAlreadyInsertedException;
-import rise.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.ActivityUser;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.ActivityUserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RegistrationAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public class RegistrationInsertScreenP extends JInternalFrame {
 

@@ -1,21 +1,21 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package rise.splcc.business;
+package {{systemName|lower}}.ev.business;
 
 import java.util.List;
 
 import org.apache.commons.mail.EmailException;
 
 
-import rise.splcc.data.Assignment;
+import {{systemName|lower}}.ev.data.Assignment;
 
 
-import rise.splcc.data.Review;
-import rise.splcc.data.User;
-import rise.splcc.exception.AssignmentAlreadyInsertedException;
-import rise.splcc.exception.AssignmentNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.repository.AssignmentRepository;
-import rise.splcc.util.Email;
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.repository.AssignmentRepository;
+import {{systemName|lower}}.ev.util.Email;
 
 public class AssignmentControl {
 	

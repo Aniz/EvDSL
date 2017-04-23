@@ -1,5 +1,5 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -22,14 +22,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import rise.splcc.data.CheckingCopy;
-import rise.splcc.data.CheckingCopy.TypeCheckingCopy;
-import rise.splcc.data.Registration;
-import rise.splcc.data.User;
-import rise.splcc.exception.CheckingCopyAlreadyInsertedException;
-import rise.splcc.exception.CheckingCopyNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.table.CheckingCopyTableModel;
+import {{systemName|lower}}.ev.data.CheckingCopy;
+import {{systemName|lower}}.ev.data.CheckingCopy.TypeCheckingCopy;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.CheckingCopyAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.CheckingCopyNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.table.CheckingCopyTableModel;
 
 public class CheckingCopyManagementScreenP extends JInternalFrame{
 

@@ -1,5 +1,5 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-package rise.splcc.data;
+package {{systemName|lower}}.ev.data;
 
 import java.sql.Blob;
 

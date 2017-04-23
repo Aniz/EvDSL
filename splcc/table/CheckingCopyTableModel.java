@@ -1,12 +1,12 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-package rise.splcc.table;
+package {{systemName|lower}}.ev.table;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import rise.splcc.data.CheckingCopy;
-import rise.splcc.data.CheckingCopy.TypeCheckingCopy;
+import {{systemName|lower}}.ev.data.CheckingCopy;
+import {{systemName|lower}}.ev.data.CheckingCopy.TypeCheckingCopy;
 
 public class CheckingCopyTableModel extends AbstractTableModel{
 

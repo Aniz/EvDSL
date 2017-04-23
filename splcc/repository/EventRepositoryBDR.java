@@ -1,4 +1,4 @@
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,15 +6,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import rise.splcc.data.Activity;
-import rise.splcc.data.Event;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
 {% if data.option.categories|length > 0 %}
-import rise.splcc.data.{{data.option.entity}}.Type{{data.option.entity}};
+import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
 {% endif %}
-import rise.splcc.exception.EventNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.util.PersistenceMechanismException;
-import rise.splcc.util.PersistenceMechanismRDBMS;
+import {{systemName|lower}}.ev.exception.EventNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismException;
+import {{systemName|lower}}.ev.util.PersistenceMechanismRDBMS;
 
 public class EventRepositoryBDR implements EventRepository {
 	

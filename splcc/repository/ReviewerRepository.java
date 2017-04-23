@@ -1,11 +1,11 @@
 //#if ${Reviewer} == "T"
-package rise.splcc.repository;
+package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
 
-import rise.splcc.data.Reviewer;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.ReviewerNotFoundException;
+import {{systemName|lower}}.ev.data.Reviewer;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.ReviewerNotFoundException;
 
 public interface ReviewerRepository {
 	

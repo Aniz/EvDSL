@@ -1,5 +1,5 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
-package rise.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -19,16 +19,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import rise.splcc.data.CheckingCopy;
-import rise.splcc.data.CheckingCopy.TypeCheckingCopy;
-import rise.splcc.data.Registration;
-import rise.splcc.data.User;
-import rise.splcc.exception.CheckingCopyAlreadyInsertedException;
-import rise.splcc.exception.RegistrationAlreadyInsertedException;
-import rise.splcc.exception.RegistrationNotFoundException;
-import rise.splcc.exception.RepositoryException;
-import rise.splcc.exception.UserAlreadyInsertedException;
-import rise.splcc.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.CheckingCopy;
+import {{systemName|lower}}.ev.data.CheckingCopy.TypeCheckingCopy;
+import {{systemName|lower}}.ev.data.Registration;
+import {{systemName|lower}}.ev.data.User;
+import {{systemName|lower}}.ev.exception.CheckingCopyAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RegistrationAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.RegistrationNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
 
 public class CheckingCopyInsertScreenP extends JInternalFrame {
 
