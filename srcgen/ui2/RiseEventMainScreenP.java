@@ -28,81 +28,81 @@ public class RiSEEventMainScreenP extends JFrame {
 	
 	private static RiSEEventMainScreenP instanceRiSEEventMainScreenP;      
 	
-	private UserInsertScreenP screenInsertUser;	
-	private UserUpdateScreenP screenUpdateUser;	
-	private UserSearchScreenP screenSearchUser;	
-	private UserRemoveScreenP screenRemoveUser;	
-	private UserListAllScreenP screenListAllUser;	
+	private UserInsertScreenP screenUserInsertUser;	
+	private UserUpdateScreenP screenUserUpdateUser;	
+	private UserSearchScreenP screenUserSearchUser;	
+	private UserRemoveScreenP screenUserRemoveUser;	
+	private UserListAllScreenP screenUserListAllUser;	
 
-	private SpeakerInsertScreenP screenInsertSpeaker;	
-	private SpeakerUpdateScreenP screenUpdateSpeaker;	
-	private SpeakerSearchScreenP screenSearchSpeaker;	
-	private SpeakerRemoveScreenP screenRemoveSpeaker;	
-	private SpeakerListAllScreenP screenListAllSpeaker;	
+	private SpeakerInsertScreenP screenSpeakerInsertSpeaker;	
+	private SpeakerUpdateScreenP screenSpeakerUpdateSpeaker;	
+	private SpeakerSearchScreenP screenSpeakerSearchSpeaker;	
+	private SpeakerRemoveScreenP screenSpeakerRemoveSpeaker;	
+	private SpeakerListAllScreenP screenSpeakerListAllSpeaker;	
 
-	private OrganizerInsertScreenP screenInsertOrganizer;	
-	private OrganizerUpdateScreenP screenUpdateOrganizer;	
-	private OrganizerSearchScreenP screenSearchOrganizer;	
-	private OrganizerRemoveScreenP screenRemoveOrganizer;	
-	private OrganizerListAllScreenP screenListAllOrganizer;	
+	private OrganizerInsertScreenP screenOrganizerInsertOrganizer;	
+	private OrganizerUpdateScreenP screenOrganizerUpdateOrganizer;	
+	private OrganizerSearchScreenP screenOrganizerSearchOrganizer;	
+	private OrganizerRemoveScreenP screenOrganizerRemoveOrganizer;	
+	private OrganizerListAllScreenP screenOrganizerListAllOrganizer;	
 
-	private ReviewerInsertScreenP screenInsertReviewer;	
-	private ReviewerUpdateScreenP screenUpdateReviewer;	
-	private ReviewerSearchScreenP screenSearchReviewer;	
-	private ReviewerRemoveScreenP screenRemoveReviewer;	
-	private ReviewerListAllScreenP screenListAllReviewer;	
+	private ReviewerInsertScreenP screenReviewerInsertReviewer;	
+	private ReviewerUpdateScreenP screenReviewerUpdateReviewer;	
+	private ReviewerSearchScreenP screenReviewerSearchReviewer;	
+	private ReviewerRemoveScreenP screenReviewerRemoveReviewer;	
+	private ReviewerListAllScreenP screenReviewerListAllReviewer;	
 
-	private EventInsertScreenP screenInsertEvent;	
-	private EventUpdateScreenP screenUpdateEvent;	
-	private EventSearchScreenP screenSearchEvent;	
-	private EventRemoveScreenP screenRemoveEvent;	
-	private EventListAllScreenP screenListAllEvent;	
-	private EventReportslistofauthorsScreenP screenReportslistofauthors;	
-	private EventReportsfrequencyperactivityScreenP screenReportsfrequencyperactivity;	
-	private EventReportsfrequencypereventScreenP screenReportsfrequencyperevent;	
+	private EventInsertScreenP screenEventInsertEvent;	
+	private EventUpdateScreenP screenEventUpdateEvent;	
+	private EventSearchScreenP screenEventSearchEvent;	
+	private EventRemoveScreenP screenEventRemoveEvent;	
+	private EventListAllScreenP screenEventListAllEvent;	
+	private EventReportslistofauthorsScreenP screenEventReportslistofauthors;	
+	private EventReportsfrequencyperactivityScreenP screenEventReportsfrequencyperactivity;	
+	private EventReportsfrequencypereventScreenP screenEventReportsfrequencyperevent;	
 
-	private PaymentInsertScreenP screenInsertPayment;	
-	private PaymentUpdateScreenP screenUpdatePayment;	
-	private PaymentSearchScreenP screenSearchPayment;	
-	private PaymentRemoveScreenP screenRemovePayment;	
-	private PaymentListAllScreenP screenListAllPayment;	
-	private PaymentReportslistofauthorsScreenP screenReportslistofauthors;	
-	private PaymentReportsfrequencyperactivityScreenP screenReportsfrequencyperactivity;	
-	private PaymentReportsfrequencypereventScreenP screenReportsfrequencyperevent;	
+	private PaymentInsertScreenP screenPaymentInsertPayment;	
+	private PaymentUpdateScreenP screenPaymentUpdatePayment;	
+	private PaymentSearchScreenP screenPaymentSearchPayment;	
+	private PaymentRemoveScreenP screenPaymentRemovePayment;	
+	private PaymentListAllScreenP screenPaymentListAllPayment;	
+	private PaymentReportslistofauthorsScreenP screenPaymentReportslistofauthors;	
+	private PaymentReportsfrequencyperactivityScreenP screenPaymentReportsfrequencyperactivity;	
+	private PaymentReportsfrequencypereventScreenP screenPaymentReportsfrequencyperevent;	
 
-	private ActivityInsertScreenP screenInsertActivity;	
-	private ActivityUpdateScreenP screenUpdateActivity;	
-	private ActivitySearchScreenP screenSearchActivity;	
-	private ActivityRemoveScreenP screenRemoveActivity;	
-	private ActivityListAllScreenP screenListAllActivity;	
-	private ActivityReportslistofauthorsScreenP screenReportslistofauthors;	
-	private ActivityReportsfrequencyperactivityScreenP screenReportsfrequencyperactivity;	
-	private ActivityReportsfrequencypereventScreenP screenReportsfrequencyperevent;	
+	private ActivityInsertScreenP screenActivityInsertActivity;	
+	private ActivityUpdateScreenP screenActivityUpdateActivity;	
+	private ActivitySearchScreenP screenActivitySearchActivity;	
+	private ActivityRemoveScreenP screenActivityRemoveActivity;	
+	private ActivityListAllScreenP screenActivityListAllActivity;	
+	private ActivityReportslistofauthorsScreenP screenActivityReportslistofauthors;	
+	private ActivityReportsfrequencyperactivityScreenP screenActivityReportsfrequencyperactivity;	
+	private ActivityReportsfrequencypereventScreenP screenActivityReportsfrequencyperevent;	
 
-	private AssignmentInsertScreenP screenInsertAssignment;	
-	private AssignmentSearchScreenP screenSearchAssignment;	
-	private AssignmentRemoveScreenP screenRemoveAssignment;	
-	private AssignmentListAllScreenP screenListAllAssignment;	
-	private AssignmentReportslistofauthorsScreenP screenReportslistofauthors;	
-	private AssignmentReportsfrequencyperactivityScreenP screenReportsfrequencyperactivity;	
-	private AssignmentReportsfrequencypereventScreenP screenReportsfrequencyperevent;	
+	private AssignmentInsertScreenP screenAssignmentInsertAssignment;	
+	private AssignmentSearchScreenP screenAssignmentSearchAssignment;	
+	private AssignmentRemoveScreenP screenAssignmentRemoveAssignment;	
+	private AssignmentListAllScreenP screenAssignmentListAllAssignment;	
+	private AssignmentReportslistofauthorsScreenP screenAssignmentReportslistofauthors;	
+	private AssignmentReportsfrequencyperactivityScreenP screenAssignmentReportsfrequencyperactivity;	
+	private AssignmentReportsfrequencypereventScreenP screenAssignmentReportsfrequencyperevent;	
 
-	private SubmissionSearchScreenP screenSearchSubmission;	
-	private SubmissionRemoveScreenP screenRemoveSubmission;	
-	private SubmissionListAllScreenP screenListAllSubmission;	
-	private SubmissionReportslistofauthorsScreenP screenReportslistofauthors;	
-	private SubmissionReportsfrequencyperactivityScreenP screenReportsfrequencyperactivity;	
-	private SubmissionReportsfrequencypereventScreenP screenReportsfrequencyperevent;	
+	private SubmissionSearchScreenP screenSubmissionSearchSubmission;	
+	private SubmissionRemoveScreenP screenSubmissionRemoveSubmission;	
+	private SubmissionListAllScreenP screenSubmissionListAllSubmission;	
+	private SubmissionReportslistofauthorsScreenP screenSubmissionReportslistofauthors;	
+	private SubmissionReportsfrequencyperactivityScreenP screenSubmissionReportsfrequencyperactivity;	
+	private SubmissionReportsfrequencypereventScreenP screenSubmissionReportsfrequencyperevent;	
 
 
-	private CheckingCopyInsertScreenP screenInsertCheckingCopy;	
-	private CheckingCopyUpdateScreenP screenUpdateCheckingCopy;	
-	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
-	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
-	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
-	private CheckingCopyReportslistofauthorsScreenP screenReportslistofauthors;	
-	private CheckingCopyReportsfrequencyperactivityScreenP screenReportsfrequencyperactivity;	
-	private CheckingCopyReportsfrequencypereventScreenP screenReportsfrequencyperevent;	
+	private CheckingCopyInsertScreenP screenCheckingCopyInsertCheckingCopy;	
+	private CheckingCopyUpdateScreenP screenCheckingCopyUpdateCheckingCopy;	
+	private CheckingCopyRemoveScreenP screenCheckingCopyRemoveCheckingCopy;	
+	private CheckingCopySearchScreenP screenCheckingCopySearchCheckingCopy;	
+	private CheckingCopyListAllScreenP screenCheckingCopyListAllCheckingCopy;	
+	private CheckingCopyReportslistofauthorsScreenP screenCheckingCopyReportslistofauthors;	
+	private CheckingCopyReportsfrequencyperactivityScreenP screenCheckingCopyReportsfrequencyperactivity;	
+	private CheckingCopyReportsfrequencypereventScreenP screenCheckingCopyReportsfrequencyperevent;	
 
 
 	private ReceiptScreenP screenReceipt;

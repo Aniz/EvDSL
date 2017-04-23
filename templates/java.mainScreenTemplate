@@ -31,13 +31,13 @@ public class RiSEEventMainScreenP extends JFrame {
 {% for key,value in data.items() %}
 	{% if value.commands %}
 		{% for command in value.commands %}
-	private {{key}}{{command}}ScreenP screen{{command}}{{key}};	
+	private {{key}}{{command}}ScreenP screen{{key}}{{command}}{{key}};	
 		{% endfor %}
 	{% endif %}
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-	private {{key}}{{actionKey|capitalize}}ScreenP screen{{actionKey|capitalize}}{{user}};	
+	private {{key}}{{actionKey|capitalize}}ScreenP screen{{key}}{{actionKey|capitalize}}{{user}};	
 			{% endif %}
 		{% endfor %}
 	{% endif %}
