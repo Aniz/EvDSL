@@ -65,6 +65,7 @@ def main(debug=False):
     #copy files
     copy(join(this_folder,'lib'),join(srcgen_folder,'lib'))
     copy(join(this_folder,'util'),join(srcgen_folder,'util'))
+    shutil.copy(join(exceptionCodeFolder,"RepositoryException.java"),exceptionFolder)
 
     # Initialize template engine.
     jinja_env = jinja2.Environment(

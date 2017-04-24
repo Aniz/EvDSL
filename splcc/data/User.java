@@ -6,7 +6,6 @@ public class User {
 	private int idUser;
 	private String password;
 	private String nameUser;
-	private TypeUser typeUser;
 	private String email;
 	private String filiation;
 {% if data.option.properties|length > 0 %}
@@ -91,7 +90,7 @@ public class User {
 		{% endfor %}
 	{% endif %}
 	{% if data.option.categories|length > 0 %}
-		+ "Type{{data.option.name}}:" + type{{data.option.name}} 		
+		+ "Type{{data.option.entity}}:" + type{{data.option.entity}} 		
 	{% endif %}
 	;
 	}

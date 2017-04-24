@@ -100,9 +100,10 @@ public class Submission {
 		{% endfor %}
 	{% endif %}
 	{% if data.option.categories|length > 0 %}
-		+ "Type{{data.option.name}}:" + type{{data.option.name}} 		
+		+ "Type{{data.option.entity}}:" + type{{data.option.entity}} 		
 	{% endif %}
 	;
+	}
 	
 }
 //#endif

@@ -55,7 +55,7 @@ public class Reviewer extends User{
 		//return "User Id:"+ getIdUser() + "\nName:" + getNameUser() + "\nType:" + getTypeUser().toString() + "\nEmail:" + getEmail()   + "\nKnowledgeArea:" + knowledgeArea + "\nFiliation:" + getFiliation() ;
 		//return "\nKnowledge Area:" + knowledgeArea;
 		return super.toString()  + "\nKnowledgeArea:" + knowledgeArea
-		+ "Type:" + type 		
+		+ "TypeReviewer:" + typeReviewer 		
 	;
 	}
 
