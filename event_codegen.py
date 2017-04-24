@@ -65,8 +65,7 @@ def main(debug=False):
     #copy files
     copy(join(this_folder,'lib'),join(srcgen_folder,'lib'))
     copy(join(this_folder,'util'),join(srcgen_folder,'util'))
-    shutil.copy(join(exceptionCodeFolder,"RepositoryException.java"),exceptionFolder)
-
+    
     # Initialize template engine.
     jinja_env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(this_folder),
@@ -89,9 +88,11 @@ def main(debug=False):
     statmentDict = {}
     commandsDict = {}
     commandsOptionDict = {}
-
+    dependenceDict = {}
+    
     avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","Author","Receipt","CheckingCopy"]
     avaliableFunctions = ["Insert","Remove","Update","Search","ListAll","Search","Management"]
+    avaliableDependencesArray = ["Review","ActivityUser","ActivitySpeaker","ActivityOrganizer","SubmissionAuthor","SubmissionUser","Registration"]
     chosenFunctions = []
     
     #Get options from model
@@ -118,9 +119,15 @@ def main(debug=False):
     #Get statments from model
     statmentDict = {}
     for statment in statmentsArray:
-        if statment.entity in selectedOptionsArray:
-            statmentDict[statment.actionType] = statment
-            componentDict[statment.entity]["statments"] = statmentDict    
+        if statment.entity in selectedOptionsArray or statment.entity in avaliableDependencesArray:
+            statmentDict = {}
+            if statment.entity in selectedOptionsArray:
+                statmentDict[statment.actionType] = statment
+                componentDict[statment.entity]["statments"] = statmentDict    
+            if statment.entity in avaliableDependencesArray:
+                statmentDict[statment.actionType] = statment
+                dependenceDict[statment.entity] = {}       
+                dependenceDict[statment.entity]["statments"] = statmentDict               
         else:
             print("[warning] Option '%s' of method '%s' not found" % (statment.entity,statment.actionType)) 
     
@@ -190,6 +197,12 @@ def main(debug=False):
     
     for key,value in dependencesDict.items():
         if all((w in selectedOptionsArray for w in value)):
+            componentExtraData = ""
+            componentData = ""
+        
+            if key in dependenceDict:
+                componentData = dependenceDict[key]
+            
             copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData,systemName)
             copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData,systemName) 
             copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,componentData,componentExtraData,systemName)
@@ -213,6 +226,8 @@ def main(debug=False):
         if (valueStatment.condition == 'def'):
             copyCodeFile(viewCodeFolder,viewFolder,valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
        
+    copyCodeFile(exceptionCodeFolder,exceptionFolder,"RepositoryException",jinja_env,"","",systemName)
+          
 def createDotFiles(event_mm,event_model,dotFolder):
     # Export to .dot file for visualization
     metamodel_export(event_mm, join(dotFolder, 'event_meta.dot'))

@@ -83,6 +83,8 @@ if Assignment -> notificationsDeadline
 if Assignment -> notificationsPaperAssignemnt 
 if Assignment -> notificationsAceptanceRejection 
 
+def ActivityUser -> reportsFrequencyperActivity
+
 
 
 

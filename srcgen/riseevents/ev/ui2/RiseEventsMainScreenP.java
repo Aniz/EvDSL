@@ -57,8 +57,6 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventSearchScreenP screenEventSearchEvent;	
 	private EventRemoveScreenP screenEventRemoveEvent;	
 	private EventListAllScreenP screenEventListAllEvent;	
-	private EventReportslistofauthorsScreenP screenEventReportslistofauthors;	
-	private EventReportsfrequencyperactivityScreenP screenEventReportsfrequencyperactivity;	
 	private EventReportsfrequencypereventScreenP screenEventReportsfrequencyperevent;	
 
 	private PaymentInsertScreenP screenPaymentInsertPayment;	
@@ -66,33 +64,22 @@ public class RiseEventsMainScreenP extends JFrame {
 	private PaymentSearchScreenP screenPaymentSearchPayment;	
 	private PaymentRemoveScreenP screenPaymentRemovePayment;	
 	private PaymentListAllScreenP screenPaymentListAllPayment;	
-	private PaymentReportslistofauthorsScreenP screenPaymentReportslistofauthors;	
-	private PaymentReportsfrequencyperactivityScreenP screenPaymentReportsfrequencyperactivity;	
-	private PaymentReportsfrequencypereventScreenP screenPaymentReportsfrequencyperevent;	
 
 	private ActivityInsertScreenP screenActivityInsertActivity;	
 	private ActivityUpdateScreenP screenActivityUpdateActivity;	
 	private ActivitySearchScreenP screenActivitySearchActivity;	
 	private ActivityRemoveScreenP screenActivityRemoveActivity;	
 	private ActivityListAllScreenP screenActivityListAllActivity;	
-	private ActivityReportslistofauthorsScreenP screenActivityReportslistofauthors;	
 	private ActivityReportsfrequencyperactivityScreenP screenActivityReportsfrequencyperactivity;	
-	private ActivityReportsfrequencypereventScreenP screenActivityReportsfrequencyperevent;	
 
 	private AssignmentInsertScreenP screenAssignmentInsertAssignment;	
 	private AssignmentSearchScreenP screenAssignmentSearchAssignment;	
 	private AssignmentRemoveScreenP screenAssignmentRemoveAssignment;	
 	private AssignmentListAllScreenP screenAssignmentListAllAssignment;	
-	private AssignmentReportslistofauthorsScreenP screenAssignmentReportslistofauthors;	
-	private AssignmentReportsfrequencyperactivityScreenP screenAssignmentReportsfrequencyperactivity;	
-	private AssignmentReportsfrequencypereventScreenP screenAssignmentReportsfrequencyperevent;	
 
 	private SubmissionSearchScreenP screenSubmissionSearchSubmission;	
 	private SubmissionRemoveScreenP screenSubmissionRemoveSubmission;	
 	private SubmissionListAllScreenP screenSubmissionListAllSubmission;	
-	private SubmissionReportslistofauthorsScreenP screenSubmissionReportslistofauthors;	
-	private SubmissionReportsfrequencyperactivityScreenP screenSubmissionReportsfrequencyperactivity;	
-	private SubmissionReportsfrequencypereventScreenP screenSubmissionReportsfrequencyperevent;	
 
 
 	private CheckingCopyInsertScreenP screenCheckingCopyInsertCheckingCopy;	
@@ -100,9 +87,6 @@ public class RiseEventsMainScreenP extends JFrame {
 	private CheckingCopyRemoveScreenP screenCheckingCopyRemoveCheckingCopy;	
 	private CheckingCopySearchScreenP screenCheckingCopySearchCheckingCopy;	
 	private CheckingCopyListAllScreenP screenCheckingCopyListAllCheckingCopy;	
-	private CheckingCopyReportslistofauthorsScreenP screenCheckingCopyReportslistofauthors;	
-	private CheckingCopyReportsfrequencyperactivityScreenP screenCheckingCopyReportsfrequencyperactivity;	
-	private CheckingCopyReportsfrequencypereventScreenP screenCheckingCopyReportsfrequencyperevent;	
 
 
 	private ReceiptScreenP screenReceipt;
@@ -179,8 +163,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllMenuAction();	
-		ReportslistofauthorsMenuAction reportslistofauthorsAction = new reportsListofAuthorsMenuAction();	
-		ReportsfrequencyperactivityMenuAction reportsfrequencyperactivityAction = new reportsFrequencyperActivityMenuAction();	
 		ReportsfrequencypereventMenuAction reportsfrequencypereventAction = new reportsFrequencyperEventMenuAction();	
 
 		InsertPaymentMenuAction insertPaymentAction = new InsertMenuAction();	
@@ -188,33 +170,22 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchPaymentMenuAction searchPaymentAction = new SearchMenuAction();	
 		RemovePaymentMenuAction removePaymentAction = new RemoveMenuAction();	
 		ListAllPaymentMenuAction listallPaymentAction = new ListAllMenuAction();	
-		ReportslistofauthorsMenuAction reportslistofauthorsAction = new reportsListofAuthorsMenuAction();	
-		ReportsfrequencyperactivityMenuAction reportsfrequencyperactivityAction = new reportsFrequencyperActivityMenuAction();	
-		ReportsfrequencypereventMenuAction reportsfrequencypereventAction = new reportsFrequencyperEventMenuAction();	
 
 		InsertActivityMenuAction insertActivityAction = new InsertMenuAction();	
 		UpdateActivityMenuAction updateActivityAction = new UpdateMenuAction();	
 		SearchActivityMenuAction searchActivityAction = new SearchMenuAction();	
 		RemoveActivityMenuAction removeActivityAction = new RemoveMenuAction();	
 		ListAllActivityMenuAction listallActivityAction = new ListAllMenuAction();	
-		ReportslistofauthorsMenuAction reportslistofauthorsAction = new reportsListofAuthorsMenuAction();	
 		ReportsfrequencyperactivityMenuAction reportsfrequencyperactivityAction = new reportsFrequencyperActivityMenuAction();	
-		ReportsfrequencypereventMenuAction reportsfrequencypereventAction = new reportsFrequencyperEventMenuAction();	
 
 		InsertAssignmentMenuAction insertAssignmentAction = new InsertMenuAction();	
 		SearchAssignmentMenuAction searchAssignmentAction = new SearchMenuAction();	
 		RemoveAssignmentMenuAction removeAssignmentAction = new RemoveMenuAction();	
 		ListAllAssignmentMenuAction listallAssignmentAction = new ListAllMenuAction();	
-		ReportslistofauthorsMenuAction reportslistofauthorsAction = new reportsListofAuthorsMenuAction();	
-		ReportsfrequencyperactivityMenuAction reportsfrequencyperactivityAction = new reportsFrequencyperActivityMenuAction();	
-		ReportsfrequencypereventMenuAction reportsfrequencypereventAction = new reportsFrequencyperEventMenuAction();	
 
 		SearchSubmissionMenuAction searchSubmissionAction = new SearchMenuAction();	
 		RemoveSubmissionMenuAction removeSubmissionAction = new RemoveMenuAction();	
 		ListAllSubmissionMenuAction listallSubmissionAction = new ListAllMenuAction();	
-		ReportslistofauthorsMenuAction reportslistofauthorsAction = new reportsListofAuthorsMenuAction();	
-		ReportsfrequencyperactivityMenuAction reportsfrequencyperactivityAction = new reportsFrequencyperActivityMenuAction();	
-		ReportsfrequencypereventMenuAction reportsfrequencypereventAction = new reportsFrequencyperEventMenuAction();	
 
 
 		InsertCheckingCopyMenuAction insertCheckingCopyAction = new InsertMenuAction();	
@@ -222,9 +193,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveMenuAction();	
 		SearchCheckingCopyMenuAction searchCheckingCopyAction = new SearchMenuAction();	
 		ListAllCheckingCopyMenuAction listallCheckingCopyAction = new ListAllMenuAction();	
-		ReportslistofauthorsMenuAction reportslistofauthorsAction = new reportsListofAuthorsMenuAction();	
-		ReportsfrequencyperactivityMenuAction reportsfrequencyperactivityAction = new reportsFrequencyperActivityMenuAction();	
-		ReportsfrequencypereventMenuAction reportsfrequencypereventAction = new reportsFrequencyperEventMenuAction();	
 
 
 		//#if ${Bugs} == "T"

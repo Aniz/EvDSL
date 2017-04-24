@@ -1,4 +1,4 @@
-package {{systemName|lower}}.ev.exception;
+package riseevents.ev.exception;
 public class RepositoryException extends Exception {
 
     private Exception exception;
