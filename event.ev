@@ -78,7 +78,7 @@ if CheckiCopy.Certificado -> checkingCopyCertificado
 if Event -> eventProgram
 if Event -> eventImportantDates
 def Event -> reportsFrequencyperEvent 
-if Submission.Completa -> inserAttachmanet
+if Submission.Completa -> insertAttachment
 if Assignment -> notificationsDeadline
 if Assignment -> notificationsPaperAssignemnt 
 if Assignment -> notificationsAceptanceRejection 

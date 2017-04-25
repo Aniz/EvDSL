@@ -55,10 +55,7 @@ import riseevents.ev.repository.CheckingCopyRepositoryBDR;
 import com.lowagie.text.DocumentException;
 
 
-public class RiSEventFacade {
-
-	private EventControl eventList;
-	private UserControl userList;
+public class RiseEventsFacade {
 
 	private UserControl userList;
 	private SpeakerControl speakerList;
@@ -72,9 +69,9 @@ public class RiSEventFacade {
 	private AuthorControl authorList;
 	private CheckingCopyControl checkingcopyList;
 
-	protected static RiSEventFacade instance;
+	protected static RiseEventsFacade instance;
 	
-	public RiSEventFacade(){
+	public RiseEventsFacade(){
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
 		
@@ -107,21 +104,21 @@ public class RiSEventFacade {
 	
 	}
 	
-	public static RiSEventFacade getInstance()  {
-		if (RiSEventFacade.instance == null) {
-			RiSEventFacade.instance = new RiSEventFacade();
+	public static RiseEventsFacade getInstance()  {
+		if (RiseEventsFacade.instance == null) {
+			RiseEventsFacade.instance = new RiseEventsFacade();
 		}
-		return RiSEventFacade.instance;
+		return RiseEventsFacade.instance;
 	}
 	
-	public void insertUser(User entity) throws UserException, RepositoryException{
+	public void insertUser(User entity) throws UserAlreadyInsertedException, RepositoryException{
 		this.userList.insert(entity);
 	}
-	public void removeUser(int idEntity) throws UserException, RepositoryException, UserException{
+	public void removeUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		userList.remove(idEntity);  
 	}
 	
-	public void updateUser(User Entity) throws UserException, Exception, UserException{
+	public void updateUser(User Entity) throws UserNotFoundException, Exception, UserAlreadyInsertedException{
 		userList.update(User);
 	}
 	
@@ -129,7 +126,7 @@ public class RiSEventFacade {
 		return Users.getUser();
 	}
 	
-	public User searchUser(int idEntity) throws UserException, RepositoryException, UserException{
+	public User searchUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		return userList.search(idEntity);
 	}
 	
@@ -144,14 +141,14 @@ public class RiSEventFacade {
 	public boolean isThereUser(int idEntity) throws RepositoryException{
 		return userList.isThere(idEntity);
 	}
-	public void insertSpeaker(Speaker entity) throws SpeakerException, RepositoryException{
+	public void insertSpeaker(Speaker entity) throws SpeakerAlreadyInsertedException, RepositoryException{
 		this.speakerList.insert(entity);
 	}
-	public void removeSpeaker(int idEntity) throws SpeakerException, RepositoryException, SpeakerException{
+	public void removeSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
 		speakerList.remove(idEntity);  
 	}
 	
-	public void updateSpeaker(Speaker Entity) throws SpeakerException, Exception, SpeakerException{
+	public void updateSpeaker(Speaker Entity) throws SpeakerNotFoundException, Exception, SpeakerAlreadyInsertedException{
 		speakerList.update(Speaker);
 	}
 	
@@ -159,7 +156,7 @@ public class RiSEventFacade {
 		return Speakers.getSpeaker();
 	}
 	
-	public Speaker searchSpeaker(int idEntity) throws SpeakerException, RepositoryException, SpeakerException{
+	public Speaker searchSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
 		return speakerList.search(idEntity);
 	}
 	
@@ -174,14 +171,14 @@ public class RiSEventFacade {
 	public boolean isThereSpeaker(int idEntity) throws RepositoryException{
 		return speakerList.isThere(idEntity);
 	}
-	public void insertOrganizer(Organizer entity) throws OrganizerException, RepositoryException{
+	public void insertOrganizer(Organizer entity) throws OrganizerAlreadyInsertedException, RepositoryException{
 		this.organizerList.insert(entity);
 	}
-	public void removeOrganizer(int idEntity) throws OrganizerException, RepositoryException, OrganizerException{
+	public void removeOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
 		organizerList.remove(idEntity);  
 	}
 	
-	public void updateOrganizer(Organizer Entity) throws OrganizerException, Exception, OrganizerException{
+	public void updateOrganizer(Organizer Entity) throws OrganizerNotFoundException, Exception, OrganizerAlreadyInsertedException{
 		organizerList.update(Organizer);
 	}
 	
@@ -189,7 +186,7 @@ public class RiSEventFacade {
 		return Organizers.getOrganizer();
 	}
 	
-	public Organizer searchOrganizer(int idEntity) throws OrganizerException, RepositoryException, OrganizerException{
+	public Organizer searchOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
 		return organizerList.search(idEntity);
 	}
 	
@@ -204,14 +201,14 @@ public class RiSEventFacade {
 	public boolean isThereOrganizer(int idEntity) throws RepositoryException{
 		return organizerList.isThere(idEntity);
 	}
-	public void insertReviewer(Reviewer entity) throws ReviewerException, RepositoryException{
+	public void insertReviewer(Reviewer entity) throws ReviewerAlreadyInsertedException, RepositoryException{
 		this.reviewerList.insert(entity);
 	}
-	public void removeReviewer(int idEntity) throws ReviewerException, RepositoryException, ReviewerException{
+	public void removeReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
 		reviewerList.remove(idEntity);  
 	}
 	
-	public void updateReviewer(Reviewer Entity) throws ReviewerException, Exception, ReviewerException{
+	public void updateReviewer(Reviewer Entity) throws ReviewerNotFoundException, Exception, ReviewerAlreadyInsertedException{
 		reviewerList.update(Reviewer);
 	}
 	
@@ -219,7 +216,7 @@ public class RiSEventFacade {
 		return Reviewers.getReviewer();
 	}
 	
-	public Reviewer searchReviewer(int idEntity) throws ReviewerException, RepositoryException, ReviewerException{
+	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
 		return reviewerList.search(idEntity);
 	}
 	
@@ -234,14 +231,14 @@ public class RiSEventFacade {
 	public boolean isThereReviewer(int idEntity) throws RepositoryException{
 		return reviewerList.isThere(idEntity);
 	}
-	public void insertEvent(Event entity) throws EventException, RepositoryException{
+	public void insertEvent(Event entity) throws EventAlreadyInsertedException, RepositoryException{
 		this.eventList.insert(entity);
 	}
-	public void removeEvent(int idEntity) throws EventException, RepositoryException, EventException{
+	public void removeEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		eventList.remove(idEntity);  
 	}
 	
-	public void updateEvent(Event Entity) throws EventException, Exception, EventException{
+	public void updateEvent(Event Entity) throws EventNotFoundException, Exception, EventAlreadyInsertedException{
 		eventList.update(Event);
 	}
 	
@@ -249,7 +246,7 @@ public class RiSEventFacade {
 		return Events.getEvent();
 	}
 	
-	public Event searchEvent(int idEntity) throws EventException, RepositoryException, EventException{
+	public Event searchEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		return eventList.search(idEntity);
 	}
 	
@@ -264,14 +261,14 @@ public class RiSEventFacade {
 	public boolean isThereEvent(int idEntity) throws RepositoryException{
 		return eventList.isThere(idEntity);
 	}
-	public void insertPayment(Payment entity) throws PaymentException, RepositoryException{
+	public void insertPayment(Payment entity) throws PaymentAlreadyInsertedException, RepositoryException{
 		this.paymentList.insert(entity);
 	}
-	public void removePayment(int idEntity) throws PaymentException, RepositoryException, PaymentException{
+	public void removePayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
 		paymentList.remove(idEntity);  
 	}
 	
-	public void updatePayment(Payment Entity) throws PaymentException, Exception, PaymentException{
+	public void updatePayment(Payment Entity) throws PaymentNotFoundException, Exception, PaymentAlreadyInsertedException{
 		paymentList.update(Payment);
 	}
 	
@@ -279,7 +276,7 @@ public class RiSEventFacade {
 		return Payments.getPayment();
 	}
 	
-	public Payment searchPayment(int idEntity) throws PaymentException, RepositoryException, PaymentException{
+	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
 		return paymentList.search(idEntity);
 	}
 	
@@ -294,14 +291,14 @@ public class RiSEventFacade {
 	public boolean isTherePayment(int idEntity) throws RepositoryException{
 		return paymentList.isThere(idEntity);
 	}
-	public void insertActivity(Activity entity) throws ActivityException, RepositoryException{
+	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
 		this.activityList.insert(entity);
 	}
-	public void removeActivity(int idEntity) throws ActivityException, RepositoryException, ActivityException{
+	public void removeActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		activityList.remove(idEntity);  
 	}
 	
-	public void updateActivity(Activity Entity) throws ActivityException, Exception, ActivityException{
+	public void updateActivity(Activity Entity) throws ActivityNotFoundException, Exception, ActivityAlreadyInsertedException{
 		activityList.update(Activity);
 	}
 	
@@ -309,7 +306,7 @@ public class RiSEventFacade {
 		return Activitys.getActivity();
 	}
 	
-	public Activity searchActivity(int idEntity) throws ActivityException, RepositoryException, ActivityException{
+	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		return activityList.search(idEntity);
 	}
 	
@@ -324,14 +321,14 @@ public class RiSEventFacade {
 	public boolean isThereActivity(int idEntity) throws RepositoryException{
 		return activityList.isThere(idEntity);
 	}
-	public void insertAssignment(Assignment entity) throws AssignmentException, RepositoryException{
+	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
 		this.assignmentList.insert(entity);
 	}
-	public void removeAssignment(int idEntity) throws AssignmentException, RepositoryException, AssignmentException{
+	public void removeAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		assignmentList.remove(idEntity);  
 	}
 	
-	public void updateAssignment(Assignment Entity) throws AssignmentException, Exception, AssignmentException{
+	public void updateAssignment(Assignment Entity) throws AssignmentNotFoundException, Exception, AssignmentAlreadyInsertedException{
 		assignmentList.update(Assignment);
 	}
 	
@@ -339,7 +336,7 @@ public class RiSEventFacade {
 		return Assignments.getAssignment();
 	}
 	
-	public Assignment searchAssignment(int idEntity) throws AssignmentException, RepositoryException, AssignmentException{
+	public Assignment searchAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		return assignmentList.search(idEntity);
 	}
 	
@@ -354,14 +351,14 @@ public class RiSEventFacade {
 	public boolean isThereAssignment(int idEntity) throws RepositoryException{
 		return assignmentList.isThere(idEntity);
 	}
-	public void insertSubmission(Submission entity) throws SubmissionException, RepositoryException{
+	public void insertSubmission(Submission entity) throws SubmissionAlreadyInsertedException, RepositoryException{
 		this.submissionList.insert(entity);
 	}
-	public void removeSubmission(int idEntity) throws SubmissionException, RepositoryException, SubmissionException{
+	public void removeSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		submissionList.remove(idEntity);  
 	}
 	
-	public void updateSubmission(Submission Entity) throws SubmissionException, Exception, SubmissionException{
+	public void updateSubmission(Submission Entity) throws SubmissionNotFoundException, Exception, SubmissionAlreadyInsertedException{
 		submissionList.update(Submission);
 	}
 	
@@ -369,7 +366,7 @@ public class RiSEventFacade {
 		return Submissions.getSubmission();
 	}
 	
-	public Submission searchSubmission(int idEntity) throws SubmissionException, RepositoryException, SubmissionException{
+	public Submission searchSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		return submissionList.search(idEntity);
 	}
 	
@@ -384,14 +381,14 @@ public class RiSEventFacade {
 	public boolean isThereSubmission(int idEntity) throws RepositoryException{
 		return submissionList.isThere(idEntity);
 	}
-	public void insertAuthor(Author entity) throws AuthorException, RepositoryException{
+	public void insertAuthor(Author entity) throws AuthorAlreadyInsertedException, RepositoryException{
 		this.authorList.insert(entity);
 	}
-	public void removeAuthor(int idEntity) throws AuthorException, RepositoryException, AuthorException{
+	public void removeAuthor(int idEntity) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
 		authorList.remove(idEntity);  
 	}
 	
-	public void updateAuthor(Author Entity) throws AuthorException, Exception, AuthorException{
+	public void updateAuthor(Author Entity) throws AuthorNotFoundException, Exception, AuthorAlreadyInsertedException{
 		authorList.update(Author);
 	}
 	
@@ -399,7 +396,7 @@ public class RiSEventFacade {
 		return Authors.getAuthor();
 	}
 	
-	public Author searchAuthor(int idEntity) throws AuthorException, RepositoryException, AuthorException{
+	public Author searchAuthor(int idEntity) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
 		return authorList.search(idEntity);
 	}
 	
@@ -414,14 +411,14 @@ public class RiSEventFacade {
 	public boolean isThereAuthor(int idEntity) throws RepositoryException{
 		return authorList.isThere(idEntity);
 	}
-	public void insertCheckingCopy(CheckingCopy entity) throws CheckingCopyException, RepositoryException{
+	public void insertCheckingCopy(CheckingCopy entity) throws CheckingCopyAlreadyInsertedException, RepositoryException{
 		this.checkingcopyList.insert(entity);
 	}
-	public void removeCheckingCopy(int idEntity) throws CheckingCopyException, RepositoryException, CheckingCopyException{
+	public void removeCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
 		checkingcopyList.remove(idEntity);  
 	}
 	
-	public void updateCheckingCopy(CheckingCopy Entity) throws CheckingCopyException, Exception, CheckingCopyException{
+	public void updateCheckingCopy(CheckingCopy Entity) throws CheckingCopyNotFoundException, Exception, CheckingCopyAlreadyInsertedException{
 		checkingcopyList.update(CheckingCopy);
 	}
 	
@@ -429,7 +426,7 @@ public class RiSEventFacade {
 		return CheckingCopys.getCheckingCopy();
 	}
 	
-	public CheckingCopy searchCheckingCopy(int idEntity) throws CheckingCopyException, RepositoryException, CheckingCopyException{
+	public CheckingCopy searchCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
 		return checkingcopyList.search(idEntity);
 	}
 	

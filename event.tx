@@ -76,7 +76,7 @@ Param:
 
 ActionType:
   'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
-   | 'notificationsDeadline' | 'inserAttachmanet' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection'
+   | 'notificationsDeadline' | 'insertAttachment' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection'
 ;
 
 // Special rule for comments. Comments start with //

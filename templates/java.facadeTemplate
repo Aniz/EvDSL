@@ -17,18 +17,15 @@ import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 import com.lowagie.text.DocumentException;
 
 
-public class RiSEventFacade {
-
-	private EventControl eventList;
-	private UserControl userList;
+public class {{systemName}}Facade {
 
 {% for key,value in data.items() %}
 	private {{key}}Control {{key|lower}}List;
 {% endfor %}
 
-	protected static RiSEventFacade instance;
+	protected static {{systemName}}Facade instance;
 	
-	public RiSEventFacade(){
+	public {{systemName}}Facade(){
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
 		
@@ -44,22 +41,22 @@ public class RiSEventFacade {
 	{% endfor %}	
 	}
 	
-	public static RiSEventFacade getInstance()  {
-		if (RiSEventFacade.instance == null) {
-			RiSEventFacade.instance = new RiSEventFacade();
+	public static {{systemName}}Facade getInstance()  {
+		if ({{systemName}}Facade.instance == null) {
+			{{systemName}}Facade.instance = new {{systemName}}Facade();
 		}
-		return RiSEventFacade.instance;
+		return {{systemName}}Facade.instance;
 	}
 	
 	{% for key,value in data.items() %}
-	public void insert{{key}}({{key}} entity) throws {{key}}Exception, RepositoryException{
+	public void insert{{key}}({{key}} entity) throws {{key}}AlreadyInsertedException, RepositoryException{
 		this.{{key|lower}}List.insert(entity);
 	}
-	public void remove{{key}}(int idEntity) throws {{key}}Exception, RepositoryException, {{key}}Exception{
+	public void remove{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.remove(idEntity);  
 	}
 	
-	public void update{{key}}({{key}} Entity) throws {{key}}Exception, Exception, {{key}}Exception{
+	public void update{{key}}({{key}} Entity) throws {{key}}NotFoundException, Exception, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.update({{key}});
 	}
 	
@@ -67,7 +64,7 @@ public class RiSEventFacade {
 		return {{key}}s.get{{key}}();
 	}
 	
-	public {{key}} search{{key}}(int idEntity) throws {{key}}Exception, RepositoryException, {{key}}Exception{
+	public {{key}} search{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		return {{key|lower}}List.search(idEntity);
 	}
 	

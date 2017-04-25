@@ -236,7 +236,7 @@ import {{systemName|lower}}.ev.util.Email;
 import com.lowagie.text.DocumentException;
 
 
-public class RiSEventFacade {
+public class {{systemName}}Facade {
 
 	private EventControl events;
 
