@@ -6,7 +6,7 @@ public class AssignmentAlreadyInsertedException extends Exception {
 	private int idReview;
 
 	public AssignmentAlreadyInsertedException(int idReview) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idReview = idReview;
 	}
 

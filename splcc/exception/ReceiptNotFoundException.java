@@ -1,12 +1,13 @@
 //#if ${Receipt} == "T" 
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class ReceiptNotFoundException extends Exception {
 
     private int idReceipt;
 
     public ReceiptNotFoundException(int idReceipt){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idReceipt = idReceipt;
     }
 

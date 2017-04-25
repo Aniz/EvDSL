@@ -6,7 +6,7 @@ public class ActivityOrganizerAlreadyInsertedException extends Exception {
 	private int idActivity;
 
 	public ActivityOrganizerAlreadyInsertedException(int idActivity) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idActivity = idActivity;
 	}
 

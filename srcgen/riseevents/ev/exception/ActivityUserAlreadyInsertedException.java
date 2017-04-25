@@ -6,7 +6,7 @@ public class ActivityUserAlreadyInsertedException extends Exception {
 	private int idActivity;
 
 	public ActivityUserAlreadyInsertedException(int idActivity) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idActivity = idActivity;
 	}
 

@@ -1,12 +1,13 @@
 //#if ${Organizer} == "T"
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class OrganizerAlreadyInsertedException extends Exception {
 
 	private int idUser;
 
 	public OrganizerAlreadyInsertedException(int idUser) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idUser = idUser;
 	}
 

@@ -1,12 +1,13 @@
 //#if ${Speaker} == "T"
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class SpeakerAlreadyInsertedException extends Exception {
 
 	private int idUser;
 
 	public SpeakerAlreadyInsertedException(int idUser) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idUser = idUser;
 	}
 

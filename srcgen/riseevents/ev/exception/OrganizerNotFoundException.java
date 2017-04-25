@@ -6,7 +6,7 @@ public class OrganizerNotFoundException extends Exception {
     private int idUser;
 
     public OrganizerNotFoundException(int idUser){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idUser = idUser;
     }
 

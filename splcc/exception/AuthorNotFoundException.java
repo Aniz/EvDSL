@@ -2,11 +2,12 @@
 package {{systemName|lower}}.ev.exception;
 
 public class AuthorNotFoundException extends Exception {
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
     private int idAuthor;
 
     public AuthorNotFoundException(int idAuthor){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idAuthor = idAuthor;
     }
 

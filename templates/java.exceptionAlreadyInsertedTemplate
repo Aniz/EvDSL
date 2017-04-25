@@ -5,7 +5,7 @@ public class {{entity.name}}AlreadyInsertedException extends Exception {
 	private int idEntity;
 
 	public {{entity.name}}AlreadyInsertedException(int idEntity) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idEntity = idEntity;
 	}
 

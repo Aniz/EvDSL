@@ -6,7 +6,7 @@ public class CheckingCopyNotFoundException extends Exception {
     private int idCheckingCopy;
 
     public CheckingCopyNotFoundException(int idCheckingCopy){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idCheckingCopy = idCheckingCopy;
     }
 

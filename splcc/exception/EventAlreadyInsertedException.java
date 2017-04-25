@@ -1,11 +1,12 @@
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class EventAlreadyInsertedException extends Exception {
 
 	private int idEvent;
 
 	public EventAlreadyInsertedException(int idEvent) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idEvent = idEvent;
 	}
 

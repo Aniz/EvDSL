@@ -1,12 +1,13 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class SubmissionAlreadyInsertedException extends Exception {
 
 	private int idSubmission;
 
 	public SubmissionAlreadyInsertedException(int idSubmission) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idSubmission = idSubmission;
 	}
 

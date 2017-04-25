@@ -6,7 +6,7 @@ public class SubmissionAlreadyInsertedException extends Exception {
 	private int idSubmission;
 
 	public SubmissionAlreadyInsertedException(int idSubmission) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idSubmission = idSubmission;
 	}
 

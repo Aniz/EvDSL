@@ -6,7 +6,7 @@ public class ActivityNotFoundException extends Exception {
     private int idActivity;
 
     public ActivityNotFoundException(int idActivity){
-        super (EXC_NOT_FOUND);
+        super (ExceptionMessages.EXC_NOT_FOUND);
         this.idActivity = idActivity;
     }
 

@@ -6,7 +6,7 @@ public class AssignmentNotFoundException extends Exception {
     private int idReview;
 
     public AssignmentNotFoundException(int idReview){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idReview = idReview;
     }
 

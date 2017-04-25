@@ -6,7 +6,7 @@ public class OrganizerAlreadyInsertedException extends Exception {
 	private int idUser;
 
 	public OrganizerAlreadyInsertedException(int idUser) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idUser = idUser;
 	}
 

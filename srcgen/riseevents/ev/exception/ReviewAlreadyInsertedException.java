@@ -6,7 +6,7 @@ public class ReviewAlreadyInsertedException extends Exception {
 	private int idReview;
 
 	public ReviewAlreadyInsertedException(int idReview) {
-		super(EXC_NOT_FOUND);
+		super(ExceptionMessages.EXC_NOT_FOUND);
         this.idReview = idReview;
 	}
 

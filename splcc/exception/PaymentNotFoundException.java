@@ -1,12 +1,13 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class PaymentNotFoundException extends Exception {
 
     private int idPayment;
 
     public PaymentNotFoundException(int idPayment){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idPayment = idPayment;
     }
 

@@ -6,7 +6,7 @@ public class SubmissionAuthorAlreadyInsertedException extends Exception {
 	private int idSubmissionAuthor;
 
 	public SubmissionAuthorAlreadyInsertedException(int idSubmissionAuthor) {
-		super(EXC_ALREADY_EXISTS);
+		super(ExceptionMessages.EXC_ALREADY_EXISTS);
         this.idSubmissionAuthor = idSubmissionAuthor;
 	}
 

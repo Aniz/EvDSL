@@ -6,7 +6,7 @@ public class ReviewerNotFoundException extends Exception {
     private int idReviewer;
 
     public ReviewerNotFoundException(int idReviewer){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idReviewer = idReviewer;
     }
 

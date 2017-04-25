@@ -6,7 +6,7 @@ public class AuthorNotFoundException extends Exception {
     private int idAuthor;
 
     public AuthorNotFoundException(int idAuthor){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idAuthor = idAuthor;
     }
 

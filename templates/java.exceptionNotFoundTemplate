@@ -5,7 +5,7 @@ public class {{entity.name}}FoundException extends Exception {
     private int idEntity;
 
     public {{entity.name}}NotFoundException(int idEntity){
-        super (EXC_NOT_FOUND);
+        super (ExceptionMessages.EXC_NOT_FOUND);
         this.idEntity = idEntity;
     }
 

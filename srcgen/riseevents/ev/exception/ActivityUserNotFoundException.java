@@ -6,7 +6,7 @@ public class ActivityUserNotFoundException extends Exception {
     private int idUser;
 
     public ActivityUserNotFoundException(int idUser){
-        super (EXC_NOT_FOUND);
+        super (ExceptionMessages.EXC_NOT_FOUND);
         this.idUser = idUser;
     }
 

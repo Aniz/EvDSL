@@ -6,7 +6,7 @@ public class SubmissionUserNotFoundException extends Exception {
     private int idSubmissionUser;
 
     public SubmissionUserNotFoundException(int idSubmissionUser){
-        super(EXC_NOT_FOUND);
+        super(ExceptionMessages.EXC_NOT_FOUND);
         this.idSubmissionUser = idSubmissionUser;
     }
 

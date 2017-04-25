@@ -1,5 +1,6 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class ReviewNotFoundException extends Exception {
 
