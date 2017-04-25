@@ -129,10 +129,10 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 		public void actionPerformed(ActionEvent e) {
 			int idActivity;
 			try {
-				idActivity = RiseEventsScreenP.getFacade().getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
-				Activity activity = RiseEventsScreenP.getFacade().searchActivity(idActivity);
+				idActivity = RiseEventsMainScreenP.getFacade().getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				Activity activity = RiseEventsMainScreenP.getFacade().searchActivity(idActivity);
 				Set<String> conjunto = new HashSet<String>(authorsPerActivity);
-				RiseEventsScreenP.getFacade().listOfAuthorsPerActivity(conjunto, activity);
+				RiseEventsMainScreenP.getFacade().listOfAuthorsPerActivity(conjunto, activity);
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -177,9 +177,9 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 					return;
 				// buscando atividade com base no nome
 				int i;
-				i = RiseEventsScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				i = RiseEventsMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				
-				authorsPerActivity = RiseEventsScreenP.getFacade().getListOfAuthorsPerActivity(i);
+				authorsPerActivity = RiseEventsMainScreenP.getFacade().getListOfAuthorsPerActivity(i);
 				
 				
 				
@@ -203,7 +203,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 				// buscando atividade com base no nome
 				List<Activity> activities;
 				List<String> nameActivities = new ArrayList<String>();
-				activities = RiseEventsScreenP.facade.getActivitiesByEvent(RiseEventsScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
+				activities = RiseEventsMainScreenP.facade.getActivitiesByEvent(RiseEventsMainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
 				comboBoxActivity.removeAllItems();
 				//Passando de lista de atividades para lista de nome de atividades
 				Iterator<Activity> iteratorActivity = activities.iterator();
@@ -227,7 +227,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiseEventsScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

@@ -111,7 +111,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			
         
 				organizer.setTypeUser(resultset.getString("typeUser"));
-				organizer.setContato(resultset.getint("contato"));
+				organizer.setContato(resultset.getInt("contato"));
 			
 
             } else {
@@ -151,7 +151,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			
         
 				organizer.setTypeUser(resultset.getString("typeUser"));
-				organizer.setContato(resultset.getint("contato"));
+				organizer.setContato(resultset.getInt("contato"));
 			
 
 				list.add(organizer);

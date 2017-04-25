@@ -178,20 +178,20 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 			Speaker speaker = null;
 
 			try {
-				speaker =  new SpeakerTableModel({{systemName}}ScreenP.facade.getSpeakers()).get(rowIndex);
-				int idActivity = {{systemName}}ScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				speaker =  new SpeakerTableModel({{systemName}}MainScreenP.facade.getSpeakers()).get(rowIndex);
+				int idActivity = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Criando ActivitySpeaker
 				ActivitySpeaker activitySpeaker = new ActivitySpeaker();
 				activitySpeaker.setIdActivity(idActivity);
 				activitySpeaker.setIdSpeaker(speaker.getIdUser());
 				//Inserindo na tabela
-				{{systemName}}ScreenP.facade.insertActivitySpeaker(activitySpeaker);
+				{{systemName}}MainScreenP.facade.insertActivitySpeaker(activitySpeaker);
 				// buscando atividade com base no nome
 				int i;
-				i = {{systemName}}ScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Atualizando a tabela
 				ActivitySpeakerTableModel model;
-				model = new ActivitySpeakerTableModel({{systemName}}ScreenP.facade.getActivitiesById(i));
+				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesById(i));
 				tableActivities.setModel(model);      
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -217,13 +217,13 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 			ActivitySpeaker activitySpeaker = null;
 			
 			try {
-				activitySpeaker = new ActivitySpeakerTableModel({{systemName}}ScreenP.facade.getActivitiesSpeakers()).get(rowIndex);
-				{{systemName}}ScreenP.facade.removeActivitySpeaker(activitySpeaker);
+				activitySpeaker = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesSpeakers()).get(rowIndex);
+				{{systemName}}MainScreenP.facade.removeActivitySpeaker(activitySpeaker);
 				//Atualizando a tabela
 				int i;
-				i = {{systemName}}ScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				ActivitySpeakerTableModel model;
-				model = new ActivitySpeakerTableModel({{systemName}}ScreenP.facade.getActivitiesById(i));
+				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesById(i));
 				tableActivities.setModel(model);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -256,10 +256,10 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 					return;
 				// buscando atividade com base no nome
 				int i;
-				i = {{systemName}}ScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Atualizando a tabela
 				ActivitySpeakerTableModel model;
-				model = new ActivitySpeakerTableModel({{systemName}}ScreenP.facade.getActivitiesById(i));
+				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesById(i));
 				tableActivities.setModel(model);
 				
 			} catch (RepositoryException e1) {
@@ -281,7 +281,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 				// buscando atividade com base no nome
 				List<Activity> activities;
 				List<String> nameActivities = new ArrayList<String>();
-				activities = {{systemName}}ScreenP.facade.getActivitiesByEvent({{systemName}}ScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
+				activities = {{systemName}}MainScreenP.facade.getActivitiesByEvent({{systemName}}MainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
 				comboBox_Activities.removeAllItems();
 				//Passando de lista de atividades para lista de nome de atividades
 				Iterator<Activity> iteratorActivity = activities.iterator();
@@ -307,7 +307,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 	private void populateTableSpeakres(){
 		try {
 			SpeakerTableModel model;
-			model = new SpeakerTableModel({{systemName}}ScreenP.facade.getSpeakers());
+			model = new SpeakerTableModel({{systemName}}MainScreenP.facade.getSpeakers());
 
 			tableSpeakers.setModel(model);
 			
@@ -322,7 +322,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

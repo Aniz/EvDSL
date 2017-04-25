@@ -140,7 +140,7 @@ setTitle("Update Registration");
 			String totalValue = textFieldTotalValue.getText();
 			
 			try {
-				registration = {{systemName}}ScreenP.facade.searchRegistration(idRegistration);
+				registration = {{systemName}}MainScreenP.facade.searchRegistration(idRegistration);
 			} catch (RegistrationNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -159,7 +159,7 @@ setTitle("Update Registration");
 			}
 			
 			try {
-				registration.setIdUser({{systemName}}ScreenP.facade.getUserIdByName(nameUser));
+				registration.setIdUser({{systemName}}MainScreenP.facade.getUserIdByName(nameUser));
 				registration.setTotalValue(Float.parseFloat(totalValue));
 				
 			} catch (RepositoryException e1) {
@@ -170,8 +170,8 @@ setTitle("Update Registration");
 			}
 			
 			try {
-				{{systemName}}ScreenP.facade.updateRegistration(registration);
-				registration = {{systemName}}ScreenP.facade.searchRegistration(registration.getIdRegistration());
+				{{systemName}}MainScreenP.facade.updateRegistration(registration);
+				registration = {{systemName}}MainScreenP.facade.searchRegistration(registration.getIdRegistration());
 				textArea.setText("");
 				textArea.append(registration.toString());
 			} catch (RegistrationNotFoundException e1) {
@@ -195,7 +195,7 @@ setTitle("Update Registration");
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = {{systemName}}ScreenP.facade.getUsers();
+			List<User> list = {{systemName}}MainScreenP.facade.getUsers();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUser.addItem(iterator.next().getNameUser());

@@ -103,13 +103,13 @@ public class PaymentRemoveScreenP extends JInternalFrame {
 			int idPayment = Integer.valueOf(textFieldPaymentId.getText());
 			
 			try {
-				if ({{systemName}}ScreenP.facade.searchPayment(idPayment) == null){
+				if ({{systemName}}MainScreenP.facade.searchPayment(idPayment) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Payment não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					{{systemName}}ScreenP.facade.removePayment(idPayment);
+					{{systemName}}MainScreenP.facade.removePayment(idPayment);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

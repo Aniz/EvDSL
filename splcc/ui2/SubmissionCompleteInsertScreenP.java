@@ -286,7 +286,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 		private void carregarComboUser(){
 			try {
 				List<User> list;
-				list = {{systemName}}ScreenP.facade.getUsers();
+				list = {{systemName}}MainScreenP.facade.getUsers();
 				Iterator<User> iterator = list.iterator();
 				while(iterator.hasNext()){
 					comboBoxUser.addItem(iterator.next().getNameUser());
@@ -308,7 +308,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 				
 				try {
 					String nameUser = comboBoxUser.getSelectedItem().toString();
-					lblIdUserLogado.setText(String.valueOf({{systemName}}ScreenP.facade.getUserIdByName(nameUser)));
+					lblIdUserLogado.setText(String.valueOf({{systemName}}MainScreenP.facade.getUserIdByName(nameUser)));
 				} catch (RepositoryException e1) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							e1.toString(), "Erro",
@@ -321,7 +321,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 	
 	private void loadLastIndex(){
 		try {
-			lblLastSubmissionId.setText(String.valueOf({{systemName}}ScreenP.facade.getSubmissionLastId()));
+			lblLastSubmissionId.setText(String.valueOf({{systemName}}MainScreenP.facade.getSubmissionLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -332,7 +332,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 	//#if ${InsertAuthors} == "T"
 	private void loadLastAuthorIndex(){
 		try {
-			lblIdAuthor.setText(String.valueOf({{systemName}}ScreenP.facade.getAuthorLastId()));
+			lblIdAuthor.setText(String.valueOf({{systemName}}MainScreenP.facade.getAuthorLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -358,7 +358,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 	
 	private void carregarComboBoxActivity(){
 		try {
-			List<Activity> list = {{systemName}}ScreenP.facade.getActivities();
+			List<Activity> list = {{systemName}}MainScreenP.facade.getActivities();
 			Iterator<Activity> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxActivityName.addItem(iterator.next().getNameActivity());
@@ -406,7 +406,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 				author.setFiliation(filiation);
 				author.setEmail(email);
 				//Insere na tabela de authors
-				{{systemName}}ScreenP.facade.insertAuthor(author);
+				{{systemName}}MainScreenP.facade.insertAuthor(author);
 				
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Author inserido com sucesso", "Sucesso",
@@ -452,7 +452,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 						submission = new Submission();
 						submission.setIdSubmission(Integer.valueOf(lblLastSubmissionId.getText()));
 						submission.setAbstractPaper(abstractPaper);
-						submission.setIdActivity({{systemName}}ScreenP.facade.getActivityIdByName(nameActivity));
+						submission.setIdActivity({{systemName}}MainScreenP.facade.getActivityIdByName(nameActivity));
 						submission.setKeywords(keywords);
 						submission.setTitle(title);
 						submission.setType(TypeSubmission.valueOf(type));
@@ -463,7 +463,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 						
 						
 						if(typeComboBox.getSelectedItem().toString().equals("Completa"))
-							{{systemName}}ScreenP.facade.updateSubmission(submission);
+							{{systemName}}MainScreenP.facade.updateSubmission(submission);
 						
 						
 						//Inserir na tabela de submissionUSER
@@ -474,8 +474,8 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 						SubmissionUser submissionUser = new SubmissionUser();
 						submissionUser.setIdUser(idUsuario);
 						submissionUser.setIdSubmission(Integer.valueOf(lblLastSubmissionId.getText()));
-						submissionUser.setIdActivity({{systemName}}ScreenP.facade.getActivityIdByName(nameActivity));
-						{{systemName}}ScreenP.facade.insertSubmissionUser(submissionUser);
+						submissionUser.setIdActivity({{systemName}}MainScreenP.facade.getActivityIdByName(nameActivity));
+						{{systemName}}MainScreenP.facade.insertSubmissionUser(submissionUser);
 						
 						//#if ${InsertAuthors} == "T"
 						//Inserir na tabela de submissionAUTHORS
@@ -486,8 +486,8 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 						int idCorrespondingAuthor = Integer.valueOf(lblIdUserLogado.getText());
 						submissionAuthor.setIdAuthor(idCorrespondingAuthor);
 						submissionAuthor.setIdSubmission(Integer.valueOf(lblLastSubmissionId.getText()));
-						submissionAuthor.setIdActivity({{systemName}}ScreenP.facade.getActivityIdByName(comboBoxActivityName.getSelectedItem().toString()));
-						{{systemName}}ScreenP.facade.insertSubmissionAuthor(submissionAuthor);
+						submissionAuthor.setIdActivity({{systemName}}MainScreenP.facade.getActivityIdByName(comboBoxActivityName.getSelectedItem().toString()));
+						{{systemName}}MainScreenP.facade.insertSubmissionAuthor(submissionAuthor);
 						//#endif
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Submission inserida com sucesso", "Sucesso",
@@ -559,8 +559,8 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 	            
 	            try {
 	            	//byte[] b = new byte[(int)file.length()];
-	            	int idActivity = {{systemName}}ScreenP.facade.getActivityIdByName(comboBoxActivityName.getSelectedItem().toString());
-					{{systemName}}ScreenP.facade.insertAttachment(file,idActivity);
+	            	int idActivity = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBoxActivityName.getSelectedItem().toString());
+					{{systemName}}MainScreenP.facade.insertAttachment(file,idActivity);
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Artigo inserido com sucesso", "Sucesso",
 							JOptionPane.INFORMATION_MESSAGE);

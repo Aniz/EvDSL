@@ -131,13 +131,13 @@ public class AssignmentRemoveScreenP extends JInternalFrame {
 			assignment.setIdReviewSubmission(Integer.valueOf(textFieldSubmissionId.getText()));
 			
 			try {
-				if (RiseEventsScreenP.facade.searchAssignment(assignment) == null){
+				if (RiseEventsMainScreenP.facade.searchAssignment(assignment) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Assignment não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					RiseEventsScreenP.facade.removeAssignment(assignment);
+					RiseEventsMainScreenP.facade.removeAssignment(assignment);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

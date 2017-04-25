@@ -184,7 +184,7 @@ public class CheckingCopyTypeScreenP  extends JInternalFrame {
 					String caminho = String.valueOf(local.getSelectedFile());
 					CheckingCopy checkcopy = new CheckingCopy();
 					try {
-						{{systemName}}ScreenP.facade.emitirAtestado(nomeUsuario, nomeEvento, periodo, checkcopy);
+						{{systemName}}MainScreenP.facade.emitirAtestado(nomeUsuario, nomeEvento, periodo, checkcopy);
 					} catch (RepositoryException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								e.toString(), "Erro",
@@ -225,7 +225,7 @@ public class CheckingCopyTypeScreenP  extends JInternalFrame {
 					String caminho = String.valueOf(local.getSelectedFile());
 					CheckingCopy checkcopy = new CheckingCopy();
 					try {
-						{{systemName}}ScreenP.facade.emitirCertificado(nomeUsuario, nomeEvento , periodo, typeActivity, checkcopy);
+						{{systemName}}MainScreenP.facade.emitirCertificado(nomeUsuario, nomeEvento , periodo, typeActivity, checkcopy);
 					} catch (RepositoryException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								e.toString(), "Erro",
@@ -246,7 +246,7 @@ public class CheckingCopyTypeScreenP  extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -262,7 +262,7 @@ public class CheckingCopyTypeScreenP  extends JInternalFrame {
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = {{systemName}}ScreenP.facade.getUsers();
+			List<User> list = {{systemName}}MainScreenP.facade.getUsers();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUser.addItem(iterator.next().getNameUser());
@@ -291,8 +291,8 @@ public class CheckingCopyTypeScreenP  extends JInternalFrame {
 		Event event = new Event();
 		
 		try {
-			idEvent = {{systemName}}ScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
-			event = {{systemName}}ScreenP.facade.searchEvent(idEvent);
+			idEvent = {{systemName}}MainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+			event = {{systemName}}MainScreenP.facade.searchEvent(idEvent);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

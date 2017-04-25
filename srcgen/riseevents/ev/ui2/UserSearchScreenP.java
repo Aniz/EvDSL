@@ -121,7 +121,7 @@ public class UserSearchScreenP extends JInternalFrame {
 			int idUser =Integer.valueOf( textFieldUserId.getText());
 			
 			try {
-				user = RiseEventsScreenP.facade.searchUser(idUser);
+				user = RiseEventsMainScreenP.facade.searchUser(idUser);
 				textArea.setText("");
 				textArea.append(user.toString());
 			} catch (UserNotFoundException e1) {

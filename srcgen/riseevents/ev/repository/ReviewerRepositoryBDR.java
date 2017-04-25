@@ -154,7 +154,7 @@ int("contato"));
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setContato(resultset.getint("contato"));
+				reviewer.setContato(resultset.getInt("contato"));
 			
         		list.add(reviewer);
             } 

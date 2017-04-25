@@ -147,7 +147,7 @@ public class EventInsertScreenP extends JInternalFrame {
 		
 		
 		try {
-			lblNewLabel.setText(String.valueOf({{systemName}}ScreenP.facade.getEventLastId()));
+			lblNewLabel.setText(String.valueOf({{systemName}}MainScreenP.facade.getEventLastId()));
 			
 			
 		} catch (RepositoryException e) {
@@ -198,7 +198,7 @@ public class EventInsertScreenP extends JInternalFrame {
 				
 				
 				try {
-					{{systemName}}ScreenP.facade.insertEvent(event);
+					{{systemName}}MainScreenP.facade.insertEvent(event);
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Evento inserido com Sucesso.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);

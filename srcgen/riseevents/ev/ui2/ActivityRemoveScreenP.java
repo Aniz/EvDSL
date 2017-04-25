@@ -103,13 +103,13 @@ public class ActivityRemoveScreenP extends JInternalFrame {
 			int idActivity = Integer.valueOf(textFieldActivityId.getText());
 			
 			try {
-				if (RiseEventsScreenP.facade.searchActivity(idActivity) == null){
+				if (RiseEventsMainScreenP.facade.searchActivity(idActivity) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Activity não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					RiseEventsScreenP.facade.removeActivity(idActivity);
+					RiseEventsMainScreenP.facade.removeActivity(idActivity);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

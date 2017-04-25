@@ -108,7 +108,7 @@ public class ReviewerRemoveScreenP extends JInternalFrame {
 			int idReviewer = Integer.valueOf(textFieldIdReviewer.getText());
 			
 			try {
-					{{systemName}}ScreenP.facade.removeReviewer(idReviewer);
+					{{systemName}}MainScreenP.facade.removeReviewer(idReviewer);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 			} catch (HeadlessException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),

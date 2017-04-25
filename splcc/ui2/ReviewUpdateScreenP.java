@@ -145,7 +145,7 @@ public class ReviewUpdateScreenP extends JInternalFrame  {
 		carregarComboBoxStatus();
 		
 		try {
-			lblLastId.setText(String.valueOf({{systemName}}ScreenP.facade.getReviewLastId()));
+			lblLastId.setText(String.valueOf({{systemName}}MainScreenP.facade.getReviewLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -178,7 +178,7 @@ public class ReviewUpdateScreenP extends JInternalFrame  {
 			String status = statusComboBox.getSelectedItem().toString();
 			
 			try {
-				review = {{systemName}}ScreenP.facade.searchReview(idReview);
+				review = {{systemName}}MainScreenP.facade.searchReview(idReview);
 			} catch (ReviewNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -200,7 +200,7 @@ public class ReviewUpdateScreenP extends JInternalFrame  {
 				review.setDate(date);
 				review.setDescription(description);
 				review.setStatus(StatusReview.valueOf(status));
-				review.setIdSubmission({{systemName}}ScreenP.facade.getSubmissionIdByTitle(titleSubmission));
+				review.setIdSubmission({{systemName}}MainScreenP.facade.getSubmissionIdByTitle(titleSubmission));
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -209,8 +209,8 @@ public class ReviewUpdateScreenP extends JInternalFrame  {
 			}
 			
 			try {
-				{{systemName}}ScreenP.facade.updateReview(review);
-				review = {{systemName}}ScreenP.facade.searchReview(review.getIdReview());
+				{{systemName}}MainScreenP.facade.updateReview(review);
+				review = {{systemName}}MainScreenP.facade.searchReview(review.getIdReview());
 				textArea.setText("");
 				textArea.append(review.toString());
 			} catch (ReviewNotFoundException e1) {
@@ -234,7 +234,7 @@ public class ReviewUpdateScreenP extends JInternalFrame  {
 	
 	private void carregarComboBoxSubmission(){
 		try {
-			List<Submission> list = {{systemName}}ScreenP.facade.getSubmissions();
+			List<Submission> list = {{systemName}}MainScreenP.facade.getSubmissions();
 			Iterator<Submission> iterator = list.iterator();
 			while(iterator.hasNext()){
 				submissionComboBox.addItem(iterator.next().getTitle());

@@ -125,8 +125,8 @@ public class SpeakerSearchScreenP extends JInternalFrame {
 			int idUser =Integer.valueOf(textFieldSpeakerId.getText());
 			
 			try {
-				speaker = {{systemName}}ScreenP.facade.searchSpeaker(idUser);
-				//user = {{systemName}}ScreenP.facade.searchUser(idUser);
+				speaker = {{systemName}}MainScreenP.facade.searchSpeaker(idUser);
+				//user = {{systemName}}MainScreenP.facade.searchUser(idUser);
 				textArea.setText("");
 				//textArea.append(user.toString() + speaker.toString());
 				textArea.append(speaker.toString());

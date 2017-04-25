@@ -125,8 +125,8 @@ public class OrganizerSearchScreenP extends JInternalFrame {
 			int idUser =Integer.valueOf(textFieldOrganizerId.getText());
 			
 			try {
-				organizer = {{systemName}}ScreenP.facade.searchOrganizer(idUser);
-				//user = {{systemName}}ScreenP.facade.searchUser(idUser);
+				organizer = {{systemName}}MainScreenP.facade.searchOrganizer(idUser);
+				//user = {{systemName}}MainScreenP.facade.searchUser(idUser);
 				textArea.setText("");
 				//textArea.append(user.toString() + organizer.toString());
 				textArea.append(organizer.toString());

@@ -108,7 +108,7 @@ public class SpeakerRemoveScreenP extends JInternalFrame {
 			int idSpeaker = Integer.valueOf(textFieldIdSpeaker.getText());
 			
 			try {
-					{{systemName}}ScreenP.facade.removeSpeaker(idSpeaker);
+					{{systemName}}MainScreenP.facade.removeSpeaker(idSpeaker);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 			} catch (HeadlessException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),

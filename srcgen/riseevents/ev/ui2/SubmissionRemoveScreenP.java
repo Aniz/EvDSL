@@ -105,13 +105,13 @@ public class SubmissionRemoveScreenP extends JInternalFrame {
 			int idSubmission = Integer.valueOf(textFieldSubmissionId.getText());
 			
 			try {
-				if (RiseEventsScreenP.facade.searchSubmission(idSubmission) == null){
+				if (RiseEventsMainScreenP.facade.searchSubmission(idSubmission) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Submission não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					RiseEventsScreenP.facade.removeSubmission(idSubmission);
+					RiseEventsMainScreenP.facade.removeSubmission(idSubmission);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

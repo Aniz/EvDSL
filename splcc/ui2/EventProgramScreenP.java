@@ -108,10 +108,10 @@ public class EventProgramScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				int idEvent = {{systemName}}ScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
-				Event event = {{systemName}}ScreenP.facade.searchEvent(idEvent);
-				List<Activity> activities = {{systemName}}ScreenP.facade.getActivitiesByEvent(idEvent);
-				{{systemName}}ScreenP.facade.generateProgram(activities,event );
+				int idEvent = {{systemName}}MainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+				Event event = {{systemName}}MainScreenP.facade.searchEvent(idEvent);
+				List<Activity> activities = {{systemName}}MainScreenP.facade.getActivitiesByEvent(idEvent);
+				{{systemName}}MainScreenP.facade.generateProgram(activities,event );
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -143,7 +143,7 @@ public class EventProgramScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

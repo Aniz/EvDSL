@@ -196,8 +196,8 @@ public class ReviewerInsertScreenP extends JInternalFrame {
 //					user.setEmail(email);
 					
 					try {
-					//	RiseEventsScreenP.facade.insertUser(user);
-						RiseEventsScreenP.facade.insertReviewer(reviewer);
+					//	RiseEventsMainScreenP.facade.insertUser(user);
+						RiseEventsMainScreenP.facade.insertReviewer(reviewer);
 					} catch (ReviewerAlreadyInsertedException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								e1.toString(), "Erro",

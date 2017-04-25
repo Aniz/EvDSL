@@ -113,7 +113,7 @@ public class EventRepositoryBDR implements EventRepository {
 				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
 			{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));   
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));   
 			{% endfor %}{% endif %}					        
             } else {
             	throw new EventNotFoundException(idEvent);
@@ -152,7 +152,7 @@ public class EventRepositoryBDR implements EventRepository {
 				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
 			{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));   
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));   
 			{% endfor %}{% endif %}					        
 				list.add(event);
             } 

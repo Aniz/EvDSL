@@ -197,8 +197,8 @@ public class UserUpdateScreenP extends JInternalFrame {
 			user.setFiliation(filiation);
 
 			try {
-				{{systemName}}ScreenP.getFacade().updateUser(user);
-				//user = {{systemName}}ScreenP.facade.searchUser(user.getIdUser());
+				{{systemName}}MainScreenP.getFacade().updateUser(user);
+				//user = {{systemName}}MainScreenP.facade.searchUser(user.getIdUser());
 				textArea.setText("");
 				textArea.append(user.toString());
 			} catch (UserNotFoundException e1) {

@@ -182,7 +182,7 @@ public class EventUpdateScreenP extends JInternalFrame {
 			String sponsors = textFieldSponsors.getText();
 			
 			try {
-				event = {{systemName}}ScreenP.facade.searchEvent(idEvent);
+				event = {{systemName}}MainScreenP.facade.searchEvent(idEvent);
 			} catch (EventNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -206,8 +206,8 @@ public class EventUpdateScreenP extends JInternalFrame {
 			event.setSponsors(sponsors);
 
 			try {
-				{{systemName}}ScreenP.facade.updateEvent(event);
-				event = {{systemName}}ScreenP.facade.searchEvent(event.getIdEvent());
+				{{systemName}}MainScreenP.facade.updateEvent(event);
+				event = {{systemName}}MainScreenP.facade.searchEvent(event.getIdEvent());
 				textArea.setText("");
 				textArea.append(event.toString());
 			} catch (EventNotFoundException e1) {

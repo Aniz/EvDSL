@@ -109,7 +109,7 @@ public class OrganizerRemoveScreenP extends JInternalFrame {
 			int idUser = Integer.valueOf(textFieldIdUser.getText());
 			
 			try {
-					RiseEventsScreenP.facade.removeOrganizer(idUser);
+					RiseEventsMainScreenP.facade.removeOrganizer(idUser);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 			} catch (HeadlessException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),

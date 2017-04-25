@@ -202,9 +202,9 @@ public class ReviewerUpdateScreenP extends JInternalFrame {
 			reviewer.setKnowledgeArea(knowledgeArea);
 
 			try {
-				//RiseEventsScreenP.facade.updateUser(reviewer);
-				RiseEventsScreenP.facade.updateReviewer(reviewer);
-				//reviewer = RiseEventsScreenP.facade.searchReviewer(reviewer.getIdUser());
+				//RiseEventsMainScreenP.facade.updateUser(reviewer);
+				RiseEventsMainScreenP.facade.updateReviewer(reviewer);
+				//reviewer = RiseEventsMainScreenP.facade.searchReviewer(reviewer.getIdUser());
 				textArea.setText("");
 				textArea.append(reviewer.toString());
 			} catch (ReviewerNotFoundException e1) {

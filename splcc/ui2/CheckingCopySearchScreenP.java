@@ -120,7 +120,7 @@ public class CheckingCopySearchScreenP extends JInternalFrame {
 			int idCheckingCopy =Integer.valueOf( textFieldIdCheckingCopy.getText());
 			
 			try {
-				checkingCopy = {{systemName}}ScreenP.facade.searchCheckingCopy(idCheckingCopy);
+				checkingCopy = {{systemName}}MainScreenP.facade.searchCheckingCopy(idCheckingCopy);
 				textArea.setText("");
 				textArea.append(checkingCopy.toString());
 			} catch (CheckingCopyNotFoundException e1) {

@@ -199,7 +199,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		
 		try {
-			lblNewLabel.setText(String.valueOf({{systemName}}ScreenP.facadevalueOf({{systemName}}ScreenP.facade.getActivityLastId()));
+			lblNewLabel.setText(String.valueOf({{systemName}}MainScreenP.facadevalueOf({{systemName}}MainScreenP.facade.getActivityLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -262,7 +262,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 				}else{
 					try {
 						activity = new Activity();
-						activity.setIdEvent({{systemName}}ScreenP.facade.getEventIdByName(nameEvent));
+						activity.setIdEvent({{systemName}}MainScreenP.facade.getEventIdByName(nameEvent));
 						activity.setNameActivity(nameActivity);
 						activity.setDescriptionActivity(descriptionActivity);
 						activity.setTypeActivity(TypeActivity.valueOf(activityType));
@@ -273,7 +273,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
 
-						{{systemName}}ScreenP.facade.insertActivity(activity);
+						{{systemName}}MainScreenP.facade.insertActivity(activity);
 
 
 					} catch (ActivityAlreadyInsertedException e1) {
@@ -297,7 +297,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

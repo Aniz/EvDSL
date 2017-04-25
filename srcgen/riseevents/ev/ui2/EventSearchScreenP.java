@@ -119,7 +119,7 @@ public class EventSearchScreenP extends JInternalFrame {
 			int idEvent =Integer.valueOf( textFieldEventId.getText());
 			
 			try {
-				event = RiseEventsScreenP.facade.searchEvent(idEvent);
+				event = RiseEventsMainScreenP.facade.searchEvent(idEvent);
 				textArea.setText("");
 				textArea.append(event.toString());
 			} catch (EventNotFoundException e1) {

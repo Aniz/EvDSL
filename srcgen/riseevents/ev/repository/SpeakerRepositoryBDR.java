@@ -111,11 +111,11 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
             	speaker.setFiliation(resultset.getString("filiation"));
 
 				speaker.setTypeSpeaker(TypeSpeaker.valueOf(resultset.getString("typeSpeaker")));
-				speaker.setNacionalidade(resultset.getint("nacionalidade"));
+				speaker.setNacionalidade(resultset.getInt("nacionalidade"));
 			
         
 				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				speaker.setContato(resultset.getint("contato"));
+				speaker.setContato(resultset.getInt("contato"));
 			
 
             } else {

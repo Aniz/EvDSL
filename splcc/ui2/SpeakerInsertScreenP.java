@@ -196,8 +196,8 @@ public class SpeakerInsertScreenP extends JInternalFrame {
 //					user.setEmail(email);
 					
 					try {
-						//{{systemName}}ScreenP.facade.insertUser(user);
-						{{systemName}}ScreenP.facade.insertSpeaker(speaker);
+						//{{systemName}}MainScreenP.facade.insertUser(user);
+						{{systemName}}MainScreenP.facade.insertSpeaker(speaker);
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Speaker cadastrado com Sucesso!!.", "Sucesso",
 								JOptionPane.INFORMATION_MESSAGE);

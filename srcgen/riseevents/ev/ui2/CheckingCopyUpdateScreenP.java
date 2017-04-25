@@ -177,8 +177,8 @@ public class CheckingCopyUpdateScreenP extends JInternalFrame {
 	
 	private void setarNomeUsuarioByRegistration(){
 		try {
-			Registration registration = RiseEventsScreenP.facade.searchRegistration(Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString()));
-			User user = RiseEventsScreenP.facade.searchUser(registration.getIdUser());
+			Registration registration = RiseEventsMainScreenP.facade.searchRegistration(Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString()));
+			User user = RiseEventsMainScreenP.facade.searchUser(registration.getIdUser());
 			comboBoxUserId.setSelectedItem(user.getNameUser());
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -226,7 +226,7 @@ public class CheckingCopyUpdateScreenP extends JInternalFrame {
 			String date = textFieldDate.getText();
 			
 			try {
-				checkingCopy = RiseEventsScreenP.facade.searchCheckingCopy(idCheckingCopy);
+				checkingCopy = RiseEventsMainScreenP.facade.searchCheckingCopy(idCheckingCopy);
 			} catch (CheckingCopyNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -251,8 +251,8 @@ public class CheckingCopyUpdateScreenP extends JInternalFrame {
 			checkingCopy.setDateOfIssue(date);
 			
 			try {
-				RiseEventsScreenP.facade.updateCheckingCopy(checkingCopy);
-				checkingCopy = RiseEventsScreenP.facade.searchCheckingCopy(checkingCopy.getIdCheckingCopy());
+				RiseEventsMainScreenP.facade.updateCheckingCopy(checkingCopy);
+				checkingCopy = RiseEventsMainScreenP.facade.searchCheckingCopy(checkingCopy.getIdCheckingCopy());
 				textArea.setText("");
 				textArea.append(checkingCopy.toString());
 			} catch (CheckingCopyNotFoundException e1) {
@@ -276,7 +276,7 @@ public class CheckingCopyUpdateScreenP extends JInternalFrame {
 	
 	private void carregarRegistrationComboBox(){
 		try {
-			List<Registration> list = RiseEventsScreenP.facade.getRegistrations();
+			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrations();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistrationId.addItem(iterator.next().getIdRegistration());
@@ -291,7 +291,7 @@ public class CheckingCopyUpdateScreenP extends JInternalFrame {
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = RiseEventsScreenP.facade.getUsers();
+			List<User> list = RiseEventsMainScreenP.facade.getUsers();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUserId.addItem(iterator.next().getNameUser());

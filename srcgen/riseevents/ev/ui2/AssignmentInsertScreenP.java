@@ -242,9 +242,9 @@ setTitle("Insert Assignment");
 				
 				int idSubmission;
 				
-				idSubmission = RiseEventsScreenP.facade.getSubmissionIdByTitle(idsubmission);
+				idSubmission = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(idsubmission);
 				
-				Submission submission = RiseEventsScreenP.facade.searchSubmission(idSubmission);
+				Submission submission = RiseEventsMainScreenP.facade.searchSubmission(idSubmission);
 				assignment1.setIdReviewSubmission(idSubmission);
 				assignment2.setIdReviewSubmission(idSubmission);
 				assignment3.setIdReviewSubmission(idSubmission);
@@ -266,18 +266,18 @@ setTitle("Insert Assignment");
 				reviewer3 = listaRevisoresSelecionados.get(2);
 				
 				
-				RiseEventsScreenP.facade.insertReview(review1);
-				int lastIdReview1 = RiseEventsScreenP.facade.getReviewLastId();
+				RiseEventsMainScreenP.facade.insertReview(review1);
+				int lastIdReview1 = RiseEventsMainScreenP.facade.getReviewLastId();
 				assignment1.setIdReview(lastIdReview1 - 1);
 				review1.setIdReview(lastIdReview1);
 				
-				RiseEventsScreenP.facade.insertReview(review2);
-				int lastIdReview2 = RiseEventsScreenP.facade.getReviewLastId();
+				RiseEventsMainScreenP.facade.insertReview(review2);
+				int lastIdReview2 = RiseEventsMainScreenP.facade.getReviewLastId();
 				assignment2.setIdReview(lastIdReview2 - 1);
 				review2.setIdReview(lastIdReview2);
 				
-				RiseEventsScreenP.facade.insertReview(review3);
-				int lastIdReview3 = RiseEventsScreenP.facade.getReviewLastId();
+				RiseEventsMainScreenP.facade.insertReview(review3);
+				int lastIdReview3 = RiseEventsMainScreenP.facade.getReviewLastId();
 				assignment3.setIdReview(lastIdReview3 - 1);
 				review3.setIdReview(lastIdReview3);
 				
@@ -285,29 +285,29 @@ setTitle("Insert Assignment");
 				assignment2.setIdReviwerUser(reviewer2.getIdUser());
 				assignment3.setIdReviwerUser(reviewer3.getIdUser());
 				
-				RiseEventsScreenP.facade.insertAssignment(assignment1);
-				RiseEventsScreenP.facade.insertAssignment(assignment2);
-				RiseEventsScreenP.facade.insertAssignment(assignment3);
+				RiseEventsMainScreenP.facade.insertAssignment(assignment1);
+				RiseEventsMainScreenP.facade.insertAssignment(assignment2);
+				RiseEventsMainScreenP.facade.insertAssignment(assignment3);
 				
 				//#if ${InsertAuthors} == "T"
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
-				submissionAuthor = RiseEventsScreenP.facade.getSubmissionAuthors();
+				submissionAuthor = RiseEventsMainScreenP.facade.getSubmissionAuthors();
 							
 				for(SubmissionAuthor sa : submissionAuthor){
 					if(sa.getIdSubmission() == idSubmission){
-						author = RiseEventsScreenP.facade.searchAuthor(sa.getIdAuthor());
+						author = RiseEventsMainScreenP.facade.searchAuthor(sa.getIdAuthor());
 					}
 				}
 				//#endif
 				User user = new User();
 				//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
-				submissionUser = RiseEventsScreenP.facade.getSubmissionUsers();
+				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUsers();
 							
 				for(SubmissionUser su : submissionUser){
 					if(su.getIdSubmission() == idSubmission){
-						user = RiseEventsScreenP.facade.searchUser(su.getIdUser());
+						user = RiseEventsMainScreenP.facade.searchUser(su.getIdUser());
 					}
 				}
 				//#endif
@@ -410,7 +410,7 @@ setTitle("Insert Assignment");
 	
 	private void carregarComboSubmission(){
 		try {
-			List<Submission> submissions = RiseEventsScreenP.facade.getSubmissions();
+			List<Submission> submissions = RiseEventsMainScreenP.facade.getSubmissions();
 			Iterator<Submission> iterator = submissions.iterator();
 			while(iterator.hasNext()){
 				comboBoxSubmission.addItem(iterator.next().getTitle());
@@ -432,8 +432,8 @@ setTitle("Insert Assignment");
 				
 				int idSubmissionSelecionado;
 				
-				idSubmissionSelecionado = RiseEventsScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
-				submissionSelecionado = RiseEventsScreenP.facade.searchSubmission(idSubmissionSelecionado);
+				idSubmissionSelecionado = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
+				submissionSelecionado = RiseEventsMainScreenP.facade.searchSubmission(idSubmissionSelecionado);
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -460,15 +460,15 @@ setTitle("Insert Assignment");
 		Submission submissionSelecionado = null;
 		int idSubmission;
 		try {
-			reviewers = RiseEventsScreenP.facade.getReviewers();
+			reviewers = RiseEventsMainScreenP.facade.getReviewers();
 			
-			idSubmission = RiseEventsScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
-			submissionSelecionado = RiseEventsScreenP.facade.searchSubmission(idSubmission);
+			idSubmission = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
+			submissionSelecionado = RiseEventsMainScreenP.facade.searchSubmission(idSubmission);
 			keyWords = quebrarKeywords(submissionSelecionado);
 			
 			Iterator<String> iteratorKeywords = keyWords.iterator();
 			while(iteratorKeywords.hasNext()){
-				reviewers.add(RiseEventsScreenP.facade.getReviewerByknowledgeArea(iteratorKeywords.next()));
+				reviewers.add(RiseEventsMainScreenP.facade.getReviewerByknowledgeArea(iteratorKeywords.next()));
 			}
 		} catch (RepositoryException e1) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -515,7 +515,7 @@ setTitle("Insert Assignment");
 		Email email = new Email();
 		User user = new User();
 		try {
-			user = RiseEventsScreenP.facade.searchUser(reviewer.getIdUser());
+			user = RiseEventsMainScreenP.facade.searchUser(reviewer.getIdUser());
 		} catch (UserNotFoundException e1) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e1.toString(), "Erro",
@@ -534,7 +534,7 @@ setTitle("Insert Assignment");
 		}
 		
 		try {
-			RiseEventsScreenP.facade.emailNotification(user, review, email);
+			RiseEventsMainScreenP.facade.emailNotification(user, review, email);
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -568,7 +568,7 @@ setTitle("Insert Assignment");
 			
 			try {
 				
-				reviewerRight =  new ReviewerTableModel(RiseEventsScreenP.facade.getReviewers()).get(rowIndex);
+				reviewerRight =  new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewers()).get(rowIndex);
 				if(listaRevisoresSelecionados.size() < 3){
 					listaRevisoresSelecionados.add(reviewerRight);
 					ReviewerTableModel model;
@@ -593,7 +593,7 @@ setTitle("Insert Assignment");
 	private void populateTableReviewer(){
 		try {
 			ReviewerTableModel model;
-			model = new ReviewerTableModel(RiseEventsScreenP.facade.getReviewers());
+			model = new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewers());
 
 			tableReviewer.setModel(model);
 			
@@ -619,11 +619,11 @@ setTitle("Insert Assignment");
 						JOptionPane.INFORMATION_MESSAGE);
 			}else{
 				try {
-					int subId = RiseEventsScreenP.facade.getSubmissionIdByTitle(submissao);
-					Submission sub = RiseEventsScreenP.facade.searchSubmission(subId);
+					int subId = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(submissao);
+					Submission sub = RiseEventsMainScreenP.facade.searchSubmission(subId);
 					String keywords = sub.getKeywords();
 					String keywordsSplit[] = keywords.split(Pattern.quote(","));
-					reviewerList = RiseEventsScreenP.facade.getReviewers();
+					reviewerList = RiseEventsMainScreenP.facade.getReviewers();
 					boolean flag;
 
 					

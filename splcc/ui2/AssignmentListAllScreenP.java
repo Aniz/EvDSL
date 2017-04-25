@@ -70,7 +70,7 @@ public class AssignmentListAllScreenP extends JInternalFrame {
 		
 		
 		try {
-			model = new AssignmentTableModel({{systemName}}ScreenP.facade.getAssignments());
+			model = new AssignmentTableModel({{systemName}}MainScreenP.facade.getAssignments());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

@@ -142,7 +142,7 @@ public class AssignmentSearchScreenP extends JInternalFrame {
 			assignment.setIdReviewSubmission(Integer.valueOf( textFieldIdSubmission.getText()));
 			
 			try {
-				assignment = RiseEventsScreenP.facade.searchAssignment(assignment);
+				assignment = RiseEventsMainScreenP.facade.searchAssignment(assignment);
 				textArea.setText("");
 				textArea.append(assignment.toString());
 			} catch (AssignmentNotFoundException e1) {

@@ -182,20 +182,20 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 			Organizer organizer = null;
 
 			try {
-				organizer =  new OrganizerTableModel(RiseEventsScreenP.facade.getOrganizers()).get(rowIndex);
-				int idActivity = RiseEventsScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				organizer =  new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizers()).get(rowIndex);
+				int idActivity = RiseEventsMainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Criando ActivityOrganizer
 				ActivityOrganizer activityOrganizer = new ActivityOrganizer();
 				activityOrganizer.setIdActivity(idActivity);
 				activityOrganizer.setIdOrganizer(organizer.getIdUser());
 				//Inserindo na tabela
-				RiseEventsScreenP.facade.insertActivityOrganizer(activityOrganizer);
+				RiseEventsMainScreenP.facade.insertActivityOrganizer(activityOrganizer);
 				// buscando atividade com base no nome
 				int i;
-				i = RiseEventsScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				i = RiseEventsMainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Atualizando a tabela
 				ActivityOrganizerTableModel model;
-				model = new ActivityOrganizerTableModel(RiseEventsScreenP.facade.getActivitiesOrganizersById(i));
+				model = new ActivityOrganizerTableModel(RiseEventsMainScreenP.facade.getActivitiesOrganizersById(i));
 				tableActivities.setModel(model);      
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -221,13 +221,13 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 			ActivityOrganizer activityOrganizer = null;
 			
 			try {
-				activityOrganizer = new ActivityOrganizerTableModel(RiseEventsScreenP.facade.getActivitiesOrganizers()).get(rowIndex);
-				RiseEventsScreenP.facade.removeActivityOrganizer(activityOrganizer);
+				activityOrganizer = new ActivityOrganizerTableModel(RiseEventsMainScreenP.facade.getActivitiesOrganizers()).get(rowIndex);
+				RiseEventsMainScreenP.facade.removeActivityOrganizer(activityOrganizer);
 				//Atualizando a tabela
 				int i;
-				i = RiseEventsScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				i = RiseEventsMainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				ActivityOrganizerTableModel model;
-				model = new ActivityOrganizerTableModel(RiseEventsScreenP.facade.getActivitiesOrganizersById(i));
+				model = new ActivityOrganizerTableModel(RiseEventsMainScreenP.facade.getActivitiesOrganizersById(i));
 				tableActivities.setModel(model);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -260,10 +260,10 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 					return;
 				// buscando atividade com base no nome
 				int i;
-				i = RiseEventsScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
+				i = RiseEventsMainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Atualizando a tabela
 				ActivityOrganizerTableModel model;
-				model = new ActivityOrganizerTableModel(RiseEventsScreenP.facade.getActivitiesOrganizersById(i));
+				model = new ActivityOrganizerTableModel(RiseEventsMainScreenP.facade.getActivitiesOrganizersById(i));
 				tableActivities.setModel(model);
 				
 			} catch (RepositoryException e1) {
@@ -285,7 +285,7 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 				// buscando atividade com base no nome
 				List<Activity> activities;
 				List<String> nameActivities = new ArrayList<String>();
-				activities = RiseEventsScreenP.facade.getActivitiesByEvent(RiseEventsScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
+				activities = RiseEventsMainScreenP.facade.getActivitiesByEvent(RiseEventsMainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
 				comboBox_Activities.removeAllItems();
 				//Passando de lista de atividades para lista de nome de atividades
 				Iterator<Activity> iteratorActivity = activities.iterator();
@@ -311,7 +311,7 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 	private void populateTableOrganizers(){
 		try {
 			OrganizerTableModel model;
-			model = new OrganizerTableModel(RiseEventsScreenP.facade.getOrganizers());
+			model = new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizers());
 
 			tableOrganizers.setModel(model);
 			
@@ -326,7 +326,7 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiseEventsScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

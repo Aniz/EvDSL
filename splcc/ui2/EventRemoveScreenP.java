@@ -105,13 +105,13 @@ public class EventRemoveScreenP extends JInternalFrame {
 			int idEvent = Integer.valueOf(textFieldIdEvent.getText());
 			
 			try {
-				if ({{systemName}}ScreenP.facade.searchEvent(idEvent) == null){
+				if ({{systemName}}MainScreenP.facade.searchEvent(idEvent) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Evento não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					{{systemName}}ScreenP.facade.removeEvent(idEvent);
+					{{systemName}}MainScreenP.facade.removeEvent(idEvent);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

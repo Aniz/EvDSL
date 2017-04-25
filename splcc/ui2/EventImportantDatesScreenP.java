@@ -149,7 +149,7 @@ public class EventImportantDatesScreenP extends JInternalFrame {
 				String fullPaper = textFieldFullPaperDate.getText();
 				String notification = textFieldNotificationsDAte.getText();
 				try {
-					{{systemName}}ScreenP.facade.generateImportantDates(abstractPaper, fullPaper, notification,event);
+					{{systemName}}MainScreenP.facade.generateImportantDates(abstractPaper, fullPaper, notification,event);
 				} catch (DocumentException e1) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							e1.toString(), "Erro",
@@ -171,8 +171,8 @@ public class EventImportantDatesScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				int idEvent = {{systemName}}ScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
-				event = {{systemName}}ScreenP.facade.searchEvent(idEvent);
+				int idEvent = {{systemName}}MainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+				event = {{systemName}}MainScreenP.facade.searchEvent(idEvent);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -194,7 +194,7 @@ public class EventImportantDatesScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

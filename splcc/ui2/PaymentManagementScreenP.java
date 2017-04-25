@@ -230,7 +230,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		
 		List<Registration> registrations = new ArrayList<Registration>();
 		try {
-			registrations = {{systemName}}ScreenP.facade.getRegistrations();
+			registrations = {{systemName}}MainScreenP.facade.getRegistrations();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",
@@ -248,7 +248,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			PaymentTableModel model;
-			model = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments());
+			model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -321,7 +321,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		
 		public void acaoType(Payment paymentout) throws DocumentException, IOException{
 			Payment payment = new Payment();
-			{{systemName}}ScreenP.facade.typePayment(payment, paymentout);
+			{{systemName}}MainScreenP.facade.typePayment(payment, paymentout);
 			
 		}		
 		
@@ -363,8 +363,8 @@ public class PaymentManagementScreenP extends JInternalFrame{
 						payment.setStatus(StatusPayment.valueOf(status));
 						payment.setValue(value);
 						
-						{{systemName}}ScreenP.facade.insertPayment(payment); 
-						PaymentTableModel model = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments());
+						{{systemName}}MainScreenP.facade.insertPayment(payment); 
+						PaymentTableModel model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments());
 							
 						acaoType(payment);
 						
@@ -441,9 +441,9 @@ public class PaymentManagementScreenP extends JInternalFrame{
 						
 						try {
 							
-							{{systemName}}ScreenP.facade.updatePayment(payment);
+							{{systemName}}MainScreenP.facade.updatePayment(payment);
 							PaymentTableModel model;
-							model = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments());
+							model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments());
 							table.setModel(model);
 						} catch (PaymentNotFoundException e1) {
 							JOptionPane
@@ -479,7 +479,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				Payment payment = null;
 
 				try {
-					payment=  new PaymentTableModel({{systemName}}ScreenP.facade.getPayments()).get(rowIndex);
+					payment=  new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments()).get(rowIndex);
 				
 					
 					comboBoxIdRegistration.setSelectedItem(String.valueOf(payment.getIdRegistration()));
@@ -511,8 +511,8 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				}
 				
 				try {
-					Payment payment = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments()).get(rowIndex);
-					{{systemName}}ScreenP.facade.removePayment(payment.getIdPayment());
+					Payment payment = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments()).get(rowIndex);
+					{{systemName}}MainScreenP.facade.removePayment(payment.getIdPayment());
 					PaymentTableModel model = (PaymentTableModel) table.getModel();
 					model.removePayment(rowIndex);
 					table.setModel(model);

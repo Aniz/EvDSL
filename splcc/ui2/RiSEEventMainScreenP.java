@@ -20,13 +20,13 @@ import javax.swing.border.EmptyBorder;
 
 import {{systemName|lower}}.ev.facade.RiSEventFacade;
 
-public class {{systemName}}ScreenP extends JFrame {
+public class {{systemName}}MainScreenP extends JFrame {
 
 	private JPanel contentPane;
 	
     public static RiSEventFacade facade; // caso a variabilidade de tela login seja retirada o sistema deve iniciar dessa tela
 	
-	private static {{systemName}}ScreenP instance{{systemName}}ScreenP;      
+	private static {{systemName}}MainScreenP instance{{systemName}}MainScreenP;      
 	
 
 	private UserInsertScreenP screenInsertUser;	
@@ -168,11 +168,11 @@ public class {{systemName}}ScreenP extends JFrame {
 		return RiSEventFacade.getInstance();
 	}
 	
-	public static {{systemName}}ScreenP getInstance{{systemName}}ScreenP() {
-		if (instance{{systemName}}ScreenP == null) {
-			{{systemName}}ScreenP.instance{{systemName}}ScreenP = new {{systemName}}ScreenP();
+	public static {{systemName}}MainScreenP getInstance{{systemName}}MainScreenP() {
+		if (instance{{systemName}}MainScreenP == null) {
+			{{systemName}}MainScreenP.instance{{systemName}}MainScreenP = new {{systemName}}MainScreenP();
 		}
-		return {{systemName}}ScreenP.instance{{systemName}}ScreenP;
+		return {{systemName}}MainScreenP.instance{{systemName}}MainScreenP;
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class {{systemName}}ScreenP extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					{{systemName}}ScreenP frame = new {{systemName}}ScreenP();
+					{{systemName}}MainScreenP frame = new {{systemName}}MainScreenP();
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -195,7 +195,7 @@ public class {{systemName}}ScreenP extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public {{systemName}}ScreenP() {
+	public {{systemName}}MainScreenP() {
 		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
@@ -331,7 +331,7 @@ public class {{systemName}}ScreenP extends JFrame {
 		
 		//		
 		//ADICIONADO
-		{{systemName}}ScreenP.facade = RiSEventFacade.getInstance();
+		{{systemName}}MainScreenP.facade = RiSEventFacade.getInstance();
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

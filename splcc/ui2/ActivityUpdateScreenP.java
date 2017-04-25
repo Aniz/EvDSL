@@ -250,7 +250,7 @@ setTitle("Insert Activity");
 			int registrationLimit = Integer.valueOf(textFieldRegLimit.getText());
 			
 			try {
-				activity = {{systemName}}ScreenP.facade.searchActivity(idActivity);
+				activity = {{systemName}}MainScreenP.facade.searchActivity(idActivity);
 			} catch (ActivityNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -269,7 +269,7 @@ setTitle("Insert Activity");
 			}
 			
 			try {
-				activity.setIdEvent({{systemName}}ScreenP.facade.getEventIdByName(nameEvent));
+				activity.setIdEvent({{systemName}}MainScreenP.facade.getEventIdByName(nameEvent));
 				activity.setNameActivity(nameActivity);
 				activity.setDescriptionActivity(descriptionActivity);
 				activity.setTypeActivity(TypeActivity.valueOf(activityType));
@@ -287,8 +287,8 @@ setTitle("Insert Activity");
 			}
 			
 			try {
-				{{systemName}}ScreenP.facade.updateActivity(activity);
-				activity = {{systemName}}ScreenP.facade.searchActivity(activity.getIdActivity());
+				{{systemName}}MainScreenP.facade.updateActivity(activity);
+				activity = {{systemName}}MainScreenP.facade.searchActivity(activity.getIdActivity());
 				textArea.setText("");
 				textArea.append(activity.toString());
 			} catch (ActivityNotFoundException e1) {
@@ -312,7 +312,7 @@ setTitle("Insert Activity");
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

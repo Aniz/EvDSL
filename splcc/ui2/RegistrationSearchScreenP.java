@@ -119,7 +119,7 @@ public class RegistrationSearchScreenP extends JInternalFrame {
 			int idRegistration =Integer.valueOf( textFieldIdRegistration.getText());
 			
 			try {
-				activity = {{systemName}}ScreenP.facade.searchRegistration(idRegistration);
+				activity = {{systemName}}MainScreenP.facade.searchRegistration(idRegistration);
 				textArea.setText("");
 				textArea.append(activity.toString());
 			} catch (RegistrationNotFoundException e1) {

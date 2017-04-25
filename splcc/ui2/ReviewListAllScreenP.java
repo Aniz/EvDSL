@@ -62,7 +62,7 @@ public class ReviewListAllScreenP extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		try {
-			model = new ReviewTableModel({{systemName}}ScreenP.facade.getReviews());
+			model = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviews());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

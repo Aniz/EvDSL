@@ -189,7 +189,7 @@ public class UserInsertScreenP extends JInternalFrame {
 					user.setEmail(email);
 					user.setFiliation(filiation);
 					try {
-						{{systemName}}ScreenP.facade.insertUser(user);
+						{{systemName}}MainScreenP.facade.insertUser(user);
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Usuario cadastrado com Sucesso!!.", "Sucesso",
 								JOptionPane.INFORMATION_MESSAGE);

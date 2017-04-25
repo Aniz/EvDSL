@@ -117,7 +117,7 @@ public class RegistrationInsertScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		
 		try {
-			lblNewLabel.setText(String.valueOf({{systemName}}ScreenP.facade.getRegistrationLastId()));
+			lblNewLabel.setText(String.valueOf({{systemName}}MainScreenP.facade.getRegistrationLastId()));
 			
 			
 		} catch (RepositoryException e) {
@@ -152,24 +152,24 @@ public class RegistrationInsertScreenP extends JInternalFrame {
 					Registration registration = new Registration();
 					
 					String nameUser = comboBoxUser.getSelectedItem().toString();
-					int idEvent = {{systemName}}ScreenP.getFacade().getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+					int idEvent = {{systemName}}MainScreenP.getFacade().getEventIdByName(comboBoxEvent.getSelectedItem().toString());
 					
 					//Atualizar o valor atual, com o valor do maintrack do evento.
-					float totalValue = {{systemName}}ScreenP.getFacade().getEventMainTrackValue(idEvent);
+					float totalValue = {{systemName}}MainScreenP.getFacade().getEventMainTrackValue(idEvent);
 					textFieldTotalValue.setText(String.valueOf(totalValue));
 					
 					
 					registration.setIdEvent(idEvent);
-					registration.setIdUser({{systemName}}ScreenP.facade.getUserIdByName(nameUser));
+					registration.setIdUser({{systemName}}MainScreenP.facade.getUserIdByName(nameUser));
 					registration.setTotalValue(totalValue);
 
-					{{systemName}}ScreenP.facade.insertRegistration(registration);
+					{{systemName}}MainScreenP.facade.insertRegistration(registration);
 					
 					//adicao na tabela de activityuser.
 					ActivityUser activityUser = new ActivityUser();
-					activityUser.setIdActivity({{systemName}}ScreenP.getFacade().getActivityMainTrackId(idEvent));
+					activityUser.setIdActivity({{systemName}}MainScreenP.getFacade().getActivityMainTrackId(idEvent));
 					activityUser.setIdUser(registration.getIdUser());
-					{{systemName}}ScreenP.getFacade().insertActivityUser(activityUser);
+					{{systemName}}MainScreenP.getFacade().insertActivityUser(activityUser);
 					
 
 				} catch (RegistrationAlreadyInsertedException e1) {
@@ -198,7 +198,7 @@ public class RegistrationInsertScreenP extends JInternalFrame {
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = {{systemName}}ScreenP.facade.getUsers();
+			List<User> list = {{systemName}}MainScreenP.facade.getUsers();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUser.addItem(iterator.next().getNameUser());
@@ -213,7 +213,7 @@ public class RegistrationInsertScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

@@ -68,7 +68,7 @@ public class EventListAllScreenP extends JInternalFrame {
 		
 		
 		try {
-			model = new EventTableModel(RiseEventsScreenP.facade.getEvents());
+			model = new EventTableModel(RiseEventsMainScreenP.facade.getEvents());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

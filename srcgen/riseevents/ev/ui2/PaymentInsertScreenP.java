@@ -206,8 +206,8 @@ setTitle("Insert Payment");
 					payment.setBarcode(barcode);
 					payment.setDate(date);
 					
-					RiseEventsScreenP.facade.insertPayment(payment); 
-					PaymentTableModel model = new PaymentTableModel(RiseEventsScreenP.facade.getPayments());
+					RiseEventsMainScreenP.facade.insertPayment(payment); 
+					PaymentTableModel model = new PaymentTableModel(RiseEventsMainScreenP.facade.getPayments());
 					
 					acaoType(payment);
 				
@@ -234,14 +234,14 @@ setTitle("Insert Payment");
 		
 	public void acaoType(Payment paymentout) throws DocumentException, IOException{
 		Payment payment = new Payment();
-		RiseEventsScreenP.facade.typePayment(payment, paymentout);
+		RiseEventsMainScreenP.facade.typePayment(payment, paymentout);
 		
 	}	
 		
 	
 	private void carregarRegistrationComboBox(){
 		try {
-			List<Registration> list = RiseEventsScreenP.facade.getRegistrations();
+			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrations();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistration.addItem(iterator.next().getIdRegistration());

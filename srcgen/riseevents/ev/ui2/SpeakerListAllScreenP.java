@@ -68,7 +68,7 @@ public class SpeakerListAllScreenP extends JInternalFrame {
 		
 		
 		try {
-			model = new SpeakerTableModel(RiseEventsScreenP.facade.getSpeakers());
+			model = new SpeakerTableModel(RiseEventsMainScreenP.facade.getSpeakers());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

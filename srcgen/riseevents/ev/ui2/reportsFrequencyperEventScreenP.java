@@ -113,9 +113,9 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 		public void actionPerformed(ActionEvent e) {
 			int idEvent;
 			try {
-				idEvent = RiseEventsScreenP.getFacade().getEventIdByName(comboBoxEvent.getSelectedItem().toString());
-				Event event = RiseEventsScreenP.getFacade().searchEvent(idEvent);
-				RiseEventsScreenP.getFacade().frequencyPerEvent(participants,event);
+				idEvent = RiseEventsMainScreenP.getFacade().getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+				Event event = RiseEventsMainScreenP.getFacade().searchEvent(idEvent);
+				RiseEventsMainScreenP.getFacade().frequencyPerEvent(participants,event);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -148,7 +148,7 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiseEventsScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -169,8 +169,8 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 
 			try {
 				int i;
-				i = RiseEventsScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
-				participants = RiseEventsScreenP.facade.getParticipantsPerEvent(i);
+				i = RiseEventsMainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+				participants = RiseEventsMainScreenP.facade.getParticipantsPerEvent(i);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",

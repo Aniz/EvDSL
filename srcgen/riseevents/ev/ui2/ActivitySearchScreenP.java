@@ -119,7 +119,7 @@ public class ActivitySearchScreenP extends JInternalFrame {
 			int idActivity =Integer.valueOf( textFieldIdActivity.getText());
 			
 			try {
-				activity = RiseEventsScreenP.facade.searchActivity(idActivity);
+				activity = RiseEventsMainScreenP.facade.searchActivity(idActivity);
 				textArea.setText("");
 				textArea.append(activity.toString());
 			} catch (ActivityNotFoundException e1) {

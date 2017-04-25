@@ -100,7 +100,7 @@ public class UserRepositoryBDR implements UserRepository {
             	user.setEmail(resultset.getString("email"));
             	user.setFiliation(resultset.getString("filiation"));
 				user.setTypeUser(Type(User.valueOf(resultset.getString("typeUser")));
-				user.setContato(resultset.getint("contato"));
+				user.setContato(resultset.getInt("contato"));
 			
            
             	resultset.close();
@@ -137,7 +137,7 @@ public class UserRepositoryBDR implements UserRepository {
             	user.setFiliation(resultset.getString("filiation"));
 				user.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
    
-				user.setContato(resultset.getint("contato"));
+				user.setContato(resultset.getInt("contato"));
 				list.add(user);
             } 
 			resultset.close();
