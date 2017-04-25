@@ -188,12 +188,12 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Submission submission;
-				boolean validacao = RiSEEventMainScreenP.facade.isThereReviewer(Integer.valueOf(textFieldUserId.getText()));
+				boolean validacao = {{systemName}}ScreenP.facade.isThereReviewer(Integer.valueOf(textFieldUserId.getText()));
 				if(validacao == true){
-					List<Assignment> assignments = RiSEEventMainScreenP.facade.getAssignments();
+					List<Assignment> assignments = {{systemName}}ScreenP.facade.getAssignments();
 					for(Assignment a : assignments){
 						if(textFieldUserId.getText().equals(a.getIdReviwerUser())){
-							submission = RiSEEventMainScreenP.facade.searchSubmission(a.getIdReviewSubmission());
+							submission = {{systemName}}ScreenP.facade.searchSubmission(a.getIdReviewSubmission());
 							submissionComboBox.addItem(String.valueOf(submission.getTitle()));
 						}
 					 
@@ -255,12 +255,12 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 						review.setDate(date);
 						review.setDescription(description);
 						review.setStatus(StatusReview.valueOf(status));
-						review.setIdSubmission(RiSEEventMainScreenP.facade.getSubmissionIdByTitle(titleSubmission));
+						review.setIdSubmission({{systemName}}ScreenP.facade.getSubmissionIdByTitle(titleSubmission));
 						int round = verificarRound(); 
 						review.setRound(round + 1);
 						review.setResult(resultado);
 						
-						RiSEEventMainScreenP.facade.updateReview(review);
+						{{systemName}}ScreenP.facade.updateReview(review);
 						enviarEmails(review);
 
 					} catch (ReviewAlreadyInsertedException e1) {
@@ -292,8 +292,8 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 		int round = 0;
 		title = submissionComboBox.getSelectedItem().toString();
 		try {
-			int submissionid = RiSEEventMainScreenP.facade.getSubmissionIdByTitle(title);
-			reviews = RiSEEventMainScreenP.facade.getReviews();
+			int submissionid = {{systemName}}ScreenP.facade.getSubmissionIdByTitle(title);
+			reviews = {{systemName}}ScreenP.facade.getReviews();
 			for(Review r : reviews){
 				if(submissionid == r.getIdSubmission()){
 					round = r.getRound();
@@ -313,10 +313,10 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 	public void enviarEmails(Review review){
 		Email email = new Email();
 		try {
-			Submission submission = RiSEEventMainScreenP.facade.searchSubmission(review.getIdSubmission());
+			Submission submission = {{systemName}}ScreenP.facade.searchSubmission(review.getIdSubmission());
 //			Author author = pegarAuthorSubmission(submission);
-			User user = RiSEEventMainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
-			RiSEEventMainScreenP.facade.emailRoundNotification(review, user, email);
+			User user = {{systemName}}ScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
+			{{systemName}}ScreenP.facade.emailRoundNotification(review, user, email);
 			
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -355,7 +355,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 //		SubmissionAuthor authorSubmission = new SubmissionAuthor();
 //		List<SubmissionAuthor> submissionAuthorList = null;
 //		try {
-//			submissionAuthorList = RiSEEventMainScreenP.facade.getSubmissionAuthors();
+//			submissionAuthorList = {{systemName}}ScreenP.facade.getSubmissionAuthors();
 //		} catch (RepositoryException e) {
 //			JOptionPane.showMessageDialog(getContentPane(),
 //					e.toString(), "Erro",
@@ -370,9 +370,9 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 //			authorSubmission.setIdAuthor(submissionAuthor.getIdAuthor());
 //			boolean bool;
 //			try {
-//				bool = RiSEEventMainScreenP.facade.isThereSubmissionAuthor(authorSubmission);
+//				bool = {{systemName}}ScreenP.facade.isThereSubmissionAuthor(authorSubmission);
 //				if(bool == true){
-//					authorResult = RiSEEventMainScreenP.facade.searchAuthor(authorSubmission.getIdAuthor());
+//					authorResult = {{systemName}}ScreenP.facade.searchAuthor(authorSubmission.getIdAuthor());
 //					break;
 //				}
 //			} catch (RepositoryException e) {

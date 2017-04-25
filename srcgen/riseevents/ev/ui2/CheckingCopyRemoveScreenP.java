@@ -103,13 +103,13 @@ public class CheckingCopyRemoveScreenP extends JInternalFrame {
 			int idActivity = Integer.valueOf(textFieldActivityId.getText());
 			
 			try {
-				if (RiSEEventMainScreenP.facade.searchActivity(idActivity) == null){
+				if (RiseEventsScreenP.facade.searchActivity(idActivity) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Activity não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					RiSEEventMainScreenP.facade.removeActivity(idActivity);
+					RiseEventsScreenP.facade.removeActivity(idActivity);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

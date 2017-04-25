@@ -122,7 +122,7 @@ public class ActivityRepositoryBDR implements ActivityRepository {
     			activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
     		{% endif %}
     		{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				activity.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				activity.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}
             } else {
             	throw new ActivityNotFoundException(idActivity);
@@ -165,7 +165,7 @@ public class ActivityRepositoryBDR implements ActivityRepository {
     			activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
     		{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				activity.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				activity.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}	
 				list.add(activity);
             } 
@@ -330,10 +330,10 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	            	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
 	            	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));			
 				{% if data.option.categories|length > 0 %}
-					activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(getString("type{{data.option.entity}}")));						    	    
+					activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));						    	    
 				{% endif %}
 				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-					activity.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+					activity.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 				{% endfor %}{% endif %}	
 					list.add(activity);
 	            } 

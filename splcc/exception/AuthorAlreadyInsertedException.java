@@ -1,8 +1,8 @@
 //#if ${InsertAuthors} == "T"
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class AuthorAlreadyInsertedException extends Exception {
-import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 	private int idAuthor;
 

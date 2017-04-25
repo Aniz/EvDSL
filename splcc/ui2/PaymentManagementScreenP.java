@@ -230,7 +230,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		
 		List<Registration> registrations = new ArrayList<Registration>();
 		try {
-			registrations = RiSEEventMainScreenP.facade.getRegistrations();
+			registrations = {{systemName}}ScreenP.facade.getRegistrations();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",
@@ -248,7 +248,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			PaymentTableModel model;
-			model = new PaymentTableModel(RiSEEventMainScreenP.facade.getPayments());
+			model = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -321,7 +321,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		
 		public void acaoType(Payment paymentout) throws DocumentException, IOException{
 			Payment payment = new Payment();
-			RiSEEventMainScreenP.facade.typePayment(payment, paymentout);
+			{{systemName}}ScreenP.facade.typePayment(payment, paymentout);
 			
 		}		
 		
@@ -363,8 +363,8 @@ public class PaymentManagementScreenP extends JInternalFrame{
 						payment.setStatus(StatusPayment.valueOf(status));
 						payment.setValue(value);
 						
-						RiSEEventMainScreenP.facade.insertPayment(payment); 
-						PaymentTableModel model = new PaymentTableModel(RiSEEventMainScreenP.facade.getPayments());
+						{{systemName}}ScreenP.facade.insertPayment(payment); 
+						PaymentTableModel model = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments());
 							
 						acaoType(payment);
 						
@@ -441,9 +441,9 @@ public class PaymentManagementScreenP extends JInternalFrame{
 						
 						try {
 							
-							RiSEEventMainScreenP.facade.updatePayment(payment);
+							{{systemName}}ScreenP.facade.updatePayment(payment);
 							PaymentTableModel model;
-							model = new PaymentTableModel(RiSEEventMainScreenP.facade.getPayments());
+							model = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments());
 							table.setModel(model);
 						} catch (PaymentNotFoundException e1) {
 							JOptionPane
@@ -479,7 +479,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				Payment payment = null;
 
 				try {
-					payment=  new PaymentTableModel(RiSEEventMainScreenP.facade.getPayments()).get(rowIndex);
+					payment=  new PaymentTableModel({{systemName}}ScreenP.facade.getPayments()).get(rowIndex);
 				
 					
 					comboBoxIdRegistration.setSelectedItem(String.valueOf(payment.getIdRegistration()));
@@ -511,8 +511,8 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				}
 				
 				try {
-					Payment payment = new PaymentTableModel(RiSEEventMainScreenP.facade.getPayments()).get(rowIndex);
-					RiSEEventMainScreenP.facade.removePayment(payment.getIdPayment());
+					Payment payment = new PaymentTableModel({{systemName}}ScreenP.facade.getPayments()).get(rowIndex);
+					{{systemName}}ScreenP.facade.removePayment(payment.getIdPayment());
 					PaymentTableModel model = (PaymentTableModel) table.getModel();
 					model.removePayment(rowIndex);
 					table.setModel(model);

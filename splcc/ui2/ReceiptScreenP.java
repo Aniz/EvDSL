@@ -207,7 +207,7 @@ public class ReceiptScreenP extends JInternalFrame{
 			
 			try {
 				
-				payment = RiSEEventMainScreenP.facade.searchPayment(receipt2.getIdPayment());
+				payment = {{systemName}}ScreenP.facade.searchPayment(receipt2.getIdPayment());
 				receipt.gerarRecibo(payment);
 			} catch (PaymentNotFoundException | RepositoryException
 					| PaymentAlreadyInsertedException e1) {
@@ -231,7 +231,7 @@ public class ReceiptScreenP extends JInternalFrame{
 			Receipt receipt = null;
 
 			try {
-				receipt=  new ReceiptTableModel(RiSEEventMainScreenP.facade.getReceipts()).get(rowIndex);
+				receipt=  new ReceiptTableModel({{systemName}}ScreenP.facade.getReceipts()).get(rowIndex);
 			
 				lblLastReceiptId.setText(String.valueOf(receipt.getIdReceipt()));
 				comboBoxIdPayment.setSelectedItem(String.valueOf(receipt.getIdPayment()));
@@ -260,8 +260,8 @@ public class ReceiptScreenP extends JInternalFrame{
 			}
 			
 			try {
-				Receipt payment = new ReceiptTableModel(RiSEEventMainScreenP.facade.getReceipts()).get(rowIndex);
-				RiSEEventMainScreenP.facade.removeReceipt(payment.getIdReceipt());
+				Receipt payment = new ReceiptTableModel({{systemName}}ScreenP.facade.getReceipts()).get(rowIndex);
+				{{systemName}}ScreenP.facade.removeReceipt(payment.getIdReceipt());
 				ReceiptTableModel model = (ReceiptTableModel) table.getModel();
 				model.removeReceipt(rowIndex);
 				table.setModel(model);
@@ -318,7 +318,7 @@ public class ReceiptScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			ReceiptTableModel model;
-			model = new ReceiptTableModel(RiSEEventMainScreenP.facade.getReceipts());
+			model = new ReceiptTableModel({{systemName}}ScreenP.facade.getReceipts());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -330,7 +330,7 @@ public class ReceiptScreenP extends JInternalFrame{
 	
 	private void carregarComboBoxIdPayment(){
 			try {
-				List<Receipt> list = RiSEEventMainScreenP.facade.getReceipts();
+				List<Receipt> list = {{systemName}}ScreenP.facade.getReceipts();
 				Iterator<Receipt> iterator = list.iterator();
 				while(iterator.hasNext()){
 					comboBoxIdPayment.addItem(iterator.next().getIdReceipt());
@@ -345,7 +345,7 @@ public class ReceiptScreenP extends JInternalFrame{
 	
 	private void loadLastIndex(){
 		try {
-			lblLastReceiptId.setText(String.valueOf(RiSEEventMainScreenP.facade.getReceiptLastId()));
+			lblLastReceiptId.setText(String.valueOf({{systemName}}ScreenP.facade.getReceiptLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

@@ -202,8 +202,8 @@ public class OrganizerInsertScreenP extends JInternalFrame {
 //					user.setEmail(email);
 					
 					try {
-				//		RiSEEventMainScreenP.facade.insertUser(user);
-						RiSEEventMainScreenP.getFacade().insertOrganizer(organizer);
+				//		{{systemName}}ScreenP.facade.insertUser(user);
+						{{systemName}}ScreenP.getFacade().insertOrganizer(organizer);
 					} catch (OrganizerAlreadyInsertedException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								e1.toString(), "Erro",

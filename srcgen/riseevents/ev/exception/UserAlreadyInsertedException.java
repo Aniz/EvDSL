@@ -16,6 +16,6 @@ public class UserAlreadyInsertedException extends Exception {
 	}
 	
 	public String toString(){
-		return EXC_ALREADY_EXISTS;
+		return ExceptionMessages.EXC_ALREADY_EXISTS;
 	}
 }

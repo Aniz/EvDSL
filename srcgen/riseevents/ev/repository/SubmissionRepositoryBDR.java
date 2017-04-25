@@ -47,9 +47,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 	public void insert(Submission submission) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title,typeSubmission,newSubmissionField) Values('"
+			statement.executeUpdate("INSERT INTO submission (idActivity, abstract, keywords, title,typeSubmission,newSubmissionField) Values('"
 				+submission.getIdActivity()
-				+"', '"+submission.getType()
 				+"', '"+ submission.getAbstractPaper() 
 				+"', '" + submission.getKeywords()
 				+ "', '"+submission.getTitle()
@@ -85,8 +84,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setAbstractPaper(resultset.getString("abstract"));
                 submission.setKeywords(resultset.getString("keywords"));
                 submission.setTitle(resultset.getString("title"));
-				submission.setTypeSubmission(TypeSubmission(resultset.getString("typeSubmission")));
-				submission.setnewSubmissionField(resultset.getString("newSubmissionField"));
+				submission.setTypeSubmission(TypeSubmission.valueOf(resultset.getString("typeSubmission")));
+				submission.setNewsubmissionfield(resultset.getString("newSubmissionField"));
 			
            
 				list.add(submission);
@@ -180,7 +179,7 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
 
-            statement.executeUpdate("UPDATE submission SET idActivity = '"+submission.getIdActivity()+"', type = '"+submission.getType()+"', abstract = '"+ submission.getAbstractPaper() +"', keywords = '" + submission.getKeywords()+ "' , title = '" + submission.getTitle()+ "' WHERE idSubmission = '"+ submission.getIdSubmission()+"'");
+            statement.executeUpdate("UPDATE submission SET idActivity = '"+submission.getIdActivity()+"', abstract = '"+ submission.getAbstractPaper() +"', keywords = '" + submission.getKeywords()+ "' , title = '" + submission.getTitle()+ "' WHERE idSubmission = '"+ submission.getIdSubmission()+"'");
             	
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -235,8 +234,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setAbstractPaper(resultset.getString("abstract"));
                 submission.setKeywords(resultset.getString("keywords"));
                 submission.setTitle(resultset.getString("title"));
-				submission.setTypeSubmission(TypeSubmission(resultset.getString("typeSubmission")));
-				submission.setnewSubmissionField(resultset.getString("newSubmissionField"));
+				submission.setTypeSubmission(TypeSubmission.valueOf(resultset.getString("typeSubmission")));
+				submission.setNewsubmissionfield(resultset.getString("newSubmissionField"));
 			
            
             } else {

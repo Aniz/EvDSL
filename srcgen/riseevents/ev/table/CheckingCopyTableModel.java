@@ -46,7 +46,7 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_DATE) {
 					return checkingCopy.getDateOfIssue();
 				} else if (columnIndex == COL_TYPE) {
-					return checkingCopy.getCheckingCopyType();
+					return checkingCopy.getTypeCheckingCopy();
 				} 
 				return null;
 			}
@@ -110,7 +110,7 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 			}
 			
 			public void alterarCheckingCopy(int indiceLinha, CheckingCopy checkingCopy) {
-				rows.get(indiceLinha).setCheckingCopyType(checkingCopy.getCheckingCopyType());
+				rows.get(indiceLinha).setTypeCheckingCopy(checkingCopy.getTypeCheckingCopy());
 				rows.get(indiceLinha).setDateOfIssue(checkingCopy.getDateOfIssue());
 				rows.get(indiceLinha).setIdRegistration(checkingCopy.getIdRegistration());	
 				fireTableDataChanged();

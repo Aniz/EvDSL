@@ -196,31 +196,31 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 			
 			try {
 				
-				user =  new UserTableModel(RiSEEventMainScreenP.facade.getUsers()).get(rowIndex);
-				int idActivity = RiSEEventMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				user =  new UserTableModel(RiseEventsScreenP.facade.getUsers()).get(rowIndex);
+				int idActivity = RiseEventsScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				//Verificando se o numero de registration é maior que o numero de participantes atual
-				activity = RiSEEventMainScreenP.facade.searchActivity(idActivity);
+				activity = RiseEventsScreenP.facade.searchActivity(idActivity);
 				if(activity.getNumberOfParticipants() < activity.getRegistrationLimit()){
 					//Criando ActivityUser
 					ActivityUser activityUser = new ActivityUser();
 					activityUser.setIdActivity(idActivity);
 					activityUser.setIdUser(user.getIdUser());
 					//Inserindo na tabela
-					RiSEEventMainScreenP.facade.insertActivityUser(activityUser);		
+					RiseEventsScreenP.facade.insertActivityUser(activityUser);		
 					//Atualizando a tabela
 					ActivityUserTableModel model;
-					model = new ActivityUserTableModel(RiSEEventMainScreenP.facade.getActivitiesUsersById(idActivity));
+					model = new ActivityUserTableModel(RiseEventsScreenP.facade.getActivitiesUsersById(idActivity));
 					tableUserActivity.setModel(model);  		
 					// Incrementando numero de participantes
 					activity.setNumberOfParticipants(activity.getNumberOfParticipants() + 1);
-					RiSEEventMainScreenP.facade.updateActivity(activity);
+					RiseEventsScreenP.facade.updateActivity(activity);
 					atualizarNumeroParticipantes();
 					// Atualizando valor no registration quando uma atividade é adicionada
-					int idEvent = RiSEEventMainScreenP.getFacade().getEventbyActivity(idActivity);
+					int idEvent = RiseEventsScreenP.getFacade().getEventbyActivity(idActivity);
 					int idUser = user.getIdUser();
-					int idRegistration = RiSEEventMainScreenP.getFacade().searchRegistration(idUser, idEvent);
+					int idRegistration = RiseEventsScreenP.getFacade().searchRegistration(idUser, idEvent);
 					
-					RiSEEventMainScreenP.getFacade().addValue(activity.getValue(),idRegistration);
+					RiseEventsScreenP.getFacade().addValue(activity.getValue(),idRegistration);
 				}else{
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Activity has no vacancy .", "Erro",
@@ -267,25 +267,25 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 			ActivityUser activityUser = null;
 			Activity activity = null;
 			try {
-				activityUser = new ActivityUserTableModel(RiSEEventMainScreenP.facade.getActivitiesUsers()).get(rowIndex);
-				RiSEEventMainScreenP.facade.removeActivityUser(activityUser);
+				activityUser = new ActivityUserTableModel(RiseEventsScreenP.facade.getActivitiesUsers()).get(rowIndex);
+				RiseEventsScreenP.facade.removeActivityUser(activityUser);
 				//Atualizando a tabela
 				int idActivity;
-				idActivity = RiSEEventMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				idActivity = RiseEventsScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				ActivityUserTableModel model;
-				model = new ActivityUserTableModel(RiSEEventMainScreenP.facade.getActivitiesUsersById(idActivity));
+				model = new ActivityUserTableModel(RiseEventsScreenP.facade.getActivitiesUsersById(idActivity));
 				tableUserActivity.setModel(model);	
 				// Decrementando numero de participantes
-				activity = RiSEEventMainScreenP.facade.searchActivity(idActivity);
+				activity = RiseEventsScreenP.facade.searchActivity(idActivity);
 				activity.setNumberOfParticipants(activity.getNumberOfParticipants() -1);
-				RiSEEventMainScreenP.facade.updateActivity(activity);
+				RiseEventsScreenP.facade.updateActivity(activity);
 				atualizarNumeroParticipantes();
 				// Atualizando valor no registration quando uma atividade é removida
-				int idEvent = RiSEEventMainScreenP.getFacade().getEventbyActivity(idActivity);
+				int idEvent = RiseEventsScreenP.getFacade().getEventbyActivity(idActivity);
 				int idUser = activityUser.getIdUser();
-				int idRegistration = RiSEEventMainScreenP.getFacade().searchRegistration(idUser, idEvent);
+				int idRegistration = RiseEventsScreenP.getFacade().searchRegistration(idUser, idEvent);
 				
-				RiSEEventMainScreenP.getFacade().removeValue(activity.getValue(),idRegistration);
+				RiseEventsScreenP.getFacade().removeValue(activity.getValue(),idRegistration);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -332,10 +332,10 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 					return;
 				// buscando atividade com base no nome
 				int i;
-				i = RiSEEventMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				i = RiseEventsScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				//Atualizando a tabela
 				ActivityUserTableModel model;
-				model = new ActivityUserTableModel(RiSEEventMainScreenP.facade.getActivitiesUsersById(i));
+				model = new ActivityUserTableModel(RiseEventsScreenP.facade.getActivitiesUsersById(i));
 				tableUserActivity.setModel(model);
 				
 			} catch (RepositoryException e1) {
@@ -358,7 +358,7 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 				// buscando atividade com base no nome
 				List<Activity> activities;
 				List<String> nameActivities = new ArrayList<String>();
-				activities = RiSEEventMainScreenP.facade.getActivitiesByEvent(RiSEEventMainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
+				activities = RiseEventsScreenP.facade.getActivitiesByEvent(RiseEventsScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
 				comboBoxActivity.removeAllItems();
 				//Passando de lista de atividades para lista de nome de atividades
 				Iterator<Activity> iteratorActivity = activities.iterator();
@@ -383,7 +383,7 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 	private void populateTableUsers(){
 		try {
 			UserTableModel model;
-			model = new UserTableModel(RiSEEventMainScreenP.facade.getUsers());
+			model = new UserTableModel(RiseEventsScreenP.facade.getUsers());
 
 			tableUsers.setModel(model);
 			
@@ -397,7 +397,7 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiSEEventMainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -415,8 +415,8 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 		int IdActivity;
 		try {
 			
-			IdActivity = RiSEEventMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
-			Activity activity = RiSEEventMainScreenP.facade.searchActivity(IdActivity);
+			IdActivity = RiseEventsScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+			Activity activity = RiseEventsScreenP.facade.searchActivity(IdActivity);
 			lblNOfParticipants.setText(String.valueOf(activity.getNumberOfParticipants()));
 			lblLimit.setText(String.valueOf(activity.getRegistrationLimit()));
 		} catch (RepositoryException e) {

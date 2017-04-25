@@ -120,7 +120,7 @@ public class PaymentSearchScreenP extends JInternalFrame {
 			int idPayment =Integer.valueOf( textFieldIdPayment.getText());
 			
 			try {
-				payment = RiSEEventMainScreenP.facade.searchPayment(idPayment);
+				payment = {{systemName}}ScreenP.facade.searchPayment(idPayment);
 				textArea.setText("");
 				textArea.append(payment.toString());
 			} catch (PaymentNotFoundException e1) {

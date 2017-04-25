@@ -1,9 +1,8 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
 package {{systemName|lower}}.ev.exception;
-
-public class CheckingCopyAlreadyInsertedException extends Exception {
 import {{systemName|lower}}.ev.util.ExceptionMessages;
 
+public class CheckingCopyAlreadyInsertedException extends Exception {
 	private int idCheckingCopy;
 
 	public CheckingCopyAlreadyInsertedException(int idCheckingCopy) {

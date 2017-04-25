@@ -43,10 +43,9 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 	public void insert(Payment payment) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
+			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, barcode, date, value, status{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
 				+payment.getIdPayment()
 				+ "', '"+payment.getIdRegistration()
-				+ "', '"+payment.getPaymentType()
 				+ "', '"+payment.getBarcode()
 				+ "', '"+payment.getDate()
 				+ "', '"+payment.getValue() 
@@ -86,7 +85,6 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                 payment = new Payment();
                 payment.setIdPayment(resultset.getInt("idPayment"));
                 payment.setIdRegistration(resultset.getInt("idRegistration"));
-                payment.setPaymentType(TypePayment.valueOf(resultset.getString("paymentType")));
                 payment.setStatus(StatusPayment.valueOf(resultset.getString("status")));
                 payment.setDate(resultset.getString("date"));
                 payment.setValue(resultset.getFloat("value"));
@@ -95,7 +93,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
             	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
             {% endif %}
             {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}
           
 				list.add(payment);
@@ -166,8 +164,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
 
-    	    statement.executeUpdate("UPDATE payment SET paymentType = '"+ payment.getPaymentType() +
-    	    		                                 "', status = '"+ payment.getStatus() + 
+    	    statement.executeUpdate("UPDATE payment SET status = '"+ payment.getStatus() + 
     	    		                                 "', barcode = '"+ payment.getBarcode()+ 
     	    		                                 "', date = '"+ payment.getDate() + 
     	    		                                 "', value = '"+ payment.getValue() +
@@ -236,7 +233,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
             	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
             {% endif %}
             {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}
            
             } else {

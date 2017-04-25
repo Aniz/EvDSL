@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import {{systemName|lower}}.ev.exception.PaymentAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
 import {{systemName|lower}}.ev.exception.RepositoryException;
-import {{systemName|lower}}.ev.ui2.RiSEEventMainScreenP;
+import {{systemName|lower}}.ev.ui2.{{systemName}}ScreenP;
 
 import com.itextpdf.text.Element;
 import com.lowagie.text.Document;

@@ -104,7 +104,7 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
             	assignment.setTypeAssignment(TypeAssignment.valueOf(resultset.getString("typeAssignment")));
-				assignment.setNewassigmentfield(resultset.getString("newAssigmentField"));
+				assignment.setNewassigmentfield(resultset.getint("newAssigmentField"));
             	
             } else {
             	throw new AssignmentNotFoundException(assignment.getIdReview());
@@ -139,7 +139,7 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setDate(resultset.getString("date"));
             	assignment.setTypeAssignment(TypeAssignment.valueOf(resultset.getString("typeAssignment")));
      
-				assignment.setNewassigmentfield(resultset.getString("newAssigmentField"));
+				assignment.setNewassigmentfield(resultset.getint("newAssigmentField"));
 			
 				list.add(assignment);
             } 

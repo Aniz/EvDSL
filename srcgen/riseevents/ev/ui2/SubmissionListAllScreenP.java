@@ -71,7 +71,7 @@ public class SubmissionListAllScreenP extends JInternalFrame {
 		BackButtonAction backAction = new BackButtonAction();
 		
 		try {
-			model = new SubmissionTableModel(RiSEEventMainScreenP.facade.getSubmissions());
+			model = new SubmissionTableModel(RiseEventsScreenP.facade.getSubmissions());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

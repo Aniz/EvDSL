@@ -1,9 +1,8 @@
 //#if ${InsertAuthors} == "T"
 package {{systemName|lower}}.ev.exception;
-
-public class AuthorNotFoundException extends Exception {
 import {{systemName|lower}}.ev.util.ExceptionMessages;
 
+public class AuthorNotFoundException extends Exception {
     private int idAuthor;
 
     public AuthorNotFoundException(int idAuthor){

@@ -107,7 +107,7 @@ public class UserRemoveScreenP extends JInternalFrame {
 			
 			try {
 				
-					RiSEEventMainScreenP.facade.removeUser(idUser);
+					RiseEventsScreenP.facade.removeUser(idUser);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
 			} catch (HeadlessException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),

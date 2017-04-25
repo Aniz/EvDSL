@@ -195,7 +195,7 @@ public class BugtrackScreenP extends JInternalFrame {
 			String mensagem = textFieldTitulo.getText() + "\n\n" + textPaneObservacoes.getText() + "\n\n\n" + textFieldNome.getText() + "\n" + "Resacher in " + textFieldArea.getText() + "\n" + comboBoxEscolaridade.getSelectedItem().toString() + " - " + textFieldEmail.getText() ; 
 			
 			try {
-				String msg = RiSEEventMainScreenP.facade.sendBug(nome, assunto, mensagem, email);
+				String msg = {{systemName}}ScreenP.facade.sendBug(nome, assunto, mensagem, email);
 				JOptionPane.showMessageDialog(getContentPane(),
 						msg.toString(), "SUCESSO",
 						JOptionPane.INFORMATION_MESSAGE);

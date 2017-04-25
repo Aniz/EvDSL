@@ -119,7 +119,7 @@ public class ReviewSearchScreenP extends JInternalFrame {
 			int idReview =Integer.valueOf( textFieldIdReview.getText());
 			
 			try {
-				review = RiSEEventMainScreenP.facade.searchReview(idReview);
+				review = {{systemName}}ScreenP.facade.searchReview(idReview);
 				textArea.setText("");
 				textArea.append(review.toString());
 			} catch (ReviewNotFoundException e1) {

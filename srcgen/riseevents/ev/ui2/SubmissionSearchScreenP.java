@@ -121,7 +121,7 @@ public class SubmissionSearchScreenP extends JInternalFrame {
 			int idSubmission =Integer.valueOf( textFieldIdSubmission.getText());
 			
 			try {
-				submission = RiSEEventMainScreenP.facade.searchSubmission(idSubmission);
+				submission = RiseEventsScreenP.facade.searchSubmission(idSubmission);
 				textArea.setText("");
 				textArea.append(submission.toString());
 			} catch (SubmissionNotFoundException e1) {

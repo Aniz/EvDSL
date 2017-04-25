@@ -133,7 +133,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 		
 		
 		try {
-			lblNewLabel.setText(String.valueOf(RiSEEventMainScreenP.facade.getCheckingCopyLastId()));
+			lblNewLabel.setText(String.valueOf({{systemName}}ScreenP.facade.getCheckingCopyLastId()));
 			
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -178,8 +178,8 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 	
 	private void setarNomeUsuarioByRegistration(){
 		try {
-			Registration registration = RiSEEventMainScreenP.facade.searchRegistration(Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString()));
-			User user = RiSEEventMainScreenP.facade.searchUser(registration.getIdUser());
+			Registration registration = {{systemName}}ScreenP.facade.searchRegistration(Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString()));
+			User user = {{systemName}}ScreenP.facade.searchUser(registration.getIdUser());
 			comboBoxUserId.setSelectedItem(user.getNameUser());
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -222,8 +222,8 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 			Registration registration = null;
 			User user = null;
 			try {
-				registration = RiSEEventMainScreenP.facade.searchRegistration(Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString()));
-				user = RiSEEventMainScreenP.facade.searchUser(registration.getIdUser());
+				registration = {{systemName}}ScreenP.facade.searchRegistration(Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString()));
+				user = {{systemName}}ScreenP.facade.searchUser(registration.getIdUser());
 			} catch (NumberFormatException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e.toString(), "Erro",
@@ -275,7 +275,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 						checkingCopy.setDateOfIssue(date);
 						checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(type));
 				
-						RiSEEventMainScreenP.facade.insertCheckingCopy(checkingCopy);
+						{{systemName}}ScreenP.facade.insertCheckingCopy(checkingCopy);
 
 
 					} catch (CheckingCopyAlreadyInsertedException e1) {
@@ -298,7 +298,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 	
 	private void carregarRegistrationComboBox(){
 		try {
-			List<Registration> list = RiSEEventMainScreenP.facade.getRegistrations();
+			List<Registration> list = {{systemName}}ScreenP.facade.getRegistrations();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistrationId.addItem(iterator.next().getIdRegistration());
@@ -313,7 +313,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = RiSEEventMainScreenP.facade.getUsers();
+			List<User> list = {{systemName}}ScreenP.facade.getUsers();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUserId.addItem(iterator.next().getNameUser());

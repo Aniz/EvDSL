@@ -103,13 +103,13 @@ public class ReviewRemoveScreenP extends JInternalFrame {
 			int idReview = Integer.valueOf(textFieldReviewId.getText());
 			
 			try {
-				if (RiSEEventMainScreenP.facade.searchReview(idReview) == null){
+				if ({{systemName}}ScreenP.facade.searchReview(idReview) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Review não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					RiSEEventMainScreenP.facade.removeReview(idReview);
+					{{systemName}}ScreenP.facade.removeReview(idReview);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

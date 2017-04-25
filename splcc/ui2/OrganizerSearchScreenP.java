@@ -125,8 +125,8 @@ public class OrganizerSearchScreenP extends JInternalFrame {
 			int idUser =Integer.valueOf(textFieldOrganizerId.getText());
 			
 			try {
-				organizer = RiSEEventMainScreenP.facade.searchOrganizer(idUser);
-				//user = RiSEEventMainScreenP.facade.searchUser(idUser);
+				organizer = {{systemName}}ScreenP.facade.searchOrganizer(idUser);
+				//user = {{systemName}}ScreenP.facade.searchUser(idUser);
 				textArea.setText("");
 				//textArea.append(user.toString() + organizer.toString());
 				textArea.append(organizer.toString());

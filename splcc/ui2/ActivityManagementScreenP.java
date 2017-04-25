@@ -327,7 +327,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 				}else{
 					try {
 						activity = new Activity();
-						activity.setIdEvent(RiSEEventMainScreenP.facade.getEventIdByName(nameEvent));
+						activity.setIdEvent({{systemName}}ScreenP.facade.getEventIdByName(nameEvent));
 						activity.setNameActivity(nameActivity);
 						activity.setDescriptionActivity(descriptionActivity);
 						activity.setTypeActivity(TypeActivity.valueOf(activityType));
@@ -338,11 +338,11 @@ public class ActivityManagementScreenP extends JInternalFrame {
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
 
-						ActivityTableModel model = new ActivityTableModel(RiSEEventMainScreenP.facade.getActivities());	
+						ActivityTableModel model = new ActivityTableModel({{systemName}}ScreenP.facade.getActivities());	
 						model.addActivity(activity);
 						table.setModel(model);
 
-						RiSEEventMainScreenP.facade.insertActivity(activity);
+						{{systemName}}ScreenP.facade.insertActivity(activity);
 
 
 					} catch (ActivityAlreadyInsertedException e1) {
@@ -376,8 +376,8 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			}
 			
 			try {
-				Activity activity = new ActivityTableModel(RiSEEventMainScreenP.facade.getActivities()).get(rowIndex);
-				RiSEEventMainScreenP.facade.removeActivity(activity.getIdActivity());
+				Activity activity = new ActivityTableModel({{systemName}}ScreenP.facade.getActivities()).get(rowIndex);
+				{{systemName}}ScreenP.facade.removeActivity(activity.getIdActivity());
 				ActivityTableModel model = (ActivityTableModel) table.getModel();
 				model.removeActivity(rowIndex);
 				table.setModel(model);
@@ -439,7 +439,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 				} else {
 					activity = new Activity();
 					activity.setIdActivity(Integer.parseInt(lblLastIdActivity.getText()));
-					activity.setIdEvent(RiSEEventMainScreenP.facade.getEventIdByName(nameEvent));
+					activity.setIdEvent({{systemName}}ScreenP.facade.getEventIdByName(nameEvent));
 					activity.setNameActivity(nameActivity);
 					activity.setDescriptionActivity(descriptionActivity);
 					activity.setTypeActivity(TypeActivity.valueOf(activityType));
@@ -453,9 +453,9 @@ public class ActivityManagementScreenP extends JInternalFrame {
 					
 					try {
 						
-						RiSEEventMainScreenP.facade.updateActivity(activity);
+						{{systemName}}ScreenP.facade.updateActivity(activity);
 						ActivityTableModel model;
-						model = new ActivityTableModel(RiSEEventMainScreenP.facade.getActivities());
+						model = new ActivityTableModel({{systemName}}ScreenP.facade.getActivities());
 						table.setModel(model);
 					} catch (ActivityNotFoundException e1) {
 						JOptionPane
@@ -491,10 +491,10 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			Activity activity = null;
 
 			try {
-				activity=  new ActivityTableModel(RiSEEventMainScreenP.facade.getActivities()).get(rowIndex);
+				activity=  new ActivityTableModel({{systemName}}ScreenP.facade.getActivities()).get(rowIndex);
 			
 				lblLastIdActivity.setText(String.valueOf(activity.getIdActivity()));
-				comboBoxEvent.setSelectedItem(RiSEEventMainScreenP.facade.searchEvent(activity.getIdEvent()).getEventName());
+				comboBoxEvent.setSelectedItem({{systemName}}ScreenP.facade.searchEvent(activity.getIdEvent()).getEventName());
 				textFieldActivityName.setText(activity.getNameActivity());
 				textFieldDescription.setText(activity.getDescriptionActivity());
 				comboBoxActivityType.setSelectedItem(activity.getTypeActivity().toString());
@@ -544,7 +544,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiSEEventMainScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}ScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -559,7 +559,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 	
 	private void carregarLastId(){
 		try {
-			lblLastIdActivity.setText(String.valueOf(RiSEEventMainScreenP.facade.getActivityLastId()));
+			lblLastIdActivity.setText(String.valueOf({{systemName}}ScreenP.facade.getActivityLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -572,7 +572,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		
 		try {
 			ActivityTableModel model;
-			model = new ActivityTableModel(RiSEEventMainScreenP.facade.getActivities());	
+			model = new ActivityTableModel({{systemName}}ScreenP.facade.getActivities());	
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			e.printStackTrace();

@@ -41,10 +41,9 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 	public void insert(Payment payment) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, paymentType, barcode, date, value, status,typePayment,ooii) Values('"
+			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, barcode, date, value, status,typePayment,ooii) Values('"
 				+payment.getIdPayment()
 				+ "', '"+payment.getIdRegistration()
-				+ "', '"+payment.getPaymentType()
 				+ "', '"+payment.getBarcode()
 				+ "', '"+payment.getDate()
 				+ "', '"+payment.getValue() 
@@ -82,7 +81,6 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                 payment = new Payment();
                 payment.setIdPayment(resultset.getInt("idPayment"));
                 payment.setIdRegistration(resultset.getInt("idRegistration"));
-                payment.setPaymentType(TypePayment.valueOf(resultset.getString("paymentType")));
                 payment.setStatus(StatusPayment.valueOf(resultset.getString("status")));
                 payment.setDate(resultset.getString("date"));
                 payment.setValue(resultset.getFloat("value"));
@@ -158,8 +156,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
 
-    	    statement.executeUpdate("UPDATE payment SET paymentType = '"+ payment.getPaymentType() +
-    	    		                                 "', status = '"+ payment.getStatus() + 
+    	    statement.executeUpdate("UPDATE payment SET status = '"+ payment.getStatus() + 
     	    		                                 "', barcode = '"+ payment.getBarcode()+ 
     	    		                                 "', date = '"+ payment.getDate() + 
     	    		                                 "', value = '"+ payment.getValue() +

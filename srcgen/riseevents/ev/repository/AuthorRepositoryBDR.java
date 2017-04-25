@@ -99,8 +99,8 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));
-				author.getTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
-				author.getLattes(resultset.getString("lattes"));   
+				author.setTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
+				author.setLattes(resultset.getString("lattes"));   
 					        
 				  } else {
             	throw new AuthorNotFoundException(idAuthor);
@@ -133,8 +133,8 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));				
-				author.getTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
-				author.getLattes(resultset.getString("lattes"));   
+				author.setTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
+				author.setLattes(resultset.getString("lattes"));   
 					        
 				list.add(author);
             } 

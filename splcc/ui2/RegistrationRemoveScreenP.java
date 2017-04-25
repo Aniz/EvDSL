@@ -102,13 +102,13 @@ public class RegistrationRemoveScreenP extends JInternalFrame {
 			int idRegistration = Integer.valueOf(textFieldRegistrationId.getText());
 			
 			try {
-				if (RiSEEventMainScreenP.facade.searchRegistration(idRegistration) == null){
+				if ({{systemName}}ScreenP.facade.searchRegistration(idRegistration) == null){
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Registration não existe.", "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					RiSEEventMainScreenP.facade.removeRegistration(idRegistration);
+					{{systemName}}ScreenP.facade.removeRegistration(idRegistration);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

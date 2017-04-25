@@ -70,7 +70,7 @@ public class ActivityListAllScreenP extends JInternalFrame {
 		BackButtonAction backAction = new BackButtonAction();
 		
 		try {
-			model = new ActivityTableModel(RiSEEventMainScreenP.facade.getActivities());
+			model = new ActivityTableModel({{systemName}}ScreenP.facade.getActivities());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

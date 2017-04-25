@@ -262,7 +262,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		
 		try {
 			AssignmentTableModel model;
-			model = new AssignmentTableModel(RiSEEventMainScreenP.facade.getAssignments());	
+			model = new AssignmentTableModel({{systemName}}ScreenP.facade.getAssignments());	
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			e.printStackTrace();
@@ -335,11 +335,11 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				assignment3.setDate(date);
 				
 				int idSubmission;
-				idSubmission = RiSEEventMainScreenP.facade.getSubmissionIdByTitle(idsubmission);
+				idSubmission = {{systemName}}ScreenP.facade.getSubmissionIdByTitle(idsubmission);
 				
 			
 				
-				Submission submission = RiSEEventMainScreenP.facade.searchSubmission(idSubmission);
+				Submission submission = {{systemName}}ScreenP.facade.searchSubmission(idSubmission);
 				assignment1.setIdReviewSubmission(idSubmission);
 				assignment2.setIdReviewSubmission(idSubmission);
 				assignment3.setIdReviewSubmission(idSubmission);
@@ -361,18 +361,18 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				reviewer3 = listaRevisoresSelecionados.get(2);
 				
 
-				RiSEEventMainScreenP.facade.insertReview(review1);
-				int lastIdReview1 = RiSEEventMainScreenP.facade.getReviewLastId();
+				{{systemName}}ScreenP.facade.insertReview(review1);
+				int lastIdReview1 = {{systemName}}ScreenP.facade.getReviewLastId();
 				assignment1.setIdReview(lastIdReview1 - 1);
 				review1.setIdReview(lastIdReview1);
 				
-				RiSEEventMainScreenP.facade.insertReview(review2);
-				int lastIdReview2 = RiSEEventMainScreenP.facade.getReviewLastId();
+				{{systemName}}ScreenP.facade.insertReview(review2);
+				int lastIdReview2 = {{systemName}}ScreenP.facade.getReviewLastId();
 				assignment2.setIdReview(lastIdReview2 - 1);
 				review2.setIdReview(lastIdReview2);
 				
-				RiSEEventMainScreenP.facade.insertReview(review3);
-				int lastIdReview3 = RiSEEventMainScreenP.facade.getReviewLastId();
+				{{systemName}}ScreenP.facade.insertReview(review3);
+				int lastIdReview3 = {{systemName}}ScreenP.facade.getReviewLastId();
 				assignment3.setIdReview(lastIdReview3 - 1);
 				review3.setIdReview(lastIdReview3);
 				
@@ -380,18 +380,18 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				assignment2.setIdReviwerUser(reviewer2.getIdUser());
 				assignment3.setIdReviwerUser(reviewer3.getIdUser());
 				
-				RiSEEventMainScreenP.facade.insertAssignment(assignment1);
-				RiSEEventMainScreenP.facade.insertAssignment(assignment2);
-				RiSEEventMainScreenP.facade.insertAssignment(assignment3);
+				{{systemName}}ScreenP.facade.insertAssignment(assignment1);
+				{{systemName}}ScreenP.facade.insertAssignment(assignment2);
+				{{systemName}}ScreenP.facade.insertAssignment(assignment3);
 				
 				//#if ${InsertAuthors} == "T"
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
-				submissionAuthor = RiSEEventMainScreenP.facade.getSubmissionAuthors();
+				submissionAuthor = {{systemName}}ScreenP.facade.getSubmissionAuthors();
 							
 				for(SubmissionAuthor sa : submissionAuthor){
 					if(sa.getIdSubmission() == idSubmission){
-						author = RiSEEventMainScreenP.facade.searchAuthor(sa.getIdAuthor());
+						author = {{systemName}}ScreenP.facade.searchAuthor(sa.getIdAuthor());
 					}
 				}
 				//#endif
@@ -400,11 +400,11 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				
 				//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
-				submissionUser = RiSEEventMainScreenP.facade.getSubmissionUsers();
+				submissionUser = {{systemName}}ScreenP.facade.getSubmissionUsers();
 							
 				for(SubmissionUser su : submissionUser){
 					if(su.getIdSubmission() == idSubmission){
-						user = RiSEEventMainScreenP.facade.searchUser(su.getIdUser());
+						user = {{systemName}}ScreenP.facade.searchUser(su.getIdUser());
 					}
 				}
 				//#endif
@@ -510,7 +510,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			try {
-				RiSEEventMainScreenP.facade.removeAssignment(assignmentSelecionado);
+				{{systemName}}ScreenP.facade.removeAssignment(assignmentSelecionado);
 				JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 			} catch (AssignmentNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -533,7 +533,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 			int rowIndex = table.getSelectedRow();
 
 			try {
-				assignmentSelecionado =  new AssignmentTableModel(RiSEEventMainScreenP.facade.getAssignments()).get(rowIndex);
+				assignmentSelecionado =  new AssignmentTableModel({{systemName}}ScreenP.facade.getAssignments()).get(rowIndex);
 			} catch (RepositoryException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -545,7 +545,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	private void populateTableReviewer(){
 		try {
 			ReviewerTableModel model;
-			model = new ReviewerTableModel(RiSEEventMainScreenP.facade.getReviewers());
+			model = new ReviewerTableModel({{systemName}}ScreenP.facade.getReviewers());
 
 			tableReviewer.setModel(model);
 			
@@ -559,7 +559,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	
 	private void carregarComboSubmission(){
 		try {
-			List<Submission> submissions = RiSEEventMainScreenP.facade.getSubmissions();
+			List<Submission> submissions = {{systemName}}ScreenP.facade.getSubmissions();
 			Iterator<Submission> iterator = submissions.iterator();
 			while(iterator.hasNext()){
 				comboBoxSubmission.addItem(iterator.next().getTitle());
@@ -581,8 +581,8 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				
 				int idSubmissionSelecionado;
 				
-				idSubmissionSelecionado = RiSEEventMainScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
-				submissionSelecionado = RiSEEventMainScreenP.facade.searchSubmission(idSubmissionSelecionado);
+				idSubmissionSelecionado = {{systemName}}ScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
+				submissionSelecionado = {{systemName}}ScreenP.facade.searchSubmission(idSubmissionSelecionado);
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -608,7 +608,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		Email email = new Email();
 		User user = new User();
 		try {
-			user = RiSEEventMainScreenP.facade.searchUser(reviewer.getIdUser());
+			user = {{systemName}}ScreenP.facade.searchUser(reviewer.getIdUser());
 		} catch (UserNotFoundException e1) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e1.toString(), "Erro",
@@ -627,7 +627,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		}
 		
 		try {
-			RiSEEventMainScreenP.facade.emailNotification(user, review, email);
+			{{systemName}}ScreenP.facade.emailNotification(user, review, email);
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -661,7 +661,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 			
 			try {
 				
-				reviewerRight =  new ReviewerTableModel(RiSEEventMainScreenP.facade.getReviewers()).get(rowIndex);
+				reviewerRight =  new ReviewerTableModel({{systemName}}ScreenP.facade.getReviewers()).get(rowIndex);
 				if(listaRevisoresSelecionados.size() < 3){
 					listaRevisoresSelecionados.add(reviewerRight);
 					ReviewerTableModel model;
@@ -696,11 +696,11 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						JOptionPane.INFORMATION_MESSAGE);
 			}else{
 				try {
-					int subId = RiSEEventMainScreenP.facade.getSubmissionIdByTitle(submissao);
-					Submission sub = RiSEEventMainScreenP.facade.searchSubmission(subId);
+					int subId = {{systemName}}ScreenP.facade.getSubmissionIdByTitle(submissao);
+					Submission sub = {{systemName}}ScreenP.facade.searchSubmission(subId);
 					String keywords = sub.getKeywords();
 					String keywordsSplit[] = keywords.split(Pattern.quote(","));
-					reviewerList = RiSEEventMainScreenP.facade.getReviewers();
+					reviewerList = {{systemName}}ScreenP.facade.getReviewers();
 					boolean flag;
 
 					

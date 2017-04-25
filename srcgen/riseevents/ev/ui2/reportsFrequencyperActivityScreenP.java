@@ -126,9 +126,9 @@ public class FrequencyPerActivityScreenP extends JInternalFrame {
 		public void actionPerformed(ActionEvent e) {
 			int idActivity;
 			try {
-				idActivity = RiSEEventMainScreenP.getFacade().getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
-				Activity activity = RiSEEventMainScreenP.getFacade().searchActivity(idActivity);
-				RiSEEventMainScreenP.getFacade().frequencyPerActivity(participants, activity, comboBoxEvent.getSelectedItem().toString());	
+				idActivity = RiseEventsScreenP.getFacade().getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				Activity activity = RiseEventsScreenP.getFacade().searchActivity(idActivity);
+				RiseEventsScreenP.getFacade().frequencyPerActivity(participants, activity, comboBoxEvent.getSelectedItem().toString());	
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -173,9 +173,9 @@ public class FrequencyPerActivityScreenP extends JInternalFrame {
 					return;
 				// buscando atividade com base no nome
 				int i;
-				i = RiSEEventMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				i = RiseEventsScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				
-				participants = RiSEEventMainScreenP.facade.getParticipantsPerActivity(i);
+				participants = RiseEventsScreenP.facade.getParticipantsPerActivity(i);
 				
 				
 				
@@ -199,7 +199,7 @@ public class FrequencyPerActivityScreenP extends JInternalFrame {
 				// buscando atividade com base no nome
 				List<Activity> activities;
 				List<String> nameActivities = new ArrayList<String>();
-				activities = RiSEEventMainScreenP.facade.getActivitiesByEvent(RiSEEventMainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
+				activities = RiseEventsScreenP.facade.getActivitiesByEvent(RiseEventsScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
 				comboBoxActivity.removeAllItems();
 				//Passando de lista de atividades para lista de nome de atividades
 				Iterator<Activity> iteratorActivity = activities.iterator();
@@ -223,7 +223,7 @@ public class FrequencyPerActivityScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiSEEventMainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

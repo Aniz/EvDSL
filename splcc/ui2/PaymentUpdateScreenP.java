@@ -195,7 +195,7 @@ setTitle("Insert Payment");
 			String date = textFieldDate.getText();
 			
 			try {
-				payment = RiSEEventMainScreenP.facade.searchPayment(idPayment);
+				payment = {{systemName}}ScreenP.facade.searchPayment(idPayment);
 			} catch (PaymentNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -221,8 +221,8 @@ setTitle("Insert Payment");
 			payment.setDate(date);
 			
 			try {
-				RiSEEventMainScreenP.facade.updatePayment(payment);
-				payment = RiSEEventMainScreenP.facade.searchPayment(payment.getIdPayment());
+				{{systemName}}ScreenP.facade.updatePayment(payment);
+				payment = {{systemName}}ScreenP.facade.searchPayment(payment.getIdPayment());
 				textArea.setText("");
 				textArea.append(payment.toString());
 			} catch (PaymentNotFoundException e1) {
@@ -246,7 +246,7 @@ setTitle("Insert Payment");
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Registration> list = RiSEEventMainScreenP.facade.getRegistrations();
+			List<Registration> list = {{systemName}}ScreenP.facade.getRegistrations();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistration.addItem(iterator.next().getIdRegistration());

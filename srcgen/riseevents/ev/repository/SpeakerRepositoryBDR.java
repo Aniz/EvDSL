@@ -110,12 +110,12 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
             	speaker.setEmail(resultset.getString("email"));
             	speaker.setFiliation(resultset.getString("filiation"));
 
-				speaker.setTypeSpeaker(TypeSpeaker(resultset.getString("typeSpeaker")));
-				speaker.setNacionalidade(resultset.getString("nacionalidade"));
+				speaker.setTypeSpeaker(TypeSpeaker.valueOf(resultset.getString("typeSpeaker")));
+				speaker.setNacionalidade(resultset.getint("nacionalidade"));
 			
         
-				speaker.setTypeUser(TypeUser(resultset.getString("typeUser")));
-				speaker.setContato(resultset.getString("contato"));
+				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
+				speaker.setContato(resultset.getint("contato"));
 			
 
             } else {
@@ -152,11 +152,11 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
             	speaker.setEmail(resultset.getString("email"));
             	speaker.setFiliation(resultset.getString("filiation"));
             	speaker.setBiography(resultset.getString("biography"));
-				speaker.setTypeSpeaker(TypeSpeaker(resultset.getString("typeSpeaker")));
+				speaker.setTypeSpeaker(TypeSpeaker.valueOf(resultset.getString("typeSpeaker")));
 				speaker.setnacionalidade(resultset.getString("nacionalidade"));
 			
         	
-				speaker.setTypeUser(TypeUser(resultset.getString("typeUser")));
+				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
 				speaker.setcontato(resultset.getString("contato"));
 			
         

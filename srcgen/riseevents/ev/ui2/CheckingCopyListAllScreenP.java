@@ -69,7 +69,7 @@ public class CheckingCopyListAllScreenP extends JInternalFrame {
 		BackButtonAction backAction = new BackButtonAction();
 		
 		try {
-			model = new CheckingCopyTableModel(RiSEEventMainScreenP.facade.getCheckingCopys());
+			model = new CheckingCopyTableModel(RiseEventsScreenP.facade.getCheckingCopys());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

@@ -125,8 +125,8 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 			int idUser =Integer.valueOf(textFieldReviewerId.getText());
 			
 			try {
-				reviewer = RiSEEventMainScreenP.facade.searchReviewer(idUser);
-				//user = RiSEEventMainScreenP.facade.searchUser(idUser);
+				reviewer = {{systemName}}ScreenP.facade.searchReviewer(idUser);
+				//user = {{systemName}}ScreenP.facade.searchUser(idUser);
 				textArea.setText("");
 				textArea.append(reviewer.toString());
 			} catch (ReviewerNotFoundException e1) {

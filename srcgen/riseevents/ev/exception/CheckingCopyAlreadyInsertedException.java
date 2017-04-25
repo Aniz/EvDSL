@@ -1,9 +1,8 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
 package riseevents.ev.exception;
-
-public class CheckingCopyAlreadyInsertedException extends Exception {
 import riseevents.ev.util.ExceptionMessages;
 
+public class CheckingCopyAlreadyInsertedException extends Exception {
 	private int idCheckingCopy;
 
 	public CheckingCopyAlreadyInsertedException(int idCheckingCopy) {

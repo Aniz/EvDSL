@@ -114,24 +114,22 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             ResultSet resultset = statement.executeQuery("select * from organizer as o inner join user on user.idUser = o.idUser and o.idUser =" + idUser);
             if (resultset.next()) {   
             	organizer.setIdUser(resultset.getInt("idUser"));
-            	organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
             	organizer.setPassword(resultset.getString("password"));
             	organizer.setNameUser(resultset.getString("nameUser"));       	
-            	organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
             {% if data.option.categories|length > 0 %}
 				{{data.option.entity|lower}}.setType{{data.option.entity}}(resultset.getString("type{{data.option.entity}}"));
         	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}			
         
         	{% if extraData.option.categories|length > 0 %}
 				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(resultset.getString("type{{extraData.option.entity}}"));
         	{% endif %}
            	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}			
 
             } else {
@@ -158,28 +156,26 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 		ArrayList<Organizer> list = new ArrayList<Organizer>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, typeUser, email, filiation, typeOrganizer from Organizer inner join User on Organizer.idUser = User.idUser;");
+            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, email, filiation from Organizer inner join User on Organizer.idUser = User.idUser;");
             while (resultset.next()) {
             	organizer = new Organizer();
             	organizer.setIdUser(resultset.getInt("idUser"));
             	organizer.setPassword(resultset.getString("password"));
             	organizer.setNameUser(resultset.getString("nameUser"));
-            	organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
-            	organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
 			{% if data.option.categories|length > 0 %}
 				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
         	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}			
         
         	{% if extraData.option.categories|length > 0 %}
 				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(resultset.getString("type{{extraData.option.entity}}"));
         	{% endif %}
            	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}			
 
 				list.add(organizer);

@@ -70,7 +70,7 @@ public class ReviewerListAllScreenP extends JInternalFrame {
 		
 		
 		try {
-			model = new ReviewerTableModel(RiSEEventMainScreenP.facade.getReviewers());
+			model = new ReviewerTableModel(RiseEventsScreenP.facade.getReviewers());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

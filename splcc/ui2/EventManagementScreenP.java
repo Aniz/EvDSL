@@ -275,9 +275,9 @@ public class EventManagementScreenP extends JInternalFrame {
 					event.setSponsors(sponsors);
 
 					//Atualizar JTable
-					EventTableModel model = new EventTableModel(RiSEEventMainScreenP.facade.getEvents());
+					EventTableModel model = new EventTableModel({{systemName}}ScreenP.facade.getEvents());
 
-					RiSEEventMainScreenP.facade.insertEvent(event); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
+					{{systemName}}ScreenP.facade.insertEvent(event); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 
 
 					//(EventTableModel) table.getModel();
@@ -322,8 +322,8 @@ public class EventManagementScreenP extends JInternalFrame {
 			}
 
 			try {
-				Event event = new EventTableModel(RiSEEventMainScreenP.facade.getEvents()).get(rowIndex);
-				RiSEEventMainScreenP.facade.removeEvent(event.getIdEvent());
+				Event event = new EventTableModel({{systemName}}ScreenP.facade.getEvents()).get(rowIndex);
+				{{systemName}}ScreenP.facade.removeEvent(event.getIdEvent());
 				EventTableModel model = (EventTableModel) table.getModel();
 				model.removeEvent(rowIndex);
 				table.setModel(model);
@@ -384,9 +384,9 @@ public class EventManagementScreenP extends JInternalFrame {
 					eventNew.setSponsors(sponsors);
 
 					try {
-						RiSEEventMainScreenP.facade.updateEvent(eventNew);
+						{{systemName}}ScreenP.facade.updateEvent(eventNew);
 						EventTableModel model;
-						model = new EventTableModel(RiSEEventMainScreenP.facade.getEvents());
+						model = new EventTableModel({{systemName}}ScreenP.facade.getEvents());
 						table.setModel(model);
 					} catch (EventNotFoundException e1) {
 						JOptionPane
@@ -425,7 +425,7 @@ public class EventManagementScreenP extends JInternalFrame {
 			Event eventOld = null;
 
 			try {
-				eventOld=  new EventTableModel(RiSEEventMainScreenP.facade.getEvents()).get(rowIndex);
+				eventOld=  new EventTableModel({{systemName}}ScreenP.facade.getEvents()).get(rowIndex);
 
 				lblLastEventId.setText(String.valueOf(eventOld.getIdEvent()));
 				eventNametextField.setText(eventOld.getEventName());
@@ -466,7 +466,7 @@ public class EventManagementScreenP extends JInternalFrame {
 
 	private void loadLastIndex(){
 		try {
-			lblLastEventId.setText(String.valueOf(RiSEEventMainScreenP.facade.getEventLastId()));
+			lblLastEventId.setText(String.valueOf({{systemName}}ScreenP.facade.getEventLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -478,7 +478,7 @@ public class EventManagementScreenP extends JInternalFrame {
 	private void populateTable(){
 		try {
 			EventTableModel model;
-			model = new EventTableModel(RiSEEventMainScreenP.facade.getEvents());
+			model = new EventTableModel({{systemName}}ScreenP.facade.getEvents());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),

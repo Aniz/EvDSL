@@ -1,8 +1,8 @@
 //#if ${InsertAuthors} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class AuthorAlreadyInsertedException extends Exception {
-import riseevents.ev.util.ExceptionMessages;
 
 	private int idAuthor;
 

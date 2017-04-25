@@ -102,10 +102,8 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             ResultSet resultset = statement.executeQuery("select * from organizer as o inner join user on user.idUser = o.idUser and o.idUser =" + idUser);
             if (resultset.next()) {   
             	organizer.setIdUser(resultset.getInt("idUser"));
-            	organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
             	organizer.setPassword(resultset.getString("password"));
             	organizer.setNameUser(resultset.getString("nameUser"));       	
-            	organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
 				organizer.setTypeOrganizer(resultset.getString("typeOrganizer"));
@@ -113,7 +111,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			
         
 				organizer.setTypeUser(resultset.getString("typeUser"));
-				organizer.setContato(resultset.getString("contato"));
+				organizer.setContato(resultset.getint("contato"));
 			
 
             } else {
@@ -140,22 +138,20 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 		ArrayList<Organizer> list = new ArrayList<Organizer>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, typeUser, email, filiation, typeOrganizer from Organizer inner join User on Organizer.idUser = User.idUser;");
+            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, email, filiation from Organizer inner join User on Organizer.idUser = User.idUser;");
             while (resultset.next()) {
             	organizer = new Organizer();
             	organizer.setIdUser(resultset.getInt("idUser"));
             	organizer.setPassword(resultset.getString("password"));
             	organizer.setNameUser(resultset.getString("nameUser"));
-            	organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
-            	organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
 				organizer.setTypeOrganizer(TypeOrganizer(resultset.getString("typeOrganizer")));
 				organizer.setContato(resultset.getString("contato"));
 			
         
 				organizer.setTypeUser(resultset.getString("typeUser"));
-				organizer.setContato(resultset.getString("contato"));
+				organizer.setContato(resultset.getint("contato"));
 			
 
 				list.add(organizer);

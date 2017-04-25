@@ -157,12 +157,12 @@ public class ReviewResultsScreenP extends JInternalFrame {
 			Submission submission = null;
 			int idSubmission;
 			try {
-				idSubmission = RiSEEventMainScreenP.getFacade().getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
-				submission = RiSEEventMainScreenP.getFacade().searchSubmission(idSubmission);
+				idSubmission = {{systemName}}ScreenP.getFacade().getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
+				submission = {{systemName}}ScreenP.getFacade().searchSubmission(idSubmission);
 				lblAbs.setText(submission.getAbstractPaper());
 				
 				List<String> listOfReviews = new ArrayList<String>();
-				listOfReviews = RiSEEventMainScreenP.getFacade().getReviewsBySubmission(idSubmission);
+				listOfReviews = {{systemName}}ScreenP.getFacade().getReviewsBySubmission(idSubmission);
 				
 				if(listOfReviews.size() ==1)
 				lblReview1.setText(listOfReviews.get(0));
@@ -202,7 +202,7 @@ public class ReviewResultsScreenP extends JInternalFrame {
 			
 			List<Submission> list;
 			try {
-				list = RiSEEventMainScreenP.getFacade().getSubmissionsByUser(idUser);
+				list = {{systemName}}ScreenP.getFacade().getSubmissionsByUser(idUser);
 				Iterator<Submission> iterator = list.iterator();
 				while(iterator.hasNext()){
 					comboBoxSubmission.addItem(iterator.next().getTitle().toString());

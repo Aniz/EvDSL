@@ -113,7 +113,10 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setContato(resultset.getString("contato"));
+				reviewer.setContato(resultset.get
+
+
+int("contato"));
 			
         	resultset.close();   
             } else {
@@ -151,7 +154,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setContato(resultset.getString("contato"));
+				reviewer.setContato(resultset.getint("contato"));
 			
         		list.add(reviewer);
             } 

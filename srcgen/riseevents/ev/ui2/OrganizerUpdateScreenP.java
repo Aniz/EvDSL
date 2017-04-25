@@ -227,9 +227,9 @@ public class OrganizerUpdateScreenP extends JInternalFrame {
 			
 
 			try {
-				//RiSEEventMainScreenP.facade.updateUser(organizer);
-				RiSEEventMainScreenP.facade.updateOrganizer(organizer);
-				//organizer = RiSEEventMainScreenP.facade.searchOrganizer(organizer.getIdUser());
+				//RiseEventsScreenP.facade.updateUser(organizer);
+				RiseEventsScreenP.facade.updateOrganizer(organizer);
+				//organizer = RiseEventsScreenP.facade.searchOrganizer(organizer.getIdUser());
 				textArea.setText("");
 				textArea.append(organizer.toString());
 			} catch (OrganizerNotFoundException e1) {

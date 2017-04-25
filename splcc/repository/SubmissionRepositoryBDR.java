@@ -47,9 +47,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 	public void insert(Submission submission) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO submission (idActivity, type, abstract, keywords, title{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
+			statement.executeUpdate("INSERT INTO submission (idActivity, abstract, keywords, title{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
 				+submission.getIdActivity()
-				+"', '"+submission.getType()
 				+"', '"+ submission.getAbstractPaper() 
 				+"', '" + submission.getKeywords()
 				+ "', '"+submission.getTitle()
@@ -90,10 +89,10 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setKeywords(resultset.getString("keywords"));
                 submission.setTitle(resultset.getString("title"));
             {% if data.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
     		{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}			
            
 				list.add(submission);
@@ -187,7 +186,7 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
 
-            statement.executeUpdate("UPDATE submission SET idActivity = '"+submission.getIdActivity()+"', type = '"+submission.getType()+"', abstract = '"+ submission.getAbstractPaper() +"', keywords = '" + submission.getKeywords()+ "' , title = '" + submission.getTitle()+ "' WHERE idSubmission = '"+ submission.getIdSubmission()+"'");
+            statement.executeUpdate("UPDATE submission SET idActivity = '"+submission.getIdActivity()+"', abstract = '"+ submission.getAbstractPaper() +"', keywords = '" + submission.getKeywords()+ "' , title = '" + submission.getTitle()+ "' WHERE idSubmission = '"+ submission.getIdSubmission()+"'");
             	
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -243,10 +242,10 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setKeywords(resultset.getString("keywords"));
                 submission.setTitle(resultset.getString("title"));
             {% if data.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
         	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
 			{% endfor %}{% endif %}			
            
             } else {
@@ -282,9 +281,9 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 					"jdbc:mysql://localhost:3306/EeventDB", "root", "password");
 
 			// 2. Prepare statement
-			String sql = "INSERT INTO submission" + 
-			             "(idActivity, type, abstract, keywords, title, attachment) Values" +
-					      "(?,?,?,?,?,?)";
+			String sql = "INSERT INTO submission (idActivity, abstract, keywords, title{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) ValuesValues" +
+					      "(?,?,?,?,?,?{% if data.option.categories|length > 0 %},?{% endif %}{% for prop in data.option.properties %},?{% endfor %})";
+
 			myStmt = myConn.prepareStatement(sql);
 
 			// 3. Set parameter for resume file name

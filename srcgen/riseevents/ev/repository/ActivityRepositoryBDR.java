@@ -312,7 +312,7 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	            	activity.setHour(resultset.getString("hour"));
 	            	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
 	            	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));			
-					activity.setTypeActivity(TypeActivity.valueOf(getString("typeActivity")));						    	    
+					activity.setTypeActivity(TypeActivity.valueOf(resultset.getString("typeActivity")));						    	    
 					activity.setDescription(resultset.getString("description"));
 	
 					list.add(activity);

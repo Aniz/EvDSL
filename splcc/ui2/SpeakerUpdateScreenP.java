@@ -201,10 +201,10 @@ public class SpeakerUpdateScreenP extends JInternalFrame {
 			speaker.setBiography(biography);
 
 			try {
-				//RiSEEventMainScreenP.facade.updateUser(speaker);
-				RiSEEventMainScreenP.facade.updateSpeaker(speaker);
+				//{{systemName}}ScreenP.facade.updateUser(speaker);
+				{{systemName}}ScreenP.facade.updateSpeaker(speaker);
 				textArea.setText("");
-				//textArea.append(RiSEEventMainScreenP.facade.searchUser(idUser).toString() +   speaker.toString());
+				//textArea.append({{systemName}}ScreenP.facade.searchUser(idUser).toString() +   speaker.toString());
 				textArea.append(speaker.toString());
 			} catch (SpeakerNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
