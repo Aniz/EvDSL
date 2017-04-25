@@ -1,4 +1,4 @@
-package rise.splcc.ui2;
+package riseevents.ev.ui2;
 
 import java.awt.Color;
 import java.awt.EventQueue;

@@ -1,5 +1,6 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class PaymentAlreadyInsertedException extends Exception {
 

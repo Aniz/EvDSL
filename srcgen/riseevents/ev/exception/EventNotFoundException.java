@@ -1,4 +1,5 @@
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class EventNotFoundException extends Exception {
 

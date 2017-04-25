@@ -1,5 +1,6 @@
 //#if ${RegistrationSpeakerActivity} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class ActivitySpeakerAlreadyInsertedException extends Exception {
 

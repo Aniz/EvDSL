@@ -1,5 +1,6 @@
 //#if ${CheckingCopyCertificado} == "T" or ${CheckingCopyAtestado} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class CheckingCopyNotFoundException extends Exception {
 

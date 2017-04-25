@@ -1,5 +1,6 @@
 //#if ${Reviewer} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class ReviewerNotFoundException extends Exception {
 

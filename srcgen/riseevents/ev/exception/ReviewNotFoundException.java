@@ -1,5 +1,6 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class ReviewNotFoundException extends Exception {
 

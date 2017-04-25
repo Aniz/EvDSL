@@ -1,5 +1,6 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class AssignmentNotFoundException extends Exception {
 

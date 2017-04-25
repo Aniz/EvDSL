@@ -1,4 +1,5 @@
 package {{systemName|lower}}.ev.exception;
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 
 public class {{entity.name}}FoundException extends Exception {
 

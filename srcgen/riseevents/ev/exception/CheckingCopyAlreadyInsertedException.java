@@ -2,6 +2,7 @@
 package riseevents.ev.exception;
 
 public class CheckingCopyAlreadyInsertedException extends Exception {
+import riseevents.ev.util.ExceptionMessages;
 
 	private int idCheckingCopy;
 

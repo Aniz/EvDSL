@@ -2,6 +2,7 @@
 package riseevents.ev.exception;
 
 public class AuthorAlreadyInsertedException extends Exception {
+import riseevents.ev.util.ExceptionMessages;
 
 	private int idAuthor;
 

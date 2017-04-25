@@ -1,5 +1,6 @@
 
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class UserNotFoundException extends Exception {
 

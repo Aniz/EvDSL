@@ -1,5 +1,6 @@
 //#if ${Organizer} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class OrganizerNotFoundException extends Exception {
 

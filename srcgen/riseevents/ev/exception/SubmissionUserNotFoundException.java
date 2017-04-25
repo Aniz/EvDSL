@@ -1,5 +1,6 @@
 //#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class SubmissionUserNotFoundException extends Exception {
 

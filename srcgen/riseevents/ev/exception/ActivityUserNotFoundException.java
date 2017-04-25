@@ -1,5 +1,6 @@
 //#if ${RegistrationUserActivity} == "T"
 package riseevents.ev.exception;
+import riseevents.ev.util.ExceptionMessages;
 
 public class ActivityUserNotFoundException extends Exception {
 
