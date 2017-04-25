@@ -2,7 +2,7 @@
 Generate java code from textX model using jinja2
 template engine (http://jinja.pocoo.org/docs/dev/)
 """
-from os import mkdir
+from os import mkdir, walk
 from os.path import exists, dirname, join
 import jinja2
 import pydot
@@ -50,6 +50,7 @@ def main(debug=False):
     tableFolder = createFolder(srcgen_folder, 'table')
     facadeFolder = createFolder(srcgen_folder, 'facade')
     viewFolder = createFolder(srcgen_folder, 'ui2')
+    utilFolder = createFolder(srcgen_folder,'util')
     
     codeFolder = join(this_folder, 'splcc')
     entityCodeFolder = createFolder(codeFolder, 'data')
@@ -59,12 +60,10 @@ def main(debug=False):
     tableCodeFolder = createFolder(codeFolder, 'table')
     facadeCodeFolder = createFolder(codeFolder, 'facade')
     viewCodeFolder = createFolder(codeFolder, 'ui2')
+    utilCodeFolder = createFolder(codeFolder,'util')
     
     # Get template folders
     templateFolder = join(this_folder, 'templates')
-    #copy files
-    copy(join(this_folder,'lib'),join(srcgen_folder,'lib'))
-    copy(join(this_folder,'util'),join(srcgen_folder,'util'))
     
     # Initialize template engine.
     jinja_env = jinja2.Environment(
@@ -227,7 +226,9 @@ def main(debug=False):
             copyCodeFile(viewCodeFolder,viewFolder,valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
        
     copyCodeFile(exceptionCodeFolder,exceptionFolder,"RepositoryException",jinja_env,"","",systemName)
-          
+    copy(join(this_folder,'lib'),join(srcgen_folder,'lib'))
+    generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,"","",systemName)
+        
 def createDotFiles(event_mm,event_model,dotFolder):
     # Export to .dot file for visualization
     metamodel_export(event_mm, join(dotFolder, 'event_meta.dot'))
@@ -252,6 +253,13 @@ def createFolder(dest,name):
         mkdir(folder)
 
     return folder
+
+def generateCodeRecursively(src, dest,jinja_env,var,extraVar,systemName):
+    for (dirpath,dirnames,filenames) in walk (src):
+        for file in filenames:
+            codeFileTemplate = jinja_env.get_template(join(src,file))
+            with open(join(dest,file), 'w') as f:
+                f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName))
 
 def copy(src, dest):
     if exists(dest):

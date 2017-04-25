@@ -1,4 +1,4 @@
-package rise.splcc.util;
+package riseevents.ev.util;
 
 
 import java.io.File;
@@ -29,6 +29,21 @@ public class PersistenceMechanismRDBMS implements IPersistenceMechanism {
     
     Properties prop = new Properties();
     InputStream input = null;
+
+//    private PersistenceMechanismRDBMS(String url, String login, String senha, String classeDoDriver)
+//            throws PersistenceMechanismException {
+//        conexoesAlocadas = new HashMap();
+//        this.classeDoDriver = classeDoDriver;
+//        this.url = url;
+//        this.login = login;
+//        this.senha = senha;
+//        indisponivel = false;
+//        try {
+//            Class.forName(classeDoDriver);
+//        } catch (ClassNotFoundException e) {
+//            throw new PersistenceMechanismException("EXC_CLASSE_NAO_ENCONTRADA");
+//        }
+//    }
     
     private PersistenceMechanismRDBMS()
             throws PersistenceMechanismException, IOException {

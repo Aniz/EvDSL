@@ -1,8 +1,8 @@
 //#if ${ConflictofinterestAutomatic} == "T"
-package rise.splcc.util;
+package riseevents.ev.util;
 
-import rise.splcc.data.Author;
-import rise.splcc.data.User;
+import riseevents.ev.data.Author;
+import riseevents.ev.data.User;
 
 public class Conflict {
 
@@ -31,4 +31,3 @@ public class Conflict {
 	
 }
 //#endif
-

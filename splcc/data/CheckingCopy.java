@@ -104,7 +104,7 @@ public class CheckingCopy {
 		;
 	}
 	
-	{% if 'reportsListofAuthors' in data.statments %}
+	{% if 'checkingCopyAtestado' in data.statments %}
 	public boolean emitirAtestado(String nome, String evento, String periodo) {
         Document documento = new Document();
      

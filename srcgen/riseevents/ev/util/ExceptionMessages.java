@@ -1,4 +1,4 @@
-package rise.splcc.util;
+package riseevents.ev.util;
 
 
 
