@@ -49,7 +49,7 @@ public class PaymentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_DATE) {
 					return payment.getDate();
 				} else if (columnIndex == COL_TYPE) {
-					return payment.getPaymentType();
+					return payment.getTypePayment();
 				} else if (columnIndex == COL_BARCODE) {
 					return payment.getBarcode();
 				} else if (columnIndex == COL_VALUE) {
@@ -130,7 +130,7 @@ public class PaymentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setBarcode(payment.getBarcode());
 				rows.get(indiceLinha).setStatus(payment.getStatus());
 				rows.get(indiceLinha).setDate(payment.getDate());
-				rows.get(indiceLinha).setPaymentType(payment.getPaymentType());
+				rows.get(indiceLinha).setTypePayment(payment.getTypePayment());
 				rows.get(indiceLinha).setValue(payment.getValue());
 				rows.get(indiceLinha).setIdRegistration(payment.getIdRegistration());
 				fireTableDataChanged();

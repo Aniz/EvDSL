@@ -110,7 +110,7 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 			}
 			
 			public void alterarCheckingCopy(int indiceLinha, CheckingCopy checkingCopy) {
-				rows.get(indiceLinha).setTypeCheckingCopy(checkingCopy.getTypeCheckingCopy());
+				rows.get(indiceLinha).setTypeCheckingcopy(checkingCopy.getTypeCheckingopy());
 				rows.get(indiceLinha).setDateOfIssue(checkingCopy.getDateOfIssue());
 				rows.get(indiceLinha).setIdRegistration(checkingCopy.getIdRegistration());	
 				fireTableDataChanged();

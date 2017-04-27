@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riseevents.ev.data.Organizer;
+import riseevents.ev.data.User.TypeUser;
 import riseevents.ev.data.Organizer.TypeOrganizer;
 import riseevents.ev.data.User.TypeUser;
 import riseevents.ev.exception.OrganizerNotFoundException;
@@ -89,7 +90,6 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				throw new RepositoryException(ex);
 			}
 		}
-		
 	}
 
 	@Override
@@ -106,11 +106,11 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             	organizer.setNameUser(resultset.getString("nameUser"));       	
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
-				organizer.setTypeOrganizer(resultset.getString("typeOrganizer"));
+				organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
 				organizer.setContato(resultset.getString("contato"));
 			
         
-				organizer.setTypeUser(resultset.getString("typeUser"));
+				organizer.setTypeUser(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
 				organizer.setContato(resultset.getInt("contato"));
 			
 
@@ -182,14 +182,11 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
                 "',email = '"+ organizer.getEmail() +
                 "', filiation = '" + organizer.getFiliation() +
 
-				"', typeUser = '"+ user.getTypeUser() + 
+				"', typeUser = '"+ organizer.getTypeUser() + 
 				"', contato = '"+ organizer.getContato() + 
                 "' WHERE idUser = '"+ organizer.getIdUser()+"'");
 
-            	statement.executeUpdate("UPDATE organizer SET biography = '"+ 
-            	organizer.getBiography() +
-					"', typeOrganizer = '"+ organizer.getTypeOrganizer() + 
-					"', contato = '"+ organizer.getContato() + 
+            	statement.executeUpdate("UPDATE organizer SET typeOrganizer = '"+ organizer.getTypeOrganizer() + 					"', contato = '"+ organizer.getContato() + 
             	"' WHERE idUser = '"+ organizer.getIdUser()+"'");   
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

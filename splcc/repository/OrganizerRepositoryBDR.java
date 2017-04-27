@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import {{systemName|lower}}.ev.data.Organizer;
+{% if extraData.option.categories|length > 0 %}
+import {{systemName|lower}}.ev.data.{{extraData.option.entity}}.Type{{extraData.option.entity}};
+{% endif%}
 {% if data.option.categories|length > 0 %}
 import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
 {% endif %}
@@ -59,10 +62,10 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			{% if data.option.properties|length > 0 or data.option.categories|length > 0 %}
            	statement.executeUpdate("INSERT INTO organizer Values('"+organizer.getIdUser()
 			{% if data.option.categories|length > 0 %}
-				+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+				+"', '"+organizer.getType{{data.option.entity}}()
 			{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+				+"', '"+organizer.get{{property.name|capitalize}}()   
 			{% endfor %}{% endif %}
 				+"')");
 			{% endif %}
@@ -101,7 +104,6 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				throw new RepositoryException(ex);
 			}
 		}
-		
 	}
 
 	@Override
@@ -119,14 +121,14 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
             {% if data.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.setType{{data.option.entity}}(resultset.getString("type{{data.option.entity}}"));
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
         	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
 			{% endfor %}{% endif %}			
         
         	{% if extraData.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(resultset.getString("type{{extraData.option.entity}}"));
+				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
         	{% endif %}
            	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
 				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
@@ -207,21 +209,17 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
                 "', filiation = '" + organizer.getFiliation() +
 
 			{% if extraData.option.categories|length > 0 %}
-				"', type{{extraData.option.entity}} = '"+ {{extraData.option.entity|lower}}.getType{{extraData.option.entity}}() + 
+				"', type{{extraData.option.entity}} = '"+ organizer.getType{{extraData.option.entity}}() + 
 			{% endif %}
 			{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-				"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() + 
+				"', {{property.name}} = '"+ organizer.get{{property.name|capitalize}}() + 
 			{% endfor %}{% endif %}
                 "' WHERE idUser = '"+ organizer.getIdUser()+"'");
 
             {% if data.option.properties|length > 0 or data.option.categories|length > 0 %}
-            	statement.executeUpdate("UPDATE organizer SET biography = '"+ 
-            	organizer.getBiography() +
-            	{% if data.option.categories|length > 0 %}
-					"', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() + 
-				{% endif %}
+            	statement.executeUpdate("UPDATE organizer SET {% if data.option.categories|length > 0 %}type{{data.option.entity}} = '"+ organizer.getType{{data.option.entity}}() + {% endif %}
 				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-					"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() + 
+					"', {{property.name}} = '"+ organizer.get{{property.name|capitalize}}() + 
 				{% endfor %}{% endif %}
             	"' WHERE idUser = '"+ organizer.getIdUser()+"'");   
 			{% endif %}

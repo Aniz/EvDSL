@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import {{systemName|lower}}.ev.data.Reviewer;
+{% if extraData.option.categories|length > 0 %}
+import {{systemName|lower}}.ev.data.{{extraData.option.entity}}.Type{{extraData.option.entity}};
+{% endif%}
 {% if data.option.categories|length > 0 %}
 import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
 {% endif %}
@@ -51,20 +54,20 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 				+"', '"+reviewer.getEmail() 
 				+"', '"+reviewer.getFiliation()
 			{% if extraData.option.categories|length > 0 %}
-				+"', '"+{{data.option.entity|lower}}.getType{{extraData.option.entity}}()
+				+"', '"+reviewer.getType{{extraData.option.entity}}()
 			{% endif %}
 			{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+				+"', '"+reviewer.get{{property.name|capitalize}}()   
 			{% endfor %}{% endif %}
 				+"')");
 
 			statement.executeUpdate("INSERT INTO reviewer Values('"+reviewer.getIdUser()
 				+"','" + reviewer.getKnowledgeArea()
 			{% if data.option.categories|length > 0 %}
-				+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
+				+"', '"+reviewer.getType{{data.option.entity}}()
 			{% endif %}
 			{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
+				+"', '"+reviewer.get{{property.name|capitalize}}()   
 			{% endfor %}{% endif %}
 				+"')");
 		} catch (SQLException e) {
@@ -122,23 +125,17 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
             	reviewer.setEmail(resultset.getString("email"));
             	reviewer.setFiliation(resultset.getString("filiation"));
             {% if data.option.categories|length > 0 %}
-			 	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+			 	reviewer.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
            	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get
-
-
-{{property.type|javatype}}("{{property.name}}"));
+				reviewer.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}
 
 			{% if extraData.option.categories|length > 0 %}
-			 	{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{extraData.option.entity}}")));
+			 	reviewer.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{extraData.option.entity}}")));
            	{% endif %}
            	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get
-
-
-{{property.type|javatype}}("{{property.name}}"));
+				reviewer.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
 			{% endfor %}{% endif %}			
         	resultset.close();   
             } else {
@@ -174,17 +171,17 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
             	reviewer.setFiliation(resultset.getString("filiation"));
             	reviewer.setKnowledgeArea(resultset.getString("knowledgeArea"));
 		    {% if data.option.categories|length > 0 %}
-			 	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+			 	reviewer.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
            	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
+				reviewer.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
 			{% endfor %}{% endif %}
 
 			{% if extraData.option.categories|length > 0 %}
-			 	{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{extraData.option.entity}}")));
+			 	reviewer.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{extraData.option.entity}}")));
            	{% endif %}
            	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
+				reviewer.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
 			{% endfor %}{% endif %}			
         		list.add(reviewer);
             } 
@@ -210,7 +207,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
     	    Statement statement = (Statement) pm.getCommunicationChannel();
             statement.executeUpdate("UPDATE reviewer SET knowledgeArea = '"+ reviewer.getKnowledgeArea() +
             	{% if data.option.categories|length > 0 %}
-					"', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() + 
+					"', type{{data.option.entity}} = '"+ reviewer.getType{{data.option.entity}}() + 
 				{% endif %}
 				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 						"', {{property.name}} = '"+ user.get{{property.name|capitalize}}() + 
@@ -223,10 +220,10 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
                     "',email = '"+ reviewer.getEmail() +
                     "', filiation = '" + reviewer.getFiliation() +
                 {% if extraData.option.categories|length > 0 %}
-					"', type{{data.option.entity}} = '"+ {{extraData.option.entity|lower}}.getType{{extraData.option.entity}}() + 
+					"', type{{data.option.entity}} = '"+ reviewer.getType{{extraData.option.entity}}() + 
 				{% endif %}
 				{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-						"', {{property.name}} = '"+ user.get{{property.name|capitalize}}() + 
+						"', {{property.name}} = '"+ reviewer.get{{property.name|capitalize}}() + 
 				{% endfor %}{% endif %}
                  	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             

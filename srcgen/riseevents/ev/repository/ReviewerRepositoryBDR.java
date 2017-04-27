@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riseevents.ev.data.Reviewer;
+import riseevents.ev.data.User.TypeUser;
 import riseevents.ev.data.Reviewer.TypeReviewer;
 
 import riseevents.ev.exception.RepositoryException;
@@ -113,10 +114,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setContato(resultset.get
-
-
-int("contato"));
+				reviewer.setContato(resultset.getint("contato"));
 			
         	resultset.close();   
             } else {
@@ -187,8 +185,8 @@ int("contato"));
                     "', nameUser = '"+ reviewer.getNameUser() +
                     "',email = '"+ reviewer.getEmail() +
                     "', filiation = '" + reviewer.getFiliation() +
-					"', typeReviewer = '"+ user.getTypeUser() + 
-						"', contato = '"+ user.getContato() + 
+					"', typeReviewer = '"+ reviewer.getTypeUser() + 
+						"', contato = '"+ reviewer.getContato() + 
                  	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             
 		} catch(PersistenceMechanismException e){

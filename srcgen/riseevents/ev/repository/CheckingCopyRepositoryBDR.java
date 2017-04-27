@@ -74,8 +74,7 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
                 checkingCopy.setIdRegistration(resultset.getInt("idRegistration"));
                 checkingCopy.setIdUser(resultset.getInt("idUser"));
                 checkingCopy.setDateOfIssue(resultset.getString("dateOfIssue"));
-                checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(resultset.getString("checkingCopytype")));
-				checkingCopy.setTypeCheckingCopy(resultset.getString("typeCheckingCopy"));
+				checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(resultset.getString("typeCheckingCopy")));
 				checkingCopy.setBanana(resultset.getString("banana"));
 			
 				list.add(checkingCopy);

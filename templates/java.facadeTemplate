@@ -7,9 +7,11 @@ import java.util.Set;
 
 import org.apache.commons.mail.EmailException;
 import {{systemName|lower}}.ev.util.Email;
-
+import {{systemName|lower}}.ev.data.Review;
 {% for key,value in data.items() %}
 import {{systemName|lower}}.ev.business.{{key}}Control;
+import {{systemName|lower}}.ev.exception.{{key}}AlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.{{key}}NotFoundException;
 import {{systemName|lower}}.ev.exception.{{key}}Exception;
 import {{systemName|lower}}.ev.repository.{{key}}Repository;
 import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
@@ -26,16 +28,10 @@ public class {{systemName}}Facade {
 	protected static {{systemName}}Facade instance;
 	
 	public {{systemName}}Facade(){
-		EventRepository eventRepository = EventRepositoryBDR.getInstance();
-		UserRepository userRepository = UserRepositoryBDR.getInstance();
-		
 	{% for key,value in data.items() %}
 		{{key}}Repository {{key|lower}}Repository = {{key}}RepositoryBDR.getInstance();
 	{% endfor %}
 		
-		eventControlList = new EventControl(eventRepository);		
-		userControlList = new UserControl(userRepository);
-	
 	{% for key,value in data.items() %}
 		{{key|lower}}List = new {{key}}Control({{key|lower}}Repository); 
 	{% endfor %}	
@@ -48,34 +44,36 @@ public class {{systemName}}Facade {
 		return {{systemName}}Facade.instance;
 	}
 	
-	{% for key,value in data.items() %}
+{% for key,value in data.items() %}
+	{% if 'Insert' in value.commands %}
 	public void insert{{key}}({{key}} entity) throws {{key}}AlreadyInsertedException, RepositoryException{
 		this.{{key|lower}}List.insert(entity);
 	}
+	{% endif %}
+	{% if 'Remove' in value.commands %}
 	public void remove{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.remove(idEntity);  
 	}
-	
+	{% endif %}
+	{% if 'Update' in value.commands %}
 	public void update{{key}}({{key}} Entity) throws {{key}}NotFoundException, Exception, {{key}}AlreadyInsertedException{
-		{{key|lower}}List.update({{key}});
+		{{key|lower}}List.update(Entity);
 	}
-	
+	{% endif %}
 	public List<{{key}}> get{{key}}() throws RepositoryException{
 		return {{key}}s.get{{key}}();
 	}
-	
+	{% if 'Search' in value.commands %}
 	public {{key}} search{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		return {{key|lower}}List.search(idEntity);
 	}
-	
+	{% endif %}
 	public int get{{key}}LastId() throws RepositoryException{
 		return {{key|lower}}List.get{{key}}LastId();
 	}
-	
 	public int get{{key}}IdByName(String entityName) throws RepositoryException{
 		return {{key|lower}}List.get{{key}}IdByName(entityName);
 	}
-
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
@@ -140,6 +138,9 @@ public class {{systemName}}Facade {
 		activity.listOfAuthorsPerActivity(authorsPerActivity);
 	}
 	{% endif %}
+	public List<Activity> getActivities() throws RepositoryException{
+		return activities.getActivities();
+	}
 {% endif %}
 {% if 'Payment' in data %}	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{

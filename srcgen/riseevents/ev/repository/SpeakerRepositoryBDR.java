@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riseevents.ev.data.Speaker;
+import riseevents.ev.data.User.TypeUser;
 import riseevents.ev.data.Speaker.TypeSpeaker;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.exception.SpeakerNotFoundException;
@@ -153,11 +154,11 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
             	speaker.setFiliation(resultset.getString("filiation"));
             	speaker.setBiography(resultset.getString("biography"));
 				speaker.setTypeSpeaker(TypeSpeaker.valueOf(resultset.getString("typeSpeaker")));
-				speaker.setnacionalidade(resultset.getString("nacionalidade"));
+				speaker.setNacionalidade(resultset.getString("nacionalidade"));
 			
         	
 				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				speaker.setcontato(resultset.getString("contato"));
+				speaker.setContato(resultset.Int("contato"));
 			
         
 				list.add(speaker);

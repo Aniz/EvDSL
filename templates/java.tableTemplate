@@ -84,7 +84,7 @@ public class {{entity.name}}TableModel extends AbstractTableModel{
 				
 				public void alterar{{entity.name}}(int indiceLinha, {{entity.name}} {{entity.name|lower}}) {
 					{% for property in entity.properties %}
-					rows.get(indiceLinha).set{{property.name}}({{entity.name|lower}}.get{{property.name}}());		
+					rows.get(indiceLinha).set{{property.name|capitalize}}({{entity.name|lower}}.get{{property.name}}());		
 					{% endfor %}
 					fireTableDataChanged();
 				}

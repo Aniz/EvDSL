@@ -79,9 +79,8 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
                 checkingCopy.setIdRegistration(resultset.getInt("idRegistration"));
                 checkingCopy.setIdUser(resultset.getInt("idUser"));
                 checkingCopy.setDateOfIssue(resultset.getString("dateOfIssue"));
-                checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(resultset.getString("checkingCopytype")));
         	{% if data.option.categories|length > 0 %}
-				checkingCopy.setType{{data.option.entity}}(resultset.getString("type{{data.option.entity}}"));
+				checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
         	{% endif %}
         	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 				checkingCopy.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));

@@ -99,7 +99,7 @@ public class UserRepositoryBDR implements UserRepository {
             	user.setNameUser(resultset.getString("nameUser"));       	
             	user.setEmail(resultset.getString("email"));
             	user.setFiliation(resultset.getString("filiation"));
-				user.setTypeUser(Type(User.valueOf(resultset.getString("typeUser")));
+				user.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
 				user.setContato(resultset.getInt("contato"));
 			
            

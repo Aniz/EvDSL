@@ -236,7 +236,7 @@ import {{systemName|lower}}.ev.util.Email;
 import com.lowagie.text.DocumentException;
 
 
-public class {{systemName}}Facade {
+public class {{sy}}Facade {
 
 	private EventControl events;
 
