@@ -19,7 +19,6 @@ public class OrganizerControl {
 
 	}
 	
-	//usar instance of para saber qual o objeto dependendo disso direciona para o respectivo repositorio.
 	public void insert(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException{
 		if (organizer != null) {
 			if (!organizers.isThere(organizer.getIdUser())) {
@@ -31,7 +30,6 @@ public class OrganizerControl {
             throw new IllegalArgumentException();
         }
 	}
-
 	public void remove(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
 		if(organizers.isThere(idUser))
 			organizers.remove(idUser);
@@ -39,18 +37,16 @@ public class OrganizerControl {
 			throw new OrganizerNotFoundException(idUser);
 
 	}
-	
 	public void update(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
 		if(organizers.isThere(organizer.getIdUser()))
 			organizers.update(organizer);
 		else
 			throw new OrganizerNotFoundException(organizer.getIdUser());
 	}
-
 	public Organizer search(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
 		return organizers.search(idUser);
 	}
-
+	
 	public boolean isThere(int idUser) throws RepositoryException {
 		return organizers.isThere(idUser);
 	}

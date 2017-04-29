@@ -18,26 +18,9 @@ public class SubmissionControl {
 	public SubmissionControl(SubmissionRepository repository){
 		this.submissions = repository;
 	}
-
-	public void insert(Submission submission) throws SubmissionAlreadyInsertedException, RepositoryException{
-		if (submission != null) {
-			if (!submissions.isThere(submission.getIdSubmission())) 
-				submissions.insert(submission);
-			else
-				throw new SubmissionAlreadyInsertedException(submission.getIdSubmission());
-		} else {
-            throw new IllegalArgumentException();
-        }
-	}
-	
 	public void remove(int idSubmission) throws SubmissionAlreadyInsertedException, RepositoryException, SubmissionNotFoundException{
 		submissions.remove(idSubmission);
 	}
-	
-	public void update(Submission submission) throws SubmissionAlreadyInsertedException, RepositoryException, SubmissionNotFoundException{
-		submissions.update(submission);
-	}
-	
 	
 	public List<Submission> getSubmissions() throws RepositoryException {
 		return submissions.getSubmissions();  
@@ -46,7 +29,6 @@ public class SubmissionControl {
 	public int getSubmissionLastId() throws RepositoryException{
 		return submissions.getSubmissionLastId();
 	}
-
 
 	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
 		return submissions.getSubmissionIdByTitle(submissionTitle);

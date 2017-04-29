@@ -1,5 +1,5 @@
-//#if ${ReportsListofAuthors} == "T"
-package {{systemName|lower}}.ev.ui2;
+//#if ${ReportsFrequencyperActivity} == "T"
+package riseevents.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -8,10 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,31 +17,30 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import {{systemName|lower}}.ev.data.Activity;
-import {{systemName|lower}}.ev.data.Event;
-import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
-import {{systemName|lower}}.ev.exception.RepositoryException;
-
 import com.lowagie.text.DocumentException;
 
-public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
+import riseevents.ev.data.Activity;
+import riseevents.ev.data.Event;
+import riseevents.ev.exception.ActivityAlreadyInsertedException;
+import riseevents.ev.exception.ActivityNotFoundException;
+import riseevents.ev.exception.RepositoryException;
+
+public class RegistrationReportsRegistrationReportsFrequencyPerActivityScreenP extends JInternalFrame {
+
+	private JComboBox comboBoxEvent;
+	private JComboBox comboBoxActivity;
 	
+	List<String> participants;
 	
-	private static ListOfAuthorsPerActivityScreenP instanceListOfAuthorsPerActivityScreenP;
+	private static RegistrationReportsFrequencyPerActivityScreenP instanceRegistrationReportsFrequencyPerActivityScreenP;
 	
-	public static ListOfAuthorsPerActivityScreenP getInstanceListOfAuthorsPerActivityScreenP() {
-		if (instanceListOfAuthorsPerActivityScreenP == null) {
-			ListOfAuthorsPerActivityScreenP.instanceListOfAuthorsPerActivityScreenP = new ListOfAuthorsPerActivityScreenP();
+	public static RegistrationReportsFrequencyPerActivityScreenP getInstanceRegistrationReportsFrequencyPerActivityScreenP() {
+		if (instanceRegistrationReportsFrequencyPerActivityScreenP == null) {
+			RegistrationReportsFrequencyPerActivityScreenP.instanceRegistrationReportsFrequencyPerActivityScreenP = new RegistrationReportsFrequencyPerActivityScreenP();
 		}
-		return ListOfAuthorsPerActivityScreenP.instanceListOfAuthorsPerActivityScreenP;
+		return RegistrationReportsFrequencyPerActivityScreenP.instanceRegistrationReportsFrequencyPerActivityScreenP;
 	}
 	
-	JComboBox comboBoxEvent;
-	JComboBox comboBoxActivity;
-	
-	List<String> authorsPerActivity;
-
 	/**
 	 * Launch the application.
 	 */
@@ -51,7 +48,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ListOfAuthorsPerActivityScreenP frame = new ListOfAuthorsPerActivityScreenP();
+					RegistrationReportsFrequencyPerActivityScreenP frame = new RegistrationReportsFrequencyPerActivityScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,8 +60,8 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ListOfAuthorsPerActivityScreenP() {
-		setTitle("List of Authors");
+	public RegistrationReportsFrequencyPerActivityScreenP() {
+		setTitle("Frequency per Activity");
 		
 		int inset = 30;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -76,28 +73,28 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 		setIconifiable(true);
 		getContentPane().setLayout(null);
 		
-		JLabel lblEvent = new JLabel("Event:");
-		lblEvent.setBounds(45, 41, 61, 16);
-		getContentPane().add(lblEvent);
-		
 		comboBoxEvent = new JComboBox();
-		comboBoxEvent.setBounds(118, 37, 366, 27);
+		comboBoxEvent.setBounds(78, 34, 416, 35);
 		getContentPane().add(comboBoxEvent);
 		
+		JLabel lblEvent = new JLabel("Event:");
+		lblEvent.setBounds(23, 42, 61, 16);
+		getContentPane().add(lblEvent);
+		
 		JLabel lblActivity = new JLabel("Activity:");
-		lblActivity.setBounds(45, 99, 61, 16);
+		lblActivity.setBounds(23, 93, 61, 16);
 		getContentPane().add(lblActivity);
 		
 		comboBoxActivity = new JComboBox();
-		comboBoxActivity.setBounds(118, 95, 366, 27);
+		comboBoxActivity.setBounds(78, 89, 416, 27);
 		getContentPane().add(comboBoxActivity);
 		
 		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(528, 36, 117, 29);
+		btnGenerate.setBounds(541, 42, 117, 29);
 		getContentPane().add(btnGenerate);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(528, 94, 117, 29);
+		btnBack.setBounds(541, 83, 117, 29);
 		getContentPane().add(btnBack);
 		
 		GenerateButtonAction generateAction = new GenerateButtonAction();
@@ -119,7 +116,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			ListOfAuthorsPerActivityScreenP.instanceListOfAuthorsPerActivityScreenP = null;
+			RegistrationReportsFrequencyPerActivityScreenP.instanceRegistrationReportsFrequencyPerActivityScreenP = null;
 		}
 	}
 	
@@ -129,10 +126,9 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 		public void actionPerformed(ActionEvent e) {
 			int idActivity;
 			try {
-				idActivity = {{systemName}}MainScreenP.getFacade().getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
-				Activity activity = {{systemName}}MainScreenP.getFacade().searchActivity(idActivity);
-				Set<String> conjunto = new HashSet<String>(authorsPerActivity);
-				{{systemName}}MainScreenP.getFacade().listOfAuthorsPerActivity(conjunto, activity);
+				idActivity = RiseEventsMainScreenP.getFacade().getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				Activity activity = RiseEventsMainScreenP.getFacade().searchActivity(idActivity);
+				RiseEventsMainScreenP.getFacade().frequencyPerActivity(participants, activity, comboBoxEvent.getSelectedItem().toString());	
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -177,9 +173,9 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 					return;
 				// buscando atividade com base no nome
 				int i;
-				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
+				i = RiseEventsMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				
-				authorsPerActivity = {{systemName}}MainScreenP.getFacade().getListOfAuthorsPerActivity(i);
+				participants = RiseEventsMainScreenP.facade.getParticipantsPerActivity(i);
 				
 				
 				
@@ -203,7 +199,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 				// buscando atividade com base no nome
 				List<Activity> activities;
 				List<String> nameActivities = new ArrayList<String>();
-				activities = {{systemName}}MainScreenP.facade.getActivitiesByEvent({{systemName}}MainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
+				activities = RiseEventsMainScreenP.facade.getActivitiesByEvent(RiseEventsMainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString()));
 				comboBoxActivity.removeAllItems();
 				//Passando de lista de atividades para lista de nome de atividades
 				Iterator<Activity> iteratorActivity = activities.iterator();
@@ -227,7 +223,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

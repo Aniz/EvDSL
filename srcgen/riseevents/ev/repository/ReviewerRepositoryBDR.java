@@ -50,7 +50,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 				+"', '"+reviewer.getEmail() 
 				+"', '"+reviewer.getFiliation()
 				+"', '"+reviewer.getTypeUser()
-				+"', '"+reviewer.getContato()   
+				+"', '"+reviewer.getEmail()   
 				+"')");
 
 			statement.executeUpdate("INSERT INTO reviewer Values('"+reviewer.getIdUser()
@@ -114,7 +114,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setContato(resultset.getint("contato"));
+				reviewer.setEmail(resultset.getint("email"));
 			
         	resultset.close();   
             } else {
@@ -152,7 +152,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setContato(resultset.getInt("contato"));
+				reviewer.setEmail(resultset.getInt("email"));
 			
         		list.add(reviewer);
             } 
@@ -186,7 +186,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
                     "',email = '"+ reviewer.getEmail() +
                     "', filiation = '" + reviewer.getFiliation() +
 					"', typeReviewer = '"+ reviewer.getTypeUser() + 
-						"', contato = '"+ reviewer.getContato() + 
+						"', email = '"+ reviewer.getEmail() + 
                  	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             
 		} catch(PersistenceMechanismException e){

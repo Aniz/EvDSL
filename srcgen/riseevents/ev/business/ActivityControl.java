@@ -22,7 +22,6 @@ public class ActivityControl {
 	public ActivityControl(ActivityRepository repository){
 		this.activities = repository;
 	}
-	
 	public void insert(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException{
 		if (activity != null) {
             if (!activities.isThere(activity.getIdActivity())) {
@@ -34,19 +33,15 @@ public class ActivityControl {
             throw new IllegalArgumentException();
         }
 	}
-
 	public void remove(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
 		activities.remove(idActivity);
 	}
-	
 	public void update(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
 		activities.update(activity);
 	}
-	
 	public Activity search(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
 		return activities.search(idActivity);
 	}
-
 	public boolean isThere(int idActivity) throws RepositoryException {
 		return activities.isThere(idActivity);
 	}

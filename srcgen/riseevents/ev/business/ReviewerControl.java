@@ -29,25 +29,22 @@ public class ReviewerControl {
             throw new IllegalArgumentException();
         }
 	}  
-
 	public void remove(int idUser) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
 		if(reviewers.isThere(idUser))
 			reviewers.remove(idUser);
 		else
 			throw new ReviewerNotFoundException(idUser);
 	}
-	
 	public void update(Reviewer reviewer) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
 		if(reviewers.isThere(reviewer.getIdUser()))
 			reviewers.update(reviewer);
 		else
 			throw new ReviewerNotFoundException(reviewer.getIdUser());
 	}
-
 	public Reviewer search(int idUser) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
 		return reviewers.search(idUser);
 	}
-
+	
 	public boolean isThere(int idUser) throws RepositoryException {
 		return reviewers.isThere(idUser);
 	}

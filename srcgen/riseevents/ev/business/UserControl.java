@@ -39,10 +39,35 @@ public class UserControl {
 	}
 
 	//usar instance of para saber qual o objeto dependendo disso direciona para o respectivo repositorio.
+	public void insert(User user) throws UserAlreadyInsertedException, RepositoryException{
+		if (user != null) {
+			if (!users.isThere(user.getIdUser())) 
+				users.insert(user);
+			else
+				throw new UserAlreadyInsertedException(user.getIdUser());
+		} else {
+            throw new IllegalArgumentException();
+        }
+	}
+	public void remove(int idUser) throws UserAlreadyInsertedException, RepositoryException, UserNotFoundException{
+		if (users.isThere(idUser)) 
+			users.remove(idUser);
+		else
+			throw new UserNotFoundException(idUser);
+	}
+	public void update(User user) throws UserAlreadyInsertedException, RepositoryException, UserNotFoundException{
+		if (users.isThere(user.getIdUser())) 
+			users.update(user);
+		else
+			throw new UserNotFoundException(user.getIdUser());
+	}
+	public User search(int idUser) throws UserAlreadyInsertedException, RepositoryException, UserNotFoundException{
+		return users.search(idUser);
+	}
 
-
-
-
+	public boolean isThere(int idUser) throws RepositoryException {
+		return users.isThere(idUser);
+	}
 	
 	public List<User> getUsers() throws RepositoryException { 
 		return users.getUsers();  

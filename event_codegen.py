@@ -99,7 +99,9 @@ def main(debug=False):
         if component.__class__.__name__ == 'Action':
             actionsArray.append(component)
         
-        elif component.__class__.__name__ == 'Option':
+        elif component.__class__.__name__ == 'Option' or component.__class__.__name__ == 'NewOption':
+            if component.__class__.__name__ == 'NewOption':
+                component.new = True
             selectedOptionsArray.append(component.entity)
             componentDict[component.entity] = {"option":component}
             
@@ -182,8 +184,18 @@ def main(debug=False):
             for keyCommand,view in enumerate(value["commands"]):
                 copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData,systemName)
         else :
-            print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
-
+            #print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
+            print("[New] Option '%s' created" % key)
+            generateFile(templateFolder,entityFolder,'java.template',key,jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,controllerFolder,'java.controllerTemplate',key+"Control",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,repositoryFolder,'java.repositoryTemplate',key+"Repository",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,repositoryFolder,'java.repositoryBDRTemplate',key+"RepositoryBDR",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,exceptionFolder,'java.exceptionAlreadyInsertedTemplate',key+"AlreadyInsertedException",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,exceptionFolder,'java.exceptionNotFoundTemplate',key+"NotFoundException",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Managment'+"ScreenP",jinja_env,value,componentExtraData,systemName)
+       
     #DepedentClassses
     dependencesDict = {} 
     dependencesDict["Review"] = "Reviewer","Submission"
@@ -223,11 +235,11 @@ def main(debug=False):
         
     for keyStatmentView,valueStatment in enumerate(statmentsArray):
         if (valueStatment.condition == 'def'):
-            copyCodeFile(viewCodeFolder,viewFolder,valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
+            copyCodeFile(viewCodeFolder,viewFolder,key+valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
        
     copyCodeFile(exceptionCodeFolder,exceptionFolder,"RepositoryException",jinja_env,"","",systemName)
     copy(join(this_folder,'lib'),join(srcgen_folder,'lib'))
-    generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,"","",systemName)
+    generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,"",systemName)
         
 def createDotFiles(event_mm,event_model,dotFolder):
     # Export to .dot file for visualization
@@ -243,8 +255,12 @@ def createDotFiles(event_mm,event_model,dotFolder):
     
 def copyCodeFile(src,dest,nameFile,jinja_env,var,extraVar,systemName):
     codeFileTemplate = jinja_env.get_template(join(src,nameFile+'.java'))
-    with open(join(dest,
-                      "%s.java" % nameFile), 'w') as f:
+    with open(join(dest,"%s.java" % nameFile), 'w') as f:
+            f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName))
+
+def generateFile(src,dest,file,nameFile,jinja_env,var,extraVar,systemName):
+    codeFileTemplate = jinja_env.get_template(join(src,file))
+    with open(join(dest,"%s.java" % nameFile), 'w') as f:
             f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName))
 
 def createFolder(dest,name):

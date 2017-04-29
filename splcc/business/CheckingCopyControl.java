@@ -24,7 +24,6 @@ public class CheckingCopyControl {
 		this.checkingCopys = repository;
 	}
 
-	
 	public void insert(CheckingCopy checkingCopy) throws CheckingCopyAlreadyInsertedException, RepositoryException{
 		if (checkingCopy != null) {
 			if (!checkingCopys.isThere(checkingCopy.getIdCheckingCopy())) 

@@ -15,31 +15,6 @@ public class AuthorControl {
 		public AuthorControl(AuthorRepository repository){
 			this.authors = repository;
 		}
-		
-		public void insert(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
-			if (author != null) {
-	            if (!authors.isThere(author.getIdAuthor())) {
-	                authors.insert(author);
-	            } else {
-	                throw new AuthorAlreadyInsertedException(author.getIdAuthor());
-	            }
-	        } else {
-	            throw new IllegalArgumentException();
-	        }
-		}
-
-		public void remove(int idAuthor) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
-			authors.remove(idAuthor);
-		}
-		
-		public void update(Author author) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
-			authors.update(author);
-		}
-		
-		public Author search(int idAuthor) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
-			return authors.search(idAuthor);
-		}
-
 		public boolean isThere(int idAuthor) throws RepositoryException {
 			return authors.isThere(idAuthor);
 		}

@@ -1,5 +1,5 @@
 //#if ${ReportsFrequencyperEvent} == "T"
-package {{systemName|lower}}.ev.ui2;
+package riseevents.ev.ui2;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -11,10 +11,10 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
-import {{systemName|lower}}.ev.data.Event;
-import {{systemName|lower}}.ev.exception.EventAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.EventNotFoundException;
-import {{systemName|lower}}.ev.exception.RepositoryException;
+import riseevents.ev.data.Event;
+import riseevents.ev.exception.EventAlreadyInsertedException;
+import riseevents.ev.exception.EventNotFoundException;
+import riseevents.ev.exception.RepositoryException;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -24,20 +24,20 @@ import javax.swing.JOptionPane;
 import com.lowagie.text.DocumentException;
 
 
-public class FrequencyPerEventScreenP extends JInternalFrame {
+public class RegistrationReportsFrequencyPerEventScreenP extends JInternalFrame {
 
 	
 	List<String> participants;
 	
 	JComboBox comboBoxEvent;
 	
-	private static FrequencyPerEventScreenP instanceFrequencyPerEventScreenP;
+	private static RegistrationReportsFrequencyPerEventScreenP instanceRegistrationReportsFrequencyPerEventScreenP;
 	
-	public static FrequencyPerEventScreenP getInstanceFrequencyPerEventScreenP() {
-		if (instanceFrequencyPerEventScreenP == null) {
-			FrequencyPerEventScreenP.instanceFrequencyPerEventScreenP = new FrequencyPerEventScreenP();
+	public static RegistrationReportsFrequencyPerEventScreenP getInstanceRegistrationReportsFrequencyPerEventScreenP() {
+		if (instanceRegistrationReportsFrequencyPerEventScreenP == null) {
+			RegistrationReportsFrequencyPerEventScreenP.instanceRegistrationReportsFrequencyPerEventScreenP = new RegistrationReportsFrequencyPerEventScreenP();
 		}
-		return FrequencyPerEventScreenP.instanceFrequencyPerEventScreenP;
+		return RegistrationReportsFrequencyPerEventScreenP.instanceRegistrationReportsFrequencyPerEventScreenP;
 	}
 	/**
 	 * Launch the application.
@@ -46,7 +46,7 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrequencyPerEventScreenP frame = new FrequencyPerEventScreenP();
+					RegistrationReportsFrequencyPerEventScreenP frame = new RegistrationReportsFrequencyPerEventScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +58,7 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrequencyPerEventScreenP() {
+	public RegistrationReportsFrequencyPerEventScreenP() {
 		setTitle("Frequency per Event");
 		
 		int inset = 30;
@@ -103,7 +103,7 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			FrequencyPerEventScreenP.instanceFrequencyPerEventScreenP = null;
+			RegistrationReportsFrequencyPerEventScreenP.instanceRegistrationReportsFrequencyPerEventScreenP = null;
 		}
 	}
 	
@@ -113,9 +113,9 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 		public void actionPerformed(ActionEvent e) {
 			int idEvent;
 			try {
-				idEvent = {{systemName}}MainScreenP.getFacade().getEventIdByName(comboBoxEvent.getSelectedItem().toString());
-				Event event = {{systemName}}MainScreenP.getFacade().searchEvent(idEvent);
-				{{systemName}}MainScreenP.getFacade().frequencyPerEvent(participants,event);
+				idEvent = RiseEventsMainScreenP.getFacade().getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+				Event event = RiseEventsMainScreenP.getFacade().searchEvent(idEvent);
+				RiseEventsMainScreenP.getFacade().frequencyPerEvent(participants,event);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
@@ -148,7 +148,7 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -169,8 +169,8 @@ public class FrequencyPerEventScreenP extends JInternalFrame {
 
 			try {
 				int i;
-				i = {{systemName}}MainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
-				participants = {{systemName}}MainScreenP.facade.getParticipantsPerEvent(i);
+				i = RiseEventsMainScreenP.facade.getEventIdByName(comboBoxEvent.getSelectedItem().toString());
+				participants = RiseEventsMainScreenP.facade.getParticipantsPerEvent(i);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",

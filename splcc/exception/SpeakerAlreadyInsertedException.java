@@ -16,7 +16,7 @@ public class SpeakerAlreadyInsertedException extends Exception {
 	}
 	
 	public String toString(){
-		return ExceptionMessages,EXC_ALREADY_EXISTS;
+		return ExceptionMessages.EXC_ALREADY_EXISTS;
 	}
 }
 //#endif

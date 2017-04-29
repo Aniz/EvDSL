@@ -27,16 +27,16 @@ import riseevents.ev.exception.RepositoryException;
 
 import com.lowagie.text.DocumentException;
 
-public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
+public class RegistrationReportsListofAuthorsScreenP extends JInternalFrame {
 	
 	
-	private static ListOfAuthorsPerActivityScreenP instanceListOfAuthorsPerActivityScreenP;
+	private static RegistrationReportsListofAuthorsScreenP instanceRegistrationReportsListofAuthorsScreenP;
 	
-	public static ListOfAuthorsPerActivityScreenP getInstanceListOfAuthorsPerActivityScreenP() {
-		if (instanceListOfAuthorsPerActivityScreenP == null) {
-			ListOfAuthorsPerActivityScreenP.instanceListOfAuthorsPerActivityScreenP = new ListOfAuthorsPerActivityScreenP();
+	public static RegistrationReportsListofAuthorsScreenP getInstanceRegistrationReportsListofAuthorsScreenP() {
+		if (instanceRegistrationReportsListofAuthorsScreenP == null) {
+			RegistrationReportsListofAuthorsScreenP.instanceRegistrationReportsListofAuthorsScreenP = new RegistrationReportsListofAuthorsScreenP();
 		}
-		return ListOfAuthorsPerActivityScreenP.instanceListOfAuthorsPerActivityScreenP;
+		return RegistrationReportsListofAuthorsScreenP.instanceRegistrationReportsListofAuthorsScreenP;
 	}
 	
 	JComboBox comboBoxEvent;
@@ -51,7 +51,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ListOfAuthorsPerActivityScreenP frame = new ListOfAuthorsPerActivityScreenP();
+					RegistrationReportsListofAuthorsScreenP frame = new RegistrationReportsListofAuthorsScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +63,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ListOfAuthorsPerActivityScreenP() {
+	public RegistrationReportsListofAuthorsScreenP() {
 		setTitle("List of Authors");
 		
 		int inset = 30;
@@ -119,7 +119,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			ListOfAuthorsPerActivityScreenP.instanceListOfAuthorsPerActivityScreenP = null;
+			RegistrationReportsListofAuthorsScreenP.instanceRegistrationReportsListofAuthorsScreenP = null;
 		}
 	}
 	
@@ -179,7 +179,7 @@ public class ListOfAuthorsPerActivityScreenP extends JInternalFrame {
 				int i;
 				i = RiseEventsMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				
-				authorsPerActivity = RiseEventsMainScreenP.getFacade().getListOfAuthorsPerActivity(i);
+				authorsPerActivity = RiseEventsMainScreenP.getFacade().getRegistrationReportsListofAuthors(i);
 				
 				
 				

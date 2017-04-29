@@ -46,7 +46,7 @@ public class UserRepositoryBDR implements UserRepository {
 				+"', '"+user.getEmail() 
 				+"', '"+user.getFiliation()
 				+"', '"+user.getTypeUser()
-				+"', '"+user.getContato()   
+				+"', '"+user.getEmail()   
 				+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -100,7 +100,7 @@ public class UserRepositoryBDR implements UserRepository {
             	user.setEmail(resultset.getString("email"));
             	user.setFiliation(resultset.getString("filiation"));
 				user.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				user.setContato(resultset.getInt("contato"));
+				user.setEmail(resultset.getInt("email"));
 			
            
             	resultset.close();
@@ -137,7 +137,7 @@ public class UserRepositoryBDR implements UserRepository {
             	user.setFiliation(resultset.getString("filiation"));
 				user.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
    
-				user.setContato(resultset.getInt("contato"));
+				user.setEmail(resultset.getInt("email"));
 				list.add(user);
             } 
 			resultset.close();
@@ -168,7 +168,7 @@ public class UserRepositoryBDR implements UserRepository {
     	                                     "',email = '"+ user.getEmail() +
     	                                     "', filiation = '" + user.getFiliation() +
 											"', typeUser = '"+ user.getTypeUser() + 
-											"', contato = '"+ user.getContato() + 
+											"', email = '"+ user.getEmail() + 
     	                                     "' WHERE idUser = '"+ user.getIdUser()+"'");
             if (i == 0) {
             	throw new UserNotFoundException(user.getIdUser());

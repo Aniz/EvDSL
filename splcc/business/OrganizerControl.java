@@ -19,7 +19,7 @@ public class OrganizerControl {
 
 	}
 	
-	//usar instance of para saber qual o objeto dependendo disso direciona para o respectivo repositorio.
+	{% if 'Insert' in data.commands %}
 	public void insert(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException{
 		if (organizer != null) {
 			if (!organizers.isThere(organizer.getIdUser())) {
@@ -31,7 +31,8 @@ public class OrganizerControl {
             throw new IllegalArgumentException();
         }
 	}
-
+	{% endif %}
+	{% if 'Remove' in data.commands %}
 	public void remove(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
 		if(organizers.isThere(idUser))
 			organizers.remove(idUser);
@@ -39,18 +40,21 @@ public class OrganizerControl {
 			throw new OrganizerNotFoundException(idUser);
 
 	}
-	
+	{% endif %}
+	{% if 'Update' in data.commands %}
 	public void update(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
 		if(organizers.isThere(organizer.getIdUser()))
 			organizers.update(organizer);
 		else
 			throw new OrganizerNotFoundException(organizer.getIdUser());
 	}
-
+	{% endif %}
+	{% if 'Search' in data.commands %}
 	public Organizer search(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
 		return organizers.search(idUser);
 	}
-
+	{% endif %}
+	
 	public boolean isThere(int idUser) throws RepositoryException {
 		return organizers.isThere(idUser);
 	}

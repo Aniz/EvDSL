@@ -8,7 +8,7 @@ EventModel:
 ;
 
 Component:  
-     Option | Action | Statment
+     Option | Action | Statment | NewOption
 ;
 
 Statment: 
@@ -23,6 +23,13 @@ Condition:
 
 Option:
   'add' entity=Entity 
+  ('+' properties*=Property)*     
+  "show" command=Command
+  ("types" categories*=Category[',']".")*
+;
+
+NewOption:
+  'addNew' entity=ID 
   ('+' properties*=Property)*     
   "show" command=Command
   ("types" categories*=Category[',']".")*
@@ -67,10 +74,10 @@ CommandType:
 
 Action:
   'include' actionType=[ActionType]
-  params*=Param + "."
+  params*=NewData + "."
 ;
 
-Param:
+NewData:
   name=ID
 ;
 

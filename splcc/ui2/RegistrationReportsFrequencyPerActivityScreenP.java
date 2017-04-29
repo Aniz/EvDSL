@@ -25,20 +25,20 @@ import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
 import {{systemName|lower}}.ev.exception.RepositoryException;
 
-public class FrequencyPerActivityScreenP extends JInternalFrame {
+public class RegistrationReportsRegistrationReportsFrequencyPerActivityScreenP extends JInternalFrame {
 
 	private JComboBox comboBoxEvent;
 	private JComboBox comboBoxActivity;
 	
 	List<String> participants;
 	
-	private static FrequencyPerActivityScreenP instanceFrequencyPerActivityScreenP;
+	private static RegistrationReportsFrequencyPerActivityScreenP instanceRegistrationReportsFrequencyPerActivityScreenP;
 	
-	public static FrequencyPerActivityScreenP getInstanceFrequencyPerActivityScreenP() {
-		if (instanceFrequencyPerActivityScreenP == null) {
-			FrequencyPerActivityScreenP.instanceFrequencyPerActivityScreenP = new FrequencyPerActivityScreenP();
+	public static RegistrationReportsFrequencyPerActivityScreenP getInstanceRegistrationReportsFrequencyPerActivityScreenP() {
+		if (instanceRegistrationReportsFrequencyPerActivityScreenP == null) {
+			RegistrationReportsFrequencyPerActivityScreenP.instanceRegistrationReportsFrequencyPerActivityScreenP = new RegistrationReportsFrequencyPerActivityScreenP();
 		}
-		return FrequencyPerActivityScreenP.instanceFrequencyPerActivityScreenP;
+		return RegistrationReportsFrequencyPerActivityScreenP.instanceRegistrationReportsFrequencyPerActivityScreenP;
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class FrequencyPerActivityScreenP extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrequencyPerActivityScreenP frame = new FrequencyPerActivityScreenP();
+					RegistrationReportsFrequencyPerActivityScreenP frame = new RegistrationReportsFrequencyPerActivityScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +60,7 @@ public class FrequencyPerActivityScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrequencyPerActivityScreenP() {
+	public RegistrationReportsFrequencyPerActivityScreenP() {
 		setTitle("Frequency per Activity");
 		
 		int inset = 30;
@@ -116,7 +116,7 @@ public class FrequencyPerActivityScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			FrequencyPerActivityScreenP.instanceFrequencyPerActivityScreenP = null;
+			RegistrationReportsFrequencyPerActivityScreenP.instanceRegistrationReportsFrequencyPerActivityScreenP = null;
 		}
 	}
 	

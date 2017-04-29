@@ -22,7 +22,7 @@ public class ActivityControl {
 	public ActivityControl(ActivityRepository repository){
 		this.activities = repository;
 	}
-	
+	{% if 'Insert' in data.commands %}
 	public void insert(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException{
 		if (activity != null) {
             if (!activities.isThere(activity.getIdActivity())) {
@@ -34,19 +34,22 @@ public class ActivityControl {
             throw new IllegalArgumentException();
         }
 	}
-
+	{% endif %}
+	{% if 'Remove' in data.commands %}
 	public void remove(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
 		activities.remove(idActivity);
 	}
-	
+	{% endif %}
+	{% if 'Update' in data.commands %}
 	public void update(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
 		activities.update(activity);
 	}
-	
+	{% endif %}
+	{% if 'Search' in data.commands %}
 	public Activity search(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
 		return activities.search(idActivity);
 	}
-
+	{% endif %}
 	public boolean isThere(int idActivity) throws RepositoryException {
 		return activities.isThere(idActivity);
 	}

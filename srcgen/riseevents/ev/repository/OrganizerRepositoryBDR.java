@@ -48,7 +48,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				+"', '"+organizer.getEmail() 
 				+"', '"+organizer.getFiliation()
 				+"', '"+organizer.getTypeUser()
-				+"', '"+user.getContato()   
+				+"', '"+user.getEmail()   
 				+"')");
 
            	statement.executeUpdate("INSERT INTO organizer Values('"+organizer.getIdUser()
@@ -111,7 +111,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			
         
 				organizer.setTypeUser(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
-				organizer.setContato(resultset.getInt("contato"));
+				organizer.setEmail(resultset.getInt("email"));
 			
 
             } else {
@@ -151,7 +151,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			
         
 				organizer.setTypeUser(resultset.getString("typeUser"));
-				organizer.setContato(resultset.getInt("contato"));
+				organizer.setEmail(resultset.getInt("email"));
 			
 
 				list.add(organizer);
@@ -183,7 +183,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
                 "', filiation = '" + organizer.getFiliation() +
 
 				"', typeUser = '"+ organizer.getTypeUser() + 
-				"', contato = '"+ organizer.getContato() + 
+				"', email = '"+ organizer.getEmail() + 
                 "' WHERE idUser = '"+ organizer.getIdUser()+"'");
 
             	statement.executeUpdate("UPDATE organizer SET typeOrganizer = '"+ organizer.getTypeOrganizer() + 					"', contato = '"+ organizer.getContato() + 

@@ -39,7 +39,7 @@ public class UserControl {
 	}
 
 	//usar instance of para saber qual o objeto dependendo disso direciona para o respectivo repositorio.
-	{% if 'Insert' in data.statments %}
+	{% if 'Insert' in data.commands %}
 	public void insert(User user) throws UserAlreadyInsertedException, RepositoryException{
 		if (user != null) {
 			if (!users.isThere(user.getIdUser())) 
@@ -51,8 +51,7 @@ public class UserControl {
         }
 	}
 	{% endif %}
-
-	{% if 'Remove' in data.statments %}
+	{% if 'Remove' in data.commands %}
 	public void remove(int idUser) throws UserAlreadyInsertedException, RepositoryException, UserNotFoundException{
 		if (users.isThere(idUser)) 
 			users.remove(idUser);
@@ -60,8 +59,7 @@ public class UserControl {
 			throw new UserNotFoundException(idUser);
 	}
 	{% endif %}
-
-	{% if 'Update' in data.statments %}
+	{% if 'Update' in data.commands %}
 	public void update(User user) throws UserAlreadyInsertedException, RepositoryException, UserNotFoundException{
 		if (users.isThere(user.getIdUser())) 
 			users.update(user);
@@ -69,18 +67,15 @@ public class UserControl {
 			throw new UserNotFoundException(user.getIdUser());
 	}
 	{% endif %}
-
-	{% if 'Search' in data.statments %}
+	{% if 'Search' in data.commands %}
 	public User search(int idUser) throws UserAlreadyInsertedException, RepositoryException, UserNotFoundException{
 		return users.search(idUser);
 	}
 	{% endif %}
 
-	{% if 'isThere' in data.statments %}
 	public boolean isThere(int idUser) throws RepositoryException {
 		return users.isThere(idUser);
 	}
-	{% endif %}
 	
 	public List<User> getUsers() throws RepositoryException { 
 		return users.getUsers();  

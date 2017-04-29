@@ -1,7 +1,7 @@
 Create RiseEvents 
 
 add User
-	+contato : integer
+	+email : integer
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
@@ -65,6 +65,11 @@ add CheckingCopy
 show Insert Update Remove Search ListAll
 	types Atestado,Certificado.
 
+addNew NewClass
++banana : integer
+show Insert
+types AAAA,BBB.
+
 include Conflit.
 
 if Payment.Credito -> askCardInfo 
@@ -84,7 +89,6 @@ if Assignment -> notificationsPaperAssignemnt
 if Assignment -> notificationsAceptanceRejection 
 
 def ActivityUser -> reportsFrequencyperActivity
-
 
 
 

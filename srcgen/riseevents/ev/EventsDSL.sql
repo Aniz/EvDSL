@@ -6,7 +6,7 @@ CREATE TABLE `User`(
 	filiation varchar(255) NOT NULL, 
 		typeUser varchar(255) NOT NULL,
 				
-		contato varchar(255) NOT NULL,
+		email varchar(255) NOT NULL,
 	        
 PRIMARY KEY (idUser));
 
@@ -207,3 +207,9 @@ totalValue float,
 dateOfIssue varchar(255) NOT NULL,
 PRIMARY KEY (idReceipt),
 FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
+
+Create table NewClass(
+	idNewClass int(10) NOT NULL AUTO_INCREMENT,
+				
+	banana varchar(255) NOT NULL,
+PRIMARY KEY (id);

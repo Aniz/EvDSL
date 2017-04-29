@@ -21,7 +21,7 @@ public class PaymentControl {
 		this.payments = repository;
 	}
 
-	
+	{% if 'Insert' in data.commands %}
 	public void insert(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException{
 		if (payment != null) {
 			if (!payments.isThere(payment.getIdPayment())) 
@@ -32,7 +32,7 @@ public class PaymentControl {
             throw new IllegalArgumentException();
         }
 	}
-	
+	{% endif %}
 	public List<Payment> getPayments() throws RepositoryException {
 		return payments.getPayments();  
 	}
@@ -42,21 +42,22 @@ public class PaymentControl {
 		return payments.getPaymentLastId();
 	}
 
-
+	{% if 'Update' in data.commands %}	
 	public void update(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
 		payments.update(payment);
 	}
-
-
+	{% endif %}
+	{% if 'Remove' in data.commands %}
 	public void remove(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
 		payments.remove(idPayment);
 	}
-
-
+	{% endif %}
+	{% if 'Search' in data.commands %}
 	public Payment search(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
 		return payments.search(idPayment);
 	}
-
+	{% endif %}
+	
 	public void type(Payment payment, Payment out) throws DocumentException, IOException {
 		payment.startarAcaoTypePayment(out);
 	}
