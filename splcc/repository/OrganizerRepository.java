@@ -16,7 +16,7 @@ public interface OrganizerRepository {
 
 	public Organizer search(int idUser) throws OrganizerNotFoundException, RepositoryException;
 	
-	public List<Organizer> getOrganizers() throws RepositoryException;
+	public List<Organizer> getOrganizerList() throws RepositoryException;
 
 	public void update(Organizer organizer) throws OrganizerNotFoundException, RepositoryException;
 

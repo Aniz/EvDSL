@@ -134,7 +134,7 @@ public class EventRepositoryBDR implements EventRepository {
 	}
 
 	@Override
-	public List<Event> getEvents() throws RepositoryException {
+	public List<Event> getEventList() throws RepositoryException {
 		Event event = null;
 		ArrayList<Event> list = new ArrayList<Event>();
         try {

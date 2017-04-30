@@ -24,11 +24,11 @@ public class NewClassTableRender extends DefaultTableCellRenderer {
 		}
 		//Tamanho das Colunas
 		table.getColumnModel().getColumn(0).setMaxWidth(13);
-		table.getColumnModel().getColumn(1).setMaxWidth(213);
-
+		table.getColumnModel().getColumn(1).setMaxWidth(13);
+		
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
-
+		
 		//Texto Centralizado nas Colunas
 		this.setHorizontalAlignment(CENTER);
 		return this;

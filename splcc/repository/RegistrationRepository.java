@@ -8,7 +8,7 @@ import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface RegistrationRepository {
 
-	public List<Registration> getRegistrations() throws RepositoryException;
+	public List<Registration> getRegistrationList() throws RepositoryException;
 
 	public Registration search(int idRegistration) throws RegistrationNotFoundException, RepositoryException;
 	

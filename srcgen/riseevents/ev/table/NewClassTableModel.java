@@ -11,33 +11,33 @@ import riseevents.ev.data.NewClass;
 public class NewClassTableModel extends AbstractTableModel{
 	// Nome das Colunas
 	
-			private static final int COL_ACTIVITYID = 0;
-			private static final int COL_ORGANIZERID = 1;
+			private static final int COL_BANANA = 1;
 			
 			// Lista de Valores
 			private List<NewClass> rows;
 			
-			public NewClassTableModel(List<newclass> values){
+			public NewClassTableModel(List<NewClass> values){
 				this.rows = values;
 			}
-			
+			v
 			public int getRowCount() {
 				return rows.size();
 			}
 			
 			//Quantidade de Colunas
 			public int getColumnCount() {
-				return 2;
+				return 1;
 			}
 			
 			//Preenchimento de cada coluna
 				public Object getValueAt(int rowIndex, int columnIndex) {
 					NewClass newclass = rows.get(rowIndex);
-					if (columnIndex == COL_ACTIVITYID) {
-						return newclass.getIdActivity();
-					}  else if (columnIndex == COL_ORGANIZERID) {
-						return newclass.getIdOrganizer();
-					} 
+					if (columnIndex == COL_NEWCLASSID) {
+						return newclass.getId();
+					}
+					else if (columnIndex == COL_BANANA) {
+						return newclass.getBanana();
+					}  
 					return null;
 				}
 				

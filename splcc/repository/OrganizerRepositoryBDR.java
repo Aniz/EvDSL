@@ -153,7 +153,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 	}
 
 	@Override
-	public List<Organizer> getOrganizers() throws RepositoryException {
+	public List<Organizer> getOrganizerList() throws RepositoryException {
 		Organizer organizer = null;
 		ArrayList<Organizer> list = new ArrayList<Organizer>();
         try {

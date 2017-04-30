@@ -82,7 +82,7 @@ public class RegistrationRepositoryBDR implements RegistrationRepository {
 
 
 	@Override
-	public List<Registration> getRegistrations() throws RepositoryException {
+	public List<Registration> getRegistrationList() throws RepositoryException {
 		Registration registration = null;
 		ArrayList<Registration> list = new ArrayList<Registration>();
         try {

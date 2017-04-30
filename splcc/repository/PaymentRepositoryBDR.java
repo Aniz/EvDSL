@@ -75,7 +75,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 
 
 	@Override
-	public List<Payment> getPayments() throws RepositoryException {
+	public List<Payment> getPaymentList() throws RepositoryException {
 		Payment payment = null;
 		ArrayList<Payment> list = new ArrayList<Payment>();
         try {

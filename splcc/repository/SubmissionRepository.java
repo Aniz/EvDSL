@@ -15,7 +15,7 @@ public interface SubmissionRepository {
 
 	public void insert(Submission submission) throws RepositoryException;
 	
-	public List<Submission> getSubmissions() throws RepositoryException;
+	public List<Submission> getSubmissionList() throws RepositoryException;
 	
 	public boolean isThere(int idSubmission) throws RepositoryException;
 	

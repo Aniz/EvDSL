@@ -125,7 +125,7 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 	}
 
 	@Override
-	public List<Assignment> getAssignments() throws RepositoryException {
+	public List<Assignment> getAssignmentList() throws RepositoryException {
 		Assignment assignment=null;
 		ArrayList<Assignment> list = new ArrayList<Assignment>();
         try {

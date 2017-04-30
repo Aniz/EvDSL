@@ -11,7 +11,7 @@ public interface ReceiptRepository {
 
 	public void insert(Receipt receipt) throws RepositoryException;
 	
-	public List<Receipt> getReceipts() throws RepositoryException;
+	public List<Receipt> getReceiptList() throws RepositoryException;
 	
 	public boolean isThere(int idReceipt) throws RepositoryException;
 	

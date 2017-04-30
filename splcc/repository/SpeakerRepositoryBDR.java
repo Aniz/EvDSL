@@ -156,7 +156,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 	}
 
 	@Override
-	public List<Speaker> getSpeakers() throws RepositoryException {
+	public List<Speaker> getSpeakerList() throws RepositoryException {
 		Speaker speaker = null;
 		ArrayList<Speaker> list = new ArrayList<Speaker>();
         try {

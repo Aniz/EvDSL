@@ -114,7 +114,7 @@ public class ActivitySpeakerRepositoryBDR implements ActivitySpeakerRepository {
 
 
 	@Override
-	public List<ActivitySpeaker> getActivitiesSpeakers() throws RepositoryException {
+	public List<ActivitySpeaker> getActivitiesSpeakerList() throws RepositoryException {
 		ActivitySpeaker activitySpeaker=null;
 		ArrayList<ActivitySpeaker> list = new ArrayList<ActivitySpeaker>();
         try {

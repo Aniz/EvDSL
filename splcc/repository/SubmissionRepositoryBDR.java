@@ -75,7 +75,7 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 	}
 
 	@Override
-	public List<Submission> getSubmissions() throws RepositoryException {
+	public List<Submission> getSubmissionList() throws RepositoryException {
 		Submission submission = null;
 		ArrayList<Submission> list = new ArrayList<Submission>();
         try {

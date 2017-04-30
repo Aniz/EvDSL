@@ -12,7 +12,7 @@ public interface PaymentRepository {
 
 	public void insert(Payment payment) throws RepositoryException;
 	
-	public List<Payment> getPayments() throws RepositoryException;
+	public List<Payment> getPaymentList() throws RepositoryException;
 	
 	public boolean isThere(int idPayment) throws RepositoryException;
 

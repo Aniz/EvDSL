@@ -6,7 +6,7 @@ CREATE TABLE `User`(
 	filiation varchar(255) NOT NULL, 
 		typeUser varchar(255) NOT NULL,
 				
-		email varchar(255) NOT NULL,
+		phone varchar(255) NOT NULL,
 	        
 PRIMARY KEY (idUser));
 

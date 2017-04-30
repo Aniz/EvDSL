@@ -131,7 +131,7 @@ public class UserRepositoryBDR implements UserRepository {
 	}
 	
 	@Override
-	public List<User> getUsers() throws RepositoryException {
+	public List<User> getUserList() throws RepositoryException {
 		User user = null;
 		List<User> list = new ArrayList<User>();
         try {

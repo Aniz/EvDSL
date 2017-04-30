@@ -15,7 +15,7 @@ public interface AuthorRepository {
 
 	public Author search(int idAuthor) throws AuthorNotFoundException, RepositoryException;
 	
-	public List<Author> getAuthors() throws RepositoryException;
+	public List<Author> getAuthorList() throws RepositoryException;
 
 	public void update(Author author) throws AuthorNotFoundException, RepositoryException;
 

@@ -16,7 +16,7 @@ public interface SubmissionAuthorRepository {
 
 	public SubmissionAuthor search(SubmissionAuthor submissionAuthor) throws SubmissionAuthorNotFoundException, RepositoryException;
 	
-	public List<SubmissionAuthor> getSubmissionAuthors() throws RepositoryException;
+	public List<SubmissionAuthor> getSubmissionAuthorList() throws RepositoryException;
 
 	public void update(SubmissionAuthor submissionAuthor) throws SubmissionAuthorNotFoundException, RepositoryException;
 

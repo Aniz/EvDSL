@@ -12,7 +12,7 @@ public interface ReviewRepository {
 
 	public void insert(Review review) throws RepositoryException;
 	
-	public List<Review> getReviews() throws RepositoryException;
+	public List<Review> getReviewList() throws RepositoryException;
 	
 	public boolean isThere(int idReview) throws RepositoryException;
 	

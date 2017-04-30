@@ -112,7 +112,7 @@ public class ActivityUserRepositoryBDR implements ActivityUserRepository{
 	}
 	
 	@Override
-	public List<ActivityUser> getActivitiesUsers() throws RepositoryException {
+	public List<ActivityUser> getActivitiesUserList() throws RepositoryException {
 		ActivityUser activityUser=null;
 		ArrayList<ActivityUser> list = new ArrayList<ActivityUser>();
         try {

@@ -15,7 +15,7 @@ public interface ActivityUserRepository {
 
 	public ActivityUser search(int idUser) throws ActivityUserNotFoundException, RepositoryException;
 	
-	public List<ActivityUser> getActivitiesUsers() throws RepositoryException;
+	public List<ActivityUser> getActivitiesUserList() throws RepositoryException;
 
 	public void update(ActivityUser activityUser) throws ActivityUserNotFoundException, RepositoryException;
 

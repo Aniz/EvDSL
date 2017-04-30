@@ -15,7 +15,7 @@ public interface ActivityOrganizerRepository {
 
 	public ActivityOrganizer search(int idActivity) throws ActivityOrganizerNotFoundException, RepositoryException;
 	
-	public List<ActivityOrganizer> getActivitiesOrganizers() throws RepositoryException;
+	public List<ActivityOrganizer> getActivitiesOrganizerList() throws RepositoryException;
 
 	public void update(ActivityOrganizer activityOrganzier) throws ActivityOrganizerNotFoundException, RepositoryException;
 

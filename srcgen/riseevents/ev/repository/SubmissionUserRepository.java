@@ -15,7 +15,7 @@ public interface SubmissionUserRepository {
 
 	public SubmissionUser search(SubmissionUser submissionUser) throws SubmissionUserNotFoundException, RepositoryException;
 	
-	public List<SubmissionUser> getSubmissionUsers() throws RepositoryException;
+	public List<SubmissionUser> getSubmissionUserList() throws RepositoryException;
 
 	public void update(SubmissionUser submissionUser) throws SubmissionUserNotFoundException, RepositoryException;
 

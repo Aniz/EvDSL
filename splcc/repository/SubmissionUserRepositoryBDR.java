@@ -110,7 +110,7 @@ public class SubmissionUserRepositoryBDR implements SubmissionUserRepository{
 	}
 	
 	@Override
-	public List<SubmissionUser> getSubmissionUsers() throws RepositoryException {
+	public List<SubmissionUser> getSubmissionUserList() throws RepositoryException {
 		SubmissionUser submissionUser=null;
 		ArrayList<SubmissionUser> list = new ArrayList<SubmissionUser>();
         try {

@@ -48,7 +48,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				+"', '"+organizer.getEmail() 
 				+"', '"+organizer.getFiliation()
 				+"', '"+organizer.getTypeUser()
-				+"', '"+user.getEmail()   
+				+"', '"+user.getPhone()   
 				+"')");
 
            	statement.executeUpdate("INSERT INTO organizer Values('"+organizer.getIdUser()
@@ -111,7 +111,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			
         
 				organizer.setTypeUser(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
-				organizer.setEmail(resultset.getInt("email"));
+				organizer.setPhone(resultset.getInt("phone"));
 			
 
             } else {
@@ -133,7 +133,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 	}
 
 	@Override
-	public List<Organizer> getOrganizers() throws RepositoryException {
+	public List<Organizer> getOrganizerList() throws RepositoryException {
 		Organizer organizer = null;
 		ArrayList<Organizer> list = new ArrayList<Organizer>();
         try {
@@ -151,7 +151,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			
         
 				organizer.setTypeUser(resultset.getString("typeUser"));
-				organizer.setEmail(resultset.getInt("email"));
+				organizer.setPhone(resultset.getInt("phone"));
 			
 
 				list.add(organizer);
@@ -183,7 +183,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
                 "', filiation = '" + organizer.getFiliation() +
 
 				"', typeUser = '"+ organizer.getTypeUser() + 
-				"', email = '"+ organizer.getEmail() + 
+				"', phone = '"+ organizer.getPhone() + 
                 "' WHERE idUser = '"+ organizer.getIdUser()+"'");
 
             	statement.executeUpdate("UPDATE organizer SET typeOrganizer = '"+ organizer.getTypeOrganizer() + 					"', contato = '"+ organizer.getContato() + 

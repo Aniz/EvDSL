@@ -82,7 +82,7 @@ import riseevents.ev.exception.NewClassAlreadyInsertedException;
 import riseevents.ev.exception.NewClassNotFoundException;
 import riseevents.ev.repository.NewClassRepository;
 import riseevents.ev.repository.NewClassRepositoryBDR;
-import riseevents.ev.repository.RepositoryException;
+import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
 
@@ -148,8 +148,8 @@ public class RiseEventsFacade {
 	public void updateUser(User Entity) throws UserNotFoundException, Exception, UserAlreadyInsertedException{
 		userList.update(Entity);
 	}
-	public List<User> getUser() throws RepositoryException{
-		return Users.getUser();
+	public List<User> getUserList() throws RepositoryException{
+		return UserList.getUserList();
 	}
 	public User searchUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		return userList.search(idEntity);
@@ -172,8 +172,8 @@ public class RiseEventsFacade {
 	public void updateSpeaker(Speaker Entity) throws SpeakerNotFoundException, Exception, SpeakerAlreadyInsertedException{
 		speakerList.update(Entity);
 	}
-	public List<Speaker> getSpeaker() throws RepositoryException{
-		return Speakers.getSpeaker();
+	public List<Speaker> getSpeakerList() throws RepositoryException{
+		return SpeakerList.getSpeakerList();
 	}
 	public Speaker searchSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
 		return speakerList.search(idEntity);
@@ -196,8 +196,8 @@ public class RiseEventsFacade {
 	public void updateOrganizer(Organizer Entity) throws OrganizerNotFoundException, Exception, OrganizerAlreadyInsertedException{
 		organizerList.update(Entity);
 	}
-	public List<Organizer> getOrganizer() throws RepositoryException{
-		return Organizers.getOrganizer();
+	public List<Organizer> getOrganizerList() throws RepositoryException{
+		return OrganizerList.getOrganizerList();
 	}
 	public Organizer searchOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
 		return organizerList.search(idEntity);
@@ -220,8 +220,8 @@ public class RiseEventsFacade {
 	public void updateReviewer(Reviewer Entity) throws ReviewerNotFoundException, Exception, ReviewerAlreadyInsertedException{
 		reviewerList.update(Entity);
 	}
-	public List<Reviewer> getReviewer() throws RepositoryException{
-		return Reviewers.getReviewer();
+	public List<Reviewer> getReviewerList() throws RepositoryException{
+		return ReviewerList.getReviewerList();
 	}
 	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
 		return reviewerList.search(idEntity);
@@ -244,8 +244,8 @@ public class RiseEventsFacade {
 	public void updateEvent(Event Entity) throws EventNotFoundException, Exception, EventAlreadyInsertedException{
 		eventList.update(Entity);
 	}
-	public List<Event> getEvent() throws RepositoryException{
-		return Events.getEvent();
+	public List<Event> getEventList() throws RepositoryException{
+		return EventList.getEventList();
 	}
 	public Event searchEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		return eventList.search(idEntity);
@@ -268,8 +268,8 @@ public class RiseEventsFacade {
 	public void updatePayment(Payment Entity) throws PaymentNotFoundException, Exception, PaymentAlreadyInsertedException{
 		paymentList.update(Entity);
 	}
-	public List<Payment> getPayment() throws RepositoryException{
-		return Payments.getPayment();
+	public List<Payment> getPaymentList() throws RepositoryException{
+		return PaymentList.getPaymentList();
 	}
 	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
 		return paymentList.search(idEntity);
@@ -292,8 +292,8 @@ public class RiseEventsFacade {
 	public void updateActivity(Activity Entity) throws ActivityNotFoundException, Exception, ActivityAlreadyInsertedException{
 		activityList.update(Entity);
 	}
-	public List<Activity> getActivity() throws RepositoryException{
-		return Activitys.getActivity();
+	public List<Activity> getActivityList() throws RepositoryException{
+		return ActivityList.getActivityList();
 	}
 	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		return activityList.search(idEntity);
@@ -313,8 +313,8 @@ public class RiseEventsFacade {
 	public void removeAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		assignmentList.remove(idEntity);  
 	}
-	public List<Assignment> getAssignment() throws RepositoryException{
-		return Assignments.getAssignment();
+	public List<Assignment> getAssignmentList() throws RepositoryException{
+		return AssignmentList.getAssignmentList();
 	}
 	public Assignment searchAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		return assignmentList.search(idEntity);
@@ -331,8 +331,8 @@ public class RiseEventsFacade {
 	public void removeSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		submissionList.remove(idEntity);  
 	}
-	public List<Submission> getSubmission() throws RepositoryException{
-		return Submissions.getSubmission();
+	public List<Submission> getSubmissionList() throws RepositoryException{
+		return SubmissionList.getSubmissionList();
 	}
 	public Submission searchSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		return submissionList.search(idEntity);
@@ -346,8 +346,8 @@ public class RiseEventsFacade {
 	public boolean isThereSubmission(int idEntity) throws RepositoryException{
 		return submissionList.isThere(idEntity);
 	}
-	public List<Author> getAuthor() throws RepositoryException{
-		return Authors.getAuthor();
+	public List<Author> getAuthorList() throws RepositoryException{
+		return AuthorList.getAuthorList();
 	}
 	public int getAuthorLastId() throws RepositoryException{
 		return authorList.getAuthorLastId();
@@ -367,8 +367,8 @@ public class RiseEventsFacade {
 	public void updateCheckingCopy(CheckingCopy Entity) throws CheckingCopyNotFoundException, Exception, CheckingCopyAlreadyInsertedException{
 		checkingcopyList.update(Entity);
 	}
-	public List<CheckingCopy> getCheckingCopy() throws RepositoryException{
-		return CheckingCopys.getCheckingCopy();
+	public List<CheckingCopy> getCheckingCopyList() throws RepositoryException{
+		return CheckingCopyList.getCheckingCopyList();
 	}
 	public CheckingCopy searchCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
 		return checkingcopyList.search(idEntity);
@@ -385,8 +385,8 @@ public class RiseEventsFacade {
 	public void insertNewClass(NewClass entity) throws NewClassAlreadyInsertedException, RepositoryException{
 		this.newclassList.insert(entity);
 	}
-	public List<NewClass> getNewClass() throws RepositoryException{
-		return NewClasss.getNewClass();
+	public List<NewClass> getNewClassList() throws RepositoryException{
+		return NewClassList.getNewClassList();
 	}
 	public int getNewClassLastId() throws RepositoryException{
 		return newclassList.getNewClassLastId();

@@ -17,7 +17,7 @@ public interface SpeakerRepository {
 
 	public Speaker search(int idUser) throws SpeakerNotFoundException, RepositoryException;
 	
-	public List<Speaker> getSpeakers() throws RepositoryException;
+	public List<Speaker> getSpeakerList() throws RepositoryException;
 
 	public void update(Speaker speaker) throws SpeakerNotFoundException, RepositoryException;
 

@@ -62,7 +62,7 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
 	}
 
 	@Override
-	public List<CheckingCopy> getCheckingCopys() throws RepositoryException {
+	public List<CheckingCopy> getCheckingCopyList() throws RepositoryException {
 		CheckingCopy checkingCopy = null;
 		ArrayList<CheckingCopy> list = new ArrayList<CheckingCopy>();
         try {

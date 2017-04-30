@@ -17,7 +17,7 @@ public interface UserRepository {
 	
 	public User search(int idUser) throws UserNotFoundException, RepositoryException;
 		
-	public List<User> getUsers() throws RepositoryException;
+	public List<User> getUserList() throws RepositoryException;
 	
 	public void update(User user) throws UserNotFoundException, RepositoryException;
 	

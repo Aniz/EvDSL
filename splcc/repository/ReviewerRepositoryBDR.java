@@ -156,7 +156,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 	}
 
 	@Override
-	public List<Reviewer> getReviewers() throws RepositoryException {
+	public List<Reviewer> getReviewerList() throws RepositoryException {
 		Reviewer reviewer = null;
 		ArrayList<Reviewer> list = new ArrayList<Reviewer>();
         try {

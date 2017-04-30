@@ -11,33 +11,37 @@ import {{systemName|lower}}.ev.data.{{data.option.entity}};
 public class {{data.option.entity}}TableModel extends AbstractTableModel{
 	// Nome das Colunas
 	
-			private static final int COL_ACTIVITYID = 0;
-			private static final int COL_ORGANIZERID = 1;
+			{% for property in data.option.properties %}
+			private static final int COL_{{property.name|upper}} = {{loop.index}};
+			{% endfor %}
 			
 			// Lista de Valores
 			private List<{{data.option.entity}}> rows;
 			
-			public {{data.option.entity}}TableModel(List<{{data.option.entity|lower}}> values){
+			public {{data.option.entity}}TableModel(List<{{data.option.entity}}> values){
 				this.rows = values;
 			}
-			
+			v
 			public int getRowCount() {
 				return rows.size();
 			}
 			
 			//Quantidade de Colunas
 			public int getColumnCount() {
-				return 2;
+				return {{data.option.properties|length}};
 			}
 			
 			//Preenchimento de cada coluna
 				public Object getValueAt(int rowIndex, int columnIndex) {
 					{{data.option.entity}} {{data.option.entity|lower}} = rows.get(rowIndex);
-					if (columnIndex == COL_ACTIVITYID) {
-						return {{data.option.entity|lower}}.getIdActivity();
-					}  else if (columnIndex == COL_ORGANIZERID) {
-						return {{data.option.entity|lower}}.getIdOrganizer();
-					} 
+					if (columnIndex == COL_{{data.option.entity|upper}}ID) {
+						return {{data.option.entity|lower}}.getId{{data.option.name}}();
+					}
+					{% for property in data.option.properties %}
+					else if (columnIndex == COL_{{property.name|upper}}) {
+						return {{data.option.entity|lower}}.get{{property.name|capitalize}}();
+					}  
+					{% endfor %}
 					return null;
 				}
 				

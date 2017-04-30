@@ -24,11 +24,15 @@ public class {{data.option.entity}}TableRender extends DefaultTableCellRenderer 
 		}
 		//Tamanho das Colunas
 		table.getColumnModel().getColumn(0).setMaxWidth(13);
-		table.getColumnModel().getColumn(1).setMaxWidth(213);
-
+		{% for p in data.option.properties %}
+		table.getColumnModel().getColumn({{loop.index}}).setMaxWidth(13);
+		{% endfor %}
+		
 		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(1).setResizable(false);
-
+		{% for p in data.option.properties %}
+		table.getColumnModel().getColumn({{loop.index}}).setResizable(false);
+		{% endfor %}
+		
 		//Texto Centralizado nas Colunas
 		this.setHorizontalAlignment(CENTER);
 		return this;

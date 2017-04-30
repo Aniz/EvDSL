@@ -16,7 +16,7 @@ public interface ReviewerRepository {
 
 	public Reviewer search(int idUser) throws ReviewerNotFoundException, RepositoryException;
 	
-	public List<Reviewer> getReviewers() throws RepositoryException;
+	public List<Reviewer> getReviewerList() throws RepositoryException;
 
 	public void update(Reviewer reviewer) throws ReviewerNotFoundException, RepositoryException;
 

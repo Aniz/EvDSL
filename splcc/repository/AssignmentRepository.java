@@ -1,4 +1,3 @@
-//#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
 package {{systemName|lower}}.ev.repository;
 
 import java.util.List;
@@ -15,11 +14,10 @@ public interface AssignmentRepository {
 	
 	public Assignment search(Assignment assignment) throws AssignmentNotFoundException, RepositoryException;
 	
-	public List<Assignment> getAssignments() throws RepositoryException;
+	public List<Assignment> getAssignmentList() throws RepositoryException;
 
 	public void update(Assignment assignment) throws AssignmentNotFoundException, RepositoryException;	
 	
 	public boolean isThere(Assignment assignment) throws RepositoryException;
 	
 }
-//#endif

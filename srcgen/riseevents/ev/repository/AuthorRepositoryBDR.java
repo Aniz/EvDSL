@@ -121,7 +121,7 @@ public class AuthorRepositoryBDR implements AuthorRepository {
 	}
 
 	@Override
-	public List<Author> getAuthors() throws RepositoryException {
+	public List<Author> getAuthorList() throws RepositoryException {
 		Author author=null;
 		ArrayList<Author> list = new ArrayList<Author>();
         try {

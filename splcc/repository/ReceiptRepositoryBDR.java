@@ -71,7 +71,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 
 
 	@Override
-	public List<{{data.option.entity}}> get{{data.option.entity|lower}}Group() throws RepositoryException {
+	public List<{{data.option.entity}}> get{{data.option.entity|lower}}List() throws RepositoryException {
 		{{data.option.entity}} {{data.option.entity|lower}} = null;
 		ArrayList<{{{data.option.entity}}}> list = new ArrayList<{{data.option.entity}}>();
         try {

@@ -50,7 +50,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 				+"', '"+reviewer.getEmail() 
 				+"', '"+reviewer.getFiliation()
 				+"', '"+reviewer.getTypeUser()
-				+"', '"+reviewer.getEmail()   
+				+"', '"+reviewer.getPhone()   
 				+"')");
 
 			statement.executeUpdate("INSERT INTO reviewer Values('"+reviewer.getIdUser()
@@ -114,7 +114,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setEmail(resultset.getint("email"));
+				reviewer.setPhone(resultset.getint("phone"));
 			
         	resultset.close();   
             } else {
@@ -135,7 +135,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 	}
 
 	@Override
-	public List<Reviewer> getReviewers() throws RepositoryException {
+	public List<Reviewer> getReviewerList() throws RepositoryException {
 		Reviewer reviewer = null;
 		ArrayList<Reviewer> list = new ArrayList<Reviewer>();
         try {
@@ -152,7 +152,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setEmail(resultset.getInt("email"));
+				reviewer.setPhone(resultset.getInt("phone"));
 			
         		list.add(reviewer);
             } 
@@ -186,7 +186,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
                     "',email = '"+ reviewer.getEmail() +
                     "', filiation = '" + reviewer.getFiliation() +
 					"', typeReviewer = '"+ reviewer.getTypeUser() + 
-						"', email = '"+ reviewer.getEmail() + 
+						"', phone = '"+ reviewer.getPhone() + 
                  	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             
 		} catch(PersistenceMechanismException e){

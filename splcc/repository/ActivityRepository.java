@@ -18,7 +18,7 @@ public interface ActivityRepository {
 
 	public Activity search(int idActivity) throws ActivityNotFoundException, RepositoryException;
 	
-	public List<Activity> getActivities() throws RepositoryException;
+	public List<Activity> getActivityList() throws RepositoryException;
 
 	public void update(Activity activityo) throws ActivityNotFoundException, RepositoryException;
 

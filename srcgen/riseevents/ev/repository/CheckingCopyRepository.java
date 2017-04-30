@@ -13,7 +13,7 @@ public interface CheckingCopyRepository {
 
 	public void insert(CheckingCopy checkingCopy) throws RepositoryException;
 	
-	public List<CheckingCopy> getCheckingCopys() throws RepositoryException;
+	public List<CheckingCopy> getCheckingCopyList() throws RepositoryException;
 	
 	public boolean isThere(int idCheckingCopy) throws RepositoryException;
 	

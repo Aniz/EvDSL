@@ -48,7 +48,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 				+"', '"+speaker.getEmail() 
 				+"', '"+speaker.getFiliation()
 				+"', '"+speaker.getTypeUser()
-				+"', '"+speaker.getEmail()   
+				+"', '"+speaker.getPhone()   
 				+"')");
 
 			statement.executeUpdate("INSERT INTO speaker Values('"+speaker.getIdUser()
@@ -116,7 +116,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 			
         
 				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				speaker.setEmail(resultset.getInt("email"));
+				speaker.setPhone(resultset.getInt("phone"));
 			
 
             } else {
@@ -138,7 +138,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 	}
 
 	@Override
-	public List<Speaker> getSpeakers() throws RepositoryException {
+	public List<Speaker> getSpeakerList() throws RepositoryException {
 		Speaker speaker = null;
 		ArrayList<Speaker> list = new ArrayList<Speaker>();
         try {
@@ -158,7 +158,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 			
         	
 				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				speaker.setEmail(resultset.Int("email"));
+				speaker.setPhone(resultset.Int("phone"));
 			
         
 				list.add(speaker);
@@ -190,7 +190,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
                 "', filiation = '" + speaker.getFiliation() +
 
 				"', typeUser = '"+ user.getTypeUser() + 
-				"', email = '"+ speaker.getEmail() + 
+				"', phone = '"+ speaker.getPhone() + 
                 "' WHERE idUser = '"+ speaker.getIdUser()+"'");
 
             statement.executeUpdate("UPDATE speaker SET biography = '"+ 

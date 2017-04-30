@@ -113,7 +113,7 @@ public class SubmissionAuthorRepositoryBDR implements SubmissionAuthorRepository
 	}
 
 	@Override
-	public List<SubmissionAuthor> getSubmissionAuthors() throws RepositoryException {
+	public List<SubmissionAuthor> getSubmissionAuthorList() throws RepositoryException {
 		SubmissionAuthor submissionAuthor=null;
 		ArrayList<SubmissionAuthor> list = new ArrayList<SubmissionAuthor>();
         try {

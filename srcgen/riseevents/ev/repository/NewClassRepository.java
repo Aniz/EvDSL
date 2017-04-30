@@ -8,20 +8,20 @@ import riseevents.ev.exception.RepositoryException;
 
 public interface NewClassRepository {
 
-	public void insert(NewClass activityOrganzier) throws RepositoryException;
+	public void insert(NewClass newclass) throws RepositoryException;
 
-	public void remove(NewClass activityOrganzier) throws NewClassNotFoundException, RepositoryException;
+	public void remove(NewClass newclass) throws NewClassNotFoundException, RepositoryException;
 
 	public NewClass search(int idEntity) throws NewClassNotFoundException, RepositoryException;
 	
-	public List<NewClass> getActivitiesOrganizers() throws RepositoryException;
+	public List<NewClass> getNewClassList() throws RepositoryException;
 
-	public void update(NewClass activityOrganzier) throws NewClassNotFoundException, RepositoryException;
+	public void update(NewClass newclass) throws NewClassNotFoundException, RepositoryException;
 
-	public boolean isThere(NewClass activityOrganzier) throws RepositoryException;
+	public boolean isThere(NewClass newclass) throws RepositoryException;
 	
 	public int getNewClassLastId() throws RepositoryException;
 	
-	public List<NewClass> getActivitiesById(int idActivity) throws RepositoryException;
+	public List<NewClass> getNewClassById(int idActivity) throws RepositoryException;
 
 }

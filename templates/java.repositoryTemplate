@@ -8,20 +8,20 @@ import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public interface {{data.option.entity}}Repository {
 
-	public void insert({{data.option.entity}} activityOrganzier) throws RepositoryException;
+	public void insert({{data.option.entity}} {{data.option.entity|lower}}) throws RepositoryException;
 
-	public void remove({{data.option.entity}} activityOrganzier) throws {{data.option.entity}}NotFoundException, RepositoryException;
+	public void remove({{data.option.entity}} {{data.option.entity|lower}}) throws {{data.option.entity}}NotFoundException, RepositoryException;
 
 	public {{data.option.entity}} search(int idEntity) throws {{data.option.entity}}NotFoundException, RepositoryException;
 	
-	public List<{{data.option.entity}}> getActivitiesOrganizers() throws RepositoryException;
+	public List<{{data.option.entity}}> get{{data.option.entity}}List() throws RepositoryException;
 
-	public void update({{data.option.entity}} activityOrganzier) throws {{data.option.entity}}NotFoundException, RepositoryException;
+	public void update({{data.option.entity}} {{data.option.entity|lower}}) throws {{data.option.entity}}NotFoundException, RepositoryException;
 
-	public boolean isThere({{data.option.entity}} activityOrganzier) throws RepositoryException;
+	public boolean isThere({{data.option.entity}} {{data.option.entity|lower}}) throws RepositoryException;
 	
 	public int get{{data.option.entity}}LastId() throws RepositoryException;
 	
-	public List<{{data.option.entity}}> getActivitiesById(int idActivity) throws RepositoryException;
+	public List<{{data.option.entity}}> get{{data.option.entity}}ById(int idActivity) throws RepositoryException;
 
 }

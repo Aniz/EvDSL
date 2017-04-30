@@ -1,7 +1,7 @@
 Create RiseEvents 
 
 add User
-	+email : integer
+	+phone : integer
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 

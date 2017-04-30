@@ -18,7 +18,7 @@ import {{systemName|lower}}.ev.exception.{{key}}NotFoundException;
 import {{systemName|lower}}.ev.repository.{{key}}Repository;
 import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 {% endfor %}
-import {{systemName|lower}}.ev.repository.{{key}}RepositoryException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
 
@@ -63,8 +63,8 @@ public class {{systemName}}Facade {
 		{{key|lower}}List.update(Entity);
 	}
 	{% endif %}
-	public List<{{key}}> get{{key}}() throws RepositoryException{
-		return {{key}}s.get{{key}}();
+	public List<{{key}}> get{{key}}List() throws RepositoryException{
+		return {{key}}List.get{{key}}List();
 	}
 	{% if 'Search' in value.commands %}
 	public {{key}} search{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{

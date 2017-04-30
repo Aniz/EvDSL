@@ -176,9 +176,11 @@ def main(debug=False):
             copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value,componentExtraData,systemName)
             
             if key not in ["Author"]:
+                #generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData,systemName)
             
             if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
+                #generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData,systemName)
         
             for keyCommand,view in enumerate(value["commands"]):

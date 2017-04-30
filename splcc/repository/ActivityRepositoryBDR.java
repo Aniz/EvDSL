@@ -143,7 +143,7 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	}
 
 	@Override
-	public List<Activity> getActivities() throws RepositoryException {
+	public List<Activity> getActivityList() throws RepositoryException {
 		Activity activity=null;
 		ArrayList<Activity> list = new ArrayList<Activity>();
         try {

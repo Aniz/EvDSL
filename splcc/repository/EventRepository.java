@@ -18,7 +18,7 @@ public interface EventRepository {
 
 	public Event search(int idEvent) throws EventNotFoundException, RepositoryException;
 	
-	public List<Event> getEvents() throws RepositoryException;
+	public List<Event> getEventList() throws RepositoryException;
 
 	public void update(Event evento) throws EventNotFoundException, RepositoryException;
 

@@ -59,7 +59,7 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 
 
 	@Override
-	public List<Review> getReviews() throws RepositoryException {
+	public List<Review> getReviewList() throws RepositoryException {
 		Review review = null;
 		ArrayList<Review> list = new ArrayList<Review>();
         try {
