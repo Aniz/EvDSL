@@ -39,7 +39,7 @@ public class CheckingCopy {
 	public TypeCheckingCopy getTypeCheckingCopy(){
 		return this.typeCheckingCopy;
 	}
-	public void setTypeCheckingcopy(TypeCheckingCopy new_value){
+	public void setTypeCheckingCopy(TypeCheckingCopy new_value){
 		this.typeCheckingCopy = new_value;
 	}
 	//

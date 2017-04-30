@@ -14,9 +14,22 @@ public class ReviewerTableModel extends AbstractTableModel{
 		private static final int COL_USERID = 0;
 		//private static final int COL_PASSWORD = 1;
 		private static final int COL_NAMEUSER = 1;
-		private static final int COL_TYPEUSER = 2;
-		private static final int COL_EMAIL = 3;
-		private static final int COL_KNOWLEDGEAREA = 4;
+		private static final int COL_EMAIL = 2;
+		private static final int COL_KNOWLEDGEAREA = 3;
+		
+		{% for property in data.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+3}};
+		{% endfor %}
+		{% if data.option.categories|length > 0 %}
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{3 + data.option.properties|length}};
+		{% endif %}
+		
+		{% for property in extraData.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+3 + data.option.properties|length + data.option.categories|length}};
+		{% endfor %}
+		{% if extraData.option.categories|length > 0 %}
+		private static final int COL_TYPE{{extraData.option.entity|upper}} = {{3 + extraData.option.properties|length + extraData.option.properties|length  + data.option.categories|length}};
+		{% endif %}
 		
 		// Lista de Valores
 		private List<Reviewer> rows;
@@ -31,7 +44,7 @@ public class ReviewerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return {{4 + data.option.properties|length + (data.option.properties is defined) + extraData.option.properties|length + (extraData.option.properties is defined)}};
 		}
 		
 		//Preenchimento de cada coluna
@@ -48,6 +61,27 @@ public class ReviewerTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_KNOWLEDGEAREA) {
 					return reviewer.getKnowledgeArea();
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return reviewer.get{{property.name|capitalize}}();
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return reviewer.getType{{data.option.entity}}();
+				}
+				{% endif %}
+				{% for property in extraData.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return reviewer.get{{property.name|capitalize}}();
+				}
+				{% endfor %}
+				{% if extraData.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{extraData.option.entity|upper}}) {
+					return reviewer.getType{{extraData.option.entity}}();
+				}
+				{% endif %}
+		
 				return null;
 			}
 			
@@ -70,6 +104,27 @@ public class ReviewerTableModel extends AbstractTableModel{
 				case COL_KNOWLEDGEAREA:
 					coluna = "Knowledge Area";
 					break;
+				{% for property in data.option.properties %}
+				case COL_{{property.name|upper}}:
+					coluna = "{{property.alias}}";
+					break;
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				case COL_TYPE{{data.option.entity|upper}}:
+					coluna = "Tipo";
+					break;
+				{% endif %}
+				{% for property in extraData.option.properties %}
+				case COL_{{property.name|upper}}:
+					coluna = "{{property.alias}}";
+					break;
+				{% endfor %}
+				{% if extraData.option.categories|length > 0 %}
+				case COL_TYPE{{extraData.option.entity|upper}}:
+					coluna = "Tipo {{extraData.option.entity}}";
+					break;
+				{% endif %}
+			
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -90,6 +145,27 @@ public class ReviewerTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_KNOWLEDGEAREA) {
 					return String.class;
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return {{property.type|javatype}}.class;
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return String.class;
+				}
+				{% endif %}
+				{% for property in extraData.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return {{property.type|javatype}}.class;
+				}
+				{% endfor %}
+				{% if extraData.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{extraData.option.entity|upper}}) {
+					return String.class;
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -112,9 +188,21 @@ public class ReviewerTableModel extends AbstractTableModel{
 			public void alterarReviewer(int indiceLinha, Reviewer reviewer) {
 				rows.get(indiceLinha).setIdUser(reviewer.getIdUser());
 				rows.get(indiceLinha).setNameUser(reviewer.getNameUser());
-				rows.get(indiceLinha).setTypeUser(reviewer.getTypeUser());
 				rows.get(indiceLinha).setEmail(reviewer.getEmail());
 				rows.get(indiceLinha).setKnowledgeArea(reviewer.getKnowledgeArea());
+				{% for property in data.option.properties %}
+				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				{% endif %}
+				{% for property in extraData.option.properties %}
+				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				{% endfor %}
+				{% if extraData.option.categories|length > 0 %}
+				rows.get(indiceLinha).setType{{extraData.option.entity}}(activity.getType{{data.option.entity}}());
+				{% endif %}
+			
 				fireTableDataChanged();
 			}
 			

@@ -48,7 +48,7 @@ public class CheckingCopy {
 	public Type{{data.option.entity}} getType{{data.option.entity}}(){
 		return this.type{{data.option.entity}};
 	}
-	public void setType{{data.option.entity|capitalize}}(Type{{data.option.entity}} new_value){
+	public void setType{{data.option.entity}}(Type{{data.option.entity}} new_value){
 		this.type{{data.option.entity}} = new_value;
 	}
 	//

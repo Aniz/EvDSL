@@ -17,6 +17,12 @@ public class EventTableModel extends AbstractTableModel{
 		private static final int COL_PLACE = 3;
 		private static final int COL_INSTITUTION = 4;
 		private static final int COL_SPONSORS = 5;
+		{% for property in data.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+5}};
+		{% endfor %}
+		{% if data.option.categories|length > 0 %}
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{6 + data.option.properties|length}};
+		{% endif %}
 		
 		// Lista de Valores
 		private List<Event> rows;
@@ -31,7 +37,7 @@ public class EventTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return {{5 + data.option.properties|length + (data.option.properties is defined)}};
 		}
 		
 		//Preenchimento de cada coluna
@@ -50,6 +56,16 @@ public class EventTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_SPONSORS) {
 					return event.getSponsors();
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return event.get{{property.name|capitalize}}();
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return event.getType{{data.option.entity}}();
+				}
+				{% endif %}
 				return null;
 			}
 			
@@ -74,7 +90,18 @@ public class EventTableModel extends AbstractTableModel{
 					break;
 				case COL_SPONSORS:
 					coluna = "Sponsors";
-					break;  
+					break;
+				{% for property in data.option.properties %}
+				case COL_{{property.name|upper}}:
+					coluna = "{{property.alias}}";
+					break;
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				case COL_TYPE{{data.option.entity|upper}}:
+					coluna = "Tipo";
+					break;
+				{% endif %}
+				  
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -97,6 +124,17 @@ public class EventTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_SPONSORS) {
 					return String.class;
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return {{property.type|javatype}}.class;
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return String.class;
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -122,6 +160,13 @@ public class EventTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setPlace(event.getPlace());
 				rows.get(indiceLinha).setInstitution(event.getInstitution());
 				rows.get(indiceLinha).setSponsors(event.getSponsors());		
+				{% for property in data.option.properties %}
+				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				{% endif %}
+			
 				fireTableDataChanged();
 			}
 			

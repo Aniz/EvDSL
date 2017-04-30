@@ -17,6 +17,8 @@ public class EventTableModel extends AbstractTableModel{
 		private static final int COL_PLACE = 3;
 		private static final int COL_INSTITUTION = 4;
 		private static final int COL_SPONSORS = 5;
+		private static final int COL_LINK =6;
+		private static final int COL_TYPEEVENT = 7;
 		
 		// Lista de Valores
 		private List<Event> rows;
@@ -31,7 +33,7 @@ public class EventTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return 7;
 		}
 		
 		//Preenchimento de cada coluna
@@ -49,6 +51,12 @@ public class EventTableModel extends AbstractTableModel{
 					return event.getInstitution();
 				} else if (columnIndex == COL_SPONSORS) {
 					return event.getSponsors();
+				}
+				else if (columnIndex == COL_LINK) {
+					return event.getLink();
+				}
+				else if (columnIndex == COL_TYPEEVENT) {
+					return event.getTypeEvent();
 				}
 				return null;
 			}
@@ -74,7 +82,14 @@ public class EventTableModel extends AbstractTableModel{
 					break;
 				case COL_SPONSORS:
 					coluna = "Sponsors";
-					break;  
+					break;
+				case COL_LINK:
+					coluna = "";
+					break;
+				case COL_TYPEEVENT:
+					coluna = "Tipo";
+					break;
+				  
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -97,6 +112,13 @@ public class EventTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_SPONSORS) {
 					return String.class;
 				}
+				else if (columnIndex == COL_LINK) {
+					return String.class;
+				}
+				else if (columnIndex == COL_TYPEEVENT) {
+					return String.class;
+				}
+			
 				return null;
 			}
 			
@@ -122,6 +144,9 @@ public class EventTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setPlace(event.getPlace());
 				rows.get(indiceLinha).setInstitution(event.getInstitution());
 				rows.get(indiceLinha).setSponsors(event.getSponsors());		
+				rows.get(indiceLinha).setLink(activity.getLink());
+				rows.get(indiceLinha).setTypeEvent(activity.getTypeEvent());
+			
 				fireTableDataChanged();
 			}
 			

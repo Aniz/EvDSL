@@ -14,9 +14,10 @@ public class SubmissionTableModel extends AbstractTableModel{
 	
 		private static final int COL_SUBMISSIONID = 0;
 		private static final int COL_ACTIVITYID = 1;
-		private static final int COL_TYPE = 2;
-		private static final int COL_ABSTRACT = 3;
-		private static final int COL_KEYWORDS = 4;
+		private static final int COL_ABSTRACT = 2;
+		private static final int COL_KEYWORDS = 3;
+		private static final int COL_NEWSUBMISSIONFIELD =4;
+		private static final int COL_TYPESUBMISSION = 4;
 		
 		// Lista de Valores
 		private List<Submission> rows;
@@ -31,7 +32,7 @@ public class SubmissionTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 6;
 		}
 		
 		//Preenchimento de cada coluna
@@ -41,13 +42,18 @@ public class SubmissionTableModel extends AbstractTableModel{
 					return submission.getIdSubmission();
 				} else if (columnIndex == COL_ACTIVITYID) {
 					return submission.getIdActivity();
-				} else if (columnIndex == COL_TYPE) {
-					return submission.getType();
 				} else if (columnIndex == COL_ABSTRACT) {
 					return submission.getAbstractPaper();
 				} else if (columnIndex == COL_KEYWORDS) {
 					return submission.getKeywords();
 				} 
+				else if (columnIndex == COL_NEWSUBMISSIONFIELD) {
+					return activity.getNewsubmissionfield();
+				}
+				else if (columnIndex == COL_TYPESUBMISSION) {
+					return activity.getTypeSubmission();
+				}
+			
 				return null;
 			}
 			
@@ -70,6 +76,13 @@ public class SubmissionTableModel extends AbstractTableModel{
 				case COL_KEYWORDS:
 					coluna = "Keywords";
 					break;
+				case COL_NEWSUBMISSIONFIELD:
+					coluna = "";
+					break;
+				case COL_TYPESUBMISSION:
+					coluna = "Tipo";
+					break;
+		
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -90,6 +103,13 @@ public class SubmissionTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_KEYWORDS) {
 					return String.class;
 				}
+				else if (columnIndex == COL_NEWSUBMISSIONFIELD) {
+					return String.class;
+				}
+				else if (columnIndex == COL_TYPESUBMISSION) {
+					return String.class;
+				}
+			
 				return null;
 			}
 			
@@ -113,6 +133,9 @@ public class SubmissionTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setType(submission.getType());
 				rows.get(indiceLinha).setKeywords(submission.getKeywords());
 				rows.get(indiceLinha).setAbstractPaper(submission.getAbstractPaper());	
+				rows.get(indiceLinha).setNewsubmissionfield(activity.getNewsubmissionfield());
+				rows.get(indiceLinha).setTypeSubmission(activity.getTypeSubmission());
+			
 				fireTableDataChanged();
 			}
 			

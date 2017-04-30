@@ -14,10 +14,15 @@ public class UserTableModel extends AbstractTableModel{
 		private static final int COL_USERID = 0;
 		//private static final int COL_PASSWORD = 1;
 		private static final int COL_NAMEUSER = 1;
-		private static final int COL_TYPEUSER = 2;
-		private static final int COL_EMAIL = 3;
-		private static final int COL_FILIATION = 4;
-		
+		private static final int COL_EMAIL = 2;
+		private static final int COL_FILIATION = 3;
+		{% for property in data.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+3}};
+		{% endfor %}
+		{% if data.option.categories|length > 0 %}
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{4 + data.option.properties|length}};
+		{% endif %}
+	
 		// Lista de Valores
 		private List<User> rows;
 		
@@ -31,7 +36,7 @@ public class UserTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return {{4 + data.option.properties|length + (data.option.properties is defined)}};
 		}
 		
 		//Preenchimento de cada coluna
@@ -48,6 +53,17 @@ public class UserTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_FILIATION) {
 					return user.getFiliation();
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return activity.get{{property.name|capitalize}}();
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return activity.getType{{data.option.entity}}();
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -70,6 +86,17 @@ public class UserTableModel extends AbstractTableModel{
 				case COL_FILIATION:
 					coluna = "Filiation";
 					break;
+				{% for property in data.option.properties %}
+				case COL_{{property.name|upper}}:
+					coluna = "{{property.alias}}";
+					break;
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				case COL_TYPE{{data.option.entity|upper}}:
+					coluna = "Tipo";
+					break;
+				{% endif %}
+		
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -90,6 +117,17 @@ public class UserTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_FILIATION) {
 					return String.class;
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return {{property.type|javatype}}.class;
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return String.class;
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -115,6 +153,13 @@ public class UserTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypeUser(user.getTypeUser());
 				rows.get(indiceLinha).setEmail(user.getEmail());
 				rows.get(indiceLinha).setFiliation(user.getFiliation());
+				{% for property in data.option.properties %}
+				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				{% endif %}
+			
 				fireTableDataChanged();
 			}
 			

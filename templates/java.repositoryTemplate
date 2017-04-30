@@ -18,7 +18,7 @@ public interface {{data.option.entity}}Repository {
 
 	public void update({{data.option.entity}} {{data.option.entity|lower}}) throws {{data.option.entity}}NotFoundException, RepositoryException;
 
-	public boolean isThere({{data.option.entity}} {{data.option.entity|lower}}) throws RepositoryException;
+	public boolean isThere(int idEntity) throws RepositoryException;
 	
 	public int get{{data.option.entity}}LastId() throws RepositoryException;
 	

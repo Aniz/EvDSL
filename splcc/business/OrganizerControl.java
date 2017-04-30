@@ -11,19 +11,19 @@ import {{systemName|lower}}.ev.repository.OrganizerRepository;
 
 public class OrganizerControl {
 
-	private OrganizerRepository organizers;
+	private OrganizerRepository organizerList;
 
 	
 	public OrganizerControl(OrganizerRepository organizerRepository){
-		this.organizers = organizerRepository;
+		this.organizerList = organizerRepository;
 
 	}
 	
 	{% if 'Insert' in data.commands %}
 	public void insert(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException{
 		if (organizer != null) {
-			if (!organizers.isThere(organizer.getIdUser())) {
-				organizers.insert(organizer);
+			if (!organizerList.isThere(organizer.getIdUser())) {
+				organizerList.insert(organizer);
 			}else
 				throw new OrganizerAlreadyInsertedException(organizer.getIdUser());
 		} 
@@ -34,8 +34,8 @@ public class OrganizerControl {
 	{% endif %}
 	{% if 'Remove' in data.commands %}
 	public void remove(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		if(organizers.isThere(idUser))
-			organizers.remove(idUser);
+		if(organizerList.isThere(idUser))
+			organizerList.remove(idUser);
 		else
 			throw new OrganizerNotFoundException(idUser);
 
@@ -43,24 +43,24 @@ public class OrganizerControl {
 	{% endif %}
 	{% if 'Update' in data.commands %}
 	public void update(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		if(organizers.isThere(organizer.getIdUser()))
-			organizers.update(organizer);
+		if(organizerList.isThere(organizer.getIdUser()))
+			organizerList.update(organizer);
 		else
 			throw new OrganizerNotFoundException(organizer.getIdUser());
 	}
 	{% endif %}
 	{% if 'Search' in data.commands %}
 	public Organizer search(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		return organizers.search(idUser);
+		return organizerList.search(idUser);
 	}
 	{% endif %}
 	
 	public boolean isThere(int idUser) throws RepositoryException {
-		return organizers.isThere(idUser);
+		return organizerList.isThere(idUser);
 	}
 
-	public List<Organizer> getOrganizers() throws RepositoryException { 
-		return organizers.getOrganizers();  
+	public List<Organizer> getOrganizerList() throws RepositoryException { 
+		return organizerList.getOrganizerList();  
 }
 
 }

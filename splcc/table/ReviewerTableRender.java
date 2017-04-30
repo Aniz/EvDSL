@@ -34,7 +34,27 @@ public class ReviewerTableRender extends DefaultTableCellRenderer {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
-
+		
+		{% for p in data.option.properties %}
+		table.getColumnModel().getColumn({{loop.index + 4}}).setMaxWidth(13);
+		table.getColumnModel().getColumn({{loop.index + 4}}).setResizable(false);
+		{% endfor %}
+		
+		{% if data.option.categories|length > 0 %}
+		table.getColumnModel().getColumn({{4 + data.option.properties|length}}).setMaxWidth(13);
+		table.getColumnModel().getColumn({{4 + data.option.properties|length}}).setResizable(false);
+		{% endif %}
+		
+		{% for p in extraData.option.properties %}
+		table.getColumnModel().getColumn({{4+loop.index + data.option.categories|length + data.option.properties|length}}).setMaxWidth(13);
+		table.getColumnModel().getColumn({{4+loop.index + data.option.categories|length + data.option.properties|length}}).setResizable(false);
+		{% endfor %}
+		
+		{% if extraData.option.categories|length > 0 %}
+		table.getColumnModel().getColumn({{4 + data.option.categories|length + data.option.properties|length + extraData.option.properties|length}}).setMaxWidth(13);
+		table.getColumnModel().getColumn({{4 + data.option.categories|length + data.option.properties|length + extraData.option.properties|length}}).setResizable(false);
+		{% endif %}
+		
 		//Texto Centralizado nas Colunas
 		this.setHorizontalAlignment(CENTER);
 		return this;

@@ -18,16 +18,16 @@ import {{systemName|lower}}.ev.repository.CheckingCopyRepository;
 
 public class CheckingCopyControl {
 	
-    private CheckingCopyRepository checkingCopys;
+    private CheckingCopyRepository checkingCopyList;
 	
 	public CheckingCopyControl(CheckingCopyRepository repository){
-		this.checkingCopys = repository;
+		this.checkingCopyList = repository;
 	}
 
 	public void insert(CheckingCopy checkingCopy) throws CheckingCopyAlreadyInsertedException, RepositoryException{
 		if (checkingCopy != null) {
-			if (!checkingCopys.isThere(checkingCopy.getIdCheckingCopy())) 
-				checkingCopys.insert(checkingCopy);
+			if (!checkingCopyList.isThere(checkingCopy.getIdCheckingCopy())) 
+				checkingCopyList.insert(checkingCopy);
 			else
 				throw new CheckingCopyAlreadyInsertedException(checkingCopy.getIdCheckingCopy());
 		} else {
@@ -36,24 +36,24 @@ public class CheckingCopyControl {
 	}
 	
 	public void remove(int idCheckingCopy) throws CheckingCopyAlreadyInsertedException, RepositoryException, CheckingCopyNotFoundException{
-		checkingCopys.remove(idCheckingCopy);
+		checkingCopyList.remove(idCheckingCopy);
 	}
 	
 	public void update(CheckingCopy checkingCopy) throws CheckingCopyAlreadyInsertedException, RepositoryException, CheckingCopyNotFoundException{
-		checkingCopys.update(checkingCopy);
+		checkingCopyList.update(checkingCopy);
 	}
 	
 	
-	public List<CheckingCopy> getCheckingCopys() throws RepositoryException {
-		return checkingCopys.getCheckingCopys();  
+	public List<CheckingCopy> getCheckingCopyList() throws RepositoryException {
+		return checkingCopyList.getCheckingCopyList();  
 	}
 	
 	public int getCheckingCopyLastId() throws RepositoryException{
-		return checkingCopys.getCheckingCopyLastId();
+		return checkingCopyList.getCheckingCopyLastId();
 	}
 
 	public CheckingCopy search(int idCheckingCopy) throws CheckingCopyAlreadyInsertedException, RepositoryException, CheckingCopyNotFoundException{
-		return checkingCopys.search(idCheckingCopy);
+		return checkingCopyList.search(idCheckingCopy);
 	}
 	
 	{% if 'checkingCopyAtestado' in data.statments %}

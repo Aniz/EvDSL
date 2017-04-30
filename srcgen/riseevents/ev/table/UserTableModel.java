@@ -14,10 +14,11 @@ public class UserTableModel extends AbstractTableModel{
 		private static final int COL_USERID = 0;
 		//private static final int COL_PASSWORD = 1;
 		private static final int COL_NAMEUSER = 1;
-		private static final int COL_TYPEUSER = 2;
-		private static final int COL_EMAIL = 3;
-		private static final int COL_FILIATION = 4;
-		
+		private static final int COL_EMAIL = 2;
+		private static final int COL_FILIATION = 3;
+		private static final int COL_PHONE =4;
+		private static final int COL_TYPEUSER = 5;
+	
 		// Lista de Valores
 		private List<User> rows;
 		
@@ -31,7 +32,7 @@ public class UserTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 6;
 		}
 		
 		//Preenchimento de cada coluna
@@ -48,6 +49,13 @@ public class UserTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_FILIATION) {
 					return user.getFiliation();
 				}
+				else if (columnIndex == COL_PHONE) {
+					return activity.getPhone();
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return activity.getTypeUser();
+				}
+			
 				return null;
 			}
 			
@@ -70,6 +78,13 @@ public class UserTableModel extends AbstractTableModel{
 				case COL_FILIATION:
 					coluna = "Filiation";
 					break;
+				case COL_PHONE:
+					coluna = "";
+					break;
+				case COL_TYPEUSER:
+					coluna = "Tipo";
+					break;
+		
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -90,6 +105,13 @@ public class UserTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_FILIATION) {
 					return String.class;
 				}
+				else if (columnIndex == COL_PHONE) {
+					return int.class;
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return String.class;
+				}
+			
 				return null;
 			}
 			
@@ -115,6 +137,9 @@ public class UserTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypeUser(user.getTypeUser());
 				rows.get(indiceLinha).setEmail(user.getEmail());
 				rows.get(indiceLinha).setFiliation(user.getFiliation());
+				rows.get(indiceLinha).setPhone(activity.getPhone());
+				rows.get(indiceLinha).setTypeUser(activity.getTypeUser());
+			
 				fireTableDataChanged();
 			}
 			

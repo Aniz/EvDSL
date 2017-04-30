@@ -18,7 +18,7 @@ public interface NewClassRepository {
 
 	public void update(NewClass newclass) throws NewClassNotFoundException, RepositoryException;
 
-	public boolean isThere(NewClass newclass) throws RepositoryException;
+	public boolean isThere(int idEntity) throws RepositoryException;
 	
 	public int getNewClassLastId() throws RepositoryException;
 	

@@ -15,9 +15,12 @@ public class OrganizerTableModel extends AbstractTableModel{
 		private static final int COL_USERID = 0;
 		//private static final int COL_PASSWORD = 1;
 		private static final int COL_NAMEUSER = 1;
-		private static final int COL_TYPEUSER = 2;
-		private static final int COL_EMAIL = 3;
+		private static final int COL_EMAIL = 2;
+		private static final int COL_CONTATO =3;
 		private static final int COL_TYPEORGANIZER = 4;
+		
+		private static final int COL_PHONE =10;
+		private static final int COL_TYPEUSER = 11;
 		
 		// Lista de Valores
 		private List<Organizer> rows;
@@ -32,7 +35,7 @@ public class OrganizerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 6;
 		}
 		
 		//Preenchimento de cada coluna
@@ -49,6 +52,19 @@ public class OrganizerTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_TYPEORGANIZER) {
 					return organizer.getTypeOrganizer().name();
 				}
+				else if (columnIndex == COL_CONTATO) {
+					return organizer.getContato();
+				}
+				else if (columnIndex == COL_TYPEORGANIZER) {
+					return organizer.getTypeOrganizer();
+				}
+				else if (columnIndex == COL_PHONE) {
+					return organizer.getPhone();
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return organizer.getTypeUser();
+				}
+		
 				return null;
 			}
 			
@@ -62,15 +78,22 @@ public class OrganizerTableModel extends AbstractTableModel{
 				case COL_NAMEUSER:
 					coluna = "Name";
 					break;
-				case COL_TYPEUSER:
-					coluna = "Type";
-					break;
 				case COL_EMAIL:
 					coluna = "Email";
 					break;  
-				case COL_TYPEORGANIZER:
-					coluna = "Type Organizer";
+				case COL_CONTATO:
+					coluna = "";
 					break;
+				case COL_ORGANIZER:
+					coluna = "Tipo";
+					break;
+				case COL_PHONE:
+					coluna = "";
+					break;
+				case COL_TYPEUSER:
+					coluna = "Tipo User";
+					break;
+			
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -84,13 +107,22 @@ public class OrganizerTableModel extends AbstractTableModel{
 					return int.class;
 				} else if (columnIndex == COL_NAMEUSER) {
 					return String.class;
-				} else if (columnIndex == COL_TYPEUSER) {
-					return String.class;
 				} else if (columnIndex == COL_EMAIL) {
 					return String.class;
-				}  else if (columnIndex == COL_TYPEORGANIZER) {
+				}
+				else if (columnIndex == COL_CONTATO) {
 					return String.class;
 				}
+				else if (columnIndex == COL_TYPEORGANIZER) {
+					return String.class;
+				}
+				else if (columnIndex == COL_PHONE) {
+					return int.class;
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return String.class;
+				}
+			
 				return null;
 			}
 			
@@ -113,9 +145,12 @@ public class OrganizerTableModel extends AbstractTableModel{
 			public void alterarReviewer(int indiceLinha, Organizer organizer) {
 				rows.get(indiceLinha).setIdUser(organizer.getIdUser());
 				rows.get(indiceLinha).setNameUser(organizer.getNameUser());
-				rows.get(indiceLinha).setTypeUser(organizer.getTypeUser());
 				rows.get(indiceLinha).setEmail(organizer.getEmail());
-				rows.get(indiceLinha).setTypeOrganizer(organizer.getTypeOrganizer());
+				rows.get(indiceLinha).setContato(activity.getContato());
+				rows.get(indiceLinha).setTypeOrganizer(activity.getTypeOrganizer());
+				rows.get(indiceLinha).setPhone(activity.getPhone());
+				rows.get(indiceLinha).setTypeUser(activity.getTypeOrganizer());
+			
 				fireTableDataChanged();
 			}
 			

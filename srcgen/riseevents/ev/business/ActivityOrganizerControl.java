@@ -11,16 +11,16 @@ import riseevents.ev.repository.ActivityOrganizerRepository;
 
 public class ActivityOrganizerControl {
 
-private ActivityOrganizerRepository activitiesOrganizers;
+private ActivityOrganizerRepository actitivityOrganizerList;
 	
 	public ActivityOrganizerControl(ActivityOrganizerRepository repository){
-		this.activitiesOrganizers = repository;
+		this.actitivityOrganizerList = repository;
 	}
 	
 	public void insert(ActivityOrganizer activityOrganizer) throws ActivityOrganizerAlreadyInsertedException, RepositoryException{
 		if (activityOrganizer != null) {
-            if (activitiesOrganizers.isThere(activityOrganizer) == false) {
-            	activitiesOrganizers.insert(activityOrganizer);
+            if (actitivityOrganizerList.isThere(activityOrganizer) == false) {
+            	actitivityOrganizerList.insert(activityOrganizer);
             } else {
                 throw new ActivityOrganizerAlreadyInsertedException(activityOrganizer.getIdActivity());
             }
@@ -30,31 +30,31 @@ private ActivityOrganizerRepository activitiesOrganizers;
 	}
 
 	public void remove(ActivityOrganizer activityOrganizer) throws ActivityOrganizerAlreadyInsertedException, RepositoryException, ActivityOrganizerNotFoundException{		
-		activitiesOrganizers.remove(activityOrganizer);
+		actitivityOrganizerList.remove(activityOrganizer);
 	}
 	
 	public void update(ActivityOrganizer activityOrganizer) throws ActivityOrganizerAlreadyInsertedException, RepositoryException, ActivityOrganizerNotFoundException{
-		activitiesOrganizers.update(activityOrganizer);
+		actitivityOrganizerList.update(activityOrganizer);
 	}
 	
 	public ActivityOrganizer search(int idActivity) throws ActivityOrganizerAlreadyInsertedException, RepositoryException, ActivityOrganizerNotFoundException{
-		return activitiesOrganizers.search(idActivity);
+		return actitivityOrganizerList.search(idActivity);
 	}
 
 	public boolean isThere(ActivityOrganizer activityOrganizer) throws RepositoryException {
-		return activitiesOrganizers.isThere(activityOrganizer);
+		return actitivityOrganizerList.isThere(activityOrganizer);
 	}
 
-	public List<ActivityOrganizer> getActivitiesOrganizers() throws RepositoryException {
-		return activitiesOrganizers.getActivitiesOrganizers();  
+	public List<ActivityOrganizer> getActivityOrganizerList() throws RepositoryException {
+		return actitivityOrganizerList.getActivityOrganizerList();  
 	}
 	
 	public int getActivityOrganizerLastId() throws RepositoryException{
-		return activitiesOrganizers.getActivityOrganizerLastId();
+		return actitivityOrganizerList.getActivityOrganizerLastId();
 	}
 	
 	public List<ActivityOrganizer> getActivitiesById(int idActivity) throws RepositoryException{
-		return activitiesOrganizers.getActivitiesById(idActivity);
+		return actitivityOrganizerList.getActivitiesById(idActivity);
 	}
 }
 //#endif

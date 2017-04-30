@@ -15,15 +15,14 @@ public class ActivityTableModel extends AbstractTableModel{
 		private static final int COL_IDEVENT = 1;
 		private static final int COL_NAMEACTIVITY = 2;
 		private static final int COL_DESCRIPTIONACTIVITY = 3;
-		private static final int COL_ACTIVITYTYPE = 4;
-		private static final int COL_VALUE = 5;
-		private static final int COL_HOURLYLOAD =6;
-		private static final int COL_DATE =7;
-		private static final int COL_HOUR = 8;
-		private static final int COL_NUMBEROFPARTICIPANTS =9;
-		private static final int COL_REGISTRATIONLIMIT =10;
-		
-		
+		private static final int COL_VALUE = 4;
+		private static final int COL_HOURLYLOAD =5;
+		private static final int COL_DATE =6;
+		private static final int COL_HOUR = 7;
+		private static final int COL_NUMBEROFPARTICIPANTS =8;
+		private static final int COL_REGISTRATIONLIMIT =9;
+		private static final int COL_DESCRIPTION =10;
+		private static final int COL_TYPEACTIVITY = 11;
 		// Lista de Valores
 		private List<Activity> rows;
 		
@@ -51,9 +50,7 @@ public class ActivityTableModel extends AbstractTableModel{
 					return activity.getNameActivity();
 				} else if (columnIndex == COL_DESCRIPTIONACTIVITY) {
 					return activity.getDescriptionActivity();
-				} else if (columnIndex == COL_ACTIVITYTYPE) {
-					return activity.getTypeActivity().name();
-				}   else if (columnIndex == COL_VALUE) {
+				} else if (columnIndex == COL_VALUE) {
 					return activity.getValue();
 				} else if (columnIndex == COL_HOURLYLOAD) {
 					return activity.getHourlyLoad();
@@ -65,6 +62,12 @@ public class ActivityTableModel extends AbstractTableModel{
 					return activity.getNumberOfParticipants();
 				} else if (columnIndex == COL_REGISTRATIONLIMIT) {
 					return activity.getRegistrationLimit();
+				}
+				else if (columnIndex == COL_DESCRIPTION) {
+					return activity.getDescription();
+				}
+				else if (columnIndex == COL_TYPEACTIVITY) {
+					return activity.getTypeActivity();
 				}
 				return null;
 			}
@@ -85,9 +88,6 @@ public class ActivityTableModel extends AbstractTableModel{
 				case COL_DESCRIPTIONACTIVITY:
 					coluna = "Description";
 					break;
-				case COL_ACTIVITYTYPE:
-					coluna = "Type";
-					break;
 				case COL_VALUE:
 					coluna = "Value";
 					break;
@@ -105,6 +105,12 @@ public class ActivityTableModel extends AbstractTableModel{
 					break;
 				case COL_REGISTRATIONLIMIT:
 					coluna = "REgistration Limit";
+					break;
+				case COL_DESCRIPTION:
+					coluna = "Activityyyytttt";
+					break;
+				case COL_TYPEACTIVITY:
+					coluna = "Tipo";
 					break;
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
@@ -138,6 +144,12 @@ public class ActivityTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_REGISTRATIONLIMIT) {
 					return int.class;
 				}
+				else if (columnIndex == COL_DESCRIPTION) {
+					return String.class;
+				}
+				else if (columnIndex == COL_TYPEACTIVITY) {
+					return String.class;
+				}
 				return null;
 			}
 			
@@ -168,6 +180,9 @@ public class ActivityTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setHour(activity.getHour());
 				rows.get(indiceLinha).setNumberOfParticipants(activity.getNumberOfParticipants());
 				rows.get(indiceLinha).setRegistrationLimit(activity.getRegistrationLimit());
+				rows.get(indiceLinha).setDescription(activity.getDescription());
+				rows.get(indiceLinha).setTypeActivity(activity.getTypeActivity());
+			
 				fireTableDataChanged();
 			}
 			

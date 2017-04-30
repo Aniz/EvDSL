@@ -19,16 +19,16 @@ import {{systemName|lower}}.ev.util.Email;
 
 public class AssignmentControl {
 	
-    private AssignmentRepository assignments;
+    private AssignmentRepository assignmentList;
 	
 	public AssignmentControl(AssignmentRepository repository){
-		this.assignments = repository;
+		this.assignmentList = repository;
 	}
 	
 	public void insert(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException{
 		if (assignment != null) {
-            if (!assignments.isThere(assignment)) {
-                assignments.insert(assignment);
+            if (!assignmentList.isThere(assignment)) {
+                assignmentList.insert(assignment);
             } else {
                 throw new AssignmentAlreadyInsertedException(assignment.getIdReview());
             }
@@ -38,23 +38,23 @@ public class AssignmentControl {
 	}
 
 	public void remove(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException, AssignmentNotFoundException{
-		assignments.remove(assignment);
+		assignmentList.remove(assignment);
 	}
 	
 	public void update(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException, AssignmentNotFoundException{
-		assignments.update(assignment);
+		assignmentList.update(assignment);
 	}
 	
 	public Assignment search(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException, AssignmentNotFoundException{
-		return assignments.search(assignment);
+		return assignmentList.search(assignment);
 	}
 
 	public boolean isThere(Assignment assignment) throws RepositoryException {
-		return assignments.isThere(assignment);
+		return assignmentList.isThere(assignment);
 	}
 
-	public List<Assignment> getAssignments() throws RepositoryException {
-		return assignments.getAssignments();  
+	public List<Assignment> getAssignmentList() throws RepositoryException {
+		return assignmentList.getAssignmentList();  
 	}
 	
 	{% if 'notificationsDeadline' in data.statments or 'notificationsPaperAssignemnt' in data.statments %}

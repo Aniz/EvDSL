@@ -16,7 +16,12 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 		private static final int COL_REGISTRATIONID = 1;
 		private static final int COL_USERID = 2;
 		private static final int COL_DATE = 3;
-		private static final int COL_TYPE = 4;
+		{% for property in data.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+10}};
+		{% endfor %}
+		{% if data.option.categories|length > 0 %}
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{10 + data.option.properties|length}};
+		{% endif %}
 		
 		// Lista de Valores
 		private List<CheckingCopy> rows;
@@ -31,7 +36,7 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return {{4 + data.option.properties|length + (data.option.properties is defined)}};
 		}
 		
 		//Preenchimento de cada coluna
@@ -48,6 +53,17 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_TYPE) {
 					return checkingCopy.getTypeCheckingCopy();
 				} 
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return activity.get{{property.name|capitalize}}();
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return activity.getType{{data.option.entity}}();
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -70,6 +86,17 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 				case COL_TYPE:
 					coluna = "Type";
 					break;
+				{% for property in data.option.properties %}
+				case COL_{{property.name|upper}}:
+					coluna = "{{property.alias}}";
+					break;
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				case COL_TYPE{{data.option.entity|upper}}:
+					coluna = "Tipo";
+					break;
+				{% endif %}
+				
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -87,9 +114,18 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 					return int.class;
 				} else if (columnIndex == COL_DATE) {
 					return String.class;
-				} else if (columnIndex == COL_TYPE) {
-					return TypeCheckingCopy.class;
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return {{property.type|javatype}}.class;
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return String.class;
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -110,9 +146,15 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 			}
 			
 			public void alterarCheckingCopy(int indiceLinha, CheckingCopy checkingCopy) {
-				rows.get(indiceLinha).setTypeCheckingcopy(checkingCopy.getTypeCheckincopy());
 				rows.get(indiceLinha).setDateOfIssue(checkingCopy.getDateOfIssue());
 				rows.get(indiceLinha).setIdRegistration(checkingCopy.getIdRegistration());	
+				{% for property in data.option.properties %}
+				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				{% endif %}
+			
 				fireTableDataChanged();
 			}
 			

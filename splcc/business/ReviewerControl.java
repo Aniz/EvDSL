@@ -12,18 +12,18 @@ import {{systemName|lower}}.ev.repository.ReviewerRepository;
 
 public class ReviewerControl {
 
-	private ReviewerRepository reviewers;
+	private ReviewerRepository reviewerList;
 	
 	public ReviewerControl(ReviewerRepository repository){
-		this.reviewers = repository;
+		this.reviewerList = repository;
 	}
 	
 	//usar instance of para saber qual o objeto dependendo disso direciona para o respectivo repositorio.
 	{% if 'Insert' in data.commands %}
 	public void insert(Reviewer reviewer) throws ReviewerAlreadyInsertedException, RepositoryException{
 		if (reviewer != null) {
-			if (!reviewers.isThere(reviewer.getIdUser())) 
-				reviewers.insert(reviewer);
+			if (!reviewerList.isThere(reviewer.getIdUser())) 
+				reviewerList.insert(reviewer);
 			else
 				throw new ReviewerAlreadyInsertedException(reviewer.getIdUser());
 		} else {
@@ -33,36 +33,36 @@ public class ReviewerControl {
 	{% endif %}
 	{% if 'Remove' in data.commands %}
 	public void remove(int idUser) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
-		if(reviewers.isThere(idUser))
-			reviewers.remove(idUser);
+		if(reviewerList.isThere(idUser))
+			reviewerList.remove(idUser);
 		else
 			throw new ReviewerNotFoundException(idUser);
 	}
 	{% endif %}
 	{% if 'Update' in data.commands %}
 	public void update(Reviewer reviewer) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
-		if(reviewers.isThere(reviewer.getIdUser()))
-			reviewers.update(reviewer);
+		if(reviewerList.isThere(reviewer.getIdUser()))
+			reviewerList.update(reviewer);
 		else
 			throw new ReviewerNotFoundException(reviewer.getIdUser());
 	}
 	{% endif %}
 	{% if 'Search' in data.commands %}
 	public Reviewer search(int idUser) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
-		return reviewers.search(idUser);
+		return reviewerList.search(idUser);
 	}
 	{% endif %}
 	
 	public boolean isThere(int idUser) throws RepositoryException {
-		return reviewers.isThere(idUser);
+		return reviewerList.isThere(idUser);
 	}
 
-	public List<Reviewer> getReviewers() throws RepositoryException { 
-		return reviewers.getReviewers();  
+	public List<Reviewer> getReviewerList() throws RepositoryException { 
+		return reviewerList.getReviewerList();  
 	}
 	
 	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
-		return reviewers.getReviewerByknowledgeArea(knowledgearea);
+		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
 
 }

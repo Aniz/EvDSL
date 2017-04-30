@@ -11,16 +11,16 @@ import riseevents.ev.repository.SubmissionUserRepository;
 
 public class SubmissionUserControl {
 
-	private SubmissionUserRepository submissionUsers;
+	private SubmissionUserRepository submissionUserList;
 	
 	public SubmissionUserControl(SubmissionUserRepository repository){
-		this.submissionUsers = repository;
+		this.submissionUserList = repository;
 	}
 	
 	public void insert(SubmissionUser submissionUser) throws SubmissionUserAlreadyInsertedException, RepositoryException{
 		if (submissionUser != null) {
-            if (submissionUsers.isThere(submissionUser) == false) {
-            	submissionUsers.insert(submissionUser);
+            if (submissionUserList.isThere(submissionUser) == false) {
+            	submissionUserList.insert(submissionUser);
             } else {
                 throw new SubmissionUserAlreadyInsertedException(submissionUser.getIdActivity());
             }
@@ -30,23 +30,23 @@ public class SubmissionUserControl {
 	}
 	
 	public void remove(SubmissionUser submissionUser) throws SubmissionUserAlreadyInsertedException, RepositoryException, SubmissionUserNotFoundException{		
-		submissionUsers.remove(submissionUser);
+		submissionUserList.remove(submissionUser);
 	}
 	
 	public void update(SubmissionUser submissionUser) throws SubmissionUserAlreadyInsertedException, RepositoryException, SubmissionUserNotFoundException{
-		submissionUsers.update(submissionUser);
+		submissionUserList.update(submissionUser);
 	}
 	
 	public SubmissionUser search(SubmissionUser submissionUser) throws SubmissionUserAlreadyInsertedException, RepositoryException, SubmissionUserNotFoundException{
-		return submissionUsers.search(submissionUser);
+		return submissionUserList.search(submissionUser);
 	}
 
 	public boolean isThere(SubmissionUser submissionUser) throws RepositoryException {
-		return submissionUsers.isThere(submissionUser);
+		return submissionUserList.isThere(submissionUser);
 	}
 
-	public List<SubmissionUser> getSubmissionUsers() throws RepositoryException {
-		return submissionUsers.getSubmissionUsers();  
+	public List<SubmissionUser> getSubmissionUserList() throws RepositoryException {
+		return submissionUserList.getSubmissionUserList();  
 	}
 
 }

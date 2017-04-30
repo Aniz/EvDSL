@@ -16,16 +16,16 @@ import riseevents.ev.util.Email;
 
 public class ReviewControl {
 	
-    private ReviewRepository reviews;
+    private ReviewRepository reviewList;
 	
 	public ReviewControl(ReviewRepository repository){
-		this.reviews = repository;
+		this.reviewList = repository;
 	}
 
 	public void insert(Review review) throws ReviewAlreadyInsertedException, RepositoryException{
 		if (review != null) {
-			if (!reviews.isThere(review.getIdReview())) 
-				reviews.insert(review);
+			if (!reviewList.isThere(review.getIdReview())) 
+				reviewList.insert(review);
 			else
 				throw new ReviewAlreadyInsertedException(review.getIdReview());
 		} else {
@@ -34,27 +34,27 @@ public class ReviewControl {
 	}
 	
 	public void remove(int idReview) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
-		reviews.remove(idReview);
+		reviewList.remove(idReview);
 	}
 	
 	public void update(Review review) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
-		reviews.update(review);
+		reviewList.update(review);
 	}
 	
-	public List<Review> getReviews() throws RepositoryException {
-		return reviews.getReviews();  
+	public List<Review> getReviewList() throws RepositoryException {
+		return reviewList.getReviewList();  
 	}
 	
 	public int getReviewLastId() throws RepositoryException{
-		return reviews.getReviewLastId();
+		return reviewList.getReviewLastId();
 	}
 	
 	public Review search(int idReview) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
-		return reviews.search(idReview);
+		return reviewList.search(idReview);
 	}
 
 	public boolean isThere(int idReview) throws RepositoryException {
-		return reviews.isThere(idReview);
+		return reviewList.isThere(idReview);
 	}
 	
 	public void emailRoundNotification(Review review, User user, Email email) throws EmailException{
@@ -62,7 +62,7 @@ public class ReviewControl {
 	}
 	
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
-		return reviews.getReviewsBySubmission(idSubmission);
+		return reviewList.getReviewsBySubmission(idSubmission);
 	}
 }
 //#endif

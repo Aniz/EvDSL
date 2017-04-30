@@ -17,16 +17,16 @@ import com.lowagie.text.DocumentException;
 
 public class ActivityControl {
 	
-    private ActivityRepository activities;
+    private ActivityRepository activitieList;
 	
 	public ActivityControl(ActivityRepository repository){
-		this.activities = repository;
+		this.activitieList = repository;
 	}
 	{% if 'Insert' in data.commands %}
 	public void insert(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException{
 		if (activity != null) {
-            if (!activities.isThere(activity.getIdActivity())) {
-                activities.insert(activity);
+            if (!activitieList.isThere(activity.getIdActivity())) {
+                activitieList.insert(activity);
             } else {
                 throw new ActivityAlreadyInsertedException(activity.getIdActivity());
             }
@@ -37,49 +37,49 @@ public class ActivityControl {
 	{% endif %}
 	{% if 'Remove' in data.commands %}
 	public void remove(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		activities.remove(idActivity);
+		activitieList.remove(idActivity);
 	}
 	{% endif %}
 	{% if 'Update' in data.commands %}
 	public void update(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		activities.update(activity);
+		activitieList.update(activity);
 	}
 	{% endif %}
 	{% if 'Search' in data.commands %}
 	public Activity search(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		return activities.search(idActivity);
+		return activitieList.search(idActivity);
 	}
 	{% endif %}
 	public boolean isThere(int idActivity) throws RepositoryException {
-		return activities.isThere(idActivity);
+		return activitieList.isThere(idActivity);
 	}
 
-	public List<Activity> getActivities() throws RepositoryException {
-		return activities.getActivities();  
+	public List<Activity> getActivityList() throws RepositoryException {
+		return activitieList.getActivityList();  
 	}
 	
 	public int getActivityLastId() throws RepositoryException{
-		return activities.getActivityLastId();
+		return activitieList.getActivityLastId();
 	}
 	
 	public int getActivityIdByName(String activityName) throws RepositoryException{
-		return activities.getActivityIdByName(activityName);
+		return activitieList.getActivityIdByName(activityName);
 	}
 	
 	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activities.getActivitiesByEvent(idEvent);
+		return activitieList.getActivitiesByEvent(idEvent);
 	}
 	
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
-		return activities.getEventMainTrackValue(idEvent);
+		return activitieList.getEventMainTrackValue(idEvent);
 	}
 	
 	public int getActivityMainTrackId(int idEvent) throws RepositoryException{
-		return activities.getActivityMainTrackId(idEvent);
+		return activitieList.getActivityMainTrackId(idEvent);
 	}
 
 	public int getEventbyActivity(int idActivity) throws RepositoryException{
-		return activities.getEventbyActivity(idActivity);
+		return activitieList.getEventbyActivity(idActivity);
 	}
 	
 {% if 'reportsFrequencyperActivity' in data.statments %}
@@ -95,7 +95,7 @@ public class ActivityControl {
 		activity.listOfAuthorsPerActivity(authorsPerActivity);
 	}
 	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
-		return activities.getListOfAuthorsPerActivity(idActivity);
+		return activitieList.getListOfAuthorsPerActivity(idActivity);
 	}
 	//
 {% endif %}

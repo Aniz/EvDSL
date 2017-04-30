@@ -11,18 +11,18 @@ import riseevents.ev.repository.OrganizerRepository;
 
 public class OrganizerControl {
 
-	private OrganizerRepository organizers;
+	private OrganizerRepository organizerList;
 
 	
 	public OrganizerControl(OrganizerRepository organizerRepository){
-		this.organizers = organizerRepository;
+		this.organizerList = organizerRepository;
 
 	}
 	
 	public void insert(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException{
 		if (organizer != null) {
-			if (!organizers.isThere(organizer.getIdUser())) {
-				organizers.insert(organizer);
+			if (!organizerList.isThere(organizer.getIdUser())) {
+				organizerList.insert(organizer);
 			}else
 				throw new OrganizerAlreadyInsertedException(organizer.getIdUser());
 		} 
@@ -31,28 +31,28 @@ public class OrganizerControl {
         }
 	}
 	public void remove(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		if(organizers.isThere(idUser))
-			organizers.remove(idUser);
+		if(organizerList.isThere(idUser))
+			organizerList.remove(idUser);
 		else
 			throw new OrganizerNotFoundException(idUser);
 
 	}
 	public void update(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		if(organizers.isThere(organizer.getIdUser()))
-			organizers.update(organizer);
+		if(organizerList.isThere(organizer.getIdUser()))
+			organizerList.update(organizer);
 		else
 			throw new OrganizerNotFoundException(organizer.getIdUser());
 	}
 	public Organizer search(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		return organizers.search(idUser);
+		return organizerList.search(idUser);
 	}
 	
 	public boolean isThere(int idUser) throws RepositoryException {
-		return organizers.isThere(idUser);
+		return organizerList.isThere(idUser);
 	}
 
-	public List<Organizer> getOrganizers() throws RepositoryException { 
-		return organizers.getOrganizers();  
+	public List<Organizer> getOrganizerList() throws RepositoryException { 
+		return organizerList.getOrganizerList();  
 }
 
 }

@@ -14,9 +14,13 @@ public class ReviewerTableModel extends AbstractTableModel{
 		private static final int COL_USERID = 0;
 		//private static final int COL_PASSWORD = 1;
 		private static final int COL_NAMEUSER = 1;
-		private static final int COL_TYPEUSER = 2;
-		private static final int COL_EMAIL = 3;
-		private static final int COL_KNOWLEDGEAREA = 4;
+		private static final int COL_EMAIL = 2;
+		private static final int COL_KNOWLEDGEAREA = 3;
+		
+		private static final int COL_TYPEREVIEWER = 3;
+		
+		private static final int COL_PHONE =7;
+		private static final int COL_TYPEUSER = 8;
 		
 		// Lista de Valores
 		private List<Reviewer> rows;
@@ -31,7 +35,7 @@ public class ReviewerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 7;
 		}
 		
 		//Preenchimento de cada coluna
@@ -48,6 +52,16 @@ public class ReviewerTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_KNOWLEDGEAREA) {
 					return reviewer.getKnowledgeArea();
 				}
+				else if (columnIndex == COL_TYPEREVIEWER) {
+					return reviewer.getTypeReviewer();
+				}
+				else if (columnIndex == COL_PHONE) {
+					return reviewer.getPhone();
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return reviewer.getTypeUser();
+				}
+		
 				return null;
 			}
 			
@@ -70,6 +84,16 @@ public class ReviewerTableModel extends AbstractTableModel{
 				case COL_KNOWLEDGEAREA:
 					coluna = "Knowledge Area";
 					break;
+				case COL_TYPEREVIEWER:
+					coluna = "Tipo";
+					break;
+				case COL_PHONE:
+					coluna = "";
+					break;
+				case COL_TYPEUSER:
+					coluna = "Tipo User";
+					break;
+			
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -90,6 +114,16 @@ public class ReviewerTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_KNOWLEDGEAREA) {
 					return String.class;
 				}
+				else if (columnIndex == COL_TYPEREVIEWER) {
+					return String.class;
+				}
+				else if (columnIndex == COL_PHONE) {
+					return int.class;
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return String.class;
+				}
+			
 				return null;
 			}
 			
@@ -112,9 +146,12 @@ public class ReviewerTableModel extends AbstractTableModel{
 			public void alterarReviewer(int indiceLinha, Reviewer reviewer) {
 				rows.get(indiceLinha).setIdUser(reviewer.getIdUser());
 				rows.get(indiceLinha).setNameUser(reviewer.getNameUser());
-				rows.get(indiceLinha).setTypeUser(reviewer.getTypeUser());
 				rows.get(indiceLinha).setEmail(reviewer.getEmail());
 				rows.get(indiceLinha).setKnowledgeArea(reviewer.getKnowledgeArea());
+				rows.get(indiceLinha).setTypeReviewer(activity.getTypeReviewer());
+				rows.get(indiceLinha).setPhone(activity.getPhone());
+				rows.get(indiceLinha).setTypeUser(activity.getTypeReviewer());
+			
 				fireTableDataChanged();
 			}
 			

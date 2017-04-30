@@ -14,17 +14,17 @@ import riseevents.ev.repository.NewClassRepository;
 
 public class NewClassControl {
   
-  private NewClassRepository newclasss;
+  private NewClassRepository newclassList;
   
   public NewClassControl(NewClassRepository repository){
-    this.newclasss = repository;
+    this.newclassList = repository;
   }
-  public void insert(NewClass NewClass) throws NewClassAlreadyInsertedException, RepositoryException{
-    if (NewClass != null) {
-            if (!newclasss.isThere(NewClass.getIdNewClass())) {
-                newclasss.insert(NewClass);
+  public void insert(NewClass newclass) throws NewClassAlreadyInsertedException, RepositoryException{
+    if (newclass != null) {
+            if (!newclass.isThere(newclass.getIdNewClass())) {
+                newclass.insert(newclass);
             } else {
-                throw new NewClassAlreadyInsertedException(NewClass.getIdNewClass());
+                throw new NewClassAlreadyInsertedException(newclass.getIdNewClass());
             }
         } else {
             throw new IllegalArgumentException();
@@ -33,7 +33,7 @@ public class NewClassControl {
 
   
   public boolean isThere(int idNewClass) throws RepositoryException {
-    return newclasss.isThere(idNewClass);
+    return newclassList.isThere(idNewClass);
   }
   
  }

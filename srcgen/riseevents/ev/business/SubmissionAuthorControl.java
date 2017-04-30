@@ -12,16 +12,16 @@ import riseevents.ev.repository.SubmissionAuthorRepository;
 public class SubmissionAuthorControl {
 
 	
-	private SubmissionAuthorRepository submissionAuthors;
+	private SubmissionAuthorRepository submissionAuthorList;
 	
 	public SubmissionAuthorControl(SubmissionAuthorRepository repository){
-		this.submissionAuthors = repository;
+		this.submissionAuthorList = repository;
 	}
 	
 	public void insert(SubmissionAuthor submissionAuthor) throws SubmissionAuthorAlreadyInsertedException, RepositoryException{
 		if (submissionAuthor != null) {
-            if (submissionAuthors.isThere(submissionAuthor) == false) {
-            	submissionAuthors.insert(submissionAuthor);
+            if (submissionAuthorList.isThere(submissionAuthor) == false) {
+            	submissionAuthorList.insert(submissionAuthor);
             } else {
                 throw new SubmissionAuthorAlreadyInsertedException(submissionAuthor.getIdActivity());
             }
@@ -31,23 +31,23 @@ public class SubmissionAuthorControl {
 	}
 	
 	public void remove(SubmissionAuthor submissionAuthor) throws SubmissionAuthorAlreadyInsertedException, RepositoryException, SubmissionAuthorNotFoundException{		
-		submissionAuthors.remove(submissionAuthor);
+		submissionAuthorList.remove(submissionAuthor);
 	}
 	
 	public void update(SubmissionAuthor submissionAuthor) throws SubmissionAuthorAlreadyInsertedException, RepositoryException, SubmissionAuthorNotFoundException{
-		submissionAuthors.update(submissionAuthor);
+		submissionAuthorList.update(submissionAuthor);
 	}
 	
 	public SubmissionAuthor search(SubmissionAuthor submissionAuthor) throws SubmissionAuthorAlreadyInsertedException, RepositoryException, SubmissionAuthorNotFoundException{
-		return submissionAuthors.search(submissionAuthor);
+		return submissionAuthorList.search(submissionAuthor);
 	}
 
 	public boolean isThere(SubmissionAuthor submissionAuthor) throws RepositoryException {
-		return submissionAuthors.isThere(submissionAuthor);
+		return submissionAuthorList.isThere(submissionAuthor);
 	}
 
-	public List<SubmissionAuthor> getSubmissionAuthors() throws RepositoryException {
-		return submissionAuthors.getSubmissionAuthors();  
+	public List<SubmissionAuthor> getSubmissionAuthorList() throws RepositoryException {
+		return submissionAuthorList.getSubmissionAuthorList();  
 	}
 
 }

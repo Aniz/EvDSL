@@ -15,16 +15,16 @@ import riseevents.ev.repository.PaymentRepository;
 
 public class PaymentControl {
 	
-    private PaymentRepository payments;
+    private PaymentRepository paymentList;
 	
 	public PaymentControl(PaymentRepository repository){
-		this.payments = repository;
+		this.paymentList = repository;
 	}
 
 	public void insert(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException{
 		if (payment != null) {
-			if (!payments.isThere(payment.getIdPayment())) 
-				payments.insert(payment);
+			if (!paymentList.isThere(payment.getIdPayment())) 
+				paymentList.insert(payment);
 			else
 				throw new PaymentAlreadyInsertedException(payment.getIdPayment());
 		} else {
@@ -32,23 +32,23 @@ public class PaymentControl {
         }
 	}
 	public List<Payment> getPayments() throws RepositoryException {
-		return payments.getPayments();  
+		return paymentList.getPaymentList();  
 	}
 
 
 	public int getPaymentLastId() throws RepositoryException{
-		return payments.getPaymentLastId();
+		return paymentList.getPaymentLastId();
 	}
 
 	
 	public void update(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
-		payments.update(payment);
+		paymentList.update(payment);
 	}
 	public void remove(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
-		payments.remove(idPayment);
+		paymentList.remove(idPayment);
 	}
 	public Payment search(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
-		return payments.search(idPayment);
+		return paymentList.search(idPayment);
 	}
 	
 	public void type(Payment payment, Payment out) throws DocumentException, IOException {

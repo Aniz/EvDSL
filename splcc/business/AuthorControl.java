@@ -10,16 +10,16 @@ import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.repository.AuthorRepository;
 
 public class AuthorControl {
-	 private AuthorRepository authors;
+	 private AuthorRepository authorList;
 		
 		public AuthorControl(AuthorRepository repository){
-			this.authors = repository;
+			this.authorList = repository;
 		}
 		{% if 'Insert' in data.commands %}
 		public void insert(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
 			if (author != null) {
-	            if (!authors.isThere(author.getIdAuthor())) {
-	                authors.insert(author);
+	            if (!authorList.isThere(author.getIdAuthor())) {
+	                authorList.insert(author);
 	            } else {
 	                throw new AuthorAlreadyInsertedException(author.getIdAuthor());
 	            }
@@ -30,28 +30,28 @@ public class AuthorControl {
 		{% endif %}
 		{% if 'Remove' in data.commands %}
 		public void remove(int idAuthor) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
-			authors.remove(idAuthor);
+			authorList.remove(idAuthor);
 		}
 		{% endif %}
 		{% if 'Update' in data.commands %}
 		public void update(Author author) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
-			authors.update(author);
+			authorList.update(author);
 		}
 		{% endif %}
 		{% if 'Search' in data.commands %}
 		public Author search(int idAuthor) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
-			return authors.search(idAuthor);
+			return authorList.search(idAuthor);
 		}
 		{% endif %}
 		public boolean isThere(int idAuthor) throws RepositoryException {
-			return authors.isThere(idAuthor);
+			return authorList.isThere(idAuthor);
 		}
 
-		public List<Author> getAuthors() throws RepositoryException {
-			return authors.getAuthors();  
+		public List<Author> getAuthorList() throws RepositoryException {
+			return authorList.getAuthorList();  
 		}
 		public int getAuthorLastId() throws RepositoryException{
-			return authors.getAuthorLastId();
+			return authorList.getAuthorLastId();
 		}
 	}
 //#endif

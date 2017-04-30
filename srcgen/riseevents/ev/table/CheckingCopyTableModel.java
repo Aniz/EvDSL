@@ -16,7 +16,8 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 		private static final int COL_REGISTRATIONID = 1;
 		private static final int COL_USERID = 2;
 		private static final int COL_DATE = 3;
-		private static final int COL_TYPE = 4;
+		private static final int COL_BANANA =11;
+		private static final int COL_TYPECHECKINGCOPY = 11;
 		
 		// Lista de Valores
 		private List<CheckingCopy> rows;
@@ -31,7 +32,7 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 6;
 		}
 		
 		//Preenchimento de cada coluna
@@ -48,6 +49,13 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_TYPE) {
 					return checkingCopy.getTypeCheckingCopy();
 				} 
+				else if (columnIndex == COL_BANANA) {
+					return activity.getBanana();
+				}
+				else if (columnIndex == COL_TYPECHECKINGCOPY) {
+					return activity.getTypeCheckingCopy();
+				}
+			
 				return null;
 			}
 			
@@ -70,6 +78,13 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 				case COL_TYPE:
 					coluna = "Type";
 					break;
+				case COL_BANANA:
+					coluna = "";
+					break;
+				case COL_TYPECHECKINGCOPY:
+					coluna = "Tipo";
+					break;
+				
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -87,9 +102,14 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 					return int.class;
 				} else if (columnIndex == COL_DATE) {
 					return String.class;
-				} else if (columnIndex == COL_TYPE) {
-					return TypeCheckingCopy.class;
 				}
+				else if (columnIndex == COL_BANANA) {
+					return String.class;
+				}
+				else if (columnIndex == COL_TYPECHECKINGCOPY) {
+					return String.class;
+				}
+			
 				return null;
 			}
 			
@@ -110,9 +130,11 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 			}
 			
 			public void alterarCheckingCopy(int indiceLinha, CheckingCopy checkingCopy) {
-				rows.get(indiceLinha).setTypeCheckingcopy(checkingCopy.getTypeCheckincopy());
 				rows.get(indiceLinha).setDateOfIssue(checkingCopy.getDateOfIssue());
 				rows.get(indiceLinha).setIdRegistration(checkingCopy.getIdRegistration());	
+				rows.get(indiceLinha).setBanana(activity.getBanana());
+				rows.get(indiceLinha).setTypeCheckingCopy(activity.getTypeCheckingCopy());
+			
 				fireTableDataChanged();
 			}
 			

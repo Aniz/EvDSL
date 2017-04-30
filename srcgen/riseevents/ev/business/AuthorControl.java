@@ -10,20 +10,20 @@ import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.repository.AuthorRepository;
 
 public class AuthorControl {
-	 private AuthorRepository authors;
+	 private AuthorRepository authorList;
 		
 		public AuthorControl(AuthorRepository repository){
-			this.authors = repository;
+			this.authorList = repository;
 		}
 		public boolean isThere(int idAuthor) throws RepositoryException {
-			return authors.isThere(idAuthor);
+			return authorList.isThere(idAuthor);
 		}
 
-		public List<Author> getAuthors() throws RepositoryException {
-			return authors.getAuthors();  
+		public List<Author> getAuthorList() throws RepositoryException {
+			return authorList.getAuthorList();  
 		}
 		public int getAuthorLastId() throws RepositoryException{
-			return authors.getAuthorLastId();
+			return authorList.getAuthorLastId();
 		}
 	}
 //#endif

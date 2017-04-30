@@ -52,7 +52,7 @@ Entity:
 ;
 
 Property:
-    name=ID ':' type=[Type]  
+    name=ID ':' type=[Type] ('='alias=ID)*
 ;
 
 // Type can be SimpleType or Entity

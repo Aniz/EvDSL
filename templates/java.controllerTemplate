@@ -14,17 +14,17 @@ import {{systemName|lower}}.ev.repository.{{data.option.entity}}Repository;
 
 public class {{data.option.entity}}Control {
   
-  private {{data.option.entity}}Repository {{data.option.entity|lower}}s;
+  private {{data.option.entity}}Repository {{data.option.entity|lower}}List;
   
   public {{data.option.entity}}Control({{data.option.entity}}Repository repository){
-    this.{{data.option.entity|lower}}s = repository;
+    this.{{data.option.entity|lower}}List = repository;
   }
-  public void insert({{data.option.entity}} {{data.option.entity}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException{
-    if ({{data.option.entity}} != null) {
-            if (!{{data.option.entity|lower}}s.isThere({{data.option.entity}}.getId{{data.option.entity}}())) {
-                {{data.option.entity|lower}}s.insert({{data.option.entity}});
+  public void insert({{data.option.entity}} {{data.option.entity|lower}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException{
+    if ({{data.option.entity|lower}} != null) {
+            if (!{{data.option.entity|lower}}.isThere({{data.option.entity|lower}}.getId{{data.option.entity}}())) {
+                {{data.option.entity|lower}}.insert({{data.option.entity|lower}});
             } else {
-                throw new {{data.option.entity}}AlreadyInsertedException({{data.option.entity}}.getId{{data.option.entity}}());
+                throw new {{data.option.entity}}AlreadyInsertedException({{data.option.entity|lower}}.getId{{data.option.entity}}());
             }
         } else {
             throw new IllegalArgumentException();
@@ -33,27 +33,27 @@ public class {{data.option.entity}}Control {
 
   {% if 'Remove' in data.commands %}
   public void remove(int id{{data.option.entity}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException, {{data.option.entity}}NotFoundException{
-    {{data.option.entity|lower}}s.remove(id{{data.option.entity}});
+    {{data.option.entity|lower}}List.remove(id{{data.option.entity}});
   }
   {% endif %}
   {% if 'Update' in data.commands %}
   public void update({{data.option.entity}} {{data.option.entity}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException, {{data.option.entity}}NotFoundException{
-  {{data.option.entity|lower}}s.update({{data.option.entity}});
+  {{data.option.entity|lower}}List.update({{data.option.entity}});
   }
   {% endif %}
   {% if 'Search' in data.commands %}
   public {{data.option.entity}} search(int id{{data.option.entity}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException, {{data.option.entity}}NotFoundException{
-    return {{data.option.entity|lower}}s.search(id{{data.option.entity}});
+    return {{data.option.entity|lower}}List.search(id{{data.option.entity}});
   }
   {% endif %}
   
   public boolean isThere(int id{{data.option.entity}}) throws RepositoryException {
-    return {{data.option.entity|lower}}s.isThere(id{{data.option.entity}});
+    return {{data.option.entity|lower}}List.isThere(id{{data.option.entity}});
   }
   
   {% if 'ListAll' in data.commands %}
-  public List<{{data.option.entity}}> get{{data.option.entity}}s() throws RepositoryException {
-    return {{data.option.entity|lower}}s.get{{data.option.entity}}s();  
+  public List<{{data.option.entity}}> get{{data.option.entity}}List() throws RepositoryException {
+    return {{data.option.entity|lower}}List.get{{data.option.entity}}List();  
   } 
   {% endif %}
  }

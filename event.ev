@@ -11,7 +11,7 @@ add Speaker
     types GeneralChair.
     
 add Organizer 
-    +contato : string
+    +contato : string 
     show Insert Update Search Remove ListAll
     types GeneralChair, 
 		ProgramChair, 
@@ -35,7 +35,7 @@ add Payment
 	types Avista,Debito,Credito.
 
 add Activity
-	+ description:string
+	+ description:string = Activityyyytttt
 	show Insert Update Search Remove ListAll 
 	types MiniCurso = Mini, 
 		Tutorial, 

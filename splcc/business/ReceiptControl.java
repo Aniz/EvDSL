@@ -12,16 +12,16 @@ import {{systemName|lower}}.ev.repository.ReceiptRepository;
 
 public class ReceiptControl {
 	
-    private ReceiptRepository receipts;
+    private ReceiptRepository receiptList;
 	
 	public ReceiptControl(ReceiptRepository repository){
-		this.receipts = repository;
+		this.receiptList = repository;
 	}
 
 	public void insert(Receipt receipt) throws ReceiptAlreadyInsertedException, RepositoryException{
 		if (receipt != null) {
-			if (!receipts.isThere(receipt.getIdReceipt())) 
-				receipts.insert(receipt);
+			if (!receiptList.isThere(receipt.getIdReceipt())) 
+				receiptList.insert(receipt);
 			else
 				throw new ReceiptAlreadyInsertedException(receipt.getIdReceipt());
 		} else {
@@ -29,25 +29,25 @@ public class ReceiptControl {
         }
 	}
 
-	public List<Receipt> getReceipts() throws RepositoryException{
-		return receipts.getReceipts();  
+	public List<Receipt> getReceiptList() throws RepositoryException{
+		return receiptList.getReceiptList();  
 	}
 	
 	
 	public void remove(int idReceipt) throws ReceiptAlreadyInsertedException, RepositoryException, ReceiptNotFoundException{
-		receipts.remove(idReceipt);
+		receiptList.remove(idReceipt);
 	}
 	
 	public void update(Receipt review) throws ReceiptAlreadyInsertedException, RepositoryException, ReceiptNotFoundException{
-		receipts.update(review);
+		receiptList.update(review);
 	}
 	
 	public int getReceiptLastId() throws RepositoryException{
-		return receipts.getReceiptLastId();
+		return receiptList.getReceiptLastId();
 	}
 	
 	public Receipt search(int idReceipt) throws ReceiptAlreadyInsertedException, RepositoryException, ReceiptNotFoundException{
-		return receipts.search(idReceipt);
+		return receiptList.search(idReceipt);
 	}
 }
 //#endif

@@ -11,24 +11,24 @@ import {{systemName|lower}}.ev.repository.RegistrationRepository;
 
 public class RegistrationControl {
 	
-    private RegistrationRepository registrations;
+    private RegistrationRepository registrationList;
 	
 	public RegistrationControl(RegistrationRepository repository){
-		this.registrations = repository;
+		this.registrationList = repository;
 	}
 
-	public List<Registration> getRegistrations() throws RepositoryException {
-		return registrations.getRegistrations();  
+	public List<Registration> getRegistrationList() throws RepositoryException {
+		return registrationList.getRegistrationList();  
 	}
 	
 	public Registration search(int idRegistration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
-		return registrations.search(idRegistration);
+		return registrationList.search(idRegistration);
 	}
 	
 	public void insert(Registration registration) throws RegistrationAlreadyInsertedException, RepositoryException{
 		if (registration != null) {
-            if (!registrations.isThere(registration.getIdRegistration())) {
-                registrations.insert(registration);
+            if (!registrationList.isThere(registration.getIdRegistration())) {
+                registrationList.insert(registration);
             } else {
                 throw new RegistrationAlreadyInsertedException(registration.getIdRegistration());
             }
@@ -38,31 +38,31 @@ public class RegistrationControl {
 	}
 
 	public void remove(int idRegistration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
-		registrations.remove(idRegistration);
+		registrationList.remove(idRegistration);
 	}
 	
 	public void update(Registration registration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
-		registrations.update(registration);
+		registrationList.update(registration);
 	}
 
 	public boolean isThere(int idRegistration) throws RepositoryException {
-		return registrations.isThere(idRegistration);
+		return registrationList.isThere(idRegistration);
 	}
 	
 	public int getRegistrationLastId() throws RepositoryException{
-		return registrations.getRegistrationLastId();
+		return registrationList.getRegistrationLastId();
 	}
 	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
-		registrations.removeValue(value, idRegistration);
+		registrationList.removeValue(value, idRegistration);
 	}
 	
 	public void addValue(float value, int idRegistration) throws RepositoryException{
-		registrations.addValue(value, idRegistration);
+		registrationList.addValue(value, idRegistration);
 	}
 	
 	public int search(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
-		return registrations.search(idUser, idEvent);
+		return registrationList.search(idUser, idEvent);
 	}
 
 }

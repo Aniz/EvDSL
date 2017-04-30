@@ -19,7 +19,12 @@ public class PaymentTableModel extends AbstractTableModel{
 		private static final int COL_TYPE = 4;
 		private static final int COL_BARCODE = 5;
 		private static final int COL_VALUE = 6;
-		
+		{% for property in data.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+10}};
+		{% endfor %}
+		{% if data.option.categories|length > 0 %}
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{10 + data.option.properties|length}};
+		{% endif %}
 		
 		// Lista de Valores
 		private List<Payment> rows;
@@ -34,7 +39,7 @@ public class PaymentTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 7;
+			return {{11 + data.option.properties|length + (data.option.properties is defined)}};
 		}
 		
 		//Preenchimento de cada coluna
@@ -55,6 +60,16 @@ public class PaymentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_VALUE) {
 					return payment.getValue();
 				} 
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return activity.get{{property.name|capitalize}}();
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return activity.getType{{data.option.entity}}();
+				}
+				{% endif %}
 				return null;
 			}
 			
@@ -83,6 +98,17 @@ public class PaymentTableModel extends AbstractTableModel{
 				case COL_VALUE:
 					coluna = "Value";
 					break;
+				{% for property in data.option.properties %}
+				case COL_{{property.name|upper}}:
+					coluna = "{{property.alias}}";
+					break;
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				case COL_TYPE{{data.option.entity|upper}}:
+					coluna = "Tipo";
+					break;
+				{% endif %}
+			
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -107,6 +133,16 @@ public class PaymentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_VALUE) {
 					return Float.class;
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return {{property.type|javatype}}.class;
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return String.class;
+				}
+				{% endif %}
 				return null;
 			}
 			
@@ -133,6 +169,13 @@ public class PaymentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypePayment(payment.getTypePayment());
 				rows.get(indiceLinha).setValue(payment.getValue());
 				rows.get(indiceLinha).setIdRegistration(payment.getIdRegistration());
+				{% for property in data.option.properties %}
+				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				{% endif %}
+			
 				fireTableDataChanged();
 			}
 			

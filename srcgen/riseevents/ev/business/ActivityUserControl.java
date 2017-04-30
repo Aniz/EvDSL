@@ -11,16 +11,16 @@ import riseevents.ev.repository.ActivityUserRepository;
 
 public class ActivityUserControl {
 
-	private ActivityUserRepository activitiesUsers;
+	private ActivityUserRepository activityUserList;
 	
 	public ActivityUserControl(ActivityUserRepository repository){
-		this.activitiesUsers = repository;
+		this.activityUserList = repository;
 	}
 	
 	public void insert(ActivityUser activityUser) throws ActivityUserAlreadyInsertedException, RepositoryException{
 		if (activityUser != null) {
-            if (activitiesUsers.isThere(activityUser) == false) {
-            	activitiesUsers.insert(activityUser);
+            if (activityUserList.isThere(activityUser) == false) {
+            	activityUserList.insert(activityUser);
             } else {
                 throw new ActivityUserAlreadyInsertedException(activityUser.getIdActivity());
             }
@@ -30,35 +30,35 @@ public class ActivityUserControl {
 	}
 	
 	public void remove(ActivityUser activityUser) throws ActivityUserAlreadyInsertedException, RepositoryException, ActivityUserNotFoundException{		
-		activitiesUsers.remove(activityUser);
+		activityUserList.remove(activityUser);
 	}
 	
 	public void update(ActivityUser activityUser) throws ActivityUserAlreadyInsertedException, RepositoryException, ActivityUserNotFoundException{
-		activitiesUsers.update(activityUser);
+		activityUserList.update(activityUser);
 	}
 	
 	public ActivityUser search(int idActivity) throws ActivityUserAlreadyInsertedException, RepositoryException, ActivityUserNotFoundException{
-		return activitiesUsers.search(idActivity);
+		return activityUserList.search(idActivity);
 	}
 
 	public boolean isThere(ActivityUser activityUser) throws RepositoryException {
-		return activitiesUsers.isThere(activityUser);
+		return activityUserList.isThere(activityUser);
 	}
 
-	public List<ActivityUser> getActivitiesUsers() throws RepositoryException {
-		return activitiesUsers.getActivitiesUsers();  
+	public List<ActivityUser> getActivityUserList() throws RepositoryException {
+		return activityUserList.getActivityUserList();  
 	}
 	
 	public int getActivityUserLastId() throws RepositoryException{
-		return activitiesUsers.getActivityUserLastId(); 
+		return activityUserList.getActivityUserLastId(); 
 	}
 	
 	public List<ActivityUser> getActivitiesById(int idActivity) throws RepositoryException{
-		return activitiesUsers.getActivitiesById(idActivity);
+		return activityUserList.getActivitiesById(idActivity);
 	}
 	
 	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
-		return activitiesUsers.getParticipantsPerActivity(idActivity);
+		return activityUserList.getParticipantsPerActivity(idActivity);
 	}
 }
 //#endif

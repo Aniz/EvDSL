@@ -14,9 +14,14 @@ public class SubmissionTableModel extends AbstractTableModel{
 	
 		private static final int COL_SUBMISSIONID = 0;
 		private static final int COL_ACTIVITYID = 1;
-		private static final int COL_TYPE = 2;
-		private static final int COL_ABSTRACT = 3;
-		private static final int COL_KEYWORDS = 4;
+		private static final int COL_ABSTRACT = 2;
+		private static final int COL_KEYWORDS = 3;
+		{% for property in data.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+3}};
+		{% endfor %}
+		{% if data.option.categories|length > 0 %}
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{3 + data.option.properties|length}};
+		{% endif %}
 		
 		// Lista de Valores
 		private List<Submission> rows;
@@ -31,7 +36,7 @@ public class SubmissionTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return {{4 + data.option.properties|length + (data.option.properties is defined)}};
 		}
 		
 		//Preenchimento de cada coluna
@@ -41,13 +46,22 @@ public class SubmissionTableModel extends AbstractTableModel{
 					return submission.getIdSubmission();
 				} else if (columnIndex == COL_ACTIVITYID) {
 					return submission.getIdActivity();
-				} else if (columnIndex == COL_TYPE) {
-					return submission.getType();
 				} else if (columnIndex == COL_ABSTRACT) {
 					return submission.getAbstractPaper();
 				} else if (columnIndex == COL_KEYWORDS) {
 					return submission.getKeywords();
 				} 
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return activity.get{{property.name|capitalize}}();
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return activity.getType{{data.option.entity}}();
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -70,6 +84,17 @@ public class SubmissionTableModel extends AbstractTableModel{
 				case COL_KEYWORDS:
 					coluna = "Keywords";
 					break;
+				{% for property in data.option.properties %}
+				case COL_{{property.name|upper}}:
+					coluna = "{{property.alias}}";
+					break;
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				case COL_TYPE{{data.option.entity|upper}}:
+					coluna = "Tipo";
+					break;
+				{% endif %}
+		
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -90,6 +115,17 @@ public class SubmissionTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_KEYWORDS) {
 					return String.class;
 				}
+				{% for property in data.option.properties %}
+				else if (columnIndex == COL_{{property.name|upper}}) {
+					return {{property.type|javatype}}.class;
+				}
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+					return String.class;
+				}
+				{% endif %}
+			
 				return null;
 			}
 			
@@ -113,6 +149,13 @@ public class SubmissionTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setType(submission.getType());
 				rows.get(indiceLinha).setKeywords(submission.getKeywords());
 				rows.get(indiceLinha).setAbstractPaper(submission.getAbstractPaper());	
+				{% for property in data.option.properties %}
+				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				{% endif %}
+			
 				fireTableDataChanged();
 			}
 			

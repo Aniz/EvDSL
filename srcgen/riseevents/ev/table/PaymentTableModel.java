@@ -19,7 +19,8 @@ public class PaymentTableModel extends AbstractTableModel{
 		private static final int COL_TYPE = 4;
 		private static final int COL_BARCODE = 5;
 		private static final int COL_VALUE = 6;
-		
+		private static final int COL_OOII =11;
+		private static final int COL_TYPEPAYMENT = 11;
 		
 		// Lista de Valores
 		private List<Payment> rows;
@@ -34,7 +35,7 @@ public class PaymentTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 7;
+			return 13;
 		}
 		
 		//Preenchimento de cada coluna
@@ -55,6 +56,12 @@ public class PaymentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_VALUE) {
 					return payment.getValue();
 				} 
+				else if (columnIndex == COL_OOII) {
+					return activity.getOoii();
+				}
+				else if (columnIndex == COL_TYPEPAYMENT) {
+					return activity.getTypePayment();
+				}
 				return null;
 			}
 			
@@ -83,6 +90,13 @@ public class PaymentTableModel extends AbstractTableModel{
 				case COL_VALUE:
 					coluna = "Value";
 					break;
+				case COL_OOII:
+					coluna = "";
+					break;
+				case COL_TYPEPAYMENT:
+					coluna = "Tipo";
+					break;
+			
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -106,6 +120,12 @@ public class PaymentTableModel extends AbstractTableModel{
 					return String.class;
 				} else if (columnIndex == COL_VALUE) {
 					return Float.class;
+				}
+				else if (columnIndex == COL_OOII) {
+					return String.class;
+				}
+				else if (columnIndex == COL_TYPEPAYMENT) {
+					return String.class;
 				}
 				return null;
 			}
@@ -133,6 +153,9 @@ public class PaymentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypePayment(payment.getTypePayment());
 				rows.get(indiceLinha).setValue(payment.getValue());
 				rows.get(indiceLinha).setIdRegistration(payment.getIdRegistration());
+				rows.get(indiceLinha).setOoii(activity.getOoii());
+				rows.get(indiceLinha).setTypePayment(activity.getTypePayment());
+			
 				fireTableDataChanged();
 			}
 			

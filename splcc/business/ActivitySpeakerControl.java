@@ -13,16 +13,16 @@ import {{systemName|lower}}.ev.repository.ActivitySpeakerRepository;
 
 public class ActivitySpeakerControl {
 	
-    private ActivitySpeakerRepository activitiesSpeakers;
+    private ActivitySpeakerRepository activitySpeakerList;
 	
 	public ActivitySpeakerControl(ActivitySpeakerRepository repository){
-		this.activitiesSpeakers = repository;
+		this.activitySpeakerList = repository;
 	}
 	
 	public void insert(ActivitySpeaker activitySpeaker) throws ActivitySpeakerAlreadyInsertedException, RepositoryException{
 		if (activitySpeaker != null) {
-            if (activitiesSpeakers.isThere(activitySpeaker) == false) {
-            	activitiesSpeakers.insert(activitySpeaker);
+            if (activitySpeakerList.isThere(activitySpeaker) == false) {
+            	activitySpeakerList.insert(activitySpeaker);
             } else {
                 throw new ActivitySpeakerAlreadyInsertedException(activitySpeaker.getIdActivity());
             }
@@ -32,31 +32,31 @@ public class ActivitySpeakerControl {
 	}
 
 	public void remove(ActivitySpeaker activitySpeaker) throws ActivitySpeakerAlreadyInsertedException, RepositoryException, ActivitySpeakerNotFoundException{		
-		activitiesSpeakers.remove(activitySpeaker);
+		activitySpeakerList.remove(activitySpeaker);
 	}
 	
 	public void update(ActivitySpeaker activitySpeaker) throws ActivitySpeakerAlreadyInsertedException, RepositoryException, ActivitySpeakerNotFoundException{
-		activitiesSpeakers.update(activitySpeaker);
+		activitySpeakerList.update(activitySpeaker);
 	}
 	
 	public ActivitySpeaker search(int idActivity) throws ActivitySpeakerAlreadyInsertedException, RepositoryException, ActivitySpeakerNotFoundException{
-		return activitiesSpeakers.search(idActivity);
+		return activitySpeakerList.search(idActivity);
 	}
 
 	public boolean isThere(ActivitySpeaker activitySpeaker) throws RepositoryException {
-		return activitiesSpeakers.isThere(activitySpeaker);
+		return activitySpeakerList.isThere(activitySpeaker);
 	}
 
-	public List<ActivitySpeaker> getActivitiesSpeakers() throws RepositoryException {
-		return activitiesSpeakers.getActivitiesSpeakers();  
+	public List<ActivitySpeaker> getActivitySpeakerList() throws RepositoryException {
+		return activitySpeakerList.getActivitySpeakerList();  
 	}
 	
 	public int getActivitySpeakerLastId() throws RepositoryException{
-		return activitiesSpeakers.getActivitySpeakerLastId();
+		return activitySpeakerList.getActivitySpeakerLastId();
 	}
 	
 	public List<ActivitySpeaker> getActivitiesById(int idActivity) throws RepositoryException{
-		return activitiesSpeakers.getActivitiesById(idActivity);
+		return activitySpeakerList.getActivitiesById(idActivity);
 	}
 }
 //#endif

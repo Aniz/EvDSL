@@ -15,9 +15,13 @@ public class SpeakerTableModel extends AbstractTableModel{
 		private static final int COL_USERID = 0;
 		//private static final int COL_PASSWORD = 1;
 		private static final int COL_NAMEUSER = 1;
-		private static final int COL_TYPEUSER = 2;
-		private static final int COL_EMAIL = 3;
-		private static final int COL_BIOGRAPHY = 4;
+		private static final int COL_EMAIL = 2;
+		private static final int COL_BIOGRAPHY = 3;
+		private static final int COL_NACIONALIDADE =4;
+		private static final int COL_TYPESPEAKER = 5;
+		
+		private static final int COL_PHONE =6;
+		private static final int COL_TYPEUSER = 7;
 		
 		// Lista de Valores
 		private List<Speaker> rows;
@@ -32,7 +36,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 8;
 		}
 		
 		//Preenchimento de cada coluna
@@ -42,13 +46,24 @@ public class SpeakerTableModel extends AbstractTableModel{
 					return speaker.getIdUser();
 				}  else if (columnIndex == COL_NAMEUSER) {
 					return speaker.getNameUser();
-				} else if (columnIndex == COL_TYPEUSER) {
-					return speaker.getTypeUser().name();
 				} else if (columnIndex == COL_EMAIL) {
 					return speaker.getEmail();
 				}  else if (columnIndex == COL_BIOGRAPHY) {
 					return speaker.getBiography();
 				}
+				else if (columnIndex == COL_NACIONALIDADE) {
+					return speaker.getNacionalidade();
+				}
+				else if (columnIndex == COL_TYPESPEAKER) {
+					return speaker.getTypeSpeaker();
+				}
+				else if (columnIndex == COL_PHONE) {
+					return speaker.getPhone();
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return speaker.getTypeUser();
+				}
+		
 				return null;
 			}
 			
@@ -62,15 +77,25 @@ public class SpeakerTableModel extends AbstractTableModel{
 				case COL_NAMEUSER:
 					coluna = "Name";
 					break;
-				case COL_TYPEUSER:
-					coluna = "Type";
-					break;
 				case COL_EMAIL:
 					coluna = "Email";
 					break;  
 				case COL_BIOGRAPHY:
 					coluna = "Biography";
 					break;
+				case COL_NACIONALIDADE:
+					coluna = "";
+					break;
+				case COL_SPEAKER:
+					coluna = "Tipo";
+					break;
+				case COL_PHONE:
+					coluna = "";
+					break;
+				case COL_USER:
+					coluna = "Tipo User";
+					break;
+			
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -84,13 +109,24 @@ public class SpeakerTableModel extends AbstractTableModel{
 					return int.class;
 				} else if (columnIndex == COL_NAMEUSER) {
 					return String.class;
-				} else if (columnIndex == COL_TYPEUSER) {
-					return String.class;
 				} else if (columnIndex == COL_EMAIL) {
 					return String.class;
 				}  else if (columnIndex == COL_BIOGRAPHY) {
 					return String.class;
 				}
+				else if (columnIndex == COL_NACIONALIDADE) {
+					return int.class;
+				}
+				else if (columnIndex == COL_TYPESPEAKER) {
+					return String.class;
+				}
+				else if (columnIndex == COL_PHONE) {
+					return int.class;
+				}
+				else if (columnIndex == COL_TYPEUSER) {
+					return String.class;
+				}
+			
 				return null;
 			}
 			
@@ -113,9 +149,13 @@ public class SpeakerTableModel extends AbstractTableModel{
 			public void alterarSpeaker(int indiceLinha, Speaker speaker) {
 				rows.get(indiceLinha).setIdUser(speaker.getIdUser());
 				rows.get(indiceLinha).setNameUser(speaker.getNameUser());
-				rows.get(indiceLinha).setTypeUser(speaker.getTypeUser());
 				rows.get(indiceLinha).setEmail(speaker.getEmail());	
 				rows.get(indiceLinha).setBiography(speaker.getBiography());
+				rows.get(indiceLinha).setNacionalidade(activity.getNacionalidade());
+				rows.get(indiceLinha).setTypeSpeaker(activity.getTypeSpeaker());
+				rows.get(indiceLinha).setPhone(activity.getPhone());
+				rows.get(indiceLinha).setTypeUser(activity.getTypeSpeaker());
+			
 				fireTableDataChanged();
 			}
 			

@@ -37,6 +37,10 @@ public class ActivityInsertScreenP extends JInternalFrame {
 	private JTextField textFieldHour;
 	private JTextField textFieldNOParticipants;
 	private JTextField textFieldRegLimit;
+	{% for property in data.option.properties %}
+	private JTextField textField{{property.name|capitalize}};
+	{% endfor %}
+	
 	private JComboBox comboBoxActivity;
 	private JComboBox comboBoxEvent;
 	
@@ -116,14 +120,6 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		getContentPane().add(textFieldDescription);
 		textFieldDescription.setColumns(10);
 		
-		JLabel lblActivityType = new JLabel("Activity Type:");
-		lblActivityType.setBounds(17, 113, 86, 16);
-		getContentPane().add(lblActivityType);
-		
-		comboBoxActivity = new JComboBox();
-		comboBoxActivity.setBounds(115, 109, 159, 27);
-		getContentPane().add(comboBoxActivity);
-		
 		JLabel lblStatus = new JLabel("Status:");
 		lblStatus.setBounds(304, 113, 61, 16);
 		getContentPane().add(lblStatus);
@@ -186,7 +182,17 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		textFieldRegLimit.setBounds(561, 181, 134, 28);
 		getContentPane().add(textFieldRegLimit);
 		textFieldRegLimit.setColumns(10);
+	{% for property in data.option.properties %}
+		JLabel lbl{{property.name|capitalize}} = new JLabel("{{property.alias}}:");
+		lbl{{property.name|capitalize}}.setBounds(476, 187, 73, 16);
+		getContentPane().add(lbl{{property.name|capitalize}});
 		
+		textField{{property.name|capitalize}} = new JTextField();
+		textField{{property.name|capitalize}}.setBounds(561, 181, 134, 28);
+		getContentPane().add(textField{{property.name|capitalize}});
+		textField{{property.name|capitalize}}.setColumns(10);
+	{% endfor %}
+
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(157, 237, 117, 29);
 		getContentPane().add(btnInsert);
@@ -207,14 +213,24 @@ public class ActivityInsertScreenP extends JInternalFrame {
 			e.printStackTrace();
 		}
 		
-		TypeActivity[] types = TypeActivity.values();
+	{% if data.option.categories|length > 0 %}
+		JLabel lblType{{data.option.entity}} = new JLabel("{{data.option.entity}} Type:");
+		lblType{{data.option.entity}}.setBounds(17, 113, 86, 16);
+		getContentPane().add(lblType{{data.option.entity}});
+		
+		comboBox{{data.option.entity}} = new JComboBox();
+		comboBox{{data.option.entity}}.setBounds(115, 109, 159, 27);
+		getContentPane().add(comboBox{{data.option.entity}});
+		
+		Type{{data.option.entity}}[] types = Type{{data.option.entity}}.values();
 		List<String> names = new ArrayList<String>();
 		for(int i=0; i<types.length; i++){
 			names.add(i, types[i].name());
-			comboBoxActivity.addItem(types[i].name());
+			comboBox{{data.option.entity}}.addItem(types[i].name());
 		}
-		
+	{% endif %}
 		carregarEventComboBox();
+	
 
 	}
 	
@@ -236,7 +252,6 @@ public class ActivityInsertScreenP extends JInternalFrame {
 			String nameEvent = comboBoxEvent.getSelectedItem().toString();
 			String nameActivity = textFieldNameActivity.getText();
 			String descriptionActivity = textFieldDescription.getText();
-			String activityType = comboBoxActivity.getSelectedItem().toString();
 			String status = textFieldStatus.getText();
 			float value = Float.valueOf(textFieldValue.getText());
 			float hourlyLoad = Float.valueOf(textFieldHourlyLoad.getText());
@@ -244,6 +259,12 @@ public class ActivityInsertScreenP extends JInternalFrame {
 			String hour = textFieldHour.getText();
 			int numberOfParticipants = Integer.valueOf(textFieldNOParticipants.getText());
 			int registrationLimit = Integer.valueOf(textFieldRegLimit.getText());
+			{% for property in data.option.properties %}
+			{{property.type|javatype}} {{property.name}} = {{property.type|capitalize}}.valueOf(textField{{property.name}}.getText());	
+			{% endfor %}
+			{% if data.option.categories|length > 0 %}
+			String type{{data.option.entity|capitalize}} = comboBox{{data.option.entity}}.getSelectedItem().toString();
+			{% endif %}
 			
 			if (nameEvent.equals("")|| nameActivity.equals("") || descriptionActivity.equals("")
 					|| activityType.equals("") || status.equals("") 
@@ -272,7 +293,13 @@ public class ActivityInsertScreenP extends JInternalFrame {
 						activity.setHour(hour);
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
-
+						{% for property in data.option.properties %}
+						{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
+						{% endfor %}
+						{% if data.option.categories|length > 0 %}
+						activity.setType{{data.option.entity}}(type{{data.option.entity|capitalize}});
+						{% endif %}
+						
 						{{systemName}}MainScreenP.facade.insertActivity(activity);
 
 
