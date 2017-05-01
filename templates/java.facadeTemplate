@@ -34,6 +34,9 @@ public class {{systemName}}Facade {
 {% for key,value in data.items() %}
 	private {{key}}Control {{key|lower}}List;
 {% endfor %}
+{% for dep in dependences %}
+	private {{dep}}Control {{dep|lower}}List;
+{% endfor %}
 
 	protected static {{systemName}}Facade instance;
 	
@@ -95,8 +98,8 @@ public class {{systemName}}Facade {
 {% for dep in dependences %}
 	public void insert{{dep}}({{dep}} entity) throws {{dep}}AlreadyInsertedException, RepositoryException{
 		this.{{dep|lower}}List.insert(entity);
-	public void remove{{dep}}(int idEntity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
-		{{dep|lower}}List.remove(idEntity);  
+	public void remove{{dep}}({{dep}} entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
+		{{dep|lower}}List.remove(entity);  
 	}
 	public void update{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, Exception, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.update(Entity);
@@ -172,9 +175,6 @@ public class {{systemName}}Facade {
 		activity.listOfAuthorsPerActivity(authorsPerActivity);
 	}
 	{% endif %}
-	public List<Activity> getActivityList() throws RepositoryException{
-		return activityList.getActivityList();
-	}
 {% endif %}
 {% if 'Payment' in data %}	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{

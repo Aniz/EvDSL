@@ -74,6 +74,10 @@ public class RiseEventsFacade {
 	private OrganizerControl organizerList;
 	private ActivityControl activityList;
 	private EventControl eventList;
+	private ActivityUserControl activityuserList;
+	private ActivitySpeakerControl activityspeakerList;
+	private ActivityOrganizerControl activityorganizerList;
+	private RegistrationControl registrationList;
 
 	protected static RiseEventsFacade instance;
 	
@@ -206,8 +210,8 @@ public class RiseEventsFacade {
 	}
 	public void insertActivityUser(ActivityUser entity) throws ActivityUserAlreadyInsertedException, RepositoryException{
 		this.activityuserList.insert(entity);
-	public void removeActivityUser(int idEntity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
-		activityuserList.remove(idEntity);  
+	public void removeActivityUser(ActivityUser entity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
+		activityuserList.remove(entity);  
 	}
 	public void updateActivityUser(ActivityUser Entity) throws ActivityUserNotFoundException, Exception, ActivityUserAlreadyInsertedException{
 		activityuserList.update(Entity);
@@ -229,8 +233,8 @@ public class RiseEventsFacade {
 	}
 	public void insertActivitySpeaker(ActivitySpeaker entity) throws ActivitySpeakerAlreadyInsertedException, RepositoryException{
 		this.activityspeakerList.insert(entity);
-	public void removeActivitySpeaker(int idEntity) throws ActivitySpeakerNotFoundException, RepositoryException, ActivitySpeakerAlreadyInsertedException{
-		activityspeakerList.remove(idEntity);  
+	public void removeActivitySpeaker(ActivitySpeaker entity) throws ActivitySpeakerNotFoundException, RepositoryException, ActivitySpeakerAlreadyInsertedException{
+		activityspeakerList.remove(entity);  
 	}
 	public void updateActivitySpeaker(ActivitySpeaker Entity) throws ActivitySpeakerNotFoundException, Exception, ActivitySpeakerAlreadyInsertedException{
 		activityspeakerList.update(Entity);
@@ -252,8 +256,8 @@ public class RiseEventsFacade {
 	}
 	public void insertActivityOrganizer(ActivityOrganizer entity) throws ActivityOrganizerAlreadyInsertedException, RepositoryException{
 		this.activityorganizerList.insert(entity);
-	public void removeActivityOrganizer(int idEntity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
-		activityorganizerList.remove(idEntity);  
+	public void removeActivityOrganizer(ActivityOrganizer entity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
+		activityorganizerList.remove(entity);  
 	}
 	public void updateActivityOrganizer(ActivityOrganizer Entity) throws ActivityOrganizerNotFoundException, Exception, ActivityOrganizerAlreadyInsertedException{
 		activityorganizerList.update(Entity);
@@ -275,8 +279,8 @@ public class RiseEventsFacade {
 	}
 	public void insertRegistration(Registration entity) throws RegistrationAlreadyInsertedException, RepositoryException{
 		this.registrationList.insert(entity);
-	public void removeRegistration(int idEntity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
-		registrationList.remove(idEntity);  
+	public void removeRegistration(Registration entity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		registrationList.remove(entity);  
 	}
 	public void updateRegistration(Registration Entity) throws RegistrationNotFoundException, Exception, RegistrationAlreadyInsertedException{
 		registrationList.update(Entity);
@@ -313,9 +317,6 @@ public class RiseEventsFacade {
 	}
 	
 
-	public List<Activity> getActivityList() throws RepositoryException{
-		return activityList.getActivityList();
-	}
 	
 	
 }

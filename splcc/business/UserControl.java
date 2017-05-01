@@ -9,30 +9,12 @@ import {{systemName|lower}}.ev.data.User;
 import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.UserNotFoundException;
-//#if ${Organizer} == "T"
-import {{systemName|lower}}.ev.repository.OrganizerRepository;
-//#endif
-//#if ${Reviewer} == "T"
-import {{systemName|lower}}.ev.repository.ReviewerRepository;
-//#endif
-//#if ${Speaker} == "T"
-import {{systemName|lower}}.ev.repository.SpeakerRepository;
-//#endif
 import {{systemName|lower}}.ev.repository.UserRepository;
 import {{systemName|lower}}.ev.util.Email;
 
 public class UserControl {
 
 	private UserRepository userList;
-	//#if ${Speaker} == "T"
-	private SpeakerRepository speakers;
-	//#endif
-	//#if ${Organizer} == "T"
-	private OrganizerRepository organizers;
-	//#endif
-	//#if ${Reviewer} == "T"
-	private ReviewerRepository reviewers;
-	//#endif
 	
 	public UserControl(UserRepository repository){
 		this.userList = repository;

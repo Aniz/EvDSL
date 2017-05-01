@@ -14,6 +14,8 @@ import riseevents.ev.util.Email;
 
 public class UserControl {
 
+	private UserRepository userList;
+	
 	public UserControl(UserRepository repository){
 		this.userList = repository;
 	}

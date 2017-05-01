@@ -19,6 +19,8 @@ public class LibraryOfDSL {
 			return false;
 		}	
 	}	
+
+	{% if "Author" in data.items() %}
 	public Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
 		
 		String authorFiliation = null;
@@ -38,6 +40,6 @@ public class LibraryOfDSL {
 		else {
 			return false;
 		}
-		
 	}
+	{% endif %}	
 }
