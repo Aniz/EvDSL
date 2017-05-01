@@ -109,10 +109,9 @@ public class {{systemName}}MainScreenP extends JFrame {
 
 {% endfor %}
 
-		//#if ${Bugs} == "T"
+		{% if 'sendBugTrackEmail' in data.statments %}
 		BugtrackScreenMenuAction bugtrackAction = new BugtrackScreenMenuAction();
-		//#endif
-		
+		{% endif %}
 		{{systemName}}MainScreenP.facade = {{systemName}}Facade.getInstance();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -155,7 +154,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% for command in value.commands %}
 		JMenuItem mntm{{command}}{{key}} = new JMenuItem("{{command}}");
 		mn{{key}}.add(mntm{{command}}{{key}});
-		mntm{{command}}.addActionListener({{command|lower}}{{key}}Action);
+		mntm{{command}}{{key}}.addActionListener({{command|lower}}{{key}}Action);
 	{% endfor %}
 {% endfor %}
 		JMenu mnReports = new JMenu("Reports");
@@ -199,7 +198,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% endfor %}
 {% endfor %}
 
-				//#if ${Bugs} == "T"
+				{% if 'sendBugTrackEmail' in data.statments %}
 				private class BugtrackScreenMenuAction  implements ActionListener{ 
 
 					@Override
@@ -219,5 +218,5 @@ public class {{systemName}}MainScreenP extends JFrame {
 						}
 					}  
 				}
-				//#endif
+				{% endif %}
 }

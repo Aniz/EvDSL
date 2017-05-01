@@ -112,10 +112,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
 
 
-		//#if ${Bugs} == "T"
-		BugtrackScreenMenuAction bugtrackAction = new BugtrackScreenMenuAction();
-		//#endif
-		
 		RiseEventsMainScreenP.facade = RiseEventsFacade.getInstance();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,53 +152,53 @@ public class RiseEventsMainScreenP extends JFrame {
 		menuBar.add(mnUser);
 		JMenuItem mntmInsertUser = new JMenuItem("Insert");
 		mnUser.add(mntmInsertUser);
-		mntmInsert.addActionListener(insertUserAction);
+		mntmInsertUser.addActionListener(insertUserAction);
 		JMenuItem mntmUpdateUser = new JMenuItem("Update");
 		mnUser.add(mntmUpdateUser);
-		mntmUpdate.addActionListener(updateUserAction);
+		mntmUpdateUser.addActionListener(updateUserAction);
 		JMenuItem mntmSearchUser = new JMenuItem("Search");
 		mnUser.add(mntmSearchUser);
-		mntmSearch.addActionListener(searchUserAction);
+		mntmSearchUser.addActionListener(searchUserAction);
 		JMenuItem mntmRemoveUser = new JMenuItem("Remove");
 		mnUser.add(mntmRemoveUser);
-		mntmRemove.addActionListener(removeUserAction);
+		mntmRemoveUser.addActionListener(removeUserAction);
 		JMenuItem mntmListAllUser = new JMenuItem("ListAll");
 		mnUser.add(mntmListAllUser);
-		mntmListAll.addActionListener(listallUserAction);
+		mntmListAllUser.addActionListener(listallUserAction);
 		JMenu mnActivity = new JMenu("Activity");
 		menuBar.add(mnActivity);
 		JMenuItem mntmInsertActivity = new JMenuItem("Insert");
 		mnActivity.add(mntmInsertActivity);
-		mntmInsert.addActionListener(insertActivityAction);
+		mntmInsertActivity.addActionListener(insertActivityAction);
 		JMenuItem mntmUpdateActivity = new JMenuItem("Update");
 		mnActivity.add(mntmUpdateActivity);
-		mntmUpdate.addActionListener(updateActivityAction);
+		mntmUpdateActivity.addActionListener(updateActivityAction);
 		JMenuItem mntmSearchActivity = new JMenuItem("Search");
 		mnActivity.add(mntmSearchActivity);
-		mntmSearch.addActionListener(searchActivityAction);
+		mntmSearchActivity.addActionListener(searchActivityAction);
 		JMenuItem mntmRemoveActivity = new JMenuItem("Remove");
 		mnActivity.add(mntmRemoveActivity);
-		mntmRemove.addActionListener(removeActivityAction);
+		mntmRemoveActivity.addActionListener(removeActivityAction);
 		JMenuItem mntmListAllActivity = new JMenuItem("ListAll");
 		mnActivity.add(mntmListAllActivity);
-		mntmListAll.addActionListener(listallActivityAction);
+		mntmListAllActivity.addActionListener(listallActivityAction);
 		JMenu mnEvent = new JMenu("Event");
 		menuBar.add(mnEvent);
 		JMenuItem mntmInsertEvent = new JMenuItem("Insert");
 		mnEvent.add(mntmInsertEvent);
-		mntmInsert.addActionListener(insertEventAction);
+		mntmInsertEvent.addActionListener(insertEventAction);
 		JMenuItem mntmUpdateEvent = new JMenuItem("Update");
 		mnEvent.add(mntmUpdateEvent);
-		mntmUpdate.addActionListener(updateEventAction);
+		mntmUpdateEvent.addActionListener(updateEventAction);
 		JMenuItem mntmSearchEvent = new JMenuItem("Search");
 		mnEvent.add(mntmSearchEvent);
-		mntmSearch.addActionListener(searchEventAction);
+		mntmSearchEvent.addActionListener(searchEventAction);
 		JMenuItem mntmRemoveEvent = new JMenuItem("Remove");
 		mnEvent.add(mntmRemoveEvent);
-		mntmRemove.addActionListener(removeEventAction);
+		mntmRemoveEvent.addActionListener(removeEventAction);
 		JMenuItem mntmListAllEvent = new JMenuItem("ListAll");
 		mnEvent.add(mntmListAllEvent);
-		mntmListAll.addActionListener(listallEventAction);
+		mntmListAllEvent.addActionListener(listallEventAction);
 		JMenu mnReports = new JMenu("Reports");
 		menuBar.add(mnReports);
 		
@@ -503,25 +499,4 @@ public class RiseEventsMainScreenP extends JFrame {
 		}  
 	}
 
-				//#if ${Bugs} == "T"
-				private class BugtrackScreenMenuAction  implements ActionListener{ 
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						screenBugtrack = BugtrackScreenP.getInstanceBugtrackScreenP();
-						//desktopPane.add(screenBugtrack);
-						if(screenBugtrack.getParent() == null){
-							desktopPane.add(screenBugtrack);
-						}
-						screenBugtrack.setVisible(true);
-						desktopPane.moveToFront(screenBugtrack);
-						try {
-							screenBugtrack.setSelected(true);
-						} catch (PropertyVetoException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}  
-				}
-				//#endif
 }
