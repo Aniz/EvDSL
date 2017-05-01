@@ -21,25 +21,6 @@ add Organizer
 		ProceedingsChair,
 		PanelChair.
 
-add Reviewer 
-+aaaa : integer
-	bbbb : string
-	show Insert Update Search Remove ListAll
-	types Associado,Profissional,Estudante.
-
-add Event 
-	+ link:string
-    aaaa : integer
-	bbbb : string
-	show Insert Update Search Remove ListAll
-	types Associado,Profissional,Estudante.
-		
-add Payment
-	+aaaa : integer
-	bbbb : string
-	show Insert Update Search Remove ListAll 
-	types Avista,Debito,Credito.
-
 add Activity
 	+aaaa : integer = activityy
 	bbbb : string = ttrryuu
@@ -50,58 +31,11 @@ add Activity
 		Workshop,
 		MainTrack = hidden.
 
-//update
-add Assignment
-+aaaa : integer
+add Event 
+	+ link:string
+    aaaa : integer
 	bbbb : string
-		show Insert Search Remove ListAll
+	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
-
-//insert Update
-add Submission
-	+aaaa : integer
-	bbbb : string
-	show Search Remove ListAll
-	types Completa,Parcial.
-
-add Author
-	+lattes:string
-	aaaa : integer
-	bbbb : string
-	show in User
-	types Associado,Profissional,Estudante.
-
-add CheckingCopy
-+banana : string
-anana : integer
-show Insert Update Remove Search ListAll
-	types Atestado,Certificado.
-
-addNew NewClass
-+aaaa : integer
-bbbb : string
-show Insert
-types AAAA,BBB.
-
-include Conflit.
-
-if Payment.Credito -> askCardInfo 
-if Payment.Debito -> generateCarne
-if Payment.Avista -> generateBoleto
-
-def Activity -> reportsListofAuthors 
-def Activity -> reportsFrequencyperActivity 
-if CheckingCopy.Atestado -> checkingCopyAtestado
-if CheckiCopy.Certificado -> checkingCopyCertificado 
-if Event -> eventProgram
-if Event -> eventImportantDates
-def Event -> reportsFrequencyperEvent 
-if Submission.Completa -> insertAttachment
-if Assignment -> notificationsDeadline
-if Assignment -> notificationsPaperAssignemnt 
-if Assignment -> notificationsAceptanceRejection 
-
-def ActivityUser -> reportsFrequencyperActivity
-
-
-
+		
+include Conflict.

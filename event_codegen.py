@@ -98,7 +98,7 @@ def main(debug=False):
     for component in event_model.components:
         if component.__class__.__name__ == 'Action':
             actionsArray.append(component)
-        
+            
         elif component.__class__.__name__ == 'Option' or component.__class__.__name__ == 'NewOption':
             if component.__class__.__name__ == 'NewOption':
                 component.new = True
@@ -132,27 +132,18 @@ def main(debug=False):
         else:
             print("[warning] Option '%s' of method '%s' not found" % (statment.entity,statment.actionType)) 
     
-    #Unique files template
-    sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
-    with open(join(srcgen_folder,
-                   "%s.sql" % ("EventsDSL")), 'w') as f:
-        f.write(sqlTemplate.render(data=componentDict,systemName=systemName))
-
-    facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
-    with open(join(facadeFolder,
-                   "%s.java" % (systemName+"Facade")), 'w') as f:
-        f.write(facadeTemplate.render(data=componentDict,systemName=systemName))
-    
-    mainViewTemplate =jinja_env.get_template(join(templateFolder,'java.mainScreenTemplate'))
-    with open(join(viewFolder,
-                   "%s.java" % (systemName+"MainScreenP")), 'w') as f:
-        f.write(mainViewTemplate.render(data=componentDict,systemName=systemName))
-    
     #Classes Definition
     for key,value in componentDict.items():
         componentData = ""
         componentExtraData = ""
+        actionsKeyArray = []
         #Remove Option if the dependence is not avaliable and print a error
+        
+        if 'InterestConflict' in actionsArray:
+            #dependencesDict["Conflict"] = "Assigment","Author"
+            if("Assigment" in selectedOptionsArray and "Author" in selectedOptionsArray):
+                actionsArray.append("InterestConflict")
+                value.actions = actionsKeyArray
         if key == "CheckingCopy":
             if componentDict.get("Activity"):
                 componentExtraData = componentDict["Activity"]
@@ -207,15 +198,17 @@ def main(debug=False):
     dependencesDict["SubmissionAuthor"] = "Submission","Author"
     dependencesDict["SubmissionUser"] = "Submission","User"
     dependencesDict["Registration"] = "User","Event"
-    
+                
+    dependencesList = []
     for key,value in dependencesDict.items():
         if all((w in selectedOptionsArray for w in value)):
             componentExtraData = ""
             componentData = ""
-        
+            dependencesList.append(key)
+            
             if key in dependenceDict:
                 componentData = dependenceDict[key]
-            
+                
             copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData,systemName)
             copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData,systemName) 
             copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,componentData,componentExtraData,systemName)
@@ -223,18 +216,18 @@ def main(debug=False):
             copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,componentData,componentExtraData,systemName)
             copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,componentData,componentExtraData,systemName)
         
-        if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
-            copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData,systemName)
-            copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData,systemName)
-        
-        if key not in ["SubmissionAuthor","SubmissionUser"]:
-            copyCodeFile(viewCodeFolder,viewFolder,key+'Management'+"ScreenP",jinja_env,value,componentExtraData,systemName)
-       
-        for keyCommand,view in enumerate(avaliableFunctions):
-            keyView = key+view
-            if not ((keyView == "ActivityUserInsert") or (key != "ActivitySpeakerRemove") or (key != "ActivityUserRemove")):
-                copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,value,componentExtraData,systemName)
-        
+            if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData,systemName)
+                copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData,systemName)
+            
+            if key not in ["SubmissionAuthor","SubmissionUser"]:
+                copyCodeFile(viewCodeFolder,viewFolder,key+'Management'+"ScreenP",jinja_env,value,componentExtraData,systemName)
+           
+            for keyCommand,view in enumerate(avaliableFunctions):
+                keyView = key+view
+                if not ((keyView == "ActivityUserInsert") or (key != "ActivitySpeakerRemove") or (key != "ActivityUserRemove")):
+                    copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,value,componentExtraData,systemName)
+            
     for keyStatmentView,valueStatment in enumerate(statmentsArray):
         if (valueStatment.condition == 'def'):
             copyCodeFile(viewCodeFolder,viewFolder,key+valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
@@ -243,6 +236,23 @@ def main(debug=False):
     copy(join(this_folder,'lib'),join(srcgen_folder,'lib'))
     generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,"",systemName)
         
+    #Unique files template
+    sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
+    with open(join(srcgen_folder,
+                   "%s.sql" % ("EventsDSL")), 'w') as f:
+        f.write(sqlTemplate.render(data=componentDict,systemName=systemName))
+
+    facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
+    with open(join(facadeFolder,
+                   "%s.java" % (systemName+"Facade")), 'w') as f:
+        f.write(facadeTemplate.render(data=componentDict,systemName=systemName,dependences=dependencesList))
+    
+    mainViewTemplate =jinja_env.get_template(join(templateFolder,'java.mainScreenTemplate'))
+    with open(join(viewFolder,
+                   "%s.java" % (systemName+"MainScreenP")), 'w') as f:
+        f.write(mainViewTemplate.render(data=componentDict,systemName=systemName))
+    
+    
 def createDotFiles(event_mm,event_model,dotFolder):
     # Export to .dot file for visualization
     metamodel_export(event_mm, join(dotFolder, 'event_meta.dot'))

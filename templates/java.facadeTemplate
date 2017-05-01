@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.apache.commons.mail.EmailException;
 import {{systemName|lower}}.ev.util.Email;
-import {{systemName|lower}}.ev.data.Review;
 {% for key,value in data.items() %}
 import {{systemName|lower}}.ev.data.{{key}};
 import {{systemName|lower}}.ev.business.{{key}}Control;
@@ -21,6 +20,14 @@ import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 import {{systemName|lower}}.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
+{% for dep in dependences %}
+import {{systemName|lower}}.ev.data.{{dep}};
+import {{systemName|lower}}.ev.business.{{dep}}Control;
+import {{systemName|lower}}.ev.exception.{{dep}}AlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.{{dep}}NotFoundException;
+import {{systemName|lower}}.ev.repository.{{dep}}Repository;
+import {{systemName|lower}}.ev.repository.{{dep}}RepositoryBDR;
+{% endfor %}
 
 public class {{systemName}}Facade {
 
@@ -71,12 +78,16 @@ public class {{systemName}}Facade {
 		return {{key|lower}}List.search(idEntity);
 	}
 	{% endif %}
-	public int get{{key}}LastId() throws RepositoryException{
-		return {{key|lower}}List.get{{key}}LastId();
-	}
+	{% if key not in ["Reviewer","Organizer","Speaker"] %}
 	public int get{{key}}IdByName(String entityName) throws RepositoryException{
 		return {{key|lower}}List.get{{key}}IdByName(entityName);
 	}
+	{% endif %}
+	{% if key not in ["User","Reviewer","Organizer","Speaker"] %}
+	public int get{{key}}LastId() throws RepositoryException{
+		return {{key|lower}}List.get{{key}}LastId();
+	}
+	{% endif %}
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
@@ -109,11 +120,6 @@ public class {{systemName}}Facade {
 	{% endif %}	
 {% endif %}	
 {% if 'Activity' in data %}
-	//ACTIVITY
-	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activityList.getActivitiesByEvent(idEvent);
-	}
-	
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
 		return activityList.getEventMainTrackValue(idEvent);
 	}
@@ -141,8 +147,8 @@ public class {{systemName}}Facade {
 		activity.listOfAuthorsPerActivity(authorsPerActivity);
 	}
 	{% endif %}
-	public List<Activity> getActivities() throws RepositoryException{
-		return activityList.getActivities();
+	public List<Activity> getActivityList() throws RepositoryException{
+		return activityList.getActivityList();
 	}
 {% endif %}
 {% if 'Payment' in data %}	

@@ -293,7 +293,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 						activity.setRegistrationLimit(registrationLimit);
 						activity.setAaaa(aaaa);	
 						activity.setBbbb(bbbb);	
-						activity.setTypeActivity(TypeActivity.valueOf(Activity));
+						activity.setTypeActivity(TypeActivity.valueOf(typeActivity));
 						
 						RiseEventsMainScreenP.facade.insertActivity(activity);
 

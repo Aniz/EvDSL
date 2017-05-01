@@ -19,4 +19,25 @@ public class LibraryOfDSL {
 			return false;
 		}	
 	}	
+	public Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
+		
+		String authorFiliation = null;
+		String reviewerFiliation = null;
+		String userFiliation = null;
+				
+		authorFiliation = authorSubmission.getFiliation();
+		reviewerFiliation = user.getFiliation();
+		userFiliation = user.getFiliation();
+		
+		if(authorFiliation.equals(reviewerFiliation)){
+			return true;
+		}
+		if(usersub.equals(userFiliation)){
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
 }

@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.apache.commons.mail.EmailException;
 import riseevents.ev.util.Email;
-import riseevents.ev.data.Review;
 import riseevents.ev.data.User;
 import riseevents.ev.business.UserControl;
 import riseevents.ev.exception.UserAlreadyInsertedException;
@@ -209,11 +208,6 @@ public class RiseEventsFacade {
 	
 	
 	
-	//ACTIVITY
-	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activityList.getActivitiesByEvent(idEvent);
-	}
-	
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
 		return activityList.getEventMainTrackValue(idEvent);
 	}
@@ -227,8 +221,8 @@ public class RiseEventsFacade {
 	}
 	
 
-	public List<Activity> getActivities() throws RepositoryException{
-		return activityList.getActivities();
+	public List<Activity> getActivityList() throws RepositoryException{
+		return activityList.getActivityList();
 	}
 	
 	

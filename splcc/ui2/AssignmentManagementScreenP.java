@@ -409,55 +409,43 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				}
 				//#endif
 				
-				//#if ${ConflictofinterestAutomatic} == "T"
-				Conflict conflict = new Conflict();
-				boolean resultAutomaticConflict1 = conflict.automaticInterestConflict(author, user, reviewer1);
-				boolean resultAutomaticConflict2 = conflict.automaticInterestConflict(author, user, reviewer2);
-				boolean resultAutomaticConflict3 = conflict.automaticInterestConflict(author, user, reviewer3);
-				//#endif
+				boolean resultAutomaticConflict1 = false;
+				boolean resultAutomaticConflict2 = false;
+				boolean resultAutomaticConflict3 = false;
+				{% if "InterestConflict" in data.option.actions %}
+				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
+				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
+				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
+				{% endif %}
 				
-				//#if ${ConflictofinterestAutomatic} == "T"
 				if(resultAutomaticConflict1 == true){
-				JOptionPane.showMessageDialog(getContentPane(),
+					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-				//#endif	
-					
-				//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
-				enviarEmails(reviewer1, submission, review1);
-				//#endif
-				
-				//#if ${ConflictofinterestAutomatic} == "T"
+					//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
+					enviarEmails(reviewer1, submission, review1);
+					//#endif
 				}
 				if(resultAutomaticConflict2 == true){
-				JOptionPane.showMessageDialog(getContentPane(),
+					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-				//#endif
-					
-				//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
-				enviarEmails(reviewer2, submission, review2);
-				//#endif
-				
-				//#if ${ConflictofinterestAutomatic} == "T"
+					//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
+					enviarEmails(reviewer2, submission, review2);
+					//#endif
 				}
 				if(resultAutomaticConflict3 == true){
-				JOptionPane.showMessageDialog(getContentPane(),
+					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-				//#endif
-					
-				//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
-				enviarEmails(reviewer3, submission, review3);
-				//#endif
-				
-				//#if ${ConflictofinterestAutomatic} == "T"
+					//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
+					enviarEmails(reviewer3, submission, review3);
+					//#endif
 				}
-				//#endif
-		
+				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",

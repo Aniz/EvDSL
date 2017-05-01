@@ -73,8 +73,12 @@ CommandType:
 ;
 
 Action:
-  'include' actionType=[ActionType]
+  'include' function=[FunctionType]
   params*=NewData + "."
+;
+
+FunctionType:
+  'InterestConflict'
 ;
 
 NewData:
