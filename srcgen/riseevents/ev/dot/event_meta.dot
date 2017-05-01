@@ -11,80 +11,80 @@
     edge[dir=black,arrowtail=empty]
 
 
-140684864540952 -> 140684864546664[arrowtail=diamond, dir=both, headlabel="components 0..*"]
-140684864540952[ label="{EventModel|+name:ID\l}"]
+140618065967464 -> 140618065969320[arrowtail=diamond, dir=both, headlabel="components 0..*"]
+140618065967464[ label="{EventModel|+name:ID\l}"]
 
-140684864546664[ label="{*Component|}"]
-140684864546664 -> 140684864552808 [dir=back]
-140684864546664 -> 140684864572520 [dir=back]
-140684864546664 -> 140684864548520 [dir=back]
-140684864546664 -> 140684864554664 [dir=back]
+140618065969320[ label="{*Component|}"]
+140618065969320 -> 140618065974888 [dir=back]
+140618065969320 -> 140618065993448 [dir=back]
+140618065969320 -> 140618065971176 [dir=back]
+140618065969320 -> 140618065976744 [dir=back]
 
-140684864548520 -> 140684864560232[headlabel="category "]
-140684864548520[ label="{Statment|+condition:Condition\l+entity:Entity\l+actionType:ActionType\l}"]
+140618065971176 -> 140618065982312[headlabel="category "]
+140618065971176[ label="{Statment|+condition:Condition\l+entity:Entity\l+actionType:ActionType\l}"]
 
-140684864550376[ label="{Condition|if\|else\|def}"]
+140618065973032[ label="{Condition|if\|else\|def}"]
 
-140684864552808 -> 140684864563944[arrowtail=diamond, dir=both, headlabel="properties 0..*"]
-140684864552808 -> 140684864556520[arrowtail=diamond, dir=both, headlabel="command "]
-140684864552808 -> 140684864560232[arrowtail=diamond, dir=both, headlabel="categories 0..*"]
-140684864552808[ label="{Option|+entity:Entity\l}"]
+140618065974888 -> 140618065986024[arrowtail=diamond, dir=both, headlabel="properties 0..*"]
+140618065974888 -> 140618065978600[arrowtail=diamond, dir=both, headlabel="command "]
+140618065974888 -> 140618065982312[arrowtail=diamond, dir=both, headlabel="categories 0..*"]
+140618065974888[ label="{Option|+entity:Entity\l}"]
 
-140684864554664 -> 140684864563944[arrowtail=diamond, dir=both, headlabel="properties 0..*"]
-140684864554664 -> 140684864556520[arrowtail=diamond, dir=both, headlabel="command "]
-140684864554664 -> 140684864560232[arrowtail=diamond, dir=both, headlabel="categories 0..*"]
-140684864554664[ label="{NewOption|+entity:ID\l}"]
+140618065976744 -> 140618065986024[arrowtail=diamond, dir=both, headlabel="properties 0..*"]
+140618065976744 -> 140618065978600[arrowtail=diamond, dir=both, headlabel="command "]
+140618065976744 -> 140618065982312[arrowtail=diamond, dir=both, headlabel="categories 0..*"]
+140618065976744[ label="{NewOption|+entity:ID\l}"]
 
-140684864556520[ label="{*Command|}"]
-140684864556520 -> 140684864568808 [dir=back]
-140684864556520 -> 140684864558376 [dir=back]
+140618065978600[ label="{*Command|}"]
+140618065978600 -> 140618065989736 [dir=back]
+140618065978600 -> 140618065980456 [dir=back]
 
-140684864558376[ label="{SubCommandInOption|+entity:Entity\l}"]
+140618065980456[ label="{SubCommandInOption|+entity:Entity\l}"]
 
-140684864560232[ label="{Category|+name:ID\l+alias:ID\l}"]
+140618065982312[ label="{Category|+name:ID\l+alias:ID\l}"]
 
-140684864562088[ label="{Entity|Speaker\|Organizer\|User\|Event\|Payment\|Activity\|Assignment\|Submission\|Reviewer\|Author\|CheckingCopy\|Receipt}"]
+140618065984168[ label="{Entity|Speaker\|Organizer\|User\|Event\|Payment\|Activity\|Assignment\|Submission\|Reviewer\|Author\|CheckingCopy\|Receipt}"]
 
-140684864563944 -> 140684864566376[headlabel="type "]
-140684864563944[ label="{Property|+name:ID\l+alias:ID\l}"]
+140618065986024 -> 140618065987880[headlabel="type "]
+140618065986024[ label="{Property|+name:ID\l+alias:ID\l}"]
 
-140684864566376[ label="{*Type|}"]
-140684864566376 -> 140684864441016 [dir=back]
+140618065987880[ label="{*Type|}"]
+140618065987880 -> 140618064818584 [dir=back]
 
-140684864441016[ label="{SimpleType|+name:ID\l}"]
+140618064818584[ label="{SimpleType|+name:ID\l}"]
 
-140684864568808[ label="{CommandOption|commandsOption:list[CommandType]\l}"]
+140618065989736[ label="{CommandOption|commandsOption:list[CommandType]\l}"]
 
-140684864570664[ label="{CommandType|Insert\|Remove\|Update\|Search\|ListAll\|Search\|Management}"]
+140618065991592[ label="{CommandType|Insert\|Remove\|Update\|Search\|ListAll\|Search\|Management}"]
 
-140684864572520 -> 140684864574376[arrowtail=diamond, dir=both, headlabel="params 0..*"]
-140684864572520[ label="{Action|+actionType:ActionType\l}"]
+140618065993448 -> 140618065995304[arrowtail=diamond, dir=both, headlabel="params 0..*"]
+140618065993448[ label="{Action|+actionType:ActionType\l}"]
 
-140684864574376[ label="{NewData|+name:ID\l}"]
+140618065995304[ label="{NewData|+name:ID\l}"]
 
-140684864576232[ label="{ActionType|sendEmailNotification\|assigmentConflictResolver\|askCardInfo\|reportsFrequencyperActivity\|reportsListofAuthors\|checkingCopyAtestado\|checkingCopyCertificado\|eventProgram\|eventImportantDates\|reportsFrequencyperEvent\|generateCarne\|generateBoleto\|sendBugTrackEmail\|notificationsDeadline\|insertAttachment\|notificationsPaperAssignemnt\|notificationsAceptanceRejection}"]
+140618065997160[ label="{ActionType|sendEmailNotification\|assigmentConflictResolver\|askCardInfo\|reportsFrequencyperActivity\|reportsListofAuthors\|checkingCopyAtestado\|checkingCopyCertificado\|eventProgram\|eventImportantDates\|reportsFrequencyperEvent\|generateCarne\|generateBoleto\|sendBugTrackEmail\|notificationsDeadline\|insertAttachment\|notificationsPaperAssignemnt\|notificationsAceptanceRejection}"]
 
-140684864578088[ label="{Comment|\\/\\/.*$}"]
+140618065999016[ label="{Comment|\\/\\/.*$}"]
 
-140684864462872[ label="{ID|}"]
+140618065688104[ label="{ID|}"]
 
-140684864464728[ label="{STRING|}"]
+140618065689960[ label="{STRING|}"]
 
-140684864466584[ label="{BOOL|}"]
+140618065708440[ label="{BOOL|}"]
 
-140684864468440[ label="{INT|}"]
+140618065701000[ label="{INT|}"]
 
-140684864470296[ label="{FLOAT|}"]
+140618065694408[ label="{FLOAT|}"]
 
-140684864472152[ label="{NUMBER|}"]
-140684864472152 -> 140684864470296 [dir=back]
-140684864472152 -> 140684864468440 [dir=back]
+140618065713480[ label="{NUMBER|}"]
+140618065713480 -> 140618065694408 [dir=back]
+140618065713480 -> 140618065701000 [dir=back]
 
-140684864498136[ label="{BASETYPE|}"]
-140684864498136 -> 140684864472152 [dir=back]
-140684864498136 -> 140684864466584 [dir=back]
-140684864498136 -> 140684864462872 [dir=back]
-140684864498136 -> 140684864464728 [dir=back]
+140618065715336[ label="{BASETYPE|}"]
+140618065715336 -> 140618065713480 [dir=back]
+140618065715336 -> 140618065708440 [dir=back]
+140618065715336 -> 140618065688104 [dir=back]
+140618065715336 -> 140618065689960 [dir=back]
 
 
 }

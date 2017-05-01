@@ -58,10 +58,6 @@ CREATE TABLE Activity (
 	hour varchar(255), 
 	numberOfParticipants int(10), 
 	registrationLimit int(10), 
-	typeActivity varchar(255) NOT NULL,
-				
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idActivity),
 FOREIGN KEY (idEvent) REFERENCES Event (idEvent) ON DELETE CASCADE);
@@ -104,10 +100,6 @@ CREATE TABLE submission(
 	keywords varchar(255),
 	title varchar(255), 
 	attachment blob,
-	typeSubmission varchar(255) NOT NULL,
-				
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idSubmission),
 FOREIGN KEY (idActivity) REFERENCES Activity (idActivity));
@@ -117,11 +109,6 @@ CREATE TABLE author(
 	nameAuthor varchar(255) NOT NULL, 
 	filiation varchar(255) NOT NULL, 
 	email varchar(255) NOT NULL, 
-	typeAuthor varchar(255) NOT NULL,
-				
-	lattes varchar(255) NOT NULL,
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idAuthor));
 
@@ -161,10 +148,6 @@ CREATE TABLE `Checkingcopy`(
 	idRegistration int(10) NOT NULL,
 	idUser int(10) NOT NULL,
 	dateOfIssue varchar(255) NOT NULL, 
-	typeCheckingCopy varchar(255) NOT NULL,
-				
-	banana varchar(255) NOT NULL,
-	anana varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idCheckingcopy),
 FOREIGN KEY (idRegistration) REFERENCES Registration (idRegistration) ON DELETE CASCADE,
@@ -186,10 +169,6 @@ Create table assignement(
 	idReview int(10) NOT NULL,
 	idSubmission int(10) NOT NULL,
 	date varchar(255) NOT NULL, 
-	typeAssignment varchar(255) NOT NULL,
-				
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idUser, idReview, idSubmission),
 FOREIGN KEY (idUser) REFERENCES Reviewer (idUser) ON DELETE CASCADE,
@@ -204,10 +183,6 @@ Create table Payment(
 	attachment blob,
 	barcode varchar(255) NOT NULL,
 	value float,
-	typePayment varchar(255) NOT NULL,
-				
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idPayment),
 FOREIGN KEY (idRegistration) REFERENCES Registration (idRegistration));
@@ -220,9 +195,3 @@ dateOfIssue varchar(255) NOT NULL,
 PRIMARY KEY (idReceipt),
 FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
 
-Create table NewClass(
-	idNewClass int(10) NOT NULL AUTO_INCREMENT,
-				
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
-PRIMARY KEY (id);
