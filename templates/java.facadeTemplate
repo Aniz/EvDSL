@@ -83,58 +83,58 @@ public class {{systemName}}Facade {
 {% endfor %}
 {% if 'Event' in data %}
 	{% if 'eventProgram' in data.User.option.statments %}
-	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
-		events.generateProgram(activities, event);
+	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{
+		eventList.generateProgram(activityList, event);
 	}
 	{% endif %}
 	{% if 'eventImportantDates' in data.User.option.statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
-		events.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
+		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 	{% endif %}
 	{% if 'reportsFrequencyperEvent' in data.User.option.statments %}	
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
-		return events.getParticipantsPerEvent(idEvent);
+		return eventList.getParticipantsPerEvent(idEvent);
 	}
 	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
-		events.frequencyPerEvent(ParticipantsPerEvent, event);
+		eventList.frequencyPerEvent(ParticipantsPerEvent, event);
 	}
 	{% endif %}	
 {% endif %}	
 {% if 'User' in data %}
 	{% if 'sendBugTrackEmail' in data.User.option.statments %}
 	public String sendBug(String nome, String assunto, String mensagem, Email email) throws EmailException {
-		return users.sendBug(nome, assunto, mensagem, email);
+		return userList.sendBug(nome, assunto, mensagem, email);
 	}
 	{% endif %}	
 {% endif %}	
 {% if 'Activity' in data %}
 	//ACTIVITY
 	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activities.getActivitiesByEvent(idEvent);
+		return activityList.getActivitiesByEvent(idEvent);
 	}
 	
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
-		return activities.getEventMainTrackValue(idEvent);
+		return activityList.getEventMainTrackValue(idEvent);
 	}
 	
 	public int getActivityMainTrackId(int idEvent) throws RepositoryException{
-		return activities.getActivityMainTrackId(idEvent);
+		return activityList.getActivityMainTrackId(idEvent);
 	}
 	
 	public int getEventbyActivity(int idActivity) throws RepositoryException{
-		return activities.getEventbyActivity(idActivity);
+		return activityList.getEventbyActivity(idActivity);
 	}
 	
 	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
-		activities.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
+		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
 	{% endif %}
 
 	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
 	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
-		return activities.getListOfAuthorsPerActivity(idActivity);
+		return activityList.getListOfAuthorsPerActivity(idActivity);
 	}
 	
 	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
@@ -142,15 +142,15 @@ public class {{systemName}}Facade {
 	}
 	{% endif %}
 	public List<Activity> getActivities() throws RepositoryException{
-		return activities.getActivities();
+		return activityList.getActivities();
 	}
 {% endif %}
 {% if 'Payment' in data %}	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
-		registrations.removeValue(value, idRegistration);
+		registrationList.removeValue(value, idRegistration);
 	}
 	public void addValue(float value, int idRegistration) throws RepositoryException{
-		registrations.addValue(value, idRegistration);
+		registrationList.addValue(value, idRegistration);
 	}
 	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
 		this.payments.type(payment, paymentout);
@@ -159,25 +159,25 @@ public class {{systemName}}Facade {
 {% if 'Submission' in data %}	
 	{% if 'insertAttachment' in data.Submission.option.statments %}
 	public void insertAttachment(File attachment, int idActivity) throws RepositoryException, SubmissionAlreadyInsertedException{
-		this.submissions.inserAttachmanet(attachment, idActivity);
+		this.submissionList.inserAttachmanet(attachment, idActivity);
 	}
 	{% endif %}
 	public void pdfRecovey(int idSubmission) throws RepositoryException{
-		this.submissions.pdfRecover(idSubmission);
+		this.submissionList.pdfRecover(idSubmission);
 	}
 	public List<Submission> getSubmissionsByUser(int idUser) throws RepositoryException{
-		return submissions.getSubmissionsByUser(idUser);
+		return submissionList.getSubmissionsByUser(idUser);
 	}
 {% endif %}
 {% if 'CheckingCopy' in data %}
 	{% if 'checkingCopyAtestado' in data.Reviewer.option.statments %}
 	public void emitirAtestado (String nome, String evento, String periodo, CheckingCopy checkingcopy) throws RepositoryException {
-		checkingCopys.emitirAtestado(nome, evento, periodo, checkingcopy);
+		checkingcopyList.emitirAtestado(nome, evento, periodo, checkingcopy);
 	}
 	{% endif %}
 	{% if 'checkingCopyCertificado' in data.Reviewer.option.statments %}
 	public void emitirCertificado (String nome, String evento, String periodo, String atividade, CheckingCopy checkingcopy) throws RepositoryException, DocumentException, IOException {
-		checkingCopys.emitirCertificado(nome, evento, periodo, atividade, checkingcopy);
+		checkingcopyList.emitirCertificado(nome, evento, periodo, atividade, checkingcopy);
 	}
 	{% endif %}
 {% endif %}
@@ -187,20 +187,20 @@ public class {{systemName}}Facade {
 	//Review Feature
 	{% if 'Submission' in data %}			
 	public void emailRoundNotification (Review review, User user, Email email) throws EmailException{
-		reviews.emailRoundNotification(review, user, email);
+		reviewList.emailRoundNotification(review, user, email);
 	}
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
-		return reviews.getReviewsBySubmission(idSubmission);
+		return reviewList.getReviewsBySubmission(idSubmission);
 	}
 	{% endif %}
 
 	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		return reviewers.getReviewerByknowledgeArea(knowledgearea);
+		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
 
 	{% if 'notificationsDeadline' in data.Reviewer.option.statments or 'notificationsPaperAssignemnt' in data.Reviewer.option.statments or 'notificationsAceptanceRejection' in data.Reviewer.option.statments%}
 	public void emailNotification (User user, Review review, Email email) throws EmailException{
-		assignments.emailNotification(user, review, email);
+		assignmentList.emailNotification(user, review, email);
 	}
 	{% endif %}
 {% endif %}

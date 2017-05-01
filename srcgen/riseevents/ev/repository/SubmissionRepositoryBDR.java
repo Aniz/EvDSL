@@ -286,6 +286,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 			myStmt.setString(4, "");
 			myStmt.setString(5, "");
 			myStmt.setBinaryStream(6,input);
+				myStmt.setBinaryStream(7,input);
+				myStmt.setBinaryStream(8,input);
 
 			System.out.println("Reading input file: " + attachment.getAbsolutePath());
 

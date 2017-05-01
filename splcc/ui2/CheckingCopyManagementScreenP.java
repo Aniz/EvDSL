@@ -355,7 +355,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopy.set{{property.name|capitalize}}({{property.name}});	
 						{% endfor %}
 						{% if data.option.categories|length > 0 %}
-						checkingCopy.setType{{data.option.entity}}(type{{data.option.entity}});
+							checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf({{data.option.entity|capitalize}}));
 						{% endfor %}
 							
 						//Atualizar JTable
@@ -472,7 +472,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopyNew.set{{property.name|capitalize}}({{property.name}});
 						{% endfor %}
 						{% if data.option.categories|length > 0 %}
-						checkingCopyNew.setType{{data.option.entity}}(type{{data.option.entity}});
+							checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf({{data.option.entity|capitalize}}));
 						{% endif %}
 						
 						try {

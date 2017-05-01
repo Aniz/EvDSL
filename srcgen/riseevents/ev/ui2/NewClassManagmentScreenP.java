@@ -21,18 +21,18 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import riseevents.ev.data.Newclass;
-import riseevents.ev.business.NewclassControl;
-import riseevents.ev.exception.NewclassAlreadyInsertedException;
-import riseevents.ev.exception.NewclassNotFoundException;
-import riseevents.ev.repository.NewclassRepository;
-import riseevents.ev.repository.NewclassRepositoryBDR;
+import riseevents.ev.data.NewClass;
+import riseevents.ev.business.NewClassControl;
+import riseevents.ev.exception.NewClassAlreadyInsertedException;
+import riseevents.ev.exception.NewClassNotFoundException;
+import riseevents.ev.repository.NewClassRepository;
+import riseevents.ev.repository.NewClassRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.table.NewclassTableModel;
+import riseevents.ev.table.NewClassTableModel;
 
-public class NewclassManagementScreenP extends JInternalFrame{
+public class NewClassManagementScreenP extends JInternalFrame{
 
-	private static NewclassManagementScreenP instanceNewclassManagementScreenP;
+	private static NewClassManagementScreenP instanceNewClassManagementScreenP;
 	private JTextField textFieldDate;
 	private JTextField textFieldDescription;
 	private JPanel contentPane;
@@ -50,22 +50,22 @@ public class NewclassManagementScreenP extends JInternalFrame{
 	JButton btnSelect;
 	JButton btnClean;
 	
-	JLabel lblLastNewclassId;
-	private JTextField textFieldNewclassId;
+	JLabel lblLastNewClassId;
+	private JTextField textFieldNewClassId;
 	
 
-	 public static NewclassManagementScreenP getInstanceNewclassManagementScreenP() {
-		 if (instanceNewclassManagementScreenP == null) {
-			 NewclassManagementScreenP.instanceNewclassManagementScreenP = new NewclassManagementScreenP();
+	 public static NewClassManagementScreenP getInstanceNewClassManagementScreenP() {
+		 if (instanceNewClassManagementScreenP == null) {
+			 NewClassManagementScreenP.instanceNewClassManagementScreenP = new NewClassManagementScreenP();
 		 }
-		 return NewclassManagementScreenP.instanceNewclassManagementScreenP;
+		 return NewClassManagementScreenP.instanceNewClassManagementScreenP;
 	 }
 	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewclassManagementScreenP frame = new NewclassManagementScreenP();
+					NewClassManagementScreenP frame = new NewClassManagementScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,7 +77,7 @@ public class NewclassManagementScreenP extends JInternalFrame{
 	/**
 	 * Create the frame.
 	 */
-	public NewclassManagementScreenP() {
+	public NewClassManagementScreenP() {
 		
 		InsertButtonAction insertAction = new InsertButtonAction(); 
 		RemoveButtonAction removeAction = new RemoveButtonAction(); 
@@ -86,7 +86,7 @@ public class NewclassManagementScreenP extends JInternalFrame{
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		BackButtonAction backAction = new BackButtonAction();
 		
-		setTitle("Newclass Management");
+		setTitle("NewClass Management");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 841, 513);
 		contentPane = new JPanel();
@@ -111,13 +111,13 @@ public class NewclassManagementScreenP extends JInternalFrame{
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewclassId = new JLabel("Newclass Id:");
-		lblNewclassId.setBounds(6, 6, 69, 16);
-		panel_1.add(lblNewclassId);
+		JLabel lblNewClassId = new JLabel("NewClass Id:");
+		lblNewClassId.setBounds(6, 6, 69, 16);
+		panel_1.add(lblNewClassId);
 		
-		lblLastNewclassId = new JLabel("");
-		lblLastNewclassId.setBounds(79, 6, 61, 16);
-		panel_1.add(lblLastNewclassId);
+		lblLastNewClassId = new JLabel("");
+		lblLastNewClassId.setBounds(79, 6, 61, 16);
+		panel_1.add(lblLastNewClassId);
 		
 		JLabel lblSubmissionId = new JLabel("Submission Id:");
 		lblSubmissionId.setBounds(6, 49, 104, 16);
@@ -153,10 +153,10 @@ public class NewclassManagementScreenP extends JInternalFrame{
 		panel_1.add(textFieldDescription);
 		textFieldDescription.setColumns(10);
 		
-		textFieldNewclassId = new JTextField();
-		textFieldNewclassId.setBounds(74, 0, 134, 28);
-		panel_1.add(textFieldNewclassId);
-		textFieldNewclassId.setColumns(10);
+		textFieldNewClassId = new JTextField();
+		textFieldNewClassId.setBounds(74, 0, 134, 28);
+		panel_1.add(textFieldNewClassId);
+		textFieldNewClassId.setColumns(10);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(6, 327, 829, 158);
@@ -212,7 +212,7 @@ public class NewclassManagementScreenP extends JInternalFrame{
 	}
 	
 	private void carregarComboBoxStatus(){
-		StatusNewclass[] status = StatusNewclass.values();
+		StatusNewClass[] status = StatusNewClass.values();
 		List<String> statusnewclasss = new ArrayList<String>();
 		for(int i=0; i<status.length; i++){
 			statusnewclasss.add(i, status[i].name());
@@ -240,8 +240,8 @@ public class NewclassManagementScreenP extends JInternalFrame{
 	
 	private void populateTable(){
 		try {
-			NewclassTableModel model;
-			model = new NewclassTableModel(RiseEventsMainScreenP.facade.getNewclasss());
+			NewClassTableModel model;
+			model = new NewClassTableModel(RiseEventsMainScreenP.facade.getNewClasss());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -265,10 +265,10 @@ public class NewclassManagementScreenP extends JInternalFrame{
 		public void actionPerformed(ActionEvent e) {
 
 			
-			Newclass newclass = null;
+			NewClass newclass = null;
 			
 			Integer submissionId = Integer.parseInt(submissionIdcomboBox.getSelectedItem().toString());
-			StatusNewclass status = StatusNewclass.valueOf(statusComboBox.getSelectedItem().toString());
+			StatusNewClass status = StatusNewClass.valueOf(statusComboBox.getSelectedItem().toString());
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
 			
@@ -282,26 +282,26 @@ public class NewclassManagementScreenP extends JInternalFrame{
 			} else {					
 				try {
 					
-					newclass = new Newclass();
+					newclass = new NewClass();
 					newclass.setIdSubmission(submissionId);
 					newclass.setDate(date);
 					newclass.setDescription(description);
 					newclass.setStatus(status);
 					
 					//Atualizar JTable
-					NewclassTableModel model = new NewclassTableModel(RiseEventsMainScreenP.facade.getNewclasss());
+					NewClassTableModel model = new NewClassTableModel(RiseEventsMainScreenP.facade.getNewClasss());
 					
-					RiseEventsMainScreenP.facade.insertNewclass(newclass); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
+					RiseEventsMainScreenP.facade.insertNewClass(newclass); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 				
 
-							//(NewclassTableModel) table.getModel();
-					model.addNewclass(newclass);
+							//(NewClassTableModel) table.getModel();
+					model.addNewClass(newclass);
 					table.setModel(model);
 
 					// Limpar campos
 					cleanFields();
 
-				} catch (NewclassAlreadyInsertedException e1) {
+				} catch (NewClassAlreadyInsertedException e1) {
 					JOptionPane
 					.showMessageDialog(
 							getContentPane(),
@@ -336,15 +336,15 @@ public class NewclassManagementScreenP extends JInternalFrame{
 			}
 			
 			try {
-				Newclass newclass = new NewclassTableModel(RiseEventsMainScreenP.facade.getNewclasss()).get(rowIndex);
-				RiseEventsMainScreenP.facade.removeNewclass(newclass.getIdNewclass());
-				NewclassTableModel model = (NewclassTableModel) table.getModel();
-				model.removeNewclass(rowIndex);
+				NewClass newclass = new NewClassTableModel(RiseEventsMainScreenP.facade.getNewClasss()).get(rowIndex);
+				RiseEventsMainScreenP.facade.removeNewClass(newclass.getIdNewClass());
+				NewClassTableModel model = (NewClassTableModel) table.getModel();
+				model.removeNewClass(rowIndex);
 				table.setModel(model);
 				
 				cleanFields();
 
-			} catch (NewclassNotFoundException e1) {
+			} catch (NewClassNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -354,7 +354,7 @@ public class NewclassManagementScreenP extends JInternalFrame{
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
-			} catch (NewclassAlreadyInsertedException e1) {
+			} catch (NewClassAlreadyInsertedException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -376,7 +376,7 @@ public class NewclassManagementScreenP extends JInternalFrame{
 
 				
 				Integer submissionId = Integer.parseInt(submissionIdcomboBox.getSelectedItem().toString());
-				StatusNewclass status = StatusNewclass.valueOf(statusComboBox.getSelectedItem().toString());
+				StatusNewClass status = StatusNewClass.valueOf(statusComboBox.getSelectedItem().toString());
 				String date = textFieldDate.getText();
 				String description  = textFieldDescription.getText();
 				
@@ -389,18 +389,18 @@ public class NewclassManagementScreenP extends JInternalFrame{
 
 				} else {
 					
-					Newclass newclassNew = new Newclass();
+					NewClass newclassNew = new NewClass();
 					newclassNew.setIdSubmission(submissionId);
 					newclassNew.setDate(date);
 					newclassNew.setDescription(description);
 					newclassNew.setStatus(status);
 					
 					try {
-						RiseEventsMainScreenP.facade.updateNewclass(newclassNew);
-						NewclassTableModel model;
-						model = new NewclassTableModel(RiseEventsMainScreenP.facade.getNewclasss());
+						RiseEventsMainScreenP.facade.updateNewClass(newclassNew);
+						NewClassTableModel model;
+						model = new NewClassTableModel(RiseEventsMainScreenP.facade.getNewClasss());
 						table.setModel(model);
-					} catch (NewclassNotFoundException e1) {
+					} catch (NewClassNotFoundException e1) {
 						JOptionPane
 						.showMessageDialog(
 								getContentPane(),
@@ -408,7 +408,7 @@ public class NewclassManagementScreenP extends JInternalFrame{
 								"Revisao Inexistente",
 								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
-					} catch (NewclassAlreadyInsertedException e1) {
+					} catch (NewClassAlreadyInsertedException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								e1.toString(), "Erro",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -434,12 +434,12 @@ public class NewclassManagementScreenP extends JInternalFrame{
 		public void actionPerformed(ActionEvent e) {
 			
 			int rowIndex = table.getSelectedRow();
-			Newclass newclassOld = null;
+			NewClass newclassOld = null;
 
 			try {
-				newclassOld=  new NewclassTableModel(RiseEventsMainScreenP.facade.getNewclasss()).get(rowIndex);
+				newclassOld=  new NewClassTableModel(RiseEventsMainScreenP.facade.getNewClasss()).get(rowIndex);
 			
-				lblLastNewclassId.setText(String.valueOf(newclassOld.getIdNewclass()));
+				lblLastNewClassId.setText(String.valueOf(newclassOld.getIdNewClass()));
 				submissionIdcomboBox.setSelectedItem(newclassOld.getIdSubmission());
 				statusComboBox.setSelectedItem(newclassOld.getStatus());
 				textFieldDate.setText(newclassOld.getDate());
@@ -470,7 +470,7 @@ public class NewclassManagementScreenP extends JInternalFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			NewclassManagementScreenP.instanceNewclassManagementScreenP = null;
+			NewClassManagementScreenP.instanceNewClassManagementScreenP = null;
 		}
 	}
 	

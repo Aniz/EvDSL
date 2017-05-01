@@ -46,12 +46,8 @@ public class OrganizerTableModel extends AbstractTableModel{
 					return organizer.getIdUser();
 				}  else if (columnIndex == COL_NAMEUSER) {
 					return organizer.getNameUser();
-				} else if (columnIndex == COL_TYPEUSER) {
-					return organizer.getTypeUser().name();
 				} else if (columnIndex == COL_EMAIL) {
 					return organizer.getEmail();
-				}  else if (columnIndex == COL_TYPEORGANIZER) {
-					return organizer.getTypeOrganizer().name();
 				}
 				else if (columnIndex == COL_CONTATO) {
 					return organizer.getContato();
@@ -88,7 +84,7 @@ public class OrganizerTableModel extends AbstractTableModel{
 				case COL_CONTATO:
 					coluna = "";
 					break;
-				case COL_ORGANIZER:
+				case COL_TYPEORGANIZER:
 					coluna = "Tipo";
 					break;
 				case COL_AAAA:
@@ -160,7 +156,7 @@ public class OrganizerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypeOrganizer(organizer.getTypeOrganizer());
 				rows.get(indiceLinha).setAaaa(organizer.getAaaa());
 				rows.get(indiceLinha).setBbbb(organizer.getBbbb());
-				rows.get(indiceLinha).setTypeUser(organizer.getTypeOrganizer());
+				rows.get(indiceLinha).setTypeUser(organizer.getTypeUser());
 			
 				fireTableDataChanged();
 			}

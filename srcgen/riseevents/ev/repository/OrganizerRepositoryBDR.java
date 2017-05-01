@@ -44,7 +44,6 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			statement.executeUpdate("INSERT INTO User Values('"+organizer.getIdUser()
 				+"','" + organizer.getPassword()
 				+"', '"+organizer.getNameUser()
-				+"', '"+organizer.getTypeUser()
 				+"', '"+organizer.getEmail() 
 				+"', '"+organizer.getFiliation()
 				+"', '"+organizer.getTypeUser()
@@ -148,7 +147,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             	organizer.setNameUser(resultset.getString("nameUser"));
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
-				organizer.setTypeOrganizer(TypeOrganizer.valueOf(Organizer(resultset.getString("typeOrganizer")));
+				organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
 				organizer.setContato(resultset.getString("contato"));
 			
         

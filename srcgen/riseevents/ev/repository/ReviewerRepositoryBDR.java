@@ -188,8 +188,8 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
     	    Statement statement = (Statement) pm.getCommunicationChannel();
             statement.executeUpdate("UPDATE reviewer SET knowledgeArea = '"+ reviewer.getKnowledgeArea() +
 					"', typeReviewer = '"+ reviewer.getTypeReviewer() + 
-						"', aaaa = '"+ user.getAaaa() + 
-						"', bbbb = '"+ user.getBbbb() + 
+						"', aaaa = '"+ reviewer.getAaaa() + 
+						"', bbbb = '"+ reviewer.getBbbb() + 
             	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             
             	statement.executeUpdate("UPDATE User SET password = '"+ 

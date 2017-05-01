@@ -210,7 +210,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 					"', type{{data.option.entity}} = '"+ reviewer.getType{{data.option.entity}}() + 
 				{% endif %}
 				{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-						"', {{property.name}} = '"+ user.get{{property.name|capitalize}}() + 
+						"', {{property.name}} = '"+ reviewer.get{{property.name|capitalize}}() + 
 				{% endfor %}{% endif %}
             	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             

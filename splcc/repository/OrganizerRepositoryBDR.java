@@ -48,7 +48,6 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			statement.executeUpdate("INSERT INTO User Values('"+organizer.getIdUser()
 				+"','" + organizer.getPassword()
 				+"', '"+organizer.getNameUser()
-				+"', '"+organizer.getTypeUser()
 				+"', '"+organizer.getEmail() 
 				+"', '"+organizer.getFiliation()
 			{% if extraData.option.categories|length > 0 %}
@@ -167,7 +166,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
 			{% if data.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf({{data.option.entity}}(resultset.getString("type{{data.option.entity}}")));
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
         	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
 				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));

@@ -92,7 +92,7 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
     		{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type == 'integer' %}Int{% else %}String{% endif %}("{{property.name}}"));
 			{% endfor %}{% endif %}			
            
 				list.add(submission);
@@ -245,7 +245,7 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
         	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.getString("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type == 'integer' %}Int{% else %}String{% endif %}("{{property.name}}"));
 			{% endfor %}{% endif %}			
            
             } else {
@@ -294,6 +294,13 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 			myStmt.setString(4, "");
 			myStmt.setString(5, "");
 			myStmt.setBinaryStream(6,input);
+			{% for property in data.option.properties %}
+			{% if property.type == 'integer' %}
+				myStmt.setBinaryStream({{loop.index + 6}},input);
+			{% else %}
+				myStmt.setBinaryStream({{loop.index + 6}},input);
+			{% endif %}
+			{% endfor %}
 
 			System.out.println("Reading input file: " + attachment.getAbsolutePath());
 

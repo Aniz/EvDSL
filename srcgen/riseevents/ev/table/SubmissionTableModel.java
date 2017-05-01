@@ -100,8 +100,6 @@ public class SubmissionTableModel extends AbstractTableModel{
 					return int.class;
 				} else if (columnIndex == COL_ACTIVITYID) {
 					return int.class;
-				} else if (columnIndex == COL_TYPE) {
-					return TypeSubmission.class;
 				} else if (columnIndex == COL_ABSTRACT) {
 					return String.class;
 				} else if (columnIndex == COL_KEYWORDS) {

@@ -209,7 +209,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		
 		try {
-			lblNewLabel.setText(String.valueOf(RiSEEventMainScreenP.facade.getActivityLastId()));
+			lblNewLabel.setText(String.valueOf(RiseEventsMainScreenP.facade.getActivityLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -293,7 +293,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 						activity.setRegistrationLimit(registrationLimit);
 						activity.setAaaa(aaaa);	
 						activity.setBbbb(bbbb);	
-						activity.setTypeActivity(typeActivity);
+						activity.setTypeActivity(TypeActivity.valueOf(Activity));
 						
 						RiseEventsMainScreenP.facade.insertActivity(activity);
 

@@ -7,20 +7,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import riseevents.ev.data.Newclass;
-import riseevents.ev.exception.NewclassNotFoundException;
-import riseevents.ev.exception.NewclassAlreadyInsertedException;
+import riseevents.ev.data.NewClass;
+import riseevents.ev.exception.NewClassNotFoundException;
+import riseevents.ev.exception.NewClassAlreadyInsertedException;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.PersistenceMechanismException;
 import riseevents.ev.util.PersistenceMechanismRDBMS;
-import riseevents.ev.data.Newclass.TypeNewclass;
+import riseevents.ev.data.NewClass.TypeNewClass;
 
-public class NewclassRepositoryBDR implements NewclassRepository{
+public class NewClassRepositoryBDR implements NewClassRepository{
 	
-	private static NewclassRepositoryBDR instance;
+	private static NewClassRepositoryBDR instance;
 	private PersistenceMechanismRDBMS pm;
 	
-	public NewclassRepositoryBDR(){
+	public NewClassRepositoryBDR(){
 		try{
 			pm = PersistenceMechanismRDBMS.getInstance();
 			pm.connect();
@@ -29,19 +29,19 @@ public class NewclassRepositoryBDR implements NewclassRepository{
 		}
 	}
 	
-	public synchronized static NewclassRepositoryBDR getInstance(){
+	public synchronized static NewClassRepositoryBDR getInstance(){
 		if(instance == null){
-			instance = new NewclassRepositoryBDR();
+			instance = new NewClassRepositoryBDR();
 		}
 		return instance;
 	}
 	
 	@Override
-	public void insert(Newclass newclass) throws RepositoryException{
+	public void insert(NewClass newclass) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Newclass (aaaa,bbbb,typeNewclass) Values('" +
-newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewclass()+"')");
+			statement.executeUpdate("INSERT INTO NewClass (aaaa,bbbb,typeNewClass) Values('" +
+newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewClass()+"')");
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -60,13 +60,13 @@ newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewclass()+"'
 	}
 
 	@Override
-	public void remove(Newclass newclass) throws NewclassNotFoundException,
+	public void remove(NewClass newclass) throws NewClassNotFoundException,
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM Newclass WHERE idNewclass = '"+ newclass.getIdNewclass()+"'"); 
+		    int i = statement.executeUpdate("DELETE FROM NewClass WHERE idNewClass = '"+ newclass.getIdNewClass()+"'"); 
 		    if (i == 0) {
-            	throw new NewclassNotFoundException(newclass.getIdNewclass());
+            	throw new NewClassNotFoundException(newclass.getIdNewClass());
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -83,20 +83,20 @@ newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewclass()+"'
 	}
 
 	@Override
-	public Newclass search(int idEntity) throws NewclassNotFoundException,
+	public NewClass search(int idEntity) throws NewClassNotFoundException,
 			RepositoryException {
-		Newclass newclass = null;
-		newclass = new Newclass();
+		NewClass newclass = null;
+		newclass = new NewClass();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from Newclass WHERE idNewclass =" + idEntity);
+            ResultSet resultset = statement.executeQuery("Select * from NewClass WHERE idNewClass =" + idEntity);
             if (resultset.next()) {  	
-    			newclass.setTypeNewclass(TypeNewclass.valueOf(resultset.getString("typeNewclass")));
+    			newclass.setTypeNewClass(TypeNewClass.valueOf(resultset.getString("typeNewClass")));
 				newclass.setAaaa(resultset.getInt("aaaa"));
 				newclass.setBbbb(resultset.getString("bbbb"));
 	
 		     } else {
-            	throw new NewclassNotFoundException(idEntity);
+            	throw new NewClassNotFoundException(idEntity);
             }
 			resultset.close();
 		} catch(PersistenceMechanismException e){
@@ -114,15 +114,15 @@ newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewclass()+"'
 	}
 
 	@Override
-	public List<Newclass> getNewclassList() throws RepositoryException {
-		Newclass activity=null;
-		ArrayList<Newclass> list = new ArrayList<Newclass>();
+	public List<NewClass> getNewClassList() throws RepositoryException {
+		NewClass activity=null;
+		ArrayList<NewClass> list = new ArrayList<NewClass>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("select * from Newclass");
+            ResultSet resultset = statement.executeQuery("select * from NewClass");
             while (resultset.next()) {
-            	Newclass newclass = new Newclass();
-    			newclass.setTypeNewclass(TypeNewclass.valueOf(resultset.getString("typeNewclass")));
+            	NewClass newclass = new NewClass();
+    			newclass.setTypeNewClass(TypeNewClass.valueOf(resultset.getString("typeNewClass")));
 				newclass.setAaaa(resultset.getInt("aaaa"));
 				newclass.setBbbb(resultset.getString("bbbb"));
 	
@@ -144,11 +144,11 @@ newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewclass()+"'
 	}
 
 	@Override
-	public void update(Newclass newclass) throws NewclassNotFoundException,
+	public void update(NewClass newclass) throws NewClassNotFoundException,
 			RepositoryException {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
-    	    statement.executeUpdate("UPDATE Newclass SET aaaa = '"+ newclass.getAaaa()+"', bbbb = '"+ newclass.getBbbb()+ "', typeNewclass = '"+ newclass.getTypeNewclass() +"' WHERE idNewclass = '"+ newclass.getIdNewclass()+"'");
+    	    statement.executeUpdate("UPDATE NewClass SET aaaa = '"+ newclass.getAaaa()+"', bbbb = '"+ newclass.getBbbb()+ "', typeNewClass = '"+ newclass.getTypeNewClass() +"' WHERE idNewClass = '"+ newclass.getIdNewClass()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -164,7 +164,7 @@ newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewclass()+"'
 		
 	}
 	@Override
-	public int getNewclassLastId() throws RepositoryException {
+	public int getNewClassLastId() throws RepositoryException {
 		int answer=-1;
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
@@ -191,7 +191,7 @@ newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewclass()+"'
 		boolean answer = false;
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Newclass WHERE idNewclass = '" + idEntity +"'");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM NewClass WHERE idNewClass = '" + idEntity +"'");
             answer = resultset.next();
 			resultset.close();
 		} catch(PersistenceMechanismException e){

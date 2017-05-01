@@ -2,32 +2,32 @@
 package riseevents.ev.data;
 import riseevents.ev.util.LibraryOfDSL;
 
-public class Newclass {
-  private int idNewclass;
+public class NewClass {
+  private int idNewClass;
 
   private int aaaa;
   private String bbbb;
 
-  private TypeNewclass typeNewclass;
-  public enum TypeNewclass{
+  private TypeNewClass typeNewClass;
+  public enum TypeNewClass{
       AAAA,
       BBB
   
   }
 
-  public TypeNewclass getTypeNewclass(){
-    return this.typeNewclass;
+  public TypeNewClass getTypeNewClass(){
+    return this.typeNewClass;
   }
-  public void setTypeNewclass(TypeNewclass new_value){
-    this.typeNewclass = new_value;
+  public void setTypeNewClass(TypeNewClass new_value){
+    this.typeNewClass = new_value;
   }
  
 
-  public int getIdNewclass(){
-    return this.idNewclass;
+  public int getIdNewClass(){
+    return this.idNewClass;
   }
-  public void setIdNewclass(int new_value){
-    this.idNewclass = new_value;
+  public void setIdNewClass(int new_value){
+    this.idNewClass = new_value;
   }
     public int getAaaa(){
       return this.aaaa;

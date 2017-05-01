@@ -66,12 +66,12 @@ import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
 import riseevents.ev.exception.CheckingCopyNotFoundException;
 import riseevents.ev.repository.CheckingCopyRepository;
 import riseevents.ev.repository.CheckingCopyRepositoryBDR;
-import riseevents.ev.data.Newclass;
-import riseevents.ev.business.NewclassControl;
-import riseevents.ev.exception.NewclassAlreadyInsertedException;
-import riseevents.ev.exception.NewclassNotFoundException;
-import riseevents.ev.repository.NewclassRepository;
-import riseevents.ev.repository.NewclassRepositoryBDR;
+import riseevents.ev.data.NewClass;
+import riseevents.ev.business.NewClassControl;
+import riseevents.ev.exception.NewClassAlreadyInsertedException;
+import riseevents.ev.exception.NewClassNotFoundException;
+import riseevents.ev.repository.NewClassRepository;
+import riseevents.ev.repository.NewClassRepositoryBDR;
 
 public class LibraryOfDSL {
 

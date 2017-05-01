@@ -53,12 +53,8 @@ public class OrganizerTableModel extends AbstractTableModel{
 					return organizer.getIdUser();
 				}  else if (columnIndex == COL_NAMEUSER) {
 					return organizer.getNameUser();
-				} else if (columnIndex == COL_TYPEUSER) {
-					return organizer.getTypeUser().name();
 				} else if (columnIndex == COL_EMAIL) {
 					return organizer.getEmail();
-				}  else if (columnIndex == COL_TYPEORGANIZER) {
-					return organizer.getTypeOrganizer().name();
 				}
 				{% for property in data.option.properties %}
 				else if (columnIndex == COL_{{property.name|upper}}) {
@@ -103,7 +99,7 @@ public class OrganizerTableModel extends AbstractTableModel{
 					break;
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				case COL_{{data.option.entity|upper}}:
+				case COL_TYPE{{data.option.entity|upper}}:
 					coluna = "Tipo";
 					break;
 				{% endif %}
@@ -188,7 +184,7 @@ public class OrganizerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).set{{property.name|capitalize}}(organizer.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if extraData.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{extraData.option.entity}}(organizer.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{extraData.option.entity}}(organizer.getType{{extraData.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

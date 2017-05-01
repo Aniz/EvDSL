@@ -220,8 +220,8 @@ dateOfIssue varchar(255) NOT NULL,
 PRIMARY KEY (idReceipt),
 FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
 
-Create table Newclass(
-	idNewclass int(10) NOT NULL AUTO_INCREMENT,
+Create table NewClass(
+	idNewClass int(10) NOT NULL AUTO_INCREMENT,
 				
 	aaaa varchar(255) NOT NULL,
 	bbbb varchar(255) NOT NULL,

@@ -3,15 +3,15 @@ package riseevents.ev.exception;
 import riseevents.ev.util.LibraryOfDSL;
 import riseevents.ev.util.ExceptionMessages;
 
-public class NewclassNotFoundException extends Exception {
+public class NewClassNotFoundException extends Exception {
     private int idEntity;
 
-    public NewclassNotFoundException(int idEntity){
+    public NewClassNotFoundException(int idEntity){
         super (ExceptionMessages.EXC_NOT_FOUND);
         this.idEntity = idEntity;
     }
 
-    public int getIdNewclass(){
+    public int getIdNewClass(){
         return idEntity;
     }
 

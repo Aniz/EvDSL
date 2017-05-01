@@ -182,7 +182,7 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 			Organizer organizer = null;
 
 			try {
-				organizer =  new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizers()).get(rowIndex);
+				organizer =  new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizerList()).get(rowIndex);
 				int idActivity = RiseEventsMainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Criando ActivityOrganizer
 				ActivityOrganizer activityOrganizer = new ActivityOrganizer();

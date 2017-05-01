@@ -165,7 +165,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypeSpeaker(speaker.getTypeSpeaker());
 				rows.get(indiceLinha).setAaaa(speaker.getAaaa());
 				rows.get(indiceLinha).setBbbb(speaker.getBbbb());
-				rows.get(indiceLinha).setTypeUser(speaker.getTypeSpeaker());
+					rows.get(indiceLinha).setTypeUser(organizer.getTypeUser());
 			
 				fireTableDataChanged();
 			}

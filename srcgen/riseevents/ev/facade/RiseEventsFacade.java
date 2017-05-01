@@ -76,12 +76,12 @@ import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
 import riseevents.ev.exception.CheckingCopyNotFoundException;
 import riseevents.ev.repository.CheckingCopyRepository;
 import riseevents.ev.repository.CheckingCopyRepositoryBDR;
-import riseevents.ev.data.Newclass;
-import riseevents.ev.business.NewclassControl;
-import riseevents.ev.exception.NewclassAlreadyInsertedException;
-import riseevents.ev.exception.NewclassNotFoundException;
-import riseevents.ev.repository.NewclassRepository;
-import riseevents.ev.repository.NewclassRepositoryBDR;
+import riseevents.ev.data.NewClass;
+import riseevents.ev.business.NewClassControl;
+import riseevents.ev.exception.NewClassAlreadyInsertedException;
+import riseevents.ev.exception.NewClassNotFoundException;
+import riseevents.ev.repository.NewClassRepository;
+import riseevents.ev.repository.NewClassRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
@@ -99,7 +99,7 @@ public class RiseEventsFacade {
 	private SubmissionControl submissionList;
 	private AuthorControl authorList;
 	private CheckingCopyControl checkingcopyList;
-	private NewclassControl newclassList;
+	private NewClassControl newclassList;
 
 	protected static RiseEventsFacade instance;
 	
@@ -115,7 +115,7 @@ public class RiseEventsFacade {
 		SubmissionRepository submissionRepository = SubmissionRepositoryBDR.getInstance();
 		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
 		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
-		NewclassRepository newclassRepository = NewclassRepositoryBDR.getInstance();
+		NewClassRepository newclassRepository = NewClassRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
 		speakerList = new SpeakerControl(speakerRepository); 
@@ -128,7 +128,7 @@ public class RiseEventsFacade {
 		submissionList = new SubmissionControl(submissionRepository); 
 		authorList = new AuthorControl(authorRepository); 
 		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
-		newclassList = new NewclassControl(newclassRepository); 
+		newclassList = new NewClassControl(newclassRepository); 
 	
 	}
 	
@@ -382,19 +382,19 @@ public class RiseEventsFacade {
 	public boolean isThereCheckingCopy(int idEntity) throws RepositoryException{
 		return checkingcopyList.isThere(idEntity);
 	}
-	public void insertNewclass(Newclass entity) throws NewclassAlreadyInsertedException, RepositoryException{
+	public void insertNewClass(NewClass entity) throws NewClassAlreadyInsertedException, RepositoryException{
 		this.newclassList.insert(entity);
 	}
-	public List<Newclass> getNewclassList() throws RepositoryException{
-		return newclassList.getNewclassList();
+	public List<NewClass> getNewClassList() throws RepositoryException{
+		return newclassList.getNewClassList();
 	}
-	public int getNewclassLastId() throws RepositoryException{
-		return newclassList.getNewclassLastId();
+	public int getNewClassLastId() throws RepositoryException{
+		return newclassList.getNewClassLastId();
 	}
-	public int getNewclassIdByName(String entityName) throws RepositoryException{
-		return newclassList.getNewclassIdByName(entityName);
+	public int getNewClassIdByName(String entityName) throws RepositoryException{
+		return newclassList.getNewClassIdByName(entityName);
 	}
-	public boolean isThereNewclass(int idEntity) throws RepositoryException{
+	public boolean isThereNewClass(int idEntity) throws RepositoryException{
 		return newclassList.isThere(idEntity);
 	}
 	
@@ -403,31 +403,31 @@ public class RiseEventsFacade {
 	
 	//ACTIVITY
 	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activities.getActivitiesByEvent(idEvent);
+		return activityList.getActivitiesByEvent(idEvent);
 	}
 	
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
-		return activities.getEventMainTrackValue(idEvent);
+		return activityList.getEventMainTrackValue(idEvent);
 	}
 	
 	public int getActivityMainTrackId(int idEvent) throws RepositoryException{
-		return activities.getActivityMainTrackId(idEvent);
+		return activityList.getActivityMainTrackId(idEvent);
 	}
 	
 	public int getEventbyActivity(int idActivity) throws RepositoryException{
-		return activities.getEventbyActivity(idActivity);
+		return activityList.getEventbyActivity(idActivity);
 	}
 	
 
 	public List<Activity> getActivities() throws RepositoryException{
-		return activities.getActivities();
+		return activityList.getActivities();
 	}
 	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
-		registrations.removeValue(value, idRegistration);
+		registrationList.removeValue(value, idRegistration);
 	}
 	public void addValue(float value, int idRegistration) throws RepositoryException{
-		registrations.addValue(value, idRegistration);
+		registrationList.addValue(value, idRegistration);
 	}
 	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
 		this.payments.type(payment, paymentout);
@@ -435,10 +435,10 @@ public class RiseEventsFacade {
 	
 	
 	public void pdfRecovey(int idSubmission) throws RepositoryException{
-		this.submissions.pdfRecover(idSubmission);
+		this.submissionList.pdfRecover(idSubmission);
 	}
 	public List<Submission> getSubmissionsByUser(int idUser) throws RepositoryException{
-		return submissions.getSubmissionsByUser(idUser);
+		return submissionList.getSubmissionsByUser(idUser);
 	}
 	
 	
@@ -446,14 +446,14 @@ public class RiseEventsFacade {
 	//Review Feature
 			
 	public void emailRoundNotification (Review review, User user, Email email) throws EmailException{
-		reviews.emailRoundNotification(review, user, email);
+		reviewList.emailRoundNotification(review, user, email);
 	}
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
-		return reviews.getReviewsBySubmission(idSubmission);
+		return reviewList.getReviewsBySubmission(idSubmission);
 	}
 
 	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		return reviewers.getReviewerByknowledgeArea(knowledgearea);
+		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
 
 	

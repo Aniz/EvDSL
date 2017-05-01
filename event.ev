@@ -77,7 +77,7 @@ anana : integer
 show Insert Update Remove Search ListAll
 	types Atestado,Certificado.
 
-addNew Newclass
+addNew NewClass
 +aaaa : integer
 bbbb : string
 show Insert

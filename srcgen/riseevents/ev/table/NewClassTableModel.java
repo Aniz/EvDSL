@@ -7,9 +7,9 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import riseevents.ev.util.ExceptionMessages;
-import riseevents.ev.data.Newclass;
+import riseevents.ev.data.NewClass;
 
-public class NewclassTableModel extends AbstractTableModel{
+public class NewClassTableModel extends AbstractTableModel{
 	// Nome das Colunas
 		
 			private static final int COL_NEWCLASSID = 0
@@ -17,9 +17,9 @@ public class NewclassTableModel extends AbstractTableModel{
 			private static final int COL_BBBB = 2;
 			
 			// Lista de Valores
-			private List<Newclass> rows;
+			private List<NewClass> rows;
 			
-			public NewclassTableModel(List<Newclass> values){
+			public NewClassTableModel(List<NewClass> values){
 				this.rows = values;
 			}
 			
@@ -34,9 +34,9 @@ public class NewclassTableModel extends AbstractTableModel{
 			
 			//Preenchimento de cada coluna
 				public Object getValueAt(int rowIndex, int columnIndex) {
-					Newclass newclass = rows.get(rowIndex);
+					NewClass newclass = rows.get(rowIndex);
 					if (columnIndex == COL_NEWCLASSID) {
-						return newclass.getIdNewclass();
+						return newclass.getIdNewClass();
 					}
 					else if (columnIndex == COL_AAAA) {
 						return newclass.getAaaa();
@@ -65,35 +65,35 @@ public class NewclassTableModel extends AbstractTableModel{
 				}
 				
 				//Abaixo metodos de InserÁ„o, remoÁ„o, update e etc;
-				public Newclass get(int row) {
+				public NewClass get(int row) {
 					return rows.get(row);
 				}
 
-				public void addNewclass(Newclass newclass) {
+				public void addNewClass(NewClass newclass) {
 					rows.add(newclass);
 					int ultimoIndice = getRowCount() - 1;
 					fireTableRowsInserted(ultimoIndice, ultimoIndice);
 				}
 				
-				public void removeNewclass(int indiceLinha) {
+				public void removeNewClass(int indiceLinha) {
 					rows.remove(indiceLinha);
 					fireTableRowsDeleted(indiceLinha, indiceLinha);
 				}
 				
-				public void alterarNewclass(int indiceLinha, Newclass newclass) {
+				public void alterarNewClass(int indiceLinha, NewClass newclass) {
 					rows.get(indiceLinha).setAaaa(newclass.getAaaa());		
 					rows.get(indiceLinha).setBbbb(newclass.getBbbb());		
 					fireTableDataChanged();
 				}
 				
 				//real name listade....
-				public void addNewclassList(List<Newclass> newclassList) {
+				public void addNewClassList(List<NewClass> newclassList) {
 					int indice = getRowCount();
-					rows.addAll(NewclassList);
-					fireTableRowsInserted(indice, indice + NewclassList.size());
+					rows.addAll(NewClassList);
+					fireTableRowsInserted(indice, indice + NewClassList.size());
 				}
 				
-				public int retornarIndice(Newclass newclass) {
+				public int retornarIndice(NewClass newclass) {
 					return rows.indexOf(newclass);
 				}
 				
