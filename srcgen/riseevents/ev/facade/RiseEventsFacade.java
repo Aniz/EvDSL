@@ -43,6 +43,30 @@ import riseevents.ev.repository.EventRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
+import riseevents.ev.data.ActivityUser;
+import riseevents.ev.business.ActivityUserControl;
+import riseevents.ev.exception.ActivityUserAlreadyInsertedException;
+import riseevents.ev.exception.ActivityUserNotFoundException;
+import riseevents.ev.repository.ActivityUserRepository;
+import riseevents.ev.repository.ActivityUserRepositoryBDR;
+import riseevents.ev.data.ActivitySpeaker;
+import riseevents.ev.business.ActivitySpeakerControl;
+import riseevents.ev.exception.ActivitySpeakerAlreadyInsertedException;
+import riseevents.ev.exception.ActivitySpeakerNotFoundException;
+import riseevents.ev.repository.ActivitySpeakerRepository;
+import riseevents.ev.repository.ActivitySpeakerRepositoryBDR;
+import riseevents.ev.data.ActivityOrganizer;
+import riseevents.ev.business.ActivityOrganizerControl;
+import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
+import riseevents.ev.exception.ActivityOrganizerNotFoundException;
+import riseevents.ev.repository.ActivityOrganizerRepository;
+import riseevents.ev.repository.ActivityOrganizerRepositoryBDR;
+import riseevents.ev.data.Registration;
+import riseevents.ev.business.RegistrationControl;
+import riseevents.ev.exception.RegistrationAlreadyInsertedException;
+import riseevents.ev.exception.RegistrationNotFoundException;
+import riseevents.ev.repository.RegistrationRepository;
+import riseevents.ev.repository.RegistrationRepositoryBDR;
 
 public class RiseEventsFacade {
 
@@ -91,9 +115,6 @@ public class RiseEventsFacade {
 	public User searchUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		return userList.search(idEntity);
 	}
-	public int getUserLastId() throws RepositoryException{
-		return userList.getUserLastId();
-	}
 	public int getUserIdByName(String entityName) throws RepositoryException{
 		return userList.getUserIdByName(entityName);
 	}
@@ -115,12 +136,6 @@ public class RiseEventsFacade {
 	public Speaker searchSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
 		return speakerList.search(idEntity);
 	}
-	public int getSpeakerLastId() throws RepositoryException{
-		return speakerList.getSpeakerLastId();
-	}
-	public int getSpeakerIdByName(String entityName) throws RepositoryException{
-		return speakerList.getSpeakerIdByName(entityName);
-	}
 	public boolean isThereSpeaker(int idEntity) throws RepositoryException{
 		return speakerList.isThere(idEntity);
 	}
@@ -138,12 +153,6 @@ public class RiseEventsFacade {
 	}
 	public Organizer searchOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
 		return organizerList.search(idEntity);
-	}
-	public int getOrganizerLastId() throws RepositoryException{
-		return organizerList.getOrganizerLastId();
-	}
-	public int getOrganizerIdByName(String entityName) throws RepositoryException{
-		return organizerList.getOrganizerIdByName(entityName);
 	}
 	public boolean isThereOrganizer(int idEntity) throws RepositoryException{
 		return organizerList.isThere(idEntity);
@@ -163,11 +172,11 @@ public class RiseEventsFacade {
 	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		return activityList.search(idEntity);
 	}
-	public int getActivityLastId() throws RepositoryException{
-		return activityList.getActivityLastId();
-	}
 	public int getActivityIdByName(String entityName) throws RepositoryException{
 		return activityList.getActivityIdByName(entityName);
+	}
+	public int getActivityLastId() throws RepositoryException{
+		return activityList.getActivityLastId();
 	}
 	public boolean isThereActivity(int idEntity) throws RepositoryException{
 		return activityList.isThere(idEntity);
@@ -187,11 +196,11 @@ public class RiseEventsFacade {
 	public Event searchEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		return eventList.search(idEntity);
 	}
-	public int getEventLastId() throws RepositoryException{
-		return eventList.getEventLastId();
-	}
 	public int getEventIdByName(String entityName) throws RepositoryException{
 		return eventList.getEventIdByName(entityName);
+	}
+	public int getEventLastId() throws RepositoryException{
+		return eventList.getEventLastId();
 	}
 	public boolean isThereEvent(int idEntity) throws RepositoryException{
 		return eventList.isThere(idEntity);
