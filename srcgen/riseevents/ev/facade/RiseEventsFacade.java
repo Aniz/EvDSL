@@ -204,6 +204,98 @@ public class RiseEventsFacade {
 	public boolean isThereEvent(int idEntity) throws RepositoryException{
 		return eventList.isThere(idEntity);
 	}
+	public void insertActivityUser(ActivityUser entity) throws ActivityUserAlreadyInsertedException, RepositoryException{
+		this.activityuserList.insert(entity);
+	public void removeActivityUser(int idEntity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
+		activityuserList.remove(idEntity);  
+	}
+	public void updateActivityUser(ActivityUser Entity) throws ActivityUserNotFoundException, Exception, ActivityUserAlreadyInsertedException{
+		activityuserList.update(Entity);
+	}
+	public List<ActivityUser> getActivityUserList() throws RepositoryException{
+		return activityuserList.getActivityUserList();
+	}
+	public ActivityUser searchActivityUser(int idEntity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
+		return activityuserList.search(idEntity);
+	}
+	public int getActivityUserIdByName(String entityName) throws RepositoryException{
+		return activityuserList.getActivityUserIdByName(entityName);
+	}
+	public int getActivityUserLastId() throws RepositoryException{
+		return activityuserList.getActivityUserLastId();
+	}
+	public boolean isThereActivityUser(int idEntity) throws RepositoryException{
+		return activityuserList.isThere(idEntity);
+	}
+	public void insertActivitySpeaker(ActivitySpeaker entity) throws ActivitySpeakerAlreadyInsertedException, RepositoryException{
+		this.activityspeakerList.insert(entity);
+	public void removeActivitySpeaker(int idEntity) throws ActivitySpeakerNotFoundException, RepositoryException, ActivitySpeakerAlreadyInsertedException{
+		activityspeakerList.remove(idEntity);  
+	}
+	public void updateActivitySpeaker(ActivitySpeaker Entity) throws ActivitySpeakerNotFoundException, Exception, ActivitySpeakerAlreadyInsertedException{
+		activityspeakerList.update(Entity);
+	}
+	public List<ActivitySpeaker> getActivitySpeakerList() throws RepositoryException{
+		return activityspeakerList.getActivitySpeakerList();
+	}
+	public ActivitySpeaker searchActivitySpeaker(int idEntity) throws ActivitySpeakerNotFoundException, RepositoryException, ActivitySpeakerAlreadyInsertedException{
+		return activityspeakerList.search(idEntity);
+	}
+	public int getActivitySpeakerIdByName(String entityName) throws RepositoryException{
+		return activityspeakerList.getActivitySpeakerIdByName(entityName);
+	}
+	public int getActivitySpeakerLastId() throws RepositoryException{
+		return activityspeakerList.getActivitySpeakerLastId();
+	}
+	public boolean isThereActivitySpeaker(int idEntity) throws RepositoryException{
+		return activityspeakerList.isThere(idEntity);
+	}
+	public void insertActivityOrganizer(ActivityOrganizer entity) throws ActivityOrganizerAlreadyInsertedException, RepositoryException{
+		this.activityorganizerList.insert(entity);
+	public void removeActivityOrganizer(int idEntity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
+		activityorganizerList.remove(idEntity);  
+	}
+	public void updateActivityOrganizer(ActivityOrganizer Entity) throws ActivityOrganizerNotFoundException, Exception, ActivityOrganizerAlreadyInsertedException{
+		activityorganizerList.update(Entity);
+	}
+	public List<ActivityOrganizer> getActivityOrganizerList() throws RepositoryException{
+		return activityorganizerList.getActivityOrganizerList();
+	}
+	public ActivityOrganizer searchActivityOrganizer(int idEntity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
+		return activityorganizerList.search(idEntity);
+	}
+	public int getActivityOrganizerIdByName(String entityName) throws RepositoryException{
+		return activityorganizerList.getActivityOrganizerIdByName(entityName);
+	}
+	public int getActivityOrganizerLastId() throws RepositoryException{
+		return activityorganizerList.getActivityOrganizerLastId();
+	}
+	public boolean isThereActivityOrganizer(int idEntity) throws RepositoryException{
+		return activityorganizerList.isThere(idEntity);
+	}
+	public void insertRegistration(Registration entity) throws RegistrationAlreadyInsertedException, RepositoryException{
+		this.registrationList.insert(entity);
+	public void removeRegistration(int idEntity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		registrationList.remove(idEntity);  
+	}
+	public void updateRegistration(Registration Entity) throws RegistrationNotFoundException, Exception, RegistrationAlreadyInsertedException{
+		registrationList.update(Entity);
+	}
+	public List<Registration> getRegistrationList() throws RepositoryException{
+		return registrationList.getRegistrationList();
+	}
+	public Registration searchRegistration(int idEntity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		return registrationList.search(idEntity);
+	}
+	public int getRegistrationIdByName(String entityName) throws RepositoryException{
+		return registrationList.getRegistrationIdByName(entityName);
+	}
+	public int getRegistrationLastId() throws RepositoryException{
+		return registrationList.getRegistrationLastId();
+	}
+	public boolean isThereRegistration(int idEntity) throws RepositoryException{
+		return registrationList.isThere(idEntity);
+	}
 	
 	
 	

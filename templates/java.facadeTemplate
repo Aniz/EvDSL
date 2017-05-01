@@ -92,6 +92,31 @@ public class {{systemName}}Facade {
 		return {{key|lower}}List.isThere(idEntity);
 	}
 {% endfor %}
+{% for dep in dependences %}
+	public void insert{{dep}}({{dep}} entity) throws {{dep}}AlreadyInsertedException, RepositoryException{
+		this.{{dep|lower}}List.insert(entity);
+	public void remove{{dep}}(int idEntity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
+		{{dep|lower}}List.remove(idEntity);  
+	}
+	public void update{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, Exception, {{dep}}AlreadyInsertedException{
+		{{dep|lower}}List.update(Entity);
+	}
+	public List<{{dep}}> get{{dep}}List() throws RepositoryException{
+		return {{dep|lower}}List.get{{dep}}List();
+	}
+	public {{dep}} search{{dep}}(int idEntity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
+		return {{dep|lower}}List.search(idEntity);
+	}
+	public int get{{dep}}IdByName(String entityName) throws RepositoryException{
+		return {{dep|lower}}List.get{{dep}}IdByName(entityName);
+	}
+	public int get{{dep}}LastId() throws RepositoryException{
+		return {{dep|lower}}List.get{{dep}}LastId();
+	}
+	public boolean isThere{{dep}}(int idEntity) throws RepositoryException{
+		return {{dep|lower}}List.isThere(idEntity);
+	}
+{% endfor %}
 {% if 'Event' in data %}
 	{% if 'eventProgram' in data.User.option.statments %}
 	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{

@@ -311,7 +311,7 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 	private void populateTableOrganizers(){
 		try {
 			OrganizerTableModel model;
-			model = new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizers());
+			model = new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizerList());
 
 			tableOrganizers.setModel(model);
 			
@@ -326,7 +326,7 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

@@ -56,9 +56,5 @@ public class ActivityUserControl {
 	public List<ActivityUser> getActivitiesById(int idActivity) throws RepositoryException{
 		return activityUserList.getActivitiesById(idActivity);
 	}
-	
-	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
-		return activityUserList.getParticipantsPerActivity(idActivity);
-	}
 }
 //#endif

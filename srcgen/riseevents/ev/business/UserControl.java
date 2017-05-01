@@ -9,31 +9,11 @@ import riseevents.ev.data.User;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.exception.UserAlreadyInsertedException;
 import riseevents.ev.exception.UserNotFoundException;
-//#if ${Organizer} == "T"
-import riseevents.ev.repository.OrganizerRepository;
-//#endif
-//#if ${Reviewer} == "T"
-import riseevents.ev.repository.ReviewerRepository;
-//#endif
-//#if ${Speaker} == "T"
-import riseevents.ev.repository.SpeakerRepository;
-//#endif
 import riseevents.ev.repository.UserRepository;
 import riseevents.ev.util.Email;
 
 public class UserControl {
 
-	private UserRepository userList;
-	//#if ${Speaker} == "T"
-	private SpeakerRepository speakers;
-	//#endif
-	//#if ${Organizer} == "T"
-	private OrganizerRepository organizers;
-	//#endif
-	//#if ${Reviewer} == "T"
-	private ReviewerRepository reviewers;
-	//#endif
-	
 	public UserControl(UserRepository repository){
 		this.userList = repository;
 	}
