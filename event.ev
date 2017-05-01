@@ -6,21 +6,6 @@ add User
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
-add Speaker 
-    +nacionalidade : integer
-    show Insert Update Search Remove ListAll
-    types GeneralChair.
-    
-add Organizer 
-    +contato : string 
-    show Insert Update Search Remove ListAll
-    types GeneralChair, 
-		ProgramChair, 
-		WorkshopChair, 
-		TutorialChair,
-		ProceedingsChair,
-		PanelChair.
-
 add Activity
 	+aaaa : integer = activityy
 	bbbb : string = ttrryuu
@@ -37,5 +22,4 @@ add Event
 	bbbb : string
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
-		
-include Conflict.
+

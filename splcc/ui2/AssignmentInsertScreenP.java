@@ -53,10 +53,6 @@ import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
 import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.UserNotFoundException;
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
-//#if ${ConflictofinterestAutomatic} == "T"
-import {{systemName|lower}}.ev.util.Conflict;
-//#endif
-import {{systemName|lower}}.ev.util.Email;
 
 public class AssignmentInsertScreenP extends JInternalFrame{
 
@@ -494,7 +490,6 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	}
 	//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"
 	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
-		Email email = new Email();
 		User user = new User();
 		try {
 			user = {{systemName}}MainScreenP.facade.searchUser(reviewer.getIdUser());
@@ -516,7 +511,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		}
 		
 		try {
-			{{systemName}}MainScreenP.facade.emailNotification(user, review, email);
+			{{systemName}}MainScreenP.facade.emailNotification(user, review);
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

@@ -10,7 +10,7 @@ import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.exception.UserAlreadyInsertedException;
 import riseevents.ev.exception.UserNotFoundException;
 import riseevents.ev.repository.UserRepository;
-import riseevents.ev.util.Email;
+import riseevents.ev.util.LibraryOfDSL;
 
 public class UserControl {
 

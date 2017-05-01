@@ -98,6 +98,7 @@ public class {{systemName}}Facade {
 {% for dep in dependences %}
 	public void insert{{dep}}({{dep}} entity) throws {{dep}}AlreadyInsertedException, RepositoryException{
 		this.{{dep|lower}}List.insert(entity);
+	}
 	public void remove{{dep}}({{dep}} entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.remove(entity);  
 	}
@@ -110,16 +111,28 @@ public class {{systemName}}Facade {
 	public {{dep}} search{{dep}}(int idEntity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		return {{dep|lower}}List.search(idEntity);
 	}
-	public int get{{dep}}IdByName(String entityName) throws RepositoryException{
-		return {{dep|lower}}List.get{{dep}}IdByName(entityName);
-	}
 	public int get{{dep}}LastId() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}LastId();
 	}
-	public boolean isThere{{dep}}(int idEntity) throws RepositoryException{
-		return {{dep|lower}}List.isThere(idEntity);
+	public boolean isThere{{dep}}({{dep}} entity) throws RepositoryException{
+		return {{dep|lower}}List.isThere(entity);
 	}
 {% endfor %}
+{% if 'ActivityOrganizer' in dependences %}
+	public List<ActivityOrganizer> getActivitiesOrganizersById(int idActivity) throws RepositoryException{
+		return activityorganizerList.getActivitiesById(idActivity);
+	}
+{% endif %}
+{% if 'ActivitySpeaker' in dependences %}
+	public List<ActivitySpeaker> getActivitiesSpeakerById(int idActivity) throws RepositoryException{
+		return activityspeakerList.getActivitiesById(idActivity);
+	}
+{% endif %}
+{% if 'ActivityUser' in dependences %}
+	public List<ActivityUser> getActivitiesUsersById(int idActivity) throws RepositoryException{
+		return activityuserList.getActivitiesById(idActivity);
+	}
+{% endif %}
 {% if 'Event' in data %}
 	{% if 'eventProgram' in data.User.option.statments %}
 	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{
@@ -142,8 +155,8 @@ public class {{systemName}}Facade {
 {% endif %}	
 {% if 'User' in data %}
 	{% if 'sendBugTrackEmail' in data.User.option.statments %}
-	public String sendBug(String nome, String assunto, String mensagem, Email email) throws EmailException {
-		return userList.sendBug(nome, assunto, mensagem, email);
+	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
+		return userList.sendBug(nome, assunto, mensagem);
 	}
 	{% endif %}	
 {% endif %}	
@@ -217,8 +230,8 @@ public class {{systemName}}Facade {
 	//if Reviewer and Submission -> Review is enable 
 	//Review Feature
 	{% if 'Submission' in data %}			
-	public void emailRoundNotification (Review review, User user, Email email) throws EmailException{
-		reviewList.emailRoundNotification(review, user, email);
+	public void emailRoundNotification (Review review, User user) throws EmailException{
+		reviewList.emailRoundNotification(review, user);
 	}
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
 		return reviewList.getReviewsBySubmission(idSubmission);
@@ -230,8 +243,8 @@ public class {{systemName}}Facade {
 	}
 
 	{% if 'notificationsDeadline' in data.Reviewer.option.statments or 'notificationsPaperAssignemnt' in data.Reviewer.option.statments or 'notificationsAceptanceRejection' in data.Reviewer.option.statments%}
-	public void emailNotification (User user, Review review, Email email) throws EmailException{
-		assignmentList.emailNotification(user, review, email);
+	public void emailNotification (User user, Review review) throws EmailException{
+		assignmentList.emailNotification(user, review);
 	}
 	{% endif %}
 {% endif %}

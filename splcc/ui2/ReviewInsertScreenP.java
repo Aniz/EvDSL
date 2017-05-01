@@ -32,7 +32,7 @@ import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
 import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.UserNotFoundException;
-import {{systemName|lower}}.ev.util.Email;
+import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 public class ReviewInsertScreenP extends JInternalFrame  {
 
@@ -311,12 +311,11 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 	}
 	
 	public void enviarEmails(Review review){
-		Email email = new Email();
 		try {
 			Submission submission = {{systemName}}MainScreenP.facade.searchSubmission(review.getIdSubmission());
 //			Author author = pegarAuthorSubmission(submission);
 			User user = {{systemName}}MainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
-			{{systemName}}MainScreenP.facade.emailRoundNotification(review, user, email);
+			{{systemName}}MainScreenP.facade.emailRoundNotification(review, user);
 			
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),

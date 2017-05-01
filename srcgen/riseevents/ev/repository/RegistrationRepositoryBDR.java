@@ -170,11 +170,11 @@ public class RegistrationRepositoryBDR implements RegistrationRepository {
 	}
 
 	@Override
-	public boolean isThere(int idRegistration) throws RepositoryException {
+	public boolean isThere(Registration registration) throws RepositoryException {
 		boolean answer = false;
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM registration WHERE idRegistration = '" + idRegistration + "'");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM registration WHERE idRegistration = '" + registration.getIdRegistration() + "'");
             answer = resultset.next();
 			resultset.close();
 		} catch(PersistenceMechanismException e){

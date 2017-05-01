@@ -593,7 +593,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	
 	//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"
 	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
-		Email email = new Email();
 		User user = new User();
 		try {
 			user = {{systemName}}MainScreenP.facade.searchUser(reviewer.getIdUser());
@@ -615,7 +614,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		}
 		
 		try {
-			{{systemName}}MainScreenP.facade.emailNotification(user, review, email);
+			{{systemName}}MainScreenP.facade.emailNotification(user, review);
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

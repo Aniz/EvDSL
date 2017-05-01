@@ -22,7 +22,7 @@ import {{systemName|lower}}.ev.business.ActivityUserControl;
 
 import {{systemName|lower}}.ev.business.ReceiptControl;
 import {{systemName|lower}}.ev.business.RegistrationControl;
-import {{systemName|lower}}.ev.util.Email;
+import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 import com.lowagie.text.DocumentException;
 
@@ -285,8 +285,8 @@ public class {{sy}}Facade {
 		return users.getUserIdByName(userName);
 	}
 	//#if ${Bugs} == "T"
-	public String sendBug(String nome, String assunto, String mensagem, Email email) throws EmailException {
-		return users.sendBug(nome, assunto, mensagem, email);
+	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
+		return users.sendBug(nome, assunto, mensagem);
 	}
 	//#endif
 	
@@ -640,8 +640,8 @@ public class {{sy}}Facade {
 		return reviews.isThere(idReview);
 	}
 	
-	public void emailRoundNotification (Review review, User user, Email email) throws EmailException{
-		reviews.emailRoundNotification(review, user, email);
+	public void emailRoundNotification (Review review, User user) throws EmailException{
+		reviews.emailRoundNotification(review, user);
 	}
 	
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
@@ -806,8 +806,8 @@ public class {{sy}}Facade {
 		return assignments.isThere(assignment);
 	}
 	//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"
-	public void emailNotification (User user, Review review, Email email) throws EmailException{
-		assignments.emailNotification(user, review, email);
+	public void emailNotification (User user, Review review) throws EmailException{
+		assignments.emailNotification(user, review);
 	}
 	//#endif
 	//#endif

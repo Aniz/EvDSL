@@ -11,7 +11,7 @@ import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.ReviewNotFoundException;
 import {{systemName|lower}}.ev.repository.ReviewRepository;
-import {{systemName|lower}}.ev.util.Email;
+import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 
 public class ReviewControl {
@@ -57,8 +57,8 @@ public class ReviewControl {
 		return reviewList.isThere(idReview);
 	}
 	
-	public void emailRoundNotification(Review review, User user, Email email) throws EmailException{
-		email.sendRoundNotification(review, user);
+	public void emailRoundNotification(Review review, User user) throws EmailException{
+		LibraryOfDSL.sendRoundNotification(review, user);
 	}
 	
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{

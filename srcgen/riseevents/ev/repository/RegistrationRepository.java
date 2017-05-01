@@ -18,7 +18,7 @@ public interface RegistrationRepository {
 	
 	public void update(Registration registration) throws RegistrationNotFoundException, RepositoryException;
 
-	public boolean isThere(int idRegistration) throws RepositoryException;
+	public boolean isThere(Registration registration) throws RepositoryException;
 	
 	public int getRegistrationLastId() throws RepositoryException;
 	

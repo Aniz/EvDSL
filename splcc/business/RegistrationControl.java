@@ -27,7 +27,7 @@ public class RegistrationControl {
 	
 	public void insert(Registration registration) throws RegistrationAlreadyInsertedException, RepositoryException{
 		if (registration != null) {
-            if (!registrationList.isThere(registration.getIdRegistration())) {
+            if (!registrationList.isThere(registration)) {
                 registrationList.insert(registration);
             } else {
                 throw new RegistrationAlreadyInsertedException(registration.getIdRegistration());
@@ -37,16 +37,16 @@ public class RegistrationControl {
         }
 	}
 
-	public void remove(int idRegistration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
-		registrationList.remove(idRegistration);
+	public void remove(Registration registration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
+		registrationList.remove(registration);
 	}
 	
 	public void update(Registration registration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
 		registrationList.update(registration);
 	}
 
-	public boolean isThere(int idRegistration) throws RepositoryException {
-		return registrationList.isThere(idRegistration);
+	public boolean isThere(Registration registration) throws RepositoryException {
+		return registrationList.isThere(registration);
 	}
 	
 	public int getRegistrationLastId() throws RepositoryException{

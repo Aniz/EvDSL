@@ -35,18 +35,6 @@ public class RiseEventsMainScreenP extends JFrame {
 	private UserRemoveScreenP screenRemoveUser;	
 	private UserListAllScreenP screenListAllUser;	
 
-	private SpeakerInsertScreenP screenInsertSpeaker;	
-	private SpeakerUpdateScreenP screenUpdateSpeaker;	
-	private SpeakerSearchScreenP screenSearchSpeaker;	
-	private SpeakerRemoveScreenP screenRemoveSpeaker;	
-	private SpeakerListAllScreenP screenListAllSpeaker;	
-
-	private OrganizerInsertScreenP screenInsertOrganizer;	
-	private OrganizerUpdateScreenP screenUpdateOrganizer;	
-	private OrganizerSearchScreenP screenSearchOrganizer;	
-	private OrganizerRemoveScreenP screenRemoveOrganizer;	
-	private OrganizerListAllScreenP screenListAllOrganizer;	
-
 	private ActivityInsertScreenP screenInsertActivity;	
 	private ActivityUpdateScreenP screenUpdateActivity;	
 	private ActivitySearchScreenP screenSearchActivity;	
@@ -110,18 +98,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchUserMenuAction searchUserAction = new SearchUserMenuAction();	
 		RemoveUserMenuAction removeUserAction = new RemoveUserMenuAction();	
 		ListAllUserMenuAction listallUserAction = new ListAllUserMenuAction();	
-
-		InsertSpeakerMenuAction insertSpeakerAction = new InsertSpeakerMenuAction();	
-		UpdateSpeakerMenuAction updateSpeakerAction = new UpdateSpeakerMenuAction();	
-		SearchSpeakerMenuAction searchSpeakerAction = new SearchSpeakerMenuAction();	
-		RemoveSpeakerMenuAction removeSpeakerAction = new RemoveSpeakerMenuAction();	
-		ListAllSpeakerMenuAction listallSpeakerAction = new ListAllSpeakerMenuAction();	
-
-		InsertOrganizerMenuAction insertOrganizerAction = new InsertOrganizerMenuAction();	
-		UpdateOrganizerMenuAction updateOrganizerAction = new UpdateOrganizerMenuAction();	
-		SearchOrganizerMenuAction searchOrganizerAction = new SearchOrganizerMenuAction();	
-		RemoveOrganizerMenuAction removeOrganizerAction = new RemoveOrganizerMenuAction();	
-		ListAllOrganizerMenuAction listallOrganizerAction = new ListAllOrganizerMenuAction();	
 
 		InsertActivityMenuAction insertActivityAction = new InsertActivityMenuAction();	
 		UpdateActivityMenuAction updateActivityAction = new UpdateActivityMenuAction();	
@@ -193,40 +169,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllUser = new JMenuItem("ListAll");
 		mnUser.add(mntmListAllUser);
 		mntmListAll.addActionListener(listallUserAction);
-		JMenu mnSpeaker = new JMenu("Speaker");
-		menuBar.add(mnSpeaker);
-		JMenuItem mntmInsertSpeaker = new JMenuItem("Insert");
-		mnSpeaker.add(mntmInsertSpeaker);
-		mntmInsert.addActionListener(insertSpeakerAction);
-		JMenuItem mntmUpdateSpeaker = new JMenuItem("Update");
-		mnSpeaker.add(mntmUpdateSpeaker);
-		mntmUpdate.addActionListener(updateSpeakerAction);
-		JMenuItem mntmSearchSpeaker = new JMenuItem("Search");
-		mnSpeaker.add(mntmSearchSpeaker);
-		mntmSearch.addActionListener(searchSpeakerAction);
-		JMenuItem mntmRemoveSpeaker = new JMenuItem("Remove");
-		mnSpeaker.add(mntmRemoveSpeaker);
-		mntmRemove.addActionListener(removeSpeakerAction);
-		JMenuItem mntmListAllSpeaker = new JMenuItem("ListAll");
-		mnSpeaker.add(mntmListAllSpeaker);
-		mntmListAll.addActionListener(listallSpeakerAction);
-		JMenu mnOrganizer = new JMenu("Organizer");
-		menuBar.add(mnOrganizer);
-		JMenuItem mntmInsertOrganizer = new JMenuItem("Insert");
-		mnOrganizer.add(mntmInsertOrganizer);
-		mntmInsert.addActionListener(insertOrganizerAction);
-		JMenuItem mntmUpdateOrganizer = new JMenuItem("Update");
-		mnOrganizer.add(mntmUpdateOrganizer);
-		mntmUpdate.addActionListener(updateOrganizerAction);
-		JMenuItem mntmSearchOrganizer = new JMenuItem("Search");
-		mnOrganizer.add(mntmSearchOrganizer);
-		mntmSearch.addActionListener(searchOrganizerAction);
-		JMenuItem mntmRemoveOrganizer = new JMenuItem("Remove");
-		mnOrganizer.add(mntmRemoveOrganizer);
-		mntmRemove.addActionListener(removeOrganizerAction);
-		JMenuItem mntmListAllOrganizer = new JMenuItem("ListAll");
-		mnOrganizer.add(mntmListAllOrganizer);
-		mntmListAll.addActionListener(listallOrganizerAction);
 		JMenu mnActivity = new JMenu("Activity");
 		menuBar.add(mnActivity);
 		JMenuItem mntmInsertActivity = new JMenuItem("Insert");
@@ -363,196 +305,6 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllUser);
 			try {
 				screenListAllUser.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class InsertSpeakerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenInsertSpeaker = SpeakerInsertScreenP.getInstanceSpeakerInsertScreenP();
-			if(screenInsertSpeaker.getParent() == null){
-				desktopPane.add(screenInsertSpeaker);
-			}
-			screenInsertSpeaker.setVisible(true);
-			desktopPane.moveToFront(screenInsertSpeaker);
-			try {
-				screenInsertSpeaker.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class UpdateSpeakerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenUpdateSpeaker = SpeakerUpdateScreenP.getInstanceSpeakerUpdateScreenP();
-			if(screenUpdateSpeaker.getParent() == null){
-				desktopPane.add(screenUpdateSpeaker);
-			}
-			screenUpdateSpeaker.setVisible(true);
-			desktopPane.moveToFront(screenUpdateSpeaker);
-			try {
-				screenUpdateSpeaker.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class SearchSpeakerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenSearchSpeaker = SpeakerSearchScreenP.getInstanceSpeakerSearchScreenP();
-			if(screenSearchSpeaker.getParent() == null){
-				desktopPane.add(screenSearchSpeaker);
-			}
-			screenSearchSpeaker.setVisible(true);
-			desktopPane.moveToFront(screenSearchSpeaker);
-			try {
-				screenSearchSpeaker.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class RemoveSpeakerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenRemoveSpeaker = SpeakerRemoveScreenP.getInstanceSpeakerRemoveScreenP();
-			if(screenRemoveSpeaker.getParent() == null){
-				desktopPane.add(screenRemoveSpeaker);
-			}
-			screenRemoveSpeaker.setVisible(true);
-			desktopPane.moveToFront(screenRemoveSpeaker);
-			try {
-				screenRemoveSpeaker.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ListAllSpeakerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenListAllSpeaker = SpeakerListAllScreenP.getInstanceSpeakerListAllScreenP();
-			if(screenListAllSpeaker.getParent() == null){
-				desktopPane.add(screenListAllSpeaker);
-			}
-			screenListAllSpeaker.setVisible(true);
-			desktopPane.moveToFront(screenListAllSpeaker);
-			try {
-				screenListAllSpeaker.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class InsertOrganizerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenInsertOrganizer = OrganizerInsertScreenP.getInstanceOrganizerInsertScreenP();
-			if(screenInsertOrganizer.getParent() == null){
-				desktopPane.add(screenInsertOrganizer);
-			}
-			screenInsertOrganizer.setVisible(true);
-			desktopPane.moveToFront(screenInsertOrganizer);
-			try {
-				screenInsertOrganizer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class UpdateOrganizerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenUpdateOrganizer = OrganizerUpdateScreenP.getInstanceOrganizerUpdateScreenP();
-			if(screenUpdateOrganizer.getParent() == null){
-				desktopPane.add(screenUpdateOrganizer);
-			}
-			screenUpdateOrganizer.setVisible(true);
-			desktopPane.moveToFront(screenUpdateOrganizer);
-			try {
-				screenUpdateOrganizer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class SearchOrganizerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenSearchOrganizer = OrganizerSearchScreenP.getInstanceOrganizerSearchScreenP();
-			if(screenSearchOrganizer.getParent() == null){
-				desktopPane.add(screenSearchOrganizer);
-			}
-			screenSearchOrganizer.setVisible(true);
-			desktopPane.moveToFront(screenSearchOrganizer);
-			try {
-				screenSearchOrganizer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class RemoveOrganizerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenRemoveOrganizer = OrganizerRemoveScreenP.getInstanceOrganizerRemoveScreenP();
-			if(screenRemoveOrganizer.getParent() == null){
-				desktopPane.add(screenRemoveOrganizer);
-			}
-			screenRemoveOrganizer.setVisible(true);
-			desktopPane.moveToFront(screenRemoveOrganizer);
-			try {
-				screenRemoveOrganizer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ListAllOrganizerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenListAllOrganizer = OrganizerListAllScreenP.getInstanceOrganizerListAllScreenP();
-			if(screenListAllOrganizer.getParent() == null){
-				desktopPane.add(screenListAllOrganizer);
-			}
-			screenListAllOrganizer.setVisible(true);
-			desktopPane.moveToFront(screenListAllOrganizer);
-			try {
-				screenListAllOrganizer.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

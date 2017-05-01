@@ -14,9 +14,6 @@ PRIMARY KEY (idUser));
 CREATE TABLE Speaker (
 	idUser int(10) NOT NULL, 
 	biography varchar(255) NOT NULL, 
-		typeSpeaker varchar(255) NOT NULL,
-				
-		nacionalidade varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idUser),
 FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
@@ -64,9 +61,6 @@ FOREIGN KEY (idEvent) REFERENCES Event (idEvent) ON DELETE CASCADE);
 
 CREATE TABLE Organizer (
 	idUser int(10) NOT NULL, 
-	typeOrganizer varchar(255) NOT NULL,
-				
-	contato varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idUser),
 FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
