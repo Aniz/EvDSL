@@ -21,8 +21,8 @@ public class {{data.option.entity}}Control {
   }
   public void insert({{data.option.entity}} {{data.option.entity|lower}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException{
     if ({{data.option.entity|lower}} != null) {
-            if (!{{data.option.entity|lower}}.isThere({{data.option.entity|lower}}.getId{{data.option.entity}}())) {
-                {{data.option.entity|lower}}.insert({{data.option.entity|lower}});
+            if (!{{data.option.entity|lower}}List.isThere({{data.option.entity|lower}}.getId{{data.option.entity}}())) {
+                {{data.option.entity|lower}}List.insert({{data.option.entity|lower}});
             } else {
                 throw new {{data.option.entity}}AlreadyInsertedException({{data.option.entity|lower}}.getId{{data.option.entity}}());
             }

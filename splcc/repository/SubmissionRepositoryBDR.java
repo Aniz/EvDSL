@@ -403,6 +403,13 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
             	submission = new Submission();
             	submission.setTitle(resultset.getString("title"));
             	submission.setAbstractPaper(resultset.getString("abstract"));
+				{% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+	    		{% endif %}
+	           	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
+					{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type == 'integer' %}Int{% else %}String{% endif %}("{{property.name}}"));
+				{% endfor %}{% endif %}			
+	           
 				list.add(submission);
             } 
 			resultset.close();

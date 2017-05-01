@@ -193,6 +193,33 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 	}
 	
 	@Override
+	public List<{{data.option.entity}}> getEntityById(int idEntity) throws RepositoryException {
+		{{data.option.entity}} {{data.option.entity|lower}}=null;
+		ArrayList<{{data.option.entity}}> list = new ArrayList<{{data.option.entity}}>();
+        try {
+            Statement statement = (Statement) pm.getCommunicationChannel();
+            ResultSet resultset = statement.executeQuery("select * from activityorganizer where idEntity ='"+ idEntity + "'");
+            while (resultset.next()) {
+            	{{data.option.entity|lower}} = new {{data.option.entity}}();
+            	{{data.option.entity|lower}}.setId{{data.option.entity}}(resultset.getInt("id{{data.option.entity}}"));
+				list.add({{data.option.entity|lower}});
+            } 
+			resultset.close();
+		} catch(PersistenceMechanismException e){
+            throw new RepositoryException(e);
+        } catch (SQLException e) {
+			throw new RepositoryException(e);
+		} finally {
+			try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+		return list;
+	}
+
+	@Override
 	public boolean isThere(int idEntity) throws RepositoryException {
 		boolean answer = false;
         try {

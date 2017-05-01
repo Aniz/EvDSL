@@ -12,7 +12,7 @@ import {{systemName|lower}}.ev.data.{{data.option.entity}};
 public class {{data.option.entity}}TableModel extends AbstractTableModel{
 	// Nome das Colunas
 		
-			private static final int COL_{{data.option.entity|upper}}ID = 0
+			private static final int COL_{{data.option.entity|upper}}ID = 0;
 			{% for property in data.option.properties %}
 			private static final int COL_{{property.name|upper}} = {{loop.index}};
 			{% endfor %}
@@ -99,8 +99,8 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				//real name listade....
 				public void add{{data.option.entity}}List(List<{{data.option.entity}}> {{data.option.entity|lower}}List) {
 					int indice = getRowCount();
-					rows.addAll({{data.option.entity}}List);
-					fireTableRowsInserted(indice, indice + {{data.option.entity}}List.size());
+					rows.addAll({{data.option.entity|lower}}List);
+					fireTableRowsInserted(indice, indice + {{data.option.entity|lower}}List.size());
 				}
 				
 				public int retornarIndice({{data.option.entity}} {{data.option.entity|lower}}) {

@@ -12,7 +12,7 @@ import riseevents.ev.data.NewClass;
 public class NewClassTableModel extends AbstractTableModel{
 	// Nome das Colunas
 		
-			private static final int COL_NEWCLASSID = 0
+			private static final int COL_NEWCLASSID = 0;
 			private static final int COL_AAAA = 1;
 			private static final int COL_BBBB = 2;
 			
@@ -89,8 +89,8 @@ public class NewClassTableModel extends AbstractTableModel{
 				//real name listade....
 				public void addNewClassList(List<NewClass> newclassList) {
 					int indice = getRowCount();
-					rows.addAll(NewClassList);
-					fireTableRowsInserted(indice, indice + NewClassList.size());
+					rows.addAll(newclassList);
+					fireTableRowsInserted(indice, indice + newclassList.size());
 				}
 				
 				public int retornarIndice(NewClass newclass) {

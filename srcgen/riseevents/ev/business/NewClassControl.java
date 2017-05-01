@@ -21,8 +21,8 @@ public class NewClassControl {
   }
   public void insert(NewClass newclass) throws NewClassAlreadyInsertedException, RepositoryException{
     if (newclass != null) {
-            if (!newclass.isThere(newclass.getIdNewClass())) {
-                newclass.insert(newclass);
+            if (!newclassList.isThere(newclass.getIdNewClass())) {
+                newclassList.insert(newclass);
             } else {
                 throw new NewClassAlreadyInsertedException(newclass.getIdNewClass());
             }

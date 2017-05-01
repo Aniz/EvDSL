@@ -389,6 +389,11 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
             	submission = new Submission();
             	submission.setTitle(resultset.getString("title"));
             	submission.setAbstractPaper(resultset.getString("abstract"));
+				submission.setTypeSubmission(TypeSubmission.valueOf(resultset.getString("typeSubmission")));
+					submission.setAaaa(resultset.getString("aaaa"));
+					submission.setBbbb(resultset.getString("bbbb"));
+			
+	           
 				list.add(submission);
             } 
 			resultset.close();

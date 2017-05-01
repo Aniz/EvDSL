@@ -183,7 +183,7 @@ public class ReviewerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypeReviewer(reviewer.getTypeReviewer());
 				rows.get(indiceLinha).setAaaa(reviewer.getAaaa());
 				rows.get(indiceLinha).setBbbb(reviewer.getBbbb());
-				rows.get(indiceLinha).setTypeUser(reviewer.getTypeReviewer());
+					rows.get(indiceLinha).setTypeUser(reviewer.getTypeUser());
 			
 				fireTableDataChanged();
 			}

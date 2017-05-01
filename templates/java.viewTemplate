@@ -1,0 +1,20 @@
+		{{property.name}}Field = new JTextField();
+		contentPane.add({{property.name}}Field);
+		{{property.name}}Field.setColumns(10);
+	
+		Integer.parseInt({{property.name}}FieldgetText());
+		String.valueOf("");
+		String.valueOf(entity.get{{property.name|capitalize}}());
+	
+		{{property.name}}Field.setText(String.valueOf(entity.get{{property.name|capitalize}}()));
+		{{property.name}}Field.setText(String.valueOf(""));
+		
+
+		propertyParameter = "Integer.parseInt(" + {{property.name}}Field + ".getText())";
+		clearActionParameter = "String.valueOf(\"\")";
+		loadFieldsParameter = "String.valueOf(entity.get{{property.name|capitalize}}())";
+	
+		entity.set{{property.name|capitalize}}(Integer.parseInt({{property.name}}FieldgetText());
+		
+		{{property.name}}Label = new JLabel("{{property.alias}}");
+		contentPane.add({{property.name}}Label);;

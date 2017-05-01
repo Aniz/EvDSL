@@ -119,10 +119,14 @@ public class Payment {
 	public String toString(){
 		return "Payment Id:"+ idPayment + "\nRegistration Id:" + idRegistration + "\nStatus:" + status.toString() + "\nDate:" + date + "\nValue:" + value 
 		{% for property in data.option.properties %}
-    	+ "\n{{data.option.entity}}:" + {{property.name}}.toString() 
+		{% if property.type == 'integer' %}
+    	+ "\n{{property.name}}:" + {{property.name}} 
+		{% else %}
+    	+ "\n{{property.name}}:" + {{property.name}}.toString() 
+		{% endif %}
 		{% endfor %}
 		{% if data.option.categories|length > 0 %}
-		+ "\n{{data.option.entity}}:" + type{{data.option.entity}}.toString() 
+		+ "\nType{{data.option.entity}}:" + type{{data.option.entity}}.toString() 
 		{% endif %} 
 		+ "\nBarcode:" + barcode;
 	}

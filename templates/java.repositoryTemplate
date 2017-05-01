@@ -22,6 +22,8 @@ public interface {{data.option.entity}}Repository {
 	
 	public int get{{data.option.entity}}LastId() throws RepositoryException;
 	
+	public List<{{data.option.entity}}> getEntityById(int idEntity) throws RepositoryException, {{data.option.entity}}NotFoundException;
+
 	public List<{{data.option.entity}}> get{{data.option.entity}}ById(int idActivity) throws RepositoryException;
 
 }

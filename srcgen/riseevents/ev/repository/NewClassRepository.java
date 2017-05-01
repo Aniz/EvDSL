@@ -22,6 +22,8 @@ public interface NewClassRepository {
 	
 	public int getNewClassLastId() throws RepositoryException;
 	
+	public List<NewClass> getEntityById(int idEntity) throws RepositoryException, NewClassNotFoundException;
+
 	public List<NewClass> getNewClassById(int idActivity) throws RepositoryException;
 
 }

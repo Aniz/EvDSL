@@ -200,7 +200,7 @@ public class ReviewerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).set{{property.name|capitalize}}(reviewer.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if extraData.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{extraData.option.entity}}(reviewer.getType{{data.option.entity}}());
+					rows.get(indiceLinha).setType{{extraData.option.entity}}(reviewer.getType{{extraData.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

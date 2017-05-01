@@ -187,6 +187,33 @@ newclass.getAaaa()+"','"+ newclass.getBbbb()+"','"+newclass.getTypeNewClass()+"'
 	}
 	
 	@Override
+	public List<NewClass> getEntityById(int idEntity) throws RepositoryException {
+		NewClass newclass=null;
+		ArrayList<NewClass> list = new ArrayList<NewClass>();
+        try {
+            Statement statement = (Statement) pm.getCommunicationChannel();
+            ResultSet resultset = statement.executeQuery("select * from activityorganizer where idEntity ='"+ idEntity + "'");
+            while (resultset.next()) {
+            	newclass = new NewClass();
+            	newclass.setIdNewClass(resultset.getInt("idNewClass"));
+				list.add(newclass);
+            } 
+			resultset.close();
+		} catch(PersistenceMechanismException e){
+            throw new RepositoryException(e);
+        } catch (SQLException e) {
+			throw new RepositoryException(e);
+		} finally {
+			try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+		return list;
+	}
+
+	@Override
 	public boolean isThere(int idEntity) throws RepositoryException {
 		boolean answer = false;
         try {

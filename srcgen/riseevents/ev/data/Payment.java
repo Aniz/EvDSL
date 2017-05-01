@@ -113,9 +113,9 @@ public class Payment {
 
 	public String toString(){
 		return "Payment Id:"+ idPayment + "\nRegistration Id:" + idRegistration + "\nStatus:" + status.toString() + "\nDate:" + date + "\nValue:" + value 
-    	+ "\nPayment:" + aaaa.toString() 
-    	+ "\nPayment:" + bbbb.toString() 
-		+ "\nPayment:" + typePayment.toString() 
+    	+ "\naaaa:" + aaaa.toString() 
+    	+ "\nbbbb:" + bbbb.toString() 
+		+ "\nTypePayment:" + typePayment.toString() 
  
 		+ "\nBarcode:" + barcode;
 	}
