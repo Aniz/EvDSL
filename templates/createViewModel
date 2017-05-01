@@ -1,0 +1,104 @@
+package view;
+
+import java.awt.Button;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+
+import model.<EntityName>;
+import service.<EntityName>Service;
+
+public class <EntityName>CreateForm extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	
+	private JPanel contentPane;
+	
+	<Labels>
+    
+	<Fields>
+	
+	private final Button btnSalvar = new Button("Salvar");
+	private final Button btnLimpar = new Button("Limpar");
+	
+	private <EntityName> entity;
+
+	<EntityName>Service entityService;
+
+	public <EntityName>CreateForm(<EntityName>Service entityService, <EntityName> entity) {
+		this.entity = entity;
+		this.entityService=entityService;
+		
+		setTitle("<EntityName>");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new GridLayout(0, 2, 0, 0));
+
+		<Instancies>
+
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clear();
+			}
+		});
+
+		contentPane.add(btnLimpar);
+
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				<EntityName> entity = new <EntityName>();
+				
+				<SetEntity>
+
+				salvar(entity);
+			}
+		});
+		contentPane.add(btnSalvar);
+		
+		if(entity != null){
+			carregarCampos();
+		}
+	}
+
+	private void salvar(<EntityName> entity){
+		if (this.entity==null){
+			entityService.executeInsert(entity);
+		}else{
+			entity.setId(this.entity.getId());
+			entityService.executeUpdate(entity);
+		}
+	}
+
+	private void carregarCampos(){
+		<LoadField>
+	}
+
+	private void clear(){
+		<ClearActions>
+	}
+
+	public <EntityName> get<EntityName>() {
+		return entity;
+	}
+
+	public void set<EntityName>(Pessoa entity) {
+		this.entity = entity;
+	}
+}
