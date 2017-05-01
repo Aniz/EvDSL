@@ -28,12 +28,12 @@ import riseevents.ev.exception.OrganizerAlreadyInsertedException;
 import riseevents.ev.exception.OrganizerNotFoundException;
 import riseevents.ev.repository.OrganizerRepository;
 import riseevents.ev.repository.OrganizerRepositoryBDR;
-import riseevents.ev.data.Reviewer;
-import riseevents.ev.business.ReviewerControl;
-import riseevents.ev.exception.ReviewerAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerNotFoundException;
-import riseevents.ev.repository.ReviewerRepository;
-import riseevents.ev.repository.ReviewerRepositoryBDR;
+import riseevents.ev.data.Activity;
+import riseevents.ev.business.ActivityControl;
+import riseevents.ev.exception.ActivityAlreadyInsertedException;
+import riseevents.ev.exception.ActivityNotFoundException;
+import riseevents.ev.repository.ActivityRepository;
+import riseevents.ev.repository.ActivityRepositoryBDR;
 import riseevents.ev.data.Event;
 import riseevents.ev.business.EventControl;
 import riseevents.ev.exception.EventAlreadyInsertedException;
@@ -49,7 +49,7 @@ public class RiseEventsFacade {
 	private UserControl userList;
 	private SpeakerControl speakerList;
 	private OrganizerControl organizerList;
-	private ReviewerControl reviewerList;
+	private ActivityControl activityList;
 	private EventControl eventList;
 
 	protected static RiseEventsFacade instance;
@@ -58,13 +58,13 @@ public class RiseEventsFacade {
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
 		SpeakerRepository speakerRepository = SpeakerRepositoryBDR.getInstance();
 		OrganizerRepository organizerRepository = OrganizerRepositoryBDR.getInstance();
-		ReviewerRepository reviewerRepository = ReviewerRepositoryBDR.getInstance();
+		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
 		speakerList = new SpeakerControl(speakerRepository); 
 		organizerList = new OrganizerControl(organizerRepository); 
-		reviewerList = new ReviewerControl(reviewerRepository); 
+		activityList = new ActivityControl(activityRepository); 
 		eventList = new EventControl(eventRepository); 
 	
 	}
@@ -148,29 +148,29 @@ public class RiseEventsFacade {
 	public boolean isThereOrganizer(int idEntity) throws RepositoryException{
 		return organizerList.isThere(idEntity);
 	}
-	public void insertReviewer(Reviewer entity) throws ReviewerAlreadyInsertedException, RepositoryException{
-		this.reviewerList.insert(entity);
+	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
+		this.activityList.insert(entity);
 	}
-	public void removeReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		reviewerList.remove(idEntity);  
+	public void removeActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		activityList.remove(idEntity);  
 	}
-	public void updateReviewer(Reviewer Entity) throws ReviewerNotFoundException, Exception, ReviewerAlreadyInsertedException{
-		reviewerList.update(Entity);
+	public void updateActivity(Activity Entity) throws ActivityNotFoundException, Exception, ActivityAlreadyInsertedException{
+		activityList.update(Entity);
 	}
-	public List<Reviewer> getReviewerList() throws RepositoryException{
-		return reviewerList.getReviewerList();
+	public List<Activity> getActivityList() throws RepositoryException{
+		return activityList.getActivityList();
 	}
-	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		return reviewerList.search(idEntity);
+	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		return activityList.search(idEntity);
 	}
-	public int getReviewerLastId() throws RepositoryException{
-		return reviewerList.getReviewerLastId();
+	public int getActivityLastId() throws RepositoryException{
+		return activityList.getActivityLastId();
 	}
-	public int getReviewerIdByName(String entityName) throws RepositoryException{
-		return reviewerList.getReviewerIdByName(entityName);
+	public int getActivityIdByName(String entityName) throws RepositoryException{
+		return activityList.getActivityIdByName(entityName);
 	}
-	public boolean isThereReviewer(int idEntity) throws RepositoryException{
-		return reviewerList.isThere(idEntity);
+	public boolean isThereActivity(int idEntity) throws RepositoryException{
+		return activityList.isThere(idEntity);
 	}
 	public void insertEvent(Event entity) throws EventAlreadyInsertedException, RepositoryException{
 		this.eventList.insert(entity);
@@ -200,15 +200,27 @@ public class RiseEventsFacade {
 	
 	
 	
-	
-	
-	
-	//if Reviewer and Submission -> Review is enable 
-	//Review Feature
-
-	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
+	//ACTIVITY
+	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
+		return activityList.getActivitiesByEvent(idEvent);
 	}
+	
+	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
+		return activityList.getEventMainTrackValue(idEvent);
+	}
+	
+	public int getActivityMainTrackId(int idEvent) throws RepositoryException{
+		return activityList.getActivityMainTrackId(idEvent);
+	}
+	
+	public int getEventbyActivity(int idActivity) throws RepositoryException{
+		return activityList.getEventbyActivity(idActivity);
+	}
+	
 
+	public List<Activity> getActivities() throws RepositoryException{
+		return activityList.getActivities();
+	}
+	
 	
 }

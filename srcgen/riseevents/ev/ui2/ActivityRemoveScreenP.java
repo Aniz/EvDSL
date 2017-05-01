@@ -1,4 +1,4 @@
-//#if ${Reviewer} == "T"
+//#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
 package riseevents.ev.ui2;
 
 import java.awt.Dimension;
@@ -8,31 +8,26 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
 
+import riseevents.ev.exception.ActivityAlreadyInsertedException;
+import riseevents.ev.exception.ActivityNotFoundException;
 import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.exception.ReviewerAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerNotFoundException;
-import riseevents.ev.exception.UserAlreadyInsertedException;
-import riseevents.ev.exception.UserNotFoundException;
 
+public class ActivityRemoveScreenP extends JInternalFrame {
 
-public class ReviewerRemoveScreenP extends JInternalFrame {
-
+	private static ActivityRemoveScreenP instanceActivityRemoveScreenP;
+	private JTextField textFieldActivityId;
 	
-	
-	private static ReviewerRemoveScreenP instanceReviewerRemoveScreenP;
-	private JTextField textFieldIdReviewer;
-	
-	public static ReviewerRemoveScreenP getInstanceReviewerRemoveScreenP() {
-		if (instanceReviewerRemoveScreenP == null) {
-			ReviewerRemoveScreenP.instanceReviewerRemoveScreenP = new ReviewerRemoveScreenP();
+	public static ActivityRemoveScreenP getInstanceActivityRemoveScreenP() {
+		if (instanceActivityRemoveScreenP == null) {
+			ActivityRemoveScreenP.instanceActivityRemoveScreenP = new ActivityRemoveScreenP();
 		}
-		return ReviewerRemoveScreenP.instanceReviewerRemoveScreenP;
+		return ActivityRemoveScreenP.instanceActivityRemoveScreenP;
 	}
 	/**
 	 * Launch the application.
@@ -41,7 +36,7 @@ public class ReviewerRemoveScreenP extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReviewerRemoveScreenP frame = new ReviewerRemoveScreenP();
+					ActivityRemoveScreenP frame = new ActivityRemoveScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,11 +48,8 @@ public class ReviewerRemoveScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ReviewerRemoveScreenP() {
-		
-		
-		RemoveButtonAction removeAction = new RemoveButtonAction();
-		BackButtonAction backAction = new BackButtonAction();
+	public ActivityRemoveScreenP() {
+		setTitle("Remove Activity");
 		
 		int inset = 30;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -67,37 +59,40 @@ public class ReviewerRemoveScreenP extends JInternalFrame {
 		setMaximizable(true);
 		setClosable(true);
 		setIconifiable(true);
-		
 		getContentPane().setLayout(null);
 		
-		JLabel lblReviewerId = new JLabel("User Id:");
-		lblReviewerId.setBounds(27, 45, 61, 16);
-		getContentPane().add(lblReviewerId);
+		RemoveButtonAction RemoveAction = new RemoveButtonAction();
+		BackButtonAction backAction = new BackButtonAction();
 		
-		textFieldIdReviewer = new JTextField();
-		textFieldIdReviewer.setBounds(84, 39, 134, 28);
-		getContentPane().add(textFieldIdReviewer);
-		textFieldIdReviewer.setColumns(10);
+		JLabel lblActivityid = new JLabel("ActivityId:");
+		lblActivityid.setBounds(23, 38, 73, 16);
+		getContentPane().add(lblActivityid);
+		
+		textFieldActivityId = new JTextField();
+		textFieldActivityId.setBounds(109, 32, 134, 28);
+		getContentPane().add(textFieldActivityId);
+		textFieldActivityId.setColumns(10);
 		
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.setBounds(263, 17, 117, 29);
+		btnRemove.setBounds(334, 32, 117, 29);
 		getContentPane().add(btnRemove);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(263, 58, 117, 29);
+		btnBack.setBounds(334, 73, 117, 29);
 		getContentPane().add(btnBack);
-
-		btnRemove.addActionListener(removeAction);
+		
+		btnRemove.addActionListener(RemoveAction);
 		btnBack.addActionListener(backAction);
+		
+		
 	}
-	
+
 	private class BackButtonAction  implements ActionListener{ 
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			ReviewerRemoveScreenP.instanceReviewerRemoveScreenP = null;
-			
+			ActivityRemoveScreenP.instanceActivityRemoveScreenP = null;
 		}
 	}
 	
@@ -105,17 +100,24 @@ public class ReviewerRemoveScreenP extends JInternalFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int idReviewer = Integer.valueOf(textFieldIdReviewer.getText());
+			int idActivity = Integer.valueOf(textFieldActivityId.getText());
 			
 			try {
-					RiseEventsMainScreenP.facade.removeReviewer(idReviewer);
+				if (RiseEventsMainScreenP.facade.searchActivity(idActivity) == null){
+					JOptionPane.showMessageDialog(getContentPane(),
+							"Activity não existe.", "Erro",
+							JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}else{
+					RiseEventsMainScreenP.facade.removeActivity(idActivity);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
+				}
 			} catch (HeadlessException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
-			} catch (ReviewerNotFoundException e1) {
+			} catch (ActivityNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -125,14 +127,16 @@ public class ReviewerRemoveScreenP extends JInternalFrame {
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
-			} catch (ReviewerAlreadyInsertedException e1) {
+			} catch (ActivityAlreadyInsertedException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
-			} 
+			}
 				
 		}
+
 	}
+	
 }
 //#endif

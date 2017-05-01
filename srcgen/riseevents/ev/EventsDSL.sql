@@ -24,10 +24,6 @@ FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
 CREATE TABLE Reviewer (
 	idUser int(10) NOT NULL, 
 	knowledgeArea varchar(255) NOT NULL,
-		typeReviewer varchar(255) NOT NULL,
-				
-		aaaa varchar(255) NOT NULL,
-		bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idUser),
 FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
@@ -58,6 +54,10 @@ CREATE TABLE Activity (
 	hour varchar(255), 
 	numberOfParticipants int(10), 
 	registrationLimit int(10), 
+	typeActivity varchar(255) NOT NULL,
+				
+	aaaa varchar(255) NOT NULL,
+	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idActivity),
 FOREIGN KEY (idEvent) REFERENCES Event (idEvent) ON DELETE CASCADE);

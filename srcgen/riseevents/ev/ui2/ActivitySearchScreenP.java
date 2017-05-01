@@ -1,4 +1,4 @@
-//#if ${Reviewer} == "T"
+//#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
 package riseevents.ev.ui2;
 
 import java.awt.Dimension;
@@ -15,27 +15,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import riseevents.ev.data.Reviewer;
-import riseevents.ev.data.User;
+import riseevents.ev.data.Activity;
+import riseevents.ev.exception.ActivityAlreadyInsertedException;
+import riseevents.ev.exception.ActivityNotFoundException;
 import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.exception.ReviewerAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerNotFoundException;
-import riseevents.ev.exception.UserAlreadyInsertedException;
-import riseevents.ev.exception.UserNotFoundException;
 
-public class ReviewerSearchScreenP extends JInternalFrame {
+public class ActivitySearchScreenP extends JInternalFrame {
 
-	
-	private static ReviewerSearchScreenP instanceReviewerSearchScreenP;
-	private JTextField textFieldReviewerId;
+	private static ActivitySearchScreenP instanceActivitySearchScreenP;
+	private JTextField textFieldIdActivity;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
-	
-	public static ReviewerSearchScreenP getInstanceReviewerSearchScreenP() {
-		if (instanceReviewerSearchScreenP == null) {
-			ReviewerSearchScreenP.instanceReviewerSearchScreenP = new ReviewerSearchScreenP();
+	public static ActivitySearchScreenP getInstanceActivitySearchScreenP() {
+		if (instanceActivitySearchScreenP == null) {
+			ActivitySearchScreenP.instanceActivitySearchScreenP = new ActivitySearchScreenP();
 		}
-		return ReviewerSearchScreenP.instanceReviewerSearchScreenP;
+		return ActivitySearchScreenP.instanceActivitySearchScreenP;
 	}
 	/**
 	 * Launch the application.
@@ -44,7 +39,7 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReviewerSearchScreenP frame = new ReviewerSearchScreenP();
+					ActivitySearchScreenP frame = new ActivitySearchScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,8 +51,8 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ReviewerSearchScreenP() {
-		setTitle("Search Reviewer");
+	public ActivitySearchScreenP() {
+		setTitle("Search Activity");
 		
 		int inset = 30;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -73,36 +68,37 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 		
 		getContentPane().setLayout(null);
 		
-		JLabel lblReviewerId = new JLabel("User Id:");
-		lblReviewerId.setBounds(30, 40, 61, 16);
-		getContentPane().add(lblReviewerId);
+		JLabel lblActivityId = new JLabel("Activity Id:");
+		lblActivityId.setBounds(29, 34, 87, 16);
+		getContentPane().add(lblActivityId);
 		
-		textFieldReviewerId = new JTextField();
-		textFieldReviewerId.setBounds(91, 34, 134, 28);
-		getContentPane().add(textFieldReviewerId);
-		textFieldReviewerId.setColumns(10);
-		
-		JButton btnSearch = new JButton("Search");
-		btnSearch.setBounds(480, 54, 117, 29);
-		getContentPane().add(btnSearch);
-		
-		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(480, 95, 117, 29);
-		getContentPane().add(btnBack);
+		textFieldIdActivity = new JTextField();
+		textFieldIdActivity.setBounds(110, 28, 134, 28);
+		getContentPane().add(textFieldIdActivity);
+		textFieldIdActivity.setColumns(10);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(232, 69, 233, 196);
+		scrollPane.setBounds(264, 57, 182, 211);
 		getContentPane().add(scrollPane);
 		
 		textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		
-
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setBounds(458, 29, 117, 29);
+		getContentPane().add(btnSearch);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(458, 70, 117, 29);
+		getContentPane().add(btnBack);
 		
 		btnSearch.addActionListener(searchAction);
 		btnBack.addActionListener(backAction);
 
+
 	}
+
+	
 	
 	private class BackButtonAction  implements ActionListener{ 
 
@@ -110,8 +106,7 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			dispose();
-			ReviewerSearchScreenP.instanceReviewerSearchScreenP = null;
-			
+			ActivitySearchScreenP.instanceActivitySearchScreenP = null;
 		}
 	}
 	
@@ -119,17 +114,15 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Reviewer reviewer = new Reviewer();
-			User user = new User();
+			Activity activity = new Activity();
 			
-			int idUser =Integer.valueOf(textFieldReviewerId.getText());
+			int idActivity =Integer.valueOf( textFieldIdActivity.getText());
 			
 			try {
-				reviewer = RiseEventsMainScreenP.facade.searchReviewer(idUser);
-				//user = RiseEventsMainScreenP.facade.searchUser(idUser);
+				activity = RiseEventsMainScreenP.facade.searchActivity(idActivity);
 				textArea.setText("");
-				textArea.append(reviewer.toString());
-			} catch (ReviewerNotFoundException e1) {
+				textArea.append(activity.toString());
+			} catch (ActivityNotFoundException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -139,7 +132,7 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
-			} catch (ReviewerAlreadyInsertedException e1) {
+			} catch (ActivityAlreadyInsertedException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -168,7 +161,5 @@ public class ReviewerSearchScreenP extends JInternalFrame {
 		}
 		return this.scrollPane;
 	}
-		
-
 }
 //#endif
