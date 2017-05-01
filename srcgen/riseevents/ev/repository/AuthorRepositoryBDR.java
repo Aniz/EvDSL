@@ -40,11 +40,13 @@ public class AuthorRepositoryBDR implements AuthorRepository {
 	public void insert(Author author) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email,typeAuthor,lattes  ) Values('"+author.getName()+"', '"
+			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email,typeAuthor,lattes  ,aaaa  ,bbbb  ) Values('"+author.getName()+"', '"
 				            +author.getEmail()
 				            +"', '"+author.getFiliation()
 						    +"', '"+author.getTypeAuthor()
 							+"', '"+author.getLattes()   
+							+"', '"+author.getAaaa()   
+							+"', '"+author.getBbbb()   
 	        
 				            +"')");
 		} catch (SQLException e) {
@@ -101,6 +103,8 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setFiliation(resultset.getString("filiation"));
 				author.setTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
 				author.setLattes(resultset.getString("lattes"));   
+				author.setAaaa(resultset.getInt("aaaa"));   
+				author.setBbbb(resultset.getString("bbbb"));   
 					        
 				  } else {
             	throw new AuthorNotFoundException(idAuthor);
@@ -135,6 +139,8 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setFiliation(resultset.getString("filiation"));				
 				author.setTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
 				author.setLattes(resultset.getString("lattes"));   
+				author.setAaaa(resultset.getInt("aaaa"));   
+				author.setBbbb(resultset.getString("bbbb"));   
 					        
 				list.add(author);
             } 
@@ -164,6 +170,8 @@ public class AuthorRepositoryBDR implements AuthorRepository {
 	                     "', email = '"+ author.getEmail() +
 						"', Author = '"+ author.getTypeAuthor() +
 					     "', lattes = '"+ author.getLattes() +
+					     "', aaaa = '"+ author.getAaaa() +
+					     "', bbbb = '"+ author.getBbbb() +
      
 				      "' WHERE idAuthor = '"+ author.getIdAuthor()+"'");
 

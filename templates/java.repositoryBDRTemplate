@@ -19,10 +19,10 @@ import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.ent
 
 public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity}}Repository{
 	
-	private static {{data.option.entity}}RepositoryBDRBDR instance;
+	private static {{data.option.entity}}RepositoryBDR instance;
 	private PersistenceMechanismRDBMS pm;
 	
-	public {{data.option.entity}}RepositoryBDRBDR(){
+	public {{data.option.entity}}RepositoryBDR(){
 		try{
 			pm = PersistenceMechanismRDBMS.getInstance();
 			pm.connect();
@@ -31,9 +31,9 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 		}
 	}
 	
-	public synchronized static {{data.option.entity}}RepositoryBDRBDR getInstance(){
+	public synchronized static {{data.option.entity}}RepositoryBDR getInstance(){
 		if(instance == null){
-			instance = new {{data.option.entity}}RepositoryBDRBDR();
+			instance = new {{data.option.entity}}RepositoryBDR();
 		}
 		return instance;
 	}
@@ -68,7 +68,7 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
             Statement statement = (Statement) pm.getCommunicationChannel();
 		    int i = statement.executeUpdate("DELETE FROM {{data.option.entity}} WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'"); 
 		    if (i == 0) {
-            	throw new {{data.option.entity}}NotFoundException({{data.option.entity}}.getId{{data.option.entity}}());
+            	throw new {{data.option.entity}}NotFoundException({{data.option.entity|lower}}.getId{{data.option.entity}}());
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -87,8 +87,8 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 	@Override
 	public {{data.option.entity}} search(int idEntity) throws {{data.option.entity}}NotFoundException,
 			RepositoryException {
-		{{data.option.entity}} {{data.option.entity}} = null;
-		{{data.option.entity}} = new {{data.option.entity}}();
+		{{data.option.entity}} {{data.option.entity|lower}} = null;
+		{{data.option.entity|lower}} = new {{data.option.entity}}();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
             ResultSet resultset = statement.executeQuery("Select * from {{data.option.entity}} WHERE id{{data.option.entity}} =" + idEntity);
@@ -125,7 +125,7 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
             Statement statement = (Statement) pm.getCommunicationChannel();
             ResultSet resultset = statement.executeQuery("select * from {{data.option.entity}}");
             while (resultset.next()) {
-            	{{data.option.entity|lower}} = new {{data.option.entity}}();
+            	{{data.option.entity}} {{data.option.entity|lower}} = new {{data.option.entity}}();
             {% if data.option.categories|length > 0 %}
     			{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
     		{% endif %}
@@ -154,19 +154,7 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 			RepositoryException {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
-
-    	    statement.executeUpdate("UPDATE {{data.option.entity}} SET
-	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-	{% if loop.first %}
-	    {{property.name}} = '"+ activity.get{{property.name|capitalize}}() +
-	{% else %}
-	     "', {{property.name}} = '"+ activity.get{{property.name|capitalize}}() +
-	{% endif %}
-	{% endfor %}{% endif %}
-	{% if data.option.categories|length > 0 %}
-	    "', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +
-	{% endif %}
-	     "' WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'");
+    	    statement.executeUpdate("UPDATE {{data.option.entity}} SET {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% else %}"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %} "', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +{% endif %}"' WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -181,7 +169,29 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 		}
 		
 	}
-
+	@Override
+	public int get{{data.option.entity}}LastId() throws RepositoryException {
+		int answer=-1;
+        try {
+            Statement statement = (Statement) pm.getCommunicationChannel();
+            ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EEventDB' AND TABLE_NAME= 'activityorganizer'");
+            resultset.first();
+            answer = resultset.getInt("proximo_valor");
+			resultset.close();
+		} catch(PersistenceMechanismException e){
+            throw new RepositoryException(e);
+        } catch (SQLException e) {
+			throw new RepositoryException(e);
+		} finally {
+			try {
+				pm.releaseCommunicationChannel();
+			} catch (PersistenceMechanismException ex) {
+				throw new RepositoryException(ex);
+			}
+		}
+        return answer;
+	}
+	
 	@Override
 	public boolean isThere(int idEntity) throws RepositoryException {
 		boolean answer = false;

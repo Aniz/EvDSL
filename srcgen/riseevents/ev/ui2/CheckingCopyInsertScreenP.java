@@ -34,12 +34,11 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 
 	private static CheckingCopyInsertScreenP instanceCheckingCopyInsertScreenP;
 	private JTextField textFieldDate;
-	private JComboBox comboBoxCheckingCopyType;
 	private JComboBox comboBoxUserId;
 	private JComboBox comboBoxRegistrationId;
-	
-	
-	
+	private JComboBox comboBoxTypeCheckingCopy;
+	private JTextField textFieldBanana;
+	private JTextField textFieldAnana;
 	
 	public static CheckingCopyInsertScreenP getInstanceCheckingCopyInsertScreenP() {
 		if (instanceCheckingCopyInsertScreenP == null) {
@@ -99,7 +98,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 		comboBoxCheckingCopyType = new JComboBox();
 		comboBoxCheckingCopyType.setBounds(146, 109, 159, 27);
 		getContentPane().add(comboBoxCheckingCopyType);
-		
+	
 		JLabel lblDate = new JLabel("Date:");
 		lblDate.setBounds(376, 113, 61, 16);
 		getContentPane().add(lblDate);

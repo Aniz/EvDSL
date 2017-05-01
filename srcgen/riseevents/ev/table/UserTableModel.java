@@ -16,8 +16,9 @@ public class UserTableModel extends AbstractTableModel{
 		private static final int COL_NAMEUSER = 1;
 		private static final int COL_EMAIL = 2;
 		private static final int COL_FILIATION = 3;
-		private static final int COL_PHONE =4;
-		private static final int COL_TYPEUSER = 5;
+		private static final int COL_AAAA =4;
+		private static final int COL_BBBB =5;
+		private static final int COL_TYPEUSER = 6;
 	
 		// Lista de Valores
 		private List<User> rows;
@@ -32,7 +33,7 @@ public class UserTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return 7;
 		}
 		
 		//Preenchimento de cada coluna
@@ -49,11 +50,14 @@ public class UserTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_FILIATION) {
 					return user.getFiliation();
 				}
-				else if (columnIndex == COL_PHONE) {
-					return activity.getPhone();
+				else if (columnIndex == COL_AAAA) {
+					return user.getAaaa();
+				}
+				else if (columnIndex == COL_BBBB) {
+					return user.getBbbb();
 				}
 				else if (columnIndex == COL_TYPEUSER) {
-					return activity.getTypeUser();
+					return user.getTypeUser();
 				}
 			
 				return null;
@@ -69,16 +73,16 @@ public class UserTableModel extends AbstractTableModel{
 				case COL_NAMEUSER:
 					coluna = "Name";
 					break;
-				case COL_TYPEUSER:
-					coluna = "Type";
-					break;
-				case COL_EMAIL:
+				 case COL_EMAIL:
 					coluna = "Email";
 					break;
 				case COL_FILIATION:
 					coluna = "Filiation";
 					break;
-				case COL_PHONE:
+				case COL_AAAA:
+					coluna = "";
+					break;
+				case COL_BBBB:
 					coluna = "";
 					break;
 				case COL_TYPEUSER:
@@ -105,8 +109,11 @@ public class UserTableModel extends AbstractTableModel{
 				}  else if (columnIndex == COL_FILIATION) {
 					return String.class;
 				}
-				else if (columnIndex == COL_PHONE) {
+				else if (columnIndex == COL_AAAA) {
 					return int.class;
+				}
+				else if (columnIndex == COL_BBBB) {
+					return String.class;
 				}
 				else if (columnIndex == COL_TYPEUSER) {
 					return String.class;
@@ -137,8 +144,9 @@ public class UserTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypeUser(user.getTypeUser());
 				rows.get(indiceLinha).setEmail(user.getEmail());
 				rows.get(indiceLinha).setFiliation(user.getFiliation());
-				rows.get(indiceLinha).setPhone(activity.getPhone());
-				rows.get(indiceLinha).setTypeUser(activity.getTypeUser());
+				rows.get(indiceLinha).setAaaa(user.getAaaa());
+				rows.get(indiceLinha).setBbbb(user.getBbbb());
+				rows.get(indiceLinha).setTypeUser(user.getTypeUser());
 			
 				fireTableDataChanged();
 			}

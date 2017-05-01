@@ -2,36 +2,43 @@
 package riseevents.ev.data;
 import riseevents.ev.util.LibraryOfDSL;
 
-public class NewClass {
-  private int idNewClass;
+public class Newclass {
+  private int idNewclass;
 
-  private int banana;
+  private int aaaa;
+  private String bbbb;
 
-  private TypeNewClass typeNewClass;
-  public enum TypeNewClass{
+  private TypeNewclass typeNewclass;
+  public enum TypeNewclass{
       AAAA,
       BBB
   
   }
 
-  public TypeNewClass getTypeNewClass(){
-    return this.typeNewClass;
+  public TypeNewclass getTypeNewclass(){
+    return this.typeNewclass;
   }
-  public void setTypeNewclass(TypeNewClass new_value){
-    this.typeNewClass = new_value;
+  public void setTypeNewclass(TypeNewclass new_value){
+    this.typeNewclass = new_value;
   }
  
 
-  public int getIdNewClass(){
-    return this.idNewClass;
+  public int getIdNewclass(){
+    return this.idNewclass;
   }
-  public void setIdNewClass(int new_value){
-    this.idNewClass = new_value;
+  public void setIdNewclass(int new_value){
+    this.idNewclass = new_value;
   }
-    public int getBanana(){
-      return this.banana;
+    public int getAaaa(){
+      return this.aaaa;
     }
-  public void setBanana(int new_value){
-      this.banana = new_value;
+  public void setAaaa(int new_value){
+      this.aaaa = new_value;
+    }
+    public String getBbbb(){
+      return this.bbbb;
+    }
+  public void setBbbb(String new_value){
+      this.bbbb = new_value;
     }
 }

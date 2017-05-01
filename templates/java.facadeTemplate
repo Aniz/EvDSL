@@ -64,7 +64,7 @@ public class {{systemName}}Facade {
 	}
 	{% endif %}
 	public List<{{key}}> get{{key}}List() throws RepositoryException{
-		return {{key}}List.get{{key}}List();
+		return {{key|lower}}List.get{{key}}List();
 	}
 	{% if 'Search' in value.commands %}
 	public {{key}} search{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{

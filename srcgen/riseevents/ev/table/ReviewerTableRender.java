@@ -35,15 +35,21 @@ public class ReviewerTableRender extends DefaultTableCellRenderer {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		
+		table.getColumnModel().getColumn(5).setMaxWidth(13);
+		table.getColumnModel().getColumn(5).setResizable(false);
+		table.getColumnModel().getColumn(6).setMaxWidth(13);
+		table.getColumnModel().getColumn(6).setResizable(false);
 		
-		table.getColumnModel().getColumn(4).setMaxWidth(13);
-		table.getColumnModel().getColumn(4).setResizable(false);
+		table.getColumnModel().getColumn(6).setMaxWidth(13);
+		table.getColumnModel().getColumn(6).setResizable(false);
 		
-		table.getColumnModel().getColumn(8).setMaxWidth(13);
-		table.getColumnModel().getColumn(8).setResizable(false);
+		table.getColumnModel().getColumn(10).setMaxWidth(13);
+		table.getColumnModel().getColumn(10).setResizable(false);
+		table.getColumnModel().getColumn(11).setMaxWidth(13);
+		table.getColumnModel().getColumn(11).setResizable(false);
 		
-		table.getColumnModel().getColumn(8).setMaxWidth(13);
-		table.getColumnModel().getColumn(8).setResizable(false);
+		table.getColumnModel().getColumn(11).setMaxWidth(13);
+		table.getColumnModel().getColumn(11).setResizable(false);
 		
 		//Texto Centralizado nas Colunas
 		this.setHorizontalAlignment(CENTER);

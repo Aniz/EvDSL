@@ -6,11 +6,13 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import {{systemName|lower}}.ev.util.ExceptionMessages;
 import {{systemName|lower}}.ev.data.{{data.option.entity}};
 
 public class {{data.option.entity}}TableModel extends AbstractTableModel{
 	// Nome das Colunas
-	
+		
+			private static final int COL_{{data.option.entity|upper}}ID = 0
 			{% for property in data.option.properties %}
 			private static final int COL_{{property.name|upper}} = {{loop.index}};
 			{% endfor %}
@@ -21,7 +23,7 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 			public {{data.option.entity}}TableModel(List<{{data.option.entity}}> values){
 				this.rows = values;
 			}
-			v
+			
 			public int getRowCount() {
 				return rows.size();
 			}
@@ -35,7 +37,7 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				public Object getValueAt(int rowIndex, int columnIndex) {
 					{{data.option.entity}} {{data.option.entity|lower}} = rows.get(rowIndex);
 					if (columnIndex == COL_{{data.option.entity|upper}}ID) {
-						return {{data.option.entity|lower}}.getId{{data.option.name}}();
+						return {{data.option.entity|lower}}.getId{{data.option.entity}}();
 					}
 					{% for property in data.option.properties %}
 					else if (columnIndex == COL_{{property.name|upper}}) {
@@ -55,7 +57,7 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
   					{% endfor %}
 					
 					default:
-						throw new IllegalArgumentException(EXC_INVALID_COL);
+						throw new IllegalArgumentException(ExceptionMessages.EXC_INVALID_COL);
 					}
 					return coluna;
 				}
@@ -76,8 +78,8 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 					return rows.get(row);
 				}
 
-				public void add{{data.option.entity}}({{data.option.entity}} {{data.option.entity.name|lower}}) {
-					rows.add({{data.option.entity.name|lower}});
+				public void add{{data.option.entity}}({{data.option.entity}} {{data.option.entity|lower}}) {
+					rows.add({{data.option.entity|lower}});
 					int ultimoIndice = getRowCount() - 1;
 					fireTableRowsInserted(ultimoIndice, ultimoIndice);
 				}
@@ -89,7 +91,7 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				
 				public void alterar{{data.option.entity}}(int indiceLinha, {{data.option.entity}} {{data.option.entity|lower}}) {
 					{% for property in data.option.properties %}
-					rows.get(indiceLinha).set{{property.name|capitalize}}({{data.option.entity|lower}}.get{{property.name}}());		
+					rows.get(indiceLinha).set{{property.name|capitalize}}({{data.option.entity|lower}}.get{{property.name|capitalize}}());		
 					{% endfor %}
 					fireTableDataChanged();
 				}
@@ -97,12 +99,12 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				//real name listade....
 				public void add{{data.option.entity}}List(List<{{data.option.entity}}> {{data.option.entity|lower}}List) {
 					int indice = getRowCount();
-					rows.addAll({{data.option.entity}}s);
-					fireTableRowsInserted(indice, indice + {{data.option.entity}}s.size());
+					rows.addAll({{data.option.entity}}List);
+					fireTableRowsInserted(indice, indice + {{data.option.entity}}List.size());
 				}
 				
 				public int retornarIndice({{data.option.entity}} {{data.option.entity|lower}}) {
-					return rows.indexOf({{data.option.entity}});
+					return rows.indexOf({{data.option.entity|lower}});
 				}
 				
 				// Remove todos os registros.

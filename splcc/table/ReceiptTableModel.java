@@ -52,12 +52,12 @@ public class ReceiptTableModel extends AbstractTableModel{
 				} 
 				{% for property in data.option.properties %}
 				else if (columnIndex == COL_{{property.name|upper}}) {
-					return activity.get{{property.name|capitalize}}();
+					return receipt.get{{property.name|capitalize}}();
 				}
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
 				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
-					return activity.getType{{data.option.entity}}();
+					return receipt.getType{{data.option.entity}}();
 				}
 				{% endif %}
 			
@@ -144,10 +144,10 @@ public class ReceiptTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setDateOfIssue(receipt.getDateOfIssue());
 				rows.get(indiceLinha).setTotalValue(receipt.getTotalValue());	
 				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(receipt.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{data.option.entity}}(receipt.getType{{data.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

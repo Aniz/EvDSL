@@ -7,7 +7,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class NewClassTableRender extends DefaultTableCellRenderer {
+public class NewclassTableRender extends DefaultTableCellRenderer {
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
@@ -25,9 +25,11 @@ public class NewClassTableRender extends DefaultTableCellRenderer {
 		//Tamanho das Colunas
 		table.getColumnModel().getColumn(0).setMaxWidth(13);
 		table.getColumnModel().getColumn(1).setMaxWidth(13);
+		table.getColumnModel().getColumn(2).setMaxWidth(13);
 		
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
 		
 		//Texto Centralizado nas Colunas
 		this.setHorizontalAlignment(CENTER);

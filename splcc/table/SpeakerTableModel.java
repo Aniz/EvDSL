@@ -25,10 +25,10 @@ public class SpeakerTableModel extends AbstractTableModel{
 		{% endif %}
 		
 		{% for property in extraData.option.properties %}
-		private static final int COL_{{property.name|upper}} ={{loop.index+3 + data.option.properties|length + data.option.categories|length}};
+		private static final int COL_{{property.name|upper}} ={{loop.index+3 + data.option.properties|length + (data.option.categories is defined)}};
 		{% endfor %}
 		{% if extraData.option.categories|length > 0 %}
-		private static final int COL_TYPE{{extraData.option.entity|upper}} = {{4 + extraData.option.properties|length + extraData.option.properties|length  + data.option.categories|length}};
+		private static final int COL_TYPE{{extraData.option.entity|upper}} = {{4 + extraData.option.properties|length + extraData.option.properties|length  + (data.option.categories is defined)}};
 		{% endif %}
 		
 		// Lista de Valores
@@ -44,7 +44,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return {{4 + data.option.properties|length + (data.option.properties is defined) + extraData.option.properties|length + (extraData.option.properties is defined)}};
+			return {{4 + data.option.properties|length + (data.option.categories is defined) + extraData.option.properties|length + (extraData.option.categories is defined)}};
 		}
 		
 		//Preenchimento de cada coluna
@@ -105,7 +105,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 					break;
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				case COL_{{data.option.entity|upper}}:
+				case COL_TYPE{{data.option.entity|upper}}:
 					coluna = "Tipo";
 					break;
 				{% endif %}
@@ -115,7 +115,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 					break;
 				{% endfor %}
 				{% if extraData.option.categories|length > 0 %}
-				case COL_{{extraData.option.entity|upper}}:
+				case COL_TYPE{{extraData.option.entity|upper}}:
 					coluna = "Tipo {{extraData.option.entity}}";
 					break;
 				{% endif %}
@@ -184,16 +184,16 @@ public class SpeakerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setEmail(speaker.getEmail());	
 				rows.get(indiceLinha).setBiography(speaker.getBiography());
 				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(speaker.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{data.option.entity}}(speaker.getType{{data.option.entity}}());
 				{% endif %}
 				{% for property in extraData.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(speaker.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if extraData.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{extraData.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{extraData.option.entity}}(speaker.getType{{data.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

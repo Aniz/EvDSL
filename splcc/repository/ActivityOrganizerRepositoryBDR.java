@@ -112,7 +112,7 @@ public class ActivityOrganizerRepositoryBDR implements ActivityOrganizerReposito
 
 
 	@Override
-	public List<ActivityOrganizer> getActivitiesOrganizerList() throws RepositoryException {
+	public List<ActivityOrganizer> getActivityOrganizerList() throws RepositoryException {
 		ActivityOrganizer activityOrganizer=null;
 		ArrayList<ActivityOrganizer> list = new ArrayList<ActivityOrganizer>();
         try {

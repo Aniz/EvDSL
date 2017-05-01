@@ -2,26 +2,26 @@
 package riseevents.ev.repository;
 import riseevents.ev.util.LibraryOfDSL;
 import java.util.List;
-import riseevents.ev.data.NewClass;
-import riseevents.ev.exception.NewClassNotFoundException;
+import riseevents.ev.data.Newclass;
+import riseevents.ev.exception.NewclassNotFoundException;
 import riseevents.ev.exception.RepositoryException;
 
-public interface NewClassRepository {
+public interface NewclassRepository {
 
-	public void insert(NewClass newclass) throws RepositoryException;
+	public void insert(Newclass newclass) throws RepositoryException;
 
-	public void remove(NewClass newclass) throws NewClassNotFoundException, RepositoryException;
+	public void remove(Newclass newclass) throws NewclassNotFoundException, RepositoryException;
 
-	public NewClass search(int idEntity) throws NewClassNotFoundException, RepositoryException;
+	public Newclass search(int idEntity) throws NewclassNotFoundException, RepositoryException;
 	
-	public List<NewClass> getNewClassList() throws RepositoryException;
+	public List<Newclass> getNewclassList() throws RepositoryException;
 
-	public void update(NewClass newclass) throws NewClassNotFoundException, RepositoryException;
+	public void update(Newclass newclass) throws NewclassNotFoundException, RepositoryException;
 
 	public boolean isThere(int idEntity) throws RepositoryException;
 	
-	public int getNewClassLastId() throws RepositoryException;
+	public int getNewclassLastId() throws RepositoryException;
 	
-	public List<NewClass> getNewClassById(int idActivity) throws RepositoryException;
+	public List<Newclass> getNewclassById(int idActivity) throws RepositoryException;
 
 }

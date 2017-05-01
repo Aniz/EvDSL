@@ -40,7 +40,7 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	public void insert(Activity activity) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit ,typeActivity,description) Values ('"
+			statement.executeUpdate("INSERT INTO Activity (idEvent, nameActivity, descriptionActivity, value, hourlyLoad, date, hour, numberOfParticipants, registrationLimit ,typeActivity,aaaa,bbbb) Values ('"
 								+ activity.getIdEvent()
 					            +"', '"+ activity.getNameActivity()
 					            +"', '"+ activity.getDescriptionActivity()
@@ -52,7 +52,8 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 					            +activity.getRegistrationLimit()
 							    +"', '"+activity.getTypeActivity()
 	
-								+"', '"+activity.getDescription()   
+								+"', '"+activity.getAaaa()   
+								+"', '"+activity.getBbbb()   
 						+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -113,7 +114,8 @@ public class ActivityRepositoryBDR implements ActivityRepository {
             	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
             	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));
     			activity.setTypeActivity(TypeActivity.valueOf(resultset.getString("typeActivity")));
-				activity.setDescription(resultset.getString("description"));
+				activity.setAaaa(resultset.getInt("aaaa"));
+				activity.setBbbb(resultset.getString("bbbb"));
             } else {
             	throw new ActivityNotFoundException(idActivity);
             }
@@ -152,7 +154,8 @@ public class ActivityRepositoryBDR implements ActivityRepository {
             	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
             	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));
     			activity.setTypeActivity(TypeActivity.valueOf(resultset.getString("typeActivity")));
-				activity.setDescription(resultset.getString("description"));
+				activity.setAaaa(resultset.getInt("aaaa"));
+				activity.setBbbb(resultset.getString("bbbb"));
 	
 				list.add(activity);
             } 
@@ -188,7 +191,8 @@ public class ActivityRepositoryBDR implements ActivityRepository {
     	    		                                 "', numberOfParticipants = '"+ activity.getNumberOfParticipants() +
     	    		                                 "', registrationLimit = '"+ activity.getRegistrationLimit() +
 									    	        "', typeActivity = '"+ activity.getTypeActivity() +
-											         "', description = '"+ activity.getDescription() +
+											         "', aaaa = '"+ activity.getAaaa() +
+											         "', bbbb = '"+ activity.getBbbb() +
 											         "' WHERE idActivity = '"+ activity.getIdActivity()+"'");
 
 		} catch(PersistenceMechanismException e){
@@ -313,7 +317,8 @@ public class ActivityRepositoryBDR implements ActivityRepository {
 	            	activity.setNumberOfParticipants(resultset.getInt("numberOfParticipants"));
 	            	activity.setRegistrationLimit(resultset.getInt("registrationLimit"));			
 					activity.setTypeActivity(TypeActivity.valueOf(resultset.getString("typeActivity")));						    	    
-					activity.setDescription(resultset.getString("description"));
+					activity.setAaaa(resultset.getInt("aaaa"));
+					activity.setBbbb(resultset.getString("bbbb"));
 	
 					list.add(activity);
 	            } 

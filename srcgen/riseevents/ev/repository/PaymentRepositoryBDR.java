@@ -41,7 +41,7 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 	public void insert(Payment payment) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, barcode, date, value, status,typePayment,ooii) Values('"
+			statement.executeUpdate("INSERT INTO payment (idPayment, idRegistration, barcode, date, value, status,typePayment,aaaa,bbbb) Values('"
 				+payment.getIdPayment()
 				+ "', '"+payment.getIdRegistration()
 				+ "', '"+payment.getBarcode()
@@ -50,7 +50,8 @@ public class PaymentRepositoryBDR implements PaymentRepository {
 				+ "', '"+payment.getStatus() 
 				+"', '"+payment.getTypePayment()
 				
-				+"', '"+payment.getOoii()   
+				+"', '"+payment.getAaaa()   
+				+"', '"+payment.getBbbb()   
 	        
 		        +"')");
 		} catch (SQLException e) {
@@ -86,7 +87,8 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                 payment.setValue(resultset.getFloat("value"));
                 payment.setBarcode(resultset.getString("barcode"));
             	payment.setTypePayment(TypePayment.valueOf(resultset.getString("typePayment")));
-				payment.setOoii(resultset.getString("ooii"));
+				payment.setAaaa(resultset.getInt("aaaa"));
+				payment.setBbbb(resultset.getString("bbbb"));
           
 				list.add(payment);
             } 
@@ -162,7 +164,8 @@ public class PaymentRepositoryBDR implements PaymentRepository {
     	    		                                 "', value = '"+ payment.getValue() +
 									                 "', typePayment = '"+ payment.getTypePayment() +						
     
-											         "', ooii = '"+ payment.getOoii() +
+											         "', aaaa = '"+ payment.getAaaa() +
+											         "', bbbb = '"+ payment.getBbbb() +
     	    		                                 "' WHERE idPayment = '"+ payment.getIdPayment()+"'");
 
 		} catch(PersistenceMechanismException e){
@@ -219,7 +222,8 @@ public class PaymentRepositoryBDR implements PaymentRepository {
                  payment.setValue(resultset.getFloat("value"));
                  payment.setBarcode(resultset.getString("barcode"));
             	payment.setTypePayment(TypePayment.valueOf(resultset.getString("typePayment")));
-				payment.setOoii(resultset.getString("ooii"));
+				payment.setAaaa(resultset.getInt("aaaa"));
+				payment.setBbbb(resultset.getString("bbbb"));
            
             } else {
             	throw new PaymentNotFoundException(idPayment);

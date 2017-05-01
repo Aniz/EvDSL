@@ -44,9 +44,11 @@ public class OrganizerTableRender extends DefaultTableCellRenderer {
 		
 		table.getColumnModel().getColumn(12).setMaxWidth(13);
 		table.getColumnModel().getColumn(12).setResizable(false);
+		table.getColumnModel().getColumn(13).setMaxWidth(13);
+		table.getColumnModel().getColumn(13).setResizable(false);
 		
-		table.getColumnModel().getColumn(12).setMaxWidth(13);
-		table.getColumnModel().getColumn(12).setResizable(false);
+		table.getColumnModel().getColumn(13).setMaxWidth(13);
+		table.getColumnModel().getColumn(13).setResizable(false);
 		//
 
 		//Texto Centralizado nas Colunas

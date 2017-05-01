@@ -48,7 +48,8 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 				+"', '"+speaker.getEmail() 
 				+"', '"+speaker.getFiliation()
 				+"', '"+speaker.getTypeUser()
-				+"', '"+speaker.getPhone()   
+				+"', '"+speaker.getAaaa()   
+				+"', '"+speaker.getBbbb()   
 				+"')");
 
 			statement.executeUpdate("INSERT INTO speaker Values('"+speaker.getIdUser()
@@ -116,7 +117,8 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 			
         
 				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				speaker.setPhone(resultset.getInt("phone"));
+				speaker.setAaaa(resultset.getInt("aaaa"));
+				speaker.setBbbb(resultset.getString("bbbb"));
 			
 
             } else {
@@ -154,11 +156,12 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
             	speaker.setFiliation(resultset.getString("filiation"));
             	speaker.setBiography(resultset.getString("biography"));
 				speaker.setTypeSpeaker(TypeSpeaker.valueOf(resultset.getString("typeSpeaker")));
-				speaker.setNacionalidade(resultset.getString("nacionalidade"));
+				speaker.setNacionalidade(resultset.getInt("nacionalidade"));
 			
         	
 				speaker.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				speaker.setPhone(resultset.Int("phone"));
+				speaker.setAaaa(resultset.getInt("aaaa"));
+				speaker.setBbbb(resultset.getString("bbbb"));
 			
         
 				list.add(speaker);
@@ -189,8 +192,9 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
                 "',email = '"+ speaker.getEmail() +
                 "', filiation = '" + speaker.getFiliation() +
 
-				"', typeUser = '"+ user.getTypeUser() + 
-				"', phone = '"+ speaker.getPhone() + 
+				"', typeUser = '"+ speaker.getTypeUser() + 
+				"', aaaa = '"+ speaker.getAaaa() + 
+				"', bbbb = '"+ speaker.getBbbb() + 
                 "' WHERE idUser = '"+ speaker.getIdUser()+"'");
 
             statement.executeUpdate("UPDATE speaker SET biography = '"+ 

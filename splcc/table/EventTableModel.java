@@ -161,10 +161,10 @@ public class EventTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setInstitution(event.getInstitution());
 				rows.get(indiceLinha).setSponsors(event.getSponsors());		
 				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(event.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{data.option.entity}}(event.getType{{data.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

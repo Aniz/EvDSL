@@ -124,20 +124,20 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
             	reviewer.setNameUser(resultset.getString("nameUser"));       	
             	reviewer.setEmail(resultset.getString("email"));
             	reviewer.setFiliation(resultset.getString("filiation"));
-            {% if data.option.categories|length > 0 %}
-			 	reviewer.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
-           	{% endif %}
+             {% if data.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+        	{% endif %}
            	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				reviewer.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
-			{% endfor %}{% endif %}
-
-			{% if extraData.option.categories|length > 0 %}
-			 	reviewer.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{extraData.option.entity}}")));
-           	{% endif %}
-           	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
-				reviewer.set{{property.name|capitalize}}(resultset.get{{property.type|javatype}}("{{property.name}}"));
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
 			{% endfor %}{% endif %}			
-        	resultset.close();   
+        
+        	{% if extraData.option.categories|length > 0 %}
+				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+        	{% endif %}
+           	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
+				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
+			{% endfor %}{% endif %}			
+			resultset.close();   
             } else {
             	throw new ReviewerNotFoundException(idUser);
             }

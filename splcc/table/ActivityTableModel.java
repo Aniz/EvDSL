@@ -141,8 +141,6 @@ public class ActivityTableModel extends AbstractTableModel{
 					return String.class;
 				} else if (columnIndex == COL_DESCRIPTIONACTIVITY) {
 					return String.class;
-				} else if (columnIndex == COL_ACTIVITYTYPE) {
-					return String.class;
 				}  else if (columnIndex == COL_VALUE) {
 					return float.class;
 				} else if (columnIndex == COL_HOURLYLOAD) {

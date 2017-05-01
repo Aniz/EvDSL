@@ -19,8 +19,9 @@ public class OrganizerTableModel extends AbstractTableModel{
 		private static final int COL_CONTATO =3;
 		private static final int COL_TYPEORGANIZER = 4;
 		
-		private static final int COL_PHONE =10;
-		private static final int COL_TYPEUSER = 11;
+		private static final int COL_AAAA =5;
+		private static final int COL_BBBB =6;
+		private static final int COL_TYPEUSER = 8;
 		
 		// Lista de Valores
 		private List<Organizer> rows;
@@ -35,7 +36,7 @@ public class OrganizerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return 7;
 		}
 		
 		//Preenchimento de cada coluna
@@ -58,8 +59,11 @@ public class OrganizerTableModel extends AbstractTableModel{
 				else if (columnIndex == COL_TYPEORGANIZER) {
 					return organizer.getTypeOrganizer();
 				}
-				else if (columnIndex == COL_PHONE) {
-					return organizer.getPhone();
+				else if (columnIndex == COL_AAAA) {
+					return organizer.getAaaa();
+				}
+				else if (columnIndex == COL_BBBB) {
+					return organizer.getBbbb();
 				}
 				else if (columnIndex == COL_TYPEUSER) {
 					return organizer.getTypeUser();
@@ -87,7 +91,10 @@ public class OrganizerTableModel extends AbstractTableModel{
 				case COL_ORGANIZER:
 					coluna = "Tipo";
 					break;
-				case COL_PHONE:
+				case COL_AAAA:
+					coluna = "";
+					break;
+				case COL_BBBB:
 					coluna = "";
 					break;
 				case COL_TYPEUSER:
@@ -116,8 +123,11 @@ public class OrganizerTableModel extends AbstractTableModel{
 				else if (columnIndex == COL_TYPEORGANIZER) {
 					return String.class;
 				}
-				else if (columnIndex == COL_PHONE) {
+				else if (columnIndex == COL_AAAA) {
 					return int.class;
+				}
+				else if (columnIndex == COL_BBBB) {
+					return String.class;
 				}
 				else if (columnIndex == COL_TYPEUSER) {
 					return String.class;
@@ -146,10 +156,11 @@ public class OrganizerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setIdUser(organizer.getIdUser());
 				rows.get(indiceLinha).setNameUser(organizer.getNameUser());
 				rows.get(indiceLinha).setEmail(organizer.getEmail());
-				rows.get(indiceLinha).setContato(activity.getContato());
-				rows.get(indiceLinha).setTypeOrganizer(activity.getTypeOrganizer());
-				rows.get(indiceLinha).setPhone(activity.getPhone());
-				rows.get(indiceLinha).setTypeUser(activity.getTypeOrganizer());
+				rows.get(indiceLinha).setContato(organizer.getContato());
+				rows.get(indiceLinha).setTypeOrganizer(organizer.getTypeOrganizer());
+				rows.get(indiceLinha).setAaaa(organizer.getAaaa());
+				rows.get(indiceLinha).setBbbb(organizer.getBbbb());
+				rows.get(indiceLinha).setTypeUser(organizer.getTypeOrganizer());
 			
 				fireTableDataChanged();
 			}

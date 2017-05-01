@@ -50,12 +50,15 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 				+"', '"+reviewer.getEmail() 
 				+"', '"+reviewer.getFiliation()
 				+"', '"+reviewer.getTypeUser()
-				+"', '"+reviewer.getPhone()   
+				+"', '"+reviewer.getAaaa()   
+				+"', '"+reviewer.getBbbb()   
 				+"')");
 
 			statement.executeUpdate("INSERT INTO reviewer Values('"+reviewer.getIdUser()
 				+"','" + reviewer.getKnowledgeArea()
 				+"', '"+reviewer.getTypeReviewer()
+				+"', '"+reviewer.getAaaa()   
+				+"', '"+reviewer.getBbbb()   
 				+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -111,12 +114,16 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
             	reviewer.setNameUser(resultset.getString("nameUser"));       	
             	reviewer.setEmail(resultset.getString("email"));
             	reviewer.setFiliation(resultset.getString("filiation"));
-			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
-
-			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setPhone(resultset.getint("phone"));
+				reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
+				reviewer.setAaaa(resultset.getInt("aaaa"));
+				reviewer.setBbbb(resultset.getString("bbbb"));
 			
-        	resultset.close();   
+        
+				reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeReviewer")));
+				reviewer.setAaaa(resultset.getInt("aaaa"));
+				reviewer.setBbbb(resultset.getString("bbbb"));
+			
+			resultset.close();   
             } else {
             	throw new ReviewerNotFoundException(idUser);
             }
@@ -150,9 +157,12 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
             	reviewer.setFiliation(resultset.getString("filiation"));
             	reviewer.setKnowledgeArea(resultset.getString("knowledgeArea"));
 			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
+				reviewer.setAaaa(resultset.getInt("aaaa"));
+				reviewer.setBbbb(resultset.getString("bbbb"));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
-				reviewer.setPhone(resultset.getInt("phone"));
+				reviewer.setAaaa(resultset.getInt("aaaa"));
+				reviewer.setBbbb(resultset.getString("bbbb"));
 			
         		list.add(reviewer);
             } 
@@ -178,6 +188,8 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
     	    Statement statement = (Statement) pm.getCommunicationChannel();
             statement.executeUpdate("UPDATE reviewer SET knowledgeArea = '"+ reviewer.getKnowledgeArea() +
 					"', typeReviewer = '"+ reviewer.getTypeReviewer() + 
+						"', aaaa = '"+ user.getAaaa() + 
+						"', bbbb = '"+ user.getBbbb() + 
             	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             
             	statement.executeUpdate("UPDATE User SET password = '"+ 
@@ -186,7 +198,8 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
                     "',email = '"+ reviewer.getEmail() +
                     "', filiation = '" + reviewer.getFiliation() +
 					"', typeReviewer = '"+ reviewer.getTypeUser() + 
-						"', phone = '"+ reviewer.getPhone() + 
+						"', aaaa = '"+ reviewer.getAaaa() + 
+						"', bbbb = '"+ reviewer.getBbbb() + 
                  	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             
 		} catch(PersistenceMechanismException e){

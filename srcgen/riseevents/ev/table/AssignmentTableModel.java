@@ -15,8 +15,9 @@ public class AssignmentTableModel extends AbstractTableModel{
 		private static final int COL_SUBMISSIONID = 1;
 		private static final int COL_REVIEWID = 2;
 		private static final int COL_DATE = 3;
-		private static final int COL_NEWASSIGMENTFIELD =4;
-		private static final int COL_TYPEASSIGNMENT = 5;
+		private static final int COL_AAAA =4;
+		private static final int COL_BBBB =5;
+		private static final int COL_TYPEASSIGNMENT = 6;
 		
 		// Lista de Valores
 		private List<Assignment> rows;
@@ -31,7 +32,7 @@ public class AssignmentTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 7;
+			return 8;
 		}
 		
 		//Preenchimento de cada coluna
@@ -46,8 +47,11 @@ public class AssignmentTableModel extends AbstractTableModel{
 				}	else if (columnIndex == COL_DATE) {
 					return assignment.getDate();
 				}
-				else if (columnIndex == COL_NEWASSIGMENTFIELD) {
-					return assignment.getNewassigmentfield();
+				else if (columnIndex == COL_AAAA) {
+					return assignment.getAaaa();
+				}
+				else if (columnIndex == COL_BBBB) {
+					return assignment.getBbbb();
 				}
 				else if (columnIndex == COL_TYPEASSIGNMENT) {
 					return assignment.getTypeAssignment();
@@ -71,10 +75,13 @@ public class AssignmentTableModel extends AbstractTableModel{
 				case COL_DATE:
 					coluna = "Date";
 					break;
-				case COL_NEWASSIGMENTFIELD:
+				case COL_AAAA:
 					coluna = "";
 					break;
-				case COL_ASSIGNMENT:
+				case COL_BBBB:
+					coluna = "";
+					break;
+				case COL_TYPEASSIGNMENT:
 					coluna = "Tipo";
 					break;
 				
@@ -96,8 +103,11 @@ public class AssignmentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_DATE) {
 					return String.class;
 				}
-				else if (columnIndex == COL_NEWASSIGMENTFIELD) {
+				else if (columnIndex == COL_AAAA) {
 					return int.class;
+				}
+				else if (columnIndex == COL_BBBB) {
+					return String.class;
 				}
 				else if (columnIndex == COL_TYPEASSIGNMENT) {
 					return String.class;
@@ -126,8 +136,9 @@ public class AssignmentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setIdReviwerUser(assignment.getIdReviwerUser());
 				rows.get(indiceLinha).setIdReviewSubmission(assignment.getIdReviewSubmission());
 				rows.get(indiceLinha).setDate(assignment.getDate());
-				rows.get(indiceLinha).setNewassigmentfield(activity.getNewassigmentfield());
-				rows.get(indiceLinha).setTypeAssignment(activity.getTypeAssignment());
+				rows.get(indiceLinha).setAaaa(assignment.getAaaa());
+				rows.get(indiceLinha).setBbbb(assignment.getBbbb());
+				rows.get(indiceLinha).setTypeAssignment(assignment.getTypeAssignment());
 			
 				fireTableDataChanged();
 			}

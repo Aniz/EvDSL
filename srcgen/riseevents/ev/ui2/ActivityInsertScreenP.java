@@ -37,9 +37,9 @@ public class ActivityInsertScreenP extends JInternalFrame {
 	private JTextField textFieldHour;
 	private JTextField textFieldNOParticipants;
 	private JTextField textFieldRegLimit;
-	private JTextField textFieldDescription;
-	
-	private JComboBox comboBoxActivity;
+	private JTextField textFieldAaaa;
+	private JTextField textFieldBbbb;
+	private JComboBox comboBoxTypeActivity;
 	private JComboBox comboBoxEvent;
 	
 	
@@ -180,14 +180,22 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		textFieldRegLimit.setBounds(561, 181, 134, 28);
 		getContentPane().add(textFieldRegLimit);
 		textFieldRegLimit.setColumns(10);
-		JLabel lblDescription = new JLabel("Activityyyytttt:");
-		lblDescription.setBounds(476, 187, 73, 16);
-		getContentPane().add(lblDescription);
+		JLabel lblAaaa = new JLabel("activityy:");
+		lblAaaa.setBounds(476, 187, 73, 16);
+		getContentPane().add(lblAaaa);
 		
-		textFieldDescription = new JTextField();
-		textFieldDescription.setBounds(561, 181, 134, 28);
-		getContentPane().add(textFieldDescription);
-		textFieldDescription.setColumns(10);
+		textFieldAaaa = new JTextField();
+		textFieldAaaa.setBounds(561, 181, 134, 28);
+		getContentPane().add(textFieldAaaa);
+		textFieldAaaa.setColumns(10);
+		JLabel lblBbbb = new JLabel("ttrryuu:");
+		lblBbbb.setBounds(476, 187, 73, 16);
+		getContentPane().add(lblBbbb);
+		
+		textFieldBbbb = new JTextField();
+		textFieldBbbb.setBounds(561, 181, 134, 28);
+		getContentPane().add(textFieldBbbb);
+		textFieldBbbb.setColumns(10);
 
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(157, 237, 117, 29);
@@ -201,7 +209,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		
 		try {
-			lblNewLabel.setText(String.valueOf(RiseEventsMainScreenP.facadevalueOf(RiseEventsMainScreenP.facade.getActivityLastId()));
+			lblNewLabel.setText(String.valueOf(RiSEEventMainScreenP.facade.getActivityLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -213,15 +221,15 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		lblTypeActivity.setBounds(17, 113, 86, 16);
 		getContentPane().add(lblTypeActivity);
 		
-		comboBoxActivity = new JComboBox();
-		comboBoxActivity.setBounds(115, 109, 159, 27);
-		getContentPane().add(comboBoxActivity);
+		comboBoxTypeActivity = new JComboBox();
+		comboBoxTypeActivity.setBounds(115, 109, 159, 27);
+		getContentPane().add(comboBoxTypeActivity);
 		
 		TypeActivity[] types = TypeActivity.values();
 		List<String> names = new ArrayList<String>();
 		for(int i=0; i<types.length; i++){
 			names.add(i, types[i].name());
-			comboBoxActivity.addItem(types[i].name());
+			comboBoxTypeActivity.addItem(types[i].name());
 		}
 		carregarEventComboBox();
 	
@@ -253,11 +261,12 @@ public class ActivityInsertScreenP extends JInternalFrame {
 			String hour = textFieldHour.getText();
 			int numberOfParticipants = Integer.valueOf(textFieldNOParticipants.getText());
 			int registrationLimit = Integer.valueOf(textFieldRegLimit.getText());
-			String description = String.valueOf(textFielddescription.getText());	
-			String typeActivity = comboBoxActivity.getSelectedItem().toString();
+			int aaaa = Integer.valueOf(textFieldAaaa.getText());	
+			String bbbb = String.valueOf(textFieldBbbb.getText());	
+			String typeActivity = comboBoxTypeActivity.getSelectedItem().toString();
 			
 			if (nameEvent.equals("")|| nameActivity.equals("") || descriptionActivity.equals("")
-					|| activityType.equals("") || status.equals("") 
+					|| status.equals("") 
 					|| value == -1 || hourlyLoad == -1 || date.equals("") || hour.equals("")
 					|| numberOfParticipants == -1 || registrationLimit == -1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -276,14 +285,14 @@ public class ActivityInsertScreenP extends JInternalFrame {
 						activity.setIdEvent(RiseEventsMainScreenP.facade.getEventIdByName(nameEvent));
 						activity.setNameActivity(nameActivity);
 						activity.setDescriptionActivity(descriptionActivity);
-						activity.setTypeActivity(TypeActivity.valueOf(activityType));
 						activity.setValue(value);
 						activity.setHourlyLoad(hourlyLoad);
 						activity.setDate(date);
 						activity.setHour(hour);
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
-						activity.setDescription(description);	
+						activity.setAaaa(aaaa);	
+						activity.setBbbb(bbbb);	
 						activity.setTypeActivity(typeActivity);
 						
 						RiseEventsMainScreenP.facade.insertActivity(activity);
@@ -310,7 +319,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

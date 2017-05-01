@@ -89,7 +89,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
 	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
 
-	private NewClassInsertScreenP screenInsertNewClass;	
+	private NewclassInsertScreenP screenInsertNewclass;	
 
 
 	private ReceiptScreenP screenReceipt;
@@ -197,7 +197,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchCheckingCopyMenuAction searchCheckingCopyAction = new SearchCheckingCopyMenuAction();	
 		ListAllCheckingCopyMenuAction listallCheckingCopyAction = new ListAllCheckingCopyMenuAction();	
 
-		InsertNewClassMenuAction insertNewClassAction = new InsertNewClassMenuAction();	
+		InsertNewclassMenuAction insertNewclassAction = new InsertNewclassMenuAction();	
 
 
 		//#if ${Bugs} == "T"
@@ -403,11 +403,11 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllCheckingCopy = new JMenuItem("ListAll");
 		mnCheckingCopy.add(mntmListAllCheckingCopy);
 		mntmListAll.addActionListener(listallCheckingCopyAction);
-		JMenu mnNewClass = new JMenu("NewClass");
-		menuBar.add(mnNewClass);
-		JMenuItem mntmInsertNewClass = new JMenuItem("Insert");
-		mnNewClass.add(mntmInsertNewClass);
-		mntmInsert.addActionListener(insertNewClassAction);
+		JMenu mnNewclass = new JMenu("Newclass");
+		menuBar.add(mnNewclass);
+		JMenuItem mntmInsertNewclass = new JMenuItem("Insert");
+		mnNewclass.add(mntmInsertNewclass);
+		mntmInsert.addActionListener(insertNewclassAction);
 		JMenu mnReports = new JMenu("Reports");
 		menuBar.add(mnReports);
 		
@@ -1315,18 +1315,18 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-	private class InsertNewClassMenuAction implements ActionListener{ 
+	private class InsertNewclassMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			screenInsertNewClass = NewClassInsertScreenP.getInstanceNewClassInsertScreenP();
-			if(screenInsertNewClass.getParent() == null){
-				desktopPane.add(screenInsertNewClass);
+			screenInsertNewclass = NewclassInsertScreenP.getInstanceNewclassInsertScreenP();
+			if(screenInsertNewclass.getParent() == null){
+				desktopPane.add(screenInsertNewclass);
 			}
-			screenInsertNewClass.setVisible(true);
-			desktopPane.moveToFront(screenInsertNewClass);
+			screenInsertNewclass.setVisible(true);
+			desktopPane.moveToFront(screenInsertNewclass);
 			try {
-				screenInsertNewClass.setSelected(true);
+				screenInsertNewclass.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

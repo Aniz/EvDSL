@@ -6,25 +6,25 @@ import java.util.List;
 import java.util.Set;
 
 import riseevents.ev.util.LibraryOfDSL;
-import riseevents.ev.data.NewClass;
-import riseevents.ev.exception.NewClassAlreadyInsertedException;
-import riseevents.ev.exception.NewClassNotFoundException;
+import riseevents.ev.data.Newclass;
+import riseevents.ev.exception.NewclassAlreadyInsertedException;
+import riseevents.ev.exception.NewclassNotFoundException;
 import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.repository.NewClassRepository;
+import riseevents.ev.repository.NewclassRepository;
 
-public class NewClassControl {
+public class NewclassControl {
   
-  private NewClassRepository newclassList;
+  private NewclassRepository newclassList;
   
-  public NewClassControl(NewClassRepository repository){
+  public NewclassControl(NewclassRepository repository){
     this.newclassList = repository;
   }
-  public void insert(NewClass newclass) throws NewClassAlreadyInsertedException, RepositoryException{
+  public void insert(Newclass newclass) throws NewclassAlreadyInsertedException, RepositoryException{
     if (newclass != null) {
-            if (!newclass.isThere(newclass.getIdNewClass())) {
+            if (!newclass.isThere(newclass.getIdNewclass())) {
                 newclass.insert(newclass);
             } else {
-                throw new NewClassAlreadyInsertedException(newclass.getIdNewClass());
+                throw new NewclassAlreadyInsertedException(newclass.getIdNewclass());
             }
         } else {
             throw new IllegalArgumentException();
@@ -32,8 +32,8 @@ public class NewClassControl {
   }
 
   
-  public boolean isThere(int idNewClass) throws RepositoryException {
-    return newclassList.isThere(idNewClass);
+  public boolean isThere(int idNewclass) throws RepositoryException {
+    return newclassList.isThere(idNewclass);
   }
   
  }

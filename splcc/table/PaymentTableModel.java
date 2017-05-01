@@ -20,10 +20,10 @@ public class PaymentTableModel extends AbstractTableModel{
 		private static final int COL_BARCODE = 5;
 		private static final int COL_VALUE = 6;
 		{% for property in data.option.properties %}
-		private static final int COL_{{property.name|upper}} ={{loop.index+10}};
+		private static final int COL_{{property.name|upper}} ={{loop.index+6}};
 		{% endfor %}
 		{% if data.option.categories|length > 0 %}
-		private static final int COL_TYPE{{data.option.entity|upper}} = {{10 + data.option.properties|length}};
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{7 + data.option.properties|length}};
 		{% endif %}
 		
 		// Lista de Valores
@@ -62,12 +62,12 @@ public class PaymentTableModel extends AbstractTableModel{
 				} 
 				{% for property in data.option.properties %}
 				else if (columnIndex == COL_{{property.name|upper}}) {
-					return activity.get{{property.name|capitalize}}();
+					return payment.get{{property.name|capitalize}}();
 				}
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
 				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
-					return activity.getType{{data.option.entity}}();
+					return payment.getType{{data.option.entity}}();
 				}
 				{% endif %}
 				return null;
@@ -170,10 +170,10 @@ public class PaymentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setValue(payment.getValue());
 				rows.get(indiceLinha).setIdRegistration(payment.getIdRegistration());
 				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(payment.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{data.option.entity}}(payment.getType{{data.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

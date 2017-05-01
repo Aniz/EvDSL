@@ -16,8 +16,9 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 		private static final int COL_REGISTRATIONID = 1;
 		private static final int COL_USERID = 2;
 		private static final int COL_DATE = 3;
-		private static final int COL_BANANA =11;
-		private static final int COL_TYPECHECKINGCOPY = 11;
+		private static final int COL_BANANA =4;
+		private static final int COL_ANANA =5;
+		private static final int COL_TYPECHECKINGCOPY = 6;
 		
 		// Lista de Valores
 		private List<CheckingCopy> rows;
@@ -32,7 +33,7 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return 7;
 		}
 		
 		//Preenchimento de cada coluna
@@ -46,14 +47,15 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 					return checkingCopy.getIdUser();
 				} else if (columnIndex == COL_DATE) {
 					return checkingCopy.getDateOfIssue();
-				} else if (columnIndex == COL_TYPE) {
-					return checkingCopy.getTypeCheckingCopy();
 				} 
 				else if (columnIndex == COL_BANANA) {
-					return activity.getBanana();
+					return checkingCopy.getBanana();
+				}
+				else if (columnIndex == COL_ANANA) {
+					return checkingCopy.getAnana();
 				}
 				else if (columnIndex == COL_TYPECHECKINGCOPY) {
-					return activity.getTypeCheckingCopy();
+					return checkingCopy.getTypeCheckingCopy();
 				}
 			
 				return null;
@@ -75,10 +77,10 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 				case COL_DATE:
 					coluna = "Date";
 					break;
-				case COL_TYPE:
-					coluna = "Type";
-					break;
 				case COL_BANANA:
+					coluna = "";
+					break;
+				case COL_ANANA:
 					coluna = "";
 					break;
 				case COL_TYPECHECKINGCOPY:
@@ -106,6 +108,9 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 				else if (columnIndex == COL_BANANA) {
 					return String.class;
 				}
+				else if (columnIndex == COL_ANANA) {
+					return int.class;
+				}
 				else if (columnIndex == COL_TYPECHECKINGCOPY) {
 					return String.class;
 				}
@@ -132,8 +137,9 @@ public class CheckingCopyTableModel extends AbstractTableModel{
 			public void alterarCheckingCopy(int indiceLinha, CheckingCopy checkingCopy) {
 				rows.get(indiceLinha).setDateOfIssue(checkingCopy.getDateOfIssue());
 				rows.get(indiceLinha).setIdRegistration(checkingCopy.getIdRegistration());	
-				rows.get(indiceLinha).setBanana(activity.getBanana());
-				rows.get(indiceLinha).setTypeCheckingCopy(activity.getTypeCheckingCopy());
+				rows.get(indiceLinha).setBanana(checkingCopy.getBanana());
+				rows.get(indiceLinha).setAnana(checkingCopy.getAnana());
+				rows.get(indiceLinha).setTypeCheckingCopy(checkingCopy.getTypeCheckingCopy());
 			
 				fireTableDataChanged();
 			}

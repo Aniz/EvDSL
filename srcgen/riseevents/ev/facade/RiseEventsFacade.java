@@ -76,12 +76,12 @@ import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
 import riseevents.ev.exception.CheckingCopyNotFoundException;
 import riseevents.ev.repository.CheckingCopyRepository;
 import riseevents.ev.repository.CheckingCopyRepositoryBDR;
-import riseevents.ev.data.NewClass;
-import riseevents.ev.business.NewClassControl;
-import riseevents.ev.exception.NewClassAlreadyInsertedException;
-import riseevents.ev.exception.NewClassNotFoundException;
-import riseevents.ev.repository.NewClassRepository;
-import riseevents.ev.repository.NewClassRepositoryBDR;
+import riseevents.ev.data.Newclass;
+import riseevents.ev.business.NewclassControl;
+import riseevents.ev.exception.NewclassAlreadyInsertedException;
+import riseevents.ev.exception.NewclassNotFoundException;
+import riseevents.ev.repository.NewclassRepository;
+import riseevents.ev.repository.NewclassRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
@@ -99,7 +99,7 @@ public class RiseEventsFacade {
 	private SubmissionControl submissionList;
 	private AuthorControl authorList;
 	private CheckingCopyControl checkingcopyList;
-	private NewClassControl newclassList;
+	private NewclassControl newclassList;
 
 	protected static RiseEventsFacade instance;
 	
@@ -115,7 +115,7 @@ public class RiseEventsFacade {
 		SubmissionRepository submissionRepository = SubmissionRepositoryBDR.getInstance();
 		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
 		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
-		NewClassRepository newclassRepository = NewClassRepositoryBDR.getInstance();
+		NewclassRepository newclassRepository = NewclassRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
 		speakerList = new SpeakerControl(speakerRepository); 
@@ -128,7 +128,7 @@ public class RiseEventsFacade {
 		submissionList = new SubmissionControl(submissionRepository); 
 		authorList = new AuthorControl(authorRepository); 
 		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
-		newclassList = new NewClassControl(newclassRepository); 
+		newclassList = new NewclassControl(newclassRepository); 
 	
 	}
 	
@@ -149,7 +149,7 @@ public class RiseEventsFacade {
 		userList.update(Entity);
 	}
 	public List<User> getUserList() throws RepositoryException{
-		return UserList.getUserList();
+		return userList.getUserList();
 	}
 	public User searchUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		return userList.search(idEntity);
@@ -173,7 +173,7 @@ public class RiseEventsFacade {
 		speakerList.update(Entity);
 	}
 	public List<Speaker> getSpeakerList() throws RepositoryException{
-		return SpeakerList.getSpeakerList();
+		return speakerList.getSpeakerList();
 	}
 	public Speaker searchSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
 		return speakerList.search(idEntity);
@@ -197,7 +197,7 @@ public class RiseEventsFacade {
 		organizerList.update(Entity);
 	}
 	public List<Organizer> getOrganizerList() throws RepositoryException{
-		return OrganizerList.getOrganizerList();
+		return organizerList.getOrganizerList();
 	}
 	public Organizer searchOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
 		return organizerList.search(idEntity);
@@ -221,7 +221,7 @@ public class RiseEventsFacade {
 		reviewerList.update(Entity);
 	}
 	public List<Reviewer> getReviewerList() throws RepositoryException{
-		return ReviewerList.getReviewerList();
+		return reviewerList.getReviewerList();
 	}
 	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
 		return reviewerList.search(idEntity);
@@ -245,7 +245,7 @@ public class RiseEventsFacade {
 		eventList.update(Entity);
 	}
 	public List<Event> getEventList() throws RepositoryException{
-		return EventList.getEventList();
+		return eventList.getEventList();
 	}
 	public Event searchEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		return eventList.search(idEntity);
@@ -269,7 +269,7 @@ public class RiseEventsFacade {
 		paymentList.update(Entity);
 	}
 	public List<Payment> getPaymentList() throws RepositoryException{
-		return PaymentList.getPaymentList();
+		return paymentList.getPaymentList();
 	}
 	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
 		return paymentList.search(idEntity);
@@ -293,7 +293,7 @@ public class RiseEventsFacade {
 		activityList.update(Entity);
 	}
 	public List<Activity> getActivityList() throws RepositoryException{
-		return ActivityList.getActivityList();
+		return activityList.getActivityList();
 	}
 	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		return activityList.search(idEntity);
@@ -314,7 +314,7 @@ public class RiseEventsFacade {
 		assignmentList.remove(idEntity);  
 	}
 	public List<Assignment> getAssignmentList() throws RepositoryException{
-		return AssignmentList.getAssignmentList();
+		return assignmentList.getAssignmentList();
 	}
 	public Assignment searchAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		return assignmentList.search(idEntity);
@@ -332,7 +332,7 @@ public class RiseEventsFacade {
 		submissionList.remove(idEntity);  
 	}
 	public List<Submission> getSubmissionList() throws RepositoryException{
-		return SubmissionList.getSubmissionList();
+		return submissionList.getSubmissionList();
 	}
 	public Submission searchSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		return submissionList.search(idEntity);
@@ -347,7 +347,7 @@ public class RiseEventsFacade {
 		return submissionList.isThere(idEntity);
 	}
 	public List<Author> getAuthorList() throws RepositoryException{
-		return AuthorList.getAuthorList();
+		return authorList.getAuthorList();
 	}
 	public int getAuthorLastId() throws RepositoryException{
 		return authorList.getAuthorLastId();
@@ -368,7 +368,7 @@ public class RiseEventsFacade {
 		checkingcopyList.update(Entity);
 	}
 	public List<CheckingCopy> getCheckingCopyList() throws RepositoryException{
-		return CheckingCopyList.getCheckingCopyList();
+		return checkingcopyList.getCheckingCopyList();
 	}
 	public CheckingCopy searchCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
 		return checkingcopyList.search(idEntity);
@@ -382,19 +382,19 @@ public class RiseEventsFacade {
 	public boolean isThereCheckingCopy(int idEntity) throws RepositoryException{
 		return checkingcopyList.isThere(idEntity);
 	}
-	public void insertNewClass(NewClass entity) throws NewClassAlreadyInsertedException, RepositoryException{
+	public void insertNewclass(Newclass entity) throws NewclassAlreadyInsertedException, RepositoryException{
 		this.newclassList.insert(entity);
 	}
-	public List<NewClass> getNewClassList() throws RepositoryException{
-		return NewClassList.getNewClassList();
+	public List<Newclass> getNewclassList() throws RepositoryException{
+		return newclassList.getNewclassList();
 	}
-	public int getNewClassLastId() throws RepositoryException{
-		return newclassList.getNewClassLastId();
+	public int getNewclassLastId() throws RepositoryException{
+		return newclassList.getNewclassLastId();
 	}
-	public int getNewClassIdByName(String entityName) throws RepositoryException{
-		return newclassList.getNewClassIdByName(entityName);
+	public int getNewclassIdByName(String entityName) throws RepositoryException{
+		return newclassList.getNewclassIdByName(entityName);
 	}
-	public boolean isThereNewClass(int idEntity) throws RepositoryException{
+	public boolean isThereNewclass(int idEntity) throws RepositoryException{
 		return newclassList.isThere(idEntity);
 	}
 	

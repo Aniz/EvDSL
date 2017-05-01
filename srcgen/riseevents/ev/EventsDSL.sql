@@ -6,7 +6,8 @@ CREATE TABLE `User`(
 	filiation varchar(255) NOT NULL, 
 		typeUser varchar(255) NOT NULL,
 				
-		phone varchar(255) NOT NULL,
+		aaaa varchar(255) NOT NULL,
+		bbbb varchar(255) NOT NULL,
 	        
 PRIMARY KEY (idUser));
 
@@ -25,6 +26,8 @@ CREATE TABLE Reviewer (
 	knowledgeArea varchar(255) NOT NULL,
 		typeReviewer varchar(255) NOT NULL,
 				
+		aaaa varchar(255) NOT NULL,
+		bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idUser),
 FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
@@ -39,6 +42,8 @@ CREATE TABLE Event (
 		typeEvent varchar(255) NOT NULL,
 				
 		link varchar(255) NOT NULL,
+		aaaa varchar(255) NOT NULL,
+		bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idEvent));
 
@@ -55,7 +60,8 @@ CREATE TABLE Activity (
 	registrationLimit int(10), 
 	typeActivity varchar(255) NOT NULL,
 				
-	description varchar(255) NOT NULL,
+	aaaa varchar(255) NOT NULL,
+	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idActivity),
 FOREIGN KEY (idEvent) REFERENCES Event (idEvent) ON DELETE CASCADE);
@@ -100,7 +106,8 @@ CREATE TABLE submission(
 	attachment blob,
 	typeSubmission varchar(255) NOT NULL,
 				
-	newSubmissionField varchar(255) NOT NULL,
+	aaaa varchar(255) NOT NULL,
+	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idSubmission),
 FOREIGN KEY (idActivity) REFERENCES Activity (idActivity));
@@ -113,6 +120,8 @@ CREATE TABLE author(
 	typeAuthor varchar(255) NOT NULL,
 				
 	lattes varchar(255) NOT NULL,
+	aaaa varchar(255) NOT NULL,
+	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idAuthor));
 
@@ -155,6 +164,7 @@ CREATE TABLE `Checkingcopy`(
 	typeCheckingCopy varchar(255) NOT NULL,
 				
 	banana varchar(255) NOT NULL,
+	anana varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idCheckingcopy),
 FOREIGN KEY (idRegistration) REFERENCES Registration (idRegistration) ON DELETE CASCADE,
@@ -178,7 +188,8 @@ Create table assignement(
 	date varchar(255) NOT NULL, 
 	typeAssignment varchar(255) NOT NULL,
 				
-	newAssigmentField varchar(255) NOT NULL,
+	aaaa varchar(255) NOT NULL,
+	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idUser, idReview, idSubmission),
 FOREIGN KEY (idUser) REFERENCES Reviewer (idUser) ON DELETE CASCADE,
@@ -195,7 +206,8 @@ Create table Payment(
 	value float,
 	typePayment varchar(255) NOT NULL,
 				
-	ooii varchar(255) NOT NULL,
+	aaaa varchar(255) NOT NULL,
+	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idPayment),
 FOREIGN KEY (idRegistration) REFERENCES Registration (idRegistration));
@@ -208,8 +220,9 @@ dateOfIssue varchar(255) NOT NULL,
 PRIMARY KEY (idReceipt),
 FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
 
-Create table NewClass(
-	idNewClass int(10) NOT NULL AUTO_INCREMENT,
+Create table Newclass(
+	idNewclass int(10) NOT NULL AUTO_INCREMENT,
 				
-	banana varchar(255) NOT NULL,
+	aaaa varchar(255) NOT NULL,
+	bbbb varchar(255) NOT NULL,
 PRIMARY KEY (id);

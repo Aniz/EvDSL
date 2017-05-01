@@ -20,7 +20,7 @@ public class SubmissionTableModel extends AbstractTableModel{
 		private static final int COL_{{property.name|upper}} ={{loop.index+3}};
 		{% endfor %}
 		{% if data.option.categories|length > 0 %}
-		private static final int COL_TYPE{{data.option.entity|upper}} = {{3 + data.option.properties|length}};
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{4 + data.option.properties|length}};
 		{% endif %}
 		
 		// Lista de Valores
@@ -53,12 +53,12 @@ public class SubmissionTableModel extends AbstractTableModel{
 				} 
 				{% for property in data.option.properties %}
 				else if (columnIndex == COL_{{property.name|upper}}) {
-					return activity.get{{property.name|capitalize}}();
+					return submission.get{{property.name|capitalize}}();
 				}
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
 				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
-					return activity.getType{{data.option.entity}}();
+					return submission.getType{{data.option.entity}}();
 				}
 				{% endif %}
 			
@@ -74,9 +74,6 @@ public class SubmissionTableModel extends AbstractTableModel{
 					break;
 				case COL_ACTIVITYID:
 					coluna = "Activity Id";
-					break;
-				case COL_TYPE:
-					coluna = "Type";
 					break;
 				case COL_ABSTRACT:
 					coluna = "Abstract";
@@ -146,14 +143,13 @@ public class SubmissionTableModel extends AbstractTableModel{
 			}
 			
 			public void alterarSubmission(int indiceLinha, Submission submission) {
-				rows.get(indiceLinha).setType(submission.getType());
 				rows.get(indiceLinha).setKeywords(submission.getKeywords());
 				rows.get(indiceLinha).setAbstractPaper(submission.getAbstractPaper());	
 				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(submission.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{data.option.entity}}(submission.getType{{data.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

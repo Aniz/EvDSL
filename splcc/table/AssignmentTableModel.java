@@ -85,7 +85,7 @@ public class AssignmentTableModel extends AbstractTableModel{
 					break;
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				case COL_{{data.option.entity|upper}}:
+				case COL_TYPE{{data.option.entity|upper}}:
 					coluna = "Tipo";
 					break;
 				{% endif %}
@@ -143,10 +143,10 @@ public class AssignmentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setIdReviewSubmission(assignment.getIdReviewSubmission());
 				rows.get(indiceLinha).setDate(assignment.getDate());
 				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(assignment.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{data.option.entity}}(assignment.getType{{data.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

@@ -99,7 +99,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	 * Create the frame.
 	 */
 	public AssignmentInsertScreenP() {
-setTitle("Insert Assignment");
+		setTitle("Insert Assignment");
 		
 		int inset = 30;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

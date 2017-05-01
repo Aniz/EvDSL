@@ -18,7 +18,9 @@ public class EventTableModel extends AbstractTableModel{
 		private static final int COL_INSTITUTION = 4;
 		private static final int COL_SPONSORS = 5;
 		private static final int COL_LINK =6;
-		private static final int COL_TYPEEVENT = 7;
+		private static final int COL_AAAA =7;
+		private static final int COL_BBBB =8;
+		private static final int COL_TYPEEVENT = 9;
 		
 		// Lista de Valores
 		private List<Event> rows;
@@ -33,7 +35,7 @@ public class EventTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 7;
+			return 9;
 		}
 		
 		//Preenchimento de cada coluna
@@ -54,6 +56,12 @@ public class EventTableModel extends AbstractTableModel{
 				}
 				else if (columnIndex == COL_LINK) {
 					return event.getLink();
+				}
+				else if (columnIndex == COL_AAAA) {
+					return event.getAaaa();
+				}
+				else if (columnIndex == COL_BBBB) {
+					return event.getBbbb();
 				}
 				else if (columnIndex == COL_TYPEEVENT) {
 					return event.getTypeEvent();
@@ -86,6 +94,12 @@ public class EventTableModel extends AbstractTableModel{
 				case COL_LINK:
 					coluna = "";
 					break;
+				case COL_AAAA:
+					coluna = "";
+					break;
+				case COL_BBBB:
+					coluna = "";
+					break;
 				case COL_TYPEEVENT:
 					coluna = "Tipo";
 					break;
@@ -113,6 +127,12 @@ public class EventTableModel extends AbstractTableModel{
 					return String.class;
 				}
 				else if (columnIndex == COL_LINK) {
+					return String.class;
+				}
+				else if (columnIndex == COL_AAAA) {
+					return int.class;
+				}
+				else if (columnIndex == COL_BBBB) {
 					return String.class;
 				}
 				else if (columnIndex == COL_TYPEEVENT) {
@@ -144,8 +164,10 @@ public class EventTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setPlace(event.getPlace());
 				rows.get(indiceLinha).setInstitution(event.getInstitution());
 				rows.get(indiceLinha).setSponsors(event.getSponsors());		
-				rows.get(indiceLinha).setLink(activity.getLink());
-				rows.get(indiceLinha).setTypeEvent(activity.getTypeEvent());
+				rows.get(indiceLinha).setLink(event.getLink());
+				rows.get(indiceLinha).setAaaa(event.getAaaa());
+				rows.get(indiceLinha).setBbbb(event.getBbbb());
+				rows.get(indiceLinha).setTypeEvent(event.getTypeEvent());
 			
 				fireTableDataChanged();
 			}

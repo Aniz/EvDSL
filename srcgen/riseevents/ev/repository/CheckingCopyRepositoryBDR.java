@@ -39,11 +39,12 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
 	public void insert(CheckingCopy checkingCopy) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue,banana,typeCheckingCopy) Values('"+checkingCopy.getIdRegistration()+"', '"
+			statement.executeUpdate("INSERT INTO CheckingCopy (idRegistration, idUser, dateOfIssue,banana,anana,typeCheckingCopy) Values('"+checkingCopy.getIdRegistration()+"', '"
 					+checkingCopy.getIdUser()
 					+"', '"+checkingCopy.getDateOfIssue()
 					+"', '"+checkingCopy.getTypeCheckingCopy()
 					+"', '"+checkingCopy.getBanana()   
+					+"', '"+checkingCopy.getAnana()   
 					        
 					+"')");
 		} catch (SQLException e) {
@@ -76,6 +77,7 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
                 checkingCopy.setDateOfIssue(resultset.getString("dateOfIssue"));
 				checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(resultset.getString("typeCheckingCopy")));
 				checkingCopy.setBanana(resultset.getString("banana"));
+				checkingCopy.setAnana(resultset.getInt("anana"));
 			
 				list.add(checkingCopy);
             } 
@@ -171,6 +173,7 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
     					"', dateOfIssue = '"+ checkingCopy.getDateOfIssue() +
 						"', typeCheckingCopy = '"+ checkingCopy.getTypeCheckingCopy() +
 				         "', banana = '"+ checkingCopy.getBanana() +
+				         "', anana = '"+ checkingCopy.getAnana() +
      
     					"' WHERE idCheckingCopy = '"+ checkingCopy.getIdCheckingCopy()+"'");
         	
@@ -203,6 +206,7 @@ public class CheckingCopyRepositoryBDR implements CheckingCopyRepository {
             	checkingCopy.setDateOfIssue(resultset.getString("dateOfIssue"));
 				checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(resultset.getString("typeCheckingCopy")));
 				checkingCopy.setBanana(resultset.getString("banana"));
+				checkingCopy.setAnana(resultset.getInt("anana"));
 			
             } else {
             	throw new CheckingCopyNotFoundException(idCheckingCopy);

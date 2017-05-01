@@ -1,7 +1,8 @@
 Create RiseEvents 
 
 add User
-	+phone : integer
+	+aaaa : integer
+	bbbb : string
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
@@ -21,21 +22,27 @@ add Organizer
 		PanelChair.
 
 add Reviewer 
++aaaa : integer
+	bbbb : string
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
 add Event 
 	+ link:string
-    show Insert Update Search Remove ListAll
+    aaaa : integer
+	bbbb : string
+	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 		
 add Payment
-	+ ooii:string
+	+aaaa : integer
+	bbbb : string
 	show Insert Update Search Remove ListAll 
 	types Avista,Debito,Credito.
 
 add Activity
-	+ description:string = Activityyyytttt
+	+aaaa : integer = activityy
+	bbbb : string = ttrryuu
 	show Insert Update Search Remove ListAll 
 	types MiniCurso = Mini, 
 		Tutorial, 
@@ -45,28 +52,34 @@ add Activity
 
 //update
 add Assignment
-+newAssigmentField : integer
-	show Insert Search Remove ListAll
++aaaa : integer
+	bbbb : string
+		show Insert Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
 //insert Update
 add Submission
-	+ newSubmissionField:string
+	+aaaa : integer
+	bbbb : string
 	show Search Remove ListAll
 	types Completa,Parcial.
 
 add Author
 	+lattes:string
+	aaaa : integer
+	bbbb : string
 	show in User
 	types Associado,Profissional,Estudante.
 
 add CheckingCopy
 +banana : string
+anana : integer
 show Insert Update Remove Search ListAll
 	types Atestado,Certificado.
 
-addNew NewClass
-+banana : integer
+addNew Newclass
++aaaa : integer
+bbbb : string
 show Insert
 types AAAA,BBB.
 

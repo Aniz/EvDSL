@@ -47,13 +47,14 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 	public void insert(Submission submission) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO submission (idActivity, abstract, keywords, title,typeSubmission,newSubmissionField) Values('"
+			statement.executeUpdate("INSERT INTO submission (idActivity, abstract, keywords, title,typeSubmission,aaaa,bbbb) Values('"
 				+submission.getIdActivity()
 				+"', '"+ submission.getAbstractPaper() 
 				+"', '" + submission.getKeywords()
 				+ "', '"+submission.getTitle()
 				+ "', '"+submission.getTypeSubmission()
-				+"', '"+submission.getNewsubmissionfield()   
+				+"', '"+submission.getAaaa()   
+				+"', '"+submission.getBbbb()   
 				+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,7 +86,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setKeywords(resultset.getString("keywords"));
                 submission.setTitle(resultset.getString("title"));
 				submission.setTypeSubmission(TypeSubmission.valueOf(resultset.getString("typeSubmission")));
-				submission.setNewsubmissionfield(resultset.getString("newSubmissionField"));
+				submission.setAaaa(resultset.getString("aaaa"));
+				submission.setBbbb(resultset.getString("bbbb"));
 			
            
 				list.add(submission);
@@ -235,7 +237,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
                 submission.setKeywords(resultset.getString("keywords"));
                 submission.setTitle(resultset.getString("title"));
 				submission.setTypeSubmission(TypeSubmission.valueOf(resultset.getString("typeSubmission")));
-				submission.setNewsubmissionfield(resultset.getString("newSubmissionField"));
+				submission.setAaaa(resultset.getString("aaaa"));
+				submission.setBbbb(resultset.getString("bbbb"));
 			
            
             } else {
@@ -270,8 +273,8 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
 					"jdbc:mysql://localhost:3306/EeventDB", "root", "password");
 
 			// 2. Prepare statement
-			String sql = "INSERT INTO submission (idActivity, abstract, keywords, title,typeSubmission,newSubmissionField) ValuesValues" +
-					      "(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO submission (idActivity, abstract, keywords, title,typeSubmission,aaaa,bbbb) ValuesValues" +
+					      "(?,?,?,?,?,?,?,?,?)";
 
 			myStmt = myConn.prepareStatement(sql);
 

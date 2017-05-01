@@ -48,7 +48,8 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				+"', '"+organizer.getEmail() 
 				+"', '"+organizer.getFiliation()
 				+"', '"+organizer.getTypeUser()
-				+"', '"+user.getPhone()   
+				+"', '"+organizer.getAaaa()   
+				+"', '"+organizer.getBbbb()   
 				+"')");
 
            	statement.executeUpdate("INSERT INTO organizer Values('"+organizer.getIdUser()
@@ -110,8 +111,9 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				organizer.setContato(resultset.getString("contato"));
 			
         
-				organizer.setTypeUser(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
-				organizer.setPhone(resultset.getInt("phone"));
+				organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeOrganizer")));
+				organizer.setAaaa(resultset.getInt("aaaa"));
+				organizer.setBbbb(resultset.getString("bbbb"));
 			
 
             } else {
@@ -146,12 +148,13 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
             	organizer.setNameUser(resultset.getString("nameUser"));
             	organizer.setEmail(resultset.getString("email"));
             	organizer.setFiliation(resultset.getString("filiation"));
-				organizer.setTypeOrganizer(TypeOrganizer(resultset.getString("typeOrganizer")));
+				organizer.setTypeOrganizer(TypeOrganizer.valueOf(Organizer(resultset.getString("typeOrganizer")));
 				organizer.setContato(resultset.getString("contato"));
 			
         
-				organizer.setTypeUser(resultset.getString("typeUser"));
-				organizer.setPhone(resultset.getInt("phone"));
+				organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
+				organizer.setAaaa(resultset.getInt("aaaa"));
+				organizer.setBbbb(resultset.getString("bbbb"));
 			
 
 				list.add(organizer);
@@ -183,7 +186,8 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
                 "', filiation = '" + organizer.getFiliation() +
 
 				"', typeUser = '"+ organizer.getTypeUser() + 
-				"', phone = '"+ organizer.getPhone() + 
+				"', aaaa = '"+ organizer.getAaaa() + 
+				"', bbbb = '"+ organizer.getBbbb() + 
                 "' WHERE idUser = '"+ organizer.getIdUser()+"'");
 
             	statement.executeUpdate("UPDATE organizer SET typeOrganizer = '"+ organizer.getTypeOrganizer() + 					"', contato = '"+ organizer.getContato() + 

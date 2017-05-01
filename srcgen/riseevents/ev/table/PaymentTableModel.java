@@ -19,8 +19,9 @@ public class PaymentTableModel extends AbstractTableModel{
 		private static final int COL_TYPE = 4;
 		private static final int COL_BARCODE = 5;
 		private static final int COL_VALUE = 6;
-		private static final int COL_OOII =11;
-		private static final int COL_TYPEPAYMENT = 11;
+		private static final int COL_AAAA =7;
+		private static final int COL_BBBB =8;
+		private static final int COL_TYPEPAYMENT = 9;
 		
 		// Lista de Valores
 		private List<Payment> rows;
@@ -35,7 +36,7 @@ public class PaymentTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 13;
+			return 14;
 		}
 		
 		//Preenchimento de cada coluna
@@ -56,11 +57,14 @@ public class PaymentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_VALUE) {
 					return payment.getValue();
 				} 
-				else if (columnIndex == COL_OOII) {
-					return activity.getOoii();
+				else if (columnIndex == COL_AAAA) {
+					return payment.getAaaa();
+				}
+				else if (columnIndex == COL_BBBB) {
+					return payment.getBbbb();
 				}
 				else if (columnIndex == COL_TYPEPAYMENT) {
-					return activity.getTypePayment();
+					return payment.getTypePayment();
 				}
 				return null;
 			}
@@ -90,7 +94,10 @@ public class PaymentTableModel extends AbstractTableModel{
 				case COL_VALUE:
 					coluna = "Value";
 					break;
-				case COL_OOII:
+				case COL_AAAA:
+					coluna = "";
+					break;
+				case COL_BBBB:
 					coluna = "";
 					break;
 				case COL_TYPEPAYMENT:
@@ -121,7 +128,10 @@ public class PaymentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_VALUE) {
 					return Float.class;
 				}
-				else if (columnIndex == COL_OOII) {
+				else if (columnIndex == COL_AAAA) {
+					return int.class;
+				}
+				else if (columnIndex == COL_BBBB) {
 					return String.class;
 				}
 				else if (columnIndex == COL_TYPEPAYMENT) {
@@ -153,8 +163,9 @@ public class PaymentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypePayment(payment.getTypePayment());
 				rows.get(indiceLinha).setValue(payment.getValue());
 				rows.get(indiceLinha).setIdRegistration(payment.getIdRegistration());
-				rows.get(indiceLinha).setOoii(activity.getOoii());
-				rows.get(indiceLinha).setTypePayment(activity.getTypePayment());
+				rows.get(indiceLinha).setAaaa(payment.getAaaa());
+				rows.get(indiceLinha).setBbbb(payment.getBbbb());
+				rows.get(indiceLinha).setTypePayment(payment.getTypePayment());
 			
 				fireTableDataChanged();
 			}

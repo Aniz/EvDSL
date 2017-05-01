@@ -55,12 +55,12 @@ public class UserTableModel extends AbstractTableModel{
 				}
 				{% for property in data.option.properties %}
 				else if (columnIndex == COL_{{property.name|upper}}) {
-					return activity.get{{property.name|capitalize}}();
+					return user.get{{property.name|capitalize}}();
 				}
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
 				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
-					return activity.getType{{data.option.entity}}();
+					return user.getType{{data.option.entity}}();
 				}
 				{% endif %}
 			
@@ -77,10 +77,7 @@ public class UserTableModel extends AbstractTableModel{
 				case COL_NAMEUSER:
 					coluna = "Name";
 					break;
-				case COL_TYPEUSER:
-					coluna = "Type";
-					break;
-				case COL_EMAIL:
+				 case COL_EMAIL:
 					coluna = "Email";
 					break;
 				case COL_FILIATION:
@@ -154,10 +151,10 @@ public class UserTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setEmail(user.getEmail());
 				rows.get(indiceLinha).setFiliation(user.getFiliation());
 				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(activity.get{{property.name|capitalize}}());
+				rows.get(indiceLinha).set{{property.name|capitalize}}(user.get{{property.name|capitalize}}());
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(activity.getType{{data.option.entity}}());
+				rows.get(indiceLinha).setType{{data.option.entity}}(user.getType{{data.option.entity}}());
 				{% endif %}
 			
 				fireTableDataChanged();

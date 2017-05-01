@@ -6,37 +6,43 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import riseevents.ev.data.NewClass;
+import riseevents.ev.util.ExceptionMessages;
+import riseevents.ev.data.Newclass;
 
-public class NewClassTableModel extends AbstractTableModel{
+public class NewclassTableModel extends AbstractTableModel{
 	// Nome das Colunas
-	
-			private static final int COL_BANANA = 1;
+		
+			private static final int COL_NEWCLASSID = 0
+			private static final int COL_AAAA = 1;
+			private static final int COL_BBBB = 2;
 			
 			// Lista de Valores
-			private List<NewClass> rows;
+			private List<Newclass> rows;
 			
-			public NewClassTableModel(List<NewClass> values){
+			public NewclassTableModel(List<Newclass> values){
 				this.rows = values;
 			}
-			v
+			
 			public int getRowCount() {
 				return rows.size();
 			}
 			
 			//Quantidade de Colunas
 			public int getColumnCount() {
-				return 1;
+				return 2;
 			}
 			
 			//Preenchimento de cada coluna
 				public Object getValueAt(int rowIndex, int columnIndex) {
-					NewClass newclass = rows.get(rowIndex);
+					Newclass newclass = rows.get(rowIndex);
 					if (columnIndex == COL_NEWCLASSID) {
-						return newclass.getId();
+						return newclass.getIdNewclass();
 					}
-					else if (columnIndex == COL_BANANA) {
-						return newclass.getBanana();
+					else if (columnIndex == COL_AAAA) {
+						return newclass.getAaaa();
+					}  
+					else if (columnIndex == COL_BBBB) {
+						return newclass.getBbbb();
 					}  
 					return null;
 				}
@@ -47,7 +53,7 @@ public class NewClassTableModel extends AbstractTableModel{
 					switch (column) {
 					
 					default:
-						throw new IllegalArgumentException(EXC_INVALID_COL);
+						throw new IllegalArgumentException(ExceptionMessages.EXC_INVALID_COL);
 					}
 					return coluna;
 				}
@@ -59,35 +65,36 @@ public class NewClassTableModel extends AbstractTableModel{
 				}
 				
 				//Abaixo metodos de InserÁ„o, remoÁ„o, update e etc;
-				public NewClass get(int row) {
+				public Newclass get(int row) {
 					return rows.get(row);
 				}
 
-				public void addNewClass(NewClass ) {
-					rows.add();
+				public void addNewclass(Newclass newclass) {
+					rows.add(newclass);
 					int ultimoIndice = getRowCount() - 1;
 					fireTableRowsInserted(ultimoIndice, ultimoIndice);
 				}
 				
-				public void removeNewClass(int indiceLinha) {
+				public void removeNewclass(int indiceLinha) {
 					rows.remove(indiceLinha);
 					fireTableRowsDeleted(indiceLinha, indiceLinha);
 				}
 				
-				public void alterarNewClass(int indiceLinha, NewClass newclass) {
-					rows.get(indiceLinha).setBanana(newclass.getbanana());		
+				public void alterarNewclass(int indiceLinha, Newclass newclass) {
+					rows.get(indiceLinha).setAaaa(newclass.getAaaa());		
+					rows.get(indiceLinha).setBbbb(newclass.getBbbb());		
 					fireTableDataChanged();
 				}
 				
 				//real name listade....
-				public void addNewClassList(List<NewClass> newclassList) {
+				public void addNewclassList(List<Newclass> newclassList) {
 					int indice = getRowCount();
-					rows.addAll(NewClasss);
-					fireTableRowsInserted(indice, indice + NewClasss.size());
+					rows.addAll(NewclassList);
+					fireTableRowsInserted(indice, indice + NewclassList.size());
 				}
 				
-				public int retornarIndice(NewClass newclass) {
-					return rows.indexOf(NewClass);
+				public int retornarIndice(Newclass newclass) {
+					return rows.indexOf(newclass);
 				}
 				
 				// Remove todos os registros.

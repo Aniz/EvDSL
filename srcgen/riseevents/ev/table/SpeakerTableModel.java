@@ -20,8 +20,9 @@ public class SpeakerTableModel extends AbstractTableModel{
 		private static final int COL_NACIONALIDADE =4;
 		private static final int COL_TYPESPEAKER = 5;
 		
-		private static final int COL_PHONE =6;
-		private static final int COL_TYPEUSER = 7;
+		private static final int COL_AAAA =6;
+		private static final int COL_BBBB =7;
+		private static final int COL_TYPEUSER = 9;
 		
 		// Lista de Valores
 		private List<Speaker> rows;
@@ -36,7 +37,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 8;
+			return 9;
 		}
 		
 		//Preenchimento de cada coluna
@@ -57,8 +58,11 @@ public class SpeakerTableModel extends AbstractTableModel{
 				else if (columnIndex == COL_TYPESPEAKER) {
 					return speaker.getTypeSpeaker();
 				}
-				else if (columnIndex == COL_PHONE) {
-					return speaker.getPhone();
+				else if (columnIndex == COL_AAAA) {
+					return speaker.getAaaa();
+				}
+				else if (columnIndex == COL_BBBB) {
+					return speaker.getBbbb();
 				}
 				else if (columnIndex == COL_TYPEUSER) {
 					return speaker.getTypeUser();
@@ -86,13 +90,16 @@ public class SpeakerTableModel extends AbstractTableModel{
 				case COL_NACIONALIDADE:
 					coluna = "";
 					break;
-				case COL_SPEAKER:
+				case COL_TYPESPEAKER:
 					coluna = "Tipo";
 					break;
-				case COL_PHONE:
+				case COL_AAAA:
 					coluna = "";
 					break;
-				case COL_USER:
+				case COL_BBBB:
+					coluna = "";
+					break;
+				case COL_TYPEUSER:
 					coluna = "Tipo User";
 					break;
 			
@@ -120,8 +127,11 @@ public class SpeakerTableModel extends AbstractTableModel{
 				else if (columnIndex == COL_TYPESPEAKER) {
 					return String.class;
 				}
-				else if (columnIndex == COL_PHONE) {
+				else if (columnIndex == COL_AAAA) {
 					return int.class;
+				}
+				else if (columnIndex == COL_BBBB) {
+					return String.class;
 				}
 				else if (columnIndex == COL_TYPEUSER) {
 					return String.class;
@@ -151,10 +161,11 @@ public class SpeakerTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setNameUser(speaker.getNameUser());
 				rows.get(indiceLinha).setEmail(speaker.getEmail());	
 				rows.get(indiceLinha).setBiography(speaker.getBiography());
-				rows.get(indiceLinha).setNacionalidade(activity.getNacionalidade());
-				rows.get(indiceLinha).setTypeSpeaker(activity.getTypeSpeaker());
-				rows.get(indiceLinha).setPhone(activity.getPhone());
-				rows.get(indiceLinha).setTypeUser(activity.getTypeSpeaker());
+				rows.get(indiceLinha).setNacionalidade(speaker.getNacionalidade());
+				rows.get(indiceLinha).setTypeSpeaker(speaker.getTypeSpeaker());
+				rows.get(indiceLinha).setAaaa(speaker.getAaaa());
+				rows.get(indiceLinha).setBbbb(speaker.getBbbb());
+				rows.get(indiceLinha).setTypeUser(speaker.getTypeSpeaker());
 			
 				fireTableDataChanged();
 			}

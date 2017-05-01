@@ -11,7 +11,7 @@ import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 
 public class LibraryOfDSL {
 
-	public Boolean returnValue(String value){
+	public Boolean returnValue(Boolean value){
 		if(value){
 			return true;
 		}

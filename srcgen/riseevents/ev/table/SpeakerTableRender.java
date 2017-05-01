@@ -43,9 +43,11 @@ public class SpeakerTableRender extends DefaultTableCellRenderer {
 		
 		table.getColumnModel().getColumn(7).setMaxWidth(13);
 		table.getColumnModel().getColumn(7).setResizable(false);
+		table.getColumnModel().getColumn(8).setMaxWidth(13);
+		table.getColumnModel().getColumn(8).setResizable(false);
 		
-		table.getColumnModel().getColumn(7).setMaxWidth(13);
-		table.getColumnModel().getColumn(7).setResizable(false);
+		table.getColumnModel().getColumn(8).setMaxWidth(13);
+		table.getColumnModel().getColumn(8).setResizable(false);
 		
 		//Texto Centralizado nas Colunas
 		this.setHorizontalAlignment(CENTER);

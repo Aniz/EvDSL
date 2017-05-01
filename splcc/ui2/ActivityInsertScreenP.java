@@ -40,8 +40,9 @@ public class ActivityInsertScreenP extends JInternalFrame {
 	{% for property in data.option.properties %}
 	private JTextField textField{{property.name|capitalize}};
 	{% endfor %}
-	
-	private JComboBox comboBoxActivity;
+	{% if data.option.categories|length > 0 %}
+	private JComboBox comboBoxType{{data.option.entity}};
+	{% endif %}
 	private JComboBox comboBoxEvent;
 	
 	
@@ -205,7 +206,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		
 		try {
-			lblNewLabel.setText(String.valueOf({{systemName}}MainScreenP.facadevalueOf({{systemName}}MainScreenP.facade.getActivityLastId()));
+			lblNewLabel.setText(String.valueOf(RiSEEventMainScreenP.facade.getActivityLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -218,15 +219,15 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		lblType{{data.option.entity}}.setBounds(17, 113, 86, 16);
 		getContentPane().add(lblType{{data.option.entity}});
 		
-		comboBox{{data.option.entity}} = new JComboBox();
-		comboBox{{data.option.entity}}.setBounds(115, 109, 159, 27);
-		getContentPane().add(comboBox{{data.option.entity}});
+		comboBoxType{{data.option.entity}} = new JComboBox();
+		comboBoxType{{data.option.entity}}.setBounds(115, 109, 159, 27);
+		getContentPane().add(comboBoxType{{data.option.entity}});
 		
 		Type{{data.option.entity}}[] types = Type{{data.option.entity}}.values();
 		List<String> names = new ArrayList<String>();
 		for(int i=0; i<types.length; i++){
 			names.add(i, types[i].name());
-			comboBox{{data.option.entity}}.addItem(types[i].name());
+			comboBoxType{{data.option.entity}}.addItem(types[i].name());
 		}
 	{% endif %}
 		carregarEventComboBox();
@@ -260,14 +261,14 @@ public class ActivityInsertScreenP extends JInternalFrame {
 			int numberOfParticipants = Integer.valueOf(textFieldNOParticipants.getText());
 			int registrationLimit = Integer.valueOf(textFieldRegLimit.getText());
 			{% for property in data.option.properties %}
-			{{property.type|javatype}} {{property.name}} = {{property.type|capitalize}}.valueOf(textField{{property.name}}.getText());	
+			{{property.type|javatype}} {{property.name}} = {{property.type|capitalize}}.valueOf(textField{{property.name|capitalize}}.getText());	
 			{% endfor %}
 			{% if data.option.categories|length > 0 %}
-			String type{{data.option.entity|capitalize}} = comboBox{{data.option.entity}}.getSelectedItem().toString();
+			String type{{data.option.entity|capitalize}} = comboBoxType{{data.option.entity}}.getSelectedItem().toString();
 			{% endif %}
 			
 			if (nameEvent.equals("")|| nameActivity.equals("") || descriptionActivity.equals("")
-					|| activityType.equals("") || status.equals("") 
+					|| status.equals("") 
 					|| value == -1 || hourlyLoad == -1 || date.equals("") || hour.equals("")
 					|| numberOfParticipants == -1 || registrationLimit == -1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -286,7 +287,6 @@ public class ActivityInsertScreenP extends JInternalFrame {
 						activity.setIdEvent({{systemName}}MainScreenP.facade.getEventIdByName(nameEvent));
 						activity.setNameActivity(nameActivity);
 						activity.setDescriptionActivity(descriptionActivity);
-						activity.setTypeActivity(TypeActivity.valueOf(activityType));
 						activity.setValue(value);
 						activity.setHourlyLoad(hourlyLoad);
 						activity.setDate(date);
@@ -324,7 +324,7 @@ public class ActivityInsertScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

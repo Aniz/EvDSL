@@ -3,16 +3,16 @@ package riseevents.ev.exception;
 import riseevents.ev.util.LibraryOfDSL;
 import riseevents.ev.util.ExceptionMessages;
 
-public class NewClassAlreadyInsertedException extends Exception {
+public class NewclassAlreadyInsertedException extends Exception {
 
 	private int idEntity;
 
-	public NewClassAlreadyInsertedException(int idEntity) {
+	public NewclassAlreadyInsertedException(int idEntity) {
 		super(ExceptionMessages.EXC_ALREADY_EXISTS);
 		this.idEntity = idEntity;
 	}
 
-	public int getIdNewClass() {
+	public int getIdNewclass() {
 		return idEntity;
 	}
 }
