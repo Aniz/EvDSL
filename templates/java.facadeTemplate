@@ -133,6 +133,9 @@ public class {{systemName}}Facade {
 		return activityuserList.getActivitiesById(idActivity);
 	}
 {% endif %}
+ 	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
+		return activities.getActivitiesByEvent(idEvent);
+	}
 {% if 'Event' in data %}
 	{% if 'eventProgram' in data.User.option.statments %}
 	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{

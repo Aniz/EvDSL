@@ -47,9 +47,6 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
 
-
-	private ReceiptScreenP screenReceipt;
-	
 	
 	private static JLabel labelImagem;
 	

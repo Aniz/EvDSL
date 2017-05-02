@@ -185,6 +185,9 @@ public class RiseEventsFacade {
 	public List<ActivityUser> getActivitiesUsersById(int idActivity) throws RepositoryException{
 		return activityuserList.getActivitiesById(idActivity);
 	}
+ 	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
+		return activities.getActivitiesByEvent(idEvent);
+	}
 	
 	
 	

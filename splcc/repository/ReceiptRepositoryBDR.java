@@ -73,7 +73,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 	@Override
 	public List<{{data.option.entity}}> get{{data.option.entity|lower}}List() throws RepositoryException {
 		{{data.option.entity}} {{data.option.entity|lower}} = null;
-		ArrayList<{{{data.option.entity}}}> list = new ArrayList<{{data.option.entity}}>();
+		ArrayList<{{data.option.entity}}> list = new ArrayList<{{data.option.entity}}>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
             ResultSet resultset = statement.executeQuery("select * from {{data.option.entity}}");

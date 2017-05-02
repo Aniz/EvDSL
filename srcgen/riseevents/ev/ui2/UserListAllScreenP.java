@@ -103,7 +103,7 @@ public class UserListAllScreenP extends JInternalFrame {
 	private void populateJTable(){
 		try {
 			UserTableModel model;
-			model = new UserTableModel(RiseEventsMainScreenP.getFacade().getUsers());
+			model = new UserTableModel(RiseEventsMainScreenP.getFacade().getUserList());
 			table.setModel(model);
 
 		} catch (RepositoryException e) {

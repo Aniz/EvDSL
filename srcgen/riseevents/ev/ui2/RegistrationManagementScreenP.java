@@ -196,7 +196,7 @@ public class RegistrationManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			RegistrationTableModel model;
-			model = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrations());
+			model = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrationList());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -240,7 +240,7 @@ public class RegistrationManagementScreenP extends JInternalFrame{
 					registration.setTotalValue(Float.valueOf(value));
 					
 					//Atualizar JTable
-					RegistrationTableModel model = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrations());
+					RegistrationTableModel model = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrationList());
 					
 					RiseEventsMainScreenP.facade.insertRegistration(registration); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 				
@@ -284,7 +284,7 @@ public class RegistrationManagementScreenP extends JInternalFrame{
 			}
 			
 			try {
-				Registration registration = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrations()).get(rowIndex);
+				Registration registration = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrationList()).get(rowIndex);
 				RiseEventsMainScreenP.facade.removeRegistration(registration.getIdRegistration());
 				RegistrationTableModel model = (RegistrationTableModel) table.getModel();
 				model.removeRegistration(rowIndex);
@@ -343,7 +343,7 @@ public class RegistrationManagementScreenP extends JInternalFrame{
 					try {
 						RiseEventsMainScreenP.facade.updateRegistration(registrationNew);
 						RegistrationTableModel model;
-						model = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrations());
+						model = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrationList());
 						table.setModel(model);
 					} catch (RegistrationNotFoundException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
@@ -380,7 +380,7 @@ public class RegistrationManagementScreenP extends JInternalFrame{
 			Registration registrationOld = null;
 
 			try {
-				registrationOld=  new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrations()).get(rowIndex);
+				registrationOld=  new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrationList()).get(rowIndex);
 			
 				lblLastRegistrationId.setText(String.valueOf(registrationOld.getIdRegistration()));
 				textFieldUserId.setText(String.valueOf(registrationOld.getIdUser()));

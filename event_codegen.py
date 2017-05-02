@@ -97,7 +97,7 @@ def main(debug=False):
     #Get options from model
     for component in event_model.components:
         if component.__class__.__name__ == 'Action':
-            actionsArray.append(component)
+            actionsArray.append(component.function)
             
         elif component.__class__.__name__ == 'Option' or component.__class__.__name__ == 'NewOption':
             if component.__class__.__name__ == 'NewOption':
@@ -188,7 +188,17 @@ def main(debug=False):
             generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Managment'+"ScreenP",jinja_env,value,componentExtraData,systemName)
-       
+    
+    if 'Receipt' in actionsArray:
+        copyCodeFile(entityCodeFolder,entityFolder,"Receipt",jinja_env,value,componentExtraData,systemName)
+        copyCodeFile(controllerCodeFolder,controllerFolder,"ReceiptControl",jinja_env,value,componentExtraData,systemName)
+        copyCodeFile(repositoryCodeFolder,repositoryFolder,"ReceiptRepository",jinja_env,value,componentExtraData,systemName)
+        copyCodeFile(repositoryCodeFolder,repositoryFolder,"ReceiptRepositoryBDR",jinja_env,value,componentExtraData,systemName)
+        copyCodeFile(tableCodeFolder,tableFolder,"ReceiptTableModel",jinja_env,value,componentExtraData,systemName)
+        copyCodeFile(exceptionCodeFolder,exceptionFolder,"ReceiptAlreadyInsertedException",jinja_env,value,componentExtraData,systemName)
+        copyCodeFile(exceptionCodeFolder,exceptionFolder,"ReceiptNotFoundException",jinja_env,value,componentExtraData,systemName)
+        copyCodeFile(viewCodeFolder,viewFolder,"ReceiptScreenP",jinja_env,value,componentExtraData,systemName)
+    
     #DepedentClassses
     dependencesDict = {} 
     dependencesDict["Review"] = "Reviewer","Submission"
@@ -215,9 +225,10 @@ def main(debug=False):
             copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,componentData,componentExtraData,systemName)
             copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,componentData,componentExtraData,systemName)
             copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,componentData,componentExtraData,systemName)
-        
-            if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
+
+            if key not in ["SubmissionAuthor","SubmissionUser"]:            
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData,systemName)
+            if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData,systemName)
             
             if key not in ["SubmissionAuthor","SubmissionUser"]:

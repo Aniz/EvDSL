@@ -44,9 +44,9 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% endif %}
 
 {% endfor %}
-
+	{% if 'Receipt' in data.actions %}
 	private ReceiptScreenP screenReceipt;
-	
+	{% endif %}
 	{% if 'sendBugTrackEmail' in data.statments %}
 	private BugtrackScreenP screenBugtrack;
 	{% endif %}

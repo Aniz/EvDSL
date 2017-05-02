@@ -23,3 +23,5 @@ add Event
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
+include Receipt.
+include Conflict.

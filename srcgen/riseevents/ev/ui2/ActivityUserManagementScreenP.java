@@ -196,7 +196,7 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 			
 			try {
 				
-				user =  new UserTableModel(RiseEventsMainScreenP.facade.getUsers()).get(rowIndex);
+				user =  new UserTableModel(RiseEventsMainScreenP.facade.getUserList()).get(rowIndex);
 				int idActivity = RiseEventsMainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				//Verificando se o numero de registration é maior que o numero de participantes atual
 				activity = RiseEventsMainScreenP.facade.searchActivity(idActivity);
@@ -267,7 +267,7 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 			ActivityUser activityUser = null;
 			Activity activity = null;
 			try {
-				activityUser = new ActivityUserTableModel(RiseEventsMainScreenP.facade.getActivitiesUsers()).get(rowIndex);
+				activityUser = new ActivityUserTableModel(RiseEventsMainScreenP.facade.getActivityUserList()).get(rowIndex);
 				RiseEventsMainScreenP.facade.removeActivityUser(activityUser);
 				//Atualizando a tabela
 				int idActivity;
@@ -383,7 +383,7 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 	private void populateTableUsers(){
 		try {
 			UserTableModel model;
-			model = new UserTableModel(RiseEventsMainScreenP.facade.getUsers());
+			model = new UserTableModel(RiseEventsMainScreenP.facade.getUserList());
 
 			tableUsers.setModel(model);
 			
@@ -397,7 +397,7 @@ public class ActivityUserManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

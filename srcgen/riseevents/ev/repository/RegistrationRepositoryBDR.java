@@ -58,13 +58,13 @@ public class RegistrationRepositoryBDR implements RegistrationRepository {
 	}
 
 	@Override
-	public void remove(int idRegistration) throws RegistrationNotFoundException,
+	public void remove(Registration registration) throws RegistrationNotFoundException,
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM registration WHERE idRegistration = '"+ idRegistration+"'");
+		    int i = statement.executeUpdate("DELETE FROM registration WHERE idRegistration = '"+ registration.getIdRegistration()+"'");
             if (i == 0) {
-            	throw new RegistrationNotFoundException(idRegistration);
+            	throw new RegistrationNotFoundException(registration.getIdRegistration());
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
