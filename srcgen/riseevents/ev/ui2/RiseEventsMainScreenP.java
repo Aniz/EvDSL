@@ -47,6 +47,12 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
 
+	private ReceiptManagementScreenP screenManagementReceipt;	
+
+	private PaymentInsertScreenP screenInsertPayment;	
+	private PaymentUpdateScreenP screenUpdatePayment;	
+	private PaymentManagementScreenP screenManagementPayment;	
+
 	
 	private static JLabel labelImagem;
 	
@@ -107,6 +113,12 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
+
+		ManagementReceiptMenuAction managementReceiptAction = new ManagementReceiptMenuAction();	
+
+		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
+		UpdatePaymentMenuAction updatePaymentAction = new UpdatePaymentMenuAction();	
+		ManagementPaymentMenuAction managementPaymentAction = new ManagementPaymentMenuAction();	
 
 
 		RiseEventsMainScreenP.facade = RiseEventsFacade.getInstance();
@@ -196,6 +208,22 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllEvent = new JMenuItem("ListAll");
 		mnEvent.add(mntmListAllEvent);
 		mntmListAllEvent.addActionListener(listallEventAction);
+		JMenu mnReceipt = new JMenu("Receipt");
+		menuBar.add(mnReceipt);
+		JMenuItem mntmManagementReceipt = new JMenuItem("Management");
+		mnReceipt.add(mntmManagementReceipt);
+		mntmManagementReceipt.addActionListener(managementReceiptAction);
+		JMenu mnPayment = new JMenu("Payment");
+		menuBar.add(mnPayment);
+		JMenuItem mntmInsertPayment = new JMenuItem("Insert");
+		mnPayment.add(mntmInsertPayment);
+		mntmInsertPayment.addActionListener(insertPaymentAction);
+		JMenuItem mntmUpdatePayment = new JMenuItem("Update");
+		mnPayment.add(mntmUpdatePayment);
+		mntmUpdatePayment.addActionListener(updatePaymentAction);
+		JMenuItem mntmManagementPayment = new JMenuItem("Management");
+		mnPayment.add(mntmManagementPayment);
+		mntmManagementPayment.addActionListener(managementPaymentAction);
 		JMenu mnReports = new JMenu("Reports");
 		menuBar.add(mnReports);
 		
@@ -488,6 +516,82 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllEvent);
 			try {
 				screenListAllEvent.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ManagementReceiptMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementReceipt = ReceiptManagementScreenP.getInstanceReceiptManagementScreenP();
+			if(screenManagementReceipt.getParent() == null){
+				desktopPane.add(screenManagementReceipt);
+			}
+			screenManagementReceipt.setVisible(true);
+			desktopPane.moveToFront(screenManagementReceipt);
+			try {
+				screenManagementReceipt.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class InsertPaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenInsertPayment = PaymentInsertScreenP.getInstancePaymentInsertScreenP();
+			if(screenInsertPayment.getParent() == null){
+				desktopPane.add(screenInsertPayment);
+			}
+			screenInsertPayment.setVisible(true);
+			desktopPane.moveToFront(screenInsertPayment);
+			try {
+				screenInsertPayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class UpdatePaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenUpdatePayment = PaymentUpdateScreenP.getInstancePaymentUpdateScreenP();
+			if(screenUpdatePayment.getParent() == null){
+				desktopPane.add(screenUpdatePayment);
+			}
+			screenUpdatePayment.setVisible(true);
+			desktopPane.moveToFront(screenUpdatePayment);
+			try {
+				screenUpdatePayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ManagementPaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementPayment = PaymentManagementScreenP.getInstancePaymentManagementScreenP();
+			if(screenManagementPayment.getParent() == null){
+				desktopPane.add(screenManagementPayment);
+			}
+			screenManagementPayment.setVisible(true);
+			desktopPane.moveToFront(screenManagementPayment);
+			try {
+				screenManagementPayment.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

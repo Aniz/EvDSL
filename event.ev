@@ -23,5 +23,20 @@ add Event
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
-include Receipt.
+add Receipt 
+	+ link:string
+    aaaa : integer
+	bbbb : string
+	show Management
+	types total,parcial.
+
+add Payment 
+	+ link:string
+    aaaa : integer
+	bbbb : string
+	show Insert Update Management
+	types Avista, Credito.
+
 include Conflict.
+
+if Payment.Avista -> generateCarne

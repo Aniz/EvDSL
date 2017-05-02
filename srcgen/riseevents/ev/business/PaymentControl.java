@@ -1,16 +1,16 @@
 //#if ${PaymentAvista} == "T" or ${PaymentDeposito} == "T" or ${PaymentCartao} == "T"
-package {{systemName|lower}}.ev.business;
+package riseevents.ev.business;
 
 import java.io.IOException;
 import java.util.List;
 
 import com.lowagie.text.DocumentException;
 
-import {{systemName|lower}}.ev.data.Payment;
-import {{systemName|lower}}.ev.exception.PaymentAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.PaymentNotFoundException;
-import {{systemName|lower}}.ev.exception.RepositoryException;
-import {{systemName|lower}}.ev.repository.PaymentRepository;
+import riseevents.ev.data.Payment;
+import riseevents.ev.exception.PaymentAlreadyInsertedException;
+import riseevents.ev.exception.PaymentNotFoundException;
+import riseevents.ev.exception.RepositoryException;
+import riseevents.ev.repository.PaymentRepository;
 
 
 public class PaymentControl {
@@ -20,8 +20,6 @@ public class PaymentControl {
 	public PaymentControl(PaymentRepository repository){
 		this.paymentList = repository;
 	}
-	{% if data.commands is defined %}
-	{% if 'Insert' in data.commands %}
 	public void insert(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException{
 		if (payment != null) {
 			if (!paymentList.isThere(payment.getIdPayment())) 
@@ -32,8 +30,6 @@ public class PaymentControl {
             throw new IllegalArgumentException();
         }
 	}
-	{% endif %}
-	{% endif %}
 	public List<Payment> getPaymentList() throws RepositoryException {
 		return paymentList.getPaymentList();  
 	}
@@ -41,23 +37,10 @@ public class PaymentControl {
 	public int getPaymentLastId() throws RepositoryException{
 		return paymentList.getPaymentLastId();
 	}
-	{% if data.commands is defined %}
-	{% if 'Update' in data.commands %}	
+	
 	public void update(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
 		paymentList.update(payment);
 	}
-	{% endif %}
-	{% if 'Remove' in data.commands %}
-	public void remove(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
-		paymentList.remove(idPayment);
-	}
-	{% endif %}
-	{% if 'Search' in data.commands %}
-	public Payment search(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
-		return paymentList.search(idPayment);
-	}
-	{% endif %}
-	{% endif %}
 	
 	public void type(Payment payment, Payment out) throws DocumentException, IOException {
 		payment.startarAcaoTypePayment(out);

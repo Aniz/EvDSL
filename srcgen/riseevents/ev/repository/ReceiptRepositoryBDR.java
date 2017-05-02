@@ -36,21 +36,21 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 	
 	
 	@Override
-	public void insert(Event event) throws RepositoryException {
+	public void insert(Receipt receipt) throws RepositoryException {
 		try {
 		Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Event (idEvent,typeEvent,link,aaaa,bbbb) Values('"
-				+event.getIdEvent()
-				+ "', '"+event.getIdRegistration()
-				+ "', '"+event.getBarcode()
-				+ "', '"+event.getDate()
-				+ "', '"+event.getValue() 
-				+ "', '"+event.getStatus() 
-				+"', '"+event.getTypeEvent()
+			statement.executeUpdate("INSERT INTO Receipt (idReceipt,typeReceipt,link,aaaa,bbbb) Values('"
+				+receipt.getIdReceipt()
+				+ "', '"+receipt.getIdRegistration()
+				+ "', '"+receipt.getBarcode()
+				+ "', '"+receipt.getDate()
+				+ "', '"+receipt.getValue() 
+				+ "', '"+receipt.getStatus() 
+				+"', '"+receipt.getTypeReceipt()
 				
-				+"', '"+event.getLink()   
-				+"', '"+event.getAaaa()   
-				+"', '"+event.getBbbb()   
+				+"', '"+receipt.getLink()   
+				+"', '"+receipt.getAaaa()   
+				+"', '"+receipt.getBbbb()   
 	        
 		        +"')");
 		} catch (SQLException e) {
@@ -71,20 +71,20 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 
 
 	@Override
-	public List<Event> geteventList() throws RepositoryException {
-		Event event = null;
-		ArrayList<Event> list = new ArrayList<Event>();
+	public List<Receipt> getreceiptList() throws RepositoryException {
+		Receipt receipt = null;
+		ArrayList<Receipt> list = new ArrayList<Receipt>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("select * from Event");
+            ResultSet resultset = statement.executeQuery("select * from Receipt");
             while (resultset.next()) {
-	            event = new Event();
-		        event.setIdEvent(resultset.getInt("idEvent"));         
-            	event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
-				event.setLink(resultset.getString("link"));
-				event.setAaaa(resultset.getInt("aaaa"));
-				event.setBbbb(resultset.getString("bbbb"));
-				list.add(event);
+	            receipt = new Receipt();
+		        receipt.setIdReceipt(resultset.getInt("idReceipt"));         
+            	receipt.setTypeReceipt(TypeReceipt.valueOf(resultset.getString("typeReceipt")));
+				receipt.setLink(resultset.getString("link"));
+				receipt.setAaaa(resultset.getInt("aaaa"));
+				receipt.setBbbb(resultset.getString("bbbb"));
+				list.add(receipt);
             } 
 			resultset.close();
 		} catch(PersistenceMechanismException e){
@@ -102,11 +102,11 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 	}
 
 	@Override
-	public boolean isThere(int idEvent) throws RepositoryException {
+	public boolean isThere(int idReceipt) throws RepositoryException {
 		boolean answer = false;
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Event WHERE idEvent = '" + idEntity + "'");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Receipt WHERE idReceipt = '" + idEntity + "'");
             answer = resultset.next();
 			resultset.close();
 		} catch(PersistenceMechanismException e){
@@ -124,11 +124,11 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 	}
 
 	@Override
-	public int getEventLastId() throws RepositoryException {
+	public int getReceiptLastId() throws RepositoryException {
 		int answer=-1;
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EeventDB' AND TABLE_NAME= 'Event'");
+            ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EeventDB' AND TABLE_NAME= 'Receipt'");
             resultset.first();
             answer = resultset.getInt("proximo_valor");
 			resultset.close();
@@ -151,7 +151,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM Event WHERE idEvent = '"+ idEvent+"'");
+		    int i = statement.executeUpdate("DELETE FROM Receipt WHERE idReceipt = '"+ idReceipt+"'");
             if (i == 0) {
             	throw new ReceiptNotFoundException(idReceipt);
             }
@@ -175,13 +175,13 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
 
-            		statement.executeUpdate("UPDATE Event SET 
-											         link = '"+ event.getLink() +
-												     "', aaaa = '"+ event.getAaaa() +
-												     "', bbbb = '"+ event.getBbbb() +
-									                 typeEvent = "'+ event.getTypeEvent() +						
+            		statement.executeUpdate("UPDATE Receipt SET 
+											         link = '"+ receipt.getLink() +
+												     "', aaaa = '"+ receipt.getAaaa() +
+												     "', bbbb = '"+ receipt.getBbbb() +
+									                 typeReceipt = "'+ receipt.getTypeReceipt() +						
     
-    	    		                                 ' WHERE idEvent = '"+ review.getIdEvent()+"'");
+    	    		                                 ' WHERE idReceipt = '"+ review.getIdReceipt()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -198,19 +198,19 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 	}
 	
 	@Override
-	public Receipt search(int idEvent) throws EventNotFoundException,
+	public Receipt search(int idReceipt) throws ReceiptNotFoundException,
 			RepositoryException {
-		Event event = null;
-		event = new Event();
+		Receipt receipt = null;
+		receipt = new Receipt();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from Event WHERE idEvent =" + idEvent);
+            ResultSet resultset = statement.executeQuery("Select * from Receipt WHERE idReceipt =" + idReceipt);
             if (resultset.next()) {   
-                event.setIdEvent(resultset.getInt("idEvent"));         
-            	event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
-				event.setLink(resultset.getString("link"));
-				event.setAaaa(resultset.getInt("aaaa"));
-				event.setBbbb(resultset.getString("bbbb"));
+                receipt.setIdReceipt(resultset.getInt("idReceipt"));         
+            	receipt.setTypeReceipt(TypeReceipt.valueOf(resultset.getString("typeReceipt")));
+				receipt.setLink(resultset.getString("link"));
+				receipt.setAaaa(resultset.getInt("aaaa"));
+				receipt.setBbbb(resultset.getString("bbbb"));
 		    } else {
             	throw new ReceiptNotFoundException(idReceipt);
             }
@@ -226,7 +226,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 				throw new RepositoryException(ex);
 			}
 		}
-		return event;
+		return receipt;
 	}
 
 

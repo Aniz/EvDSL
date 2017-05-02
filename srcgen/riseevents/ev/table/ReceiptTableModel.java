@@ -18,7 +18,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 		private static final int COL_LINK =4;
 		private static final int COL_AAAA =5;
 		private static final int COL_BBBB =6;
-		private static final int COL_TYPEEVENT = 6;
+		private static final int COL_TYPERECEIPT = 6;
 		
 		// Lista de Valores
 		private List<Receipt> rows;
@@ -57,8 +57,8 @@ public class ReceiptTableModel extends AbstractTableModel{
 				else if (columnIndex == COL_BBBB) {
 					return receipt.getBbbb();
 				}
-				else if (columnIndex == COL_TYPEEVENT) {
-					return receipt.getTypeEvent();
+				else if (columnIndex == COL_TYPERECEIPT) {
+					return receipt.getTypeReceipt();
 				}
 			
 				return null;
@@ -89,7 +89,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 				case COL_BBBB:
 					coluna = "";
 					break;
-				case COL_TYPEEVENT:
+				case COL_TYPERECEIPT:
 					coluna = "Tipo";
 					break;
 			
@@ -120,7 +120,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 				else if (columnIndex == COL_BBBB) {
 					return String.class;
 				}
-				else if (columnIndex == COL_TYPEEVENT) {
+				else if (columnIndex == COL_TYPERECEIPT) {
 					return String.class;
 				}
 			
@@ -150,7 +150,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setLink(receipt.getLink());
 				rows.get(indiceLinha).setAaaa(receipt.getAaaa());
 				rows.get(indiceLinha).setBbbb(receipt.getBbbb());
-				rows.get(indiceLinha).setTypeEvent(receipt.getTypeEvent());
+				rows.get(indiceLinha).setTypeReceipt(receipt.getTypeReceipt());
 			
 				fireTableDataChanged();
 			}

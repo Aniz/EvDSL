@@ -144,38 +144,47 @@ def main(debug=False):
             if("Assigment" in selectedOptionsArray and "Author" in selectedOptionsArray):
                 actionsArray.append("InterestConflict")
                 value.actions = actionsKeyArray
-        if key == "CheckingCopy":
-            if componentDict.get("Activity"):
-                componentExtraData = componentDict["Activity"]
-            else:
-               avaliableOptions.remove("CheckingCopy")
-               print("[Dependence Error] 'CheckingCopy' defined whitout Option 'Activity'")
-       
-        if key in ["Speaker","Organizer","Reviewer"]:
-            if componentDict.get("User"):
-                componentExtraData = componentDict["User"]
-            else:
-               avaliableOptions.remove(key)
-               print("[Dependence Error] '%s' defined whitout Option 'Activity'"%key)
                  
         if key in avaliableOptions:
-            copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value,componentExtraData,systemName)
-            copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value,componentExtraData,systemName)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value,componentExtraData,systemName)
-            copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,value,componentExtraData,systemName)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,value,componentExtraData,systemName)
-            copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value,componentExtraData,systemName)
-            
-            if key not in ["Author"]:
-                #generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
-                copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData,systemName)
-            
-            if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
-                #generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
-                copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData,systemName)
         
-            for keyCommand,view in enumerate(value["commands"]):
-                copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData,systemName)
+            if key == "CheckingCopy":
+                if componentDict.get("Activity"):
+                    componentExtraData = componentDict["Activity"]
+                else:
+                   avaliableOptions.remove("CheckingCopy")
+                   print("[Dependence Error] 'CheckingCopy' defined whitout Option 'Activity'")
+           
+            if key == "Receipt":
+                if componentDict.get("Payment"):
+                    componentExtraData = componentDict["Payment"]
+                else:
+                   avaliableOptions.remove("Receipt")
+                   print("[Dependence Error] '%s' defined whitout Option 'Payment'"%'Receipt')
+
+            if key in ["Speaker","Organizer","Reviewer"]:
+                if componentDict.get("User"):
+                    componentExtraData = componentDict["User"]
+                else:
+                   avaliableOptions.remove(key)
+                   print("[Dependence Error] '%s' defined whitout Option 'Activity'"%key)
+            if key in avaliableOptions:
+                copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value,componentExtraData,systemName)
+                copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value,componentExtraData,systemName)
+                copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,value,componentExtraData,systemName)
+                copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"RepositoryBDR",jinja_env,value,componentExtraData,systemName)
+                copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"AlreadyInsertedException",jinja_env,value,componentExtraData,systemName)
+                copyCodeFile(exceptionCodeFolder,exceptionFolder,key+"NotFoundException",jinja_env,value,componentExtraData,systemName)
+                
+                if key not in ["Author"]:
+                    #generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
+                    copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData,systemName)
+                
+                if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
+                    #generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
+                    copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData,systemName)
+            
+                for keyCommand,view in enumerate(value["commands"]):
+                    copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData,systemName)
         else :
             #print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
             print("[New] Option '%s' created" % key)
@@ -188,17 +197,7 @@ def main(debug=False):
             generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Managment'+"ScreenP",jinja_env,value,componentExtraData,systemName)
-    
-    if 'Receipt' in actionsArray:
-        copyCodeFile(entityCodeFolder,entityFolder,"Receipt",jinja_env,value,componentExtraData,systemName)
-        copyCodeFile(controllerCodeFolder,controllerFolder,"ReceiptControl",jinja_env,value,componentExtraData,systemName)
-        copyCodeFile(repositoryCodeFolder,repositoryFolder,"ReceiptRepository",jinja_env,value,componentExtraData,systemName)
-        copyCodeFile(repositoryCodeFolder,repositoryFolder,"ReceiptRepositoryBDR",jinja_env,value,componentExtraData,systemName)
-        copyCodeFile(tableCodeFolder,tableFolder,"ReceiptTableModel",jinja_env,value,componentExtraData,systemName)
-        copyCodeFile(exceptionCodeFolder,exceptionFolder,"ReceiptAlreadyInsertedException",jinja_env,value,componentExtraData,systemName)
-        copyCodeFile(exceptionCodeFolder,exceptionFolder,"ReceiptNotFoundException",jinja_env,value,componentExtraData,systemName)
-        copyCodeFile(viewCodeFolder,viewFolder,"ReceiptScreenP",jinja_env,value,componentExtraData,systemName)
-    
+
     #DepedentClassses
     dependencesDict = {} 
     dependencesDict["Review"] = "Reviewer","Submission"
