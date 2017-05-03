@@ -18,18 +18,6 @@ import riseevents.ev.exception.EventAlreadyInsertedException;
 import riseevents.ev.exception.EventNotFoundException;
 import riseevents.ev.repository.EventRepository;
 import riseevents.ev.repository.EventRepositoryBDR;
-import riseevents.ev.data.Receipt;
-import riseevents.ev.business.ReceiptControl;
-import riseevents.ev.exception.ReceiptAlreadyInsertedException;
-import riseevents.ev.exception.ReceiptNotFoundException;
-import riseevents.ev.repository.ReceiptRepository;
-import riseevents.ev.repository.ReceiptRepositoryBDR;
-import riseevents.ev.data.Payment;
-import riseevents.ev.business.PaymentControl;
-import riseevents.ev.exception.PaymentAlreadyInsertedException;
-import riseevents.ev.exception.PaymentNotFoundException;
-import riseevents.ev.repository.PaymentRepository;
-import riseevents.ev.repository.PaymentRepositoryBDR;
 
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;

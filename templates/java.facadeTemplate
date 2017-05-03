@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.mail.EmailException;
-import {{systemName|lower}}.ev.util.Email;
 {% for key,value in data.items() %}
 import {{systemName|lower}}.ev.data.{{key}};
 import {{systemName|lower}}.ev.business.{{key}}Control;
@@ -134,7 +133,7 @@ public class {{systemName}}Facade {
 	}
 {% endif %}
  	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activities.getActivitiesByEvent(idEvent);
+		return activityList.getActivitiesByEvent(idEvent);
 	}
 {% if 'Event' in data %}
 	{% if 'eventProgram' in data.User.option.statments %}
@@ -200,7 +199,7 @@ public class {{systemName}}Facade {
 		registrationList.addValue(value, idRegistration);
 	}
 	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
-		this.payments.type(payment, paymentout);
+		this.paymentList.type(payment, paymentout);
 	}
 {% endif %}	
 {% if 'Submission' in data %}	

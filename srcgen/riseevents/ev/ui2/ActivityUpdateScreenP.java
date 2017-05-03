@@ -312,7 +312,7 @@ setTitle("Insert Activity");
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = RiseEventsMainScreenP.facade.getEvents();
+			List<Event> list = RiseEventsMainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

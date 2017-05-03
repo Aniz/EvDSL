@@ -177,11 +177,6 @@ Create table Payment(
 	attachment blob,
 	barcode varchar(255) NOT NULL,
 	value float,
-	typePayment varchar(255) NOT NULL,
-				
-	link varchar(255) NOT NULL,
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idPayment),
 FOREIGN KEY (idRegistration) REFERENCES Registration (idRegistration));

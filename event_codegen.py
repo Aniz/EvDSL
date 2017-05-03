@@ -125,10 +125,12 @@ def main(debug=False):
             if statment.entity in selectedOptionsArray:
                 statmentDict[statment.actionType] = statment
                 componentDict[statment.entity]["statments"] = statmentDict    
-            if statment.entity in avaliableDependencesArray:
+            elif statment.entity in avaliableDependencesArray:
                 statmentDict[statment.actionType] = statment
                 dependenceDict[statment.entity] = {}       
-                dependenceDict[statment.entity]["statments"] = statmentDict               
+                dependenceDict[statment.entity]["statments"] = statmentDict  
+            else:             
+                dependenceDict[statment.entity]["statments"] = []
         else:
             print("[warning] Option '%s' of method '%s' not found" % (statment.entity,statment.actionType)) 
     
@@ -243,9 +245,12 @@ def main(debug=False):
             copyCodeFile(viewCodeFolder,viewFolder,key+valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
        
     copyCodeFile(exceptionCodeFolder,exceptionFolder,"RepositoryException",jinja_env,"","",systemName)
-    copy(join(this_folder,'lib'),join(srcgen_folder,'lib'))
+    copy(join(this_folder,'lib'),join(general_folder,'lib'))
+    copy(join(this_folder,'images'),join(general_folder,'images'))
+    copy(join(this_folder,'properties'),join(general_folder,'properties'))
     generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,"",systemName)
-        
+    generateFile(templateFolder,general_folder,'xml.buildTemplate',"build",jinja_env,value,"",systemName,".xml")
+            
     #Unique files template
     sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
     with open(join(srcgen_folder,
@@ -280,9 +285,9 @@ def copyCodeFile(src,dest,nameFile,jinja_env,var,extraVar,systemName):
     with open(join(dest,"%s.java" % nameFile), 'w') as f:
             f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName))
 
-def generateFile(src,dest,file,nameFile,jinja_env,var,extraVar,systemName):
+def generateFile(src,dest,file,nameFile,jinja_env,var,extraVar,systemName,ext=".java"):
     codeFileTemplate = jinja_env.get_template(join(src,file))
-    with open(join(dest,"%s.java" % nameFile), 'w') as f:
+    with open(join(dest,"%s" % nameFile+ext), 'w') as f:
             f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName))
 
 def createFolder(dest,name):

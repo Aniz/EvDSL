@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.mail.EmailException;
-import riseevents.ev.util.Email;
 import riseevents.ev.data.User;
 import riseevents.ev.business.UserControl;
 import riseevents.ev.exception.UserAlreadyInsertedException;
@@ -27,18 +26,6 @@ import riseevents.ev.exception.EventAlreadyInsertedException;
 import riseevents.ev.exception.EventNotFoundException;
 import riseevents.ev.repository.EventRepository;
 import riseevents.ev.repository.EventRepositoryBDR;
-import riseevents.ev.data.Receipt;
-import riseevents.ev.business.ReceiptControl;
-import riseevents.ev.exception.ReceiptAlreadyInsertedException;
-import riseevents.ev.exception.ReceiptNotFoundException;
-import riseevents.ev.repository.ReceiptRepository;
-import riseevents.ev.repository.ReceiptRepositoryBDR;
-import riseevents.ev.data.Payment;
-import riseevents.ev.business.PaymentControl;
-import riseevents.ev.exception.PaymentAlreadyInsertedException;
-import riseevents.ev.exception.PaymentNotFoundException;
-import riseevents.ev.repository.PaymentRepository;
-import riseevents.ev.repository.PaymentRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
@@ -60,8 +47,6 @@ public class RiseEventsFacade {
 	private UserControl userList;
 	private ActivityControl activityList;
 	private EventControl eventList;
-	private ReceiptControl receiptList;
-	private PaymentControl paymentList;
 	private ActivityUserControl activityuserList;
 	private RegistrationControl registrationList;
 
@@ -71,14 +56,10 @@ public class RiseEventsFacade {
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
 		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
-		ReceiptRepository receiptRepository = ReceiptRepositoryBDR.getInstance();
-		PaymentRepository paymentRepository = PaymentRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
 		activityList = new ActivityControl(activityRepository); 
 		eventList = new EventControl(eventRepository); 
-		receiptList = new ReceiptControl(receiptRepository); 
-		paymentList = new PaymentControl(paymentRepository); 
 	
 	}
 	
@@ -158,36 +139,6 @@ public class RiseEventsFacade {
 	public boolean isThereEvent(int idEntity) throws RepositoryException{
 		return eventList.isThere(idEntity);
 	}
-	public List<Receipt> getReceiptList() throws RepositoryException{
-		return receiptList.getReceiptList();
-	}
-	public int getReceiptIdByName(String entityName) throws RepositoryException{
-		return receiptList.getReceiptIdByName(entityName);
-	}
-	public int getReceiptLastId() throws RepositoryException{
-		return receiptList.getReceiptLastId();
-	}
-	public boolean isThereReceipt(int idEntity) throws RepositoryException{
-		return receiptList.isThere(idEntity);
-	}
-	public void insertPayment(Payment entity) throws PaymentAlreadyInsertedException, RepositoryException{
-		this.paymentList.insert(entity);
-	}
-	public void updatePayment(Payment Entity) throws PaymentNotFoundException, Exception, PaymentAlreadyInsertedException{
-		paymentList.update(Entity);
-	}
-	public List<Payment> getPaymentList() throws RepositoryException{
-		return paymentList.getPaymentList();
-	}
-	public int getPaymentIdByName(String entityName) throws RepositoryException{
-		return paymentList.getPaymentIdByName(entityName);
-	}
-	public int getPaymentLastId() throws RepositoryException{
-		return paymentList.getPaymentLastId();
-	}
-	public boolean isTherePayment(int idEntity) throws RepositoryException{
-		return paymentList.isThere(idEntity);
-	}
 	public void insertActivityUser(ActivityUser entity) throws ActivityUserAlreadyInsertedException, RepositoryException{
 		this.activityuserList.insert(entity);
 	}
@@ -234,7 +185,7 @@ public class RiseEventsFacade {
 		return activityuserList.getActivitiesById(idActivity);
 	}
  	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activities.getActivitiesByEvent(idEvent);
+		return activityList.getActivitiesByEvent(idEvent);
 	}
 	
 	
@@ -253,16 +204,6 @@ public class RiseEventsFacade {
 	}
 	
 
-	
-	public void removeValue(float value, int idRegistration) throws RepositoryException{
-		registrationList.removeValue(value, idRegistration);
-	}
-	public void addValue(float value, int idRegistration) throws RepositoryException{
-		registrationList.addValue(value, idRegistration);
-	}
-	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
-		this.payments.type(payment, paymentout);
-	}
 	
 	
 }
