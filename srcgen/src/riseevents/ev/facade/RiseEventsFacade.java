@@ -14,27 +14,93 @@ import riseevents.ev.exception.UserAlreadyInsertedException;
 import riseevents.ev.exception.UserNotFoundException;
 import riseevents.ev.repository.UserRepository;
 import riseevents.ev.repository.UserRepositoryBDR;
-import riseevents.ev.data.Activity;
-import riseevents.ev.business.ActivityControl;
-import riseevents.ev.exception.ActivityAlreadyInsertedException;
-import riseevents.ev.exception.ActivityNotFoundException;
-import riseevents.ev.repository.ActivityRepository;
-import riseevents.ev.repository.ActivityRepositoryBDR;
+import riseevents.ev.data.Organizer;
+import riseevents.ev.business.OrganizerControl;
+import riseevents.ev.exception.OrganizerAlreadyInsertedException;
+import riseevents.ev.exception.OrganizerNotFoundException;
+import riseevents.ev.repository.OrganizerRepository;
+import riseevents.ev.repository.OrganizerRepositoryBDR;
+import riseevents.ev.data.Reviewer;
+import riseevents.ev.business.ReviewerControl;
+import riseevents.ev.exception.ReviewerAlreadyInsertedException;
+import riseevents.ev.exception.ReviewerNotFoundException;
+import riseevents.ev.repository.ReviewerRepository;
+import riseevents.ev.repository.ReviewerRepositoryBDR;
 import riseevents.ev.data.Event;
 import riseevents.ev.business.EventControl;
 import riseevents.ev.exception.EventAlreadyInsertedException;
 import riseevents.ev.exception.EventNotFoundException;
 import riseevents.ev.repository.EventRepository;
 import riseevents.ev.repository.EventRepositoryBDR;
+import riseevents.ev.data.Payment;
+import riseevents.ev.business.PaymentControl;
+import riseevents.ev.exception.PaymentAlreadyInsertedException;
+import riseevents.ev.exception.PaymentNotFoundException;
+import riseevents.ev.repository.PaymentRepository;
+import riseevents.ev.repository.PaymentRepositoryBDR;
+import riseevents.ev.data.Activity;
+import riseevents.ev.business.ActivityControl;
+import riseevents.ev.exception.ActivityAlreadyInsertedException;
+import riseevents.ev.exception.ActivityNotFoundException;
+import riseevents.ev.repository.ActivityRepository;
+import riseevents.ev.repository.ActivityRepositoryBDR;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.business.AssignmentControl;
+import riseevents.ev.exception.AssignmentAlreadyInsertedException;
+import riseevents.ev.exception.AssignmentNotFoundException;
+import riseevents.ev.repository.AssignmentRepository;
+import riseevents.ev.repository.AssignmentRepositoryBDR;
+import riseevents.ev.data.Submission;
+import riseevents.ev.business.SubmissionControl;
+import riseevents.ev.exception.SubmissionAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionNotFoundException;
+import riseevents.ev.repository.SubmissionRepository;
+import riseevents.ev.repository.SubmissionRepositoryBDR;
+import riseevents.ev.data.Author;
+import riseevents.ev.business.AuthorControl;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
+import riseevents.ev.repository.AuthorRepository;
+import riseevents.ev.repository.AuthorRepositoryBDR;
+import riseevents.ev.data.CheckingCopy;
+import riseevents.ev.business.CheckingCopyControl;
+import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
+import riseevents.ev.exception.CheckingCopyNotFoundException;
+import riseevents.ev.repository.CheckingCopyRepository;
+import riseevents.ev.repository.CheckingCopyRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
+import riseevents.ev.data.Review;
+import riseevents.ev.business.ReviewControl;
+import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.exception.ReviewNotFoundException;
+import riseevents.ev.repository.ReviewRepository;
+import riseevents.ev.repository.ReviewRepositoryBDR;
 import riseevents.ev.data.ActivityUser;
 import riseevents.ev.business.ActivityUserControl;
 import riseevents.ev.exception.ActivityUserAlreadyInsertedException;
 import riseevents.ev.exception.ActivityUserNotFoundException;
 import riseevents.ev.repository.ActivityUserRepository;
 import riseevents.ev.repository.ActivityUserRepositoryBDR;
+import riseevents.ev.data.ActivityOrganizer;
+import riseevents.ev.business.ActivityOrganizerControl;
+import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
+import riseevents.ev.exception.ActivityOrganizerNotFoundException;
+import riseevents.ev.repository.ActivityOrganizerRepository;
+import riseevents.ev.repository.ActivityOrganizerRepositoryBDR;
+import riseevents.ev.data.SubmissionAuthor;
+import riseevents.ev.business.SubmissionAuthorControl;
+import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionAuthorNotFoundException;
+import riseevents.ev.repository.SubmissionAuthorRepository;
+import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
+import riseevents.ev.data.SubmissionUser;
+import riseevents.ev.business.SubmissionUserControl;
+import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionUserNotFoundException;
+import riseevents.ev.repository.SubmissionUserRepository;
+import riseevents.ev.repository.SubmissionUserRepositoryBDR;
 import riseevents.ev.data.Registration;
 import riseevents.ev.business.RegistrationControl;
 import riseevents.ev.exception.RegistrationAlreadyInsertedException;
@@ -45,21 +111,46 @@ import riseevents.ev.repository.RegistrationRepositoryBDR;
 public class RiseEventsFacade {
 
 	private UserControl userList;
-	private ActivityControl activityList;
+	private OrganizerControl organizerList;
+	private ReviewerControl reviewerList;
 	private EventControl eventList;
+	private PaymentControl paymentList;
+	private ActivityControl activityList;
+	private AssignmentControl assignmentList;
+	private SubmissionControl submissionList;
+	private AuthorControl authorList;
+	private CheckingCopyControl checkingcopyList;
+	private ReviewControl reviewList;
 	private ActivityUserControl activityuserList;
+	private ActivityOrganizerControl activityorganizerList;
+	private SubmissionAuthorControl submissionauthorList;
+	private SubmissionUserControl submissionuserList;
 	private RegistrationControl registrationList;
 
 	protected static RiseEventsFacade instance;
 	
 	public RiseEventsFacade(){
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
-		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
+		OrganizerRepository organizerRepository = OrganizerRepositoryBDR.getInstance();
+		ReviewerRepository reviewerRepository = ReviewerRepositoryBDR.getInstance();
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
+		PaymentRepository paymentRepository = PaymentRepositoryBDR.getInstance();
+		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
+		AssignmentRepository assignmentRepository = AssignmentRepositoryBDR.getInstance();
+		SubmissionRepository submissionRepository = SubmissionRepositoryBDR.getInstance();
+		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
+		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
-		activityList = new ActivityControl(activityRepository); 
+		organizerList = new OrganizerControl(organizerRepository); 
+		reviewerList = new ReviewerControl(reviewerRepository); 
 		eventList = new EventControl(eventRepository); 
+		paymentList = new PaymentControl(paymentRepository); 
+		activityList = new ActivityControl(activityRepository); 
+		assignmentList = new AssignmentControl(assignmentRepository); 
+		submissionList = new SubmissionControl(submissionRepository); 
+		authorList = new AuthorControl(authorRepository); 
+		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
 	
 	}
 	
@@ -91,29 +182,41 @@ public class RiseEventsFacade {
 	public boolean isThereUser(int idEntity) throws RepositoryException{
 		return userList.isThere(idEntity);
 	}
-	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
-		this.activityList.insert(entity);
+	public void insertOrganizer(Organizer entity) throws OrganizerAlreadyInsertedException, RepositoryException{
+		this.organizerList.insert(entity);
 	}
-	public void removeActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
-		activityList.remove(idEntity);  
+	public void removeOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
+		organizerList.remove(idEntity);  
 	}
-	public void updateActivity(Activity Entity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
-		activityList.update(Entity);
+	public void updateOrganizer(Organizer Entity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
+		organizerList.update(Entity);
 	}
-	public List<Activity> getActivityList() throws RepositoryException{
-		return activityList.getActivityList();
+	public List<Organizer> getOrganizerList() throws RepositoryException{
+		return organizerList.getOrganizerList();
 	}
-	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
-		return activityList.search(idEntity);
+	public Organizer searchOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
+		return organizerList.search(idEntity);
 	}
-	public int getActivityIdByName(String entityName) throws RepositoryException{
-		return activityList.getActivityIdByName(entityName);
+	public boolean isThereOrganizer(int idEntity) throws RepositoryException{
+		return organizerList.isThere(idEntity);
 	}
-	public int getActivityLastId() throws RepositoryException{
-		return activityList.getActivityLastId();
+	public void insertReviewer(Reviewer entity) throws ReviewerAlreadyInsertedException, RepositoryException{
+		this.reviewerList.insert(entity);
 	}
-	public boolean isThereActivity(int idEntity) throws RepositoryException{
-		return activityList.isThere(idEntity);
+	public void removeReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		reviewerList.remove(idEntity);  
+	}
+	public void updateReviewer(Reviewer Entity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		reviewerList.update(Entity);
+	}
+	public List<Reviewer> getReviewerList() throws RepositoryException{
+		return reviewerList.getReviewerList();
+	}
+	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		return reviewerList.search(idEntity);
+	}
+	public boolean isThereReviewer(int idEntity) throws RepositoryException{
+		return reviewerList.isThere(idEntity);
 	}
 	public void insertEvent(Event entity) throws EventAlreadyInsertedException, RepositoryException{
 		this.eventList.insert(entity);
@@ -139,6 +242,150 @@ public class RiseEventsFacade {
 	public boolean isThereEvent(int idEntity) throws RepositoryException{
 		return eventList.isThere(idEntity);
 	}
+	public void insertPayment(Payment entity) throws PaymentAlreadyInsertedException, RepositoryException{
+		this.paymentList.insert(entity);
+	}
+	public void removePayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		paymentList.remove(idEntity);  
+	}
+	public void updatePayment(Payment Entity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		paymentList.update(Entity);
+	}
+	public List<Payment> getPaymentList() throws RepositoryException{
+		return paymentList.getPaymentList();
+	}
+	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		return paymentList.search(idEntity);
+	}
+	public int getPaymentIdByName(String entityName) throws RepositoryException{
+		return paymentList.getPaymentIdByName(entityName);
+	}
+	public int getPaymentLastId() throws RepositoryException{
+		return paymentList.getPaymentLastId();
+	}
+	public boolean isTherePayment(int idEntity) throws RepositoryException{
+		return paymentList.isThere(idEntity);
+	}
+	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
+		this.activityList.insert(entity);
+	}
+	public void removeActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		activityList.remove(idEntity);  
+	}
+	public void updateActivity(Activity Entity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		activityList.update(Entity);
+	}
+	public List<Activity> getActivityList() throws RepositoryException{
+		return activityList.getActivityList();
+	}
+	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		return activityList.search(idEntity);
+	}
+	public int getActivityIdByName(String entityName) throws RepositoryException{
+		return activityList.getActivityIdByName(entityName);
+	}
+	public int getActivityLastId() throws RepositoryException{
+		return activityList.getActivityLastId();
+	}
+	public boolean isThereActivity(int idEntity) throws RepositoryException{
+		return activityList.isThere(idEntity);
+	}
+	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
+		this.assignmentList.insert(entity);
+	}
+	public void removeAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(idEntity);  
+	}
+	public List<Assignment> getAssignmentList() throws RepositoryException{
+		return assignmentList.getAssignmentList();
+	}
+	public Assignment searchAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		return assignmentList.search(idEntity);
+	}
+	public int getAssignmentIdByName(String entityName) throws RepositoryException{
+		return assignmentList.getAssignmentIdByName(entityName);
+	}
+	public int getAssignmentLastId() throws RepositoryException{
+		return assignmentList.getAssignmentLastId();
+	}
+	public boolean isThereAssignment(int idEntity) throws RepositoryException{
+		return assignmentList.isThere(idEntity);
+	}
+	public void removeSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
+		submissionList.remove(idEntity);  
+	}
+	public List<Submission> getSubmissionList() throws RepositoryException{
+		return submissionList.getSubmissionList();
+	}
+	public Submission searchSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
+		return submissionList.search(idEntity);
+	}
+	public int getSubmissionIdByName(String entityName) throws RepositoryException{
+		return submissionList.getSubmissionIdByName(entityName);
+	}
+	public int getSubmissionLastId() throws RepositoryException{
+		return submissionList.getSubmissionLastId();
+	}
+	public boolean isThereSubmission(int idEntity) throws RepositoryException{
+		return submissionList.isThere(idEntity);
+	}
+	public List<Author> getAuthorList() throws RepositoryException{
+		return authorList.getAuthorList();
+	}
+	public int getAuthorIdByName(String entityName) throws RepositoryException{
+		return authorList.getAuthorIdByName(entityName);
+	}
+	public int getAuthorLastId() throws RepositoryException{
+		return authorList.getAuthorLastId();
+	}
+	public boolean isThereAuthor(int idEntity) throws RepositoryException{
+		return authorList.isThere(idEntity);
+	}
+	public void insertCheckingCopy(CheckingCopy entity) throws CheckingCopyAlreadyInsertedException, RepositoryException{
+		this.checkingcopyList.insert(entity);
+	}
+	public void removeCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
+		checkingcopyList.remove(idEntity);  
+	}
+	public void updateCheckingCopy(CheckingCopy Entity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
+		checkingcopyList.update(Entity);
+	}
+	public List<CheckingCopy> getCheckingCopyList() throws RepositoryException{
+		return checkingcopyList.getCheckingCopyList();
+	}
+	public CheckingCopy searchCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
+		return checkingcopyList.search(idEntity);
+	}
+	public int getCheckingCopyIdByName(String entityName) throws RepositoryException{
+		return checkingcopyList.getCheckingCopyIdByName(entityName);
+	}
+	public int getCheckingCopyLastId() throws RepositoryException{
+		return checkingcopyList.getCheckingCopyLastId();
+	}
+	public boolean isThereCheckingCopy(int idEntity) throws RepositoryException{
+		return checkingcopyList.isThere(idEntity);
+	}
+	public void insertReview(Review entity) throws ReviewAlreadyInsertedException, RepositoryException{
+		this.reviewList.insert(entity);
+	}
+	public void removeReview(Review entity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		reviewList.remove(entity);  
+	}
+	public void updateReview(Review Entity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		reviewList.update(Entity);
+	}
+	public List<Review> getReviewList() throws RepositoryException{
+		return reviewList.getReviewList();
+	}
+	public Review searchReview(int idEntity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		return reviewList.search(idEntity);
+	}
+	public int getReviewLastId() throws RepositoryException{
+		return reviewList.getReviewLastId();
+	}
+	public boolean isThereReview(Review entity) throws RepositoryException{
+		return reviewList.isThere(entity);
+	}
 	public void insertActivityUser(ActivityUser entity) throws ActivityUserAlreadyInsertedException, RepositoryException{
 		this.activityuserList.insert(entity);
 	}
@@ -160,6 +407,69 @@ public class RiseEventsFacade {
 	public boolean isThereActivityUser(ActivityUser entity) throws RepositoryException{
 		return activityuserList.isThere(entity);
 	}
+	public void insertActivityOrganizer(ActivityOrganizer entity) throws ActivityOrganizerAlreadyInsertedException, RepositoryException{
+		this.activityorganizerList.insert(entity);
+	}
+	public void removeActivityOrganizer(ActivityOrganizer entity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
+		activityorganizerList.remove(entity);  
+	}
+	public void updateActivityOrganizer(ActivityOrganizer Entity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
+		activityorganizerList.update(Entity);
+	}
+	public List<ActivityOrganizer> getActivityOrganizerList() throws RepositoryException{
+		return activityorganizerList.getActivityOrganizerList();
+	}
+	public ActivityOrganizer searchActivityOrganizer(int idEntity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
+		return activityorganizerList.search(idEntity);
+	}
+	public int getActivityOrganizerLastId() throws RepositoryException{
+		return activityorganizerList.getActivityOrganizerLastId();
+	}
+	public boolean isThereActivityOrganizer(ActivityOrganizer entity) throws RepositoryException{
+		return activityorganizerList.isThere(entity);
+	}
+	public void insertSubmissionAuthor(SubmissionAuthor entity) throws SubmissionAuthorAlreadyInsertedException, RepositoryException{
+		this.submissionauthorList.insert(entity);
+	}
+	public void removeSubmissionAuthor(SubmissionAuthor entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
+		submissionauthorList.remove(entity);  
+	}
+	public void updateSubmissionAuthor(SubmissionAuthor Entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
+		submissionauthorList.update(Entity);
+	}
+	public List<SubmissionAuthor> getSubmissionAuthorList() throws RepositoryException{
+		return submissionauthorList.getSubmissionAuthorList();
+	}
+	public SubmissionAuthor searchSubmissionAuthor(int idEntity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
+		return submissionauthorList.search(idEntity);
+	}
+	public int getSubmissionAuthorLastId() throws RepositoryException{
+		return submissionauthorList.getSubmissionAuthorLastId();
+	}
+	public boolean isThereSubmissionAuthor(SubmissionAuthor entity) throws RepositoryException{
+		return submissionauthorList.isThere(entity);
+	}
+	public void insertSubmissionUser(SubmissionUser entity) throws SubmissionUserAlreadyInsertedException, RepositoryException{
+		this.submissionuserList.insert(entity);
+	}
+	public void removeSubmissionUser(SubmissionUser entity) throws SubmissionUserNotFoundException, RepositoryException, SubmissionUserAlreadyInsertedException{
+		submissionuserList.remove(entity);  
+	}
+	public void updateSubmissionUser(SubmissionUser Entity) throws SubmissionUserNotFoundException, RepositoryException, SubmissionUserAlreadyInsertedException{
+		submissionuserList.update(Entity);
+	}
+	public List<SubmissionUser> getSubmissionUserList() throws RepositoryException{
+		return submissionuserList.getSubmissionUserList();
+	}
+	public SubmissionUser searchSubmissionUser(int idEntity) throws SubmissionUserNotFoundException, RepositoryException, SubmissionUserAlreadyInsertedException{
+		return submissionuserList.search(idEntity);
+	}
+	public int getSubmissionUserLastId() throws RepositoryException{
+		return submissionuserList.getSubmissionUserLastId();
+	}
+	public boolean isThereSubmissionUser(SubmissionUser entity) throws RepositoryException{
+		return submissionuserList.isThere(entity);
+	}
 	public void insertRegistration(Registration entity) throws RegistrationAlreadyInsertedException, RepositoryException{
 		this.registrationList.insert(entity);
 	}
@@ -180,6 +490,9 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereRegistration(Registration entity) throws RepositoryException{
 		return registrationList.isThere(entity);
+	}
+	public List<ActivityOrganizer> getActivitiesOrganizersById(int idActivity) throws RepositoryException{
+		return activityorganizerList.getActivitiesById(idActivity);
 	}
 	public List<ActivityUser> getActivitiesUsersById(int idActivity) throws RepositoryException{
 		return activityuserList.getActivitiesById(idActivity);
@@ -212,8 +525,35 @@ public class RiseEventsFacade {
 		registrationList.addValue(value, idRegistration);
 	}
 	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
-		return registrations.search(idUser, idEvent);
+		return registrationList.search(idUser, idEvent);
 	}
 	
+	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
+		this.paymentList.type(payment, paymentout);
+	}
+	
+	
+	public void pdfRecovey(int idSubmission) throws RepositoryException{
+		this.submissionList.pdfRecover(idSubmission);
+	}
+	public List<Submission> getSubmissionsByUser(int idUser) throws RepositoryException{
+		return submissionList.getSubmissionsByUser(idUser);
+	}
+	
+	
+	//if Reviewer and Submission -> Review is enable 
+	//Review Feature
+			
+	public void emailRoundNotification (Review review, User user) throws EmailException{
+		reviewList.emailRoundNotification(review, user);
+	}
+	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
+		return reviewList.getReviewsBySubmission(idSubmission);
+	}
+
+	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
+	}
+
 	
 }

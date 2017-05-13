@@ -19,6 +19,8 @@ FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
 CREATE TABLE Reviewer (
 	idUser int(10) NOT NULL, 
 	knowledgeArea varchar(255) NOT NULL,
+		typeReviewer varchar(255) NOT NULL,
+				
 	  
 PRIMARY KEY (idUser),
 FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
@@ -54,6 +56,8 @@ FOREIGN KEY (idEvent) REFERENCES Event (idEvent) ON DELETE CASCADE);
 
 CREATE TABLE Organizer (
 	idUser int(10) NOT NULL, 
+	typeOrganizer varchar(255) NOT NULL,
+				
 	  
 PRIMARY KEY (idUser),
 FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
@@ -87,6 +91,8 @@ CREATE TABLE submission(
 	keywords varchar(255),
 	title varchar(255), 
 	attachment blob,
+	typeSubmission varchar(255) NOT NULL,
+				
 	  
 PRIMARY KEY (idSubmission),
 FOREIGN KEY (idActivity) REFERENCES Activity (idActivity));
@@ -96,6 +102,8 @@ CREATE TABLE author(
 	nameAuthor varchar(255) NOT NULL, 
 	filiation varchar(255) NOT NULL, 
 	email varchar(255) NOT NULL, 
+	typeAuthor varchar(255) NOT NULL,
+				
 	  
 PRIMARY KEY (idAuthor));
 
@@ -135,6 +143,8 @@ CREATE TABLE `Checkingcopy`(
 	idRegistration int(10) NOT NULL,
 	idUser int(10) NOT NULL,
 	dateOfIssue varchar(255) NOT NULL, 
+	typeCheckingCopy varchar(255) NOT NULL,
+				
 	  
 PRIMARY KEY (idCheckingcopy),
 FOREIGN KEY (idRegistration) REFERENCES Registration (idRegistration) ON DELETE CASCADE,
@@ -156,6 +166,8 @@ Create table assignement(
 	idReview int(10) NOT NULL,
 	idSubmission int(10) NOT NULL,
 	date varchar(255) NOT NULL, 
+	typeAssignment varchar(255) NOT NULL,
+				
 	  
 PRIMARY KEY (idUser, idReview, idSubmission),
 FOREIGN KEY (idUser) REFERENCES Reviewer (idUser) ON DELETE CASCADE,
@@ -170,6 +182,8 @@ Create table Payment(
 	attachment blob,
 	barcode varchar(255) NOT NULL,
 	value float,
+	typePayment varchar(255) NOT NULL,
+				
 	  
 PRIMARY KEY (idPayment),
 FOREIGN KEY (idRegistration) REFERENCES Registration (idRegistration));

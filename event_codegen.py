@@ -42,7 +42,7 @@ def main(debug=False):
     srcgen_folder = createFolder(general_ev_folder, 'ev')
     
     dotFolder = createFolder(srcgen_folder, 'dot')
-    createDotFiles(event_mm,event_model,dotFolder)
+    #createDotFiles(event_mm,event_model,dotFolder)
     
     entityFolder = createFolder(srcgen_folder, 'data')
     controllerFolder = createFolder(srcgen_folder, 'business')

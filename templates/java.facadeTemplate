@@ -201,7 +201,7 @@ public class {{systemName}}Facade {
 		registrationList.addValue(value, idRegistration);
 	}
 	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
-		return registrations.search(idUser, idEvent);
+		return registrationList.search(idUser, idEvent);
 	}
 {% endif %}
 {% if 'Payment' in data %}	

@@ -4,6 +4,28 @@ add User
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
+    
+add Organizer 
+    show Insert Update Search Remove ListAll
+    types GeneralChair, 
+		ProgramChair, 
+		WorkshopChair, 
+		TutorialChair,
+		ProceedingsChair,
+		PanelChair.
+
+add Reviewer 
+	show Insert Update Search Remove ListAll
+	types Associado,Profissional,Estudante.
+
+add Event 
+    show Insert Update Search Remove ListAll
+	types Associado,Profissional,Estudante.
+		
+add Payment
+	show Insert Update Search Remove ListAll 
+	types Avista,Debito,Credito.
+
 add Activity
 	show Insert Update Search Remove ListAll 
 	types MiniCurso = Mini, 
@@ -12,8 +34,39 @@ add Activity
 		Workshop,
 		MainTrack = hidden.
 
-add Event 
-	show Insert Update Search Remove ListAll
+//update
+add Assignment
+	show Insert Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
-	
+//insert Update
+add Submission
+	show Search Remove ListAll
+	types Completa,Parcial.
+
+add Author
+	show in User
+	types Associado,Profissional,Estudante.
+
+add CheckingCopy
+show Insert Update Remove Search ListAll
+	types Atestado,Certificado.
+
+include Conflit.
+
+if Payment.Credito -> askCardInfo 
+if Payment.Debito -> generateCarne
+if Payment.Avista -> generateBoleto
+
+def Activity -> reportsListofAuthors 
+def Activity -> reportsFrequencyperActivity 
+if CheckingCopy.Atestado -> checkingCopyAtestado
+if CheckingCopy.Certificado -> checkingCopyCertificado 
+if CheckiCopy.Certificado -> checkingCopyCertificado 
+if Event -> eventProgram
+if Event -> eventImportantDates
+def Event -> reportsFrequencyperEvent 
+if Submission.Completa -> insertAttachment
+if Assignment -> notificationsDeadline
+if Assignment -> notificationsPaperAssignemnt 
+if Assignment -> notificationsAceptanceRejection 
