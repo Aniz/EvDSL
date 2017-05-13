@@ -251,7 +251,8 @@ def main(debug=False):
     copy(join(this_folder,'properties'),join(general_folder,'properties'))
     generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,"",systemName)
     generateFile(templateFolder,general_folder,'xml.buildTemplate',"build",jinja_env,value,"",systemName,".xml")
-    shutil.copy(join(templateFolder,'project.xml'),general_folder)
+    shutil.copy(join(templateFolder,'.project'),general_folder)
+    shutil.copy(join(templateFolder,'.classpath'),general_folder)
     
     #Unique files template
     sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
