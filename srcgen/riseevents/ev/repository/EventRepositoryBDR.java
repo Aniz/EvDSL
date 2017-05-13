@@ -41,16 +41,13 @@ public class EventRepositoryBDR implements EventRepository {
 		//removi idOrganizdor. de acordo com o modelo relacional nao temos o  atributo idOrganizador dentro de Eventos
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors,typeEvent,link,aaaa,bbbb) Values('"
+			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors,typeEvent) Values('"
 					+event.getEventName()
 					+"', '"+event.getPeriod()
 					+"', '"+event.getPlace()
 					+"', '"+event.getInstitution() 
 					+"', '"+event.getSponsors() 
 				     +"', '"+event.getTypeEvent()
-					+"', '"+event.getLink()   
-					+"', '"+event.getAaaa()   
-					+"', '"+event.getBbbb()   
 	        
 		            +"')");
 		} catch (SQLException e) {
@@ -107,9 +104,6 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
 				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
-				event.setLink(resultset.getString("link"));   
-				event.setAaaa(resultset.getInt("aaaa"));   
-				event.setBbbb(resultset.getString("bbbb"));   
 					        
             } else {
             	throw new EventNotFoundException(idEvent);
@@ -145,9 +139,6 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
 				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
-				event.setLink(resultset.getString("link"));   
-				event.setAaaa(resultset.getInt("aaaa"));   
-				event.setBbbb(resultset.getString("bbbb"));   
 					        
 				list.add(event);
             } 

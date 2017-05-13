@@ -16,9 +16,7 @@ public class UserTableModel extends AbstractTableModel{
 		private static final int COL_NAMEUSER = 1;
 		private static final int COL_EMAIL = 2;
 		private static final int COL_FILIATION = 3;
-		private static final int COL_AAAA =4;
-		private static final int COL_BBBB =5;
-		private static final int COL_TYPEUSER = 6;
+		private static final int COL_TYPEUSER = 4;
 	
 		// Lista de Valores
 		private List<User> rows;
@@ -33,7 +31,7 @@ public class UserTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 7;
+			return 5;
 		}
 		
 		//Preenchimento de cada coluna
@@ -49,12 +47,6 @@ public class UserTableModel extends AbstractTableModel{
 					return user.getEmail();
 				}  else if (columnIndex == COL_FILIATION) {
 					return user.getFiliation();
-				}
-				else if (columnIndex == COL_AAAA) {
-					return user.getAaaa();
-				}
-				else if (columnIndex == COL_BBBB) {
-					return user.getBbbb();
 				}
 				else if (columnIndex == COL_TYPEUSER) {
 					return user.getTypeUser();
@@ -79,12 +71,6 @@ public class UserTableModel extends AbstractTableModel{
 				case COL_FILIATION:
 					coluna = "Filiation";
 					break;
-				case COL_AAAA:
-					coluna = "";
-					break;
-				case COL_BBBB:
-					coluna = "";
-					break;
 				case COL_TYPEUSER:
 					coluna = "Tipo";
 					break;
@@ -107,12 +93,6 @@ public class UserTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_EMAIL) {
 					return String.class;
 				}  else if (columnIndex == COL_FILIATION) {
-					return String.class;
-				}
-				else if (columnIndex == COL_AAAA) {
-					return int.class;
-				}
-				else if (columnIndex == COL_BBBB) {
 					return String.class;
 				}
 				else if (columnIndex == COL_TYPEUSER) {
@@ -144,8 +124,6 @@ public class UserTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setTypeUser(user.getTypeUser());
 				rows.get(indiceLinha).setEmail(user.getEmail());
 				rows.get(indiceLinha).setFiliation(user.getFiliation());
-				rows.get(indiceLinha).setAaaa(user.getAaaa());
-				rows.get(indiceLinha).setBbbb(user.getBbbb());
 				rows.get(indiceLinha).setTypeUser(user.getTypeUser());
 			
 				fireTableDataChanged();

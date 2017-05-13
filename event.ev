@@ -1,14 +1,10 @@
 Create RiseEvents 
 
 add User
-	+aaaa : integer
-	bbbb : string
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 
 add Activity
-	+aaaa : integer = activityy
-	bbbb : string = ttrryuu
 	show Insert Update Search Remove ListAll 
 	types MiniCurso = Mini, 
 		Tutorial, 
@@ -17,9 +13,6 @@ add Activity
 		MainTrack = hidden.
 
 add Event 
-	+ link:string
-    aaaa : integer
-	bbbb : string
 	show Insert Update Search Remove ListAll
 	types Associado,Profissional,Estudante.
 

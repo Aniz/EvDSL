@@ -37,8 +37,6 @@ public class ActivityInsertScreenP extends JInternalFrame {
 	private JTextField textFieldHour;
 	private JTextField textFieldNOParticipants;
 	private JTextField textFieldRegLimit;
-	private JTextField textFieldAaaa;
-	private JTextField textFieldBbbb;
 	private JComboBox comboBoxTypeActivity;
 	private JComboBox comboBoxEvent;
 	
@@ -180,22 +178,6 @@ public class ActivityInsertScreenP extends JInternalFrame {
 		textFieldRegLimit.setBounds(561, 181, 134, 28);
 		getContentPane().add(textFieldRegLimit);
 		textFieldRegLimit.setColumns(10);
-		JLabel lblAaaa = new JLabel("activityy:");
-		lblAaaa.setBounds(476, 187, 73, 16);
-		getContentPane().add(lblAaaa);
-		
-		textFieldAaaa = new JTextField();
-		textFieldAaaa.setBounds(561, 181, 134, 28);
-		getContentPane().add(textFieldAaaa);
-		textFieldAaaa.setColumns(10);
-		JLabel lblBbbb = new JLabel("ttrryuu:");
-		lblBbbb.setBounds(476, 187, 73, 16);
-		getContentPane().add(lblBbbb);
-		
-		textFieldBbbb = new JTextField();
-		textFieldBbbb.setBounds(561, 181, 134, 28);
-		getContentPane().add(textFieldBbbb);
-		textFieldBbbb.setColumns(10);
 
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(157, 237, 117, 29);
@@ -261,8 +243,6 @@ public class ActivityInsertScreenP extends JInternalFrame {
 			String hour = textFieldHour.getText();
 			int numberOfParticipants = Integer.valueOf(textFieldNOParticipants.getText());
 			int registrationLimit = Integer.valueOf(textFieldRegLimit.getText());
-			int aaaa = Integer.valueOf(textFieldAaaa.getText());	
-			String bbbb = String.valueOf(textFieldBbbb.getText());	
 			String typeActivity = comboBoxTypeActivity.getSelectedItem().toString();
 			
 			if (nameEvent.equals("")|| nameActivity.equals("") || descriptionActivity.equals("")
@@ -291,8 +271,6 @@ public class ActivityInsertScreenP extends JInternalFrame {
 						activity.setHour(hour);
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
-						activity.setAaaa(aaaa);	
-						activity.setBbbb(bbbb);	
 						activity.setTypeActivity(TypeActivity.valueOf(typeActivity));
 						
 						RiseEventsMainScreenP.facade.insertActivity(activity);

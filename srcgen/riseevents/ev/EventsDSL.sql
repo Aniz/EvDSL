@@ -6,8 +6,6 @@ CREATE TABLE `User`(
 	filiation varchar(255) NOT NULL, 
 		typeUser varchar(255) NOT NULL,
 				
-		aaaa varchar(255) NOT NULL,
-		bbbb varchar(255) NOT NULL,
 	        
 PRIMARY KEY (idUser));
 
@@ -34,9 +32,6 @@ CREATE TABLE Event (
 	sponsors varchar(255), 
 		typeEvent varchar(255) NOT NULL,
 				
-		link varchar(255) NOT NULL,
-		aaaa varchar(255) NOT NULL,
-		bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idEvent));
 
@@ -53,8 +48,6 @@ CREATE TABLE Activity (
 	registrationLimit int(10), 
 	typeActivity varchar(255) NOT NULL,
 				
-	aaaa varchar(255) NOT NULL,
-	bbbb varchar(255) NOT NULL,
 	  
 PRIMARY KEY (idActivity),
 FOREIGN KEY (idEvent) REFERENCES Event (idEvent) ON DELETE CASCADE);
