@@ -68,7 +68,7 @@ public class {{systemName}}Facade {
 	}
 	{% endif %}
 	{% if 'Update' in value.commands %}
-	public void update{{key}}({{key}} Entity) throws {{key}}NotFoundException, Exception, {{key}}AlreadyInsertedException{
+	public void update{{key}}({{key}} Entity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.update(Entity);
 	}
 	{% endif %}
@@ -101,15 +101,17 @@ public class {{systemName}}Facade {
 	public void remove{{dep}}({{dep}} entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.remove(entity);  
 	}
-	public void update{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, Exception, {{dep}}AlreadyInsertedException{
+	public void update{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.update(Entity);
 	}
 	public List<{{dep}}> get{{dep}}List() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}List();
 	}
+	{% if deb != 'Registration' %}
 	public {{dep}} search{{dep}}(int idEntity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		return {{dep|lower}}List.search(idEntity);
 	}
+	{% endif %}
 	public int get{{dep}}LastId() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}LastId();
 	}
@@ -191,13 +193,18 @@ public class {{systemName}}Facade {
 	}
 	{% endif %}
 {% endif %}
-{% if 'Payment' in data %}	
+{% if 'Registration' in dependences %}	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
 		registrationList.removeValue(value, idRegistration);
 	}
 	public void addValue(float value, int idRegistration) throws RepositoryException{
 		registrationList.addValue(value, idRegistration);
 	}
+	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
+		return registrations.search(idUser, idEvent);
+	}
+{% endif %}
+{% if 'Payment' in data %}	
 	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
 		this.paymentList.type(payment, paymentout);
 	}

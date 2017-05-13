@@ -76,7 +76,7 @@ public class RiseEventsFacade {
 	public void removeUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		userList.remove(idEntity);  
 	}
-	public void updateUser(User Entity) throws UserNotFoundException, Exception, UserAlreadyInsertedException{
+	public void updateUser(User Entity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		userList.update(Entity);
 	}
 	public List<User> getUserList() throws RepositoryException{
@@ -97,7 +97,7 @@ public class RiseEventsFacade {
 	public void removeActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		activityList.remove(idEntity);  
 	}
-	public void updateActivity(Activity Entity) throws ActivityNotFoundException, Exception, ActivityAlreadyInsertedException{
+	public void updateActivity(Activity Entity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		activityList.update(Entity);
 	}
 	public List<Activity> getActivityList() throws RepositoryException{
@@ -121,7 +121,7 @@ public class RiseEventsFacade {
 	public void removeEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		eventList.remove(idEntity);  
 	}
-	public void updateEvent(Event Entity) throws EventNotFoundException, Exception, EventAlreadyInsertedException{
+	public void updateEvent(Event Entity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		eventList.update(Entity);
 	}
 	public List<Event> getEventList() throws RepositoryException{
@@ -145,7 +145,7 @@ public class RiseEventsFacade {
 	public void removeActivityUser(ActivityUser entity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
 		activityuserList.remove(entity);  
 	}
-	public void updateActivityUser(ActivityUser Entity) throws ActivityUserNotFoundException, Exception, ActivityUserAlreadyInsertedException{
+	public void updateActivityUser(ActivityUser Entity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
 		activityuserList.update(Entity);
 	}
 	public List<ActivityUser> getActivityUserList() throws RepositoryException{
@@ -166,7 +166,7 @@ public class RiseEventsFacade {
 	public void removeRegistration(Registration entity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
 		registrationList.remove(entity);  
 	}
-	public void updateRegistration(Registration Entity) throws RegistrationNotFoundException, Exception, RegistrationAlreadyInsertedException{
+	public void updateRegistration(Registration Entity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
 		registrationList.update(Entity);
 	}
 	public List<Registration> getRegistrationList() throws RepositoryException{
@@ -204,6 +204,16 @@ public class RiseEventsFacade {
 	}
 	
 
+	
+	public void removeValue(float value, int idRegistration) throws RepositoryException{
+		registrationList.removeValue(value, idRegistration);
+	}
+	public void addValue(float value, int idRegistration) throws RepositoryException{
+		registrationList.addValue(value, idRegistration);
+	}
+	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
+		return registrations.search(idUser, idEvent);
+	}
 	
 	
 }
