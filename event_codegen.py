@@ -37,7 +37,8 @@ def main(debug=False):
 
     systemName = event_model.name
     general_folder = createFolder(this_folder, 'srcgen')
-    general_ev_folder = createFolder(general_folder, systemName.lower())
+    generally_folder = createFolder(general_folder, 'src')
+    general_ev_folder = createFolder(generally_folder, systemName.lower())
     srcgen_folder = createFolder(general_ev_folder, 'ev')
     
     dotFolder = createFolder(srcgen_folder, 'dot')
@@ -250,7 +251,8 @@ def main(debug=False):
     copy(join(this_folder,'properties'),join(general_folder,'properties'))
     generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,"",systemName)
     generateFile(templateFolder,general_folder,'xml.buildTemplate',"build",jinja_env,value,"",systemName,".xml")
-            
+    shutil.copy(join(templateFolder,'project.xml'),general_folder)
+    
     #Unique files template
     sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
     with open(join(srcgen_folder,

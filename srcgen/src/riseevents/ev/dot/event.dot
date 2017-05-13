@@ -1,0 +1,50 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+4494441776 -> 4494439424 [label="components:0" arrowtail=diamond dir=both]
+4494439424 -> 4494306552 [label="command" arrowtail=diamond dir=both]
+4494306552[label="{:CommandOption|commandsOption:list=['Insert','Update','Search','Remove','ListAll']\l}"]
+4494439424 -> 4494306048 [label="categories:0" arrowtail=diamond dir=both]
+4494306048[label="{Associado:Category|+alias:str=''\l}"]
+4494439424 -> 4494306328 [label="categories:1" arrowtail=diamond dir=both]
+4494306328[label="{Profissional:Category|+alias:str=''\l}"]
+4494439424 -> 4494305768 [label="categories:2" arrowtail=diamond dir=both]
+4494305768[label="{Estudante:Category|+alias:str=''\l}"]
+4494439424[label="{:Option|+entity:str='User'\lproperties:list=[]\l}"]
+4494441776 -> 4494438472 [label="components:1" arrowtail=diamond dir=both]
+4494438472 -> 4494305992 [label="command" arrowtail=diamond dir=both]
+4494305992[label="{:CommandOption|commandsOption:list=['Insert','Update','Search','Remove','ListAll']\l}"]
+4494438472 -> 4494461864 [label="categories:0" arrowtail=diamond dir=both]
+4494461864[label="{MiniCurso:Category|+alias:str='Mini'\l}"]
+4494438472 -> 4494459904 [label="categories:1" arrowtail=diamond dir=both]
+4494459904[label="{Tutorial:Category|+alias:str=''\l}"]
+4494438472 -> 4494459680 [label="categories:2" arrowtail=diamond dir=both]
+4494459680[label="{Painel:Category|+alias:str=''\l}"]
+4494438472 -> 4494404576 [label="categories:3" arrowtail=diamond dir=both]
+4494404576[label="{Workshop:Category|+alias:str=''\l}"]
+4494438472 -> 4494404352 [label="categories:4" arrowtail=diamond dir=both]
+4494404352[label="{MainTrack:Category|+alias:str='hidden'\l}"]
+4494438472[label="{:Option|+entity:str='Activity'\lproperties:list=[]\l}"]
+4494441776 -> 4494460576 [label="components:2" arrowtail=diamond dir=both]
+4494460576 -> 4494305880 [label="command" arrowtail=diamond dir=both]
+4494305880[label="{:CommandOption|commandsOption:list=['Insert','Update','Search','Remove','ListAll']\l}"]
+4494460576 -> 4494403680 [label="categories:0" arrowtail=diamond dir=both]
+4494403680[label="{Associado:Category|+alias:str=''\l}"]
+4494460576 -> 4494402672 [label="categories:1" arrowtail=diamond dir=both]
+4494402672[label="{Profissional:Category|+alias:str=''\l}"]
+4494460576 -> 4494402000 [label="categories:2" arrowtail=diamond dir=both]
+4494402000[label="{Estudante:Category|+alias:str=''\l}"]
+4494460576[label="{:Option|+entity:str='Event'\lproperties:list=[]\l}"]
+4494441776[label="{RiseEvents:EventModel|}"]
+
+}
