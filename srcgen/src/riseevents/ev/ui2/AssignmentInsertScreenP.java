@@ -1,5 +1,5 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package riseevents.ev.util.LibraryOfDSL;
+package riseevents.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -383,7 +383,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	
 	private void carregarComboSubmission(){
 		try {
-			List<Submission> submissions = RiseEventsMainScreenP.facade.getSubmissions();
+			List<Submission> submissions = RiseEventsMainScreenP.facade.getSubmissionList();
 			Iterator<Submission> iterator = submissions.iterator();
 			while(iterator.hasNext()){
 				comboBoxSubmission.addItem(iterator.next().getTitle());
@@ -433,7 +433,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		Submission submissionSelecionado = null;
 		int idSubmission;
 		try {
-			reviewers = RiseEventsMainScreenP.facade.getReviewers();
+			reviewers = RiseEventsMainScreenP.facade.getReviewerList();
 			
 			idSubmission = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
 			submissionSelecionado = RiseEventsMainScreenP.facade.searchSubmission(idSubmission);
@@ -540,7 +540,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 			
 			try {
 				
-				reviewerRight =  new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewers()).get(rowIndex);
+				reviewerRight =  new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewerList()).get(rowIndex);
 				if(listaRevisoresSelecionados.size() < 3){
 					listaRevisoresSelecionados.add(reviewerRight);
 					ReviewerTableModel model;
@@ -565,7 +565,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	private void populateTableReviewer(){
 		try {
 			ReviewerTableModel model;
-			model = new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewers());
+			model = new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewerList());
 
 			tableReviewer.setModel(model);
 			
@@ -595,7 +595,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 					Submission sub = RiseEventsMainScreenP.facade.searchSubmission(subId);
 					String keywords = sub.getKeywords();
 					String keywordsSplit[] = keywords.split(Pattern.quote(","));
-					reviewerList = RiseEventsMainScreenP.facade.getReviewers();
+					reviewerList = RiseEventsMainScreenP.facade.getReviewerList();
 					boolean flag;
 
 					

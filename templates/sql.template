@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS {{systemName|lower}};
+USE {{systemName|lower}};
+
 CREATE TABLE `User`(
 	idUser int(10) NOT NULL, 
 	password varchar(255) NOT NULL, 

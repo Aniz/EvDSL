@@ -38,7 +38,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-	private {{key}}{{actionKey|capitalize}}ScreenP screen{{key}}{{actionKey|capitalize}}{{user}};	
+	private {{key|lower}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|capitalize}};	
 			{% endif %}
 		{% endfor %}
 	{% endif %}
@@ -102,7 +102,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-		{{actionKey|capitalize}}MenuAction {{actionKey|lower}}Action = new {{actionKey}}MenuAction();	
+		{{actionKey|capitalize}}MenuAction {{actionKey|lower}}Action = new {{key}}{{actionKey|capitalize}}MenuAction();	
 			{% endif %}
 		{% endfor %}
 	{% endif %}

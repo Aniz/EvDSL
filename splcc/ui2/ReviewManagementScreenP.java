@@ -222,7 +222,7 @@ public class ReviewManagementScreenP extends JInternalFrame{
 	private void carregarComboBoxIdSubmission(){
 		List<Submission> submissions = new ArrayList<Submission>();
 		try {
-			submissions = {{systemName}}MainScreenP.facade.getSubmissions();
+			submissions = {{systemName}}MainScreenP.facade.getSubmissionList();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",

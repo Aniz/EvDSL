@@ -1,5 +1,5 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
-package {{systemName|lower}}.ev.util.LibraryOfDSL;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -388,7 +388,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	
 	private void carregarComboSubmission(){
 		try {
-			List<Submission> submissions = {{systemName}}MainScreenP.facade.getSubmissions();
+			List<Submission> submissions = {{systemName}}MainScreenP.facade.getSubmissionList();
 			Iterator<Submission> iterator = submissions.iterator();
 			while(iterator.hasNext()){
 				comboBoxSubmission.addItem(iterator.next().getTitle());
@@ -438,7 +438,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		Submission submissionSelecionado = null;
 		int idSubmission;
 		try {
-			reviewers = {{systemName}}MainScreenP.facade.getReviewers();
+			reviewers = {{systemName}}MainScreenP.facade.getReviewerList();
 			
 			idSubmission = {{systemName}}MainScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
 			submissionSelecionado = {{systemName}}MainScreenP.facade.searchSubmission(idSubmission);
@@ -545,7 +545,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 			
 			try {
 				
-				reviewerRight =  new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewers()).get(rowIndex);
+				reviewerRight =  new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewerList()).get(rowIndex);
 				if(listaRevisoresSelecionados.size() < 3){
 					listaRevisoresSelecionados.add(reviewerRight);
 					ReviewerTableModel model;
@@ -570,7 +570,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	private void populateTableReviewer(){
 		try {
 			ReviewerTableModel model;
-			model = new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewers());
+			model = new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewerList());
 
 			tableReviewer.setModel(model);
 			
@@ -600,7 +600,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 					Submission sub = {{systemName}}MainScreenP.facade.searchSubmission(subId);
 					String keywords = sub.getKeywords();
 					String keywordsSplit[] = keywords.split(Pattern.quote(","));
-					reviewerList = {{systemName}}MainScreenP.facade.getReviewers();
+					reviewerList = {{systemName}}MainScreenP.facade.getReviewerList();
 					boolean flag;
 
 					

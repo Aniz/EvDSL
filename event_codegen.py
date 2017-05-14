@@ -74,6 +74,7 @@ def main(debug=False):
     
     # Register filter for mapping event type names to Java type names.
     jinja_env.filters['javatype'] = javatype
+    jinja_env.filters['upperfirst'] = upperfirst
 
     componentData = ""
     componentExtraData = ""
@@ -185,9 +186,15 @@ def main(debug=False):
                 if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
                     #generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
                     copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData,systemName)
-            
+                
                 for keyCommand,view in enumerate(value["commands"]):
                     copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData,systemName)
+                
+                if "statments" in value:
+                    for keyStatment,viewStatment in value["statments"].items():
+                        if (viewStatment.condition == 'def'):
+                           copyCodeFile(viewCodeFolder,viewFolder,key+upperfirst(viewStatment.actionType)+"ScreenP",jinja_env,value,componentExtraData,systemName)
+        
         else :
             #print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
             print("[New] Option '%s' created" % key)
@@ -241,14 +248,13 @@ def main(debug=False):
                 if not ((keyView == "ActivityUserInsert") or (key != "ActivitySpeakerRemove") or (key != "ActivityUserRemove")):
                     copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,value,componentExtraData,systemName)
             
-    for keyStatmentView,valueStatment in enumerate(statmentsArray):
-        if (valueStatment.condition == 'def'):
-            copyCodeFile(viewCodeFolder,viewFolder,key+valueStatment.actionType+"ScreenP",jinja_env,value,componentExtraData,systemName)
-       
     copyCodeFile(exceptionCodeFolder,exceptionFolder,"RepositoryException",jinja_env,"","",systemName)
     copy(join(this_folder,'lib'),join(general_folder,'lib'))
     copy(join(this_folder,'images'),join(general_folder,'images'))
-    copy(join(this_folder,'properties'),join(general_folder,'properties'))
+    propertiesCodeFolder = join(this_folder,'properties')
+    propertiesFolder = createFolder(general_folder, 'properties')
+    generateFile(propertiesCodeFolder,propertiesFolder,'config.properties',"config",jinja_env,value,"",systemName,".properties")
+    #copy(join(this_folder,'properties'),join(general_folder,'properties'))
     generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,"",systemName)
     generateFile(templateFolder,general_folder,'xml.buildTemplate',"build",jinja_env,value,"",systemName,".xml")
     shutil.copy(join(templateFolder,'.project'),general_folder)
@@ -256,8 +262,8 @@ def main(debug=False):
     
     #Unique files template
     sqlTemplate =jinja_env.get_template(join(templateFolder,'sql.template'))
-    with open(join(srcgen_folder,
-                   "%s.sql" % ("EventsDSL")), 'w') as f:
+    with open(join(general_folder,
+                   "%s.sql" % (systemName)), 'w') as f:
         f.write(sqlTemplate.render(data=componentDict,systemName=systemName))
 
     facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
@@ -270,7 +276,9 @@ def main(debug=False):
                    "%s.java" % (systemName+"MainScreenP")), 'w') as f:
         f.write(mainViewTemplate.render(data=componentDict,systemName=systemName))
     
-    
+def upperfirst(x):
+    return x[0].upper()+x[1:]
+
 def createDotFiles(event_mm,event_model,dotFolder):
     # Export to .dot file for visualization
     metamodel_export(event_mm, join(dotFolder, 'event_meta.dot'))

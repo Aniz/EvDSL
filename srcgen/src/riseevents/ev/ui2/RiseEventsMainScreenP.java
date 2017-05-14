@@ -52,7 +52,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventSearchScreenP screenSearchEvent;	
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
-	private EventReportsfrequencypereventScreenP screenEventReportsfrequencyperevent;	
+	private eventImportantDatesScreenP screenEventImportantdates;	
 
 	private PaymentInsertScreenP screenInsertPayment;	
 	private PaymentUpdateScreenP screenUpdatePayment;	
@@ -65,7 +65,6 @@ public class RiseEventsMainScreenP extends JFrame {
 	private ActivitySearchScreenP screenSearchActivity;	
 	private ActivityRemoveScreenP screenRemoveActivity;	
 	private ActivityListAllScreenP screenListAllActivity;	
-	private ActivityReportsfrequencyperactivityScreenP screenActivityReportsfrequencyperactivity;	
 
 	private AssignmentInsertScreenP screenInsertAssignment;	
 	private AssignmentSearchScreenP screenSearchAssignment;	
@@ -149,7 +148,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
-		ReportsfrequencypereventMenuAction reportsfrequencypereventAction = new reportsFrequencyperEventMenuAction();	
+		ImportantdatesMenuAction importantdatesAction = new EventImportantdatesMenuAction();	
 
 		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
 		UpdatePaymentMenuAction updatePaymentAction = new UpdatePaymentMenuAction();	
@@ -162,7 +161,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchActivityMenuAction searchActivityAction = new SearchActivityMenuAction();	
 		RemoveActivityMenuAction removeActivityAction = new RemoveActivityMenuAction();	
 		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
-		ReportsfrequencyperactivityMenuAction reportsfrequencyperactivityAction = new reportsFrequencyperActivityMenuAction();	
 
 		InsertAssignmentMenuAction insertAssignmentAction = new InsertAssignmentMenuAction();	
 		SearchAssignmentMenuAction searchAssignmentAction = new SearchAssignmentMenuAction();	

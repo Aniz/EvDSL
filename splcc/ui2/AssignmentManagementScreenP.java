@@ -547,7 +547,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	
 	private void carregarComboSubmission(){
 		try {
-			List<Submission> submissions = {{systemName}}MainScreenP.facade.getSubmissions();
+			List<Submission> submissions = {{systemName}}MainScreenP.facade.getSubmissionList();
 			Iterator<Submission> iterator = submissions.iterator();
 			while(iterator.hasNext()){
 				comboBoxSubmission.addItem(iterator.next().getTitle());

@@ -47,7 +47,7 @@ public class LibraryOfDSL {
 		}
 	}
 	{% endif %}
-	{% if "Reviewer" in data.items() and "User" in data.items() and "Assigment" in data.items() %}
+	{% if "Reviewer" in data.items() and "User" in data.items() %}
 	public void sendNotification(User user, Review review) throws EmailException{
 
 		//#if ${NotificationsDeadline} == "T"

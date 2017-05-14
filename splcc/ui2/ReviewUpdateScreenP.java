@@ -234,7 +234,7 @@ public class ReviewUpdateScreenP extends JInternalFrame  {
 	
 	private void carregarComboBoxSubmission(){
 		try {
-			List<Submission> list = {{systemName}}MainScreenP.facade.getSubmissions();
+			List<Submission> list = {{systemName}}MainScreenP.facade.getSubmissionList();
 			Iterator<Submission> iterator = list.iterator();
 			while(iterator.hasNext()){
 				submissionComboBox.addItem(iterator.next().getTitle());

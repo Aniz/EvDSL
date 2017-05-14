@@ -80,7 +80,7 @@ public class {{systemName}}Facade {
 		return {{key|lower}}List.search(idEntity);
 	}
 	{% endif %}
-	{% if key not in ["Reviewer","Organizer","Speaker"] %}
+	{% if key not in ["Reviewer","Organizer","Speaker","Payment"] %}
 	public int get{{key}}IdByName(String entityName) throws RepositoryException{
 		return {{key|lower}}List.get{{key}}IdByName(entityName);
 	}

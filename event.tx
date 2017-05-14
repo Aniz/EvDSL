@@ -86,7 +86,7 @@ NewData:
 ;
 
 ActionType:
-  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'eventProgram' | 'eventImportantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
+  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'program' | 'importantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
    | 'notificationsDeadline' | 'insertAttachment' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection'
 ;
 

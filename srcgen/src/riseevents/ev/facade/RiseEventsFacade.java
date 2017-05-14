@@ -257,9 +257,6 @@ public class RiseEventsFacade {
 	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
 		return paymentList.search(idEntity);
 	}
-	public int getPaymentIdByName(String entityName) throws RepositoryException{
-		return paymentList.getPaymentIdByName(entityName);
-	}
 	public int getPaymentLastId() throws RepositoryException{
 		return paymentList.getPaymentLastId();
 	}
