@@ -70,7 +70,7 @@ public class OrganizerListAllScreenP extends JInternalFrame {
 		
 		
 		try {
-			model = new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizers());
+			model = new OrganizerTableModel(RiseEventsMainScreenP.facade.getOrganizerList());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

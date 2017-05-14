@@ -65,6 +65,8 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LibraryOfDSL {
 
@@ -78,18 +80,19 @@ public class LibraryOfDSL {
 	}	
 
 	
+	
 	//#if ${Bugs} == "T"
 	public String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
 		SimpleEmail email = new SimpleEmail();
 		String msg;
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
-		email.addTo("riseeventemail@gmail.com", "Bugtrack Event"); //destinat�rio 
-		email.setFrom("riseeventemail@gmail.com", nome); // remetente 
+		email.addTo("rise", "Bugtrack Event"); //destinat�rio 
+		email.setFrom("rise", nome); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("riseeventemail@gmail.com", "senhasecreta");
+		email.setAuthentication("rise", "systemPassword");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -100,4 +103,15 @@ public class LibraryOfDSL {
 		return msg;
 	}
 	//#endif	
+
+	private List<String> quebrarKeywords(Submission submission){
+		List<String> palavrasDaKeyword = new ArrayList<String>();
+		String [] array = submission.getKeywords().split("[,] *");
+		
+		for(int i=0; i< array.length ; i++){
+			palavrasDaKeyword.add(array[i]);
+		}
+		return palavrasDaKeyword;
+	}
+	
 }

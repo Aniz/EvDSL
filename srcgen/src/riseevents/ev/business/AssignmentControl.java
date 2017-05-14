@@ -56,6 +56,5 @@ public class AssignmentControl {
 	public List<Assignment> getAssignmentList() throws RepositoryException {
 		return assignmentList.getAssignmentList();  
 	}
-	
 }
 //#endif

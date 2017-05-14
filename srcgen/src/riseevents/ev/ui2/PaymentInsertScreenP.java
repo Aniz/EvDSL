@@ -207,7 +207,7 @@ setTitle("Insert Payment");
 					payment.setDate(date);
 					
 					RiseEventsMainScreenP.facade.insertPayment(payment); 
-					PaymentTableModel model = new PaymentTableModel(RiseEventsMainScreenP.facade.getPayments());
+					PaymentTableModel model = new PaymentTableModel(RiseEventsMainScreenP.facade.getPaymentList());
 					
 					acaoType(payment);
 				
@@ -241,7 +241,7 @@ setTitle("Insert Payment");
 	
 	private void carregarRegistrationComboBox(){
 		try {
-			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrations();
+			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrationList();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistration.addItem(iterator.next().getIdRegistration());

@@ -71,9 +71,6 @@ public class ReviewerTableModel extends AbstractTableModel{
 				case COL_NAMEUSER:
 					coluna = "Name";
 					break;
-				case COL_TYPEUSER:
-					coluna = "Type";
-					break;
 				case COL_EMAIL:
 					coluna = "Email";
 					break;  

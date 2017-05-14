@@ -537,7 +537,6 @@ public class RiseEventsFacade {
 		return submissionList.getSubmissionsByUser(idUser);
 	}
 	
-	
 	//if Reviewer and Submission -> Review is enable 
 	//Review Feature
 			
@@ -551,6 +550,5 @@ public class RiseEventsFacade {
 	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
 		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
-
 	
 }

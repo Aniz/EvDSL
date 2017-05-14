@@ -69,7 +69,7 @@ public class PaymentListAllScreenP extends JInternalFrame {
 		BackButtonAction backAction = new BackButtonAction();
 		
 		try {
-			model = new PaymentTableModel(RiseEventsMainScreenP.facade.getPayments());
+			model = new PaymentTableModel(RiseEventsMainScreenP.facade.getPaymentList());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

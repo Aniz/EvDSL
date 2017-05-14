@@ -295,7 +295,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 	
 	private void carregarRegistrationComboBox(){
 		try {
-			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrations();
+			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrationList();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistrationId.addItem(iterator.next().getIdRegistration());
@@ -310,7 +310,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = RiseEventsMainScreenP.facade.getUsers();
+			List<User> list = RiseEventsMainScreenP.facade.getUserList();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUserId.addItem(iterator.next().getNameUser());

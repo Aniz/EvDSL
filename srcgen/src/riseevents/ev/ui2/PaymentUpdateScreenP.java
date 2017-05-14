@@ -246,7 +246,7 @@ setTitle("Insert Payment");
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrations();
+			List<Registration> list = RiseEventsMainScreenP.facade.getRegistrationList();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistration.addItem(iterator.next().getIdRegistration());

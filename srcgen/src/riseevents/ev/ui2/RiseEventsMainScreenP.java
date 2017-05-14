@@ -52,7 +52,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventSearchScreenP screenSearchEvent;	
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
-	private eventImportantDatesScreenP screenEventImportantdates;	
+	private EventImportantDatesScreenP screenEventImportantdates;	
 
 	private PaymentInsertScreenP screenInsertPayment;	
 	private PaymentUpdateScreenP screenUpdatePayment;	
@@ -148,7 +148,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
-		ImportantdatesMenuAction importantdatesAction = new EventImportantdatesMenuAction();	
+		importantDatesMenuAction importantdatesAction = new EventImportantDatesMenuAction();	
 
 		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
 		UpdatePaymentMenuAction updatePaymentAction = new UpdatePaymentMenuAction();	
