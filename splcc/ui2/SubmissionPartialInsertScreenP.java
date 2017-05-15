@@ -246,7 +246,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 			private void carregarComboUser(){
 				try {
 					List<User> list;
-					list = {{systemName}}MainScreenP.facade.getUsers();
+					list = {{systemName}}MainScreenP.facade.getUserList);
 					Iterator<User> iterator = list.iterator();
 					while(iterator.hasNext()){
 						comboBoxUser.addItem(iterator.next().getNameUser());
@@ -318,7 +318,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		
 		private void carregarComboBoxActivity(){
 			try {
-				List<Activity> list = {{systemName}}MainScreenP.facade.getActivities();
+				List<Activity> list = {{systemName}}MainScreenP.facade.getActivityList();
 				Iterator<Activity> iterator = list.iterator();
 				while(iterator.hasNext()){
 					comboBoxActivityName.addItem(iterator.next().getNameActivity());

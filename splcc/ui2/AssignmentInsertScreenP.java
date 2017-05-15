@@ -288,7 +288,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				//#if ${InsertAuthors} == "T"
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
-				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthors();
+				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
 							
 				for(SubmissionAuthor sa : submissionAuthor){
 					if(sa.getIdSubmission() == idSubmission){
@@ -299,7 +299,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				User user = new User();
 				//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
-				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUsers();
+				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUserList();
 							
 				for(SubmissionUser su : submissionUser){
 					if(su.getIdSubmission() == idSubmission){
@@ -322,21 +322,27 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-				enviarEmails(reviewer1, submission, review1);
+				{% if 'notificationsDeadline' in data.statments %}
+					LibraryOfDSL.enviarEmails(reviewer1, submission, review1);
+				{% endif %}
 				}
 				if(resultAutomaticConflict2 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-				enviarEmails(reviewer2, submission, review2);
+				{% if 'notificationsDeadline' in data.statments %}
+					LibraryOfDSL.enviarEmails(reviewer2, submission, review2);
+				{% endif %}
 				}
 				if(resultAutomaticConflict3 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-				enviarEmails(reviewer3, submission, review3);
+				{% if 'notificationsDeadline' in data.statments %}
+					LibraryOfDSL.enviarEmails(reviewer3, submission, review3);
+				{% endif %}
 				}
 				
 			} catch (RepositoryException e1) {
@@ -433,20 +439,20 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	}
 	
 	private List<Reviewer> retornarReviewersSubmission(){
-		List<Reviewer> reviewers = new ArrayList<Reviewer>();
+		List<Reviewer> reviewerList = new ArrayList<Reviewer>();
 		List<String> keyWords;
 		Submission submissionSelecionado = null;
 		int idSubmission;
 		try {
-			reviewers = {{systemName}}MainScreenP.facade.getReviewerList();
+			reviewerList = {{systemName}}MainScreenP.facade.getReviewerList();
 			
 			idSubmission = {{systemName}}MainScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
 			submissionSelecionado = {{systemName}}MainScreenP.facade.searchSubmission(idSubmission);
-			keyWords = quebrarKeywords(submissionSelecionado);
+			keyWords = LibraryOfDSL.quebrarKeywords(submissionSelecionado);
 			
 			Iterator<String> iteratorKeywords = keyWords.iterator();
 			while(iteratorKeywords.hasNext()){
-				reviewers.add({{systemName}}MainScreenP.facade.getReviewerByknowledgeArea(iteratorKeywords.next()));
+				reviewerList.add({{systemName}}MainScreenP.facade.getReviewerByknowledgeArea(iteratorKeywords.next()));
 			}
 		} catch (RepositoryException e1) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -474,53 +480,9 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 					JOptionPane.INFORMATION_MESSAGE);
 			e.printStackTrace();
 		}
-		return reviewers;
+		return reviewerList;
 	}
 	
-
-	
-	private List<String> quebrarKeywords(Submission submission){
-		List<String> palavrasDaKeyword = new ArrayList<String>();
-		String [] array = submission.getKeywords().split("[,] *");
-		
-		for(int i=0; i< array.length ; i++){
-			palavrasDaKeyword.add(array[i]);
-		}
-		return palavrasDaKeyword;
-	}
-	//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"
-	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
-		User user = new User();
-		try {
-			user = {{systemName}}MainScreenP.facade.searchUser(reviewer.getIdUser());
-		} catch (UserNotFoundException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (RepositoryException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (UserAlreadyInsertedException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		}
-		
-		try {
-			{{systemName}}MainScreenP.facade.emailNotification(user, review);
-		} catch (EmailException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	//#endif
-
 	private class LeftButtonAction  implements ActionListener{ 
 
 		@Override

@@ -200,14 +200,14 @@ setTitle("Insert Payment");
 					payment = new Payment();
 					
 					payment.setIdRegistration(registrationId);
-					payment.setPaymentType(TypePayment.valueOf(type));
+					payment.setTypePayment(TypePayment.valueOf(type));
 					payment.setStatus(StatusPayment.valueOf(status));
 					payment.setValue(value);
 					payment.setBarcode(barcode);
 					payment.setDate(date);
 					
 					{{systemName}}MainScreenP.facade.insertPayment(payment); 
-					PaymentTableModel model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments());
+					PaymentTableModel model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPaymentList());
 					
 					acaoType(payment);
 				
@@ -241,7 +241,7 @@ setTitle("Insert Payment");
 	
 	private void carregarRegistrationComboBox(){
 		try {
-			List<Registration> list = {{systemName}}MainScreenP.facade.getRegistrations();
+			List<Registration> list = {{systemName}}MainScreenP.facade.getRegistrationList();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistration.addItem(iterator.next().getIdRegistration());

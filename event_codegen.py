@@ -36,6 +36,8 @@ def main(debug=False):
         shutil.rmtree(srcgen_folder)
 
     systemName = event_model.name
+    systemEmail = event_model.email
+    systemPassword = event_model.password
     general_folder = createFolder(this_folder, 'srcgen')
     generally_folder = createFolder(general_folder, 'src')
     general_ev_folder = createFolder(generally_folder, systemName.lower())
@@ -255,7 +257,7 @@ def main(debug=False):
     propertiesFolder = createFolder(general_folder, 'properties')
     generateFile(propertiesCodeFolder,propertiesFolder,'config.properties',"config",jinja_env,value,"",systemName,".properties")
     #copy(join(this_folder,'properties'),join(general_folder,'properties'))
-    generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,"",systemName)
+    generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,dependencesList,systemName, systemEmail, systemPassword)
     generateFile(templateFolder,general_folder,'xml.buildTemplate',"build",jinja_env,value,"",systemName,".xml")
     shutil.copy(join(templateFolder,'.project'),general_folder)
     shutil.copy(join(templateFolder,'.classpath'),general_folder)
@@ -308,12 +310,12 @@ def createFolder(dest,name):
 
     return folder
 
-def generateCodeRecursively(src, dest,jinja_env,var,extraVar,systemName):
+def generateCodeRecursively(src, dest,jinja_env,var,extraVar,systemName,systemEmail,systemPass):
     for (dirpath,dirnames,filenames) in walk (src):
         for file in filenames:
             codeFileTemplate = jinja_env.get_template(join(src,file))
             with open(join(dest,file), 'w') as f:
-                f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName))
+                f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName,systemEmail=systemEmail,systemPassword=systemPass))
 
 def copy(src, dest):
     if exists(dest):

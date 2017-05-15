@@ -222,7 +222,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	private void carregarComboUser(){
 		try {
 			List<User> list;
-			list = {{systemName}}MainScreenP.facade.getUsers();
+			list = {{systemName}}MainScreenP.facade.getUserList();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUser.addItem(iterator.next().getNameUser());
@@ -281,7 +281,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	private void carregarComboBoxIdRegistration(){
 		List<Registration> registrations = new ArrayList<Registration>();
 		try {
-			registrations = {{systemName}}MainScreenP.facade.getRegistrations();
+			registrations = {{systemName}}MainScreenP.facade.getRegistrationList();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",
@@ -300,7 +300,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			CheckingCopyTableModel model;
-			model = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopys());
+			model = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopyList());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -359,7 +359,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						{% endfor %}
 							
 						//Atualizar JTable
-						CheckingCopyTableModel model = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopys());
+						CheckingCopyTableModel model = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopyList());
 						
 						{{systemName}}MainScreenP.facade.insertCheckingCopy(checkingCopy); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 					
@@ -404,7 +404,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 				}
 				
 				try {
-					CheckingCopy checkingCopy = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopys()).get(rowIndex);
+					CheckingCopy checkingCopy = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopyList()).get(rowIndex);
 					{{systemName}}MainScreenP.facade.removeCheckingCopy(checkingCopy.getIdCheckingCopy());
 					CheckingCopyTableModel model = (CheckingCopyTableModel) table.getModel();
 					model.removeCheckingCopy(rowIndex);
@@ -478,7 +478,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						try {
 							{{systemName}}MainScreenP.facade.updateCheckingCopy(checkingCopyNew);
 							CheckingCopyTableModel model;
-							model = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopys());
+							model = new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopyList());
 							table.setModel(model);
 						} catch (CheckingCopyNotFoundException e1) {
 							JOptionPane
@@ -515,7 +515,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 			CheckingCopy checkingCopyOld = null;
 
 			try {
-				checkingCopyOld=  new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopys()).get(rowIndex);
+				checkingCopyOld=  new CheckingCopyTableModel({{systemName}}MainScreenP.facade.getCheckingCopyList()).get(rowIndex);
 			
 				lblLastCheckingCopyId.setText(String.valueOf(checkingCopyOld.getIdCheckingCopy()));
 				// ISSO DEVERIA PEGAR O LABEL DE LBLUSERID OU LBLUSERLOGADO? EU ACHO Q O LOGADO

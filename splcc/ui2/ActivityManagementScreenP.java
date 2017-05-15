@@ -488,7 +488,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 						
 						{{systemName}}MainScreenP.facade.updateActivity(activity);
 						ActivityTableModel model;
-						model = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivities());
+						model = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivityList());
 						table.setModel(model);
 					} catch (ActivityNotFoundException e1) {
 						JOptionPane
@@ -583,7 +583,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -611,7 +611,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		
 		try {
 			ActivityTableModel model;
-			model = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivities());	
+			model = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivityList());	
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			e.printStackTrace();

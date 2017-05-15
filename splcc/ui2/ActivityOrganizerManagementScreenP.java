@@ -221,7 +221,7 @@ public class ActivityOrganizerManagementScreenP extends JInternalFrame {
 			ActivityOrganizer activityOrganizer = null;
 			
 			try {
-				activityOrganizer = new ActivityOrganizerTableModel({{systemName}}MainScreenP.facade.getActivitiesOrganizers()).get(rowIndex);
+				activityOrganizer = new ActivityOrganizerTableModel({{systemName}}MainScreenP.facade.getActivityOrganizerList()).get(rowIndex);
 				{{systemName}}MainScreenP.facade.removeActivityOrganizer(activityOrganizer);
 				//Atualizando a tabela
 				int i;

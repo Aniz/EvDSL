@@ -13,6 +13,8 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LibraryOfDSL {
 
@@ -47,40 +49,41 @@ public class LibraryOfDSL {
 		}
 	}
 	{% endif %}
-	{% if "Reviewer" in data.items() and "User" in data.items() %}
+	
+	{% if "Review" in extraData and "User" in data.items() %}
+	{% if 'notificationsDeadline' in data.Assignment.option.statments or 'notificationsPaperAssignemnt' in data.Assignment.option.statments or 'notificationsAceptanceRejection' in data.Assignment.option.statments%}
 	public void sendNotification(User user, Review review) throws EmailException{
 
-		//#if ${NotificationsDeadline} == "T"
+		{% if 'notificationsDeadline' in data.Reviewer.option.statments %}
 		// esta classe eh chamada logo apos o insert do assignment
 		String assunto = "Prazo de entrega de Rivisao";
 		String mensagem = "O prazo de entrega é ate 15 dias antes da data oficial de Inicio do evento. Seu ID para cadastrar a revisao é:" + review.getIdReview() + " Favor usar este ID!" ;
 		String emailDestino = user.getEmail();
-		//#endif
+		{% endif %}
 	
-//		//#if ${NotificationsAceptanceRejection} == "T"
-//		String assunto2 = "Resultado Revisao Papper!";
-//		String mensagem2 = "Seu Papper esta sendo revisado. O resultado sera encaminhado via email.";
-//		String emailDestino2 = author.getEmail();
-//		//#endif
+		{% if 'notificationsAceptanceRejection' in data.Reviewer.option.statments %}
+		String assunto2 = "Resultado Revisao Papper!";
+		String mensagem2 = "Seu Papper esta sendo revisado. O resultado sera encaminhado via email.";
+		String emailDestino2 = author.getEmail();
+		{% endif %}
 		
-		//#if ${NotificationsPaperAssignemnt} == "T"
+		{% if 'notificationsPaperAssignemnt' in data.Reviewer.option.statments %}
 		String assunto3 = "Pappers para revisao";
 		String mensagem3 = "Seguem em anexos pappers para revisao!";
 		String emailDestino3 = user.getEmail();
-		//#endif
+		{% endif %}
+	
 		
-		
-		//#if ${NotificationsDeadline} == "T"
-		//deadline email
+		{% if 'notificationsDeadline' in data.Reviewer.option.statments %}
 		SimpleEmail email = new SimpleEmail(); 
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email.addTo(emailDestino, user.getNameUser()); //destinat�rio 
-		email.setFrom("riseeventemail@gmail.com", "Gerenciador de Eventos Rise"); // remetente 
+		email.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("riseeventemail@gmail.com", "senhasecreta");
+		email.setAuthentication("{{systemEmail}}", "{{systemPassword}}");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -88,34 +91,34 @@ public class LibraryOfDSL {
 		
 		
 		email.send(); //envia o e-mail
-		//#endif
+		{% endif %}
+
+		{% if 'notificationsAceptanceRejection' in data.Reviewer.option.statments %}
+		// AcceptReject email
+		SimpleEmail email2 = new SimpleEmail(); 
+		email2.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
-//		//#if ${NotificationsAceptanceRejection} == "T"
-//		// AcceptReject email
-//		SimpleEmail email2 = new SimpleEmail(); 
-//		email2.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
-//		
-//		email2.addTo(emailDestino2, user.getNameUser()); //destinat�rio 
-//		email2.setFrom("riseeventemail@gmail.com", "Gerenciador de Eventos Rise"); // remetente 
-//		email2.setSubject(assunto2); // assunto do e-mail 
-//		email2.setMsg(mensagem2); //conteudo do e-mail
-//		
-//		email2.setAuthentication("riseeventemail@gmail.com", "senhasecreta");
-//		email2.setSslSmtpPort( "465" ); //578 ou 465
-//		email2.setSSLOnConnect(true);
-//		email2.setStartTLSEnabled(true);
-//		email2.setStartTLSRequired(true);
-//		
-//		email2.send(); //envia o e-mail
-//		//#endif
+		email2.addTo(emailDestino2, user.getNameUser()); //destinat�rio 
+		email2.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
+		email2.setSubject(assunto2); // assunto do e-mail 
+		email2.setMsg(mensagem2); //conteudo do e-mail
 		
-		//#if ${NotificationsPaperAssignemnt} == "T"
+		email2.setAuthentication("{{systemEmail}}", "{{systemPassword}}");
+		email2.setSslSmtpPort( "465" ); //578 ou 465
+		email2.setSSLOnConnect(true);
+		email2.setStartTLSEnabled(true);
+		email2.setStartTLSRequired(true);
+		
+		email2.send(); //envia o e-mail
+		{% endif %}
+
+		{% if 'notificationsPaperAssignemnt' in data.Reviewer.option.statments %}
 		// assignment email
 		HtmlEmail email3 = new HtmlEmail(); 
 		email3.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email3.addTo(emailDestino3, user.getNameUser()); //destinat�rio 
-		email3.setFrom("riseemail@gmail.com", "Gerenciador de Eventos Rise"); // remetente 
+		email3.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
 		email3.setSubject(assunto3); // assunto do e-mail 
 		
 		//ESTOU ENVIADO UMA IMAGEM EM ANEXO POIS AINDA NAO CONSEGUI PEGAR DO BANCO E INSERIR AQUI
@@ -127,17 +130,16 @@ public class LibraryOfDSL {
 	    
 		email3.setMsg(mensagem3); //conteudo do e-mail
 		
-		email3.setAuthentication("riseemail@gmail.com", "password");
+		email3.setAuthentication("{{systemEmail}}", "{{systemPassword}}");
 		email3.setSslSmtpPort( "465" ); //578 ou 465
 		email3.setSSLOnConnect(true);
 		email3.setStartTLSEnabled(true);
 		email3.setStartTLSRequired(true);
 	
 		email3.send(); //envia o e-mail
-		//#endif
+		{% endif %}
 	}
-	//#endif
-	
+	{% endif %}
 	//#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
 	public void sendRoundNotification(Review review, User user) throws EmailException{
 		
@@ -166,11 +168,11 @@ public class LibraryOfDSL {
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email.addTo(emailDestino, user.getNameUser()); //destinat�rio 
-		email.setFrom("riseeventemail@gmail.com", "Gerenciador de Eventos Rise"); // remetente 
+		email.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("riseeventemail@gmail.com", "senhasecreta");
+		email.setAuthentication("{{systemEmail}}", "systemPassword");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -188,12 +190,12 @@ public class LibraryOfDSL {
 		String msg;
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
-		email.addTo("riseeventemail@gmail.com", "Bugtrack Event"); //destinat�rio 
-		email.setFrom("riseeventemail@gmail.com", nome); // remetente 
+		email.addTo("{{systemEmail}}", "Bugtrack Event"); //destinat�rio 
+		email.setFrom("{{systemEmail}}", nome); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("riseeventemail@gmail.com", "senhasecreta");
+		email.setAuthentication("{{systemEmail}}", "systemPassword");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -204,4 +206,47 @@ public class LibraryOfDSL {
 		return msg;
 	}
 	//#endif	
+
+	private List<String> quebrarKeywords(Submission submission){
+		List<String> palavrasDaKeyword = new ArrayList<String>();
+		String [] array = submission.getKeywords().split("[,] *");
+		
+		for(int i=0; i< array.length ; i++){
+			palavrasDaKeyword.add(array[i]);
+		}
+		return palavrasDaKeyword;
+	}
+	
+	{% if 'reportsFrequencyperActivity' in data.statments %}
+	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
+		User user = new User();
+		try {
+			user = {{systemName}}MainScreenP.facade.searchUser(reviewer.getIdUser());
+		} catch (UserNotFoundException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		} catch (RepositoryException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		} catch (UserAlreadyInsertedException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		}
+		
+		try {
+			LibraryOfDSL.sendNotification(user, review);
+		} catch (EmailException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	{% endif %}
 }

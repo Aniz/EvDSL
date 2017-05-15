@@ -3,7 +3,7 @@
 */
 
 EventModel:
-    "Create" name=ID 
+    "Create" name=ID email=ID password=ID
     components *= Component
 ;
 

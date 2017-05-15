@@ -200,7 +200,7 @@ setTitle("Insert Payment");
 					payment = new Payment();
 					
 					payment.setIdRegistration(registrationId);
-					payment.setPaymentType(TypePayment.valueOf(type));
+					payment.setTypePayment(TypePayment.valueOf(type));
 					payment.setStatus(StatusPayment.valueOf(status));
 					payment.setValue(value);
 					payment.setBarcode(barcode);

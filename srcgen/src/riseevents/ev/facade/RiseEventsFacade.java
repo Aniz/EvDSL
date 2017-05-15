@@ -374,8 +374,8 @@ public class RiseEventsFacade {
 	public List<Review> getReviewList() throws RepositoryException{
 		return reviewList.getReviewList();
 	}
-	public Review searchReview(int idEntity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
-		return reviewList.search(idEntity);
+	public Review searchReview(Review Entity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		return reviewList.search(Entity);
 	}
 	public int getReviewLastId() throws RepositoryException{
 		return reviewList.getReviewLastId();
@@ -395,8 +395,8 @@ public class RiseEventsFacade {
 	public List<ActivityUser> getActivityUserList() throws RepositoryException{
 		return activityuserList.getActivityUserList();
 	}
-	public ActivityUser searchActivityUser(int idEntity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
-		return activityuserList.search(idEntity);
+	public ActivityUser searchActivityUser(ActivityUser Entity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
+		return activityuserList.search(Entity);
 	}
 	public int getActivityUserLastId() throws RepositoryException{
 		return activityuserList.getActivityUserLastId();
@@ -416,8 +416,8 @@ public class RiseEventsFacade {
 	public List<ActivityOrganizer> getActivityOrganizerList() throws RepositoryException{
 		return activityorganizerList.getActivityOrganizerList();
 	}
-	public ActivityOrganizer searchActivityOrganizer(int idEntity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
-		return activityorganizerList.search(idEntity);
+	public ActivityOrganizer searchActivityOrganizer(ActivityOrganizer Entity) throws ActivityOrganizerNotFoundException, RepositoryException, ActivityOrganizerAlreadyInsertedException{
+		return activityorganizerList.search(Entity);
 	}
 	public int getActivityOrganizerLastId() throws RepositoryException{
 		return activityorganizerList.getActivityOrganizerLastId();
@@ -437,8 +437,8 @@ public class RiseEventsFacade {
 	public List<SubmissionAuthor> getSubmissionAuthorList() throws RepositoryException{
 		return submissionauthorList.getSubmissionAuthorList();
 	}
-	public SubmissionAuthor searchSubmissionAuthor(int idEntity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
-		return submissionauthorList.search(idEntity);
+	public SubmissionAuthor searchSubmissionAuthor(SubmissionAuthor Entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
+		return submissionauthorList.search(Entity);
 	}
 	public int getSubmissionAuthorLastId() throws RepositoryException{
 		return submissionauthorList.getSubmissionAuthorLastId();
@@ -458,8 +458,8 @@ public class RiseEventsFacade {
 	public List<SubmissionUser> getSubmissionUserList() throws RepositoryException{
 		return submissionuserList.getSubmissionUserList();
 	}
-	public SubmissionUser searchSubmissionUser(int idEntity) throws SubmissionUserNotFoundException, RepositoryException, SubmissionUserAlreadyInsertedException{
-		return submissionuserList.search(idEntity);
+	public SubmissionUser searchSubmissionUser(SubmissionUser Entity) throws SubmissionUserNotFoundException, RepositoryException, SubmissionUserAlreadyInsertedException{
+		return submissionuserList.search(Entity);
 	}
 	public int getSubmissionUserLastId() throws RepositoryException{
 		return submissionuserList.getSubmissionUserLastId();
@@ -479,8 +479,8 @@ public class RiseEventsFacade {
 	public List<Registration> getRegistrationList() throws RepositoryException{
 		return registrationList.getRegistrationList();
 	}
-	public Registration searchRegistration(int idEntity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
-		return registrationList.search(idEntity);
+	public Registration searchRegistration(Registration Entity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		return registrationList.search(Entity);
 	}
 	public int getRegistrationLastId() throws RepositoryException{
 		return registrationList.getRegistrationLastId();
@@ -535,6 +535,9 @@ public class RiseEventsFacade {
 	}
 	public List<Submission> getSubmissionsByUser(int idUser) throws RepositoryException{
 		return submissionList.getSubmissionsByUser(idUser);
+	}
+	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
+		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
 	
 	//if Reviewer and Submission -> Review is enable 

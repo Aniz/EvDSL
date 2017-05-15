@@ -246,7 +246,7 @@ public class CheckingCopyTypeScreenP  extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -262,7 +262,7 @@ public class CheckingCopyTypeScreenP  extends JInternalFrame {
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = {{systemName}}MainScreenP.facade.getUsers();
+			List<User> list = {{systemName}}MainScreenP.facade.getUserList();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUser.addItem(iterator.next().getNameUser());

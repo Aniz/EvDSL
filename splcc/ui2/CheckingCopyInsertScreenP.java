@@ -276,7 +276,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 						checkingCopy.setIdUser(userId);
 						checkingCopy.setIdRegistration(registrationId);
 						checkingCopy.setDateOfIssue(date);
-						checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(type));
+						checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(type));
 				
 						{{systemName}}MainScreenP.facade.insertCheckingCopy(checkingCopy);
 
@@ -301,7 +301,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 	
 	private void carregarRegistrationComboBox(){
 		try {
-			List<Registration> list = {{systemName}}MainScreenP.facade.getRegistrations();
+			List<Registration> list = {{systemName}}MainScreenP.facade.getRegistrationList();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistrationId.addItem(iterator.next().getIdRegistration());
@@ -316,7 +316,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = {{systemName}}MainScreenP.facade.getUsers();
+			List<User> list = {{systemName}}MainScreenP.facade.getUserList();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUserId.addItem(iterator.next().getNameUser());

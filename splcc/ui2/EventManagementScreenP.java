@@ -275,7 +275,7 @@ public class EventManagementScreenP extends JInternalFrame {
 					event.setSponsors(sponsors);
 
 					//Atualizar JTable
-					EventTableModel model = new EventTableModel({{systemName}}MainScreenP.facade.getEvents());
+					EventTableModel model = new EventTableModel({{systemName}}MainScreenP.facade.getEventList());
 
 					{{systemName}}MainScreenP.facade.insertEvent(event); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 
@@ -322,7 +322,7 @@ public class EventManagementScreenP extends JInternalFrame {
 			}
 
 			try {
-				Event event = new EventTableModel({{systemName}}MainScreenP.facade.getEvents()).get(rowIndex);
+				Event event = new EventTableModel({{systemName}}MainScreenP.facade.getEventList()).get(rowIndex);
 				{{systemName}}MainScreenP.facade.removeEvent(event.getIdEvent());
 				EventTableModel model = (EventTableModel) table.getModel();
 				model.removeEvent(rowIndex);
@@ -386,7 +386,7 @@ public class EventManagementScreenP extends JInternalFrame {
 					try {
 						{{systemName}}MainScreenP.facade.updateEvent(eventNew);
 						EventTableModel model;
-						model = new EventTableModel({{systemName}}MainScreenP.facade.getEvents());
+						model = new EventTableModel({{systemName}}MainScreenP.facade.getEventList());
 						table.setModel(model);
 					} catch (EventNotFoundException e1) {
 						JOptionPane
@@ -425,7 +425,7 @@ public class EventManagementScreenP extends JInternalFrame {
 			Event eventOld = null;
 
 			try {
-				eventOld=  new EventTableModel({{systemName}}MainScreenP.facade.getEvents()).get(rowIndex);
+				eventOld=  new EventTableModel({{systemName}}MainScreenP.facade.getEventList()).get(rowIndex);
 
 				lblLastEventId.setText(String.valueOf(eventOld.getIdEvent()));
 				eventNametextField.setText(eventOld.getEventName());
@@ -478,7 +478,7 @@ public class EventManagementScreenP extends JInternalFrame {
 	private void populateTable(){
 		try {
 			EventTableModel model;
-			model = new EventTableModel({{systemName}}MainScreenP.facade.getEvents());
+			model = new EventTableModel({{systemName}}MainScreenP.facade.getEventList());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),

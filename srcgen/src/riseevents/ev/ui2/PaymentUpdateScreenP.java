@@ -214,7 +214,7 @@ setTitle("Insert Payment");
 			}
 			
 			payment.setIdRegistration(registration);
-			payment.setPaymentType(TypePayment.valueOf(paymentType));
+			payment.setTypePayment(TypePayment.valueOf(paymentType));
 			payment.setStatus(StatusPayment.valueOf(status));
 			payment.setValue(value);
 			payment.setBarcode(barcode);

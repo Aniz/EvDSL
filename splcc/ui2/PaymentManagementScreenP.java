@@ -230,7 +230,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		
 		List<Registration> registrations = new ArrayList<Registration>();
 		try {
-			registrations = {{systemName}}MainScreenP.facade.getRegistrations();
+			registrations = {{systemName}}MainScreenP.facade.getRegistrationList();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",
@@ -248,7 +248,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			PaymentTableModel model;
-			model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments());
+			model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPaymentList());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -359,12 +359,12 @@ public class PaymentManagementScreenP extends JInternalFrame{
 						payment.setBarcode(barcode);
 						payment.setDate(date);
 						payment.setIdRegistration(registrationId);
-						payment.setPaymentType(TypePayment.valueOf(type));
+						payment.setTypePayment(TypePayment.valueOf(type));
 						payment.setStatus(StatusPayment.valueOf(status));
 						payment.setValue(value);
 						
 						{{systemName}}MainScreenP.facade.insertPayment(payment); 
-						PaymentTableModel model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments());
+						PaymentTableModel model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPaymentList());
 							
 						acaoType(payment);
 						
@@ -443,7 +443,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 							
 							{{systemName}}MainScreenP.facade.updatePayment(payment);
 							PaymentTableModel model;
-							model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments());
+							model = new PaymentTableModel({{systemName}}MainScreenP.facade.getPaymentList());
 							table.setModel(model);
 						} catch (PaymentNotFoundException e1) {
 							JOptionPane
@@ -479,7 +479,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				Payment payment = null;
 
 				try {
-					payment=  new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments()).get(rowIndex);
+					payment=  new PaymentTableModel({{systemName}}MainScreenP.facade.getPaymentList()).get(rowIndex);
 				
 					
 					comboBoxIdRegistration.setSelectedItem(String.valueOf(payment.getIdRegistration()));
@@ -511,7 +511,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				}
 				
 				try {
-					Payment payment = new PaymentTableModel({{systemName}}MainScreenP.facade.getPayments()).get(rowIndex);
+					Payment payment = new PaymentTableModel({{systemName}}MainScreenP.facade.getPaymentList()).get(rowIndex);
 					{{systemName}}MainScreenP.facade.removePayment(payment.getIdPayment());
 					PaymentTableModel model = (PaymentTableModel) table.getModel();
 					model.removePayment(rowIndex);

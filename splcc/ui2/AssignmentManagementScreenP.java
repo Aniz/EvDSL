@@ -262,7 +262,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		
 		try {
 			AssignmentTableModel model;
-			model = new AssignmentTableModel({{systemName}}MainScreenP.facade.getAssignments());	
+			model = new AssignmentTableModel({{systemName}}MainScreenP.facade.getAssignmentList());	
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			e.printStackTrace();
@@ -387,7 +387,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				//#if ${InsertAuthors} == "T"
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
-				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthors();
+				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
 							
 				for(SubmissionAuthor sa : submissionAuthor){
 					if(sa.getIdSubmission() == idSubmission){
@@ -400,7 +400,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				
 				//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
-				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUsers();
+				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUserList();
 							
 				for(SubmissionUser su : submissionUser){
 					if(su.getIdSubmission() == idSubmission){
@@ -423,27 +423,27 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
-					enviarEmails(reviewer1, submission, review1);
-					//#endif
+				{% if 'notificationsDeadline' in data.statments %}
+					LibraryOfDSL.enviarEmails(reviewer1, submission, review1);
+				{% endif %}
 				}
 				if(resultAutomaticConflict2 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
-					enviarEmails(reviewer2, submission, review2);
-					//#endif
+				{% if 'notificationsDeadline' in data.statments %}
+					LibraryOfDSL.enviarEmails(reviewer2, submission, review2);
+				{% endif %}
 				}
 				if(resultAutomaticConflict3 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"	
-					enviarEmails(reviewer3, submission, review3);
-					//#endif
+				{% if 'notificationsDeadline' in data.statments %}
+					LibraryOfDSL.enviarEmails(reviewer3, submission, review3);
+				{% endif %}
 				}
 				
 			} catch (RepositoryException e1) {
@@ -521,7 +521,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 			int rowIndex = table.getSelectedRow();
 
 			try {
-				assignmentSelecionado =  new AssignmentTableModel({{systemName}}MainScreenP.facade.getAssignments()).get(rowIndex);
+				assignmentSelecionado =  new AssignmentTableModel({{systemName}}MainScreenP.facade.getAssignmentList()).get(rowIndex);
 			} catch (RepositoryException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -533,7 +533,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	private void populateTableReviewer(){
 		try {
 			ReviewerTableModel model;
-			model = new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewers());
+			model = new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewerList());
 
 			tableReviewer.setModel(model);
 			
@@ -591,39 +591,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		}
 	}
 	
-	//#if ${NotificationsDeadline} == "T" or ${NotificationsPaperAssignemnt} == "T" or ${NotificationsAceptanceRejection} == "T"
-	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
-		User user = new User();
-		try {
-			user = {{systemName}}MainScreenP.facade.searchUser(reviewer.getIdUser());
-		} catch (UserNotFoundException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (RepositoryException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (UserAlreadyInsertedException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		}
-		
-		try {
-			{{systemName}}MainScreenP.facade.emailNotification(user, review);
-		} catch (EmailException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	//#endif
-	
 	private class LeftButtonAction  implements ActionListener{ 
 
 		@Override
@@ -648,7 +615,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 			
 			try {
 				
-				reviewerRight =  new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewers()).get(rowIndex);
+				reviewerRight =  new ReviewerTableModel({{systemName}}MainScreenP.facade.getReviewerList()).get(rowIndex);
 				if(listaRevisoresSelecionados.size() < 3){
 					listaRevisoresSelecionados.add(reviewerRight);
 					ReviewerTableModel model;
@@ -687,7 +654,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					Submission sub = {{systemName}}MainScreenP.facade.searchSubmission(subId);
 					String keywords = sub.getKeywords();
 					String keywordsSplit[] = keywords.split(Pattern.quote(","));
-					reviewerList = {{systemName}}MainScreenP.facade.getReviewers();
+					reviewerList = {{systemName}}MainScreenP.facade.getReviewerList();
 					boolean flag;
 
 					

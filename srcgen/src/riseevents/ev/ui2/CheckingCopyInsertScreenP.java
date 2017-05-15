@@ -270,7 +270,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 						checkingCopy.setIdUser(userId);
 						checkingCopy.setIdRegistration(registrationId);
 						checkingCopy.setDateOfIssue(date);
-						checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(type));
+						checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(type));
 				
 						RiseEventsMainScreenP.facade.insertCheckingCopy(checkingCopy);
 

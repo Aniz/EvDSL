@@ -68,7 +68,7 @@ public class RegistrationListAllScreenP extends JInternalFrame {
 		
 		
 		try {
-			model = new RegistrationTableModel({{systemName}}MainScreenP.facade.getRegistrations());
+			model = new RegistrationTableModel({{systemName}}MainScreenP.facade.getRegistrationList());
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",

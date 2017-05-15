@@ -108,8 +108,8 @@ public class {{systemName}}Facade {
 		return {{dep|lower}}List.get{{dep}}List();
 	}
 	{% if deb != 'Registration' %}
-	public {{dep}} search{{dep}}(int idEntity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
-		return {{dep|lower}}List.search(idEntity);
+	public {{dep}} search{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
+		return {{dep|lower}}List.search(Entity);
 	}
 	{% endif %}
 	public int get{{dep}}LastId() throws RepositoryException{
@@ -221,6 +221,9 @@ public class {{systemName}}Facade {
 	public List<Submission> getSubmissionsByUser(int idUser) throws RepositoryException{
 		return submissionList.getSubmissionsByUser(idUser);
 	}
+	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
+		return submissionList.getSubmissionIdByTitle(submissionTitle);
+	}
 {% endif %}
 {% if 'CheckingCopy' in data %}
 	{% if 'checkingCopyAtestado' in data.Reviewer.option.statments %}
@@ -235,7 +238,6 @@ public class {{systemName}}Facade {
 	{% endif %}
 {% endif %}
 {% if 'Reviewer' in data %}	
-	
 	//if Reviewer and Submission -> Review is enable 
 	//Review Feature
 	{% if 'Submission' in data %}			
@@ -250,12 +252,6 @@ public class {{systemName}}Facade {
 	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
 		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
-
-	{% if 'notificationsDeadline' in data.Reviewer.option.statments or 'notificationsPaperAssignemnt' in data.Reviewer.option.statments or 'notificationsAceptanceRejection' in data.Reviewer.option.statments%}
-	public void emailNotification (User user, Review review) throws EmailException{
-		assignmentList.emailNotification(user, review);
-	}
-	{% endif %}
 {% endif %}
 	
 }

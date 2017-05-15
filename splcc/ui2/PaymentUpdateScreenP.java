@@ -214,7 +214,7 @@ setTitle("Insert Payment");
 			}
 			
 			payment.setIdRegistration(registration);
-			payment.setPaymentType(TypePayment.valueOf(paymentType));
+			payment.setTypePayment(TypePayment.valueOf(paymentType));
 			payment.setStatus(StatusPayment.valueOf(status));
 			payment.setValue(value);
 			payment.setBarcode(barcode);
@@ -246,7 +246,7 @@ setTitle("Insert Payment");
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Registration> list = {{systemName}}MainScreenP.facade.getRegistrations();
+			List<Registration> list = {{systemName}}MainScreenP.facade.getRegistrationList();
 			Iterator<Registration> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxRegistration.addItem(iterator.next().getIdRegistration());

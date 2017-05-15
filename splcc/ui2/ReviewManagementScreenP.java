@@ -240,7 +240,7 @@ public class ReviewManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			ReviewTableModel model;
-			model = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviews());
+			model = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviewList());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -288,7 +288,7 @@ public class ReviewManagementScreenP extends JInternalFrame{
 					review.setStatus(status);
 					
 					//Atualizar JTable
-					ReviewTableModel model = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviews());
+					ReviewTableModel model = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviewList());
 					
 					{{systemName}}MainScreenP.facade.insertReview(review); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 				
@@ -335,8 +335,8 @@ public class ReviewManagementScreenP extends JInternalFrame{
 			}
 			
 			try {
-				Review review = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviews()).get(rowIndex);
-				{{systemName}}MainScreenP.facade.removeReview(review.getIdReview());
+				Review review = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviewList()).get(rowIndex);
+				{{systemName}}MainScreenP.facade.removeReview(review);
 				ReviewTableModel model = (ReviewTableModel) table.getModel();
 				model.removeReview(rowIndex);
 				table.setModel(model);
@@ -397,7 +397,7 @@ public class ReviewManagementScreenP extends JInternalFrame{
 					try {
 						{{systemName}}MainScreenP.facade.updateReview(reviewNew);
 						ReviewTableModel model;
-						model = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviews());
+						model = new ReviewTableModel({{systemName}}MainScreenP.facade.getReviewList());
 						table.setModel(model);
 					} catch (ReviewNotFoundException e1) {
 						JOptionPane
@@ -436,7 +436,7 @@ public class ReviewManagementScreenP extends JInternalFrame{
 			Review reviewOld = null;
 
 			try {
-				reviewOld=  new ReviewTableModel({{systemName}}MainScreenP.facade.getReviews()).get(rowIndex);
+				reviewOld=  new ReviewTableModel({{systemName}}MainScreenP.facade.getReviewList()).get(rowIndex);
 			
 				lblLastReviewId.setText(String.valueOf(reviewOld.getIdReview()));
 				submissionIdcomboBox.setSelectedItem(reviewOld.getIdSubmission());

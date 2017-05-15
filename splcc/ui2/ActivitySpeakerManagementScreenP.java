@@ -152,7 +152,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 		comboBoxEvent.addActionListener(selectEventAction);
 		btnBack.addActionListener(backAction);
 		
-		populateTableSpeakres();
+		populateTableSpeakers();
 		
 		//carregarActivityComboBox();
 		carregarEventComboBox();
@@ -178,7 +178,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 			Speaker speaker = null;
 
 			try {
-				speaker =  new SpeakerTableModel({{systemName}}MainScreenP.facade.getSpeakers()).get(rowIndex);
+				speaker =  new SpeakerTableModel({{systemName}}MainScreenP.facade.getSpeakerList()).get(rowIndex);
 				int idActivity = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Criando ActivitySpeaker
 				ActivitySpeaker activitySpeaker = new ActivitySpeaker();
@@ -217,7 +217,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 			ActivitySpeaker activitySpeaker = null;
 			
 			try {
-				activitySpeaker = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesSpeakers()).get(rowIndex);
+				activitySpeaker = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesSpeakerList()).get(rowIndex);
 				{{systemName}}MainScreenP.facade.removeActivitySpeaker(activitySpeaker);
 				//Atualizando a tabela
 				int i;
@@ -304,10 +304,10 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 	}
 	
 	
-	private void populateTableSpeakres(){
+	private void populateTableSpeakers(){
 		try {
 			SpeakerTableModel model;
-			model = new SpeakerTableModel({{systemName}}MainScreenP.facade.getSpeakers());
+			model = new SpeakerTableModel({{systemName}}MainScreenP.facade.getSpeakerList());
 
 			tableSpeakers.setModel(model);
 			
@@ -322,7 +322,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

@@ -195,7 +195,7 @@ setTitle("Update Registration");
 	
 	private void carregarUserComboBox(){
 		try {
-			List<User> list = {{systemName}}MainScreenP.facade.getUsers();
+			List<User> list = {{systemName}}MainScreenP.facade.getUserList();
 			Iterator<User> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxUser.addItem(iterator.next().getNameUser());

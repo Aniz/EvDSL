@@ -190,7 +190,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 				Submission submission;
 				boolean validacao = {{systemName}}MainScreenP.facade.isThereReviewer(Integer.valueOf(textFieldUserId.getText()));
 				if(validacao == true){
-					List<Assignment> assignments = {{systemName}}MainScreenP.facade.getAssignments();
+					List<Assignment> assignments = {{systemName}}MainScreenP.facade.getAssignmentList();
 					for(Assignment a : assignments){
 						if(textFieldUserId.getText().equals(a.getIdReviwerUser())){
 							submission = {{systemName}}MainScreenP.facade.searchSubmission(a.getIdReviewSubmission());
@@ -293,7 +293,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 		title = submissionComboBox.getSelectedItem().toString();
 		try {
 			int submissionid = {{systemName}}MainScreenP.facade.getSubmissionIdByTitle(title);
-			reviews = {{systemName}}MainScreenP.facade.getReviews();
+			reviews = {{systemName}}MainScreenP.facade.getReviewList();
 			for(Review r : reviews){
 				if(submissionid == r.getIdSubmission()){
 					round = r.getRound();
@@ -354,7 +354,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 //		SubmissionAuthor authorSubmission = new SubmissionAuthor();
 //		List<SubmissionAuthor> submissionAuthorList = null;
 //		try {
-//			submissionAuthorList = {{systemName}}MainScreenP.facade.getSubmissionAuthors();
+//			submissionAuthorList = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
 //		} catch (RepositoryException e) {
 //			JOptionPane.showMessageDialog(getContentPane(),
 //					e.toString(), "Erro",
