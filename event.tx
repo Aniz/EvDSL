@@ -87,7 +87,7 @@ NewData:
 
 ActionType:
   'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyperActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'program' | 'importantDates' | 'reportsFrequencyperEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
-   | 'notificationsDeadline' | 'insertAttachment' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection'
+   | 'notificationsDeadline' | 'insertAttachment' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection' | 'interestConflict'
 ;
 
 // Special rule for comments. Comments start with //

@@ -2,9 +2,7 @@
 package riseevents.ev.table;
 
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 import riseevents.ev.data.Assignment;
 
 public class AssignmentTableModel extends AbstractTableModel{
@@ -15,7 +13,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 		private static final int COL_SUBMISSIONID = 1;
 		private static final int COL_REVIEWID = 2;
 		private static final int COL_DATE = 3;
-		private static final int COL_TYPEASSIGNMENT = 4;
 		
 		// Lista de Valores
 		private List<Assignment> rows;
@@ -30,7 +27,7 @@ public class AssignmentTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return 4;
 		}
 		
 		//Preenchimento de cada coluna
@@ -44,9 +41,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 					return assignment.getIdReview();
 				}	else if (columnIndex == COL_DATE) {
 					return assignment.getDate();
-				}
-				else if (columnIndex == COL_TYPEASSIGNMENT) {
-					return assignment.getTypeAssignment();
 				}
 				return null;
 			}
@@ -67,10 +61,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 				case COL_DATE:
 					coluna = "Date";
 					break;
-				case COL_TYPEASSIGNMENT:
-					coluna = "Tipo";
-					break;
-				
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -87,9 +77,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 				}else if (columnIndex == COL_REVIEWID) {
 					return int.class;
 				} else if (columnIndex == COL_DATE) {
-					return String.class;
-				}
-				else if (columnIndex == COL_TYPEASSIGNMENT) {
 					return String.class;
 				}
 				return null;
@@ -116,8 +103,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setIdReviwerUser(assignment.getIdReviwerUser());
 				rows.get(indiceLinha).setIdReviewSubmission(assignment.getIdReviewSubmission());
 				rows.get(indiceLinha).setDate(assignment.getDate());
-				rows.get(indiceLinha).setTypeAssignment(assignment.getTypeAssignment());
-			
 				fireTableDataChanged();
 			}
 			

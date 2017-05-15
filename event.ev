@@ -34,10 +34,6 @@ add Activity
 		Workshop,
 		MainTrack = hidden.
 
-//update
-add Assignment
-	show Insert Search Remove ListAll
-	types Associado,Profissional,Estudante.
 
 //insert Update
 add Submission
@@ -45,14 +41,13 @@ add Submission
 	types Completa,Parcial.
 
 add Author
-	show in User
+show in User
 	types Associado,Profissional,Estudante.
 
 add CheckingCopy
 show Insert Update Remove Search ListAll
 	types Atestado,Certificado.
 
-include Conflit.
 include Bugtrack.
 
 if Payment.Credito -> askCardInfo 
@@ -68,6 +63,8 @@ if CheckiCopy.Certificado -> checkingCopyCertificado
 def Event -> program
 def Event -> importantDates
 if Submission.Completa -> insertAttachment
+
 if Assignment -> notificationsDeadline
 if Assignment -> notificationsPaperAssignemnt 
 if Assignment -> notificationsAceptanceRejection 
+if Assignment -> interestConflict 

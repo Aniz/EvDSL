@@ -95,13 +95,13 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 		getContentPane().add(lblRegistration);
 		
 	{% if data.option.categories|length > 0 %}
-		JLabel lblCheckingCopyType = new JLabel("CheckingCopy Type:");
-		lblCheckingCopyType.setBounds(17, 113, 153, 16);
-		getContentPane().add(lblCheckingCopyType);
+		JLabel lblTypeCheckingCopy = new JLabel("CheckingCopy Type:");
+		lblTypeCheckingCopy.setBounds(17, 113, 153, 16);
+		getContentPane().add(lblTypeCheckingCopy);
 		
-		comboBoxCheckingCopyType = new JComboBox();
-		comboBoxCheckingCopyType.setBounds(146, 109, 159, 27);
-		getContentPane().add(comboBoxCheckingCopyType);
+		comboBoxTypeCheckingCopy = new JComboBox();
+		comboBoxTypeCheckingCopy.setBounds(146, 109, 159, 27);
+		getContentPane().add(comboBoxTypeCheckingCopy);
 	{% endif %}	
 		JLabel lblDate = new JLabel("Date:");
 		lblDate.setBounds(376, 113, 61, 16);
@@ -149,7 +149,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 		List<String> names = new ArrayList<String>();
 		for(int i=0; i<types.length; i++){
 			names.add(i, types[i].name());
-			comboBoxCheckingCopyType.addItem(types[i].name());
+			comboBoxTypeCheckingCopy.addItem(types[i].name());
 		}
 		
 		carregarRegistrationComboBox();
@@ -263,7 +263,7 @@ public class CheckingCopyInsertScreenP extends JInternalFrame {
 			int registrationId = registration.getIdRegistration();
 			int userId = user.getIdUser();
 			String date = textFieldDate.getText();
-			String type = comboBoxCheckingCopyType.getSelectedItem().toString();
+			String type = comboBoxTypeCheckingCopy.getSelectedItem().toString();
 			
 			if (userId == -1 || registrationId == -1 || date.equals("") || type.equals("")) {
 				JOptionPane.showMessageDialog(getContentPane(),

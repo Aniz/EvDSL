@@ -1,9 +1,9 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
 package riseevents.ev.ui2;
 
-import riseevents.ev.util.LibraryOfDSL;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,23 +12,26 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.mail.EmailException;
 
 import riseevents.ev.data.Assignment;
 //#if ${InsertAuthors} == "T"
+import riseevents.ev.data.Author;
 //#endif
-
 import riseevents.ev.data.Review;
 import riseevents.ev.data.Review.StatusReview;
 import riseevents.ev.data.Reviewer;
@@ -36,55 +39,66 @@ import riseevents.ev.data.Submission;
 //#if ${InsertAuthors} == "T"
 import riseevents.ev.data.SubmissionAuthor;
 //#endif
-//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 import riseevents.ev.data.SubmissionUser;
-//#endif
 import riseevents.ev.data.User;
 import riseevents.ev.exception.AssignmentAlreadyInsertedException;
+import riseevents.ev.exception.AssignmentNotFoundException;
 //#if ${InsertAuthors} == "T"
-import riseevents.ev.data.Author;
 import riseevents.ev.exception.AuthorAlreadyInsertedException;
 import riseevents.ev.exception.AuthorNotFoundException;
 //#endif
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.exception.ReviewAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerNotFoundException;
 import riseevents.ev.exception.SubmissionAlreadyInsertedException;
 import riseevents.ev.exception.SubmissionNotFoundException;
 import riseevents.ev.exception.UserAlreadyInsertedException;
 import riseevents.ev.exception.UserNotFoundException;
+import riseevents.ev.table.AssignmentTableModel;
 import riseevents.ev.table.ReviewerTableModel;
+//#if ${ConflictofinterestAutomatic} == "T"
+import riseevents.ev.util.Conflict;
+//#endif
+import riseevents.ev.util.Email;
 
-public class AssignmentInsertScreenP extends JInternalFrame{
+public class AssignmentManagementScreenP extends JInternalFrame {
 
-	private static AssignmentInsertScreenP instanceAssignmentInsertScreenP;
-	private JTextField textFieldDate;
-	private JComboBox comboBoxSubmission;
+	
+	private static AssignmentManagementScreenP instanceAssignmentManagementScreenP;
+	private JPanel contentPane;
+	private JTable table;
 	
 	private JTable tableReviewer;
 	private JTable tableSelectReviewer;
 	
+	private JButton btnBack;
 	//#if ${Assignmentautomatic} == "T"
 	private JButton btnGenerate;
 	//#endif
+	private JTextField textFieldDate;
+	private JTable table_1;
+	
+	private JComboBox comboBoxSubmission;
 	
 	private List<Reviewer> listaRevisoresSelecionados = new ArrayList<Reviewer>();
 	
 	private Submission submissionSelecionado = new Submission();
 	
-	public static AssignmentInsertScreenP getInstanceAssignmentInsertScreenP() {
-		if (instanceAssignmentInsertScreenP == null) {
-			AssignmentInsertScreenP.instanceAssignmentInsertScreenP = new AssignmentInsertScreenP();
-		}
-		return AssignmentInsertScreenP.instanceAssignmentInsertScreenP;
-	}
+	private Assignment assignmentSelecionado = new Assignment();
 	
+	public static AssignmentManagementScreenP getInstanceAssignmentManagementScreenP() {
+		if (instanceAssignmentManagementScreenP == null) {
+			AssignmentManagementScreenP.instanceAssignmentManagementScreenP = new AssignmentManagementScreenP();
+		}
+		return AssignmentManagementScreenP.instanceAssignmentManagementScreenP;
+	}
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AssignmentInsertScreenP frame = new AssignmentInsertScreenP();
+					AssignmentManagementScreenP frame = new AssignmentManagementScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -96,85 +110,140 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	/**
 	 * Create the frame.
 	 */
-	public AssignmentInsertScreenP() {
-		setTitle("Insert Assignment");
+	public AssignmentManagementScreenP() {
+		setTitle("Assignment Management");
 		
 		int inset = 30;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds(inset, inset, 736,
-				480);
+		setBounds(inset, inset, 736,480);
 		
 		setMaximizable(true);
 		setClosable(true);
 		setIconifiable(true);
-		getContentPane().setLayout(null);
 		
 		SelectComboSubmissionAction selectSubmissionAction = new SelectComboSubmissionAction();
-		InsertButtonAction insertAction = new InsertButtonAction();
-		BackButtonAction backAction = new BackButtonAction();
 		RightButtonAction buttonInsertRigthAction = new RightButtonAction();
 		LeftButtonAction buttonInsertLeftAction = new LeftButtonAction();
+		InsertButtonAction insertAction = new InsertButtonAction(); 
+		RemoveButtonAction removeAction = new RemoveButtonAction(); 
+		SelectButtonAction selectAction = new SelectButtonAction(); 
+		CleanButtonAction cleanAction = new CleanButtonAction();
+		BackButtonAction backAction = new BackButtonAction();
 		//#if ${Assignmentautomatic} == "T"
 		GenerateButtonAction generateAction = new GenerateButtonAction();
 		//#endif
-		JLabel lblSubmission = new JLabel("Submission:");
-		lblSubmission.setBounds(6, 71, 80, 16);
-		getContentPane().add(lblSubmission);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 728, 480);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		comboBoxSubmission = new JComboBox();
-		comboBoxSubmission.setBounds(86, 67, 606, 27);
-		getContentPane().add(comboBoxSubmission);
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBounds(147, 17, 413, 72);
+		contentPane.add(panel);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(6, 6, 399, 60);
+		ImageIcon image = new ImageIcon(getClass().getResource("/images/riseLabs.png"));
+		Image imag = image.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+		label.setIcon(new ImageIcon(imag));
+		panel.add(label);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(6, 97, 680, 164);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
 		
 		JLabel lblDate = new JLabel("Date:");
-		lblDate.setBounds(514, 23, 61, 16);
-		getContentPane().add(lblDate);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(48, 133, 202, 246);
-		getContentPane().add(scrollPane);
-		
-		tableReviewer = new JTable();
-		scrollPane.setViewportView(tableReviewer);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(427, 133, 228, 246);
-		getContentPane().add(scrollPane_1);
-		
-		tableSelectReviewer = new JTable();
-		scrollPane_1.setViewportView(tableSelectReviewer);
+		lblDate.setBounds(499, 12, 61, 16);
+		panel_1.add(lblDate);
 		
 		textFieldDate = new JTextField();
-		textFieldDate.setBounds(558, 17, 134, 28);
-		getContentPane().add(textFieldDate);
+		textFieldDate.setBounds(540, 6, 134, 28);
+		panel_1.add(textFieldDate);
 		textFieldDate.setColumns(10);
 		
+		JLabel label_1 = new JLabel("Submission:");
+		label_1.setBounds(6, 12, 88, 16);
+		panel_1.add(label_1);
+		
+		comboBoxSubmission = new JComboBox();
+		comboBoxSubmission.setBounds(84, 8, 403, 27);
+		panel_1.add(comboBoxSubmission);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(16, 47, 202, 111);
+		panel_1.add(scrollPane_1);
+		
+		tableReviewer = new JTable();
+		scrollPane_1.setViewportView(tableReviewer);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(424, 40, 228, 118);
+		panel_1.add(scrollPane_2);
+		
 		JButton buttonInsert = new JButton("-->");
-		buttonInsert.setBounds(280, 184, 117, 29);
-		getContentPane().add(buttonInsert);
+		buttonInsert.setBounds(263, 61, 117, 29);
+		panel_1.add(buttonInsert);
 		
 		JButton buttonRemove = new JButton("<--");
-		buttonRemove.setBounds(280, 225, 117, 29);
-		getContentPane().add(buttonRemove);
+		buttonRemove.setBounds(263, 102, 117, 29);
+		panel_1.add(buttonRemove);
+		
+		
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(6, 309, 716, 143);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		tableSelectReviewer = new JTable();
+		scrollPane_2.setViewportView(tableSelectReviewer);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 6, 689, 118);
+		panel_2.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		
 		JButton btnInsert = new JButton("Insert");
-		btnInsert.setBounds(194, 399, 117, 29);
-		getContentPane().add(btnInsert);
+		btnInsert.setBounds(6, 273, 117, 29);
+		contentPane.add(btnInsert);
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(366, 399, 117, 29);
-		getContentPane().add(btnBack);
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.setBounds(127, 273, 117, 29);
+		contentPane.add(btnRemove);
+		
+		JButton btnSelect = new JButton("Select");
+		btnSelect.setBounds(377, 273, 117, 29);
+		contentPane.add(btnSelect);
+		
+		JButton btnClean = new JButton("Clean");
+		btnClean.setBounds(494, 273, 117, 29);
+		contentPane.add(btnClean);
+		
+		btnBack = new JButton("Back");
+		btnBack.setBounds(605, 273, 117, 29);
+		contentPane.add(btnBack);
 		
 		JList list = new JList();
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
 		//#if ${Assignmentautomatic} == "T"
-		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(280, 358, 117, 29);
-		getContentPane().add(btnGenerate);
+		btnGenerate = new JButton("Generate");
+		btnGenerate.setBounds(248, 273, 117, 29);
+		contentPane.add(btnGenerate);
 		//#endif
 		
+		//PASSO 2
 		btnInsert.addActionListener(insertAction);
+		btnRemove.addActionListener(removeAction);
+		btnSelect.addActionListener(selectAction);
+		btnClean.addActionListener(cleanAction);
 		btnBack.addActionListener(backAction);
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
@@ -182,9 +251,22 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		btnGenerate.addActionListener(generateAction);
 		//#endif
 		
+		populateTable();
 		populateTableReviewer();
 		carregarComboSubmission();
 		comboBoxSubmission.addActionListener(selectSubmissionAction);
+		
+	}
+	
+	private void populateTable(){
+		
+		try {
+			AssignmentTableModel model;
+			model = new AssignmentTableModel(RiseEventsMainScreenP.facade.getAssignmentList());	
+			table.setModel(model);
+		} catch (RepositoryException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -193,8 +275,22 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			AssignmentInsertScreenP.instanceAssignmentInsertScreenP = null;
+			AssignmentManagementScreenP.instanceAssignmentManagementScreenP = null;
 		}
+	}
+	
+	private class CleanButtonAction  implements ActionListener{ 
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			cleanFields();
+		}
+	}
+	
+	private void cleanFields(){
+		comboBoxSubmission.setSelectedIndex(0);
+		textFieldDate.setText("");
 	}
 	
 	private class InsertButtonAction  implements ActionListener{ 
@@ -224,7 +320,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 			}
 			
 			try {
-				
+
 				assignment1 = new Assignment();
 				assignment2 = new Assignment();
 				assignment3 = new Assignment();
@@ -239,8 +335,9 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				assignment3.setDate(date);
 				
 				int idSubmission;
-				
 				idSubmission = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(idsubmission);
+				
+			
 				
 				Submission submission = RiseEventsMainScreenP.facade.searchSubmission(idSubmission);
 				assignment1.setIdReviewSubmission(idSubmission);
@@ -263,7 +360,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				reviewer2 = listaRevisoresSelecionados.get(1);
 				reviewer3 = listaRevisoresSelecionados.get(2);
 				
-				
+
 				RiseEventsMainScreenP.facade.insertReview(review1);
 				int lastIdReview1 = RiseEventsMainScreenP.facade.getReviewLastId();
 				assignment1.setIdReview(lastIdReview1 - 1);
@@ -298,7 +395,9 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 					}
 				}
 				//#endif
+				
 				User user = new User();
+				
 				//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
@@ -309,7 +408,6 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 					}
 				}
 				//#endif
-				
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
@@ -318,21 +416,21 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
 				
 				if(resultAutomaticConflict1 == true){
-				JOptionPane.showMessageDialog(getContentPane(),
+					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					LibraryOfDSL.enviarEmails(reviewer1, submission, review1);
 				}
 				if(resultAutomaticConflict2 == true){
-				JOptionPane.showMessageDialog(getContentPane(),
+					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					LibraryOfDSL.enviarEmails(reviewer2, submission, review2);
 				}
 				if(resultAutomaticConflict3 == true){
-				JOptionPane.showMessageDialog(getContentPane(),
+					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
@@ -364,7 +462,6 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
-				
 			} 
 			//#if ${InsertAuthors} == "T"
 			catch (AuthorNotFoundException e1) {
@@ -375,6 +472,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				e1.printStackTrace();
 			}
 			//#endif
+				
 			catch (UserNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -382,9 +480,61 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-			}
+			}		
 		}
+	
+	private class RemoveButtonAction  implements ActionListener{ 
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			try {
+				RiseEventsMainScreenP.facade.removeAssignment(assignmentSelecionado);
+				JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
+			} catch (AssignmentNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (RepositoryException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (AssignmentAlreadyInsertedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				
+		}
+	}
+	
+	private class SelectButtonAction  implements ActionListener{ 
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int rowIndex = table.getSelectedRow();
+
+			try {
+				assignmentSelecionado =  new AssignmentTableModel(RiseEventsMainScreenP.facade.getAssignmentList()).get(rowIndex);
+			} catch (RepositoryException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+	}
+	
+	private void populateTableReviewer(){
+		try {
+			ReviewerTableModel model;
+			model = new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewerList());
+
+			tableReviewer.setModel(model);
+			
+		} catch (RepositoryException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		}
+	}
 	
 	private void carregarComboSubmission(){
 		try {
@@ -432,51 +582,6 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		}
 	}
 	
-	private List<Reviewer> retornarReviewersSubmission(){
-		List<Reviewer> reviewerList = new ArrayList<Reviewer>();
-		List<String> keyWords;
-		Submission submissionSelecionado = null;
-		int idSubmission;
-		try {
-			reviewerList = RiseEventsMainScreenP.facade.getReviewerList();
-			
-			idSubmission = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(comboBoxSubmission.getSelectedItem().toString());
-			submissionSelecionado = RiseEventsMainScreenP.facade.searchSubmission(idSubmission);
-			keyWords = LibraryOfDSL.quebrarKeywords(submissionSelecionado);
-			
-			Iterator<String> iteratorKeywords = keyWords.iterator();
-			while(iteratorKeywords.hasNext()){
-				reviewerList.add(RiseEventsMainScreenP.facade.getReviewerByknowledgeArea(iteratorKeywords.next()));
-			}
-		} catch (RepositoryException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (SubmissionNotFoundException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		} catch (SubmissionAlreadyInsertedException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		} catch (ReviewerNotFoundException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		} catch (ReviewerAlreadyInsertedException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		}
-		return reviewerList;
-	}
-	
 	private class LeftButtonAction  implements ActionListener{ 
 
 		@Override
@@ -522,22 +627,6 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 			
 		}
 	}
-	
-	private void populateTableReviewer(){
-		try {
-			ReviewerTableModel model;
-			model = new ReviewerTableModel(RiseEventsMainScreenP.facade.getReviewerList());
-
-			tableReviewer.setModel(model);
-			
-		} catch (RepositoryException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	
 	
 	//#if ${Assignmentautomatic} == "T"
 	private class GenerateButtonAction  implements ActionListener{ 

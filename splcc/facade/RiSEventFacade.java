@@ -513,8 +513,8 @@ public class {{sy}}Facade {
 	
 	//REGISTRATION
 	
-	public List<Registration> getRegistrations() throws RepositoryException{
-		return registrations.getRegistrations();
+	public List<Registration> getRegistrationList() throws RepositoryException{
+		return registrations.getRegistrationList();
 	}
 	
 	public Registration searchRegistration(int idRegistration) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{

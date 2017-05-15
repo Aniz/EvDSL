@@ -33,8 +33,8 @@ public class ActivityControl {
             throw new IllegalArgumentException();
         }
 	}
-	public void remove(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		activitieList.remove(idActivity);
+	public void remove(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
+		activitieList.remove(activity);
 	}
 	public void update(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
 		activitieList.update(activity);

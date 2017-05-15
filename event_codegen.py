@@ -93,9 +93,9 @@ def main(debug=False):
     commandsOptionDict = {}
     dependenceDict = {}
     
-    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Assignment","Submission","Review","Author","Receipt","CheckingCopy"]
+    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Submission","Review","Author","Receipt","CheckingCopy"]
     avaliableFunctions = ["Insert","Remove","Update","Search","ListAll","Search","Management"]
-    avaliableDependencesArray = ["Review","ActivityUser","ActivitySpeaker","ActivityOrganizer","SubmissionAuthor","SubmissionUser","Registration"]
+    avaliableDependencesArray = ["Review","ActivityUser","ActivitySpeaker","ActivityOrganizer","SubmissionAuthor","SubmissionUser","Registration","Assignment"]
     chosenFunctions = []
     
     #Get options from model
@@ -108,6 +108,7 @@ def main(debug=False):
                 component.new = True
             selectedOptionsArray.append(component.entity)
             componentDict[component.entity] = {"option":component}
+            componentDict[component.entity]["statments"] = {}
             
             #Get commands from model
             commandsArray = []
@@ -121,20 +122,31 @@ def main(debug=False):
         elif component.__class__.__name__ == 'Statment':
             statmentsArray.append(component)
     
+    #DepedentClassses
+    dependencesDict = {} 
+    dependencesDict["Review"] = "Reviewer","Submission"
+    dependencesDict["ActivityUser"] = "User","Activity"
+    dependencesDict["ActivitySpeaker"] = "Speaker","Activity"
+    dependencesDict["ActivityOrganizer"] = "Organizer","Activity"
+    dependencesDict["SubmissionAuthor"] = "Submission","Author"
+    dependencesDict["SubmissionUser"] = "Submission","User"
+    dependencesDict["Registration"] = "User","Event"
+    dependencesDict["Assignment"] = "User","Reviewer","Submission"
+    
+    dependenceDict = {} 
+    for depK,depV in dependencesDict.items():
+        dependenceDict[depK] = {}
+        dependenceDict[depK]["statments"] = {}
+           
     #Get statments from model
-    statmentDict = {}
     for statment in statmentsArray:
         if statment.entity in selectedOptionsArray or statment.entity in avaliableDependencesArray:
-            statmentDict = {}
             if statment.entity in selectedOptionsArray:
-                statmentDict[statment.actionType] = statment
-                componentDict[statment.entity]["statments"] = statmentDict    
+                componentDict[statment.entity]["statments"][statment.actionType] = {}    
+                componentDict[statment.entity]["statments"][statment.actionType] = statment    
             elif statment.entity in avaliableDependencesArray:
-                statmentDict[statment.actionType] = statment
-                dependenceDict[statment.entity] = {}       
-                dependenceDict[statment.entity]["statments"] = statmentDict  
-            else:             
-                dependenceDict[statment.entity]["statments"] = []
+                dependenceDict[statment.entity]["statments"][statment.actionType] = {}    
+                dependenceDict[statment.entity]["statments"][statment.actionType] = statment    
         else:
             print("[warning] Option '%s' of method '%s' not found" % (statment.entity,statment.actionType)) 
     
@@ -142,17 +154,8 @@ def main(debug=False):
     for key,value in componentDict.items():
         componentData = ""
         componentExtraData = ""
-        actionsKeyArray = []
         #Remove Option if the dependence is not avaliable and print a error
-        
-        if 'InterestConflict' in actionsArray:
-            #dependencesDict["Conflict"] = "Assigment","Author"
-            if("Assigment" in selectedOptionsArray and "Author" in selectedOptionsArray):
-                actionsArray.append("InterestConflict")
-                value.actions = actionsKeyArray
-                 
         if key in avaliableOptions:
-        
             if key == "CheckingCopy":
                 if componentDict.get("Activity"):
                     componentExtraData = componentDict["Activity"]
@@ -173,6 +176,7 @@ def main(debug=False):
                 else:
                    avaliableOptions.remove(key)
                    print("[Dependence Error] '%s' defined whitout Option 'Activity'"%key)
+            
             if key in avaliableOptions:
                 copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,value,componentExtraData,systemName)
                 copyCodeFile(controllerCodeFolder,controllerFolder,key+"Control",jinja_env,value,componentExtraData,systemName)
@@ -185,14 +189,14 @@ def main(debug=False):
                     #generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
                     copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData,systemName)
                 
-                if key not in ["Assignment","Author","Receipt","CheckingCopy"]:
+                if key not in ["Author","Receipt","CheckingCopy"]:
                     #generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
                     copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData,systemName)
                 
                 for keyCommand,view in enumerate(value["commands"]):
                     copyCodeFile(viewCodeFolder,viewFolder,key+view+"ScreenP",jinja_env,value,componentExtraData,systemName)
                 
-                if "statments" in value:
+                if len(value["statments"]) > 0:
                     for keyStatment,viewStatment in value["statments"].items():
                         if (viewStatment.condition == 'def'):
                            copyCodeFile(viewCodeFolder,viewFolder,key+upperfirst(viewStatment.actionType)+"ScreenP",jinja_env,value,componentExtraData,systemName)
@@ -210,18 +214,9 @@ def main(debug=False):
             generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Managment'+"ScreenP",jinja_env,value,componentExtraData,systemName)
 
-    #DepedentClassses
-    dependencesDict = {} 
-    dependencesDict["Review"] = "Reviewer","Submission"
-    dependencesDict["ActivityUser"] = "User","Activity"
-    dependencesDict["ActivitySpeaker"] = "Speaker","Activity"
-    dependencesDict["ActivityOrganizer"] = "Organizer","Activity"
-    dependencesDict["SubmissionAuthor"] = "Submission","Author"
-    dependencesDict["SubmissionUser"] = "Submission","User"
-    dependencesDict["Registration"] = "User","Event"
-                
     dependencesList = []
     for key,value in dependencesDict.items():
+        actionsKeyArray = []
         if all((w in selectedOptionsArray for w in value)):
             componentExtraData = ""
             componentData = ""
@@ -229,7 +224,7 @@ def main(debug=False):
             
             if key in dependenceDict:
                 componentData = dependenceDict[key]
-                
+            
             copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData,systemName)
             copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData,systemName) 
             copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,componentData,componentExtraData,systemName)
@@ -239,17 +234,17 @@ def main(debug=False):
 
             if key not in ["SubmissionAuthor","SubmissionUser"]:            
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,componentData,componentExtraData,systemName)
-            if key not in ["SubmissionAuthor","SubmissionUser","Registration"]:
+            if key not in ["SubmissionAuthor","SubmissionUser","Registration","Assignment"]:
                 copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,componentData,componentExtraData,systemName)
             
-            if key not in ["SubmissionAuthor","SubmissionUser"]:
-                copyCodeFile(viewCodeFolder,viewFolder,key+'Management'+"ScreenP",jinja_env,value,componentExtraData,systemName)
-           
             for keyCommand,view in enumerate(avaliableFunctions):
                 keyView = key+view
-                if not ((keyView == "ActivityUserInsert") or (key != "ActivitySpeakerRemove") or (key != "ActivityUserRemove")):
-                    copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,value,componentExtraData,systemName)
-            
+                if key not in ["SubmissionAuthor","SubmissionUser"] and keyView not in ["AssignmentUpdate"]:
+                    if key in ["ActivityUser","ActivitySpeaker","ActivityOrganizer"]:
+                        copyCodeFile(viewCodeFolder,viewFolder,key+"ManagementScreenP",jinja_env,componentData,componentExtraData,systemName)
+                    else:
+                        copyCodeFile(viewCodeFolder,viewFolder,keyView+"ScreenP",jinja_env,componentData,componentExtraData,systemName)
+  
     copyCodeFile(exceptionCodeFolder,exceptionFolder,"RepositoryException",jinja_env,"","",systemName)
     copy(join(this_folder,'lib'),join(general_folder,'lib'))
     copy(join(this_folder,'images'),join(general_folder,'images'))

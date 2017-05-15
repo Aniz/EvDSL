@@ -2,9 +2,7 @@
 package {{systemName|lower}}.ev.table;
 
 import java.util.List;
-
 import javax.swing.table.AbstractTableModel;
-
 import {{systemName|lower}}.ev.data.Assignment;
 
 public class AssignmentTableModel extends AbstractTableModel{
@@ -15,12 +13,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 		private static final int COL_SUBMISSIONID = 1;
 		private static final int COL_REVIEWID = 2;
 		private static final int COL_DATE = 3;
-		{% for property in data.option.properties %}
-		private static final int COL_{{property.name|upper}} ={{loop.index+3}};
-		{% endfor %}
-		{% if data.option.categories|length > 0 %}
-		private static final int COL_TYPE{{data.option.entity|upper}} = {{4 + data.option.properties|length}};
-		{% endif %}
 		
 		// Lista de Valores
 		private List<Assignment> rows;
@@ -35,7 +27,7 @@ public class AssignmentTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return {{3 + data.option.properties|length + data.option.categories|length}};
+			return 4;
 		}
 		
 		//Preenchimento de cada coluna
@@ -50,16 +42,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 				}	else if (columnIndex == COL_DATE) {
 					return assignment.getDate();
 				}
-				{% for property in data.option.properties %}
-				else if (columnIndex == COL_{{property.name|upper}}) {
-					return assignment.get{{property.name|capitalize}}();
-				}
-				{% endfor %}
-				{% if data.option.categories|length > 0 %}
-				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
-					return assignment.getType{{data.option.entity}}();
-				}
-				{% endif %}
 				return null;
 			}
 			
@@ -79,17 +61,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 				case COL_DATE:
 					coluna = "Date";
 					break;
-				{% for property in data.option.properties %}
-				case COL_{{property.name|upper}}:
-					coluna = "{{property.alias}}";
-					break;
-				{% endfor %}
-				{% if data.option.categories|length > 0 %}
-				case COL_TYPE{{data.option.entity|upper}}:
-					coluna = "Tipo";
-					break;
-				{% endif %}
-				
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
 				}
@@ -108,16 +79,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_DATE) {
 					return String.class;
 				}
-				{% for property in data.option.properties %}
-				else if (columnIndex == COL_{{property.name|upper}}) {
-					return {{property.type|javatype}}.class;
-				}
-				{% endfor %}
-				{% if data.option.categories|length > 0 %}
-				else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
-					return String.class;
-				}
-				{% endif %}
 				return null;
 			}
 			
@@ -142,13 +103,6 @@ public class AssignmentTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setIdReviwerUser(assignment.getIdReviwerUser());
 				rows.get(indiceLinha).setIdReviewSubmission(assignment.getIdReviewSubmission());
 				rows.get(indiceLinha).setDate(assignment.getDate());
-				{% for property in data.option.properties %}
-				rows.get(indiceLinha).set{{property.name|capitalize}}(assignment.get{{property.name|capitalize}}());
-				{% endfor %}
-				{% if data.option.categories|length > 0 %}
-				rows.get(indiceLinha).setType{{data.option.entity}}(assignment.getType{{data.option.entity}}());
-				{% endif %}
-			
 				fireTableDataChanged();
 			}
 			

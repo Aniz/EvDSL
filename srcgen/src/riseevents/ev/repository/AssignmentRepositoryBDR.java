@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riseevents.ev.data.Assignment;
-import riseevents.ev.data.Assignment.TypeAssignment;
-
 import riseevents.ev.exception.AssignmentNotFoundException;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.PersistenceMechanismException;
@@ -41,15 +39,12 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 	public void insert(Assignment assignment) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission,typeAssignment) Values('"
+			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission) Values('"
 							+assignment.getIdReviwerUser() +"', '"
 				            +assignment.getIdReview()+"', '"
 				            +assignment.getDate()+"', '"
 				            +assignment.getIdReviewSubmission()
-							+"', '"+assignment.getTypeAssignment()
-				
-	        
-				            +"')");
+			                +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,7 +97,6 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
-            	assignment.setTypeAssignment(TypeAssignment.valueOf(resultset.getString("typeAssignment")));
             	
             } else {
             	throw new AssignmentNotFoundException(assignment.getIdReview());
@@ -135,10 +129,7 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
-            	assignment.setTypeAssignment(TypeAssignment.valueOf(resultset.getString("typeAssignment")));
-     
-			
-				list.add(assignment);
+		  		list.add(assignment);
             } 
 			resultset.close();
 		} catch(PersistenceMechanismException e){
@@ -165,9 +156,7 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
     	    										 "', idSubmission = '" + assignment.getIdReviewSubmission()+
     	    		                                 "', idUser = '" + assignment.getIdReviwerUser() +
     	    		                                 "', date = '"+ assignment.getDate() + 
-									                 "', typeAssignment = '"+ assignment.getTypeAssignment() +						
-    
-    	    		                                 "' WHERE idUser = '"+ assignment.getIdReviwerUser() +"' AND idReview = '"+ assignment.getIdReview() +"' AND idSubmission = '"+ assignment.getIdReviewSubmission() +"' ");
+		                                 	         "' WHERE idUser = '"+ assignment.getIdReviwerUser() +"' AND idReview = '"+ assignment.getIdReview() +"' AND idSubmission = '"+ assignment.getIdReviewSubmission() +"' ");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

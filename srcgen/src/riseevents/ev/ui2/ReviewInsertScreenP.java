@@ -1,5 +1,5 @@
 //#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-package {{systemName|lower}}.ev.ui2;
+package riseevents.ev.ui2;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,19 +20,19 @@ import javax.swing.JTextField;
 
 import org.apache.commons.mail.EmailException;
 
-import {{systemName|lower}}.ev.data.Assignment;
-import {{systemName|lower}}.ev.data.Review;
-import {{systemName|lower}}.ev.data.Review.StatusReview;
-import {{systemName|lower}}.ev.data.Submission;
-import {{systemName|lower}}.ev.data.User;
-import {{systemName|lower}}.ev.exception.RepositoryException;
-import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.ReviewNotFoundException;
-import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
-import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.UserNotFoundException;
-import {{systemName|lower}}.ev.util.LibraryOfDSL;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.data.Review;
+import riseevents.ev.data.Review.StatusReview;
+import riseevents.ev.data.Submission;
+import riseevents.ev.data.User;
+import riseevents.ev.exception.RepositoryException;
+import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.exception.ReviewNotFoundException;
+import riseevents.ev.exception.SubmissionAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionNotFoundException;
+import riseevents.ev.exception.UserAlreadyInsertedException;
+import riseevents.ev.exception.UserNotFoundException;
+import riseevents.ev.util.LibraryOfDSL;
 
 public class ReviewInsertScreenP extends JInternalFrame  {
 
@@ -188,12 +188,12 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Submission submission;
-				boolean validacao = {{systemName}}MainScreenP.facade.isThereReviewer(Integer.valueOf(textFieldUserId.getText()));
+				boolean validacao = RiseEventsMainScreenP.facade.isThereReviewer(Integer.valueOf(textFieldUserId.getText()));
 				if(validacao == true){
-					List<Assignment> assignments = {{systemName}}MainScreenP.facade.getAssignmentList();
+					List<Assignment> assignments = RiseEventsMainScreenP.facade.getAssignmentList();
 					for(Assignment a : assignments){
 						if(textFieldUserId.getText().equals(a.getIdReviwerUser())){
-							submission = {{systemName}}MainScreenP.facade.searchSubmission(a.getIdReviewSubmission());
+							submission = RiseEventsMainScreenP.facade.searchSubmission(a.getIdReviewSubmission());
 							submissionComboBox.addItem(String.valueOf(submission.getTitle()));
 						}
 					 
@@ -255,15 +255,15 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 						review.setDate(date);
 						review.setDescription(description);
 						review.setStatus(StatusReview.valueOf(status));
-						review.setIdSubmission({{systemName}}MainScreenP.facade.getSubmissionIdByTitle(titleSubmission));
+						review.setIdSubmission(RiseEventsMainScreenP.facade.getSubmissionIdByTitle(titleSubmission));
 						int round = verificarRound(); 
 						review.setRound(round + 1);
 						review.setResult(resultado);
 						
-						{{systemName}}MainScreenP.facade.updateReview(review);
+						RiseEventsMainScreenP.facade.updateReview(review);
 						
-						Submission submission = {{systemName}}MainScreenP.facade.searchSubmission(review.getIdSubmission());
-						User user = {{systemName}}MainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
+						Submission submission = RiseEventsMainScreenP.facade.searchSubmission(review.getIdSubmission());
+						User user = RiseEventsMainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
 						LibraryOfDSL.enviarEmails(review,submission,user);
 
 					} catch (ReviewAlreadyInsertedException e1) {
@@ -295,8 +295,8 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 		int round = 0;
 		title = submissionComboBox.getSelectedItem().toString();
 		try {
-			int submissionid = {{systemName}}MainScreenP.facade.getSubmissionIdByTitle(title);
-			reviews = {{systemName}}MainScreenP.facade.getReviewList();
+			int submissionid = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(title);
+			reviews = RiseEventsMainScreenP.facade.getReviewList();
 			for(Review r : reviews){
 				if(submissionid == r.getIdSubmission()){
 					round = r.getRound();
@@ -318,7 +318,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 //		SubmissionAuthor authorSubmission = new SubmissionAuthor();
 //		List<SubmissionAuthor> submissionAuthorList = null;
 //		try {
-//			submissionAuthorList = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
+//			submissionAuthorList = RiseEventsMainScreenP.facade.getSubmissionAuthorList();
 //		} catch (RepositoryException e) {
 //			JOptionPane.showMessageDialog(getContentPane(),
 //					e.toString(), "Erro",
@@ -333,9 +333,9 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 //			authorSubmission.setIdAuthor(submissionAuthor.getIdAuthor());
 //			boolean bool;
 //			try {
-//				bool = {{systemName}}MainScreenP.facade.isThereSubmissionAuthor(authorSubmission);
+//				bool = RiseEventsMainScreenP.facade.isThereSubmissionAuthor(authorSubmission);
 //				if(bool == true){
-//					authorResult = {{systemName}}MainScreenP.facade.searchAuthor(authorSubmission.getIdAuthor());
+//					authorResult = RiseEventsMainScreenP.facade.searchAuthor(authorSubmission.getIdAuthor());
 //					break;
 //				}
 //			} catch (RepositoryException e) {

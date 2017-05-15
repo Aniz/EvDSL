@@ -44,12 +44,6 @@ import riseevents.ev.exception.ActivityAlreadyInsertedException;
 import riseevents.ev.exception.ActivityNotFoundException;
 import riseevents.ev.repository.ActivityRepository;
 import riseevents.ev.repository.ActivityRepositoryBDR;
-import riseevents.ev.data.Assignment;
-import riseevents.ev.business.AssignmentControl;
-import riseevents.ev.exception.AssignmentAlreadyInsertedException;
-import riseevents.ev.exception.AssignmentNotFoundException;
-import riseevents.ev.repository.AssignmentRepository;
-import riseevents.ev.repository.AssignmentRepositoryBDR;
 import riseevents.ev.data.Submission;
 import riseevents.ev.business.SubmissionControl;
 import riseevents.ev.exception.SubmissionAlreadyInsertedException;
@@ -107,6 +101,12 @@ import riseevents.ev.exception.RegistrationAlreadyInsertedException;
 import riseevents.ev.exception.RegistrationNotFoundException;
 import riseevents.ev.repository.RegistrationRepository;
 import riseevents.ev.repository.RegistrationRepositoryBDR;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.business.AssignmentControl;
+import riseevents.ev.exception.AssignmentAlreadyInsertedException;
+import riseevents.ev.exception.AssignmentNotFoundException;
+import riseevents.ev.repository.AssignmentRepository;
+import riseevents.ev.repository.AssignmentRepositoryBDR;
 
 public class RiseEventsFacade {
 
@@ -116,7 +116,6 @@ public class RiseEventsFacade {
 	private EventControl eventList;
 	private PaymentControl paymentList;
 	private ActivityControl activityList;
-	private AssignmentControl assignmentList;
 	private SubmissionControl submissionList;
 	private AuthorControl authorList;
 	private CheckingCopyControl checkingcopyList;
@@ -126,6 +125,7 @@ public class RiseEventsFacade {
 	private SubmissionAuthorControl submissionauthorList;
 	private SubmissionUserControl submissionuserList;
 	private RegistrationControl registrationList;
+	private AssignmentControl assignmentList;
 
 	protected static RiseEventsFacade instance;
 	
@@ -136,7 +136,6 @@ public class RiseEventsFacade {
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
 		PaymentRepository paymentRepository = PaymentRepositoryBDR.getInstance();
 		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
-		AssignmentRepository assignmentRepository = AssignmentRepositoryBDR.getInstance();
 		SubmissionRepository submissionRepository = SubmissionRepositoryBDR.getInstance();
 		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
 		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
@@ -147,10 +146,26 @@ public class RiseEventsFacade {
 		eventList = new EventControl(eventRepository); 
 		paymentList = new PaymentControl(paymentRepository); 
 		activityList = new ActivityControl(activityRepository); 
-		assignmentList = new AssignmentControl(assignmentRepository); 
 		submissionList = new SubmissionControl(submissionRepository); 
 		authorList = new AuthorControl(authorRepository); 
 		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
+	
+	
+		ReviewRepository reviewRepository = ReviewRepositoryBDR.getInstance();
+		ActivityUserRepository activityuserRepository = ActivityUserRepositoryBDR.getInstance();
+		ActivityOrganizerRepository activityorganizerRepository = ActivityOrganizerRepositoryBDR.getInstance();
+		SubmissionAuthorRepository submissionauthorRepository = SubmissionAuthorRepositoryBDR.getInstance();
+		SubmissionUserRepository submissionuserRepository = SubmissionUserRepositoryBDR.getInstance();
+		RegistrationRepository registrationRepository = RegistrationRepositoryBDR.getInstance();
+		AssignmentRepository assignmentRepository = AssignmentRepositoryBDR.getInstance();
+		
+		reviewList = new ReviewControl(reviewRepository); 
+		activityuserList = new ActivityUserControl(activityuserRepository); 
+		activityorganizerList = new ActivityOrganizerControl(activityorganizerRepository); 
+		submissionauthorList = new SubmissionAuthorControl(submissionauthorRepository); 
+		submissionuserList = new SubmissionUserControl(submissionuserRepository); 
+		registrationList = new RegistrationControl(registrationRepository); 
+		assignmentList = new AssignmentControl(assignmentRepository); 
 	
 	}
 	
@@ -260,9 +275,6 @@ public class RiseEventsFacade {
 	public int getPaymentLastId() throws RepositoryException{
 		return paymentList.getPaymentLastId();
 	}
-	public boolean isTherePayment(int idEntity) throws RepositoryException{
-		return paymentList.isThere(idEntity);
-	}
 	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
 		this.activityList.insert(entity);
 	}
@@ -286,27 +298,6 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereActivity(int idEntity) throws RepositoryException{
 		return activityList.isThere(idEntity);
-	}
-	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
-		this.assignmentList.insert(entity);
-	}
-	public void removeAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
-		assignmentList.remove(idEntity);  
-	}
-	public List<Assignment> getAssignmentList() throws RepositoryException{
-		return assignmentList.getAssignmentList();
-	}
-	public Assignment searchAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
-		return assignmentList.search(idEntity);
-	}
-	public int getAssignmentIdByName(String entityName) throws RepositoryException{
-		return assignmentList.getAssignmentIdByName(entityName);
-	}
-	public int getAssignmentLastId() throws RepositoryException{
-		return assignmentList.getAssignmentLastId();
-	}
-	public boolean isThereAssignment(int idEntity) throws RepositoryException{
-		return assignmentList.isThere(idEntity);
 	}
 	public void removeSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		submissionList.remove(idEntity);  
@@ -487,6 +478,30 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereRegistration(Registration entity) throws RepositoryException{
 		return registrationList.isThere(entity);
+	}
+	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
+		this.assignmentList.insert(entity);
+	}
+	public void removeAssignment(Assignment entity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(entity);  
+	}
+	public void updateAssignment(Assignment Entity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.update(Entity);
+	}
+	public List<Assignment> getAssignmentList() throws RepositoryException{
+		return assignmentList.getAssignmentList();
+	}
+	public Assignment searchAssignment(Assignment Entity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		return assignmentList.search(Entity);
+	}
+	public int getAssignmentLastId() throws RepositoryException{
+		return assignmentList.getAssignmentLastId();
+	}
+	public boolean isThereAssignment(Assignment entity) throws RepositoryException{
+		return assignmentList.isThere(entity);
+	}
+	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(assignment);  
 	}
 	public List<ActivityOrganizer> getActivitiesOrganizersById(int idActivity) throws RepositoryException{
 		return activityorganizerList.getActivitiesById(idActivity);

@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import {{systemName|lower}}.ev.data.Assignment;
-{% if data.option.categories|length > 0 %}
-import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
-{% endif %}
-
 import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
 import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.util.PersistenceMechanismException;
@@ -43,18 +39,12 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
 	public void insert(Assignment assignment) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% if data.option.properties|length > 0 %}{% for property in data.option.properties %},{{property.name}}{% endfor %}{% endif %}) Values('"
+			statement.executeUpdate("INSERT INTO assignement (idUser, idReview, date, idSubmission) Values('"
 							+assignment.getIdReviwerUser() +"', '"
 				            +assignment.getIdReview()+"', '"
 				            +assignment.getDate()+"', '"
 				            +assignment.getIdReviewSubmission()
-			            {% if data.option.categories|length > 0 %}
-							+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()
-						{% endif %}				
-						{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-							+"', '"+{{data.option.entity|lower}}.get{{property.name|capitalize}}()   
-						{% endfor %}{% endif %}	        
-				            +"')");
+			                +"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,12 +97,6 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
-            {% if data.option.categories|length > 0 %}
-            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
-            {% endif %}
-            {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
-			{% endfor %}{% endif %}
             	
             } else {
             	throw new AssignmentNotFoundException(assignment.getIdReview());
@@ -145,13 +129,7 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
             	assignment.setIdReviewSubmission(resultset.getInt("idSubmission"));
             	assignment.setIdReviwerUser(resultset.getInt("idUser"));
             	assignment.setDate(resultset.getString("date"));
-		    {% if data.option.categories|length > 0 %}
-            	{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
-            {% endif %}     
-    		{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
-			{% endfor %}{% endif %}			
-				list.add(assignment);
+		  		list.add(assignment);
             } 
 			resultset.close();
 		} catch(PersistenceMechanismException e){
@@ -178,13 +156,7 @@ public class AssignmentRepositoryBDR implements AssignmentRepository {
     	    										 "', idSubmission = '" + assignment.getIdReviewSubmission()+
     	    		                                 "', idUser = '" + assignment.getIdReviwerUser() +
     	    		                                 "', date = '"+ assignment.getDate() + 
-		                                 	    {% if data.option.categories|length > 0 %}
-									                 "', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +						
-									            {% endif %}    
-    		                                 	{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}
-											         "', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}() +
-												{% endfor %}{% endif %}
-    	    		                                 "' WHERE idUser = '"+ assignment.getIdReviwerUser() +"' AND idReview = '"+ assignment.getIdReview() +"' AND idSubmission = '"+ assignment.getIdReviewSubmission() +"' ");
+		                                 	         "' WHERE idUser = '"+ assignment.getIdReviwerUser() +"' AND idReview = '"+ assignment.getIdReview() +"' AND idSubmission = '"+ assignment.getIdReviewSubmission() +"' ");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

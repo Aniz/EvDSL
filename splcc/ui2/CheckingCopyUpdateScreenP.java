@@ -247,7 +247,7 @@ public class CheckingCopyUpdateScreenP extends JInternalFrame {
 			checkingCopy.setIdCheckingCopy(idCheckingCopy);
 			checkingCopy.setIdRegistration(Integer.valueOf(registration));
 			checkingCopy.setIdUser(Integer.valueOf(user));
-			checkingCopy.setCheckingCopyType(TypeCheckingCopy.valueOf(type));
+			checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(type));
 			checkingCopy.setDateOfIssue(date);
 			
 			try {

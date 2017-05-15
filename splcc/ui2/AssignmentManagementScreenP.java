@@ -408,11 +408,10 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					}
 				}
 				//#endif
-				
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				{% if "InterestConflict" in data.option.actions %}
+				{% if "interestConflict" in data.statments %}
 				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
 				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
 				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);

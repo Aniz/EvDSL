@@ -47,6 +47,14 @@ public class {{systemName}}Facade {
 	{% for key,value in data.items() %}
 		{{key|lower}}List = new {{key}}Control({{key|lower}}Repository); 
 	{% endfor %}	
+	
+	{% for dep in dependences %}
+		{{dep}}Repository {{dep|lower}}Repository = {{dep}}RepositoryBDR.getInstance();
+	{% endfor %}
+		
+	{% for dep in dependences %}
+		{{dep|lower}}List = new {{dep}}Control({{dep|lower}}Repository); 
+	{% endfor %}	
 	}
 	
 	public static {{systemName}}Facade getInstance()  {
@@ -90,17 +98,21 @@ public class {{systemName}}Facade {
 		return {{key|lower}}List.get{{key}}LastId();
 	}
 	{% endif %}
+	{% if key not in ["Payment"] %}
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
+	{% endif %}
 {% endfor %}
 {% for dep in dependences %}
 	public void insert{{dep}}({{dep}} entity) throws {{dep}}AlreadyInsertedException, RepositoryException{
 		this.{{dep|lower}}List.insert(entity);
 	}
+	{% if deb != 'Assignment' %}
 	public void remove{{dep}}({{dep}} entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.remove(entity);  
 	}
+	{% endif %}
 	public void update{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.update(Entity);
 	}
@@ -119,6 +131,11 @@ public class {{systemName}}Facade {
 		return {{dep|lower}}List.isThere(entity);
 	}
 {% endfor %}
+{% if 'Assignment' in dependences %}
+	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(assignment);  
+	}
+{% endif %}
 {% if 'ActivityOrganizer' in dependences %}
 	public List<ActivityOrganizer> getActivitiesOrganizersById(int idActivity) throws RepositoryException{
 		return activityorganizerList.getActivitiesById(idActivity);
@@ -138,12 +155,12 @@ public class {{systemName}}Facade {
 		return activityList.getActivitiesByEvent(idEvent);
 	}
 {% if 'Event' in data %}
-	{% if 'eventProgram' in data.User.option.statments %}
+	{% if 'program' in data.User.option.statments %}
 	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{
 		eventList.generateProgram(activityList, event);
 	}
 	{% endif %}
-	{% if 'eventImportantDates' in data.User.option.statments %}
+	{% if 'importantDates' in data.User.option.statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
 		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}

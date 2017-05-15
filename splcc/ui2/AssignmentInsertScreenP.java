@@ -1,6 +1,7 @@
 //#if ${AssignmentChairindication} == "T" or ${Assignmentautomatic} == "T"
 package {{systemName|lower}}.ev.ui2;
 
+import {{systemName|lower}}.ev.util.LibraryOfDSL;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -26,8 +27,8 @@ import org.apache.commons.mail.EmailException;
 
 import {{systemName|lower}}.ev.data.Assignment;
 //#if ${InsertAuthors} == "T"
-import {{systemName|lower}}.ev.data.Author;
 //#endif
+
 import {{systemName|lower}}.ev.data.Review;
 import {{systemName|lower}}.ev.data.Review.StatusReview;
 import {{systemName|lower}}.ev.data.Reviewer;
@@ -41,6 +42,7 @@ import {{systemName|lower}}.ev.data.SubmissionUser;
 import {{systemName|lower}}.ev.data.User;
 import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
 //#if ${InsertAuthors} == "T"
+import {{systemName|lower}}.ev.data.Author;
 import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
 //#endif
@@ -311,7 +313,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				{% if "InterestConflict" in data.option.actions %}
+				{% if "interestConflict" in data.statments %}
 				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
 				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
 				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);

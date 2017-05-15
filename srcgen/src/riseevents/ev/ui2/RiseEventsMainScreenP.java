@@ -52,6 +52,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventSearchScreenP screenSearchEvent;	
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
+	private EventProgramScreenP screenEventProgram;	
 	private EventImportantDatesScreenP screenEventImportantdates;	
 
 	private PaymentInsertScreenP screenInsertPayment;	
@@ -65,11 +66,6 @@ public class RiseEventsMainScreenP extends JFrame {
 	private ActivitySearchScreenP screenSearchActivity;	
 	private ActivityRemoveScreenP screenRemoveActivity;	
 	private ActivityListAllScreenP screenListAllActivity;	
-
-	private AssignmentInsertScreenP screenInsertAssignment;	
-	private AssignmentSearchScreenP screenSearchAssignment;	
-	private AssignmentRemoveScreenP screenRemoveAssignment;	
-	private AssignmentListAllScreenP screenListAllAssignment;	
 
 	private SubmissionSearchScreenP screenSearchSubmission;	
 	private SubmissionRemoveScreenP screenRemoveSubmission;	
@@ -148,6 +144,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
+		EventProgramMenuAction EventprogramAction = new EventProgramMenuAction();	
 		EventImportantDatesMenuAction EventimportantdatesAction = new EventImportantDatesMenuAction();	
 
 		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
@@ -161,11 +158,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchActivityMenuAction searchActivityAction = new SearchActivityMenuAction();	
 		RemoveActivityMenuAction removeActivityAction = new RemoveActivityMenuAction();	
 		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
-
-		InsertAssignmentMenuAction insertAssignmentAction = new InsertAssignmentMenuAction();	
-		SearchAssignmentMenuAction searchAssignmentAction = new SearchAssignmentMenuAction();	
-		RemoveAssignmentMenuAction removeAssignmentAction = new RemoveAssignmentMenuAction();	
-		ListAllAssignmentMenuAction listallAssignmentAction = new ListAllAssignmentMenuAction();	
 
 		SearchSubmissionMenuAction searchSubmissionAction = new SearchSubmissionMenuAction();	
 		RemoveSubmissionMenuAction removeSubmissionAction = new RemoveSubmissionMenuAction();	
@@ -317,20 +309,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllActivity = new JMenuItem("ListAll");
 		mnActivity.add(mntmListAllActivity);
 		mntmListAllActivity.addActionListener(listallActivityAction);
-		JMenu mnAssignment = new JMenu("Assignment");
-		menuBar.add(mnAssignment);
-		JMenuItem mntmInsertAssignment = new JMenuItem("Insert");
-		mnAssignment.add(mntmInsertAssignment);
-		mntmInsertAssignment.addActionListener(insertAssignmentAction);
-		JMenuItem mntmSearchAssignment = new JMenuItem("Search");
-		mnAssignment.add(mntmSearchAssignment);
-		mntmSearchAssignment.addActionListener(searchAssignmentAction);
-		JMenuItem mntmRemoveAssignment = new JMenuItem("Remove");
-		mnAssignment.add(mntmRemoveAssignment);
-		mntmRemoveAssignment.addActionListener(removeAssignmentAction);
-		JMenuItem mntmListAllAssignment = new JMenuItem("ListAll");
-		mnAssignment.add(mntmListAllAssignment);
-		mntmListAllAssignment.addActionListener(listallAssignmentAction);
 		JMenu mnSubmission = new JMenu("Submission");
 		menuBar.add(mnSubmission);
 		JMenuItem mntmSearchSubmission = new JMenuItem("Search");
@@ -938,82 +916,6 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllActivity);
 			try {
 				screenListAllActivity.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class InsertAssignmentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenInsertAssignment = AssignmentInsertScreenP.getInstanceAssignmentInsertScreenP();
-			if(screenInsertAssignment.getParent() == null){
-				desktopPane.add(screenInsertAssignment);
-			}
-			screenInsertAssignment.setVisible(true);
-			desktopPane.moveToFront(screenInsertAssignment);
-			try {
-				screenInsertAssignment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class SearchAssignmentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenSearchAssignment = AssignmentSearchScreenP.getInstanceAssignmentSearchScreenP();
-			if(screenSearchAssignment.getParent() == null){
-				desktopPane.add(screenSearchAssignment);
-			}
-			screenSearchAssignment.setVisible(true);
-			desktopPane.moveToFront(screenSearchAssignment);
-			try {
-				screenSearchAssignment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class RemoveAssignmentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenRemoveAssignment = AssignmentRemoveScreenP.getInstanceAssignmentRemoveScreenP();
-			if(screenRemoveAssignment.getParent() == null){
-				desktopPane.add(screenRemoveAssignment);
-			}
-			screenRemoveAssignment.setVisible(true);
-			desktopPane.moveToFront(screenRemoveAssignment);
-			try {
-				screenRemoveAssignment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ListAllAssignmentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenListAllAssignment = AssignmentListAllScreenP.getInstanceAssignmentListAllScreenP();
-			if(screenListAllAssignment.getParent() == null){
-				desktopPane.add(screenListAllAssignment);
-			}
-			screenListAllAssignment.setVisible(true);
-			desktopPane.moveToFront(screenListAllAssignment);
-			try {
-				screenListAllAssignment.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
