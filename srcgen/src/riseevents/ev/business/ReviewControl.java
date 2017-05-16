@@ -33,8 +33,8 @@ public class ReviewControl {
         }
 	}
 	
-	public void remove(int idReview) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
-		reviewList.remove(idReview);
+	public void remove(Review review) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
+		reviewList.remove(review);
 	}
 	
 	public void update(Review review) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
@@ -49,8 +49,8 @@ public class ReviewControl {
 		return reviewList.getReviewLastId();
 	}
 	
-	public Review search(int idReview) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
-		return reviewList.search(idReview);
+	public Review search(Review review) throws ReviewAlreadyInsertedException, RepositoryException, ReviewNotFoundException{
+		return reviewList.search(review);
 	}
 
 	public boolean isThere(int idReview) throws RepositoryException {

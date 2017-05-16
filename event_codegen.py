@@ -92,6 +92,7 @@ def main(debug=False):
     commandsDict = {}
     commandsOptionDict = {}
     dependenceDict = {}
+    allStatmentsDict = {}
     
     avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Submission","Review","Author","Receipt","CheckingCopy"]
     avaliableFunctions = ["Insert","Remove","Update","Search","ListAll","Search","Management"]
@@ -121,6 +122,7 @@ def main(debug=False):
             
         elif component.__class__.__name__ == 'Statment':
             statmentsArray.append(component)
+            allStatmentsDict[component.actionType] = component
     
     #DepedentClassses
     dependencesDict = {} 
@@ -252,7 +254,7 @@ def main(debug=False):
     propertiesFolder = createFolder(general_folder, 'properties')
     generateFile(propertiesCodeFolder,propertiesFolder,'config.properties',"config",jinja_env,value,"",systemName,".properties")
     #copy(join(this_folder,'properties'),join(general_folder,'properties'))
-    generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,dependencesList,systemName, systemEmail, systemPassword)
+    generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,dependencesList,allStatmentsDict,systemName, systemEmail, systemPassword)
     generateFile(templateFolder,general_folder,'xml.buildTemplate',"build",jinja_env,value,"",systemName,".xml")
     shutil.copy(join(templateFolder,'.project'),general_folder)
     shutil.copy(join(templateFolder,'.classpath'),general_folder)
@@ -305,12 +307,12 @@ def createFolder(dest,name):
 
     return folder
 
-def generateCodeRecursively(src, dest,jinja_env,var,extraVar,systemName,systemEmail,systemPass):
+def generateCodeRecursively(src, dest,jinja_env,var,extraVar,statments,systemName,systemEmail,systemPass):
     for (dirpath,dirnames,filenames) in walk (src):
         for file in filenames:
             codeFileTemplate = jinja_env.get_template(join(src,file))
             with open(join(dest,file), 'w') as f:
-                f.write(codeFileTemplate.render(data=var,extraData=extraVar,systemName=systemName,systemEmail=systemEmail,systemPassword=systemPass))
+                f.write(codeFileTemplate.render(data=var,extraData=extraVar,statments=statments,systemName=systemName,systemEmail=systemEmail,systemPassword=systemPass))
 
 def copy(src, dest):
     if exists(dest):

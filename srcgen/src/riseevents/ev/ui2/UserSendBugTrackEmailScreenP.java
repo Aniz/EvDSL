@@ -25,9 +25,9 @@ import org.apache.commons.mail.EmailException;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.LibraryOfDSL;
 
-public class UserSendBugtrackEmailScreenP extends JInternalFrame {
+public class UserSendBugTrackEmailScreenP extends JInternalFrame {
 
-	 private static UserSendBugtrackEmailScreenP instanceUserSendBugtrackEmailScreenP;
+	 private static UserSendBugTrackEmailScreenP instanceUserSendBugTrackEmailScreenP;
 	 private JPanel contentPane;
 	 
 	 JButton btnClean;
@@ -42,18 +42,18 @@ public class UserSendBugtrackEmailScreenP extends JInternalFrame {
 	 private JTextField textFieldArea;
 	 private JTextPane textPaneObservacoes;
 	 
-	 public static UserSendBugtrackEmailScreenP getInstanceUserSendBugtrackEmailScreenP() {
-		 if (instanceUserSendBugtrackEmailScreenP == null) {
-			 UserSendBugtrackEmailScreenP.instanceUserSendBugtrackEmailScreenP = new UserSendBugtrackEmailScreenP();
+	 public static UserSendBugTrackEmailScreenP getInstanceUserSendBugTrackEmailScreenP() {
+		 if (instanceUserSendBugTrackEmailScreenP == null) {
+			 UserSendBugTrackEmailScreenP.instanceUserSendBugTrackEmailScreenP = new UserSendBugTrackEmailScreenP();
 		 }
-		 return UserSendBugtrackEmailScreenP.instanceUserSendBugtrackEmailScreenP;
+		 return UserSendBugTrackEmailScreenP.instanceUserSendBugTrackEmailScreenP;
 	 } 
 	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserSendBugtrackEmailScreenP frame = new UserSendBugtrackEmailScreenP();
+					UserSendBugTrackEmailScreenP frame = new UserSendBugTrackEmailScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +65,7 @@ public class UserSendBugtrackEmailScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserSendBugtrackEmailScreenP() {
+	public UserSendBugTrackEmailScreenP() {
 		
 		setTitle("Bugtrack");
 		
@@ -225,7 +225,7 @@ public class UserSendBugtrackEmailScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			UserSendBugtrackEmailScreenP.instanceUserSendBugtrackEmailScreenP = null;
+			UserSendBugTrackEmailScreenP.instanceUserSendBugTrackEmailScreenP = null;
 			
 		}
 	}

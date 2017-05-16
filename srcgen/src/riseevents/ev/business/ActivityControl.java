@@ -17,15 +17,15 @@ import com.lowagie.text.DocumentException;
 
 public class ActivityControl {
 	
-    private ActivityRepository activitieList;
+    private ActivityRepository activityList;
 	
 	public ActivityControl(ActivityRepository repository){
-		this.activitieList = repository;
+		this.activityList = repository;
 	}
 	public void insert(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException{
 		if (activity != null) {
-            if (!activitieList.isThere(activity.getIdActivity())) {
-                activitieList.insert(activity);
+            if (!activityList.isThere(activity.getIdActivity())) {
+                activityList.insert(activity);
             } else {
                 throw new ActivityAlreadyInsertedException(activity.getIdActivity());
             }
@@ -33,45 +33,45 @@ public class ActivityControl {
             throw new IllegalArgumentException();
         }
 	}
-	public void remove(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		activitieList.remove(activity);
+	public void remove(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
+		activityList.remove(idActivity);
 	}
 	public void update(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		activitieList.update(activity);
+		activityList.update(activity);
 	}
 	public Activity search(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		return activitieList.search(idActivity);
+		return activityList.search(idActivity);
 	}
 	public boolean isThere(int idActivity) throws RepositoryException {
-		return activitieList.isThere(idActivity);
+		return activityList.isThere(idActivity);
 	}
 
 	public List<Activity> getActivityList() throws RepositoryException {
-		return activitieList.getActivityList();  
+		return activityList.getActivityList();  
 	}
 	
 	public int getActivityLastId() throws RepositoryException{
-		return activitieList.getActivityLastId();
+		return activityList.getActivityLastId();
 	}
 	
 	public int getActivityIdByName(String activityName) throws RepositoryException{
-		return activitieList.getActivityIdByName(activityName);
+		return activityList.getActivityIdByName(activityName);
 	}
 	
 	public List<Activity> getActivitiesByEvent(int idEvent) throws RepositoryException{
-		return activitieList.getActivitiesByEvent(idEvent);
+		return activityList.getActivitiesByEvent(idEvent);
 	}
 	
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
-		return activitieList.getEventMainTrackValue(idEvent);
+		return activityList.getEventMainTrackValue(idEvent);
 	}
 	
 	public int getActivityMainTrackId(int idEvent) throws RepositoryException{
-		return activitieList.getActivityMainTrackId(idEvent);
+		return activityList.getActivityMainTrackId(idEvent);
 	}
 
 	public int getEventbyActivity(int idActivity) throws RepositoryException{
-		return activitieList.getEventbyActivity(idActivity);
+		return activityList.getEventbyActivity(idActivity);
 	}
 	
 }

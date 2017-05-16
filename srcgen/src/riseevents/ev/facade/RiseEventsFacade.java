@@ -275,6 +275,9 @@ public class RiseEventsFacade {
 	public int getPaymentLastId() throws RepositoryException{
 		return paymentList.getPaymentLastId();
 	}
+	public boolean isTherePayment(int idEntity) throws RepositoryException{
+		return paymentList.isThere(idEntity);
+	}
 	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
 		this.activityList.insert(entity);
 	}
@@ -370,9 +373,6 @@ public class RiseEventsFacade {
 	}
 	public int getReviewLastId() throws RepositoryException{
 		return reviewList.getReviewLastId();
-	}
-	public boolean isThereReview(Review entity) throws RepositoryException{
-		return reviewList.isThere(entity);
 	}
 	public void insertActivityUser(ActivityUser entity) throws ActivityUserAlreadyInsertedException, RepositoryException{
 		this.activityuserList.insert(entity);
@@ -470,9 +470,6 @@ public class RiseEventsFacade {
 	public List<Registration> getRegistrationList() throws RepositoryException{
 		return registrationList.getRegistrationList();
 	}
-	public Registration searchRegistration(Registration Entity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
-		return registrationList.search(Entity);
-	}
 	public int getRegistrationLastId() throws RepositoryException{
 		return registrationList.getRegistrationLastId();
 	}
@@ -499,9 +496,6 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereAssignment(Assignment entity) throws RepositoryException{
 		return assignmentList.isThere(entity);
-	}
-	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
-		assignmentList.remove(assignment);  
 	}
 	public List<ActivityOrganizer> getActivitiesOrganizersById(int idActivity) throws RepositoryException{
 		return activityorganizerList.getActivitiesById(idActivity);
@@ -539,6 +533,9 @@ public class RiseEventsFacade {
 	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
 		return registrationList.search(idUser, idEvent);
 	}
+	public Registration searchRegistration(int idRegistration) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		return registrationList.search(idRegistration);
+	}
 	
 	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
 		this.paymentList.type(payment, paymentout);
@@ -558,9 +555,6 @@ public class RiseEventsFacade {
 	//if Reviewer and Submission -> Review is enable 
 	//Review Feature
 			
-	public void emailRoundNotification (Review review, User user) throws EmailException{
-		reviewList.emailRoundNotification(review, user);
-	}
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
 		return reviewList.getReviewsBySubmission(idSubmission);
 	}

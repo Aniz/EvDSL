@@ -82,18 +82,18 @@ public class ActivityOrganizerRepositoryBDR implements ActivityOrganizerReposito
 	@Override
 	public ActivityOrganizer search(ActivityOrganizer activityOrganizer) throws ActivityOrganizerNotFoundException,
 			RepositoryException {
-		ActivityOrganizer activityOrganizer = null;
-		activityOrganizer = new ActivityOrganizer();
+		ActivityOrganizer activityOrganizerFounded = null;
+		activityOrganizerFounded = new ActivityOrganizer();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from activityorganizer WHERE idActivity =" + activityOrganizer->getIdActivity());
+            ResultSet resultset = statement.executeQuery("Select * from activityorganizer WHERE idActivity =" + activityOrganizer.getIdActivity());
             if (resultset.next()) { 
             	
-            	activityOrganizer.setIdActivity(resultset.getInt("idActivity"));
-            	activityOrganizer.setIdOrganizer(resultset.getInt("idUser"));
+            	activityOrganizerFounded.setIdActivity(resultset.getInt("idActivity"));
+            	activityOrganizerFounded.setIdOrganizer(resultset.getInt("idUser"));
             	
             } else {
-            	throw new ActivityOrganizerNotFoundException(idActivity);
+            	throw new ActivityOrganizerNotFoundException(activityOrganizer.getIdActivity());
             }
 			resultset.close();
 		} catch(PersistenceMechanismException e){

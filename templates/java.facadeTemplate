@@ -98,7 +98,7 @@ public class {{systemName}}Facade {
 		return {{key|lower}}List.get{{key}}LastId();
 	}
 	{% endif %}
-	{% if key not in ["Payment"] %}
+	{% if key not in ["Payment,Submission,CheckingCopy"] %}
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
@@ -108,34 +108,31 @@ public class {{systemName}}Facade {
 	public void insert{{dep}}({{dep}} entity) throws {{dep}}AlreadyInsertedException, RepositoryException{
 		this.{{dep|lower}}List.insert(entity);
 	}
-	{% if deb != 'Assignment' %}
 	public void remove{{dep}}({{dep}} entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.remove(entity);  
 	}
-	{% endif %}
 	public void update{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.update(Entity);
 	}
 	public List<{{dep}}> get{{dep}}List() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}List();
 	}
-	{% if deb != 'Registration' %}
+	{% if dep not in ["Registration"] %}
 	public {{dep}} search{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		return {{dep|lower}}List.search(Entity);
 	}
 	{% endif %}
+	{% if key not in ["Assignment"] %}
 	public int get{{dep}}LastId() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}LastId();
 	}
+	{% endif %}
+	{% if dep not in ["Review"] %}
 	public boolean isThere{{dep}}({{dep}} entity) throws RepositoryException{
 		return {{dep|lower}}List.isThere(entity);
 	}
+	{% endif %}
 {% endfor %}
-{% if 'Assignment' in dependences %}
-	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
-		assignmentList.remove(assignment);  
-	}
-{% endif %}
 {% if 'ActivityOrganizer' in dependences %}
 	public List<ActivityOrganizer> getActivitiesOrganizersById(int idActivity) throws RepositoryException{
 		return activityorganizerList.getActivitiesById(idActivity);
@@ -220,6 +217,9 @@ public class {{systemName}}Facade {
 	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
 		return registrationList.search(idUser, idEvent);
 	}
+	public Registration searchRegistration(int idRegistration) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		return registrationList.search(idRegistration);
+	}
 {% endif %}
 {% if 'Payment' in data %}	
 	public void typePayment(Payment payment, Payment paymentout) throws DocumentException, IOException {
@@ -257,10 +257,7 @@ public class {{systemName}}Facade {
 {% if 'Reviewer' in data %}	
 	//if Reviewer and Submission -> Review is enable 
 	//Review Feature
-	{% if 'Submission' in data %}			
-	public void emailRoundNotification (Review review, User user) throws EmailException{
-		reviewList.emailRoundNotification(review, user);
-	}
+{% if 'Submission' in data %}			
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
 		return reviewList.getReviewsBySubmission(idSubmission);
 	}
@@ -272,17 +269,17 @@ public class {{systemName}}Facade {
 {% endif %}	
 {% if 'program' in data.statments %}
 	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
-		eventList.generateProgram(activities, event);
+		event.generateProgram(activities, event);
 	}
 {% endif %}	
 {% if 'importantDates' in data.statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
-		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
+		event.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 {% endif %}
 {% if 'reportsFrequencyperEvent' in data.statments %}
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
-		return eventList.getParticipantsPerEvent(idEvent);
+		return event.getParticipantsPerEvent(idEvent);
 	}
 	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
 		eventList.frequencyPerEvent(ParticipantsPerEvent, event);

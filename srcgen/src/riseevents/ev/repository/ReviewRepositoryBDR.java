@@ -142,9 +142,9 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM review WHERE idReview = '"+ review->getIdReview()+"'");
+		    int i = statement.executeUpdate("DELETE FROM review WHERE idReview = '"+ review.getIdReview()+"'");
             if (i == 0) {
-            	throw new ReviewNotFoundException(idReview);
+            	throw new ReviewNotFoundException(review.getIdReview());
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -188,7 +188,7 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 		Review reviewFounded = new Review();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from review WHERE idReview =" + review->getIdReview());
+            ResultSet resultset = statement.executeQuery("Select * from review WHERE idReview =" + review.getIdReview());
             if (resultset.next()) {   
             	reviewFounded.setIdReview(resultset.getInt("idReview"));
             	reviewFounded.setIdSubmission(resultset.getInt("idSubmission"));
@@ -199,7 +199,7 @@ public class ReviewRepositoryBDR implements ReviewRepository {
                 reviewFounded.setResult(resultset.getString("result"));
                 resultset.close();
             } else {
-            	throw new ReviewNotFoundException(idReview);
+            	throw new ReviewNotFoundException(review.getIdReview());
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

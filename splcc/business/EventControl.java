@@ -16,6 +16,7 @@ import {{systemName|lower}}.ev.repository.EventRepository;
 public class EventControl {
 	
     private EventRepository eventList;
+    private Event event;
 	
 	public EventControl(EventRepository repository){
 		this.eventList = repository;

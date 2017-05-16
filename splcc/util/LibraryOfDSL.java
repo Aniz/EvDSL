@@ -27,7 +27,7 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	{% if "Author" in data.items() and  'Assignment' in data.items() and 'interestConflict' in data.Assignment.statments  %}
+	{% if "Author" in data and 'Assignment' in extraData and 'interestConflict' in statments  %}
 	public Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
 		
 		String authorFiliation = null;
@@ -50,31 +50,31 @@ public class LibraryOfDSL {
 	}
 	{% endif %}
 	
-	{% if "Review" in extraData and "User" in data.items() %}
-	{% if 'notificationsDeadline' in data.Assignment.option.statments or 'notificationsPaperAssignemnt' in data.Assignment.option.statments or 'notificationsAceptanceRejection' in data.Assignment.option.statments%}
+	{% if "Review" in extraData and "User" in data %}
+	{% if 'notificationsDeadline' in statments or 'notificationsPaperAssignemnt' in statments or 'notificationsAceptanceRejection' in statments %}
 	public void sendNotification(User user, Review review) throws EmailException{
 
-		{% if 'notificationsDeadline' in data.Reviewer.option.statments %}
+		{% if 'notificationsDeadline' in statments %}
 		// esta classe eh chamada logo apos o insert do assignment
 		String assunto = "Prazo de entrega de Rivisao";
 		String mensagem = "O prazo de entrega é ate 15 dias antes da data oficial de Inicio do evento. Seu ID para cadastrar a revisao é:" + review.getIdReview() + " Favor usar este ID!" ;
 		String emailDestino = user.getEmail();
 		{% endif %}
 	
-		{% if 'notificationsAceptanceRejection' in data.Reviewer.option.statments %}
+		{% if 'notificationsAceptanceRejection' in statments %}
 		String assunto2 = "Resultado Revisao Papper!";
 		String mensagem2 = "Seu Papper esta sendo revisado. O resultado sera encaminhado via email.";
 		String emailDestino2 = author.getEmail();
 		{% endif %}
 		
-		{% if 'notificationsPaperAssignemnt' in data.Reviewer.option.statments %}
+		{% if 'notificationsPaperAssignemnt' in statments %}
 		String assunto3 = "Pappers para revisao";
 		String mensagem3 = "Seguem em anexos pappers para revisao!";
 		String emailDestino3 = user.getEmail();
 		{% endif %}
 	
 		
-		{% if 'notificationsDeadline' in data.Reviewer.option.statments %}
+		{% if 'notificationsDeadline' in statments %}
 		SimpleEmail email = new SimpleEmail(); 
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
@@ -93,7 +93,7 @@ public class LibraryOfDSL {
 		email.send(); //envia o e-mail
 		{% endif %}
 
-		{% if 'notificationsAceptanceRejection' in data.Reviewer.option.statments %}
+		{% if 'notificationsAceptanceRejection' in statments %}
 		// AcceptReject email
 		SimpleEmail email2 = new SimpleEmail(); 
 		email2.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
@@ -112,7 +112,7 @@ public class LibraryOfDSL {
 		email2.send(); //envia o e-mail
 		{% endif %}
 
-		{% if 'notificationsPaperAssignemnt' in data.Reviewer.option.statments %}
+		{% if 'notificationsPaperAssignemnt' in statments %}
 		// assignment email
 		HtmlEmail email3 = new HtmlEmail(); 
 		email3.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
@@ -183,8 +183,7 @@ public class LibraryOfDSL {
 		
 	}
 	{% endif %}
-	
-	{% if 'sendBugTrackEmail' in data.statments %}
+	{% if 'sendBugTrackEmail' in statments %}
 	public String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
 		SimpleEmail email = new SimpleEmail();
 		String msg;
@@ -206,7 +205,7 @@ public class LibraryOfDSL {
 		return msg;
 	}
 	{% endif %}
-	private List<String> quebrarKeywords(Submission submission){
+	public static List<String> quebrarKeywords(Submission submission){
 		List<String> palavrasDaKeyword = new ArrayList<String>();
 		String [] array = submission.getKeywords().split("[,] *");
 		
@@ -216,7 +215,7 @@ public class LibraryOfDSL {
 		return palavrasDaKeyword;
 	}
 	
-	{% if 'reportsFrequencyperActivity' in data.statments %}
+	{% if 'Reviewer' in data and 'Submission' in data %}
 	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
 		User user = new User();
 		try {
