@@ -34,6 +34,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private UserSearchScreenP screenSearchUser;	
 	private UserRemoveScreenP screenRemoveUser;	
 	private UserListAllScreenP screenListAllUser;	
+	private UserSendBugTrackEmailScreenP screenUserSendBugTrackEmail;	
 
 	private OrganizerInsertScreenP screenInsertOrganizer;	
 	private OrganizerUpdateScreenP screenUpdateOrganizer;	
@@ -52,8 +53,9 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventSearchScreenP screenSearchEvent;	
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
+	private EventReportsFrequencyperEventScreenP screenEventReportsFrequencyperEvent;	
 	private EventProgramScreenP screenEventProgram;	
-	private EventImportantDatesScreenP screenEventImportantdates;	
+	private EventImportantDatesScreenP screenEventImportantDates;	
 
 	private PaymentInsertScreenP screenInsertPayment;	
 	private PaymentUpdateScreenP screenUpdatePayment;	
@@ -126,6 +128,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchUserMenuAction searchUserAction = new SearchUserMenuAction();	
 		RemoveUserMenuAction removeUserAction = new RemoveUserMenuAction();	
 		ListAllUserMenuAction listallUserAction = new ListAllUserMenuAction();	
+		UserSendBugTrackEmailMenuAction userSendBugTrackEmailAction = new UserSendBugTrackEmailMenuAction();	
 
 		InsertOrganizerMenuAction insertOrganizerAction = new InsertOrganizerMenuAction();	
 		UpdateOrganizerMenuAction updateOrganizerAction = new UpdateOrganizerMenuAction();	
@@ -144,8 +147,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
-		EventProgramMenuAction EventprogramAction = new EventProgramMenuAction();	
-		EventImportantDatesMenuAction EventimportantdatesAction = new EventImportantDatesMenuAction();	
+		EventReportsFrequencyperEventMenuAction eventReportsFrequencyperEventAction = new EventReportsFrequencyperEventMenuAction();	
+		EventProgramMenuAction eventProgramAction = new EventProgramMenuAction();	
+		EventImportantDatesMenuAction eventImportantDatesAction = new EventImportantDatesMenuAction();	
 
 		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
 		UpdatePaymentMenuAction updatePaymentAction = new UpdatePaymentMenuAction();	
@@ -224,6 +228,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllUser = new JMenuItem("ListAll");
 		mnUser.add(mntmListAllUser);
 		mntmListAllUser.addActionListener(listallUserAction);
+		JMenuItem mntmUserSendBugTrackEmail = new JMenuItem("sendBugTrackEmail");
+		mnUser.add(mntmUserSendBugTrackEmail);
+		mntmUserSendBugTrackEmail.addActionListener(userSendBugTrackEmailAction);
 		JMenu mnOrganizer = new JMenu("Organizer");
 		menuBar.add(mnOrganizer);
 		JMenuItem mntmInsertOrganizer = new JMenuItem("Insert");
@@ -275,6 +282,15 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllEvent = new JMenuItem("ListAll");
 		mnEvent.add(mntmListAllEvent);
 		mntmListAllEvent.addActionListener(listallEventAction);
+		JMenuItem mntmEventReportsFrequencyperEvent = new JMenuItem("reportsFrequencyperEvent");
+		mnEvent.add(mntmEventReportsFrequencyperEvent);
+		mntmEventReportsFrequencyperEvent.addActionListener(eventReportsFrequencyperEventAction);
+		JMenuItem mntmEventProgram = new JMenuItem("program");
+		mnEvent.add(mntmEventProgram);
+		mntmEventProgram.addActionListener(eventProgramAction);
+		JMenuItem mntmEventImportantDates = new JMenuItem("importantDates");
+		mnEvent.add(mntmEventImportantDates);
+		mntmEventImportantDates.addActionListener(eventImportantDatesAction);
 		JMenu mnPayment = new JMenu("Payment");
 		menuBar.add(mnPayment);
 		JMenuItem mntmInsertPayment = new JMenuItem("Insert");
@@ -448,6 +464,22 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
+			private class UserSendBugTrackEmailMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenUserSendBugTrackEmail = UserSendBugTrackEmailScreenP.getInstanceUserSendBugTrackEmailScreenP();
+				if(screenUserSendBugTrackEmail.getParent() == null){
+					desktopPane.add(screenUserSendBugTrackEmail);
+				}
+				screenUserSendBugTrackEmail.setVisible(true);
+				desktopPane.moveToFront(screenUserSendBugTrackEmail);
+				try {
+					screenUserSendBugTrackEmail.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
 	private class InsertOrganizerMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -733,6 +765,54 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
+			private class EventReportsFrequencyperEventMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenEventReportsFrequencyperEvent = EventReportsFrequencyperEventScreenP.getInstanceEventReportsFrequencyperEventScreenP();
+				if(screenEventReportsFrequencyperEvent.getParent() == null){
+					desktopPane.add(screenEventReportsFrequencyperEvent);
+				}
+				screenEventReportsFrequencyperEvent.setVisible(true);
+				desktopPane.moveToFront(screenEventReportsFrequencyperEvent);
+				try {
+					screenEventReportsFrequencyperEvent.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
+			private class EventProgramMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenEventProgram = EventProgramScreenP.getInstanceEventProgramScreenP();
+				if(screenEventProgram.getParent() == null){
+					desktopPane.add(screenEventProgram);
+				}
+				screenEventProgram.setVisible(true);
+				desktopPane.moveToFront(screenEventProgram);
+				try {
+					screenEventProgram.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
+			private class EventImportantDatesMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenEventImportantDates = EventImportantDatesScreenP.getInstanceEventImportantDatesScreenP();
+				if(screenEventImportantDates.getParent() == null){
+					desktopPane.add(screenEventImportantDates);
+				}
+				screenEventImportantDates.setVisible(true);
+				desktopPane.moveToFront(screenEventImportantDates);
+				try {
+					screenEventImportantDates.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
 	private class InsertPaymentMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -1075,5 +1155,4 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-
 }

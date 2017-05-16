@@ -39,8 +39,8 @@ public class ActivitySpeakerControl {
 		activitySpeakerList.update(activitySpeaker);
 	}
 	
-	public ActivitySpeaker search(int idActivity) throws ActivitySpeakerAlreadyInsertedException, RepositoryException, ActivitySpeakerNotFoundException{
-		return activitySpeakerList.search(idActivity);
+	public ActivitySpeaker search(ActivitySpeaker activity) throws ActivitySpeakerAlreadyInsertedException, RepositoryException, ActivitySpeakerNotFoundException{
+		return activitySpeakerList.search(activity);
 	}
 
 	public boolean isThere(ActivitySpeaker activitySpeaker) throws RepositoryException {

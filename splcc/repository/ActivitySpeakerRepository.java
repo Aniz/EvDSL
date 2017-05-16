@@ -16,7 +16,7 @@ public interface ActivitySpeakerRepository {
 
 	public void remove(ActivitySpeaker activityspeaker) throws ActivitySpeakerNotFoundException, RepositoryException;
 
-	public ActivitySpeaker search(int idActivity) throws ActivitySpeakerNotFoundException, RepositoryException;
+	public ActivitySpeaker search(ActivitySpeaker activitySpeaker) throws ActivitySpeakerNotFoundException, RepositoryException;
 	
 	public List<ActivitySpeaker> getActivitySpeakerList() throws RepositoryException;
 

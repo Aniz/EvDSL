@@ -38,7 +38,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-	private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|capitalize}};	
+	private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|upperfirst}};	
 			{% endif %}
 		{% endfor %}
 	{% endif %}
@@ -46,9 +46,6 @@ public class {{systemName}}MainScreenP extends JFrame {
 {% endfor %}
 	{% if 'Receipt' in data.actions %}
 	private ReceiptScreenP screenReceipt;
-	{% endif %}
-	{% if 'sendBugTrackEmail' in data.statments %}
-	private BugtrackScreenP screenBugtrack;
 	{% endif %}
 	
 	private static JLabel labelImagem;
@@ -102,7 +99,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-		{{key}}{{actionKey|upperfirst}}MenuAction {{key}}{{actionKey|lower}}Action = new {{key}}{{actionKey|upperfirst}}MenuAction();	
+		{{key}}{{actionKey|upperfirst}}MenuAction {{key|lower}}{{actionKey|upperfirst}}Action = new {{key}}{{actionKey|upperfirst}}MenuAction();	
 			{% endif %}
 		{% endfor %}
 	{% endif %}
@@ -156,6 +153,15 @@ public class {{systemName}}MainScreenP extends JFrame {
 		mn{{key}}.add(mntm{{command}}{{key}});
 		mntm{{command}}{{key}}.addActionListener({{command|lower}}{{key}}Action);
 	{% endfor %}
+{% if value.statments %}
+	{% for actionKey,statment in value.statments.items() %}
+		{% if  statment.condition == 'def' %}
+		JMenuItem mntm{{key}}{{actionKey|upperfirst}} = new JMenuItem("{{actionKey}}");
+		mn{{key}}.add(mntm{{key}}{{actionKey|upperfirst}});
+		mntm{{key}}{{actionKey|upperfirst}}.addActionListener({{key|lower}}{{actionKey|upperfirst}}Action);
+		{% endif %}
+	{% endfor %}
+{% endif %}
 {% endfor %}
 		JMenu mnReports = new JMenu("Reports");
 		menuBar.add(mnReports);
@@ -176,18 +182,18 @@ public class {{systemName}}MainScreenP extends JFrame {
 
 {% for key,value in data.items() %}
 	{% for command in value.commands %}
-	private class {{command}}{{key}}MenuAction implements ActionListener{ 
+	private class {{command|upperfirst}}{{key}}MenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			screen{{command}}{{key}} = {{key}}{{command}}ScreenP.getInstance{{key}}{{command}}ScreenP();
-			if(screen{{command}}{{key}}.getParent() == null){
+			screen{{command|upperfirst}}{{key}} = {{key}}{{command}}ScreenP.getInstance{{key}}{{command}}ScreenP();
+			if(screen{{command|upperfirst}}{{key}}.getParent() == null){
 				desktopPane.add(screen{{command}}{{key}});
 			}
-			screen{{command}}{{key}}.setVisible(true);
-			desktopPane.moveToFront(screen{{command}}{{key}});
+			screen{{command|upperfirst}}{{key}}.setVisible(true);
+			desktopPane.moveToFront(screen{{command|upperfirst}}{{key}});
 			try {
-				screen{{command}}{{key}}.setSelected(true);
+				screen{{command|upperfirst}}{{key}}.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -196,27 +202,27 @@ public class {{systemName}}MainScreenP extends JFrame {
 		}  
 	}
 	{% endfor %}
-{% endfor %}
-
-				{% if 'sendBugTrackEmail' in data.statments %}
-				private class BugtrackScreenMenuAction  implements ActionListener{ 
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						screenBugtrack = BugtrackScreenP.getInstanceBugtrackScreenP();
-						//desktopPane.add(screenBugtrack);
-						if(screenBugtrack.getParent() == null){
-							desktopPane.add(screenBugtrack);
-						}
-						screenBugtrack.setVisible(true);
-						desktopPane.moveToFront(screenBugtrack);
-						try {
-							screenBugtrack.setSelected(true);
-						} catch (PropertyVetoException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}  
+	{% if value.statments %}
+		{% for actionKey,statment in value.statments.items() %}
+			{% if  statment.condition == 'def' %}
+			private class {{key}}{{actionKey|upperfirst}}MenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen{{key}}{{actionKey|upperfirst}} = {{key}}{{actionKey|upperfirst}}ScreenP.getInstance{{key}}{{actionKey|upperfirst}}ScreenP();
+				if(screen{{key}}{{actionKey|upperfirst}}.getParent() == null){
+					desktopPane.add(screen{{key}}{{actionKey|upperfirst}});
 				}
-				{% endif %}
+				screen{{key}}{{actionKey|upperfirst}}.setVisible(true);
+				desktopPane.moveToFront(screen{{key}}{{actionKey|upperfirst}});
+				try {
+					screen{{key}}{{actionKey|upperfirst}}.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
 }

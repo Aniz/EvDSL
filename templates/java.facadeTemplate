@@ -269,6 +269,23 @@ public class {{systemName}}Facade {
 	public Reviewer getReviewerByknowledgeArea(String knowledgearea) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
 		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
+{% endif %}	
+{% if 'program' in data.statments %}
+	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
+		eventList.generateProgram(activities, event);
+	}
+{% endif %}	
+{% if 'importantDates' in data.statments %}
+	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
+		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
+	}
 {% endif %}
-	
+{% if 'reportsFrequencyperEvent' in data.statments %}
+	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
+		return eventList.getParticipantsPerEvent(idEvent);
+	}
+	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
+		eventList.frequencyPerEvent(ParticipantsPerEvent, event);
+	}
+{% endif %}	
 }

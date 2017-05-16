@@ -13,7 +13,7 @@ public interface ActivityOrganizerRepository {
 
 	public void remove(ActivityOrganizer activityOrganzier) throws ActivityOrganizerNotFoundException, RepositoryException;
 
-	public ActivityOrganizer search(int idActivity) throws ActivityOrganizerNotFoundException, RepositoryException;
+	public ActivityOrganizer search(ActivityOrganizer activityOrganizer) throws ActivityOrganizerNotFoundException, RepositoryException;
 	
 	public List<ActivityOrganizer> getActivityOrganizerList() throws RepositoryException;
 

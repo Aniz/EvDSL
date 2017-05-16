@@ -56,13 +56,14 @@ if Payment.Avista -> generateBoleto
 
 def Registration -> reportsListofAuthors 
 def Registration -> reportsFrequencyperActivity 
-def Registration -> reportsFrequencyperEvent 
+def Event -> reportsFrequencyperEvent 
 if CheckingCopy.Atestado -> checkingCopyAtestado
 if CheckingCopy.Certificado -> checkingCopyCertificado 
 if CheckiCopy.Certificado -> checkingCopyCertificado 
 def Event -> program
 def Event -> importantDates
 if Submission.Completa -> insertAttachment
+def User -> sendBugTrackEmail
 
 if Assignment -> notificationsDeadline
 if Assignment -> notificationsPaperAssignemnt 

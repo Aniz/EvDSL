@@ -58,7 +58,7 @@ import riseevents.ev.table.ReviewerTableModel;
 //#if ${ConflictofinterestAutomatic} == "T"
 import riseevents.ev.util.Conflict;
 //#endif
-import riseevents.ev.util.Email;
+import riseevents.ev.util.LibraryOfDSL;
 
 public class AssignmentManagementScreenP extends JInternalFrame {
 

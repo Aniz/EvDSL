@@ -75,29 +75,6 @@ public class LibraryOfDSL {
 
 	
 	
-	//#if ${Bugs} == "T"
-	public String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
-		SimpleEmail email = new SimpleEmail();
-		String msg;
-		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
-		
-		email.addTo("rise", "Bugtrack Event"); //destinat�rio 
-		email.setFrom("rise", nome); // remetente 
-		email.setSubject(assunto); // assunto do e-mail 
-		email.setMsg(mensagem); //conteudo do e-mail
-		
-		email.setAuthentication("rise", "systemPassword");
-		email.setSslSmtpPort( "465" ); //578 ou 465
-		email.setSSLOnConnect(true);
-		email.setStartTLSEnabled(true);
-		email.setStartTLSRequired(true);
-		
-		email.send(); //envia o e-mail
-		msg = "Email enviado com Sucesso";
-		return msg;
-	}
-	//#endif	
-
 	private List<String> quebrarKeywords(Submission submission){
 		List<String> palavrasDaKeyword = new ArrayList<String>();
 		String [] array = submission.getKeywords().split("[,] *");

@@ -58,7 +58,7 @@ import {{systemName|lower}}.ev.table.ReviewerTableModel;
 //#if ${ConflictofinterestAutomatic} == "T"
 import {{systemName|lower}}.ev.util.Conflict;
 //#endif
-import {{systemName|lower}}.ev.util.Email;
+import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 public class AssignmentManagementScreenP extends JInternalFrame {
 

@@ -82,13 +82,13 @@ public class ActivitySpeakerRepositoryBDR implements ActivitySpeakerRepository {
 	}
 
 	@Override
-	public ActivitySpeaker search(int idActivity) throws ActivitySpeakerNotFoundException,
+	public ActivitySpeaker search(ActivitySpeaker activitySpeaker) throws ActivitySpeakerNotFoundException,
 			RepositoryException {
 		ActivitySpeaker activitySpeaker = null;
 		activitySpeaker = new ActivitySpeaker();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from activityspeaker WHERE idActivity =" + idActivity);
+            ResultSet resultset = statement.executeQuery("Select * from activityspeaker WHERE idActivity =" + activitySpeaker->getIdActivity());
             if (resultset.next()) { 
             	
             	activitySpeaker.setIdActivity(resultset.getInt("idActivity"));

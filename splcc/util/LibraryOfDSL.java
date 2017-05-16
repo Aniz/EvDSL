@@ -27,7 +27,7 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	{% if "Author" in data.items() and  'Assignment' in data.items() and 'interestConflict' in data.Assignment.option.statments  %}
+	{% if "Author" in data.items() and  'Assignment' in data.items() and 'interestConflict' in data.Assignment.statments  %}
 	public Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
 		
 		String authorFiliation = null;
@@ -184,7 +184,7 @@ public class LibraryOfDSL {
 	}
 	{% endif %}
 	
-	//#if ${Bugs} == "T"
+	{% if 'sendBugTrackEmail' in data.statments %}
 	public String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
 		SimpleEmail email = new SimpleEmail();
 		String msg;
@@ -205,8 +205,7 @@ public class LibraryOfDSL {
 		msg = "Email enviado com Sucesso";
 		return msg;
 	}
-	//#endif	
-
+	{% endif %}
 	private List<String> quebrarKeywords(Submission submission){
 		List<String> palavrasDaKeyword = new ArrayList<String>();
 		String [] array = submission.getKeywords().split("[,] *");

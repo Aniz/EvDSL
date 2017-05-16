@@ -37,8 +37,8 @@ private ActivityOrganizerRepository actitivityOrganizerList;
 		actitivityOrganizerList.update(activityOrganizer);
 	}
 	
-	public ActivityOrganizer search(int idActivity) throws ActivityOrganizerAlreadyInsertedException, RepositoryException, ActivityOrganizerNotFoundException{
-		return actitivityOrganizerList.search(idActivity);
+	public ActivityOrganizer search(ActivityOrganizer activity) throws ActivityOrganizerAlreadyInsertedException, RepositoryException, ActivityOrganizerNotFoundException{
+		return actitivityOrganizerList.search(activity);
 	}
 
 	public boolean isThere(ActivityOrganizer activityOrganizer) throws RepositoryException {

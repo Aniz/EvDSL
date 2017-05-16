@@ -22,7 +22,7 @@ public interface ReviewRepository {
 	
 	public void update(Review review) throws ReviewNotFoundException, RepositoryException;
 	
-	public Review search(int idReview) throws ReviewNotFoundException, RepositoryException;
+	public Review search(Review review) throws ReviewNotFoundException, RepositoryException;
 	
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException;
 	

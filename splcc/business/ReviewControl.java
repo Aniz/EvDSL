@@ -57,10 +57,6 @@ public class ReviewControl {
 		return reviewList.isThere(idReview);
 	}
 	
-	public void emailRoundNotification(Review review, User user) throws EmailException{
-		LibraryOfDSL.sendRoundNotification(review, user);
-	}
-	
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
 		return reviewList.getReviewsBySubmission(idSubmission);
 	}

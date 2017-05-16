@@ -1,5 +1,5 @@
 //#if ${Bugs} == "T"
-package {{systemName|lower}}.ev.ui2;
+package riseevents.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,12 +22,12 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.mail.EmailException;
 
-import {{systemName|lower}}.ev.exception.RepositoryException;
-import {{systemName|lower}}.ev.util.Email;
+import riseevents.ev.exception.RepositoryException;
+import riseevents.ev.util.LibraryOfDSL;
 
-public class BugtrackScreenP extends JInternalFrame {
+public class UserSendBugtrackEmailScreenP extends JInternalFrame {
 
-	 private static BugtrackScreenP instanceBugtrackScreenP;
+	 private static UserSendBugtrackEmailScreenP instanceUserSendBugtrackEmailScreenP;
 	 private JPanel contentPane;
 	 
 	 JButton btnClean;
@@ -42,18 +42,18 @@ public class BugtrackScreenP extends JInternalFrame {
 	 private JTextField textFieldArea;
 	 private JTextPane textPaneObservacoes;
 	 
-	 public static BugtrackScreenP getInstanceBugtrackScreenP() {
-		 if (instanceBugtrackScreenP == null) {
-			 BugtrackScreenP.instanceBugtrackScreenP = new BugtrackScreenP();
+	 public static UserSendBugtrackEmailScreenP getInstanceUserSendBugtrackEmailScreenP() {
+		 if (instanceUserSendBugtrackEmailScreenP == null) {
+			 UserSendBugtrackEmailScreenP.instanceUserSendBugtrackEmailScreenP = new UserSendBugtrackEmailScreenP();
 		 }
-		 return BugtrackScreenP.instanceBugtrackScreenP;
+		 return UserSendBugtrackEmailScreenP.instanceUserSendBugtrackEmailScreenP;
 	 } 
 	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BugtrackScreenP frame = new BugtrackScreenP();
+					UserSendBugtrackEmailScreenP frame = new UserSendBugtrackEmailScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +65,7 @@ public class BugtrackScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BugtrackScreenP() {
+	public UserSendBugtrackEmailScreenP() {
 		
 		setTitle("Bugtrack");
 		
@@ -189,13 +189,12 @@ public class BugtrackScreenP extends JInternalFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Email email = new Email();
 			String nome = textFieldNome.getText();
 			String assunto = comboBoxAssunto.getSelectedItem().toString();
 			String mensagem = textFieldTitulo.getText() + "\n\n" + textPaneObservacoes.getText() + "\n\n\n" + textFieldNome.getText() + "\n" + "Resacher in " + textFieldArea.getText() + "\n" + comboBoxEscolaridade.getSelectedItem().toString() + " - " + textFieldEmail.getText() ; 
 			
 			try {
-				String msg = {{systemName}}MainScreenP.facade.sendBug(nome, assunto, mensagem, email);
+				String msg = LibraryOfDSL.sendBugtrackEmail(nome, assunto, mensagem);
 				JOptionPane.showMessageDialog(getContentPane(),
 						msg.toString(), "SUCESSO",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -226,7 +225,7 @@ public class BugtrackScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			BugtrackScreenP.instanceBugtrackScreenP = null;
+			UserSendBugtrackEmailScreenP.instanceUserSendBugtrackEmailScreenP = null;
 			
 		}
 	}

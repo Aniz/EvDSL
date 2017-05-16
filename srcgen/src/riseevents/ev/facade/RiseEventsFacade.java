@@ -569,4 +569,6 @@ public class RiseEventsFacade {
 		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
 	
+	
+	
 }

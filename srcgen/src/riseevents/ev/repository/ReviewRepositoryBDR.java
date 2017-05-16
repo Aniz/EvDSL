@@ -138,11 +138,11 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 	}
 	
 	@Override
-	public void remove(int idReview) throws ReviewNotFoundException,
+	public void remove(Review review) throws ReviewNotFoundException,
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM review WHERE idReview = '"+ idReview+"'");
+		    int i = statement.executeUpdate("DELETE FROM review WHERE idReview = '"+ review->getIdReview()+"'");
             if (i == 0) {
             	throw new ReviewNotFoundException(idReview);
             }
@@ -183,20 +183,20 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 	}
 	
 	@Override
-	public Review search(int idReview) throws ReviewNotFoundException,
+	public Review search(Review review) throws ReviewNotFoundException,
 			RepositoryException {
-		Review review = new Review();
+		Review reviewFounded = new Review();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from review WHERE idReview =" + idReview);
+            ResultSet resultset = statement.executeQuery("Select * from review WHERE idReview =" + review->getIdReview());
             if (resultset.next()) {   
-            	review.setIdReview(resultset.getInt("idReview"));
-            	review.setIdSubmission(resultset.getInt("idSubmission"));
-            	review.setStatus(StatusReview.valueOf(resultset.getString("status")));
-            	review.setDate(resultset.getString("date"));
-            	review.setDescription(resultset.getString("description1"));
-            	review.setRound(resultset.getInt("round"));
-                review.setResult(resultset.getString("result"));
+            	reviewFounded.setIdReview(resultset.getInt("idReview"));
+            	reviewFounded.setIdSubmission(resultset.getInt("idSubmission"));
+            	reviewFounded.setStatus(StatusReview.valueOf(resultset.getString("status")));
+            	reviewFounded.setDate(resultset.getString("date"));
+            	reviewFounded.setDescription(resultset.getString("description1"));
+            	reviewFounded.setRound(resultset.getInt("round"));
+                reviewFounded.setResult(resultset.getString("result"));
                 resultset.close();
             } else {
             	throw new ReviewNotFoundException(idReview);
@@ -212,7 +212,7 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 				throw new RepositoryException(ex);
 			}
 		}
-		return review;
+		return reviewFounded;
 	}
 
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{

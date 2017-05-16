@@ -58,5 +58,4 @@ public class UserControl {
 	public int getUserIdByName(String userName) throws RepositoryException{
 		return userList.getUserIdByName(userName);
 	}
-
 }
