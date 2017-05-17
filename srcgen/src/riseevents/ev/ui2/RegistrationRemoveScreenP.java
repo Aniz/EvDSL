@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import riseevents.ev.data.Registration;
+import riseevents.ev.table.RegistrationTableModel;
 import riseevents.ev.exception.RegistrationAlreadyInsertedException;
 import riseevents.ev.exception.RegistrationNotFoundException;
 import riseevents.ev.exception.RepositoryException;
@@ -94,18 +96,11 @@ public class RegistrationRemoveScreenP extends JInternalFrame {
 			RegistrationRemoveScreenP.instanceRegistrationRemoveScreenP = null;
 		}
 	}
-	
 	private class RemoveButtonAction  implements ActionListener{ 
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int rowIndex = table.getSelectedRow();
-			
-			if(rowIndex == -1){
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Selecione o Registro a ser removido!");
-				return;
-			}
+			int idRegistration = Integer.valueOf(textFieldRegistrationId.getText());
 			
 			try {
 				if (RiseEventsMainScreenP.facade.searchRegistration(idRegistration) == null){
@@ -114,8 +109,7 @@ public class RegistrationRemoveScreenP extends JInternalFrame {
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					Registration registration = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrationList()).get(rowIndex);
-					RiseEventsMainScreenP.facade.removeRegistration(registration);
+					RiseEventsMainScreenP.facade.removeRegistration(idRegistration);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

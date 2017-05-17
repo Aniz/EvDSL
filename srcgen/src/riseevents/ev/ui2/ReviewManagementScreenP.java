@@ -336,7 +336,7 @@ public class ReviewManagementScreenP extends JInternalFrame{
 			
 			try {
 				Review review = new ReviewTableModel(RiseEventsMainScreenP.facade.getReviewList()).get(rowIndex);
-				RiseEventsMainScreenP.facade.removeReview(review);
+				RiseEventsMainScreenP.facade.removeReview(review->getIdReview());
 				ReviewTableModel model = (ReviewTableModel) table.getModel();
 				model.removeReview(rowIndex);
 				table.setModel(model);

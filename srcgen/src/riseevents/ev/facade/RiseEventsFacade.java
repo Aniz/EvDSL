@@ -416,9 +416,6 @@ public class RiseEventsFacade {
 	public SubmissionUser searchSubmissionUser(SubmissionUser Entity) throws SubmissionUserNotFoundException, RepositoryException, SubmissionUserAlreadyInsertedException{
 		return submissionuserList.search(Entity);
 	}
-	public int getSubmissionUserLastId() throws RepositoryException{
-		return submissionuserList.getSubmissionUserLastId();
-	}
 	public boolean isThereSubmissionUser(SubmissionUser entity) throws RepositoryException{
 		return submissionuserList.isThere(entity);
 	}
@@ -465,6 +462,9 @@ public class RiseEventsFacade {
 		return activityList.getActivitiesByEvent(idEvent);
 	}
 	
+	public int getEventIdByName(String entityName) throws RepositoryException{
+		return eventList.getEventIdByName(entityName);
+	}
 	
 	public int getUserIdByName(String entityName) throws RepositoryException{
 		return userList.getUserIdByName(entityName);

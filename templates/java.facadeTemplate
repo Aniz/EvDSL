@@ -119,7 +119,7 @@ public class {{systemName}}Facade {
 		return {{dep|lower}}List.search(Entity);
 	}
 	{% endif %}
-	{% if dep not in ["Assignment","Submission","SubmissionAuthor"] %}
+	{% if dep not in ["Assignment","Submission","SubmissionAuthor","SubmissionUser"] %}
 	public int get{{dep}}LastId() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}LastId();
 	}
@@ -166,10 +166,10 @@ public class {{systemName}}Facade {
 	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
 		eventList.frequencyPerEvent(ParticipantsPerEvent, event);
 	}
+	{% endif %}	
 	public int getEventIdByName(String entityName) throws RepositoryException{
 		return eventList.getEventIdByName(entityName);
 	}
-	{% endif %}	
 {% endif %}	
 {% if 'User' in data %}
 	public int getUserIdByName(String entityName) throws RepositoryException{

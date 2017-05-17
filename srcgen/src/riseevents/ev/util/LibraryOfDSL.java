@@ -212,7 +212,7 @@ public class LibraryOfDSL {
 		email3.send(); //envia o e-mail
 	}
 	//#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-	public void sendRoundNotification(Review review, User user) throws EmailException{
+	public static void sendRoundNotification(Review review, User user) throws EmailException{
 		
 		String assunto = null;
 		String mensagem = null;

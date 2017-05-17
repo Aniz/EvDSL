@@ -149,7 +149,7 @@ public class LibraryOfDSL {
 	}
 	{% endif %}
 	//#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
-	public void sendRoundNotification(Review review, User user) throws EmailException{
+	public static void sendRoundNotification(Review review, User user) throws EmailException{
 		
 		String assunto = null;
 		String mensagem = null;

@@ -153,7 +153,7 @@ public class Activity {
 	{% endif %}
 	;
 	}
-	{% if 'reportsFrequencyperActivity' in data.statments %}
+	{% if 'reportsFrequencyPerActivity' in data.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, String eventName) throws DocumentException, IOException{
         Document documento = new Document();
         String nomePasta = "doc_frequencia";

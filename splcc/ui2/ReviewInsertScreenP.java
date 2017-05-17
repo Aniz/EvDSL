@@ -316,7 +316,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 			Submission submission = {{systemName}}MainScreenP.facade.searchSubmission(review.getIdSubmission());
 //			Author author = pegarAuthorSubmission(submission);
 			User user = {{systemName}}MainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
-			{{systemName}}MainScreenP.facade.emailRoundNotification(review, user);
+			LibraryOfDSL.sendRoundNotification(review, user);
 			
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),

@@ -316,7 +316,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 			Submission submission = RiseEventsMainScreenP.facade.searchSubmission(review.getIdSubmission());
 //			Author author = pegarAuthorSubmission(submission);
 			User user = RiseEventsMainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
-			RiseEventsMainScreenP.facade.emailRoundNotification(review, user);
+			LibraryOfDSL.sendRoundNotification(review, user);
 			
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
