@@ -496,6 +496,9 @@ public class RiseEventsFacade {
 	public void addValue(float value, int idRegistration) throws RepositoryException{
 		registrationList.addValue(value, idRegistration);
 	}
+	public void removeRegistration(int idRegistration) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		registrations.remove(idRegistration);  
+	}
 	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
 		return registrationList.search(idUser, idEvent);
 	}
@@ -533,6 +536,18 @@ public class RiseEventsFacade {
 		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
 	
+	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
+		event.generateProgram(activities, event);
+	}
 	
+	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
+		event.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
+	}
+	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
+		return event.getParticipantsPerEvent(idEvent);
+	}
+	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
+		eventList.frequencyPerEvent(ParticipantsPerEvent, event);
+	}
 	
 }

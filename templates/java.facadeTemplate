@@ -222,6 +222,9 @@ public class {{systemName}}Facade {
 	public void addValue(float value, int idRegistration) throws RepositoryException{
 		registrationList.addValue(value, idRegistration);
 	}
+	public void removeRegistration(int idRegistration) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
+		registrations.remove(idRegistration);  
+	}
 	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
 		return registrationList.search(idUser, idEvent);
 	}
@@ -279,17 +282,17 @@ public class {{systemName}}Facade {
 		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
 {% endif %}	
-{% if 'program' in data.statments %}
+{% if 'program' in statments %}
 	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
 		event.generateProgram(activities, event);
 	}
 {% endif %}	
-{% if 'importantDates' in data.statments %}
+{% if 'importantDates' in statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
 		event.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 {% endif %}
-{% if 'reportsFrequencyperEvent' in data.statments %}
+{% if 'reportsFrequencyPerEvent' in statments %}
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
 		return event.getParticipantsPerEvent(idEvent);
 	}
