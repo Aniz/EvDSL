@@ -264,7 +264,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 						
 						Submission submission = {{systemName}}MainScreenP.facade.searchSubmission(review.getIdSubmission());
 						User user = {{systemName}}MainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
-						LibraryOfDSL.enviarEmails(review,submission,user);
+						enviarEmails(review,submission,user);
 
 					} catch (ReviewAlreadyInsertedException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
@@ -313,6 +313,46 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 		return round;
 	}
 	
+		public void enviarEmails(Review review){
+		Email email = new Email();
+		try {
+			Submission submission = RiSEEventMainScreenP.facade.searchSubmission(review.getIdSubmission());
+//			Author author = pegarAuthorSubmission(submission);
+			User user = RiSEEventMainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
+			RiSEEventMainScreenP.facade.emailRoundNotification(review, user, email);
+			
+		} catch (EmailException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		} catch (SubmissionNotFoundException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		} catch (RepositoryException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		} catch (SubmissionAlreadyInsertedException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserAlreadyInsertedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 //	public Author pegarAuthorSubmission(Submission submission){
 //		Author authorResult = new Author();
 //		SubmissionAuthor authorSubmission = new SubmissionAuthor();

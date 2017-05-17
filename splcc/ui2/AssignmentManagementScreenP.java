@@ -41,12 +41,13 @@ import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
+{% if extraData.Review is defined %}
+import {{systemName|lower}}.ev.table.Review.StatusReview;
+{% endif %}
+
 import {{systemName|lower}}.ev.table.AssignmentTableModel;
 import {{systemName|lower}}.ev.data.Assignment;
 import {{systemName|lower}}.ev.exception.RepositoryException;
-{% if 'interestConflict' in data.statments %}
-import {{systemName|lower}}.ev.util.Conflict;
-{% endif %}
 import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 public class AssignmentManagementScreenP extends JInternalFrame {

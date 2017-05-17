@@ -54,6 +54,48 @@ import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
 import riseevents.ev.exception.CheckingCopyNotFoundException;
 import riseevents.ev.repository.CheckingCopyRepository;
 import riseevents.ev.repository.CheckingCopyRepositoryBDR;
+import riseevents.ev.data.Review;
+import riseevents.ev.business.ReviewControl;
+import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.exception.ReviewNotFoundException;
+import riseevents.ev.repository.ReviewRepository;
+import riseevents.ev.repository.ReviewRepositoryBDR;
+import riseevents.ev.data.ActivityUser;
+import riseevents.ev.business.ActivityUserControl;
+import riseevents.ev.exception.ActivityUserAlreadyInsertedException;
+import riseevents.ev.exception.ActivityUserNotFoundException;
+import riseevents.ev.repository.ActivityUserRepository;
+import riseevents.ev.repository.ActivityUserRepositoryBDR;
+import riseevents.ev.data.ActivityOrganizer;
+import riseevents.ev.business.ActivityOrganizerControl;
+import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
+import riseevents.ev.exception.ActivityOrganizerNotFoundException;
+import riseevents.ev.repository.ActivityOrganizerRepository;
+import riseevents.ev.repository.ActivityOrganizerRepositoryBDR;
+import riseevents.ev.data.SubmissionAuthor;
+import riseevents.ev.business.SubmissionAuthorControl;
+import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionAuthorNotFoundException;
+import riseevents.ev.repository.SubmissionAuthorRepository;
+import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
+import riseevents.ev.data.SubmissionUser;
+import riseevents.ev.business.SubmissionUserControl;
+import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionUserNotFoundException;
+import riseevents.ev.repository.SubmissionUserRepository;
+import riseevents.ev.repository.SubmissionUserRepositoryBDR;
+import riseevents.ev.data.Registration;
+import riseevents.ev.business.RegistrationControl;
+import riseevents.ev.exception.RegistrationAlreadyInsertedException;
+import riseevents.ev.exception.RegistrationNotFoundException;
+import riseevents.ev.repository.RegistrationRepository;
+import riseevents.ev.repository.RegistrationRepositoryBDR;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.business.AssignmentControl;
+import riseevents.ev.exception.AssignmentAlreadyInsertedException;
+import riseevents.ev.exception.AssignmentNotFoundException;
+import riseevents.ev.repository.AssignmentRepository;
+import riseevents.ev.repository.AssignmentRepositoryBDR;
 
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
@@ -73,7 +115,7 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	public Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
+	public static Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
 		
 		String authorFiliation = null;
 		String reviewerFiliation = null;
@@ -94,7 +136,7 @@ public class LibraryOfDSL {
 		}
 	}
 	
-	public void sendNotification(User user, Review review) throws EmailException{
+	public static void sendNotification(User user, Review review) throws EmailException{
 
 		// esta classe eh chamada logo apos o insert do assignment
 		String assunto = "Prazo de entrega de Rivisao";
@@ -103,7 +145,7 @@ public class LibraryOfDSL {
 	
 		String assunto2 = "Resultado Revisao Papper!";
 		String mensagem2 = "Seu Papper esta sendo revisado. O resultado sera encaminhado via email.";
-		String emailDestino2 = author.getEmail();
+		String emailDestino2 = user.getEmail();
 		
 		String assunto3 = "Pappers para revisao";
 		String mensagem3 = "Seguem em anexos pappers para revisao!";
@@ -211,7 +253,7 @@ public class LibraryOfDSL {
 		email.send(); //envia o e-mail
 		
 	}
-	public String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
+	public static String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
 		SimpleEmail email = new SimpleEmail();
 		String msg;
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail

@@ -8,7 +8,7 @@ import {{systemName|lower}}.ev.exception.{{key}}NotFoundException;
 import {{systemName|lower}}.ev.repository.{{key}}Repository;
 import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 {% endfor %}
-{% for key in dependences %}
+{% for key in extraData %}
 import {{systemName|lower}}.ev.data.{{key}};
 import {{systemName|lower}}.ev.business.{{key}}Control;
 import {{systemName|lower}}.ev.exception.{{key}}AlreadyInsertedException;
@@ -36,7 +36,7 @@ public class LibraryOfDSL {
 	}	
 
 	{% if "Author" in data and 'Assignment' in extraData and 'interestConflict' in statments  %}
-	public Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
+	public static Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
 		
 		String authorFiliation = null;
 		String reviewerFiliation = null;
@@ -60,7 +60,7 @@ public class LibraryOfDSL {
 	
 	{% if "Review" in extraData and "User" in data %}
 	{% if 'notificationsDeadline' in statments or 'notificationsPaperAssignemnt' in statments or 'notificationsAceptanceRejection' in statments %}
-	public void sendNotification(User user, Review review) throws EmailException{
+	public static void sendNotification(User user, Review review) throws EmailException{
 
 		{% if 'notificationsDeadline' in statments %}
 		// esta classe eh chamada logo apos o insert do assignment
@@ -72,7 +72,7 @@ public class LibraryOfDSL {
 		{% if 'notificationsAceptanceRejection' in statments %}
 		String assunto2 = "Resultado Revisao Papper!";
 		String mensagem2 = "Seu Papper esta sendo revisado. O resultado sera encaminhado via email.";
-		String emailDestino2 = author.getEmail();
+		String emailDestino2 = user.getEmail();
 		{% endif %}
 		
 		{% if 'notificationsPaperAssignemnt' in statments %}
@@ -192,7 +192,7 @@ public class LibraryOfDSL {
 	}
 	{% endif %}
 	{% if 'sendBugTrackEmail' in statments %}
-	public String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
+	public static String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
 		SimpleEmail email = new SimpleEmail();
 		String msg;
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail

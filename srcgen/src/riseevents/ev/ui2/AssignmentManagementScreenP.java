@@ -73,10 +73,11 @@ import riseevents.ev.repository.ReviewRepositoryBDR;
 
 import riseevents.ev.table.ReviewerTableModel;
 
+import riseevents.ev.table.Review.StatusReview;
+
 import riseevents.ev.table.AssignmentTableModel;
 import riseevents.ev.data.Assignment;
 import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.util.Conflict;
 import riseevents.ev.util.LibraryOfDSL;
 
 public class AssignmentManagementScreenP extends JInternalFrame {
