@@ -77,6 +77,7 @@ import riseevents.ev.exception.AssignmentAlreadyInsertedException;
 import riseevents.ev.exception.AssignmentNotFoundException;
 import riseevents.ev.repository.AssignmentRepository;
 import riseevents.ev.repository.AssignmentRepositoryBDR;
+import riseevents.ev.table.AssignmentTableModel;
 
 import riseevents.ev.table.ReviewerTableModel;
 

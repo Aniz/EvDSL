@@ -70,7 +70,7 @@ import riseevents.ev.repository.ReviewRepositoryBDR;
 
 import riseevents.ev.table.ReviewerTableModel;
 
-import riseevents.ev.table.Review.StatusReview;
+import riseevents.ev.data.Review.StatusReview;
 
 import riseevents.ev.table.AssignmentTableModel;
 import riseevents.ev.data.Assignment;

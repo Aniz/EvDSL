@@ -39,7 +39,7 @@ import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
 {% if extraData.Review is defined %}
-import {{systemName|lower}}.ev.table.Review.StatusReview;
+import {{systemName|lower}}.ev.data.Review.StatusReview;
 {% endif %}
 
 import {{systemName|lower}}.ev.table.AssignmentTableModel;

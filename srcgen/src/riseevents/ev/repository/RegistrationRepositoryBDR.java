@@ -62,9 +62,9 @@ public class RegistrationRepositoryBDR implements RegistrationRepository {
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM registration WHERE idRegistration = '"+ registration.getIdRegistration()+"'");
+		    int i = statement.executeUpdate("DELETE FROM registration WHERE idRegistration = '"+ idRegistration +"'");
             if (i == 0) {
-            	throw new RegistrationNotFoundException(registration.getIdRegistration());
+            	throw new RegistrationNotFoundException(idRegistration );
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

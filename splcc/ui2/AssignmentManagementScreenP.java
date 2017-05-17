@@ -43,6 +43,7 @@ import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
 import {{systemName|lower}}.ev.repository.AssignmentRepository;
 import {{systemName|lower}}.ev.repository.AssignmentRepositoryBDR;
+import {{systemName|lower}}.ev.table.AssignmentTableModel;
 
 {% if extraData.Reviewer is defined %}
 import {{systemName|lower}}.ev.table.ReviewerTableModel;

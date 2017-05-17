@@ -15,7 +15,6 @@ public class AuthorControl {
 		public AuthorControl(AuthorRepository repository){
 			this.authorList = repository;
 		}
-		{% if 'Insert' in data.commands %}
 		public void insert(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
 			if (author != null) {
 	            if (!authorList.isThere(author.getIdAuthor())) {
@@ -27,22 +26,15 @@ public class AuthorControl {
 	            throw new IllegalArgumentException();
 	        }
 		}
-		{% endif %}
-		{% if 'Remove' in data.commands %}
 		public void remove(int idAuthor) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
 			authorList.remove(idAuthor);
 		}
-		{% endif %}
-		{% if 'Update' in data.commands %}
 		public void update(Author author) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
 			authorList.update(author);
 		}
-		{% endif %}
-		{% if 'Search' in data.commands %}
 		public Author search(int idAuthor) throws AuthorAlreadyInsertedException, RepositoryException, AuthorNotFoundException{
 			return authorList.search(idAuthor);
 		}
-		{% endif %}
 		public boolean isThere(int idAuthor) throws RepositoryException {
 			return authorList.isThere(idAuthor);
 		}
