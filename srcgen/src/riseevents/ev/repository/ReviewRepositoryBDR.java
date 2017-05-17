@@ -138,13 +138,13 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 	}
 	
 	@Override
-	public void remove(Review review) throws ReviewNotFoundException,
+	public void remove(int idReview) throws ReviewNotFoundException,
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM review WHERE idReview = '"+ review.getIdReview()+"'");
+		    int i = statement.executeUpdate("DELETE FROM review WHERE idReview = '"+ idReview +"'");
             if (i == 0) {
-            	throw new ReviewNotFoundException(review.getIdReview());
+            	throw new ReviewNotFoundException(idReview);
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -183,12 +183,12 @@ public class ReviewRepositoryBDR implements ReviewRepository {
 	}
 	
 	@Override
-	public Review search(Review review) throws ReviewNotFoundException,
+	public Review search(int idReview) throws ReviewNotFoundException,
 			RepositoryException {
 		Review reviewFounded = new Review();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from review WHERE idReview =" + review.getIdReview());
+            ResultSet resultset = statement.executeQuery("Select * from review WHERE idReview =" + idReview);
             if (resultset.next()) {   
             	reviewFounded.setIdReview(resultset.getInt("idReview"));
             	reviewFounded.setIdSubmission(resultset.getInt("idSubmission"));
@@ -199,7 +199,7 @@ public class ReviewRepositoryBDR implements ReviewRepository {
                 reviewFounded.setResult(resultset.getString("result"));
                 resultset.close();
             } else {
-            	throw new ReviewNotFoundException(review.getIdReview());
+            	throw new ReviewNotFoundException(idReview);
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

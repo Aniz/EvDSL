@@ -191,9 +191,6 @@ public class RiseEventsFacade {
 	public User searchUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
 		return userList.search(idEntity);
 	}
-	public int getUserIdByName(String entityName) throws RepositoryException{
-		return userList.getUserIdByName(entityName);
-	}
 	public boolean isThereUser(int idEntity) throws RepositoryException{
 		return userList.isThere(idEntity);
 	}
@@ -248,9 +245,6 @@ public class RiseEventsFacade {
 	public Event searchEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
 		return eventList.search(idEntity);
 	}
-	public int getEventIdByName(String entityName) throws RepositoryException{
-		return eventList.getEventIdByName(entityName);
-	}
 	public int getEventLastId() throws RepositoryException{
 		return eventList.getEventLastId();
 	}
@@ -275,9 +269,6 @@ public class RiseEventsFacade {
 	public int getPaymentLastId() throws RepositoryException{
 		return paymentList.getPaymentLastId();
 	}
-	public boolean isTherePayment(int idEntity) throws RepositoryException{
-		return paymentList.isThere(idEntity);
-	}
 	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
 		this.activityList.insert(entity);
 	}
@@ -292,9 +283,6 @@ public class RiseEventsFacade {
 	}
 	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
 		return activityList.search(idEntity);
-	}
-	public int getActivityIdByName(String entityName) throws RepositoryException{
-		return activityList.getActivityIdByName(entityName);
 	}
 	public int getActivityLastId() throws RepositoryException{
 		return activityList.getActivityLastId();
@@ -311,20 +299,11 @@ public class RiseEventsFacade {
 	public Submission searchSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		return submissionList.search(idEntity);
 	}
-	public int getSubmissionIdByName(String entityName) throws RepositoryException{
-		return submissionList.getSubmissionIdByName(entityName);
-	}
 	public int getSubmissionLastId() throws RepositoryException{
 		return submissionList.getSubmissionLastId();
 	}
-	public boolean isThereSubmission(int idEntity) throws RepositoryException{
-		return submissionList.isThere(idEntity);
-	}
 	public List<Author> getAuthorList() throws RepositoryException{
 		return authorList.getAuthorList();
-	}
-	public int getAuthorIdByName(String entityName) throws RepositoryException{
-		return authorList.getAuthorIdByName(entityName);
 	}
 	public int getAuthorLastId() throws RepositoryException{
 		return authorList.getAuthorLastId();
@@ -347,29 +326,17 @@ public class RiseEventsFacade {
 	public CheckingCopy searchCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
 		return checkingcopyList.search(idEntity);
 	}
-	public int getCheckingCopyIdByName(String entityName) throws RepositoryException{
-		return checkingcopyList.getCheckingCopyIdByName(entityName);
-	}
 	public int getCheckingCopyLastId() throws RepositoryException{
 		return checkingcopyList.getCheckingCopyLastId();
 	}
-	public boolean isThereCheckingCopy(int idEntity) throws RepositoryException{
-		return checkingcopyList.isThere(idEntity);
-	}
 	public void insertReview(Review entity) throws ReviewAlreadyInsertedException, RepositoryException{
 		this.reviewList.insert(entity);
-	}
-	public void removeReview(Review entity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
-		reviewList.remove(entity);  
 	}
 	public void updateReview(Review Entity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
 		reviewList.update(Entity);
 	}
 	public List<Review> getReviewList() throws RepositoryException{
 		return reviewList.getReviewList();
-	}
-	public Review searchReview(Review Entity) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
-		return reviewList.search(Entity);
 	}
 	public int getReviewLastId() throws RepositoryException{
 		return reviewList.getReviewLastId();
@@ -431,9 +398,6 @@ public class RiseEventsFacade {
 	public SubmissionAuthor searchSubmissionAuthor(SubmissionAuthor Entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
 		return submissionauthorList.search(Entity);
 	}
-	public int getSubmissionAuthorLastId() throws RepositoryException{
-		return submissionauthorList.getSubmissionAuthorLastId();
-	}
 	public boolean isThereSubmissionAuthor(SubmissionAuthor entity) throws RepositoryException{
 		return submissionauthorList.isThere(entity);
 	}
@@ -460,9 +424,6 @@ public class RiseEventsFacade {
 	}
 	public void insertRegistration(Registration entity) throws RegistrationAlreadyInsertedException, RepositoryException{
 		this.registrationList.insert(entity);
-	}
-	public void removeRegistration(Registration entity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
-		registrationList.remove(entity);  
 	}
 	public void updateRegistration(Registration Entity) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
 		registrationList.update(Entity);
@@ -491,9 +452,6 @@ public class RiseEventsFacade {
 	public Assignment searchAssignment(Assignment Entity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		return assignmentList.search(Entity);
 	}
-	public int getAssignmentLastId() throws RepositoryException{
-		return assignmentList.getAssignmentLastId();
-	}
 	public boolean isThereAssignment(Assignment entity) throws RepositoryException{
 		return assignmentList.isThere(entity);
 	}
@@ -508,8 +466,16 @@ public class RiseEventsFacade {
 	}
 	
 	
+	public int getUserIdByName(String entityName) throws RepositoryException{
+		return userList.getUserIdByName(entityName);
+	}
+
 	
 	
+	public int getActivityIdByName(String entityName) throws RepositoryException{
+		return activityList.getActivityIdByName(entityName);
+	}
+
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
 		return activityList.getEventMainTrackValue(idEvent);
 	}
@@ -552,8 +518,12 @@ public class RiseEventsFacade {
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
 	
-	//if Reviewer and Submission -> Review is enable 
-	//Review Feature
+	public void removeReview(int idReview) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		reviewList.remove(idReview);  
+	}
+	public Review searchReview(int idReview) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		return reviewList.search(idReview);
+	}
 			
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
 		return reviewList.getReviewsBySubmission(idSubmission);

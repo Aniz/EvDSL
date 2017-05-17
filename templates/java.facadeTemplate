@@ -88,17 +88,12 @@ public class {{systemName}}Facade {
 		return {{key|lower}}List.search(idEntity);
 	}
 	{% endif %}
-	{% if key not in ["Reviewer","Organizer","Speaker","Payment"] %}
-	public int get{{key}}IdByName(String entityName) throws RepositoryException{
-		return {{key|lower}}List.get{{key}}IdByName(entityName);
-	}
-	{% endif %}
 	{% if key not in ["User","Reviewer","Organizer","Speaker"] %}
 	public int get{{key}}LastId() throws RepositoryException{
 		return {{key|lower}}List.get{{key}}LastId();
 	}
 	{% endif %}
-	{% if key not in ["Payment,Submission,CheckingCopy"] %}
+	{% if key not in ["Payment","Submission","CheckingCopy"] %}
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
@@ -108,21 +103,23 @@ public class {{systemName}}Facade {
 	public void insert{{dep}}({{dep}} entity) throws {{dep}}AlreadyInsertedException, RepositoryException{
 		this.{{dep|lower}}List.insert(entity);
 	}
+	{% if dep not in ["Registration","Review"] %}
 	public void remove{{dep}}({{dep}} entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.remove(entity);  
 	}
+	{% endif %}
 	public void update{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		{{dep|lower}}List.update(Entity);
 	}
 	public List<{{dep}}> get{{dep}}List() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}List();
 	}
-	{% if dep not in ["Registration"] %}
+	{% if dep not in ["Registration","Review"] %}
 	public {{dep}} search{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		return {{dep|lower}}List.search(Entity);
 	}
 	{% endif %}
-	{% if key not in ["Assignment"] %}
+	{% if dep not in ["Assignment","Submission","SubmissionAuthor"] %}
 	public int get{{dep}}LastId() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}LastId();
 	}
@@ -169,9 +166,16 @@ public class {{systemName}}Facade {
 	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
 		eventList.frequencyPerEvent(ParticipantsPerEvent, event);
 	}
+	public int getEventIdByName(String entityName) throws RepositoryException{
+		return eventList.getEventIdByName(entityName);
+	}
 	{% endif %}	
 {% endif %}	
 {% if 'User' in data %}
+	public int getUserIdByName(String entityName) throws RepositoryException{
+		return userList.getUserIdByName(entityName);
+	}
+
 	{% if 'sendBugTrackEmail' in data.User.option.statments %}
 	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
 		return userList.sendBug(nome, assunto, mensagem);
@@ -179,6 +183,10 @@ public class {{systemName}}Facade {
 	{% endif %}	
 {% endif %}	
 {% if 'Activity' in data %}
+	public int getActivityIdByName(String entityName) throws RepositoryException{
+		return activityList.getActivityIdByName(entityName);
+	}
+
 	public float getEventMainTrackValue(int idEvent) throws RepositoryException{
 		return activityList.getEventMainTrackValue(idEvent);
 	}
@@ -255,8 +263,12 @@ public class {{systemName}}Facade {
 	{% endif %}
 {% endif %}
 {% if 'Reviewer' in data %}	
-	//if Reviewer and Submission -> Review is enable 
-	//Review Feature
+	public void removeReview(int idReview) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		reviewList.remove(idReview);  
+	}
+	public Review searchReview(int idReview) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{
+		return reviewList.search(idReview);
+	}
 {% if 'Submission' in data %}			
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException{
 		return reviewList.getReviewsBySubmission(idSubmission);

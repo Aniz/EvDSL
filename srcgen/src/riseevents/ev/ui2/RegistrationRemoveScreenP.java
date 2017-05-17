@@ -99,7 +99,13 @@ public class RegistrationRemoveScreenP extends JInternalFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int idRegistration = Integer.valueOf(textFieldRegistrationId.getText());
+			int rowIndex = table.getSelectedRow();
+			
+			if(rowIndex == -1){
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Selecione o Registro a ser removido!");
+				return;
+			}
 			
 			try {
 				if (RiseEventsMainScreenP.facade.searchRegistration(idRegistration) == null){
@@ -108,7 +114,8 @@ public class RegistrationRemoveScreenP extends JInternalFrame {
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}else{
-					RiseEventsMainScreenP.facade.removeRegistration(idRegistration);
+					Registration registration = new RegistrationTableModel(RiseEventsMainScreenP.facade.getRegistrationList()).get(rowIndex);
+					RiseEventsMainScreenP.facade.removeRegistration(registration);
 					JOptionPane.showMessageDialog(getContentPane(), "Remoção realizada com sucesso!!","Remoção",JOptionPane.INFORMATION_MESSAGE);
 				}
 			} catch (HeadlessException e1) {

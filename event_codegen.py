@@ -276,7 +276,7 @@ def main(debug=False):
     facadeTemplate =jinja_env.get_template(join(templateFolder,'java.facadeTemplate'))
     with open(join(facadeFolder,
                    "%s.java" % (systemName+"Facade")), 'w') as f:
-        f.write(facadeTemplate.render(data=componentDict,systemName=systemName,dependences=dependencesList))
+        f.write(facadeTemplate.render(data=componentDict,systemName=systemName,dependences=dependencesList,statments=allStatmentsDict))
     
     mainViewTemplate =jinja_env.get_template(join(templateFolder,'java.mainScreenTemplate'))
     with open(join(viewFolder,

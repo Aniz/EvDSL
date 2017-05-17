@@ -262,9 +262,7 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 						
 						{{systemName}}MainScreenP.facade.updateReview(review);
 						
-						Submission submission = {{systemName}}MainScreenP.facade.searchSubmission(review.getIdSubmission());
-						User user = {{systemName}}MainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
-						enviarEmails(review,submission,user);
+						enviarEmails(review);
 
 					} catch (ReviewAlreadyInsertedException e1) {
 						JOptionPane.showMessageDialog(getContentPane(),
@@ -314,12 +312,11 @@ public class ReviewInsertScreenP extends JInternalFrame  {
 	}
 	
 		public void enviarEmails(Review review){
-		Email email = new Email();
 		try {
-			Submission submission = RiSEEventMainScreenP.facade.searchSubmission(review.getIdSubmission());
+			Submission submission = {{systemName}}MainScreenP.facade.searchSubmission(review.getIdSubmission());
 //			Author author = pegarAuthorSubmission(submission);
-			User user = RiSEEventMainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
-			RiSEEventMainScreenP.facade.emailRoundNotification(review, user, email);
+			User user = {{systemName}}MainScreenP.facade.searchUser(Integer.valueOf(textFieldUserId.getText()));
+			{{systemName}}MainScreenP.facade.emailRoundNotification(review, user);
 			
 		} catch (EmailException e) {
 			JOptionPane.showMessageDialog(getContentPane(),

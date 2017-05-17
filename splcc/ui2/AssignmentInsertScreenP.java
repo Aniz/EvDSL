@@ -25,36 +25,27 @@ import javax.swing.JTextField;
 
 import org.apache.commons.mail.EmailException;
 
-import {{systemName|lower}}.ev.data.Assignment;
-//#if ${InsertAuthors} == "T"
-//#endif
+{% for key in extraData %}
+import {{systemName|lower}}.ev.data.{{key}};
+import {{systemName|lower}}.ev.business.{{key}}Control;
+import {{systemName|lower}}.ev.exception.{{key}}AlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.{{key}}NotFoundException;
+import {{systemName|lower}}.ev.repository.{{key}}Repository;
+import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
+{% endfor %}
 
-import {{systemName|lower}}.ev.data.Review;
-import {{systemName|lower}}.ev.data.Review.StatusReview;
-import {{systemName|lower}}.ev.data.Reviewer;
-import {{systemName|lower}}.ev.data.Submission;
-//#if ${InsertAuthors} == "T"
-import {{systemName|lower}}.ev.data.SubmissionAuthor;
-//#endif
-//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
-import {{systemName|lower}}.ev.data.SubmissionUser;
-//#endif
-import {{systemName|lower}}.ev.data.User;
-import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
-//#if ${InsertAuthors} == "T"
-import {{systemName|lower}}.ev.data.Author;
-import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
-//#endif
-import {{systemName|lower}}.ev.exception.RepositoryException;
-import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.ReviewerAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.ReviewerNotFoundException;
-import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
-import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.UserNotFoundException;
+{% if extraData.Reviewer is defined %}
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
+{% endif %}
+
+{% if extraData.Review is defined %}
+import {{systemName|lower}}.ev.table.Review.StatusReview;
+{% endif %}
+
+import {{systemName|lower}}.ev.table.AssignmentTableModel;
+import {{systemName|lower}}.ev.data.Assignment;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 public class AssignmentInsertScreenP extends JInternalFrame{
 
@@ -65,9 +56,9 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	private JTable tableReviewer;
 	private JTable tableSelectReviewer;
 	
-	//#if ${Assignmentautomatic} == "T"
+	{% if 'interestConflict' in data.statments %}
 	private JButton btnGenerate;
-	//#endif
+	{% endif %}
 	
 	private List<Reviewer> listaRevisoresSelecionados = new ArrayList<Reviewer>();
 	
@@ -168,20 +159,20 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
-		//#if ${Assignmentautomatic} == "T"
+		{% if 'interestConflict' in data.statments %}
 		JButton btnGenerate = new JButton("Generate");
 		btnGenerate.setBounds(280, 358, 117, 29);
 		getContentPane().add(btnGenerate);
-		//#endif
-		
+		{% endif %}
+	
 		btnInsert.addActionListener(insertAction);
 		btnBack.addActionListener(backAction);
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
-		//#if ${Assignmentautomatic} == "T"
-		btnGenerate.addActionListener(generateAction);
-		//#endif
 		
+		{% if 'interestConflict' in data.statments %}
+		btnGenerate.addActionListener(generateAction);
+		{% endif %}	
 		populateTableReviewer();
 		carregarComboSubmission();
 		comboBoxSubmission.addActionListener(selectSubmissionAction);
@@ -287,7 +278,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment2);
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment3);
 				
-				//#if ${InsertAuthors} == "T"
+				{% if 'Author' in extraData %}
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
 				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
@@ -297,9 +288,11 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						author = {{systemName}}MainScreenP.facade.searchAuthor(sa.getIdAuthor());
 					}
 				}
-				//#endif
+				{% endif %}
+				{% if 'Author' in extraData %}
 				User user = new User();
-				//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
+				{% endif %}
+				{% if 'SubmissionUser' in extraData %}
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUserList();
 							
@@ -308,7 +301,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						user = {{systemName}}MainScreenP.facade.searchUser(su.getIdUser());
 					}
 				}
-				//#endif
+				{% endif %}
 				
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
@@ -546,8 +539,39 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		}
 	}
 	
+	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
+		User user = new User();
+		try {
+			user = {{systemName}}MainScreenP.facade.searchUser(reviewer.getIdUser());
+		} catch (UserNotFoundException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		} catch (RepositoryException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		} catch (UserAlreadyInsertedException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		}
+		
+		try {
+			LibraryOfDSL.sendNotification(user, review);
+		} catch (EmailException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
 	
-	//#if ${Assignmentautomatic} == "T"
+	{% if 'interestConflict' in data.statments %}
 	private class GenerateButtonAction  implements ActionListener{ 
 
 		@Override
@@ -639,7 +663,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				
 		}
 	}
-	//#endif
+	{% endif %}
 	
 }
 //#endif

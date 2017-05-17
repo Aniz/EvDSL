@@ -18,11 +18,11 @@ public interface ReviewRepository {
 	
 	public int getReviewLastId() throws RepositoryException;
 	
-	public void remove(Review review) throws ReviewNotFoundException, RepositoryException;
+	public void remove(int idReview) throws ReviewNotFoundException, RepositoryException;
 	
 	public void update(Review review) throws ReviewNotFoundException, RepositoryException;
 	
-	public Review search(Review review) throws ReviewNotFoundException, RepositoryException;
+	public Review search(int idReview) throws ReviewNotFoundException, RepositoryException;
 	
 	public List<String> getReviewsBySubmission(int idSubmission) throws RepositoryException;
 	
