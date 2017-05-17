@@ -53,15 +53,14 @@ include Bugtrack.
 if Payment.Credito -> askCardInfo 
 if Payment.Debito -> generateCarne
 if Payment.Avista -> generateBoleto
-
 def Registration -> reportsListofAuthors 
-def Registration -> reportsFrequencyperActivity 
-def Event -> reportsFrequencyperEvent 
+def Registration -> reportsFrequencyPerActivity 
 if CheckingCopy.Atestado -> checkingCopyAtestado
 if CheckingCopy.Certificado -> checkingCopyCertificado 
 if CheckiCopy.Certificado -> checkingCopyCertificado 
 def Event -> program
 def Event -> importantDates
+def Event -> reportsFrequencyPerEvent 
 if Submission.Completa -> insertAttachment
 def User -> sendBugTrackEmail
 

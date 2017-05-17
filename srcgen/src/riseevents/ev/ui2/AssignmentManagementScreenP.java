@@ -28,36 +28,55 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.mail.EmailException;
 
-import riseevents.ev.data.Assignment;
-//#if ${InsertAuthors} == "T"
-import riseevents.ev.data.Author;
-//#endif
-import riseevents.ev.data.Review;
-import riseevents.ev.data.Review.StatusReview;
-import riseevents.ev.data.Reviewer;
-import riseevents.ev.data.Submission;
-//#if ${InsertAuthors} == "T"
-import riseevents.ev.data.SubmissionAuthor;
-//#endif
-import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.data.User;
-import riseevents.ev.exception.AssignmentAlreadyInsertedException;
-import riseevents.ev.exception.AssignmentNotFoundException;
-//#if ${InsertAuthors} == "T"
-import riseevents.ev.exception.AuthorAlreadyInsertedException;
-import riseevents.ev.exception.AuthorNotFoundException;
-//#endif
-import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.exception.ReviewAlreadyInsertedException;
-import riseevents.ev.exception.SubmissionAlreadyInsertedException;
-import riseevents.ev.exception.SubmissionNotFoundException;
+import riseevents.ev.business.UserControl;
 import riseevents.ev.exception.UserAlreadyInsertedException;
 import riseevents.ev.exception.UserNotFoundException;
-import riseevents.ev.table.AssignmentTableModel;
+import riseevents.ev.repository.UserRepository;
+import riseevents.ev.repository.UserRepositoryBDR;
+import riseevents.ev.data.Reviewer;
+import riseevents.ev.business.ReviewerControl;
+import riseevents.ev.exception.ReviewerAlreadyInsertedException;
+import riseevents.ev.exception.ReviewerNotFoundException;
+import riseevents.ev.repository.ReviewerRepository;
+import riseevents.ev.repository.ReviewerRepositoryBDR;
+import riseevents.ev.data.Submission;
+import riseevents.ev.business.SubmissionControl;
+import riseevents.ev.exception.SubmissionAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionNotFoundException;
+import riseevents.ev.repository.SubmissionRepository;
+import riseevents.ev.repository.SubmissionRepositoryBDR;
+import riseevents.ev.data.Author;
+import riseevents.ev.business.AuthorControl;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
+import riseevents.ev.repository.AuthorRepository;
+import riseevents.ev.repository.AuthorRepositoryBDR;
+import riseevents.ev.data.SubmissionUser;
+import riseevents.ev.business.SubmissionUserControl;
+import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionUserNotFoundException;
+import riseevents.ev.repository.SubmissionUserRepository;
+import riseevents.ev.repository.SubmissionUserRepositoryBDR;
+import riseevents.ev.data.SubmissionAuthor;
+import riseevents.ev.business.SubmissionAuthorControl;
+import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionAuthorNotFoundException;
+import riseevents.ev.repository.SubmissionAuthorRepository;
+import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
+import riseevents.ev.data.Review;
+import riseevents.ev.business.ReviewControl;
+import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.exception.ReviewNotFoundException;
+import riseevents.ev.repository.ReviewRepository;
+import riseevents.ev.repository.ReviewRepositoryBDR;
+
 import riseevents.ev.table.ReviewerTableModel;
-//#if ${ConflictofinterestAutomatic} == "T"
+
+import riseevents.ev.table.AssignmentTableModel;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.Conflict;
-//#endif
 import riseevents.ev.util.LibraryOfDSL;
 
 public class AssignmentManagementScreenP extends JInternalFrame {
@@ -71,18 +90,13 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	private JTable tableSelectReviewer;
 	
 	private JButton btnBack;
-	//#if ${Assignmentautomatic} == "T"
 	private JButton btnGenerate;
-	//#endif
 	private JTextField textFieldDate;
 	private JTable table_1;
 	
 	private JComboBox comboBoxSubmission;
-	
 	private List<Reviewer> listaRevisoresSelecionados = new ArrayList<Reviewer>();
-	
 	private Submission submissionSelecionado = new Submission();
-	
 	private Assignment assignmentSelecionado = new Assignment();
 	
 	public static AssignmentManagementScreenP getInstanceAssignmentManagementScreenP() {
@@ -129,9 +143,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		SelectButtonAction selectAction = new SelectButtonAction(); 
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		BackButtonAction backAction = new BackButtonAction();
-		//#if ${Assignmentautomatic} == "T"
 		GenerateButtonAction generateAction = new GenerateButtonAction();
-		//#endif
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 728, 480);
 		contentPane = new JPanel();
@@ -233,12 +245,9 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
-		//#if ${Assignmentautomatic} == "T"
 		btnGenerate = new JButton("Generate");
 		btnGenerate.setBounds(248, 273, 117, 29);
 		contentPane.add(btnGenerate);
-		//#endif
-		
 		//PASSO 2
 		btnInsert.addActionListener(insertAction);
 		btnRemove.addActionListener(removeAction);
@@ -247,10 +256,8 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
-		//#if ${Assignmentautomatic} == "T"
 		btnGenerate.addActionListener(generateAction);
-		//#endif
-		
+
 		populateTable();
 		populateTableReviewer();
 		carregarComboSubmission();
@@ -384,7 +391,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				RiseEventsMainScreenP.facade.insertAssignment(assignment2);
 				RiseEventsMainScreenP.facade.insertAssignment(assignment3);
 				
-				//#if ${InsertAuthors} == "T"
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
 				submissionAuthor = RiseEventsMainScreenP.facade.getSubmissionAuthorList();
@@ -394,11 +400,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						author = RiseEventsMainScreenP.facade.searchAuthor(sa.getIdAuthor());
 					}
 				}
-				//#endif
-				
 				User user = new User();
-				
-				//#if ${SubmissionParcial} == "T" or ${SubmissionCompleta} == "T"
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
 							
@@ -407,7 +409,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						user = RiseEventsMainScreenP.facade.searchUser(su.getIdUser());
 					}
 				}
-				//#endif
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
@@ -420,21 +421,21 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					LibraryOfDSL.enviarEmails(reviewer1, submission, review1);
+					enviarEmails(reviewer1, submission, review1);
 				}
 				if(resultAutomaticConflict2 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					LibraryOfDSL.enviarEmails(reviewer2, submission, review2);
+					enviarEmails(reviewer2, submission, review2);
 				}
 				if(resultAutomaticConflict3 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					LibraryOfDSL.enviarEmails(reviewer3, submission, review3);
+					enviarEmails(reviewer3, submission, review3);
 				}
 				
 			} catch (RepositoryException e1) {
@@ -463,7 +464,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			} 
-			//#if ${InsertAuthors} == "T"
 			catch (AuthorNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -471,8 +471,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			//#endif
-				
+					
 			catch (UserNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -628,7 +627,37 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		}
 	}
 	
-	//#if ${Assignmentautomatic} == "T"
+	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
+		User user = new User();
+		try {
+			user = RiseEventsMainScreenP.facade.searchUser(reviewer.getIdUser());
+		} catch (UserNotFoundException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		} catch (RepositoryException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		} catch (UserAlreadyInsertedException e1) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e1.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e1.printStackTrace();
+		}
+		
+		try {
+			LibraryOfDSL.sendNotification(user, review);
+		} catch (EmailException e) {
+			JOptionPane.showMessageDialog(getContentPane(),
+					e.toString(), "Erro",
+					JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
 	private class GenerateButtonAction  implements ActionListener{ 
 
 		@Override
@@ -720,7 +749,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				
 		}
 	}
-	//#endif
 	
 }
 //#endif

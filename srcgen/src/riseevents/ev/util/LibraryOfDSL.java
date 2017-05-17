@@ -114,11 +114,11 @@ public class LibraryOfDSL {
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email.addTo(emailDestino, user.getNameUser()); //destinat�rio 
-		email.setFrom("rise", "Gerenciador de Eventos Rise"); // remetente 
+		email.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("rise", "password");
+		email.setAuthentication("rise.gmail.com", "password");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -132,11 +132,11 @@ public class LibraryOfDSL {
 		email2.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email2.addTo(emailDestino2, user.getNameUser()); //destinat�rio 
-		email2.setFrom("rise", "Gerenciador de Eventos Rise"); // remetente 
+		email2.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email2.setSubject(assunto2); // assunto do e-mail 
 		email2.setMsg(mensagem2); //conteudo do e-mail
 		
-		email2.setAuthentication("rise", "password");
+		email2.setAuthentication("rise.gmail.com", "password");
 		email2.setSslSmtpPort( "465" ); //578 ou 465
 		email2.setSSLOnConnect(true);
 		email2.setStartTLSEnabled(true);
@@ -149,7 +149,7 @@ public class LibraryOfDSL {
 		email3.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email3.addTo(emailDestino3, user.getNameUser()); //destinat�rio 
-		email3.setFrom("rise", "Gerenciador de Eventos Rise"); // remetente 
+		email3.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email3.setSubject(assunto3); // assunto do e-mail 
 		
 		//ESTOU ENVIADO UMA IMAGEM EM ANEXO POIS AINDA NAO CONSEGUI PEGAR DO BANCO E INSERIR AQUI
@@ -161,7 +161,7 @@ public class LibraryOfDSL {
 	    
 		email3.setMsg(mensagem3); //conteudo do e-mail
 		
-		email3.setAuthentication("rise", "password");
+		email3.setAuthentication("rise.gmail.com", "password");
 		email3.setSslSmtpPort( "465" ); //578 ou 465
 		email3.setSSLOnConnect(true);
 		email3.setStartTLSEnabled(true);
@@ -197,11 +197,11 @@ public class LibraryOfDSL {
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email.addTo(emailDestino, user.getNameUser()); //destinat�rio 
-		email.setFrom("rise", "Gerenciador de Eventos Rise"); // remetente 
+		email.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("rise", "systemPassword");
+		email.setAuthentication("rise.gmail.com", "systemPassword");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -216,12 +216,12 @@ public class LibraryOfDSL {
 		String msg;
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
-		email.addTo("rise", "Bugtrack Event"); //destinat�rio 
-		email.setFrom("rise", nome); // remetente 
+		email.addTo("rise.gmail.com", "Bugtrack Event"); //destinat�rio 
+		email.setFrom("rise.gmail.com", nome); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("rise", "systemPassword");
+		email.setAuthentication("rise.gmail.com", "systemPassword");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -239,36 +239,5 @@ public class LibraryOfDSL {
 			palavrasDaKeyword.add(array[i]);
 		}
 		return palavrasDaKeyword;
-	}
-	
-	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
-		User user = new User();
-		try {
-			user = RiseEventsMainScreenP.facade.searchUser(reviewer.getIdUser());
-		} catch (UserNotFoundException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (RepositoryException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (UserAlreadyInsertedException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		}
-		
-		try {
-			LibraryOfDSL.sendNotification(user, review);
-		} catch (EmailException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		}
 	}
 }

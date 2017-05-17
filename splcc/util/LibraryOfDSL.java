@@ -8,6 +8,14 @@ import {{systemName|lower}}.ev.exception.{{key}}NotFoundException;
 import {{systemName|lower}}.ev.repository.{{key}}Repository;
 import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 {% endfor %}
+{% for key in dependences %}
+import {{systemName|lower}}.ev.data.{{key}};
+import {{systemName|lower}}.ev.business.{{key}}Control;
+import {{systemName|lower}}.ev.exception.{{key}}AlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.{{key}}NotFoundException;
+import {{systemName|lower}}.ev.repository.{{key}}Repository;
+import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
+{% endfor %}
 
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
@@ -79,11 +87,11 @@ public class LibraryOfDSL {
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email.addTo(emailDestino, user.getNameUser()); //destinat�rio 
-		email.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
+		email.setFrom("{{systemEmail}}.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("{{systemEmail}}", "{{systemPassword}}");
+		email.setAuthentication("{{systemEmail}}.gmail.com", "{{systemPassword}}");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -99,11 +107,11 @@ public class LibraryOfDSL {
 		email2.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email2.addTo(emailDestino2, user.getNameUser()); //destinat�rio 
-		email2.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
+		email2.setFrom("{{systemEmail}}.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email2.setSubject(assunto2); // assunto do e-mail 
 		email2.setMsg(mensagem2); //conteudo do e-mail
 		
-		email2.setAuthentication("{{systemEmail}}", "{{systemPassword}}");
+		email2.setAuthentication("{{systemEmail}}.gmail.com", "{{systemPassword}}");
 		email2.setSslSmtpPort( "465" ); //578 ou 465
 		email2.setSSLOnConnect(true);
 		email2.setStartTLSEnabled(true);
@@ -118,7 +126,7 @@ public class LibraryOfDSL {
 		email3.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email3.addTo(emailDestino3, user.getNameUser()); //destinat�rio 
-		email3.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
+		email3.setFrom("{{systemEmail}}.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email3.setSubject(assunto3); // assunto do e-mail 
 		
 		//ESTOU ENVIADO UMA IMAGEM EM ANEXO POIS AINDA NAO CONSEGUI PEGAR DO BANCO E INSERIR AQUI
@@ -130,7 +138,7 @@ public class LibraryOfDSL {
 	    
 		email3.setMsg(mensagem3); //conteudo do e-mail
 		
-		email3.setAuthentication("{{systemEmail}}", "{{systemPassword}}");
+		email3.setAuthentication("{{systemEmail}}.gmail.com", "{{systemPassword}}");
 		email3.setSslSmtpPort( "465" ); //578 ou 465
 		email3.setSSLOnConnect(true);
 		email3.setStartTLSEnabled(true);
@@ -168,11 +176,11 @@ public class LibraryOfDSL {
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
 		email.addTo(emailDestino, user.getNameUser()); //destinat�rio 
-		email.setFrom("{{systemEmail}}", "Gerenciador de Eventos Rise"); // remetente 
+		email.setFrom("{{systemEmail}}.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("{{systemEmail}}", "systemPassword");
+		email.setAuthentication("{{systemEmail}}.gmail.com", "systemPassword");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -189,12 +197,12 @@ public class LibraryOfDSL {
 		String msg;
 		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
 		
-		email.addTo("{{systemEmail}}", "Bugtrack Event"); //destinat�rio 
-		email.setFrom("{{systemEmail}}", nome); // remetente 
+		email.addTo("{{systemEmail}}.gmail.com", "Bugtrack Event"); //destinat�rio 
+		email.setFrom("{{systemEmail}}.gmail.com", nome); // remetente 
 		email.setSubject(assunto); // assunto do e-mail 
 		email.setMsg(mensagem); //conteudo do e-mail
 		
-		email.setAuthentication("{{systemEmail}}", "systemPassword");
+		email.setAuthentication("{{systemEmail}}.gmail.com", "systemPassword");
 		email.setSslSmtpPort( "465" ); //578 ou 465
 		email.setSSLOnConnect(true);
 		email.setStartTLSEnabled(true);
@@ -214,37 +222,4 @@ public class LibraryOfDSL {
 		}
 		return palavrasDaKeyword;
 	}
-	
-	{% if 'Reviewer' in data and 'Submission' in data %}
-	public void enviarEmails(Reviewer reviewer, Submission submission, Review review){
-		User user = new User();
-		try {
-			user = {{systemName}}MainScreenP.facade.searchUser(reviewer.getIdUser());
-		} catch (UserNotFoundException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (RepositoryException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		} catch (UserAlreadyInsertedException e1) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e1.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e1.printStackTrace();
-		}
-		
-		try {
-			LibraryOfDSL.sendNotification(user, review);
-		} catch (EmailException e) {
-			JOptionPane.showMessageDialog(getContentPane(),
-					e.toString(), "Erro",
-					JOptionPane.INFORMATION_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	{% endif %}
 }

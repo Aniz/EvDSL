@@ -53,9 +53,9 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventSearchScreenP screenSearchEvent;	
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
-	private EventReportsFrequencyperEventScreenP screenEventReportsFrequencyperEvent;	
 	private EventProgramScreenP screenEventProgram;	
 	private EventImportantDatesScreenP screenEventImportantDates;	
+	private EventReportsFrequencyPerEventScreenP screenEventReportsFrequencyPerEvent;	
 
 	private PaymentInsertScreenP screenInsertPayment;	
 	private PaymentUpdateScreenP screenUpdatePayment;	
@@ -147,9 +147,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
-		EventReportsFrequencyperEventMenuAction eventReportsFrequencyperEventAction = new EventReportsFrequencyperEventMenuAction();	
 		EventProgramMenuAction eventProgramAction = new EventProgramMenuAction();	
 		EventImportantDatesMenuAction eventImportantDatesAction = new EventImportantDatesMenuAction();	
+		EventReportsFrequencyPerEventMenuAction eventReportsFrequencyPerEventAction = new EventReportsFrequencyPerEventMenuAction();	
 
 		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
 		UpdatePaymentMenuAction updatePaymentAction = new UpdatePaymentMenuAction();	
@@ -282,15 +282,15 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllEvent = new JMenuItem("ListAll");
 		mnEvent.add(mntmListAllEvent);
 		mntmListAllEvent.addActionListener(listallEventAction);
-		JMenuItem mntmEventReportsFrequencyperEvent = new JMenuItem("reportsFrequencyperEvent");
-		mnEvent.add(mntmEventReportsFrequencyperEvent);
-		mntmEventReportsFrequencyperEvent.addActionListener(eventReportsFrequencyperEventAction);
 		JMenuItem mntmEventProgram = new JMenuItem("program");
 		mnEvent.add(mntmEventProgram);
 		mntmEventProgram.addActionListener(eventProgramAction);
 		JMenuItem mntmEventImportantDates = new JMenuItem("importantDates");
 		mnEvent.add(mntmEventImportantDates);
 		mntmEventImportantDates.addActionListener(eventImportantDatesAction);
+		JMenuItem mntmEventReportsFrequencyPerEvent = new JMenuItem("reportsFrequencyPerEvent");
+		mnEvent.add(mntmEventReportsFrequencyPerEvent);
+		mntmEventReportsFrequencyPerEvent.addActionListener(eventReportsFrequencyPerEventAction);
 		JMenu mnPayment = new JMenu("Payment");
 		menuBar.add(mnPayment);
 		JMenuItem mntmInsertPayment = new JMenuItem("Insert");
@@ -765,22 +765,6 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-			private class EventReportsFrequencyperEventMenuAction implements ActionListener{
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				screenEventReportsFrequencyperEvent = EventReportsFrequencyperEventScreenP.getInstanceEventReportsFrequencyperEventScreenP();
-				if(screenEventReportsFrequencyperEvent.getParent() == null){
-					desktopPane.add(screenEventReportsFrequencyperEvent);
-				}
-				screenEventReportsFrequencyperEvent.setVisible(true);
-				desktopPane.moveToFront(screenEventReportsFrequencyperEvent);
-				try {
-					screenEventReportsFrequencyperEvent.setSelected(true);
-				} catch (PropertyVetoException e1) {
-					e1.printStackTrace();
-					}
-				}  
-			}
 			private class EventProgramMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -808,6 +792,22 @@ public class RiseEventsMainScreenP extends JFrame {
 				desktopPane.moveToFront(screenEventImportantDates);
 				try {
 					screenEventImportantDates.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
+			private class EventReportsFrequencyPerEventMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenEventReportsFrequencyPerEvent = EventReportsFrequencyPerEventScreenP.getInstanceEventReportsFrequencyPerEventScreenP();
+				if(screenEventReportsFrequencyPerEvent.getParent() == null){
+					desktopPane.add(screenEventReportsFrequencyPerEvent);
+				}
+				screenEventReportsFrequencyPerEvent.setVisible(true);
+				desktopPane.moveToFront(screenEventReportsFrequencyPerEvent);
+				try {
+					screenEventReportsFrequencyPerEvent.setSelected(true);
 				} catch (PropertyVetoException e1) {
 					e1.printStackTrace();
 					}

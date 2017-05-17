@@ -93,7 +93,7 @@ def main(debug=False):
     commandsOptionDict = {}
     dependenceDict = {}
     allStatmentsDict = {}
-    
+
     avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Submission","Review","Author","Receipt","CheckingCopy"]
     avaliableFunctions = ["Insert","Remove","Update","Search","ListAll","Search","Management"]
     avaliableDependencesArray = ["Review","ActivityUser","ActivitySpeaker","ActivityOrganizer","SubmissionAuthor","SubmissionUser","Registration","Assignment"]
@@ -133,7 +133,7 @@ def main(debug=False):
     dependencesDict["SubmissionAuthor"] = "Submission","Author"
     dependencesDict["SubmissionUser"] = "Submission","User"
     dependencesDict["Registration"] = "User","Event"
-    dependencesDict["Assignment"] = "User","Reviewer","Submission"
+    dependencesDict["Assignment"] = "User","Reviewer","Submission","Author"
     
     dependenceDict = {} 
     for depK,depV in dependencesDict.items():
@@ -220,13 +220,21 @@ def main(debug=False):
     for key,value in dependencesDict.items():
         actionsKeyArray = []
         if all((w in selectedOptionsArray for w in value)):
-            componentExtraData = ""
+            componentExtraData = {}
             componentData = ""
             dependencesList.append(key)
             
             if key in dependenceDict:
                 componentData = dependenceDict[key]
             
+            for op in dependencesDict[key]:
+                componentExtraData[op] = componentDict[op]
+
+            if key in ["Assignment"]:
+                componentExtraData["SubmissionUser"] = True
+                componentExtraData["SubmissionAuthor"] = True
+                componentExtraData["Review"] = True
+
             copyCodeFile(entityCodeFolder,entityFolder,key,jinja_env,componentData,componentExtraData,systemName)
             copyCodeFile(controllerCodeFolder,controllerFolder,key +"Control",jinja_env,componentData,componentExtraData,systemName) 
             copyCodeFile(repositoryCodeFolder,repositoryFolder,key+"Repository",jinja_env,componentData,componentExtraData,systemName)
