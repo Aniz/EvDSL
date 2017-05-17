@@ -334,21 +334,21 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					LibraryOfDSL.enviarEmails(reviewer1, submission, review1);
+					enviarEmails(reviewer1, submission, review1);
 				}
 				if(resultAutomaticConflict2 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					LibraryOfDSL.enviarEmails(reviewer2, submission, review2);
+					enviarEmails(reviewer2, submission, review2);
 				}
 				if(resultAutomaticConflict3 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					LibraryOfDSL.enviarEmails(reviewer3, submission, review3);
+					enviarEmails(reviewer3, submission, review3);
 				}
 				
 			} catch (RepositoryException e1) {

@@ -490,6 +490,11 @@ public class RiseEventsFacade {
 	
 
 	
+public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
+	return authorList.search(idAuthor);
+} 
+	
+	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
 		registrationList.removeValue(value, idRegistration);
 	}
@@ -537,11 +542,11 @@ public class RiseEventsFacade {
 	}
 	
 	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
-		event.generateProgram(activities, event);
+		eventList.generateProgram(activities, event);
 	}
 	
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
-		event.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
+		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
 		return event.getParticipantsPerEvent(idEvent);

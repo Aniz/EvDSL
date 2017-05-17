@@ -215,6 +215,11 @@ public class {{systemName}}Facade {
 	}
 	{% endif %}
 {% endif %}
+{% if 'Author' in data %}	
+public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
+	return authorList.search(idAuthor);
+} 
+{% endif %}	
 {% if 'Registration' in dependences %}	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
 		registrationList.removeValue(value, idRegistration);
@@ -284,12 +289,12 @@ public class {{systemName}}Facade {
 {% endif %}	
 {% if 'program' in statments %}
 	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
-		event.generateProgram(activities, event);
+		eventList.generateProgram(activities, event);
 	}
 {% endif %}	
 {% if 'importantDates' in statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
-		event.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
+		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 {% endif %}
 {% if 'reportsFrequencyPerEvent' in statments %}

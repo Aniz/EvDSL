@@ -37,16 +37,21 @@ import {{systemName|lower}}.ev.repository.{{key}}Repository;
 import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 {% endfor %}
 
+import {{systemName|lower}}.ev.data.Assignment;
+import {{systemName|lower}}.ev.business.AssignmentControl;
+import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AssignmentNotFoundException;
+import {{systemName|lower}}.ev.repository.AssignmentRepository;
+import {{systemName|lower}}.ev.repository.AssignmentRepositoryBDR;
+
 {% if extraData.Reviewer is defined %}
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
 {% if extraData.Review is defined %}
-import {{systemName|lower}}.ev.table.Review.StatusReview;
+import {{systemName|lower}}.ev.data.Review.StatusReview;
 {% endif %}
 
-import {{systemName|lower}}.ev.table.AssignmentTableModel;
-import {{systemName|lower}}.ev.data.Assignment;
 import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.util.LibraryOfDSL;
 

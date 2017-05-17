@@ -285,7 +285,7 @@ public class RegistrationManagementScreenP extends JInternalFrame{
 			
 			try {
 				Registration registration = new RegistrationTableModel({{systemName}}MainScreenP.facade.getRegistrationList()).get(rowIndex);
-				{{systemName}}MainScreenP.facade.removeRegistration(registration);
+				{{systemName}}MainScreenP.facade.removeRegistration(registration.getIdRegistration());
 				RegistrationTableModel model = (RegistrationTableModel) table.getModel();
 				model.removeRegistration(rowIndex);
 				table.setModel(model);

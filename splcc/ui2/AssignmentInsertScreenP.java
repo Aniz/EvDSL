@@ -318,7 +318,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
 				{% if 'notificationsDeadline' in data.statments %}
-					LibraryOfDSL.enviarEmails(reviewer1, submission, review1);
+					enviarEmails(reviewer1, submission, review1);
 				{% endif %}
 				}
 				if(resultAutomaticConflict2 == true){
@@ -327,7 +327,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
 				{% if 'notificationsDeadline' in data.statments %}
-					LibraryOfDSL.enviarEmails(reviewer2, submission, review2);
+					enviarEmails(reviewer2, submission, review2);
 				{% endif %}
 				}
 				if(resultAutomaticConflict3 == true){
@@ -336,7 +336,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
 				{% if 'notificationsDeadline' in data.statments %}
-					LibraryOfDSL.enviarEmails(reviewer3, submission, review3);
+					enviarEmails(reviewer3, submission, review3);
 				{% endif %}
 				}
 				
