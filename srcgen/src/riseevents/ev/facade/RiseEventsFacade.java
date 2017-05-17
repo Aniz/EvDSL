@@ -353,9 +353,6 @@ public class RiseEventsFacade {
 	public List<ActivityUser> getActivityUserList() throws RepositoryException{
 		return activityuserList.getActivityUserList();
 	}
-	public ActivityUser searchActivityUser(ActivityUser Entity) throws ActivityUserNotFoundException, RepositoryException, ActivityUserAlreadyInsertedException{
-		return activityuserList.search(Entity);
-	}
 	public int getActivityUserLastId() throws RepositoryException{
 		return activityuserList.getActivityUserLastId();
 	}
@@ -549,7 +546,7 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
-		return event.getParticipantsPerEvent(idEvent);
+		return eventList.getParticipantsPerEvent(idEvent);
 	}
 	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
 		eventList.frequencyPerEvent(ParticipantsPerEvent, event);

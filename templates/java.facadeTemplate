@@ -114,7 +114,7 @@ public class {{systemName}}Facade {
 	public List<{{dep}}> get{{dep}}List() throws RepositoryException{
 		return {{dep|lower}}List.get{{dep}}List();
 	}
-	{% if dep not in ["Registration","Review"] %}
+	{% if dep not in ["Registration","Review","ActivityUser"] %}
 	public {{dep}} search{{dep}}({{dep}} Entity) throws {{dep}}NotFoundException, RepositoryException, {{dep}}AlreadyInsertedException{
 		return {{dep|lower}}List.search(Entity);
 	}
@@ -299,7 +299,7 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 {% endif %}
 {% if 'reportsFrequencyPerEvent' in statments %}
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
-		return event.getParticipantsPerEvent(idEvent);
+		return eventList.getParticipantsPerEvent(idEvent);
 	}
 	public void frequencyPerEvent(List<String> ParticipantsPerEvent, Event event) throws DocumentException, IOException{
 		eventList.frequencyPerEvent(ParticipantsPerEvent, event);
