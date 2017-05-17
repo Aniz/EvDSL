@@ -14,7 +14,7 @@ public interface RegistrationRepository {
 	
 	public void insert(Registration registration) throws RepositoryException;
 
-	public void remove(Registration registration) throws RegistrationNotFoundException, RepositoryException;
+	public void remove(int idRegistration) throws RegistrationNotFoundException, RepositoryException;
 	
 	public void update(Registration registration) throws RegistrationNotFoundException, RepositoryException;
 

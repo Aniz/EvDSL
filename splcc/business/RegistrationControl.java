@@ -37,8 +37,8 @@ public class RegistrationControl {
         }
 	}
 
-	public void remove(Registration registration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
-		registrationList.remove(registration);
+	public void remove(int idRegistration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{
+		registrationList.remove(idRegistration);
 	}
 	
 	public void update(Registration registration) throws RegistrationAlreadyInsertedException, RepositoryException, RegistrationNotFoundException{

@@ -58,7 +58,7 @@ public class RegistrationRepositoryBDR implements RegistrationRepository {
 	}
 
 	@Override
-	public void remove(Registration registration) throws RegistrationNotFoundException,
+	public void remove(int idRegistration) throws RegistrationNotFoundException,
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();

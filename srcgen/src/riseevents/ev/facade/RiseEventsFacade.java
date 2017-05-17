@@ -499,7 +499,7 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 		registrationList.addValue(value, idRegistration);
 	}
 	public void removeRegistration(int idRegistration) throws RegistrationNotFoundException, RepositoryException, RegistrationAlreadyInsertedException{
-		registrations.remove(idRegistration);  
+		registrationList.remove(idRegistration);  
 	}
 	public int searchRegistration(int idUser, int idEvent) throws RegistrationNotFoundException, RepositoryException{
 		return registrationList.search(idUser, idEvent);
