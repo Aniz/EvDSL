@@ -44,7 +44,7 @@ def main(debug=False):
     srcgen_folder = createFolder(general_ev_folder, 'ev')
     
     dotFolder = createFolder(srcgen_folder, 'dot')
-    #createDotFiles(event_mm,event_model,dotFolder)
+    createDotFiles(event_mm,event_model,dotFolder)
     
     entityFolder = createFolder(srcgen_folder, 'data')
     controllerFolder = createFolder(srcgen_folder, 'business')
@@ -261,7 +261,6 @@ def main(debug=False):
     propertiesCodeFolder = join(this_folder,'properties')
     propertiesFolder = createFolder(general_folder, 'properties')
     generateFile(propertiesCodeFolder,propertiesFolder,'config.properties',"config",jinja_env,value,"",systemName,".properties")
-    #copy(join(this_folder,'properties'),join(general_folder,'properties'))
     generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,dependencesList,allStatmentsDict,systemName, systemEmail, systemPassword)
     generateFile(templateFolder,general_folder,'xml.buildTemplate',"build",jinja_env,value,"",systemName,".xml")
     shutil.copy(join(templateFolder,'.project'),general_folder)

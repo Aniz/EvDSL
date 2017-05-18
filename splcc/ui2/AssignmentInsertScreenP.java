@@ -42,6 +42,7 @@ import {{systemName|lower}}.ev.table.ReviewerTableModel;
 import {{systemName|lower}}.ev.data.Review.StatusReview;
 {% endif %}
 
+import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
 import {{systemName|lower}}.ev.table.AssignmentTableModel;
 import {{systemName|lower}}.ev.data.Assignment;
 import {{systemName|lower}}.ev.exception.RepositoryException;
