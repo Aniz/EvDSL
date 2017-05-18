@@ -72,6 +72,7 @@ import riseevents.ev.table.ReviewerTableModel;
 
 import riseevents.ev.data.Review.StatusReview;
 
+import riseevents.ev.exception.AssignmentAlreadyInsertedException;
 import riseevents.ev.table.AssignmentTableModel;
 import riseevents.ev.data.Assignment;
 import riseevents.ev.exception.RepositoryException;
