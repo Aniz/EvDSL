@@ -48,8 +48,6 @@ add CheckingCopy
 show Insert Update Remove Search ListAll
 	types Atestado,Certificado.
 
-include Bugtrack.
-
 if Payment.Credito -> askCardInfo 
 if Payment.Debito -> generateCarne
 if Payment.Avista -> generateBoleto

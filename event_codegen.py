@@ -214,7 +214,7 @@ def main(debug=False):
             generateFile(templateFolder,exceptionFolder,'java.exceptionNotFoundTemplate',key+"NotFoundException",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
-            generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Managment'+"ScreenP",jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Management'+"ScreenP",jinja_env,value,componentExtraData,systemName)
 
     dependencesList = []
     for key,value in dependencesDict.items():

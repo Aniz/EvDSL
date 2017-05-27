@@ -39,10 +39,9 @@ public class UserRepositoryBDR implements UserRepository {
 	public void insert(User user) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+user.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation,typeUser) Values('"+user.getIdUser()
 				+"','" + user.getPassword()
 				+"', '"+user.getNameUser()
-				+"', '"+user.getTypeUser()
 				+"', '"+user.getEmail() 
 				+"', '"+user.getFiliation()
 				+"', '"+user.getTypeUser()
@@ -161,8 +160,7 @@ public class UserRepositoryBDR implements UserRepository {
             int i = statement.executeUpdate("UPDATE User SET password = '"+ 
     	                                     user.getPassword() +
 									         "', nameUser = '"+ user.getNameUser() +
-    	                                     "', typeUser = '"+ user.getTypeUser() +
-    	                                     "',email = '"+ user.getEmail() +
+    	                                     "', email = '"+ user.getEmail() +
     	                                     "', filiation = '" + user.getFiliation() +
 											"', typeUser = '"+ user.getTypeUser() + 
     	                                     "' WHERE idUser = '"+ user.getIdUser()+"'");

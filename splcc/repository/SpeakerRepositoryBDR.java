@@ -45,10 +45,9 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 	public void insert(Speaker speaker) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+speaker.getIdUser()
-				+"','" + speaker.getPassword()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+speaker.getIdUser()
+			    +"','" + speaker.getPassword()
 				+"', '"+speaker.getNameUser()
-				+"', '"+speaker.getTypeUser()
 				+"', '"+speaker.getEmail() 
 				+"', '"+speaker.getFiliation()
 			{% if extraData.option.categories|length > 0 %}
@@ -59,7 +58,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 			{% endfor %}{% endif %}
 				+"')");
 
-			statement.executeUpdate("INSERT INTO speaker Values('"+speaker.getIdUser()
+			statement.executeUpdate("INSERT INTO speaker (idUser,biography{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+speaker.getIdUser()
 				+"','" + speaker.getBiography()
 			{% if data.option.categories|length > 0 %}
 				+"', '"+{{data.option.entity|lower}}.getType{{data.option.entity}}()

@@ -41,10 +41,9 @@ public class UserRepositoryBDR implements UserRepository {
 	public void insert(User user) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+user.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+user.getIdUser()
 				+"','" + user.getPassword()
 				+"', '"+user.getNameUser()
-				+"', '"+user.getTypeUser()
 				+"', '"+user.getEmail() 
 				+"', '"+user.getFiliation()
 			{% if data.option.categories|length > 0 %}
@@ -176,8 +175,7 @@ public class UserRepositoryBDR implements UserRepository {
             int i = statement.executeUpdate("UPDATE User SET password = '"+ 
     	                                     user.getPassword() +
 									         "', nameUser = '"+ user.getNameUser() +
-    	                                     "', typeUser = '"+ user.getTypeUser() +
-    	                                     "',email = '"+ user.getEmail() +
+    	                                     "', email = '"+ user.getEmail() +
     	                                     "', filiation = '" + user.getFiliation() +
 										{% if data.option.categories|length > 0 %}
 											"', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() + 

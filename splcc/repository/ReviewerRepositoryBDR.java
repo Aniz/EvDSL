@@ -47,10 +47,9 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 	public void insert(Reviewer reviewer) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+reviewer.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+reviewer.getIdUser()
 				+"','" +reviewer.getPassword()
 				+"', '"+reviewer.getNameUser()
-				+"', '"+reviewer.getTypeUser()
 				+"', '"+reviewer.getEmail() 
 				+"', '"+reviewer.getFiliation()
 			{% if extraData.option.categories|length > 0 %}
@@ -61,7 +60,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 			{% endfor %}{% endif %}
 				+"')");
 
-			statement.executeUpdate("INSERT INTO reviewer Values('"+reviewer.getIdUser()
+			statement.executeUpdate("INSERT INTO reviewer (idUser,knowledgeArea{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+reviewer.getIdUser()
 				+"','" + reviewer.getKnowledgeArea()
 			{% if data.option.categories|length > 0 %}
 				+"', '"+reviewer.getType{{data.option.entity}}()

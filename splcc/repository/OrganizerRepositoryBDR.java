@@ -45,7 +45,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 	public void insert(Organizer organizer) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+organizer.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+organizer.getIdUser()
 				+"','" + organizer.getPassword()
 				+"', '"+organizer.getNameUser()
 				+"', '"+organizer.getEmail() 
@@ -59,7 +59,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				+"')");
 
 			{% if data.option.properties|length > 0 or data.option.categories|length > 0 %}
-           	statement.executeUpdate("INSERT INTO organizer Values('"+organizer.getIdUser()
+        	statement.executeUpdate("INSERT INTO organizer (idUser{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+organizer.getIdUser()
 			{% if data.option.categories|length > 0 %}
 				+"', '"+organizer.getType{{data.option.entity}}()
 			{% endif %}

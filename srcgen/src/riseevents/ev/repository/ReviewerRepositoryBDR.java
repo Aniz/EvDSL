@@ -43,16 +43,15 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 	public void insert(Reviewer reviewer) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+reviewer.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation,typeReviewer) Values('"+reviewer.getIdUser()
 				+"','" +reviewer.getPassword()
 				+"', '"+reviewer.getNameUser()
-				+"', '"+reviewer.getTypeUser()
 				+"', '"+reviewer.getEmail() 
 				+"', '"+reviewer.getFiliation()
 				+"', '"+reviewer.getTypeUser()
 				+"')");
 
-			statement.executeUpdate("INSERT INTO reviewer Values('"+reviewer.getIdUser()
+			statement.executeUpdate("INSERT INTO reviewer (idUser,knowledgeArea,typeReviewer) Values('"+reviewer.getIdUser()
 				+"','" + reviewer.getKnowledgeArea()
 				+"', '"+reviewer.getTypeReviewer()
 				+"')");

@@ -41,7 +41,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 	public void insert(Organizer organizer) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User Values('"+organizer.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation,typeOrganizer) Values('"+organizer.getIdUser()
 				+"','" + organizer.getPassword()
 				+"', '"+organizer.getNameUser()
 				+"', '"+organizer.getEmail() 
@@ -49,7 +49,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				+"', '"+organizer.getTypeUser()
 				+"')");
 
-           	statement.executeUpdate("INSERT INTO organizer Values('"+organizer.getIdUser()
+        	statement.executeUpdate("INSERT INTO organizer (idUser,typeOrganizer) Values('"+organizer.getIdUser()
 				+"', '"+organizer.getTypeOrganizer()
 				+"')");
 		} catch (SQLException e) {
