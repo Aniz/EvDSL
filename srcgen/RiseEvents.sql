@@ -15,6 +15,7 @@ PRIMARY KEY (idUser));
 CREATE TABLE Speaker (
 	idUser int(10) NOT NULL, 
 	biography varchar(255) NOT NULL, 
+				
 	  
 PRIMARY KEY (idUser),
 FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
@@ -22,7 +23,6 @@ FOREIGN KEY (idUser) REFERENCES `User` (idUser) ON DELETE CASCADE);
 CREATE TABLE Reviewer (
 	idUser int(10) NOT NULL, 
 	knowledgeArea varchar(255) NOT NULL,
-		typeReviewer varchar(255) NOT NULL,
 				
 	  
 PRIMARY KEY (idUser),
@@ -35,7 +35,6 @@ CREATE TABLE Event (
 	place varchar(255), 
 	institution varchar(255), 
 	sponsors varchar(255), 
-		typeEvent varchar(255) NOT NULL,
 				
 	  
 PRIMARY KEY (idEvent));
@@ -197,3 +196,7 @@ dateOfIssue varchar(255) NOT NULL,
 PRIMARY KEY (idReceipt),
 FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
 
+Create table NewOption(
+	idNewOption int(10) NOT NULL AUTO_INCREMENT,
+				
+PRIMARY KEY (id);

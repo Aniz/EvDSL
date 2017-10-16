@@ -50,6 +50,10 @@ public class {{data.option.entity}}Control {
   public boolean isThere(int id{{data.option.entity}}) throws RepositoryException {
     return {{data.option.entity|lower}}List.isThere(id{{data.option.entity}});
   }
+
+  public int get{{data.option.entity}}LastId() throws RepositoryException{
+    return {{data.option.entity|lower}}List.get{{data.option.entity}}LastId();
+  }
   
   {% if 'ListAll' in data.commands %}
   public List<{{data.option.entity}}> get{{data.option.entity}}List() throws RepositoryException {

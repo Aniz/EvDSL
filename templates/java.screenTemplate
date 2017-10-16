@@ -1,4 +1,4 @@
-package {{systemName}}.ev.ui2;
+package {{systemName|lower}}.ev.ui2;
 import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 import java.awt.EventQueue;
@@ -41,7 +41,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 	
 	private JButton btnBack;
 	
-	JComboBox<String> submissionIdcomboBox;
+	JComboBox<String> {{data.option.entity|lower}}IdcomboBox;
 	JComboBox<String> statusComboBox;
 	
 	JButton btnInsert;
@@ -119,13 +119,13 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 		lblLast{{data.option.entity}}Id.setBounds(79, 6, 61, 16);
 		panel_1.add(lblLast{{data.option.entity}}Id);
 		
-		JLabel lblSubmissionId = new JLabel("Submission Id:");
-		lblSubmissionId.setBounds(6, 49, 104, 16);
-		panel_1.add(lblSubmissionId);
+		JLabel lbl{{data.option.entity}}Id = new JLabel("{{data.option.entity}} Id:");
+		lbl{{data.option.entity}}Id.setBounds(6, 49, 104, 16);
+		panel_1.add(lbl{{data.option.entity}}Id);
 		
-		submissionIdcomboBox = new JComboBox<String>();
-		submissionIdcomboBox.setBounds(102, 45, 84, 27);
-		panel_1.add(submissionIdcomboBox);
+		{{data.option.entity|lower}}IdcomboBox = new JComboBox<String>();
+		{{data.option.entity|lower}}IdcomboBox.setBounds(102, 45, 84, 27);
+		panel_1.add({{data.option.entity|lower}}IdcomboBox);
 		
 		JLabel lblStatus = new JLabel("Status:");
 		lblStatus.setBounds(205, 49, 61, 16);
@@ -202,28 +202,29 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 		
 		btnBack.addActionListener(backAction);
 
-		
+	{% if data.option.categories|length > 0 %}		
 		carregarComboBoxStatus();
-		carregarComboBoxIdSubmission();
-		
+	{% endif %}
+
+		carregarComboBoxId{{data.option.entity}}();
 		populateTable();
-		
-		
 	}
 	
+	{% if data.option.categories|length > 0 %}
 	private void carregarComboBoxStatus(){
-		Status{{data.option.entity}}[] status = Status{{data.option.entity}}.values();
+		Type{{data.option.entity}}[] status = Type{{data.option.entity}}.values();
 		List<String> status{{data.option.entity|lower}}s = new ArrayList<String>();
 		for(int i=0; i<status.length; i++){
 			status{{data.option.entity|lower}}s.add(i, status[i].name());
 			statusComboBox.addItem(status[i].name());
 		}
 	}
+	{% endif %}
 	
-	private void carregarComboBoxIdSubmission(){
-		List<Submission> submissions = new ArrayList<Submission>();
+	private void carregarComboBoxId{{data.option.entity}}(){
+		List<{{data.option.entity}}> {{data.option.entity|lower}} = new ArrayList<{{data.option.entity}}>();
 		try {
-			submissions = RiseEventsMainScreenP.facade.getSubmissionList();
+			{{data.option.entity}} = {{systemName}}MainScreenP.facade.get{{data.option.entity}}List();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",
@@ -231,8 +232,8 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			ex.printStackTrace();
 		}
 		
-		for(Submission submission : submissions){
-			submissionIdcomboBox.addItem(String.valueOf(submission.getIdSubmission()));
+		for({{data.option.entity}} entity : {{data.option.entity|lower}}){
+			{{data.option.entity|lower}}IdcomboBox.addItem(String.valueOf(entity.getId{{data.option.entity}}()));
 		}
 		
 	}
@@ -241,7 +242,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			{{data.option.entity}}TableModel model;
-			model = new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}s());
+			model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}s());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -267,13 +268,13 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			
 			{{data.option.entity}} {{data.option.entity|lower}} = null;
 			
-			Integer submissionId = Integer.parseInt(submissionIdcomboBox.getSelectedItem().toString());
+			Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
 			Status{{data.option.entity}} status = Status{{data.option.entity}}.valueOf(statusComboBox.getSelectedItem().toString());
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
 			
 			//int resultado = 0;
-			if (submissionId.equals("") || status.equals("") || date.equals("")
+			if ({{data.option.entity|lower}}Id.equals("") || status.equals("") || date.equals("")
 					|| description.equals("") ) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Não pode haver campo vazio.", "Erro",
@@ -283,7 +284,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 				try {
 					
 					{{data.option.entity|lower}} = new {{data.option.entity}}();
-					{{data.option.entity|lower}}.setIdSubmission(submissionId);
+					{{data.option.entity|lower}}.setId{{data.option.entity}}({{data.option.entity|lower}}Id);
 					{{data.option.entity|lower}}.setDate(date);
 					{{data.option.entity|lower}}.setDescription(description);
 					{{data.option.entity|lower}}.setStatus(status);
@@ -375,12 +376,12 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			try {
 
 				
-				Integer submissionId = Integer.parseInt(submissionIdcomboBox.getSelectedItem().toString());
+				Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
 				Status{{data.option.entity}} status = Status{{data.option.entity}}.valueOf(statusComboBox.getSelectedItem().toString());
 				String date = textFieldDate.getText();
 				String description  = textFieldDescription.getText();
 				
-				if (submissionId.equals("") || status.equals("") || date.equals("")
+				if ({{data.option.entity|lower}}Id.equals("") || status.equals("") || date.equals("")
 						|| description.equals("") ) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Não pode haver campo vazio.", "Erro",
@@ -390,15 +391,15 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 				} else {
 					
 					{{data.option.entity}} {{data.option.entity|lower}}New = new {{data.option.entity}}();
-					{{data.option.entity|lower}}New.setIdSubmission(submissionId);
+					{{data.option.entity|lower}}New.setId{{data.option.entity}}({{data.option.entity|lower}}Id);
 					{{data.option.entity|lower}}New.setDate(date);
 					{{data.option.entity|lower}}New.setDescription(description);
 					{{data.option.entity|lower}}New.setStatus(status);
 					
 					try {
-						RiseEventsMainScreenP.facade.update{{data.option.entity}}({{data.option.entity|lower}}New);
+						{{systemName}}MainScreenP.facade.update{{data.option.entity}}({{data.option.entity|lower}}New);
 						{{data.option.entity}}TableModel model;
-						model = new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}s());
+						model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}s());
 						table.setModel(model);
 					} catch ({{data.option.entity}}NotFoundException e1) {
 						JOptionPane
@@ -440,7 +441,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 				{{data.option.entity|lower}}Old=  new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}s()).get(rowIndex);
 			
 				lblLast{{data.option.entity}}Id.setText(String.valueOf({{data.option.entity|lower}}Old.getId{{data.option.entity}}()));
-				submissionIdcomboBox.setSelectedItem({{data.option.entity|lower}}Old.getIdSubmission());
+				{{data.option.entity|lower}}IdcomboBox.setSelectedItem({{data.option.entity|lower}}Old.getId{{data.option.entity}}());
 				statusComboBox.setSelectedItem({{data.option.entity|lower}}Old.getStatus());
 				textFieldDate.setText({{data.option.entity|lower}}Old.getDate());
 				textFieldDescription.setText({{data.option.entity|lower}}Old.getDescription());

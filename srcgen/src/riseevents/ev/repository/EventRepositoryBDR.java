@@ -8,7 +8,6 @@ import java.util.List;
 
 import riseevents.ev.data.Activity;
 import riseevents.ev.data.Event;
-import riseevents.ev.data.Event.TypeEvent;
 import riseevents.ev.exception.EventNotFoundException;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.PersistenceMechanismException;
@@ -41,13 +40,12 @@ public class EventRepositoryBDR implements EventRepository {
 		//removi idOrganizdor. de acordo com o modelo relacional nao temos o  atributo idOrganizador dentro de Eventos
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors,typeEvent) Values('"
+			statement.executeUpdate("INSERT INTO Event (eventName, period, place, institution,sponsors) Values('"
 					+event.getEventName()
 					+"', '"+event.getPeriod()
 					+"', '"+event.getPlace()
 					+"', '"+event.getInstitution() 
 					+"', '"+event.getSponsors() 
-				     +"', '"+event.getTypeEvent()
 	        
 		            +"')");
 		} catch (SQLException e) {
@@ -103,7 +101,6 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setPlace(resultset.getString("place"));
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
-				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
 					        
             } else {
             	throw new EventNotFoundException(idEvent);
@@ -138,7 +135,6 @@ public class EventRepositoryBDR implements EventRepository {
             	event.setPlace(resultset.getString("place"));
             	event.setInstitution(resultset.getString("institution"));
             	event.setSponsors(resultset.getString("sponsors"));
-				event.setTypeEvent(TypeEvent.valueOf(resultset.getString("typeEvent")));
 					        
 				list.add(event);
             } 

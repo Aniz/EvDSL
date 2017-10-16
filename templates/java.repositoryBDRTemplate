@@ -42,8 +42,8 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 	public void insert({{data.option.entity}} {{data.option.entity|lower}}) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO {{data.option.entity}} ({% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{property.name}}{% else %},{{property.name}}{% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}) Values('" +
-					{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{data.option.entity|lower}}.get{{property.name|capitalize}}(){% else %}+"','"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}(){% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %}+"','"+{{data.option.entity|lower}}.getType{{data.option.entity}}(){% endif %}+"')");
+			statement.executeUpdate("INSERT INTO {{data.option.entity}} ({% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{property.name}}{% else %},{{property.name}}{% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %}{% if data.option.properties|length > 0 %},{% endif %}type{{data.option.entity}}{% endif %}) Values('" +
+					{% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{data.option.entity|lower}}.get{{property.name|capitalize}}(){% else %}+"','"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}(){% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %}{% if data.option.properties|length > 0 %}+"','"+{% endif %}{{data.option.entity|lower}}.getType{{data.option.entity}}(){% endif %}+"')");
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -62,13 +62,13 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 	}
 
 	@Override
-	public void remove({{data.option.entity}} {{data.option.entity|lower}}) throws {{data.option.entity}}NotFoundException,
+	public void remove(int id{{data.option.entity}}) throws {{data.option.entity}}NotFoundException,
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM {{data.option.entity}} WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'"); 
+		    int i = statement.executeUpdate("DELETE FROM {{data.option.entity}} WHERE id{{data.option.entity}} = '"+ id{{data.option.entity}}+"'"); 
 		    if (i == 0) {
-            	throw new {{data.option.entity}}NotFoundException({{data.option.entity|lower}}.getId{{data.option.entity}}());
+            	throw new {{data.option.entity}}NotFoundException(id{{data.option.entity}});
             }
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -154,7 +154,7 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 			RepositoryException {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
-    	    statement.executeUpdate("UPDATE {{data.option.entity}} SET {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% else %}"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %} "', type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +{% endif %}"' WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'");
+    	    statement.executeUpdate("UPDATE {{data.option.entity}} SET {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% else %}"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %}{% if data.option.properties|length > 0 %} , {% endif %}  type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +{% endif %}"' WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);

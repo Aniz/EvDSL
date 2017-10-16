@@ -55,7 +55,12 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
   						case COL_{{property.name|upper}}
 						coluna = "{{property.label}}";		
   					{% endfor %}
-					
+						{% if data.option.categories|length > 0 %}
+				case COL_TYPE{{data.option.entity|upper}}:
+					coluna = "Tipo";
+					break;
+				{% endif %}
+			
 					default:
 						throw new IllegalArgumentException(ExceptionMessages.EXC_INVALID_COL);
 					}

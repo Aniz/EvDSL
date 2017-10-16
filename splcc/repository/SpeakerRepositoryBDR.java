@@ -45,7 +45,7 @@ public class SpeakerRepositoryBDR implements SpeakerRepository{
 	public void insert(Speaker speaker) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation{% if data.option.categories|length > 0 %},type{{data.option.entity}}{% endif %}{% for property in data.option.properties %},{{property.name}}{% endfor %}) Values('"+speaker.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation{% if data.option.categories|length > 0 %},type{{extraData.option.entity}}{% endif %}{% for property in extraData.option.properties %},{{property.name}}{% endfor %}) Values('"+speaker.getIdUser()
 			    +"','" + speaker.getPassword()
 				+"', '"+speaker.getNameUser()
 				+"', '"+speaker.getEmail() 

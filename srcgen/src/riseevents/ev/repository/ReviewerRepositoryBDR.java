@@ -9,7 +9,6 @@ import java.util.List;
 
 import riseevents.ev.data.Reviewer;
 import riseevents.ev.data.User.TypeUser;
-import riseevents.ev.data.Reviewer.TypeReviewer;
 
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.exception.ReviewerNotFoundException;
@@ -43,7 +42,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 	public void insert(Reviewer reviewer) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation,typeReviewer) Values('"+reviewer.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation) Values('"+reviewer.getIdUser()
 				+"','" +reviewer.getPassword()
 				+"', '"+reviewer.getNameUser()
 				+"', '"+reviewer.getEmail() 
@@ -51,9 +50,8 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 				+"', '"+reviewer.getTypeUser()
 				+"')");
 
-			statement.executeUpdate("INSERT INTO reviewer (idUser,knowledgeArea,typeReviewer) Values('"+reviewer.getIdUser()
+			statement.executeUpdate("INSERT INTO reviewer (idUser,knowledgeArea) Values('"+reviewer.getIdUser()
 				+"','" + reviewer.getKnowledgeArea()
-				+"', '"+reviewer.getTypeReviewer()
 				+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -109,7 +107,6 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
             	reviewer.setNameUser(resultset.getString("nameUser"));       	
             	reviewer.setEmail(resultset.getString("email"));
             	reviewer.setFiliation(resultset.getString("filiation"));
-				reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 			
         
 				reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeReviewer")));
@@ -147,7 +144,6 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
             	reviewer.setEmail(resultset.getString("email"));
             	reviewer.setFiliation(resultset.getString("filiation"));
             	reviewer.setKnowledgeArea(resultset.getString("knowledgeArea"));
-			 	reviewer.setTypeReviewer(TypeReviewer.valueOf(resultset.getString("typeReviewer")));
 
 			 	reviewer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
 			
@@ -174,7 +170,6 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
             statement.executeUpdate("UPDATE reviewer SET knowledgeArea = '"+ reviewer.getKnowledgeArea() +
-					"', typeReviewer = '"+ reviewer.getTypeReviewer() + 
             	"' WHERE idUser = '"+ reviewer.getIdUser()+"'");
             
             	statement.executeUpdate("UPDATE User SET password = '"+ 

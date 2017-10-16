@@ -191,7 +191,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Atualizando a tabela
 				ActivitySpeakerTableModel model;
-				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesById(i));
+				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesSpeakerById(i));
 				tableActivities.setModel(model);      
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -217,13 +217,13 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 			ActivitySpeaker activitySpeaker = null;
 			
 			try {
-				activitySpeaker = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesSpeakerList()).get(rowIndex);
+				activitySpeaker = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitySpeakerList()).get(rowIndex);
 				{{systemName}}MainScreenP.facade.removeActivitySpeaker(activitySpeaker);
 				//Atualizando a tabela
 				int i;
 				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				ActivitySpeakerTableModel model;
-				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesById(i));
+				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesSpeakerById(i));
 				tableActivities.setModel(model);
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -259,7 +259,7 @@ public class ActivitySpeakerManagementScreenP extends JInternalFrame {
 				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBox_Activities.getSelectedItem().toString());
 				//Atualizando a tabela
 				ActivitySpeakerTableModel model;
-				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesById(i));
+				model = new ActivitySpeakerTableModel({{systemName}}MainScreenP.facade.getActivitiesSpeakerById(i));
 				tableActivities.setModel(model);
 				
 			} catch (RepositoryException e1) {

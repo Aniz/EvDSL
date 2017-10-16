@@ -36,12 +36,10 @@ public class ReviewerTableRender extends DefaultTableCellRenderer {
 		table.getColumnModel().getColumn(4).setResizable(false);
 		
 		
+		
+		
 		table.getColumnModel().getColumn(4).setMaxWidth(13);
 		table.getColumnModel().getColumn(4).setResizable(false);
-		
-		
-		table.getColumnModel().getColumn(7).setMaxWidth(13);
-		table.getColumnModel().getColumn(7).setResizable(false);
 		
 		//Texto Centralizado nas Colunas
 		this.setHorizontalAlignment(CENTER);

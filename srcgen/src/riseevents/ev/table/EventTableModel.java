@@ -17,7 +17,6 @@ public class EventTableModel extends AbstractTableModel{
 		private static final int COL_PLACE = 3;
 		private static final int COL_INSTITUTION = 4;
 		private static final int COL_SPONSORS = 5;
-		private static final int COL_TYPEEVENT = 6;
 		
 		// Lista de Valores
 		private List<Event> rows;
@@ -51,9 +50,6 @@ public class EventTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_SPONSORS) {
 					return event.getSponsors();
 				}
-				else if (columnIndex == COL_TYPEEVENT) {
-					return event.getTypeEvent();
-				}
 				return null;
 			}
 			
@@ -79,9 +75,6 @@ public class EventTableModel extends AbstractTableModel{
 				case COL_SPONSORS:
 					coluna = "Sponsors";
 					break;
-				case COL_TYPEEVENT:
-					coluna = "Tipo";
-					break;
 				  
 				default:
 					throw new IllegalArgumentException("Coluna Invalida!");
@@ -103,9 +96,6 @@ public class EventTableModel extends AbstractTableModel{
 				} else if (columnIndex == COL_INSTITUTION) {
 					return String.class;
 				} else if (columnIndex == COL_SPONSORS) {
-					return String.class;
-				}
-				else if (columnIndex == COL_TYPEEVENT) {
 					return String.class;
 				}
 			
@@ -134,7 +124,6 @@ public class EventTableModel extends AbstractTableModel{
 				rows.get(indiceLinha).setPlace(event.getPlace());
 				rows.get(indiceLinha).setInstitution(event.getInstitution());
 				rows.get(indiceLinha).setSponsors(event.getSponsors());		
-				rows.get(indiceLinha).setTypeEvent(event.getTypeEvent());
 			
 				fireTableDataChanged();
 			}

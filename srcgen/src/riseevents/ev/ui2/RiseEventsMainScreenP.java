@@ -48,6 +48,12 @@ public class RiseEventsMainScreenP extends JFrame {
 	private ReviewerRemoveScreenP screenRemoveReviewer;	
 	private ReviewerListAllScreenP screenListAllReviewer;	
 
+	private SpeakerInsertScreenP screenInsertSpeaker;	
+	private SpeakerUpdateScreenP screenUpdateSpeaker;	
+	private SpeakerSearchScreenP screenSearchSpeaker;	
+	private SpeakerRemoveScreenP screenRemoveSpeaker;	
+	private SpeakerListAllScreenP screenListAllSpeaker;	
+
 	private EventInsertScreenP screenInsertEvent;	
 	private EventUpdateScreenP screenUpdateEvent;	
 	private EventSearchScreenP screenSearchEvent;	
@@ -79,6 +85,12 @@ public class RiseEventsMainScreenP extends JFrame {
 	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
 	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
 	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
+
+	private NewOptionInsertScreenP screenInsertNewOption;	
+	private NewOptionUpdateScreenP screenUpdateNewOption;	
+	private NewOptionRemoveScreenP screenRemoveNewOption;	
+	private NewOptionSearchScreenP screenSearchNewOption;	
+	private NewOptionListAllScreenP screenListAllNewOption;	
 
 	
 	private static JLabel labelImagem;
@@ -142,6 +154,12 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveReviewerMenuAction removeReviewerAction = new RemoveReviewerMenuAction();	
 		ListAllReviewerMenuAction listallReviewerAction = new ListAllReviewerMenuAction();	
 
+		InsertSpeakerMenuAction insertSpeakerAction = new InsertSpeakerMenuAction();	
+		UpdateSpeakerMenuAction updateSpeakerAction = new UpdateSpeakerMenuAction();	
+		SearchSpeakerMenuAction searchSpeakerAction = new SearchSpeakerMenuAction();	
+		RemoveSpeakerMenuAction removeSpeakerAction = new RemoveSpeakerMenuAction();	
+		ListAllSpeakerMenuAction listallSpeakerAction = new ListAllSpeakerMenuAction();	
+
 		InsertEventMenuAction insertEventAction = new InsertEventMenuAction();	
 		UpdateEventMenuAction updateEventAction = new UpdateEventMenuAction();	
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
@@ -173,6 +191,12 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveCheckingCopyMenuAction();	
 		SearchCheckingCopyMenuAction searchCheckingCopyAction = new SearchCheckingCopyMenuAction();	
 		ListAllCheckingCopyMenuAction listallCheckingCopyAction = new ListAllCheckingCopyMenuAction();	
+
+		InsertNewOptionMenuAction insertNewOptionAction = new InsertNewOptionMenuAction();	
+		UpdateNewOptionMenuAction updateNewOptionAction = new UpdateNewOptionMenuAction();	
+		RemoveNewOptionMenuAction removeNewOptionAction = new RemoveNewOptionMenuAction();	
+		SearchNewOptionMenuAction searchNewOptionAction = new SearchNewOptionMenuAction();	
+		ListAllNewOptionMenuAction listallNewOptionAction = new ListAllNewOptionMenuAction();	
 
 
 		RiseEventsMainScreenP.facade = RiseEventsFacade.getInstance();
@@ -265,6 +289,23 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllReviewer = new JMenuItem("ListAll");
 		mnReviewer.add(mntmListAllReviewer);
 		mntmListAllReviewer.addActionListener(listallReviewerAction);
+		JMenu mnSpeaker = new JMenu("Speaker");
+		menuBar.add(mnSpeaker);
+		JMenuItem mntmInsertSpeaker = new JMenuItem("Insert");
+		mnSpeaker.add(mntmInsertSpeaker);
+		mntmInsertSpeaker.addActionListener(insertSpeakerAction);
+		JMenuItem mntmUpdateSpeaker = new JMenuItem("Update");
+		mnSpeaker.add(mntmUpdateSpeaker);
+		mntmUpdateSpeaker.addActionListener(updateSpeakerAction);
+		JMenuItem mntmSearchSpeaker = new JMenuItem("Search");
+		mnSpeaker.add(mntmSearchSpeaker);
+		mntmSearchSpeaker.addActionListener(searchSpeakerAction);
+		JMenuItem mntmRemoveSpeaker = new JMenuItem("Remove");
+		mnSpeaker.add(mntmRemoveSpeaker);
+		mntmRemoveSpeaker.addActionListener(removeSpeakerAction);
+		JMenuItem mntmListAllSpeaker = new JMenuItem("ListAll");
+		mnSpeaker.add(mntmListAllSpeaker);
+		mntmListAllSpeaker.addActionListener(listallSpeakerAction);
 		JMenu mnEvent = new JMenu("Event");
 		menuBar.add(mnEvent);
 		JMenuItem mntmInsertEvent = new JMenuItem("Insert");
@@ -355,6 +396,23 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllCheckingCopy = new JMenuItem("ListAll");
 		mnCheckingCopy.add(mntmListAllCheckingCopy);
 		mntmListAllCheckingCopy.addActionListener(listallCheckingCopyAction);
+		JMenu mnNewOption = new JMenu("NewOption");
+		menuBar.add(mnNewOption);
+		JMenuItem mntmInsertNewOption = new JMenuItem("Insert");
+		mnNewOption.add(mntmInsertNewOption);
+		mntmInsertNewOption.addActionListener(insertNewOptionAction);
+		JMenuItem mntmUpdateNewOption = new JMenuItem("Update");
+		mnNewOption.add(mntmUpdateNewOption);
+		mntmUpdateNewOption.addActionListener(updateNewOptionAction);
+		JMenuItem mntmRemoveNewOption = new JMenuItem("Remove");
+		mnNewOption.add(mntmRemoveNewOption);
+		mntmRemoveNewOption.addActionListener(removeNewOptionAction);
+		JMenuItem mntmSearchNewOption = new JMenuItem("Search");
+		mnNewOption.add(mntmSearchNewOption);
+		mntmSearchNewOption.addActionListener(searchNewOptionAction);
+		JMenuItem mntmListAllNewOption = new JMenuItem("ListAll");
+		mnNewOption.add(mntmListAllNewOption);
+		mntmListAllNewOption.addActionListener(listallNewOptionAction);
 		JMenu mnReports = new JMenu("Reports");
 		menuBar.add(mnReports);
 		
@@ -663,6 +721,101 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllReviewer);
 			try {
 				screenListAllReviewer.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class InsertSpeakerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenInsertSpeaker = SpeakerInsertScreenP.getInstanceSpeakerInsertScreenP();
+			if(screenInsertSpeaker.getParent() == null){
+				desktopPane.add(screenInsertSpeaker);
+			}
+			screenInsertSpeaker.setVisible(true);
+			desktopPane.moveToFront(screenInsertSpeaker);
+			try {
+				screenInsertSpeaker.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class UpdateSpeakerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenUpdateSpeaker = SpeakerUpdateScreenP.getInstanceSpeakerUpdateScreenP();
+			if(screenUpdateSpeaker.getParent() == null){
+				desktopPane.add(screenUpdateSpeaker);
+			}
+			screenUpdateSpeaker.setVisible(true);
+			desktopPane.moveToFront(screenUpdateSpeaker);
+			try {
+				screenUpdateSpeaker.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class SearchSpeakerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenSearchSpeaker = SpeakerSearchScreenP.getInstanceSpeakerSearchScreenP();
+			if(screenSearchSpeaker.getParent() == null){
+				desktopPane.add(screenSearchSpeaker);
+			}
+			screenSearchSpeaker.setVisible(true);
+			desktopPane.moveToFront(screenSearchSpeaker);
+			try {
+				screenSearchSpeaker.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class RemoveSpeakerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenRemoveSpeaker = SpeakerRemoveScreenP.getInstanceSpeakerRemoveScreenP();
+			if(screenRemoveSpeaker.getParent() == null){
+				desktopPane.add(screenRemoveSpeaker);
+			}
+			screenRemoveSpeaker.setVisible(true);
+			desktopPane.moveToFront(screenRemoveSpeaker);
+			try {
+				screenRemoveSpeaker.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ListAllSpeakerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenListAllSpeaker = SpeakerListAllScreenP.getInstanceSpeakerListAllScreenP();
+			if(screenListAllSpeaker.getParent() == null){
+				desktopPane.add(screenListAllSpeaker);
+			}
+			screenListAllSpeaker.setVisible(true);
+			desktopPane.moveToFront(screenListAllSpeaker);
+			try {
+				screenListAllSpeaker.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -1148,6 +1301,101 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllCheckingCopy);
 			try {
 				screenListAllCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class InsertNewOptionMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenInsertNewOption = NewOptionInsertScreenP.getInstanceNewOptionInsertScreenP();
+			if(screenInsertNewOption.getParent() == null){
+				desktopPane.add(screenInsertNewOption);
+			}
+			screenInsertNewOption.setVisible(true);
+			desktopPane.moveToFront(screenInsertNewOption);
+			try {
+				screenInsertNewOption.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class UpdateNewOptionMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenUpdateNewOption = NewOptionUpdateScreenP.getInstanceNewOptionUpdateScreenP();
+			if(screenUpdateNewOption.getParent() == null){
+				desktopPane.add(screenUpdateNewOption);
+			}
+			screenUpdateNewOption.setVisible(true);
+			desktopPane.moveToFront(screenUpdateNewOption);
+			try {
+				screenUpdateNewOption.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class RemoveNewOptionMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenRemoveNewOption = NewOptionRemoveScreenP.getInstanceNewOptionRemoveScreenP();
+			if(screenRemoveNewOption.getParent() == null){
+				desktopPane.add(screenRemoveNewOption);
+			}
+			screenRemoveNewOption.setVisible(true);
+			desktopPane.moveToFront(screenRemoveNewOption);
+			try {
+				screenRemoveNewOption.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class SearchNewOptionMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenSearchNewOption = NewOptionSearchScreenP.getInstanceNewOptionSearchScreenP();
+			if(screenSearchNewOption.getParent() == null){
+				desktopPane.add(screenSearchNewOption);
+			}
+			screenSearchNewOption.setVisible(true);
+			desktopPane.moveToFront(screenSearchNewOption);
+			try {
+				screenSearchNewOption.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ListAllNewOptionMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenListAllNewOption = NewOptionListAllScreenP.getInstanceNewOptionListAllScreenP();
+			if(screenListAllNewOption.getParent() == null){
+				desktopPane.add(screenListAllNewOption);
+			}
+			screenListAllNewOption.setVisible(true);
+			desktopPane.moveToFront(screenListAllNewOption);
+			try {
+				screenListAllNewOption.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

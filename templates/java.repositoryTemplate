@@ -10,7 +10,7 @@ public interface {{data.option.entity}}Repository {
 
 	public void insert({{data.option.entity}} {{data.option.entity|lower}}) throws RepositoryException;
 
-	public void remove({{data.option.entity}} {{data.option.entity|lower}}) throws {{data.option.entity}}NotFoundException, RepositoryException;
+	public void remove(int id{{data.option.entity}}) throws {{data.option.entity}}NotFoundException, RepositoryException;
 
 	public {{data.option.entity}} search(int idEntity) throws {{data.option.entity}}NotFoundException, RepositoryException;
 	
@@ -23,7 +23,5 @@ public interface {{data.option.entity}}Repository {
 	public int get{{data.option.entity}}LastId() throws RepositoryException;
 	
 	public List<{{data.option.entity}}> getEntityById(int idEntity) throws RepositoryException, {{data.option.entity}}NotFoundException;
-
-	public List<{{data.option.entity}}> get{{data.option.entity}}ById(int idActivity) throws RepositoryException;
 
 }

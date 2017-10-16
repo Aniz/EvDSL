@@ -26,6 +26,12 @@ import riseevents.ev.exception.ReviewerAlreadyInsertedException;
 import riseevents.ev.exception.ReviewerNotFoundException;
 import riseevents.ev.repository.ReviewerRepository;
 import riseevents.ev.repository.ReviewerRepositoryBDR;
+import riseevents.ev.data.Speaker;
+import riseevents.ev.business.SpeakerControl;
+import riseevents.ev.exception.SpeakerAlreadyInsertedException;
+import riseevents.ev.exception.SpeakerNotFoundException;
+import riseevents.ev.repository.SpeakerRepository;
+import riseevents.ev.repository.SpeakerRepositoryBDR;
 import riseevents.ev.data.Event;
 import riseevents.ev.business.EventControl;
 import riseevents.ev.exception.EventAlreadyInsertedException;
@@ -62,6 +68,12 @@ import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
 import riseevents.ev.exception.CheckingCopyNotFoundException;
 import riseevents.ev.repository.CheckingCopyRepository;
 import riseevents.ev.repository.CheckingCopyRepositoryBDR;
+import riseevents.ev.data.NewOption;
+import riseevents.ev.business.NewOptionControl;
+import riseevents.ev.exception.NewOptionAlreadyInsertedException;
+import riseevents.ev.exception.NewOptionNotFoundException;
+import riseevents.ev.repository.NewOptionRepository;
+import riseevents.ev.repository.NewOptionRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
@@ -77,6 +89,12 @@ import riseevents.ev.exception.ActivityUserAlreadyInsertedException;
 import riseevents.ev.exception.ActivityUserNotFoundException;
 import riseevents.ev.repository.ActivityUserRepository;
 import riseevents.ev.repository.ActivityUserRepositoryBDR;
+import riseevents.ev.data.ActivitySpeaker;
+import riseevents.ev.business.ActivitySpeakerControl;
+import riseevents.ev.exception.ActivitySpeakerAlreadyInsertedException;
+import riseevents.ev.exception.ActivitySpeakerNotFoundException;
+import riseevents.ev.repository.ActivitySpeakerRepository;
+import riseevents.ev.repository.ActivitySpeakerRepositoryBDR;
 import riseevents.ev.data.ActivityOrganizer;
 import riseevents.ev.business.ActivityOrganizerControl;
 import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
@@ -113,14 +131,17 @@ public class RiseEventsFacade {
 	private UserControl userList;
 	private OrganizerControl organizerList;
 	private ReviewerControl reviewerList;
+	private SpeakerControl speakerList;
 	private EventControl eventList;
 	private PaymentControl paymentList;
 	private ActivityControl activityList;
 	private SubmissionControl submissionList;
 	private AuthorControl authorList;
 	private CheckingCopyControl checkingcopyList;
+	private NewOptionControl newoptionList;
 	private ReviewControl reviewList;
 	private ActivityUserControl activityuserList;
+	private ActivitySpeakerControl activityspeakerList;
 	private ActivityOrganizerControl activityorganizerList;
 	private SubmissionAuthorControl submissionauthorList;
 	private SubmissionUserControl submissionuserList;
@@ -133,26 +154,31 @@ public class RiseEventsFacade {
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
 		OrganizerRepository organizerRepository = OrganizerRepositoryBDR.getInstance();
 		ReviewerRepository reviewerRepository = ReviewerRepositoryBDR.getInstance();
+		SpeakerRepository speakerRepository = SpeakerRepositoryBDR.getInstance();
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
 		PaymentRepository paymentRepository = PaymentRepositoryBDR.getInstance();
 		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
 		SubmissionRepository submissionRepository = SubmissionRepositoryBDR.getInstance();
 		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
 		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
+		NewOptionRepository newoptionRepository = NewOptionRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
 		organizerList = new OrganizerControl(organizerRepository); 
 		reviewerList = new ReviewerControl(reviewerRepository); 
+		speakerList = new SpeakerControl(speakerRepository); 
 		eventList = new EventControl(eventRepository); 
 		paymentList = new PaymentControl(paymentRepository); 
 		activityList = new ActivityControl(activityRepository); 
 		submissionList = new SubmissionControl(submissionRepository); 
 		authorList = new AuthorControl(authorRepository); 
 		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
+		newoptionList = new NewOptionControl(newoptionRepository); 
 	
 	
 		ReviewRepository reviewRepository = ReviewRepositoryBDR.getInstance();
 		ActivityUserRepository activityuserRepository = ActivityUserRepositoryBDR.getInstance();
+		ActivitySpeakerRepository activityspeakerRepository = ActivitySpeakerRepositoryBDR.getInstance();
 		ActivityOrganizerRepository activityorganizerRepository = ActivityOrganizerRepositoryBDR.getInstance();
 		SubmissionAuthorRepository submissionauthorRepository = SubmissionAuthorRepositoryBDR.getInstance();
 		SubmissionUserRepository submissionuserRepository = SubmissionUserRepositoryBDR.getInstance();
@@ -161,6 +187,7 @@ public class RiseEventsFacade {
 		
 		reviewList = new ReviewControl(reviewRepository); 
 		activityuserList = new ActivityUserControl(activityuserRepository); 
+		activityspeakerList = new ActivitySpeakerControl(activityspeakerRepository); 
 		activityorganizerList = new ActivityOrganizerControl(activityorganizerRepository); 
 		submissionauthorList = new SubmissionAuthorControl(submissionauthorRepository); 
 		submissionuserList = new SubmissionUserControl(submissionuserRepository); 
@@ -229,6 +256,24 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereReviewer(int idEntity) throws RepositoryException{
 		return reviewerList.isThere(idEntity);
+	}
+	public void insertSpeaker(Speaker entity) throws SpeakerAlreadyInsertedException, RepositoryException{
+		this.speakerList.insert(entity);
+	}
+	public void removeSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
+		speakerList.remove(idEntity);  
+	}
+	public void updateSpeaker(Speaker Entity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
+		speakerList.update(Entity);
+	}
+	public List<Speaker> getSpeakerList() throws RepositoryException{
+		return speakerList.getSpeakerList();
+	}
+	public Speaker searchSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
+		return speakerList.search(idEntity);
+	}
+	public boolean isThereSpeaker(int idEntity) throws RepositoryException{
+		return speakerList.isThere(idEntity);
 	}
 	public void insertEvent(Event entity) throws EventAlreadyInsertedException, RepositoryException{
 		this.eventList.insert(entity);
@@ -329,6 +374,27 @@ public class RiseEventsFacade {
 	public int getCheckingCopyLastId() throws RepositoryException{
 		return checkingcopyList.getCheckingCopyLastId();
 	}
+	public void insertNewOption(NewOption entity) throws NewOptionAlreadyInsertedException, RepositoryException{
+		this.newoptionList.insert(entity);
+	}
+	public void removeNewOption(int idEntity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
+		newoptionList.remove(idEntity);  
+	}
+	public void updateNewOption(NewOption Entity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
+		newoptionList.update(Entity);
+	}
+	public List<NewOption> getNewOptionList() throws RepositoryException{
+		return newoptionList.getNewOptionList();
+	}
+	public NewOption searchNewOption(int idEntity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
+		return newoptionList.search(idEntity);
+	}
+	public int getNewOptionLastId() throws RepositoryException{
+		return newoptionList.getNewOptionLastId();
+	}
+	public boolean isThereNewOption(int idEntity) throws RepositoryException{
+		return newoptionList.isThere(idEntity);
+	}
 	public void insertReview(Review entity) throws ReviewAlreadyInsertedException, RepositoryException{
 		this.reviewList.insert(entity);
 	}
@@ -358,6 +424,27 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereActivityUser(ActivityUser entity) throws RepositoryException{
 		return activityuserList.isThere(entity);
+	}
+	public void insertActivitySpeaker(ActivitySpeaker entity) throws ActivitySpeakerAlreadyInsertedException, RepositoryException{
+		this.activityspeakerList.insert(entity);
+	}
+	public void removeActivitySpeaker(ActivitySpeaker entity) throws ActivitySpeakerNotFoundException, RepositoryException, ActivitySpeakerAlreadyInsertedException{
+		activityspeakerList.remove(entity);  
+	}
+	public void updateActivitySpeaker(ActivitySpeaker Entity) throws ActivitySpeakerNotFoundException, RepositoryException, ActivitySpeakerAlreadyInsertedException{
+		activityspeakerList.update(Entity);
+	}
+	public List<ActivitySpeaker> getActivitySpeakerList() throws RepositoryException{
+		return activityspeakerList.getActivitySpeakerList();
+	}
+	public ActivitySpeaker searchActivitySpeaker(ActivitySpeaker Entity) throws ActivitySpeakerNotFoundException, RepositoryException, ActivitySpeakerAlreadyInsertedException{
+		return activityspeakerList.search(Entity);
+	}
+	public int getActivitySpeakerLastId() throws RepositoryException{
+		return activityspeakerList.getActivitySpeakerLastId();
+	}
+	public boolean isThereActivitySpeaker(ActivitySpeaker entity) throws RepositoryException{
+		return activityspeakerList.isThere(entity);
 	}
 	public void insertActivityOrganizer(ActivityOrganizer entity) throws ActivityOrganizerAlreadyInsertedException, RepositoryException{
 		this.activityorganizerList.insert(entity);
@@ -451,6 +538,9 @@ public class RiseEventsFacade {
 	}
 	public List<ActivityOrganizer> getActivitiesOrganizersById(int idActivity) throws RepositoryException{
 		return activityorganizerList.getActivitiesById(idActivity);
+	}
+	public List<ActivitySpeaker> getActivitiesSpeakerById(int idActivity) throws RepositoryException{
+		return activityspeakerList.getActivitiesById(idActivity);
 	}
 	public List<ActivityUser> getActivitiesUsersById(int idActivity) throws RepositoryException{
 		return activityuserList.getActivitiesById(idActivity);
