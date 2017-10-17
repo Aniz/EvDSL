@@ -13,7 +13,7 @@ public class NewOptionTableModel extends AbstractTableModel{
 	// Nome das Colunas
 		
 			private static final int COL_NEWOPTIONID = 0;
-			
+			private static final int COL_TYPENEWOPTION = 3;
 			// Lista de Valores
 			private List<NewOption> rows;
 			

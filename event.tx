@@ -31,7 +31,7 @@ Option:
 NewOption:
   'addNew' entity=ID 
   ('+' properties*=Property)*     
-  "show" command=Command
+  ("show" command=Command)*
   ("types" categories*=Category[',']".")*
 ;
 

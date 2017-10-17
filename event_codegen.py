@@ -215,7 +215,9 @@ def main(debug=False):
             generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Management'+"ScreenP",jinja_env,value,componentExtraData,systemName)
-
+            for com,comm in enumerate(value["commands"]):
+                generateFile(templateFolder,viewFolder,'java.screenTemplate',key+comm+"ScreenP",jinja_env,value,comm,systemName)
+                
     dependencesList = []
     for key,value in dependencesDict.items():
         actionsKeyArray = []
@@ -280,7 +282,7 @@ def main(debug=False):
     mainViewTemplate =jinja_env.get_template(join(templateFolder,'java.mainScreenTemplate'))
     with open(join(viewFolder,
                    "%s.java" % (systemName+"MainScreenP")), 'w') as f:
-        f.write(mainViewTemplate.render(data=componentDict,systemName=systemName))
+        f.write(mainViewTemplate.render(data=componentDict,systemName=systemName,dependences=dependencesList,avaliable=avaliableOptions))
     
 def upperfirst(x):
     return x[0].upper()+x[1:]

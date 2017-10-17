@@ -63,17 +63,29 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventImportantDatesScreenP screenEventImportantDates;	
 	private EventReportsFrequencyPerEventScreenP screenEventReportsFrequencyPerEvent;	
 
+               
+	private EventManagementScreenP screenManagementEvent;
+
+
 	private PaymentInsertScreenP screenInsertPayment;	
 	private PaymentUpdateScreenP screenUpdatePayment;	
 	private PaymentSearchScreenP screenSearchPayment;	
 	private PaymentRemoveScreenP screenRemovePayment;	
 	private PaymentListAllScreenP screenListAllPayment;	
 
+               
+	private PaymentManagementScreenP screenManagementPayment;
+
+
 	private ActivityInsertScreenP screenInsertActivity;	
 	private ActivityUpdateScreenP screenUpdateActivity;	
 	private ActivitySearchScreenP screenSearchActivity;	
 	private ActivityRemoveScreenP screenRemoveActivity;	
 	private ActivityListAllScreenP screenListAllActivity;	
+
+               
+	private ActivityManagementScreenP screenManagementActivity;
+
 
 	private SubmissionSearchScreenP screenSearchSubmission;	
 	private SubmissionRemoveScreenP screenRemoveSubmission;	
@@ -86,12 +98,71 @@ public class RiseEventsMainScreenP extends JFrame {
 	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
 	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
 
+               
+	private CheckingCopyManagementScreenP screenManagementCheckingCopy;
+
+
 	private NewOptionInsertScreenP screenInsertNewOption;	
 	private NewOptionUpdateScreenP screenUpdateNewOption;	
 	private NewOptionRemoveScreenP screenRemoveNewOption;	
 	private NewOptionSearchScreenP screenSearchNewOption;	
 	private NewOptionListAllScreenP screenListAllNewOption;	
 
+
+	
+	
+	private ReviewInsertScreenP screenInsertReview;
+	private ReviewRemoveScreenP screenRemoveReview;
+	private ReviewUpdateScreenP screenUpdateReview;
+	private ReviewSearchScreenP screenSearchReview;
+	private ReviewListAllScreenP screenListAllReview;
+	private ReviewManagementScreenP screenManagementReview;
+	private ReviewResultsScreenP screenResultsReview;
+
+               
+	private ActivityUserManagementScreenP screenManagementActivityUser;
+
+	
+	
+
+               
+	private ActivitySpeakerManagementScreenP screenManagementActivitySpeaker;
+
+	
+	
+
+
+	
+	
+
+
+	
+	
+
+
+	
+	
+
+
+	
+	
+
+	private RegistrationInsertScreenP screenInsertRegistration;
+	private RegistrationSearchScreenP screenSearchRegistration;
+	private RegistrationListAllScreenP screenListAllRegistration;
+	private RegistrationManagementScreenP screenManagementRegistration;
+	private RegistrationUpdateScreenP screenUpdateRegistration;
+	private RegistrationRemoveScreenP screenRemoveRegistration;
+
+	private AssignmentInsertScreenP screenInsertAssignment;
+	private AssignmentRemoveScreenP screenRemoveAssignment;
+	private AssignmentListAllScreenP screenListAllAssignment;
+	private AssignmentSearchScreenP screenSearchAssignment;
+	private AssignmentManagementScreenP screenManagementAssignment;
+	
+	
+
+	
 	
 	private static JLabel labelImagem;
 	
@@ -141,25 +212,21 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveUserMenuAction removeUserAction = new RemoveUserMenuAction();	
 		ListAllUserMenuAction listallUserAction = new ListAllUserMenuAction();	
 		UserSendBugTrackEmailMenuAction userSendBugTrackEmailAction = new UserSendBugTrackEmailMenuAction();	
-
 		InsertOrganizerMenuAction insertOrganizerAction = new InsertOrganizerMenuAction();	
 		UpdateOrganizerMenuAction updateOrganizerAction = new UpdateOrganizerMenuAction();	
 		SearchOrganizerMenuAction searchOrganizerAction = new SearchOrganizerMenuAction();	
 		RemoveOrganizerMenuAction removeOrganizerAction = new RemoveOrganizerMenuAction();	
 		ListAllOrganizerMenuAction listallOrganizerAction = new ListAllOrganizerMenuAction();	
-
 		InsertReviewerMenuAction insertReviewerAction = new InsertReviewerMenuAction();	
 		UpdateReviewerMenuAction updateReviewerAction = new UpdateReviewerMenuAction();	
 		SearchReviewerMenuAction searchReviewerAction = new SearchReviewerMenuAction();	
 		RemoveReviewerMenuAction removeReviewerAction = new RemoveReviewerMenuAction();	
 		ListAllReviewerMenuAction listallReviewerAction = new ListAllReviewerMenuAction();	
-
 		InsertSpeakerMenuAction insertSpeakerAction = new InsertSpeakerMenuAction();	
 		UpdateSpeakerMenuAction updateSpeakerAction = new UpdateSpeakerMenuAction();	
 		SearchSpeakerMenuAction searchSpeakerAction = new SearchSpeakerMenuAction();	
 		RemoveSpeakerMenuAction removeSpeakerAction = new RemoveSpeakerMenuAction();	
 		ListAllSpeakerMenuAction listallSpeakerAction = new ListAllSpeakerMenuAction();	
-
 		InsertEventMenuAction insertEventAction = new InsertEventMenuAction();	
 		UpdateEventMenuAction updateEventAction = new UpdateEventMenuAction();	
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
@@ -168,36 +235,29 @@ public class RiseEventsMainScreenP extends JFrame {
 		EventProgramMenuAction eventProgramAction = new EventProgramMenuAction();	
 		EventImportantDatesMenuAction eventImportantDatesAction = new EventImportantDatesMenuAction();	
 		EventReportsFrequencyPerEventMenuAction eventReportsFrequencyPerEventAction = new EventReportsFrequencyPerEventMenuAction();	
-
 		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
 		UpdatePaymentMenuAction updatePaymentAction = new UpdatePaymentMenuAction();	
 		SearchPaymentMenuAction searchPaymentAction = new SearchPaymentMenuAction();	
 		RemovePaymentMenuAction removePaymentAction = new RemovePaymentMenuAction();	
 		ListAllPaymentMenuAction listallPaymentAction = new ListAllPaymentMenuAction();	
-
 		InsertActivityMenuAction insertActivityAction = new InsertActivityMenuAction();	
 		UpdateActivityMenuAction updateActivityAction = new UpdateActivityMenuAction();	
 		SearchActivityMenuAction searchActivityAction = new SearchActivityMenuAction();	
 		RemoveActivityMenuAction removeActivityAction = new RemoveActivityMenuAction();	
 		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
-
 		SearchSubmissionMenuAction searchSubmissionAction = new SearchSubmissionMenuAction();	
 		RemoveSubmissionMenuAction removeSubmissionAction = new RemoveSubmissionMenuAction();	
 		ListAllSubmissionMenuAction listallSubmissionAction = new ListAllSubmissionMenuAction();	
-
-
 		InsertCheckingCopyMenuAction insertCheckingCopyAction = new InsertCheckingCopyMenuAction();	
 		UpdateCheckingCopyMenuAction updateCheckingCopyAction = new UpdateCheckingCopyMenuAction();	
 		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveCheckingCopyMenuAction();	
 		SearchCheckingCopyMenuAction searchCheckingCopyAction = new SearchCheckingCopyMenuAction();	
 		ListAllCheckingCopyMenuAction listallCheckingCopyAction = new ListAllCheckingCopyMenuAction();	
-
 		InsertNewOptionMenuAction insertNewOptionAction = new InsertNewOptionMenuAction();	
 		UpdateNewOptionMenuAction updateNewOptionAction = new UpdateNewOptionMenuAction();	
 		RemoveNewOptionMenuAction removeNewOptionAction = new RemoveNewOptionMenuAction();	
 		SearchNewOptionMenuAction searchNewOptionAction = new SearchNewOptionMenuAction();	
 		ListAllNewOptionMenuAction listallNewOptionAction = new ListAllNewOptionMenuAction();	
-
 
 		RiseEventsMainScreenP.facade = RiseEventsFacade.getInstance();
 		

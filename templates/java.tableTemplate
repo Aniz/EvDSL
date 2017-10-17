@@ -16,7 +16,9 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 			{% for property in data.option.properties %}
 			private static final int COL_{{property.name|upper}} = {{loop.index}};
 			{% endfor %}
-			
+			{% if data.option.categories|length > 0 %}
+			private static final int COL_TYPE{{data.option.entity|upper}} = {{data.option.categories|length + 1}};
+			{% endif %}
 			// Lista de Valores
 			private List<{{data.option.entity}}> rows;
 			

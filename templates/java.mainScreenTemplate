@@ -43,7 +43,58 @@ public class {{systemName}}MainScreenP extends JFrame {
 		{% endfor %}
 	{% endif %}
 
+	{% if key in ["Event","Activity","ActivityUser","ActivitySpeaker","ActivityO
+		rganizer","Payment","CheckingCopy"] %}               
+	private {{key}}ManagementScreenP screenManagement{{key}};
+
+
+{% endif %}
 {% endfor %}
+{% for dep in dependences %}
+	{% if dep in ["ActivityUser","ActivitySpeaker","ActivityO
+		rganizer"] %}               
+	private {{dep}}ManagementScreenP screenManagement{{dep}};
+	{% endif %}
+
+	{% if dep == "Submission" %}
+	private SubmissionSearchScreenP screenSearchSubmission;
+	private SubmissionListAllScreenP screenListAllSubmission;
+	private SubmissionRemoveScreenP screenRemoveSubmission;
+	private SubmissionCompleteInsertScreenP screenInsertSubmission;
+	private SubmissionPartialInsertScreenP screenInsertSubmissionPartial;
+	{% endif %}
+	{% if dep == "Assignment" %}
+	private AssignmentInsertScreenP screenInsertAssignment;
+	private AssignmentRemoveScreenP screenRemoveAssignment;
+	private AssignmentListAllScreenP screenListAllAssignment;
+	private AssignmentSearchScreenP screenSearchAssignment;
+	private AssignmentManagementScreenP screenManagementAssignment;
+	{% endif %}
+	
+	{% if dep == "Receipt" %}
+	private ReceiptScreenP screenReceipt;
+	{% endif %}
+	
+	{% if dep == "Review" %}
+	private ReviewInsertScreenP screenInsertReview;
+	private ReviewRemoveScreenP screenRemoveReview;
+	private ReviewUpdateScreenP screenUpdateReview;
+	private ReviewSearchScreenP screenSearchReview;
+	private ReviewListAllScreenP screenListAllReview;
+	private ReviewManagementScreenP screenManagementReview;
+	private ReviewResultsScreenP screenResultsReview;
+	{% endif %}
+
+	{% if dep == "Registration" %}
+	private RegistrationInsertScreenP screenInsertRegistration;
+	private RegistrationSearchScreenP screenSearchRegistration;
+	private RegistrationListAllScreenP screenListAllRegistration;
+	private RegistrationManagementScreenP screenManagementRegistration;
+	private RegistrationUpdateScreenP screenUpdateRegistration;
+	private RegistrationRemoveScreenP screenRemoveRegistration;
+	{% endif %}
+{% endfor %}
+	
 	{% if 'Receipt' in data.actions %}
 	private ReceiptScreenP screenReceipt;
 	{% endif %}
@@ -103,7 +154,6 @@ public class {{systemName}}MainScreenP extends JFrame {
 			{% endif %}
 		{% endfor %}
 	{% endif %}
-
 {% endfor %}
 
 		{% if 'sendBugTrackEmail' in data.statments %}
