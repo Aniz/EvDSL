@@ -216,7 +216,7 @@ def main(debug=False):
             generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
             generateFile(templateFolder,viewFolder,'java.screenTemplate',key+'Management'+"ScreenP",jinja_env,value,componentExtraData,systemName)
             for com,comm in enumerate(value["commands"]):
-                generateFile(templateFolder,viewFolder,'java.screenTemplate',key+comm+"ScreenP",jinja_env,value,comm,systemName)
+                generateFile(templateFolder,viewFolder,'java.viewCommandTemplate',key+comm+"ScreenP",jinja_env,value,comm,systemName)
                 
     dependencesList = []
     for key,value in dependencesDict.items():

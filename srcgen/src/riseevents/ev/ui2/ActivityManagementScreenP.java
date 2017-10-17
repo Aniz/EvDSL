@@ -1,5 +1,5 @@
 //#if ${ActivityMinicurso} == "T" or ${ActivityTutorial} == "T" or ${ActivityPainel} == "T" or ${ActivityWorkshop} == "T" or ${ActivityMainTrack} == "T"
-package {{systemName|lower}}.ev.ui2;
+package riseevents.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -24,15 +24,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import {{systemName|lower}}.ev.data.Activity;
-import {{systemName|lower}}.ev.data.Event;
-import {{systemName|lower}}.ev.data.Activity.TypeActivity;
-import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
-import {{systemName|lower}}.ev.exception.EventAlreadyInsertedException;
-import {{systemName|lower}}.ev.exception.EventNotFoundException;
-import {{systemName|lower}}.ev.exception.RepositoryException;
-import {{systemName|lower}}.ev.table.ActivityTableModel;
+import riseevents.ev.data.Activity;
+import riseevents.ev.data.Event;
+import riseevents.ev.data.Activity.TypeActivity;
+import riseevents.ev.exception.ActivityAlreadyInsertedException;
+import riseevents.ev.exception.ActivityNotFoundException;
+import riseevents.ev.exception.EventAlreadyInsertedException;
+import riseevents.ev.exception.EventNotFoundException;
+import riseevents.ev.exception.RepositoryException;
+import riseevents.ev.table.ActivityTableModel;
 
 public class ActivityManagementScreenP extends JInternalFrame {
 
@@ -55,12 +55,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 	
 	private JComboBox comboBoxEvent;
 	
-	{% if data.option.categories|length > 0 %}
-	private JComboBox comboBoxType{{data.option.entity}};
-	{% endif %}
-	{% for property in data.option.properties %}
-	private JTextField textField{{property.name|capitalize}};
-	{% endfor %}
+	private JComboBox comboBoxTypeActivity;
 	
 	public static ActivityManagementScreenP getInstanceActivityManagementScreenP() {
 		if (instanceActivityManagementScreenP == null) {
@@ -228,16 +223,6 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		panel_1.add(textFieldRegistrationLimit);
 		textFieldRegistrationLimit.setColumns(10);
 		
-		{% for property in data.option.properties %}
-		JLabel lbl{{property.name|capitalize}} = new JLabel("{{property.alias}}");
-		lbl{{property.name|capitalize}}.setBounds(469, 127, 116, 16);
-		panel_1.add(lbl{{property.name|capitalize}});
-		
-		textField{{property.name|capitalize}} = new JTextField();
-		textField{{property.name|capitalize}}.setBounds(600, 121, 116, 28);
-		panel_1.add(textField{{property.name|capitalize}});
-		textField{{property.name|capitalize}}.setColumns(10);
-		{% endfor %}
 	
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(6, 309, 716, 143);
@@ -251,34 +236,26 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-	{% if 'Insert' in data.commands %}
 		InsertButtonAction insertAction = new InsertButtonAction(); 
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(6, 273, 117, 29);
 		contentPane.add(btnInsert);
 		btnInsert.addActionListener(insertAction);
-	{% endif %}
-	{% if 'Remove' in data.commands %}
 		RemoveButtonAction removeAction = new RemoveButtonAction(); 
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.setBounds(127, 273, 117, 29);
 		contentPane.add(btnRemove);
 		btnRemove.addActionListener(removeAction);
-	{% endif %}
-	{% if 'Update' in data.commands %}
 		UpdateButtonAction updateAction = new UpdateButtonAction();
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.setBounds(248, 273, 117, 29);
 		contentPane.add(btnUpdate);
 		btnUpdate.addActionListener(updateAction);
-	{% endif %}
-	{% if 'Search' in data.commands %}
 		SelectButtonAction selectAction = new SelectButtonAction(); 
 		JButton btnSelect = new JButton("Select");
 		btnSelect.setBounds(377, 273, 117, 29);
 		contentPane.add(btnSelect);
 		btnSelect.addActionListener(selectAction);
-	{% endif %}
 		
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		JButton btnClean = new JButton("Clean");
@@ -324,12 +301,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			String hour = textFieldHour.getText();
 			int numberOfParticipants = Integer.valueOf(textFieldNOParticipants.getText());
 			int registrationLimit = Integer.valueOf(textFieldRegLimit.getText());
-			{% for property in data.option.properties %}
-			{{property.type|javatype}} {{property.name}} = {{property.type|capitalize}}.valueOf(textField{{property.name|capitalize}}.getText());	
-			{% endfor %}
-			{% if data.option.categories|length > 0 %}
-			String type{{data.option.entity|capitalize}} = comboBoxType{{data.option.entity}}.getSelectedItem().toString();
-			{% endif %}
+			String typeActivity = comboBoxTypeActivity.getSelectedItem().toString();
 			
 			if (nameEvent.equals("")|| nameActivity.equals("") || descriptionActivity.equals("")
 					|| status.equals("") 
@@ -348,7 +320,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 				}else{
 					try {
 						activity = new Activity();
-						activity.setIdEvent({{systemName}}MainScreenP.facade.getEventIdByName(nameEvent));
+						activity.setIdEvent(RiseEventsMainScreenP.facade.getEventIdByName(nameEvent));
 						activity.setNameActivity(nameActivity);
 						activity.setDescriptionActivity(descriptionActivity);
 						activity.setValue(value);
@@ -357,14 +329,9 @@ public class ActivityManagementScreenP extends JInternalFrame {
 						activity.setHour(hour);
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
-						{% for property in data.option.properties %}
-						{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
-						{% endfor %}
-						{% if data.option.categories|length > 0 %}
-							activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf({{data.option.entity|capitalize}}));
-						{% endif %}
+							activity.setTypeActivity(TypeActivity.valueOf(Activity));
 						
-						{{systemName}}MainScreenP.facade.insertActivity(activity);
+						RiseEventsMainScreenP.facade.insertActivity(activity);
 
 
 					} catch (ActivityAlreadyInsertedException e1) {
@@ -399,8 +366,8 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			}
 			
 			try {
-				Activity activity = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivities()).get(rowIndex);
-				{{systemName}}MainScreenP.facade.removeActivity(activity.getIdActivity());
+				Activity activity = new ActivityTableModel(RiseEventsMainScreenP.facade.getActivities()).get(rowIndex);
+				RiseEventsMainScreenP.facade.removeActivity(activity.getIdActivity());
 				ActivityTableModel model = (ActivityTableModel) table.getModel();
 				model.removeActivity(rowIndex);
 				table.setModel(model);
@@ -448,12 +415,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 				String hour = textFieldHour.getText();
 				int numberOfParticipants = Integer.valueOf(textFieldNofParticipants.getText());
 				int registrationLimit = Integer.valueOf(textFieldRegistrationLimit.getText());
-				{% for property in data.option.properties %}
-				{{property.type|javatype}} {{property.name}} = {{property.type|capitalize}}.valueOf(textField{{property.name|capitalize}}.getText());	
-				{% endfor %}
-				{% if data.option.categories|length > 0 %}
-				String type{{data.option.entity|capitalize}} = comboBoxType{{data.option.entity}}.getSelectedItem().toString();
-				{% endif %}
+				String typeActivity = comboBoxTypeActivity.getSelectedItem().toString();
 				
 				if (nameEvent.equals("")|| nameActivity.equals("") || descriptionActivity.equals("")
 						|| status.equals("") 
@@ -467,7 +429,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 				} else {
 					activity = new Activity();
 					activity.setIdActivity(Integer.parseInt(lblLastIdActivity.getText()));
-					activity.setIdEvent({{systemName}}MainScreenP.facade.getEventIdByName(nameEvent));
+					activity.setIdEvent(RiseEventsMainScreenP.facade.getEventIdByName(nameEvent));
 					activity.setNameActivity(nameActivity);
 					activity.setDescriptionActivity(descriptionActivity);
 					activity.setTypeActivity(TypeActivity.valueOf(activityType));
@@ -478,18 +440,13 @@ public class ActivityManagementScreenP extends JInternalFrame {
 					activity.setHour(hour);
 					activity.setNumberOfParticipants(numberOfParticipants);
 					activity.setRegistrationLimit(registrationLimit);
-					{% for property in data.option.properties %}
-					{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
-					{% endfor %}
-					{% if data.option.categories|length > 0 %}
-					activity.setType{{data.option.entity}}(type{{data.option.entity|capitalize}});
-					{% endif %}
+					activity.setTypeActivity(typeActivity);
 					
 					try {
 						
-						{{systemName}}MainScreenP.facade.updateActivity(activity);
+						RiseEventsMainScreenP.facade.updateActivity(activity);
 						ActivityTableModel model;
-						model = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivityList());
+						model = new ActivityTableModel(RiseEventsMainScreenP.facade.getActivityList());
 						table.setModel(model);
 					} catch (ActivityNotFoundException e1) {
 						JOptionPane
@@ -525,10 +482,10 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			Activity activity = null;
 
 			try {
-				activity=  new ActivityTableModel({{systemName}}MainScreenP.facade.getActivities()).get(rowIndex);
+				activity=  new ActivityTableModel(RiseEventsMainScreenP.facade.getActivities()).get(rowIndex);
 			
 				lblLastIdActivity.setText(String.valueOf(activity.getIdActivity()));
-				comboBoxEvent.setSelectedItem({{systemName}}MainScreenP.facade.searchEvent(activity.getIdEvent()).getEventName());
+				comboBoxEvent.setSelectedItem(RiseEventsMainScreenP.facade.searchEvent(activity.getIdEvent()).getEventName());
 				textFieldActivityName.setText(activity.getNameActivity());
 				textFieldDescription.setText(activity.getDescriptionActivity());
 				comboBoxActivityType.setSelectedItem(activity.getTypeActivity().toString());
@@ -538,12 +495,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 				textFieldHour.setText(activity.getHour());
 				textFieldNofParticipants.setText(String.valueOf(activity.getNumberOfParticipants()));
 				textFieldRegistrationLimit.setText(String.valueOf(activity.getRegistrationLimit()));
-				{% for property in data.option.properties %}
-				textField{{property.name|capitalize}}.setText({{property.type|capitalize}}.valueOf(activity.get{{property.name|capitalize}})));	
-				{% endfor %}
-				{% if data.option.categories|length > 0 %}
-				comboBoxType{{data.option.entity}}.setSelectedItem(activity.getType{{data.option.entity}}().toString());
-				{% endif %}
+				comboBoxTypeActivity.setSelectedItem(activity.getTypeActivity().toString());
 				
 			} catch (RepositoryException ex) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -584,7 +536,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEventList();
+			List<Event> list = RiseEventsMainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());
@@ -599,7 +551,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 	
 	private void carregarLastId(){
 		try {
-			lblLastIdActivity.setText(String.valueOf({{systemName}}MainScreenP.facade.getActivityLastId()));
+			lblLastIdActivity.setText(String.valueOf(RiseEventsMainScreenP.facade.getActivityLastId()));
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					e.toString(), "Erro",
@@ -612,7 +564,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		
 		try {
 			ActivityTableModel model;
-			model = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivityList());	
+			model = new ActivityTableModel(RiseEventsMainScreenP.facade.getActivityList());	
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			e.printStackTrace();
@@ -633,12 +585,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		textFieldRegistrationLimit.setText("");
 		textFieldRegistrationLimit.setText("");
 		textFieldRegistrationLimit.setText("");
-		{% for property in data.option.properties %}
-		textField{{property.name|capitalize}}.setText("");	
-		{% endfor %}
-		{% if data.option.categories|length > 0 %}
-		comboBoxType{{data.option.entity}}.setSelectedItem("");
-		{% endif %}
+		comboBoxTypeActivity.setSelectedItem("");
 		
 	}
 	

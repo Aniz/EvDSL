@@ -38,7 +38,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-	private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|upperfirst}};	
+	// private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|upperfirst}};	
 			{% endif %}
 		{% endfor %}
 	{% endif %}
@@ -82,7 +82,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	private ReviewSearchScreenP screenSearchReview;
 	private ReviewListAllScreenP screenListAllReview;
 	private ReviewManagementScreenP screenManagementReview;
-	private ReviewResultsScreenP screenResultsReview;
+	// private ReviewResultsScreenP screenResultsReview;
 	{% endif %}
 
 	{% if dep == "Registration" %}

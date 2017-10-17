@@ -21,14 +21,14 @@ add Speaker
 	show Insert Update Search Remove ListAll
 
 add Event 
-    show Insert Update Search Remove ListAll
+    show Insert Update Search Remove ListAll Management
 		
 add Payment
-	show Insert Update Search Remove ListAll 
+	show Insert Update Search Remove ListAll Management 
 	types Avista,Debito,Credito.
 
 add Activity
-	show Insert Update Search Remove ListAll 
+	show Insert Update Search Remove ListAll Management
 	types MiniCurso = Mini, 
 		Tutorial, 
 		Painel, 
@@ -44,7 +44,7 @@ show in User
 	types Associado,Profissional,Estudante.
 
 add CheckingCopy
-show Insert Update Remove Search ListAll
+show Insert Update Remove Search ListAll Management
 	types Atestado,Certificado.
 
 addNew NewOption

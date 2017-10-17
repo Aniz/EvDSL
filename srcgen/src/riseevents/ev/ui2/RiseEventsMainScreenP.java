@@ -34,7 +34,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private UserSearchScreenP screenSearchUser;	
 	private UserRemoveScreenP screenRemoveUser;	
 	private UserListAllScreenP screenListAllUser;	
-	private UserSendBugTrackEmailScreenP screenUserSendBugTrackEmail;	
+	// private UserSendBugTrackEmailScreenP screenUserSendBugTrackEmail;	
 
 	private OrganizerInsertScreenP screenInsertOrganizer;	
 	private OrganizerUpdateScreenP screenUpdateOrganizer;	
@@ -59,9 +59,10 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventSearchScreenP screenSearchEvent;	
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
-	private EventProgramScreenP screenEventProgram;	
-	private EventImportantDatesScreenP screenEventImportantDates;	
-	private EventReportsFrequencyPerEventScreenP screenEventReportsFrequencyPerEvent;	
+	private EventManagementScreenP screenManagementEvent;	
+	// private EventProgramScreenP screenEventProgram;	
+	// private EventImportantDatesScreenP screenEventImportantDates;	
+	// private EventReportsFrequencyPerEventScreenP screenEventReportsFrequencyPerEvent;	
 
                
 	private EventManagementScreenP screenManagementEvent;
@@ -72,6 +73,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private PaymentSearchScreenP screenSearchPayment;	
 	private PaymentRemoveScreenP screenRemovePayment;	
 	private PaymentListAllScreenP screenListAllPayment;	
+	private PaymentManagementScreenP screenManagementPayment;	
 
                
 	private PaymentManagementScreenP screenManagementPayment;
@@ -82,6 +84,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private ActivitySearchScreenP screenSearchActivity;	
 	private ActivityRemoveScreenP screenRemoveActivity;	
 	private ActivityListAllScreenP screenListAllActivity;	
+	private ActivityManagementScreenP screenManagementActivity;	
 
                
 	private ActivityManagementScreenP screenManagementActivity;
@@ -97,6 +100,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
 	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
 	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
+	private CheckingCopyManagementScreenP screenManagementCheckingCopy;	
 
                
 	private CheckingCopyManagementScreenP screenManagementCheckingCopy;
@@ -117,7 +121,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private ReviewSearchScreenP screenSearchReview;
 	private ReviewListAllScreenP screenListAllReview;
 	private ReviewManagementScreenP screenManagementReview;
-	private ReviewResultsScreenP screenResultsReview;
+	// private ReviewResultsScreenP screenResultsReview;
 
                
 	private ActivityUserManagementScreenP screenManagementActivityUser;
@@ -232,6 +236,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchEventMenuAction searchEventAction = new SearchEventMenuAction();	
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
+		ManagementEventMenuAction managementEventAction = new ManagementEventMenuAction();	
 		EventProgramMenuAction eventProgramAction = new EventProgramMenuAction();	
 		EventImportantDatesMenuAction eventImportantDatesAction = new EventImportantDatesMenuAction();	
 		EventReportsFrequencyPerEventMenuAction eventReportsFrequencyPerEventAction = new EventReportsFrequencyPerEventMenuAction();	
@@ -240,11 +245,13 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchPaymentMenuAction searchPaymentAction = new SearchPaymentMenuAction();	
 		RemovePaymentMenuAction removePaymentAction = new RemovePaymentMenuAction();	
 		ListAllPaymentMenuAction listallPaymentAction = new ListAllPaymentMenuAction();	
+		ManagementPaymentMenuAction managementPaymentAction = new ManagementPaymentMenuAction();	
 		InsertActivityMenuAction insertActivityAction = new InsertActivityMenuAction();	
 		UpdateActivityMenuAction updateActivityAction = new UpdateActivityMenuAction();	
 		SearchActivityMenuAction searchActivityAction = new SearchActivityMenuAction();	
 		RemoveActivityMenuAction removeActivityAction = new RemoveActivityMenuAction();	
 		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
+		ManagementActivityMenuAction managementActivityAction = new ManagementActivityMenuAction();	
 		SearchSubmissionMenuAction searchSubmissionAction = new SearchSubmissionMenuAction();	
 		RemoveSubmissionMenuAction removeSubmissionAction = new RemoveSubmissionMenuAction();	
 		ListAllSubmissionMenuAction listallSubmissionAction = new ListAllSubmissionMenuAction();	
@@ -253,6 +260,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveCheckingCopyMenuAction();	
 		SearchCheckingCopyMenuAction searchCheckingCopyAction = new SearchCheckingCopyMenuAction();	
 		ListAllCheckingCopyMenuAction listallCheckingCopyAction = new ListAllCheckingCopyMenuAction();	
+		ManagementCheckingCopyMenuAction managementCheckingCopyAction = new ManagementCheckingCopyMenuAction();	
 		InsertNewOptionMenuAction insertNewOptionAction = new InsertNewOptionMenuAction();	
 		UpdateNewOptionMenuAction updateNewOptionAction = new UpdateNewOptionMenuAction();	
 		RemoveNewOptionMenuAction removeNewOptionAction = new RemoveNewOptionMenuAction();	
@@ -383,6 +391,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllEvent = new JMenuItem("ListAll");
 		mnEvent.add(mntmListAllEvent);
 		mntmListAllEvent.addActionListener(listallEventAction);
+		JMenuItem mntmManagementEvent = new JMenuItem("Management");
+		mnEvent.add(mntmManagementEvent);
+		mntmManagementEvent.addActionListener(managementEventAction);
 		JMenuItem mntmEventProgram = new JMenuItem("program");
 		mnEvent.add(mntmEventProgram);
 		mntmEventProgram.addActionListener(eventProgramAction);
@@ -409,6 +420,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllPayment = new JMenuItem("ListAll");
 		mnPayment.add(mntmListAllPayment);
 		mntmListAllPayment.addActionListener(listallPaymentAction);
+		JMenuItem mntmManagementPayment = new JMenuItem("Management");
+		mnPayment.add(mntmManagementPayment);
+		mntmManagementPayment.addActionListener(managementPaymentAction);
 		JMenu mnActivity = new JMenu("Activity");
 		menuBar.add(mnActivity);
 		JMenuItem mntmInsertActivity = new JMenuItem("Insert");
@@ -426,6 +440,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllActivity = new JMenuItem("ListAll");
 		mnActivity.add(mntmListAllActivity);
 		mntmListAllActivity.addActionListener(listallActivityAction);
+		JMenuItem mntmManagementActivity = new JMenuItem("Management");
+		mnActivity.add(mntmManagementActivity);
+		mntmManagementActivity.addActionListener(managementActivityAction);
 		JMenu mnSubmission = new JMenu("Submission");
 		menuBar.add(mnSubmission);
 		JMenuItem mntmSearchSubmission = new JMenuItem("Search");
@@ -456,6 +473,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllCheckingCopy = new JMenuItem("ListAll");
 		mnCheckingCopy.add(mntmListAllCheckingCopy);
 		mntmListAllCheckingCopy.addActionListener(listallCheckingCopyAction);
+		JMenuItem mntmManagementCheckingCopy = new JMenuItem("Management");
+		mnCheckingCopy.add(mntmManagementCheckingCopy);
+		mntmManagementCheckingCopy.addActionListener(managementCheckingCopyAction);
 		JMenu mnNewOption = new JMenu("NewOption");
 		menuBar.add(mnNewOption);
 		JMenuItem mntmInsertNewOption = new JMenuItem("Insert");
@@ -978,6 +998,25 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
+	private class ManagementEventMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementEvent = EventManagementScreenP.getInstanceEventManagementScreenP();
+			if(screenManagementEvent.getParent() == null){
+				desktopPane.add(screenManagementEvent);
+			}
+			screenManagementEvent.setVisible(true);
+			desktopPane.moveToFront(screenManagementEvent);
+			try {
+				screenManagementEvent.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
 			private class EventProgramMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1121,6 +1160,25 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
+	private class ManagementPaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementPayment = PaymentManagementScreenP.getInstancePaymentManagementScreenP();
+			if(screenManagementPayment.getParent() == null){
+				desktopPane.add(screenManagementPayment);
+			}
+			screenManagementPayment.setVisible(true);
+			desktopPane.moveToFront(screenManagementPayment);
+			try {
+				screenManagementPayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
 	private class InsertActivityMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -1209,6 +1267,25 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllActivity);
 			try {
 				screenListAllActivity.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ManagementActivityMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementActivity = ActivityManagementScreenP.getInstanceActivityManagementScreenP();
+			if(screenManagementActivity.getParent() == null){
+				desktopPane.add(screenManagementActivity);
+			}
+			screenManagementActivity.setVisible(true);
+			desktopPane.moveToFront(screenManagementActivity);
+			try {
+				screenManagementActivity.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -1361,6 +1438,25 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllCheckingCopy);
 			try {
 				screenListAllCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ManagementCheckingCopyMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementCheckingCopy = CheckingCopyManagementScreenP.getInstanceCheckingCopyManagementScreenP();
+			if(screenManagementCheckingCopy.getParent() == null){
+				desktopPane.add(screenManagementCheckingCopy);
+			}
+			screenManagementCheckingCopy.setVisible(true);
+			desktopPane.moveToFront(screenManagementCheckingCopy);
+			try {
+				screenManagementCheckingCopy.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
