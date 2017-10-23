@@ -87,7 +87,6 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	private JTable tableReviewer;
 	private JTable tableSelectReviewer;
 	
-	private JButton btnGenerate;
 	
 	private List<Reviewer> listaRevisoresSelecionados = new ArrayList<Reviewer>();
 	
@@ -188,16 +187,12 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
-		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(280, 358, 117, 29);
-		getContentPane().add(btnGenerate);
 	
 		btnInsert.addActionListener(insertAction);
 		btnBack.addActionListener(backAction);
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
 		
-		btnGenerate.addActionListener(generateAction);
 	
 		populateTableReviewer();
 		carregarComboSubmission();
@@ -326,30 +321,24 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
-				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
-				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
 				
 				if(resultAutomaticConflict1 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					enviarEmails(reviewer1, submission, review1);
 				}
 				if(resultAutomaticConflict2 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					enviarEmails(reviewer2, submission, review2);
 				}
 				if(resultAutomaticConflict3 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					enviarEmails(reviewer3, submission, review3);
 				}
 				
 			} catch (RepositoryException e1) {
@@ -583,97 +572,6 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	}
 
 	
-	private class GenerateButtonAction  implements ActionListener{ 
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String submissao = comboBoxSubmission.getSelectedItem().toString();
-			List<Reviewer> reviewerList = new ArrayList<Reviewer>();
-			if(submissao.equals("")){
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Selecione uma Submissão", "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-			}else{
-				try {
-					int subId = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(submissao);
-					Submission sub = RiseEventsMainScreenP.facade.searchSubmission(subId);
-					String keywords = sub.getKeywords();
-					String keywordsSplit[] = keywords.split(Pattern.quote(","));
-					reviewerList = RiseEventsMainScreenP.facade.getReviewerList();
-					boolean flag;
-
-					
-					for(Reviewer r : reviewerList){
-						flag = false;
-						ReviewerTableModel model;
-						String knowledgeAreaSplit[] = r.getKnowledgeArea().split(Pattern.quote(","));						
-						for(String know : knowledgeAreaSplit){
-							flag = false;
-							for(String key : keywordsSplit){
-								if(know.equals(key)){
-									listaRevisoresSelecionados.add(r);
-									model = new ReviewerTableModel(listaRevisoresSelecionados);
-									tableSelectReviewer.setModel(model);
-									flag = true;
-									break;
-								}
-							}
-							if(flag == true){
-								break;
-							}
-						}
-						if(listaRevisoresSelecionados.size() == 3){
-							break;
-						}
-					}
-					
-					if(listaRevisoresSelecionados.size() < 3){
-					
-						if(listaRevisoresSelecionados.isEmpty()){
-							int i = 0;
-							ReviewerTableModel model;
-							while(i<3){
-								listaRevisoresSelecionados.add(reviewerList.get(i));
-								model = new ReviewerTableModel(listaRevisoresSelecionados);
-								tableSelectReviewer.setModel(model);
-								i++;
-							}
-							
-						}else{
-							int i = listaRevisoresSelecionados.size();
-							ReviewerTableModel model;
-							while(i<3){
-								listaRevisoresSelecionados.add(reviewerList.get(i));
-								model = new ReviewerTableModel(listaRevisoresSelecionados);
-								tableSelectReviewer.setModel(model);
-								i++;
-							}
-							
-						}
-						
-					}
-					
-					
-				} catch (RepositoryException e1) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							e1.toString(), "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					e1.printStackTrace();
-				} catch (SubmissionNotFoundException e1) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							e1.toString(), "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					e1.printStackTrace();
-				} catch (SubmissionAlreadyInsertedException e1) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							e1.toString(), "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					e1.printStackTrace();
-				}
-			}
-				
-		}
-	}
 	
 }
 //#endif

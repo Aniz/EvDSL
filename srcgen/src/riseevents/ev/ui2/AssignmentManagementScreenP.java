@@ -97,7 +97,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	private JTable tableSelectReviewer;
 	
 	private JButton btnBack;
-	private JButton btnGenerate;
 	private JTextField textFieldDate;
 	private JTable table_1;
 	
@@ -150,7 +149,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		SelectButtonAction selectAction = new SelectButtonAction(); 
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		BackButtonAction backAction = new BackButtonAction();
-		GenerateButtonAction generateAction = new GenerateButtonAction();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 728, 480);
 		contentPane = new JPanel();
@@ -252,9 +250,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
-		btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(248, 273, 117, 29);
-		contentPane.add(btnGenerate);
 		//PASSO 2
 		btnInsert.addActionListener(insertAction);
 		btnRemove.addActionListener(removeAction);
@@ -263,7 +258,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
-		btnGenerate.addActionListener(generateAction);
 
 		populateTable();
 		populateTableReviewer();
@@ -419,30 +413,24 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
-				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
-				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
 				
 				if(resultAutomaticConflict1 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					enviarEmails(reviewer1, submission, review1);
 				}
 				if(resultAutomaticConflict2 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					enviarEmails(reviewer2, submission, review2);
 				}
 				if(resultAutomaticConflict3 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					enviarEmails(reviewer3, submission, review3);
 				}
 				
 			} catch (RepositoryException e1) {
@@ -665,97 +653,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		}
 	}
 
-	private class GenerateButtonAction  implements ActionListener{ 
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String submissao = comboBoxSubmission.getSelectedItem().toString();
-			List<Reviewer> reviewerList = new ArrayList<Reviewer>();
-			if(submissao.equals("")){
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Selecione uma Submissão", "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-			}else{
-				try {
-					int subId = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(submissao);
-					Submission sub = RiseEventsMainScreenP.facade.searchSubmission(subId);
-					String keywords = sub.getKeywords();
-					String keywordsSplit[] = keywords.split(Pattern.quote(","));
-					reviewerList = RiseEventsMainScreenP.facade.getReviewerList();
-					boolean flag;
-
-					
-					for(Reviewer r : reviewerList){
-						flag = false;
-						ReviewerTableModel model;
-						String knowledgeAreaSplit[] = r.getKnowledgeArea().split(Pattern.quote(","));						
-						for(String know : knowledgeAreaSplit){
-							flag = false;
-							for(String key : keywordsSplit){
-								if(know.equals(key)){
-									listaRevisoresSelecionados.add(r);
-									model = new ReviewerTableModel(listaRevisoresSelecionados);
-									tableSelectReviewer.setModel(model);
-									flag = true;
-									break;
-								}
-							}
-							if(flag == true){
-								break;
-							}
-						}
-						if(listaRevisoresSelecionados.size() == 3){
-							break;
-						}
-					}
-					
-					if(listaRevisoresSelecionados.size() < 3){
-					
-						if(listaRevisoresSelecionados.isEmpty()){
-							int i = 0;
-							ReviewerTableModel model;
-							while(i<3){
-								listaRevisoresSelecionados.add(reviewerList.get(i));
-								model = new ReviewerTableModel(listaRevisoresSelecionados);
-								tableSelectReviewer.setModel(model);
-								i++;
-							}
-							
-						}else{
-							int i = listaRevisoresSelecionados.size();
-							ReviewerTableModel model;
-							while(i<3){
-								listaRevisoresSelecionados.add(reviewerList.get(i));
-								model = new ReviewerTableModel(listaRevisoresSelecionados);
-								tableSelectReviewer.setModel(model);
-								i++;
-							}
-							
-						}
-						
-					}
-					
-					
-				} catch (RepositoryException e1) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							e1.toString(), "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					e1.printStackTrace();
-				} catch (SubmissionNotFoundException e1) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							e1.toString(), "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					e1.printStackTrace();
-				} catch (SubmissionAlreadyInsertedException e1) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							e1.toString(), "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					e1.printStackTrace();
-				}
-			}
-				
-		}
-	}
 	
 }
 //#endif
