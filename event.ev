@@ -1,18 +1,8 @@
-Create RiseEvents rise password
+Create EvCo rise password
 
 add User
 	show Insert Update Search Remove ListAll
-	types Associado,Profissional,Estudante.
-
-    
-add Organizer 
-    show Insert Update Search Remove ListAll
-    types GeneralChair, 
-		ProgramChair, 
-		WorkshopChair, 
-		TutorialChair,
-		ProceedingsChair,
-		PanelChair.
+	types Associado,Profissional,Estudante,Convidado.
 
 add Reviewer 
 	show Insert Update Search Remove ListAll
@@ -25,7 +15,7 @@ add Event
 		
 add Payment
 	show Insert Update Search Remove ListAll Management 
-	types Avista,Debito,Credito.
+	types Avista,Credito.
 
 add Activity
 	show Insert Update Search Remove ListAll Management
@@ -47,17 +37,11 @@ add CheckingCopy
 show Insert Update Remove Search ListAll Management
 	types Atestado,Certificado.
 
-addNew NewOption
-show Insert Update Remove Search ListAll
-types Atestado,Certificado.
-
 if Payment.Credito -> askCardInfo 
-if Payment.Debito -> generateCarne
 if Payment.Avista -> generateBoleto
 
 if CheckingCopy.Atestado -> checkingCopyAtestado
 if CheckingCopy.Certificado -> checkingCopyCertificado 
-if CheckiCopy.Certificado -> checkingCopyCertificado 
 
 def Event -> program
 def Event -> importantDates

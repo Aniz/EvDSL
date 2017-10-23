@@ -1,5 +1,5 @@
 //#if ${Bugs} == "T"
-package riseevents.ev.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,8 +22,8 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.mail.EmailException;
 
-import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.util.LibraryOfDSL;
+import {{systemName|lower}}.ev.exception.RepositoryException;
+import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 public class UserSendBugTrackEmailScreenP extends JInternalFrame {
 
