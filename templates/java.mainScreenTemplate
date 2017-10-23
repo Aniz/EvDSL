@@ -42,13 +42,6 @@ public class {{systemName}}MainScreenP extends JFrame {
 			{% endif %}
 		{% endfor %}
 	{% endif %}
-
-	{% if key in ["Event","Activity","ActivityUser","ActivitySpeaker","ActivityO
-		rganizer","Payment","CheckingCopy"] %}               
-	private {{key}}ManagementScreenP screenManagement{{key}};
-
-
-{% endif %}
 {% endfor %}
 {% for dep in dependences %}
 	{% if dep in ["ActivityUser","ActivitySpeaker","ActivityO

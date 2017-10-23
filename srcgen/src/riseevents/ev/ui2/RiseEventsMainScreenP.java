@@ -35,25 +35,21 @@ public class RiseEventsMainScreenP extends JFrame {
 	private UserRemoveScreenP screenRemoveUser;	
 	private UserListAllScreenP screenListAllUser;	
 	// private UserSendBugTrackEmailScreenP screenUserSendBugTrackEmail;	
-
 	private OrganizerInsertScreenP screenInsertOrganizer;	
 	private OrganizerUpdateScreenP screenUpdateOrganizer;	
 	private OrganizerSearchScreenP screenSearchOrganizer;	
 	private OrganizerRemoveScreenP screenRemoveOrganizer;	
 	private OrganizerListAllScreenP screenListAllOrganizer;	
-
 	private ReviewerInsertScreenP screenInsertReviewer;	
 	private ReviewerUpdateScreenP screenUpdateReviewer;	
 	private ReviewerSearchScreenP screenSearchReviewer;	
 	private ReviewerRemoveScreenP screenRemoveReviewer;	
 	private ReviewerListAllScreenP screenListAllReviewer;	
-
 	private SpeakerInsertScreenP screenInsertSpeaker;	
 	private SpeakerUpdateScreenP screenUpdateSpeaker;	
 	private SpeakerSearchScreenP screenSearchSpeaker;	
 	private SpeakerRemoveScreenP screenRemoveSpeaker;	
 	private SpeakerListAllScreenP screenListAllSpeaker;	
-
 	private EventInsertScreenP screenInsertEvent;	
 	private EventUpdateScreenP screenUpdateEvent;	
 	private EventSearchScreenP screenSearchEvent;	
@@ -63,55 +59,32 @@ public class RiseEventsMainScreenP extends JFrame {
 	// private EventProgramScreenP screenEventProgram;	
 	// private EventImportantDatesScreenP screenEventImportantDates;	
 	// private EventReportsFrequencyPerEventScreenP screenEventReportsFrequencyPerEvent;	
-
-               
-	private EventManagementScreenP screenManagementEvent;
-
-
 	private PaymentInsertScreenP screenInsertPayment;	
 	private PaymentUpdateScreenP screenUpdatePayment;	
 	private PaymentSearchScreenP screenSearchPayment;	
 	private PaymentRemoveScreenP screenRemovePayment;	
 	private PaymentListAllScreenP screenListAllPayment;	
 	private PaymentManagementScreenP screenManagementPayment;	
-
-               
-	private PaymentManagementScreenP screenManagementPayment;
-
-
 	private ActivityInsertScreenP screenInsertActivity;	
 	private ActivityUpdateScreenP screenUpdateActivity;	
 	private ActivitySearchScreenP screenSearchActivity;	
 	private ActivityRemoveScreenP screenRemoveActivity;	
 	private ActivityListAllScreenP screenListAllActivity;	
 	private ActivityManagementScreenP screenManagementActivity;	
-
-               
-	private ActivityManagementScreenP screenManagementActivity;
-
-
 	private SubmissionSearchScreenP screenSearchSubmission;	
 	private SubmissionRemoveScreenP screenRemoveSubmission;	
 	private SubmissionListAllScreenP screenListAllSubmission;	
-
-
 	private CheckingCopyInsertScreenP screenInsertCheckingCopy;	
 	private CheckingCopyUpdateScreenP screenUpdateCheckingCopy;	
 	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
 	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
 	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
 	private CheckingCopyManagementScreenP screenManagementCheckingCopy;	
-
-               
-	private CheckingCopyManagementScreenP screenManagementCheckingCopy;
-
-
 	private NewOptionInsertScreenP screenInsertNewOption;	
 	private NewOptionUpdateScreenP screenUpdateNewOption;	
 	private NewOptionRemoveScreenP screenRemoveNewOption;	
 	private NewOptionSearchScreenP screenSearchNewOption;	
 	private NewOptionListAllScreenP screenListAllNewOption;	
-
 
 	
 	
