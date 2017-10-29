@@ -74,6 +74,12 @@ import riseevents.ev.exception.NewOptionAlreadyInsertedException;
 import riseevents.ev.exception.NewOptionNotFoundException;
 import riseevents.ev.repository.NewOptionRepository;
 import riseevents.ev.repository.NewOptionRepositoryBDR;
+import riseevents.ev.data.Receipt;
+import riseevents.ev.business.ReceiptControl;
+import riseevents.ev.exception.ReceiptAlreadyInsertedException;
+import riseevents.ev.exception.ReceiptNotFoundException;
+import riseevents.ev.repository.ReceiptRepository;
+import riseevents.ev.repository.ReceiptRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import com.lowagie.text.DocumentException;
 
@@ -139,6 +145,7 @@ public class RiseEventsFacade {
 	private AuthorControl authorList;
 	private CheckingCopyControl checkingcopyList;
 	private NewOptionControl newoptionList;
+	private ReceiptControl receiptList;
 	private ReviewControl reviewList;
 	private ActivityUserControl activityuserList;
 	private ActivitySpeakerControl activityspeakerList;
@@ -162,6 +169,7 @@ public class RiseEventsFacade {
 		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
 		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
 		NewOptionRepository newoptionRepository = NewOptionRepositoryBDR.getInstance();
+		ReceiptRepository receiptRepository = ReceiptRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
 		organizerList = new OrganizerControl(organizerRepository); 
@@ -174,6 +182,7 @@ public class RiseEventsFacade {
 		authorList = new AuthorControl(authorRepository); 
 		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
 		newoptionList = new NewOptionControl(newoptionRepository); 
+		receiptList = new ReceiptControl(receiptRepository); 
 	
 	
 		ReviewRepository reviewRepository = ReviewRepositoryBDR.getInstance();
@@ -394,6 +403,15 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereNewOption(int idEntity) throws RepositoryException{
 		return newoptionList.isThere(idEntity);
+	}
+	public List<Receipt> getReceiptList() throws RepositoryException{
+		return receiptList.getReceiptList();
+	}
+	public int getReceiptLastId() throws RepositoryException{
+		return receiptList.getReceiptLastId();
+	}
+	public boolean isThereReceipt(int idEntity) throws RepositoryException{
+		return receiptList.isThere(idEntity);
 	}
 	public void insertReview(Review entity) throws ReviewAlreadyInsertedException, RepositoryException{
 		this.reviewList.insert(entity);

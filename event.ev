@@ -1,3 +1,5 @@
+//gmail
+
 Create RiseEvents rise password
 
 add User
@@ -51,6 +53,9 @@ addNew NewOption
 show Insert Update Remove Search ListAll
 types Atestado,Certificado.
 
+add Receipt
+show Management
+
 if Payment.Credito -> askCardInfo 
 if Payment.Debito -> generateCarne
 if Payment.Avista -> generateBoleto
@@ -66,4 +71,6 @@ def Event -> reportsFrequencyPerEvent
 if Submission.Completa -> insertAttachment
 
 def User -> sendBugTrackEmail
+
+def Activity -> reportsListofAuthors
 

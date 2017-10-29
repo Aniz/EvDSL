@@ -38,7 +38,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-	// private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|upperfirst}};	
+	private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|upperfirst}};	
 			{% endif %}
 		{% endfor %}
 	{% endif %}
@@ -64,10 +64,6 @@ public class {{systemName}}MainScreenP extends JFrame {
 	private AssignmentManagementScreenP screenManagementAssignment;
 	{% endif %}
 	
-	{% if dep == "Receipt" %}
-	private ReceiptScreenP screenReceipt;
-	{% endif %}
-	
 	{% if dep == "Review" %}
 	private ReviewInsertScreenP screenInsertReview;
 	private ReviewRemoveScreenP screenRemoveReview;
@@ -87,10 +83,6 @@ public class {{systemName}}MainScreenP extends JFrame {
 	private RegistrationRemoveScreenP screenRemoveRegistration;
 	{% endif %}
 {% endfor %}
-	
-	{% if 'Receipt' in data.actions %}
-	private ReceiptScreenP screenReceipt;
-	{% endif %}
 	
 	private static JLabel labelImagem;
 	

@@ -33,9 +33,9 @@ import {{systemName|lower}}.ev.exception.ReceiptNotFoundException;
 import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.table.ReceiptTableModel;
 
-public class ReceiptScreenP extends JInternalFrame{
+public class ReceiptManagementScreenP extends JInternalFrame{
 
-	private static ReceiptScreenP instanceReceiptScreenP;
+	private static ReceiptManagementScreenP instanceReceiptManagementScreenP;
 	private JPanel contentPane;
 	private JTable table;
 	private JScrollPane scrollPane;
@@ -52,18 +52,18 @@ public class ReceiptScreenP extends JInternalFrame{
 	private JLabel lblLastReceiptId;
 	
 
-	 public static ReceiptScreenP getInstanceReceiptScreenP() {
-		 if (instanceReceiptScreenP == null) {
-			 ReceiptScreenP.instanceReceiptScreenP = new ReceiptScreenP();
+	 public static ReceiptManagementScreenP getInstanceReceiptManagementScreenP() {
+		 if (instanceReceiptManagementScreenP == null) {
+			 ReceiptManagementScreenP.instanceReceiptManagementScreenP = new ReceiptManagementScreenP();
 		 }
-		 return ReceiptScreenP.instanceReceiptScreenP;
+		 return ReceiptManagementScreenP.instanceReceiptManagementScreenP;
 	 }
 	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReceiptScreenP frame = new ReceiptScreenP();
+					ReceiptManagementScreenP frame = new ReceiptManagementScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -75,7 +75,7 @@ public class ReceiptScreenP extends JInternalFrame{
 	/**
 	 * Create the frame.
 	 */
-	public ReceiptScreenP() {
+	public ReceiptManagementScreenP() {
 		
 		InsertButtonAction insertAction = new InsertButtonAction(); 
 		RemoveButtonAction removeAction = new RemoveButtonAction(); 
@@ -311,7 +311,7 @@ public class ReceiptScreenP extends JInternalFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			ReceiptScreenP.instanceReceiptScreenP = null;
+			ReceiptManagementScreenP.instanceReceiptManagementScreenP = null;
 		}
 	}
 	
