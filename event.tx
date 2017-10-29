@@ -36,7 +36,7 @@ NewOption:
 ;
 
 Command:
-  commandsOption *= CommandType 
+  commands *= CommandType 
 ;
 
 Category: 

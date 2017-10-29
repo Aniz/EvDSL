@@ -212,32 +212,92 @@ public class RiseEventsFacade {
 		return RiseEventsFacade.instance;
 	}
 	
+	public void insertUser(User entity) throws UserAlreadyInsertedException, RepositoryException{
+		this.userList.insert(entity);
+	}
+	public void removeUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
+		userList.remove(idEntity);  
+	}
+	public void updateUser(User Entity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
+		userList.update(Entity);
+	}
 	public List<User> getUserList() throws RepositoryException{
 		return userList.getUserList();
+	}
+	public User searchUser(int idEntity) throws UserNotFoundException, RepositoryException, UserAlreadyInsertedException{
+		return userList.search(idEntity);
 	}
 	public boolean isThereUser(int idEntity) throws RepositoryException{
 		return userList.isThere(idEntity);
 	}
+	public void insertOrganizer(Organizer entity) throws OrganizerAlreadyInsertedException, RepositoryException{
+		this.organizerList.insert(entity);
+	}
+	public void removeOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
+		organizerList.remove(idEntity);  
+	}
+	public void updateOrganizer(Organizer Entity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
+		organizerList.update(Entity);
+	}
 	public List<Organizer> getOrganizerList() throws RepositoryException{
 		return organizerList.getOrganizerList();
+	}
+	public Organizer searchOrganizer(int idEntity) throws OrganizerNotFoundException, RepositoryException, OrganizerAlreadyInsertedException{
+		return organizerList.search(idEntity);
 	}
 	public boolean isThereOrganizer(int idEntity) throws RepositoryException{
 		return organizerList.isThere(idEntity);
 	}
+	public void insertReviewer(Reviewer entity) throws ReviewerAlreadyInsertedException, RepositoryException{
+		this.reviewerList.insert(entity);
+	}
+	public void removeReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		reviewerList.remove(idEntity);  
+	}
+	public void updateReviewer(Reviewer Entity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		reviewerList.update(Entity);
+	}
 	public List<Reviewer> getReviewerList() throws RepositoryException{
 		return reviewerList.getReviewerList();
+	}
+	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		return reviewerList.search(idEntity);
 	}
 	public boolean isThereReviewer(int idEntity) throws RepositoryException{
 		return reviewerList.isThere(idEntity);
 	}
+	public void insertSpeaker(Speaker entity) throws SpeakerAlreadyInsertedException, RepositoryException{
+		this.speakerList.insert(entity);
+	}
+	public void removeSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
+		speakerList.remove(idEntity);  
+	}
+	public void updateSpeaker(Speaker Entity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
+		speakerList.update(Entity);
+	}
 	public List<Speaker> getSpeakerList() throws RepositoryException{
 		return speakerList.getSpeakerList();
+	}
+	public Speaker searchSpeaker(int idEntity) throws SpeakerNotFoundException, RepositoryException, SpeakerAlreadyInsertedException{
+		return speakerList.search(idEntity);
 	}
 	public boolean isThereSpeaker(int idEntity) throws RepositoryException{
 		return speakerList.isThere(idEntity);
 	}
+	public void insertEvent(Event entity) throws EventAlreadyInsertedException, RepositoryException{
+		this.eventList.insert(entity);
+	}
+	public void removeEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
+		eventList.remove(idEntity);  
+	}
+	public void updateEvent(Event Entity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
+		eventList.update(Entity);
+	}
 	public List<Event> getEventList() throws RepositoryException{
 		return eventList.getEventList();
+	}
+	public Event searchEvent(int idEntity) throws EventNotFoundException, RepositoryException, EventAlreadyInsertedException{
+		return eventList.search(idEntity);
 	}
 	public int getEventLastId() throws RepositoryException{
 		return eventList.getEventLastId();
@@ -245,14 +305,38 @@ public class RiseEventsFacade {
 	public boolean isThereEvent(int idEntity) throws RepositoryException{
 		return eventList.isThere(idEntity);
 	}
+	public void insertPayment(Payment entity) throws PaymentAlreadyInsertedException, RepositoryException{
+		this.paymentList.insert(entity);
+	}
+	public void removePayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		paymentList.remove(idEntity);  
+	}
+	public void updatePayment(Payment Entity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		paymentList.update(Entity);
+	}
 	public List<Payment> getPaymentList() throws RepositoryException{
 		return paymentList.getPaymentList();
+	}
+	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		return paymentList.search(idEntity);
 	}
 	public int getPaymentLastId() throws RepositoryException{
 		return paymentList.getPaymentLastId();
 	}
+	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
+		this.activityList.insert(entity);
+	}
+	public void removeActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		activityList.remove(idEntity);  
+	}
+	public void updateActivity(Activity Entity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		activityList.update(Entity);
+	}
 	public List<Activity> getActivityList() throws RepositoryException{
 		return activityList.getActivityList();
+	}
+	public Activity searchActivity(int idEntity) throws ActivityNotFoundException, RepositoryException, ActivityAlreadyInsertedException{
+		return activityList.search(idEntity);
 	}
 	public int getActivityLastId() throws RepositoryException{
 		return activityList.getActivityLastId();
@@ -260,8 +344,14 @@ public class RiseEventsFacade {
 	public boolean isThereActivity(int idEntity) throws RepositoryException{
 		return activityList.isThere(idEntity);
 	}
+	public void removeSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
+		submissionList.remove(idEntity);  
+	}
 	public List<Submission> getSubmissionList() throws RepositoryException{
 		return submissionList.getSubmissionList();
+	}
+	public Submission searchSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
+		return submissionList.search(idEntity);
 	}
 	public int getSubmissionLastId() throws RepositoryException{
 		return submissionList.getSubmissionLastId();
@@ -275,14 +365,38 @@ public class RiseEventsFacade {
 	public boolean isThereAuthor(int idEntity) throws RepositoryException{
 		return authorList.isThere(idEntity);
 	}
+	public void insertCheckingCopy(CheckingCopy entity) throws CheckingCopyAlreadyInsertedException, RepositoryException{
+		this.checkingcopyList.insert(entity);
+	}
+	public void removeCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
+		checkingcopyList.remove(idEntity);  
+	}
+	public void updateCheckingCopy(CheckingCopy Entity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
+		checkingcopyList.update(Entity);
+	}
 	public List<CheckingCopy> getCheckingCopyList() throws RepositoryException{
 		return checkingcopyList.getCheckingCopyList();
+	}
+	public CheckingCopy searchCheckingCopy(int idEntity) throws CheckingCopyNotFoundException, RepositoryException, CheckingCopyAlreadyInsertedException{
+		return checkingcopyList.search(idEntity);
 	}
 	public int getCheckingCopyLastId() throws RepositoryException{
 		return checkingcopyList.getCheckingCopyLastId();
 	}
+	public void insertNewOption(NewOption entity) throws NewOptionAlreadyInsertedException, RepositoryException{
+		this.newoptionList.insert(entity);
+	}
+	public void removeNewOption(int idEntity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
+		newoptionList.remove(idEntity);  
+	}
+	public void updateNewOption(NewOption Entity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
+		newoptionList.update(Entity);
+	}
 	public List<NewOption> getNewOptionList() throws RepositoryException{
 		return newoptionList.getNewOptionList();
+	}
+	public NewOption searchNewOption(int idEntity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
+		return newoptionList.search(idEntity);
 	}
 	public int getNewOptionLastId() throws RepositoryException{
 		return newoptionList.getNewOptionLastId();

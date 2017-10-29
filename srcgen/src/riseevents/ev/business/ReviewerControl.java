@@ -19,6 +19,31 @@ public class ReviewerControl {
 	}
 	
 	//usar instance of para saber qual o objeto dependendo disso direciona para o respectivo repositorio.
+	public void insert(Reviewer reviewer) throws ReviewerAlreadyInsertedException, RepositoryException{
+		if (reviewer != null) {
+			if (!reviewerList.isThere(reviewer.getIdUser())) 
+				reviewerList.insert(reviewer);
+			else
+				throw new ReviewerAlreadyInsertedException(reviewer.getIdUser());
+		} else {
+            throw new IllegalArgumentException();
+        }
+	}  
+	public void remove(int idUser) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
+		if(reviewerList.isThere(idUser))
+			reviewerList.remove(idUser);
+		else
+			throw new ReviewerNotFoundException(idUser);
+	}
+	public void update(Reviewer reviewer) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
+		if(reviewerList.isThere(reviewer.getIdUser()))
+			reviewerList.update(reviewer);
+		else
+			throw new ReviewerNotFoundException(reviewer.getIdUser());
+	}
+	public Reviewer search(int idUser) throws ReviewerAlreadyInsertedException, RepositoryException, ReviewerNotFoundException{
+		return reviewerList.search(idUser);
+	}
 	
 	public boolean isThere(int idUser) throws RepositoryException {
 		return reviewerList.isThere(idUser);

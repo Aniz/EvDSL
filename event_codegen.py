@@ -115,8 +115,8 @@ def main(debug=False):
             commandsArray = []
             if component.command.__class__.__name__ == 'SubCommandInOption':
                 componentDict[component.command.entity]["extraCommand"] = component.entity
-            if component.command.__class__.__name__ == 'CommandOption':
-                for command in component.command.commandsOption:
+            if component.command.__class__.__name__ == 'Command':
+                for command in component.command.commands:
                     commandsArray.append(command)
             componentDict[component.entity]["commands"] = commandsArray
             

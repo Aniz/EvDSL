@@ -20,12 +20,32 @@ public class PaymentControl {
 	public PaymentControl(PaymentRepository repository){
 		this.paymentList = repository;
 	}
+	public void insert(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException{
+		if (payment != null) {
+			if (!paymentList.isThere(payment.getIdPayment())) 
+				paymentList.insert(payment);
+			else
+				throw new PaymentAlreadyInsertedException(payment.getIdPayment());
+		} else {
+            throw new IllegalArgumentException();
+        }
+	}
 	public List<Payment> getPaymentList() throws RepositoryException {
 		return paymentList.getPaymentList();  
 	}
 
 	public int getPaymentLastId() throws RepositoryException{
 		return paymentList.getPaymentLastId();
+	}
+	
+	public void update(Payment payment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
+		paymentList.update(payment);
+	}
+	public void remove(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
+		paymentList.remove(idPayment);
+	}
+	public Payment search(int idPayment) throws PaymentAlreadyInsertedException, RepositoryException, PaymentNotFoundException{
+		return paymentList.search(idPayment);
 	}
 	
 	public void type(Payment payment, Payment out) throws DocumentException, IOException {
