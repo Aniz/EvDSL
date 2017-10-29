@@ -104,7 +104,6 @@ CREATE TABLE author(
 	nameAuthor varchar(255) NOT NULL, 
 	filiation varchar(255) NOT NULL, 
 	email varchar(255) NOT NULL, 
-	typeAuthor varchar(255) NOT NULL,
 				
 	  
 PRIMARY KEY (idAuthor));

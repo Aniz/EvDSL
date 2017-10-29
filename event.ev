@@ -42,8 +42,6 @@ add Submission
 	types Completa,Parcial.
 
 add Author
-show in User
-	types Associado,Profissional,Estudante.
 
 add CheckingCopy
 show Insert Update Remove Search ListAll Management

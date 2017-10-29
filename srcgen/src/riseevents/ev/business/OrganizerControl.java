@@ -19,33 +19,6 @@ public class OrganizerControl {
 
 	}
 	
-	public void insert(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException{
-		if (organizer != null) {
-			if (!organizerList.isThere(organizer.getIdUser())) {
-				organizerList.insert(organizer);
-			}else
-				throw new OrganizerAlreadyInsertedException(organizer.getIdUser());
-		} 
-		else {
-            throw new IllegalArgumentException();
-        }
-	}
-	public void remove(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		if(organizerList.isThere(idUser))
-			organizerList.remove(idUser);
-		else
-			throw new OrganizerNotFoundException(idUser);
-
-	}
-	public void update(Organizer organizer) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		if(organizerList.isThere(organizer.getIdUser()))
-			organizerList.update(organizer);
-		else
-			throw new OrganizerNotFoundException(organizer.getIdUser());
-	}
-	public Organizer search(int idUser) throws OrganizerAlreadyInsertedException, RepositoryException, OrganizerNotFoundException{
-		return organizerList.search(idUser);
-	}
 	
 	public boolean isThere(int idUser) throws RepositoryException {
 		return organizerList.isThere(idUser);

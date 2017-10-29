@@ -22,26 +22,6 @@ public class ActivityControl {
 	public ActivityControl(ActivityRepository repository){
 		this.activityList = repository;
 	}
-	public void insert(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException{
-		if (activity != null) {
-            if (!activityList.isThere(activity.getIdActivity())) {
-                activityList.insert(activity);
-            } else {
-                throw new ActivityAlreadyInsertedException(activity.getIdActivity());
-            }
-        } else {
-            throw new IllegalArgumentException();
-        }
-	}
-	public void remove(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		activityList.remove(idActivity);
-	}
-	public void update(Activity activity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		activityList.update(activity);
-	}
-	public Activity search(int idActivity) throws ActivityAlreadyInsertedException, RepositoryException, ActivityNotFoundException{
-		return activityList.search(idActivity);
-	}
 	public boolean isThere(int idActivity) throws RepositoryException {
 		return activityList.isThere(idActivity);
 	}

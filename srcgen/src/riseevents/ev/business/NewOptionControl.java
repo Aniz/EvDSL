@@ -31,15 +31,6 @@ public class NewOptionControl {
         }
   }
 
-  public void remove(int idNewOption) throws NewOptionAlreadyInsertedException, RepositoryException, NewOptionNotFoundException{
-    newoptionList.remove(idNewOption);
-  }
-  public void update(NewOption NewOption) throws NewOptionAlreadyInsertedException, RepositoryException, NewOptionNotFoundException{
-  newoptionList.update(NewOption);
-  }
-  public NewOption search(int idNewOption) throws NewOptionAlreadyInsertedException, RepositoryException, NewOptionNotFoundException{
-    return newoptionList.search(idNewOption);
-  }
   
   public boolean isThere(int idNewOption) throws RepositoryException {
     return newoptionList.isThere(idNewOption);
@@ -49,7 +40,4 @@ public class NewOptionControl {
     return newoptionList.getNewOptionLastId();
   }
   
-  public List<NewOption> getNewOptionList() throws RepositoryException {
-    return newoptionList.getNewOptionList();  
-  } 
  }

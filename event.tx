@@ -8,7 +8,7 @@ EventModel:
 ;
 
 Component:  
-     Option | Action | Statment | NewOption
+     Option | Statment | NewOption
 ;
 
 Statment: 
@@ -18,13 +18,13 @@ Statment:
 ;
 
 Condition:
-  "if" | "else" | "def"
+  "if" | "def"
 ;
 
 Option:
   'add' entity=Entity 
   ('+' properties*=Property)*     
-  "show" command=Command
+  ("show" command=Command)*
   ("types" categories*=Category[',']".")*
 ;
 
@@ -36,11 +36,7 @@ NewOption:
 ;
 
 Command:
-  CommandOption | SubCommandInOption
-;
-
-SubCommandInOption:
-  "in" entity=[Entity]
+  commandsOption *= CommandType 
 ;
 
 Category: 
@@ -64,25 +60,8 @@ SimpleType:
     'type' name=ID
 ;
 
-CommandOption:
-  commandsOption *= CommandType 
-;
-
 CommandType:
   'Insert' | 'Remove' | 'Update' | 'Search' | 'ListAll' | 'Search' | 'Management'
-;
-
-Action:
-  'include' function=[FunctionType]
-  params*=NewData + "."
-;
-
-FunctionType:
-  'InterestConflict'
-;
-
-NewData:
-  name=ID
 ;
 
 ActionType:

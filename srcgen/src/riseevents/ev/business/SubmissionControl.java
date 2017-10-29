@@ -18,9 +18,6 @@ public class SubmissionControl {
 	public SubmissionControl(SubmissionRepository repository){
 		this.submissionList = repository;
 	}
-	public void remove(int idSubmission) throws SubmissionAlreadyInsertedException, RepositoryException, SubmissionNotFoundException{
-		submissionList.remove(idSubmission);
-	}
 	
 	public List<Submission> getSubmissionList() throws RepositoryException {
 		return submissionList.getSubmissionList();  

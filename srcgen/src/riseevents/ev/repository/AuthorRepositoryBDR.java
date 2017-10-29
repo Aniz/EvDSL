@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import riseevents.ev.data.Author;
-import riseevents.ev.data.Author.TypeAuthor;
 import riseevents.ev.exception.AuthorNotFoundException;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.PersistenceMechanismException;
@@ -40,10 +39,9 @@ public class AuthorRepositoryBDR implements AuthorRepository {
 	public void insert(Author author) throws RepositoryException{
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email,typeAuthor) Values('"+author.getName()+"', '"
+			statement.executeUpdate("INSERT INTO author ( nameAuthor, filiation, email) Values('"+author.getName()+"', '"
 				            +author.getEmail()
 				            +"', '"+author.getFiliation()
-						    +"', '"+author.getTypeAuthor()
 	        
 				            +"')");
 		} catch (SQLException e) {
@@ -98,7 +96,6 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));
-				author.setTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
 					        
 				  } else {
             	throw new AuthorNotFoundException(idAuthor);
@@ -131,7 +128,6 @@ public class AuthorRepositoryBDR implements AuthorRepository {
             	author.setName(resultset.getString("nameAuthor"));
             	author.setEmail(resultset.getString("email"));
             	author.setFiliation(resultset.getString("filiation"));				
-				author.setTypeAuthor(TypeAuthor.valueOf(resultset.getString("typeAuthor")));
 					        
 				list.add(author);
             } 
@@ -159,7 +155,6 @@ public class AuthorRepositoryBDR implements AuthorRepository {
     	    statement.executeUpdate("UPDATE author SET nameAuthor = '"+ author.getName() +
 	                     "', filiation = '" + author.getFiliation() +
 	                     "', email = '"+ author.getEmail() +
-						"', Author = '"+ author.getTypeAuthor() +
      
 				      "' WHERE idAuthor = '"+ author.getIdAuthor()+"'");
 
