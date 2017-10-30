@@ -416,9 +416,6 @@ public class RiseEventsFacade {
 	public int getReceiptLastId() throws RepositoryException{
 		return receiptList.getReceiptLastId();
 	}
-	public boolean isThereReceipt(int idEntity) throws RepositoryException{
-		return receiptList.isThere(idEntity);
-	}
 	public void insertReview(Review entity) throws ReviewAlreadyInsertedException, RepositoryException{
 		this.reviewList.insert(entity);
 	}

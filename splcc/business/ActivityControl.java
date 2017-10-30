@@ -89,7 +89,7 @@ public class ActivityControl {
 	}
 	//
 	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
-		return activityUserList.getParticipantsPerActivity(idActivity);
+		return activityList.getParticipantsPerActivity(idActivity);
 	}
 {% endif %}
 {% if 'reportsListOfAuthors' in data.statments %}

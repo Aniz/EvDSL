@@ -93,7 +93,7 @@ public class {{systemName}}Facade {
 		return {{key|lower}}List.get{{key}}LastId();
 	}
 	{% endif %}
-	{% if key not in ["Payment","Submission","CheckingCopy","Assignment"] %}
+	{% if key not in ["Payment","Submission","CheckingCopy","Assignment","Receipt"] %}
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
