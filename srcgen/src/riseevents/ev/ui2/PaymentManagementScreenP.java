@@ -28,6 +28,7 @@ import javax.swing.border.EmptyBorder;
 
 import riseevents.ev.data.Payment;
 import riseevents.ev.data.Payment.StatusPayment;
+	
 import riseevents.ev.data.Payment.TypePayment;
 import riseevents.ev.data.Registration;
 import riseevents.ev.exception.PaymentAlreadyInsertedException;
@@ -48,6 +49,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 	private JTextField textFieldValuePayment;
 	private JTextField textFieldBarCode;
 	private JLabel lblData;
+	
 	
 	JComboBox<String> comboBoxTypePayment;
 	JComboBox<String> comboBoxStatusPayment;
@@ -117,13 +119,14 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
+
 		comboBoxTypePayment = new JComboBox<String>();
 		comboBoxTypePayment.setBounds(139, 61, 128, 27);
 		panel_1.add(comboBoxTypePayment);
 		
-		JLabel lblTipoDePagamento = new JLabel("Tipo de Pagamento:");
-		lblTipoDePagamento.setBounds(6, 65, 128, 16);
-		panel_1.add(lblTipoDePagamento);
+		JLabel lblTypePayment = new JLabel("Tipo de Pagamento:");
+		lblTypePayment.setBounds(6, 65, 128, 16);
+		panel_1.add(lblTypePayment);
 		
 		JLabel lblStatusDoPagamento = new JLabel("Status do Pagamento:");
 		lblStatusDoPagamento.setBounds(279, 65, 147, 16);
@@ -338,12 +341,14 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				
 				
 				Integer registrationId = Integer.parseInt(comboBoxIdRegistration.getSelectedItem().toString());
-				String type = comboBoxTypePayment.getSelectedItem().toString();
+				// String type = comboBoxTypePayment.getSelectedItem().toString();
 				String status = comboBoxStatusPayment.getSelectedItem().toString();
 				String date = lblData.getText();
 				String barcode = textFieldBarCode.getText();
 				float value = Float.valueOf(textFieldValuePayment.getText());
-				
+				String type = "";
+				type = comboBoxTypePayment.getSelectedItem().toString();
+
 				//int resultado = 0;
 				if ( registrationId == -1 || type.equals("") || status.equals("") || date.equals("")
 						|| barcode.equals("") || value == -1) {
@@ -359,6 +364,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 						payment.setBarcode(barcode);
 						payment.setDate(date);
 						payment.setIdRegistration(registrationId);
+	
 						payment.setTypePayment(TypePayment.valueOf(type));
 						payment.setStatus(StatusPayment.valueOf(status));
 						payment.setValue(value);
@@ -414,7 +420,9 @@ public class PaymentManagementScreenP extends JInternalFrame{
 					Payment payment = null;
 					
 					Integer registrationId = Integer.parseInt(comboBoxIdRegistration.getSelectedItem().toString());
-					String type = comboBoxTypePayment.getSelectedItem().toString();
+					String type = "";
+	
+					type = comboBoxTypePayment.getSelectedItem().toString();
 					String status = comboBoxStatusPayment.getSelectedItem().toString();
 					String date = lblData.getText();
 					String barcode = textFieldBarCode.getText();
@@ -435,7 +443,8 @@ public class PaymentManagementScreenP extends JInternalFrame{
 						payment.setBarcode(barcode);
 						payment.setDate(date);
 						payment.setIdRegistration(registrationId);
-						payment.setPaymentType(TypePayment.valueOf(type));
+	
+						payment.setTypePayment(TypePayment.valueOf(type));
 						payment.setStatus(StatusPayment.valueOf(status));
 						payment.setValue(value);
 						
@@ -484,7 +493,8 @@ public class PaymentManagementScreenP extends JInternalFrame{
 					
 					comboBoxIdRegistration.setSelectedItem(String.valueOf(payment.getIdRegistration()));
 					comboBoxStatusPayment.setSelectedItem(String.valueOf(payment.getStatus()));
-					comboBoxTypePayment.setSelectedItem(String.valueOf(payment.getPaymentType()));
+	
+					comboBoxTypePayment.setSelectedItem(String.valueOf(payment.getTypePayment()));
 					lblData.setText(payment.getDate());
 					textFieldBarCode.setText(payment.getBarcode());
 					textFieldValuePayment.setText(String.valueOf(payment.getValue()));
@@ -553,6 +563,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 			
 			
 			comboBoxIdRegistration.setSelectedItem("");
+	
 			comboBoxTypePayment.setSelectedItem("");
 			comboBoxStatusPayment.setSelectedItem("");
 			lblData.setText("");

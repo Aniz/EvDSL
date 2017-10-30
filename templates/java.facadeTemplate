@@ -272,6 +272,11 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 	{% endif %}
 {% endif %}
+{% if 'Author' in data %}
+	public void insertAuthor(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
+		authorList.insert(author);
+	}
+{% endif %}
 {% if 'Assignment' in data %}
 	{% if 'Remove' in data.Assignment.option.commands %}
 	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{

@@ -1,5 +1,5 @@
 //#if ${Receipt} == "T"
-package RiseEvents.splcc.repository;
+package riseevents.ev.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,11 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import RiseEvents.splcc.data.Receipt;
-import RiseEvents.splcc.exception.ReceiptNotFoundException;
-import RiseEvents.splcc.exception.RepositoryException;
-import RiseEvents.splcc.util.PersistenceMechanismException;
-import RiseEvents.splcc.util.PersistenceMechanismRDBMS;
+import riseevents.ev.data.Receipt;
+import riseevents.ev.exception.ReceiptNotFoundException;
+import riseevents.ev.exception.RepositoryException;
+import riseevents.ev.util.PersistenceMechanismException;
+import riseevents.ev.util.PersistenceMechanismRDBMS;
 
 public class ReceiptRepositoryBDR implements ReceiptRepository {
 	

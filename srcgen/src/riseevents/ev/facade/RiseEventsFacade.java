@@ -617,6 +617,9 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
+	public void insertAuthor(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
+		authorList.insert(author);
+	}
 	public boolean isThereAssignment(Assignment assignment) throws RepositoryException{
 		return assignmentList.isThere(assignment);
 	}

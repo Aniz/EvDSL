@@ -246,7 +246,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 			private void carregarComboUser(){
 				try {
 					List<User> list;
-					list = RiseEventsMainScreenP.facade.getUserList);
+					list = RiseEventsMainScreenP.facade.getUserList();
 					Iterator<User> iterator = list.iterator();
 					while(iterator.hasNext()){
 						comboBoxUser.addItem(iterator.next().getNameUser());
