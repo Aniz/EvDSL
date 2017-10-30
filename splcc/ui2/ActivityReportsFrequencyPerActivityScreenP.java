@@ -1,5 +1,5 @@
 //#if ${ReportsFrequencyperActivity} == "T"
-package {{systemName|lower}}.splcc.ui2;
+package {{systemName|lower}}.ev.ui2;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -19,11 +19,11 @@ import javax.swing.JOptionPane;
 
 import com.lowagie.text.DocumentException;
 
-import {{systemName|lower}}.splcc.data.Activity;
-import {{systemName|lower}}.splcc.data.Event;
-import {{systemName|lower}}.splcc.exception.ActivityAlreadyInsertedException;
-import {{systemName|lower}}.splcc.exception.ActivityNotFoundException;
-import {{systemName|lower}}.splcc.exception.RepositoryException;
+import {{systemName|lower}}.ev.data.Activity;
+import {{systemName|lower}}.ev.data.Event;
+import {{systemName|lower}}.ev.exception.ActivityAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.ActivityNotFoundException;
+import {{systemName|lower}}.ev.exception.RepositoryException;
 
 public class ActivityReportsFrequencyPerActivityScreenP extends JInternalFrame {
 
@@ -223,7 +223,7 @@ public class ActivityReportsFrequencyPerActivityScreenP extends JInternalFrame {
 	
 	private void carregarEventComboBox(){
 		try {
-			List<Event> list = {{systemName}}MainScreenP.facade.getEvents();
+			List<Event> list = {{systemName}}MainScreenP.facade.getEventList();
 			Iterator<Event> iterator = list.iterator();
 			while(iterator.hasNext()){
 				comboBoxEvent.addItem(iterator.next().getEventName());

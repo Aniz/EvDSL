@@ -38,15 +38,21 @@ import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
-{% if extraData.Review is defined %}
+{% if extraData.Submission is defined and extraData.Reviewer is defined %}
+import {{systemName|lower}}.ev.data.Review;
 import {{systemName|lower}}.ev.data.Review.StatusReview;
+{% endif %}
+{% if extraData.Submission is defined %}
+import {{systemName|lower}}.ev.data.Submission;
+{% endif %}
+{% if extraData.Reviewer is defined %}
+import {{systemName|lower}}.ev.data.Reviewer;
 {% endif %}
 
 import {{systemName|lower}}.ev.exception.AssignmentAlreadyInsertedException;
 import {{systemName|lower}}.ev.table.AssignmentTableModel;
 import {{systemName|lower}}.ev.data.Assignment;
 import {{systemName|lower}}.ev.exception.RepositoryException;
-import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
 public class AssignmentInsertScreenP extends JInternalFrame{
 

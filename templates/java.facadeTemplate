@@ -70,7 +70,7 @@ public class {{systemName}}Facade {
 		this.{{key|lower}}List.insert(entity);
 	}
 	{% endif %}
-	{% if 'Remove' in value.commands %}
+	{% if 'Remove' in value.commands and key != "Assignment" %}
 	public void remove{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.remove(idEntity);  
 	}
@@ -83,17 +83,17 @@ public class {{systemName}}Facade {
 	public List<{{key}}> get{{key}}List() throws RepositoryException{
 		return {{key|lower}}List.get{{key}}List();
 	}
-	{% if 'Search' in value.commands %}
+	{% if 'Search' in value.commands and key != "Assignment" %}
 	public {{key}} search{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		return {{key|lower}}List.search(idEntity);
 	}
 	{% endif %}
-	{% if key not in ["User","Reviewer","Organizer","Speaker"] %}
+	{% if key not in ["User","Reviewer","Organizer","Speaker","Assignment"] %}
 	public int get{{key}}LastId() throws RepositoryException{
 		return {{key|lower}}List.get{{key}}LastId();
 	}
 	{% endif %}
-	{% if key not in ["Payment","Submission","CheckingCopy"] %}
+	{% if key not in ["Payment","Submission","CheckingCopy","Assignment"] %}
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
@@ -199,12 +199,14 @@ public class {{systemName}}Facade {
 		return activityList.getEventbyActivity(idActivity);
 	}
 	
-	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
+	{% if 'reportsFrequencyPerActivity' in data.Activity.option.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
+	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
+		return activityuserList.getParticipantsPerActivity(idActivity);
+	}
 	{% endif %}
-
 	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
 	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
 		return activityList.getListOfAuthorsPerActivity(idActivity);
@@ -269,6 +271,21 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 		checkingcopyList.emitirCertificado(nome, evento, periodo, atividade, checkingcopy);
 	}
 	{% endif %}
+{% endif %}
+{% if 'Assignment' in data %}
+	{% if 'Remove' in data.Assignment.option.commands %}
+	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(assignment);  
+	}
+	{% endif %}
+	{% if 'Search' in data.Assignment.option.commands %}
+	public Assignment searchAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		return assignmentList.search(assignment);
+	}
+	{% endif %}
+	public boolean isThereAssignment(Assignment assignment) throws RepositoryException{
+		return assignmentList.isThere(assignment);
+	}
 {% endif %}
 {% if 'Reviewer' in data %}	
 	public void removeReview(int idReview) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{

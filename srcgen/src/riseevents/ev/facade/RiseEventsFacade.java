@@ -368,20 +368,8 @@ public class RiseEventsFacade {
 	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
 		this.assignmentList.insert(entity);
 	}
-	public void removeAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
-		assignmentList.remove(idEntity);  
-	}
 	public List<Assignment> getAssignmentList() throws RepositoryException{
 		return assignmentList.getAssignmentList();
-	}
-	public Assignment searchAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
-		return assignmentList.search(idEntity);
-	}
-	public int getAssignmentLastId() throws RepositoryException{
-		return assignmentList.getAssignmentLastId();
-	}
-	public boolean isThereAssignment(int idEntity) throws RepositoryException{
-		return assignmentList.isThere(idEntity);
 	}
 	public void insertCheckingCopy(CheckingCopy entity) throws CheckingCopyAlreadyInsertedException, RepositoryException{
 		this.checkingcopyList.insert(entity);
@@ -593,7 +581,6 @@ public class RiseEventsFacade {
 		return activityList.getEventbyActivity(idActivity);
 	}
 	
-
 	
 public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
 	return authorList.search(idAuthor);
@@ -629,6 +616,9 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
+	}
+	public boolean isThereAssignment(Assignment assignment) throws RepositoryException{
+		return assignmentList.isThere(assignment);
 	}
 	
 	public void removeReview(int idReview) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{

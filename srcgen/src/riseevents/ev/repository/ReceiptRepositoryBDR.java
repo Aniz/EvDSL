@@ -1,5 +1,5 @@
 //#if ${Receipt} == "T"
-package riseevents.ev.repository;
+package RiseEvents.splcc.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,11 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import riseevents.ev.data.Receipt;
-import riseevents.ev.exception.ReceiptNotFoundException;
-import riseevents.ev.exception.RepositoryException;
-import riseevents.ev.util.PersistenceMechanismException;
-import riseevents.ev.util.PersistenceMechanismRDBMS;
+import RiseEvents.splcc.data.Receipt;
+import RiseEvents.splcc.exception.ReceiptNotFoundException;
+import RiseEvents.splcc.exception.RepositoryException;
+import RiseEvents.splcc.util.PersistenceMechanismException;
+import RiseEvents.splcc.util.PersistenceMechanismRDBMS;
 
 public class ReceiptRepositoryBDR implements ReceiptRepository {
 	
@@ -38,17 +38,8 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 	@Override
 	public void insert(Receipt receipt) throws RepositoryException {
 		try {
-		Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO Receipt (idReceipt) Values('"
-				+receipt.getIdReceipt()
-				+ "', '"+receipt.getIdRegistration()
-				+ "', '"+receipt.getBarcode()
-				+ "', '"+receipt.getDate()
-				+ "', '"+receipt.getValue() 
-				+ "', '"+receipt.getStatus() 
-				
-	        
-		        +"')");
+			Statement statement = (Statement) pm.getCommunicationChannel();
+			statement.executeUpdate("INSERT INTO receipt (idReceipt, idPayment, dateOfIssue, totalValue) Values('"+receipt.getIdReceipt()+"', '"+receipt.getIdPayment()+"', '"+ receipt.getDateOfIssue() +"', '" + receipt.getTotalValue()+ "')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,15 +58,19 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 
 
 	@Override
-	public List<Receipt> getreceiptList() throws RepositoryException {
+	public List<Receipt> getReceiptList() throws RepositoryException {
 		Receipt receipt = null;
 		ArrayList<Receipt> list = new ArrayList<Receipt>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
             ResultSet resultset = statement.executeQuery("select * from Receipt");
             while (resultset.next()) {
-	            receipt = new Receipt();
-		        receipt.setIdReceipt(resultset.getInt("idReceipt"));         
+                receipt = new Receipt();
+                receipt.setIdReceipt(resultset.getInt("idReceipt"));
+                receipt.setIdPayment(resultset.getInt("idPayment"));
+                receipt.setDateOfIssue(resultset.getString("dateOfIssue"));
+                receipt.setTotalValue(resultset.getFloat("totalValue"));
+            
 				list.add(receipt);
             } 
 			resultset.close();
@@ -98,7 +93,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 		boolean answer = false;
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Receipt WHERE idReceipt = '" + idEntity + "'");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM receipt WHERE idReceipt = '" + idReceipt + "'");
             answer = resultset.next();
 			resultset.close();
 		} catch(PersistenceMechanismException e){
@@ -120,7 +115,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 		int answer=-1;
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EeventDB' AND TABLE_NAME= 'Receipt'");
+            ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EeventDB' AND TABLE_NAME= 'receipt'");
             resultset.first();
             answer = resultset.getInt("proximo_valor");
 			resultset.close();
@@ -143,7 +138,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 			RepositoryException {
 		try{
             Statement statement = (Statement) pm.getCommunicationChannel();
-		    int i = statement.executeUpdate("DELETE FROM Receipt WHERE idReceipt = '"+ idReceipt+"'");
+		    int i = statement.executeUpdate("DELETE FROM review WHERE idReceipt = '"+ idReceipt+"'");
             if (i == 0) {
             	throw new ReceiptNotFoundException(idReceipt);
             }
@@ -167,9 +162,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
 
-            		statement.executeUpdate("UPDATE Receipt SET 
-    
-    	    		                                 ' WHERE idReceipt = '"+ review.getIdReceipt()+"'");
+            		statement.executeUpdate("UPDATE review SET idPayment = '"+ review.getIdPayment() +"', totalValue = '"+ review.getTotalValue() +"', dateOfIssue = '"+ review.getDateOfIssue() +"' WHERE idReceipt = '"+ review.getIdReceipt()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -188,14 +181,18 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 	@Override
 	public Receipt search(int idReceipt) throws ReceiptNotFoundException,
 			RepositoryException {
-		Receipt receipt = null;
-		receipt = new Receipt();
+		Receipt review = null;
+		review = new Receipt();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("Select * from Receipt WHERE idReceipt =" + idReceipt);
+            ResultSet resultset = statement.executeQuery("Select * from review WHERE idReceipt =" + idReceipt);
             if (resultset.next()) {   
-                receipt.setIdReceipt(resultset.getInt("idReceipt"));         
-		    } else {
+            	review.setIdReceipt(resultset.getInt("idReceipt"));
+            	review.setIdPayment(resultset.getInt("idPayment"));
+            	review.setTotalValue(resultset.getFloat("totalValue"));
+            	review.setDateOfIssue(resultset.getString("dateOfIssue"));
+            	
+            } else {
             	throw new ReceiptNotFoundException(idReceipt);
             }
 			resultset.close();
@@ -210,7 +207,7 @@ public class ReceiptRepositoryBDR implements ReceiptRepository {
 				throw new RepositoryException(ex);
 			}
 		}
-		return receipt;
+		return review;
 	}
 
 

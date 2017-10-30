@@ -158,6 +158,14 @@ def main(debug=False):
         componentExtraData = ""
         #Remove Option if the dependence is not avaliable and print a error
         if key in avaliableOptions:
+            if key == "Assignment":
+                componentExtraData = {}
+                for n in ["Submission","Review","Reviewer"]:
+                    if componentDict.get(n):
+                        componentExtraData[n] = True
+                    else: 
+                        print("[Dependence Error] 'Assignment' defined whitout Option '%s'"%n)
+                
             if key == "CheckingCopy":
                 if componentDict.get("Activity"):
                     componentExtraData = componentDict["Activity"]

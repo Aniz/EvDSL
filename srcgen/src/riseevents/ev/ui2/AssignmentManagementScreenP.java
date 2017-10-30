@@ -28,6 +28,18 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.mail.EmailException;
 
+import riseevents.ev.data.Submission;
+import riseevents.ev.business.SubmissionControl;
+import riseevents.ev.exception.SubmissionAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionNotFoundException;
+import riseevents.ev.repository.SubmissionRepository;
+import riseevents.ev.repository.SubmissionRepositoryBDR;
+import riseevents.ev.data.Reviewer;
+import riseevents.ev.business.ReviewerControl;
+import riseevents.ev.exception.ReviewerAlreadyInsertedException;
+import riseevents.ev.exception.ReviewerNotFoundException;
+import riseevents.ev.repository.ReviewerRepository;
+import riseevents.ev.repository.ReviewerRepositoryBDR;
 
 import riseevents.ev.data.Assignment;
 import riseevents.ev.business.AssignmentControl;
@@ -37,6 +49,7 @@ import riseevents.ev.repository.AssignmentRepository;
 import riseevents.ev.repository.AssignmentRepositoryBDR;
 import riseevents.ev.table.AssignmentTableModel;
 
+import riseevents.ev.table.ReviewerTableModel;
 
 
 import riseevents.ev.exception.RepositoryException;
@@ -58,6 +71,8 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	private JTable table_1;
 	
 	private JComboBox comboBoxSubmission;
+	private List<Reviewer> listaRevisoresSelecionados = new ArrayList<Reviewer>();
+	private Submission submissionSelecionado = new Submission();
 	private Assignment assignmentSelecionado = new Assignment();
 	
 	public static AssignmentManagementScreenP getInstanceAssignmentManagementScreenP() {
@@ -352,6 +367,14 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				RiseEventsMainScreenP.facade.insertAssignment(assignment2);
 				RiseEventsMainScreenP.facade.insertAssignment(assignment3);
 				
+				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
+				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
+							
+				for(SubmissionUser su : submissionUser){
+					if(su.getIdSubmission() == idSubmission){
+						user = RiseEventsMainScreenP.facade.searchUser(su.getIdUser());
+					}
+				}
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
