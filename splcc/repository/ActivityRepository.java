@@ -42,7 +42,7 @@ public interface ActivityRepository {
 	//
 {% endif %}
 {% if 'reportsFrequencyPerActivity' in data.statments %}
-	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
+	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException;
 {% endif %}
 }
 //#endif
