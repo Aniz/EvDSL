@@ -381,19 +381,19 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 				{{property.type|javatype}} {{property.name}} = {{property.type|capitalize}}.valueOf(textField{{property.name|capitalize}}.getText());	
 				{% endfor %}
 				{% if data.option.categories|length > 0 %}
-				String type{{data.option.entity|capitalize}} = comboBoxType{{data.option.entity}}.getSelectedItem().toString();
+				String type{{data.option.entity}} = type{{data.option.entity}}ComboBox.getSelectedItem().toString();
 				{% endif %}
 				
 					{% for property in data.option.properties %}
 					{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
 					{% endfor %}
 					{% if data.option.categories|length > 0 %}
-					{{data.option.entity}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity}}));
+					{{data.option.entity|lower}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity}}));
 					{% endif %}
 					
 					try {
 						
-						{{systemName}}MainScreenP.facade.update{{data.option.entity}}({{data.option.entity}});
+						{{systemName}}MainScreenP.facade.update{{data.option.entity}}({{data.option.entity|lower}});
 						{{data.option.entity}}TableModel model;
 						model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}List());
 						table.setModel(model);
@@ -410,16 +410,14 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 								e1.toString(), "Erro",
 								JOptionPane.INFORMATION_MESSAGE);
 						e1.printStackTrace();
-					}
-					
-				}
-				
+					}		
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			}
+		}
 	}
 	
 	private class SelectButtonAction  implements ActionListener{ 

@@ -583,7 +583,7 @@ public class RiseEventsFacade {
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
 	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
-		return activityuserList.getParticipantsPerActivity(idActivity);
+		return activityList.getParticipantsPerActivity(idActivity);
 	}
 	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
 		return activityList.getListOfAuthorsPerActivity(idActivity);

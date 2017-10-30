@@ -198,7 +198,7 @@ public class {{systemName}}Facade {
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
 	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
-		return activityuserList.getParticipantsPerActivity(idActivity);
+		return activityList.getParticipantsPerActivity(idActivity);
 	}
 	{% endif %}
 	{% if 'reportsListOfAuthors' in data.Activity.statments %}
