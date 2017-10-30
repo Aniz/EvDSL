@@ -260,6 +260,11 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
 {% endif %}
+{% if 'Receipt' in data %}
+	public void removeReceipt(int idReceipt) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
+		receiptList.remove(idReceipt);  
+	}
+{% endif %}
 {% if 'CheckingCopy' in data %}
 	{% if 'checkingCopyAtestado' in data.Reviewer.option.statments %}
 	public void emitirAtestado (String nome, String evento, String periodo, CheckingCopy checkingcopy) throws RepositoryException {
@@ -328,3 +333,5 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 {% endif %}	
 }
+
+{{data.Assignment|pprint}}

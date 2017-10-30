@@ -38,12 +38,17 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	private JTable table;
 	private JScrollPane scrollPane;
 	
-	{% if data.option.categories|length > 0 %}
-	JComboBox<String> ComboBoxType{{data.option.entity}};
-	{% endif %}
+	JComboBox<String> typeComboBox;
 	JComboBox<String> comboBoxRegistrationId;
 	//Retirada de login
 	JComboBox comboBoxUser;
+	
+	JButton btnInsert;
+	JButton btnRemove;
+	JButton btnUpdate;
+	JButton btnSelect;
+	JButton btnClean;
+	JButton btnBack;
 	
 	JLabel lblLastCheckingCopyId;
 	private JLabel lblUserId;

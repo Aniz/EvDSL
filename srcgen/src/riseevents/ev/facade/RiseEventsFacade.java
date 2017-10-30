@@ -617,6 +617,9 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
+	public void removeReceipt(int idReceipt) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
+		receiptList.remove(idReceipt);  
+	}
 	public void insertAuthor(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
 		authorList.insert(author);
 	}
@@ -654,3 +657,10 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 	
 }
+
+{'commands': ['Insert', 'Search', 'Remove', 'ListAll', 'Management'],
+ 'option': <textx:Option object at 0x1126a2668>,
+ 'statments': {'interestConflict': <textx:Statment object at 0x1126a2e80>,
+               'notificationsAceptanceRejection': <textx:Statment object at 0x1126a2e48>,
+               'notificationsDeadline': <textx:Statment object at 0x1126a2da0>,
+               'notificationsPaperAssignemnt': <textx:Statment object at 0x1126a2e10>}}

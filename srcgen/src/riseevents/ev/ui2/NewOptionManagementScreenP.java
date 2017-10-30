@@ -21,6 +21,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+	
+import riseevents.ev.data.NewOption.TypeNewOption;
 import riseevents.ev.data.NewOption;
 import riseevents.ev.business.NewOptionControl;
 import riseevents.ev.exception.NewOptionAlreadyInsertedException;
@@ -118,10 +120,6 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 		lblLastNewOptionId = new JLabel("");
 		lblLastNewOptionId.setBounds(79, 6, 61, 16);
 		panel_1.add(lblLastNewOptionId);
-		
-		JLabel lblNewOptionId = new JLabel("NewOption Id:");
-		lblNewOptionId.setBounds(6, 49, 104, 16);
-		panel_1.add(lblNewOptionId);
 		
 		newoptionIdcomboBox = new JComboBox<String>();
 		newoptionIdcomboBox.setBounds(102, 45, 84, 27);
@@ -221,7 +219,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 	private void carregarComboBoxIdNewOption(){
 		List<NewOption> newoption = new ArrayList<NewOption>();
 		try {
-			NewOption = RiseEventsMainScreenP.facade.getNewOptionList();
+			newoption = RiseEventsMainScreenP.facade.getNewOptionList();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",
@@ -239,7 +237,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			NewOptionTableModel model;
-			model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions());
+			model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -266,7 +264,8 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 			NewOption newoption = null;
 			
 			Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
-			StatusNewOption status = StatusNewOption.valueOf(statusComboBox.getSelectedItem().toString());
+	
+			TypeNewOption status = TypeNewOption.valueOf(statusComboBox.getSelectedItem().toString());
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
 			
@@ -282,12 +281,11 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 					
 					newoption = new NewOption();
 					newoption.setIdNewOption(newoptionId);
-					newoption.setDate(date);
-					newoption.setDescription(description);
-					newoption.setStatus(status);
-					
+	
+					newoption.setTypeNewOption(status);
+										
 					//Atualizar JTable
-					NewOptionTableModel model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions());
+					NewOptionTableModel model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
 					
 					RiseEventsMainScreenP.facade.insertNewOption(newoption); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 				
@@ -435,13 +433,13 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 			NewOption newoptionOld = null;
 
 			try {
-				newoptionOld=  new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions()).get(rowIndex);
+				newoptionOld=  new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList()).get(rowIndex);
 			
 				lblLastNewOptionId.setText(String.valueOf(newoptionOld.getIdNewOption()));
 				newoptionIdcomboBox.setSelectedItem(newoptionOld.getIdNewOption());
-				statusComboBox.setSelectedItem(newoptionOld.getStatus());
-				textFieldDate.setText(newoptionOld.getDate());
-				textFieldDescription.setText(newoptionOld.getDescription());
+				
+	
+				statusComboBox.setSelectedItem(newoptionOld.getTypeNewOption());
 				
 			} catch (RepositoryException ex) {
 				JOptionPane.showMessageDialog(getContentPane(),

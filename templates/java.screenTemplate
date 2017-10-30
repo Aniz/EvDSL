@@ -21,6 +21,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+{% if data.option.categories|length > 0 %}	
+import {{systemName|lower}}.ev.data.{{data.option.entity}}.Type{{data.option.entity}};
+{% endif %}
 import {{systemName|lower}}.ev.data.{{data.option.entity}};
 import {{systemName|lower}}.ev.business.{{data.option.entity}}Control;
 import {{systemName|lower}}.ev.exception.{{data.option.entity}}AlreadyInsertedException;
@@ -118,10 +121,6 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 		lblLast{{data.option.entity}}Id = new JLabel("");
 		lblLast{{data.option.entity}}Id.setBounds(79, 6, 61, 16);
 		panel_1.add(lblLast{{data.option.entity}}Id);
-		
-		JLabel lbl{{data.option.entity}}Id = new JLabel("{{data.option.entity}} Id:");
-		lbl{{data.option.entity}}Id.setBounds(6, 49, 104, 16);
-		panel_1.add(lbl{{data.option.entity}}Id);
 		
 		{{data.option.entity|lower}}IdcomboBox = new JComboBox<String>();
 		{{data.option.entity|lower}}IdcomboBox.setBounds(102, 45, 84, 27);
@@ -224,7 +223,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 	private void carregarComboBoxId{{data.option.entity}}(){
 		List<{{data.option.entity}}> {{data.option.entity|lower}} = new ArrayList<{{data.option.entity}}>();
 		try {
-			{{data.option.entity}} = {{systemName}}MainScreenP.facade.get{{data.option.entity}}List();
+			{{data.option.entity|lower}} = {{systemName}}MainScreenP.facade.get{{data.option.entity}}List();
 		} catch (RepositoryException ex) {
 			JOptionPane.showMessageDialog(getContentPane(),
 					ex.toString(), "Erro",
@@ -242,7 +241,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 	private void populateTable(){
 		try {
 			{{data.option.entity}}TableModel model;
-			model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}s());
+			model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}List());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -269,7 +268,9 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			{{data.option.entity}} {{data.option.entity|lower}} = null;
 			
 			Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
-			Status{{data.option.entity}} status = Status{{data.option.entity}}.valueOf(statusComboBox.getSelectedItem().toString());
+			{% if data.option.categories|length > 0 %}	
+			Type{{data.option.entity}} status = Type{{data.option.entity}}.valueOf(statusComboBox.getSelectedItem().toString());
+			{% endif %}
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
 			
@@ -285,12 +286,12 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 					
 					{{data.option.entity|lower}} = new {{data.option.entity}}();
 					{{data.option.entity|lower}}.setId{{data.option.entity}}({{data.option.entity|lower}}Id);
-					{{data.option.entity|lower}}.setDate(date);
-					{{data.option.entity|lower}}.setDescription(description);
-					{{data.option.entity|lower}}.setStatus(status);
-					
+					{% if data.option.categories|length > 0 %}	
+					{{data.option.entity|lower}}.setType{{data.option.entity}}(status);
+					{% endif %}
+										
 					//Atualizar JTable
-					{{data.option.entity}}TableModel model = new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}s());
+					{{data.option.entity}}TableModel model = new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}List());
 					
 					RiseEventsMainScreenP.facade.insert{{data.option.entity}}({{data.option.entity|lower}}); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
 				
@@ -438,13 +439,14 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			{{data.option.entity}} {{data.option.entity|lower}}Old = null;
 
 			try {
-				{{data.option.entity|lower}}Old=  new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}s()).get(rowIndex);
+				{{data.option.entity|lower}}Old=  new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}List()).get(rowIndex);
 			
 				lblLast{{data.option.entity}}Id.setText(String.valueOf({{data.option.entity|lower}}Old.getId{{data.option.entity}}()));
 				{{data.option.entity|lower}}IdcomboBox.setSelectedItem({{data.option.entity|lower}}Old.getId{{data.option.entity}}());
-				statusComboBox.setSelectedItem({{data.option.entity|lower}}Old.getStatus());
-				textFieldDate.setText({{data.option.entity|lower}}Old.getDate());
-				textFieldDescription.setText({{data.option.entity|lower}}Old.getDescription());
+				
+				{% if data.option.categories|length > 0 %}	
+				statusComboBox.setSelectedItem({{data.option.entity|lower}}Old.getType{{data.option.entity}}());
+				{% endif %}
 				
 			} catch (RepositoryException ex) {
 				JOptionPane.showMessageDialog(getContentPane(),
