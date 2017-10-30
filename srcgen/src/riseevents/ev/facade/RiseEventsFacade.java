@@ -365,8 +365,17 @@ public class RiseEventsFacade {
 	public boolean isThereAuthor(int idEntity) throws RepositoryException{
 		return authorList.isThere(idEntity);
 	}
+	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
+		this.assignmentList.insert(entity);
+	}
+	public void removeAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(idEntity);  
+	}
 	public List<Assignment> getAssignmentList() throws RepositoryException{
 		return assignmentList.getAssignmentList();
+	}
+	public Assignment searchAssignment(int idEntity) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		return assignmentList.search(idEntity);
 	}
 	public int getAssignmentLastId() throws RepositoryException{
 		return assignmentList.getAssignmentLastId();

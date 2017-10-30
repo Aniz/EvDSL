@@ -78,6 +78,11 @@ public class RiseEventsMainScreenP extends JFrame {
 	private SubmissionListAllScreenP screenListAllSubmission;	
 	private SubmissionCompleteInsertScreenP screenSubmissionCompleteInsert;	
 	private SubmissionPartialInsertScreenP screenSubmissionPartialInsert;	
+	private AssignmentInsertScreenP screenInsertAssignment;	
+	private AssignmentSearchScreenP screenSearchAssignment;	
+	private AssignmentRemoveScreenP screenRemoveAssignment;	
+	private AssignmentListAllScreenP screenListAllAssignment;	
+	private AssignmentManagementScreenP screenManagementAssignment;	
 	private CheckingCopyInsertScreenP screenInsertCheckingCopy;	
 	private CheckingCopyUpdateScreenP screenUpdateCheckingCopy;	
 	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
@@ -220,6 +225,11 @@ public class RiseEventsMainScreenP extends JFrame {
 		ListAllSubmissionMenuAction listallSubmissionAction = new ListAllSubmissionMenuAction();	
 		SubmissionCompleteInsertMenuAction submissionCompleteInsertAction = new SubmissionCompleteInsertMenuAction();	
 		SubmissionPartialInsertMenuAction submissionPartialInsertAction = new SubmissionPartialInsertMenuAction();	
+		InsertAssignmentMenuAction insertAssignmentAction = new InsertAssignmentMenuAction();	
+		SearchAssignmentMenuAction searchAssignmentAction = new SearchAssignmentMenuAction();	
+		RemoveAssignmentMenuAction removeAssignmentAction = new RemoveAssignmentMenuAction();	
+		ListAllAssignmentMenuAction listallAssignmentAction = new ListAllAssignmentMenuAction();	
+		ManagementAssignmentMenuAction managementAssignmentAction = new ManagementAssignmentMenuAction();	
 		InsertCheckingCopyMenuAction insertCheckingCopyAction = new InsertCheckingCopyMenuAction();	
 		UpdateCheckingCopyMenuAction updateCheckingCopyAction = new UpdateCheckingCopyMenuAction();	
 		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveCheckingCopyMenuAction();	
@@ -436,6 +446,21 @@ public class RiseEventsMainScreenP extends JFrame {
 		menuBar.add(mnAuthor);
 		JMenu mnAssignment = new JMenu("Assignment");
 		menuBar.add(mnAssignment);
+		JMenuItem mntmInsertAssignment = new JMenuItem("Insert");
+		mnAssignment.add(mntmInsertAssignment);
+		mntmInsertAssignment.addActionListener(insertAssignmentAction);
+		JMenuItem mntmSearchAssignment = new JMenuItem("Search");
+		mnAssignment.add(mntmSearchAssignment);
+		mntmSearchAssignment.addActionListener(searchAssignmentAction);
+		JMenuItem mntmRemoveAssignment = new JMenuItem("Remove");
+		mnAssignment.add(mntmRemoveAssignment);
+		mntmRemoveAssignment.addActionListener(removeAssignmentAction);
+		JMenuItem mntmListAllAssignment = new JMenuItem("ListAll");
+		mnAssignment.add(mntmListAllAssignment);
+		mntmListAllAssignment.addActionListener(listallAssignmentAction);
+		JMenuItem mntmManagementAssignment = new JMenuItem("Management");
+		mnAssignment.add(mntmManagementAssignment);
+		mntmManagementAssignment.addActionListener(managementAssignmentAction);
 		JMenu mnCheckingCopy = new JMenu("CheckingCopy");
 		menuBar.add(mnCheckingCopy);
 		JMenuItem mntmInsertCheckingCopy = new JMenuItem("Insert");
@@ -1399,6 +1424,101 @@ public class RiseEventsMainScreenP extends JFrame {
 					}
 				}  
 			}
+	private class InsertAssignmentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenInsertAssignment = AssignmentInsertScreenP.getInstanceAssignmentInsertScreenP();
+			if(screenInsertAssignment.getParent() == null){
+				desktopPane.add(screenInsertAssignment);
+			}
+			screenInsertAssignment.setVisible(true);
+			desktopPane.moveToFront(screenInsertAssignment);
+			try {
+				screenInsertAssignment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class SearchAssignmentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenSearchAssignment = AssignmentSearchScreenP.getInstanceAssignmentSearchScreenP();
+			if(screenSearchAssignment.getParent() == null){
+				desktopPane.add(screenSearchAssignment);
+			}
+			screenSearchAssignment.setVisible(true);
+			desktopPane.moveToFront(screenSearchAssignment);
+			try {
+				screenSearchAssignment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class RemoveAssignmentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenRemoveAssignment = AssignmentRemoveScreenP.getInstanceAssignmentRemoveScreenP();
+			if(screenRemoveAssignment.getParent() == null){
+				desktopPane.add(screenRemoveAssignment);
+			}
+			screenRemoveAssignment.setVisible(true);
+			desktopPane.moveToFront(screenRemoveAssignment);
+			try {
+				screenRemoveAssignment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ListAllAssignmentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenListAllAssignment = AssignmentListAllScreenP.getInstanceAssignmentListAllScreenP();
+			if(screenListAllAssignment.getParent() == null){
+				desktopPane.add(screenListAllAssignment);
+			}
+			screenListAllAssignment.setVisible(true);
+			desktopPane.moveToFront(screenListAllAssignment);
+			try {
+				screenListAllAssignment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ManagementAssignmentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementAssignment = AssignmentManagementScreenP.getInstanceAssignmentManagementScreenP();
+			if(screenManagementAssignment.getParent() == null){
+				desktopPane.add(screenManagementAssignment);
+			}
+			screenManagementAssignment.setVisible(true);
+			desktopPane.moveToFront(screenManagementAssignment);
+			try {
+				screenManagementAssignment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
 	private class InsertCheckingCopyMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
