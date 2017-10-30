@@ -139,6 +139,26 @@ public class LibraryOfDSL {
 		}	
 	}	
 
+	public static Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
+		
+		String authorFiliation = null;
+		String reviewerFiliation = null;
+		String userFiliation = null;
+				
+		authorFiliation = authorSubmission.getFiliation();
+		reviewerFiliation = user.getFiliation();
+		userFiliation = user.getFiliation();
+		
+		if(authorFiliation.equals(reviewerFiliation)){
+			return true;
+		}
+		if(usersub.equals(userFiliation)){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	public static void sendNotification(User user, Review review) throws EmailException{
 

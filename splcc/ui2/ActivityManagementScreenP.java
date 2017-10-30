@@ -487,7 +487,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 					{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
 					{% endfor %}
 					{% if data.option.categories|length > 0 %}
-					activity.setType{{data.option.entity}}(TypeActivity.valueOf(type{{data.option.entity}});
+					activity.setType{{data.option.entity}}(TypeActivity.valueOf(type{{data.option.entity}}));
 					{% endif %}
 					
 					try {
@@ -530,7 +530,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			Activity activity = null;
 
 			try {
-				activity=  new ActivityTableModel({{systemName}}MainScreenP.facade.getActivities()).get(rowIndex);
+				activity=  new ActivityTableModel({{systemName}}MainScreenP.facade.getActivityList()).get(rowIndex);
 			
 				lblLastIdActivity.setText(String.valueOf(activity.getIdActivity()));
 				comboBoxEvent.setSelectedItem({{systemName}}MainScreenP.facade.searchEvent(activity.getIdEvent()).getEventName());

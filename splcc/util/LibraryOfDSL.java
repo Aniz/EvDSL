@@ -35,7 +35,7 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	{% if "Author" in data and 'Assignment' in extraData and 'interestConflict' in statments  %}
+	{% if "Author" in data and 'Assignment' in data and 'interestConflict' in statments  %}
 	public static Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
 		
 		String authorFiliation = null;

@@ -441,7 +441,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 					activity.setHour(hour);
 					activity.setNumberOfParticipants(numberOfParticipants);
 					activity.setRegistrationLimit(registrationLimit);
-					activity.setTypeActivity(TypeActivity.valueOf(typeActivity);
+					activity.setTypeActivity(TypeActivity.valueOf(typeActivity));
 					
 					try {
 						
@@ -483,7 +483,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			Activity activity = null;
 
 			try {
-				activity=  new ActivityTableModel(RiseEventsMainScreenP.facade.getActivities()).get(rowIndex);
+				activity=  new ActivityTableModel(RiseEventsMainScreenP.facade.getActivityList()).get(rowIndex);
 			
 				lblLastIdActivity.setText(String.valueOf(activity.getIdActivity()));
 				comboBoxEvent.setSelectedItem(RiseEventsMainScreenP.facade.searchEvent(activity.getIdEvent()).getEventName());
