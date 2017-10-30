@@ -270,7 +270,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		contentPane.add(btnBack);
 		btnBack.addActionListener(backAction);
 		
-		carregarTypeActivity();
+		carregarTypeActivityComboBox();
 		carregarEventComboBox();
 		carregarLastId();
 		populateTable();
@@ -332,7 +332,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 						activity.setHour(hour);
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
-							activity.setTypeActivity(TypeActivity.valueOf(Activity));
+							activity.setTypeActivity(TypeActivity.valueOf(typeActivity));
 						
 						RiseEventsMainScreenP.facade.insertActivity(activity);
 
@@ -369,7 +369,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			}
 			
 			try {
-				Activity activity = new ActivityTableModel(RiseEventsMainScreenP.facade.getActivities()).get(rowIndex);
+				Activity activity = new ActivityTableModel(RiseEventsMainScreenP.facade.getActivityList()).get(rowIndex);
 				RiseEventsMainScreenP.facade.removeActivity(activity.getIdActivity());
 				ActivityTableModel model = (ActivityTableModel) table.getModel();
 				model.removeActivity(rowIndex);
@@ -441,7 +441,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 					activity.setHour(hour);
 					activity.setNumberOfParticipants(numberOfParticipants);
 					activity.setRegistrationLimit(registrationLimit);
-					activity.setTypeActivity(typeActivity);
+					activity.setTypeActivity(TypeActivity.valueOf(typeActivity);
 					
 					try {
 						

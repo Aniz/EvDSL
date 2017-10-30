@@ -149,17 +149,17 @@ public class {{systemName}}Facade {
 		return activityList.getActivitiesByEvent(idEvent);
 	}
 {% if 'Event' in data %}
-	{% if 'program' in data.User.option.statments %}
+	{% if 'program' in data.User.statments %}
 	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{
 		eventList.generateProgram(activityList, event);
 	}
 	{% endif %}
-	{% if 'importantDates' in data.User.option.statments %}
+	{% if 'importantDates' in data.User.statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
 		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 	{% endif %}
-	{% if 'reportsFrequencyperEvent' in data.User.option.statments %}	
+	{% if 'reportsFrequencyperEvent' in data.User.statments %}	
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
 		return eventList.getParticipantsPerEvent(idEvent);
 	}
@@ -176,7 +176,7 @@ public class {{systemName}}Facade {
 		return userList.getUserIdByName(entityName);
 	}
 
-	{% if 'sendBugTrackEmail' in data.User.option.statments %}
+	{% if 'sendBugTrackEmail' in data.User.statments %}
 	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
 		return userList.sendBug(nome, assunto, mensagem);
 	}
@@ -199,7 +199,7 @@ public class {{systemName}}Facade {
 		return activityList.getEventbyActivity(idActivity);
 	}
 	
-	{% if 'reportsFrequencyPerActivity' in data.Activity.option.statments %}
+	{% if 'reportsFrequencyPerActivity' in data.Activity.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
@@ -207,7 +207,7 @@ public class {{systemName}}Facade {
 		return activityuserList.getParticipantsPerActivity(idActivity);
 	}
 	{% endif %}
-	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
+	{% if 'reportsListofAuthors' in data.Activity.statments %}
 	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
 		return activityList.getListOfAuthorsPerActivity(idActivity);
 	}
@@ -245,7 +245,7 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 {% endif %}	
 {% if 'Submission' in data %}	
-	{% if 'insertAttachment' in data.Submission.option.statments %}
+	{% if 'insertAttachment' in data.Submission.statments %}
 	public void insertAttachment(File attachment, int idActivity) throws RepositoryException, SubmissionAlreadyInsertedException{
 		this.submissionList.inserAttachmanet(attachment, idActivity);
 	}
@@ -266,12 +266,12 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 {% endif %}
 {% if 'CheckingCopy' in data %}
-	{% if 'checkingCopyAtestado' in data.Reviewer.option.statments %}
+	{% if 'checkingCopyAtestado' in data.Reviewer.statments %}
 	public void emitirAtestado (String nome, String evento, String periodo, CheckingCopy checkingcopy) throws RepositoryException {
 		checkingcopyList.emitirAtestado(nome, evento, periodo, checkingcopy);
 	}
 	{% endif %}
-	{% if 'checkingCopyCertificado' in data.Reviewer.option.statments %}
+	{% if 'checkingCopyCertificado' in data.Reviewer.statments %}
 	public void emitirCertificado (String nome, String evento, String periodo, String atividade, CheckingCopy checkingcopy) throws RepositoryException, DocumentException, IOException {
 		checkingcopyList.emitirCertificado(nome, evento, periodo, atividade, checkingcopy);
 	}
@@ -283,12 +283,13 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 {% endif %}
 {% if 'Assignment' in data %}
-	{% if 'Remove' in data.Assignment.option.commands %}
+	{% if 'Remove' in data.Assignment.commands %}
 	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		assignmentList.remove(assignment);  
 	}
 	{% endif %}
-	{% if 'Search' in data.Assignment.option.commands %}
+	{% if 'Search' in data.Assignment.commands %}
+	if 'Search' in data.Assignment.commands %}
 	public Assignment searchAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		return assignmentList.search(assignment);
 	}
@@ -333,5 +334,3 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 {% endif %}	
 }
-
-{{data.Assignment|pprint}}

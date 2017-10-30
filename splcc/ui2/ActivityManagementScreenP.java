@@ -296,7 +296,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		
 		{% if data.option.categories|length > 0 %}
-		carregarType{{data.option.entity}}();
+		carregarType{{data.option.entity}}ComboBox();
 		{% endif %}
 		carregarEventComboBox();
 		carregarLastId();
@@ -368,7 +368,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 						{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
 						{% endfor %}
 						{% if data.option.categories|length > 0 %}
-							activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf({{data.option.entity|capitalize}}));
+							activity.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity}}));
 						{% endif %}
 						
 						{{systemName}}MainScreenP.facade.insertActivity(activity);
@@ -406,7 +406,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			}
 			
 			try {
-				Activity activity = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivities()).get(rowIndex);
+				Activity activity = new ActivityTableModel({{systemName}}MainScreenP.facade.getActivityList()).get(rowIndex);
 				{{systemName}}MainScreenP.facade.removeActivity(activity.getIdActivity());
 				ActivityTableModel model = (ActivityTableModel) table.getModel();
 				model.removeActivity(rowIndex);
@@ -487,7 +487,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 					{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
 					{% endfor %}
 					{% if data.option.categories|length > 0 %}
-					activity.setType{{data.option.entity}}(type{{data.option.entity|capitalize}});
+					activity.setType{{data.option.entity}}(TypeActivity.valueOf(type{{data.option.entity}});
 					{% endif %}
 					
 					try {

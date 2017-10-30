@@ -563,6 +563,9 @@ public class RiseEventsFacade {
 		return userList.getUserIdByName(entityName);
 	}
 
+	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
+		return userList.sendBug(nome, assunto, mensagem);
+	}
 	
 	
 	public int getActivityIdByName(String entityName) throws RepositoryException{
@@ -581,6 +584,19 @@ public class RiseEventsFacade {
 		return activityList.getEventbyActivity(idActivity);
 	}
 	
+	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
+		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
+	}
+	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
+		return activityuserList.getParticipantsPerActivity(idActivity);
+	}
+	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
+		return activityList.getListOfAuthorsPerActivity(idActivity);
+	}
+	
+	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
+		activity.listOfAuthorsPerActivity(authorsPerActivity);
+	}
 	
 public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
 	return authorList.search(idAuthor);
@@ -608,6 +624,9 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 	
 	
+	public void insertAttachment(File attachment, int idActivity) throws RepositoryException, SubmissionAlreadyInsertedException{
+		this.submissionList.inserAttachmanet(attachment, idActivity);
+	}
 	public void pdfRecovey(int idSubmission) throws RepositoryException{
 		this.submissionList.pdfRecover(idSubmission);
 	}
@@ -622,6 +641,13 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 	public void insertAuthor(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
 		authorList.insert(author);
+	}
+	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(assignment);  
+	}
+	if 'Search' in data.Assignment.commands %}
+	public Assignment searchAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		return assignmentList.search(assignment);
 	}
 	public boolean isThereAssignment(Assignment assignment) throws RepositoryException{
 		return assignmentList.isThere(assignment);
@@ -657,10 +683,3 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 	
 }
-
-{'commands': ['Insert', 'Search', 'Remove', 'ListAll', 'Management'],
- 'option': <textx:Option object at 0x1126a2668>,
- 'statments': {'interestConflict': <textx:Statment object at 0x1126a2e80>,
-               'notificationsAceptanceRejection': <textx:Statment object at 0x1126a2e48>,
-               'notificationsDeadline': <textx:Statment object at 0x1126a2da0>,
-               'notificationsPaperAssignemnt': <textx:Statment object at 0x1126a2e10>}}
