@@ -582,6 +582,16 @@ public class RiseEventsFacade {
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
+	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
+		return activityuserList.getParticipantsPerActivity(idActivity);
+	}
+	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
+		return activityList.getListOfAuthorsPerActivity(idActivity);
+	}
+	
+	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
+		activity.listOfAuthorsPerActivity(authorsPerActivity);
+	}
 	
 public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
 	return authorList.search(idAuthor);

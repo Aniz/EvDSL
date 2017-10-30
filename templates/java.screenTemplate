@@ -211,11 +211,11 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 	
 	{% if data.option.categories|length > 0 %}
 	private void carregarComboBoxStatus(){
-		Type{{data.option.entity}}[] status = Type{{data.option.entity}}.values();
-		List<String> status{{data.option.entity|lower}}s = new ArrayList<String>();
-		for(int i=0; i<status.length; i++){
-			status{{data.option.entity|lower}}s.add(i, status[i].name());
-			type{{data.option.entity}}ComboBox.addItem(status[i].name());
+		Type{{data.option.entity}}[] type = Type{{data.option.entity}}.values();
+		List<String> type{{data.option.entity|lower}}s = new ArrayList<String>();
+		for(int i=0; i<type.length; i++){
+			type{{data.option.entity|lower}}s.add(i, type[i].name());
+			type{{data.option.entity}}ComboBox.addItem(type[i].name());
 		}
 	}
 	{% endif %}
@@ -269,13 +269,13 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			
 			Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
 			{% if data.option.categories|length > 0 %}	
-			Type{{data.option.entity}} status = Type{{data.option.entity}}.valueOf(type{{data.option.entity}}ComboBox.getSelectedItem().toString());
+			Type{{data.option.entity}} type = Type{{data.option.entity}}.valueOf(type{{data.option.entity}}ComboBox.getSelectedItem().toString());
 			{% endif %}
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
 			
 			//int resultado = 0;
-			if ({{data.option.entity|lower}}Id.equals("") || status.equals("") || date.equals("")
+			if ({{data.option.entity|lower}}Id.equals("") || type.equals("") || date.equals("")
 					|| description.equals("") ) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Não pode haver campo vazio.", "Erro",
@@ -287,7 +287,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 					{{data.option.entity|lower}} = new {{data.option.entity}}();
 					{{data.option.entity|lower}}.setId{{data.option.entity}}({{data.option.entity|lower}}Id);
 					{% if data.option.categories|length > 0 %}	
-					{{data.option.entity|lower}}.setType{{data.option.entity}}(status);
+					{{data.option.entity|lower}}.setType{{data.option.entity}}(type);
 					{% endif %}
 										
 					//Atualizar JTable
@@ -378,11 +378,11 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 
 				
 				Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
-				Status{{data.option.entity}} status = Status{{data.option.entity}}.valueOf(type{{data.option.entity}}ComboBox.getSelectedItem().toString());
+				Type{{data.option.entity}} type = Type{{data.option.entity}}.valueOf(type{{data.option.entity}}ComboBox.getSelectedItem().toString());
 				String date = textFieldDate.getText();
 				String description  = textFieldDescription.getText();
 				
-				if ({{data.option.entity|lower}}Id.equals("") || status.equals("") || date.equals("")
+				if ({{data.option.entity|lower}}Id.equals("") || type.equals("") || date.equals("")
 						|| description.equals("") ) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Não pode haver campo vazio.", "Erro",

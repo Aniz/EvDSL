@@ -208,11 +208,11 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 	}
 	
 	private void carregarComboBoxStatus(){
-		TypeNewOption[] status = TypeNewOption.values();
-		List<String> statusnewoptions = new ArrayList<String>();
-		for(int i=0; i<status.length; i++){
-			statusnewoptions.add(i, status[i].name());
-			typeNewOptionComboBox.addItem(status[i].name());
+		TypeNewOption[] type = TypeNewOption.values();
+		List<String> typenewoptions = new ArrayList<String>();
+		for(int i=0; i<type.length; i++){
+			typenewoptions.add(i, type[i].name());
+			typeNewOptionComboBox.addItem(type[i].name());
 		}
 	}
 	
@@ -265,12 +265,12 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 			
 			Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
 	
-			TypeNewOption status = TypeNewOption.valueOf(typeNewOptionComboBox.getSelectedItem().toString());
+			TypeNewOption type = TypeNewOption.valueOf(typeNewOptionComboBox.getSelectedItem().toString());
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
 			
 			//int resultado = 0;
-			if (newoptionId.equals("") || status.equals("") || date.equals("")
+			if (newoptionId.equals("") || type.equals("") || date.equals("")
 					|| description.equals("") ) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						"Não pode haver campo vazio.", "Erro",
@@ -282,7 +282,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 					newoption = new NewOption();
 					newoption.setIdNewOption(newoptionId);
 	
-					newoption.setTypeNewOption(status);
+					newoption.setTypeNewOption(type);
 										
 					//Atualizar JTable
 					NewOptionTableModel model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
@@ -372,11 +372,11 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 
 				
 				Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
-				StatusNewOption status = StatusNewOption.valueOf(typeNewOptionComboBox.getSelectedItem().toString());
+				TypeNewOption type = TypeNewOption.valueOf(typeNewOptionComboBox.getSelectedItem().toString());
 				String date = textFieldDate.getText();
 				String description  = textFieldDescription.getText();
 				
-				if (newoptionId.equals("") || status.equals("") || date.equals("")
+				if (newoptionId.equals("") || type.equals("") || date.equals("")
 						|| description.equals("") ) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							"Não pode haver campo vazio.", "Erro",

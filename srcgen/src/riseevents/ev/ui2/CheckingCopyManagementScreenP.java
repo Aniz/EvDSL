@@ -263,11 +263,11 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 //	}
 	
 	private void carregarComboBoxTypeCheckingCopy(){
-		TypeCheckingCopy[] checkingcopyList = TypeCheckingCopy.values();
-		List<String> checkingcopyList = new ArrayList<String>();
-		for(int i=0; i<checkingcopyList.length; i++){
-			checkingcopyList.add(i, checkingcopyList[i].name());
-			comboBoxTypeCheckingCopy.addItem(checkingcopyList[i].name());
+		TypeCheckingCopy[] types = TypeCheckingCopy.values();
+		List<String> typescheckingcopys = new ArrayList<String>();
+		for(int i=0; i<types.length; i++){
+			typescheckingcopys.add(i, types[i].name());
+			typeComboBox.addItem(types[i].name());
 		}
 		
 	}
@@ -337,7 +337,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopy.setIdRegistration(registrationId);
 						checkingCopy.setIdUser(userId);
 						checkingCopy.setDateOfIssue(date);
-							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(typeCheckingCopy.toString()));
+							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(typecheckingcopy.toString()));
 							
 						//Atualizar JTable
 						CheckingCopyTableModel model = new CheckingCopyTableModel(RiseEventsMainScreenP.facade.getCheckingCopyList());

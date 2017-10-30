@@ -63,12 +63,14 @@ import riseevents.ev.table.AssignmentTableModel;
 
 import riseevents.ev.table.ReviewerTableModel;
 
+import riseevents.ev.exception.UserAlreadyInsertedException;
 import riseevents.ev.exception.UserNotFoundException;
 import riseevents.ev.data.User;
 
 import riseevents.ev.data.Review;
 import riseevents.ev.data.Review.StatusReview;
 import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.data.SubmissionAuthor;
 import riseevents.ev.data.Author;
 import riseevents.ev.exception.AuthorAlreadyInsertedException;
 import riseevents.ev.exception.AuthorNotFoundException;

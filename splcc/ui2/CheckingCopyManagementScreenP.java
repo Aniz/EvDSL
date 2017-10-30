@@ -278,11 +278,11 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 //	}
 	
 	private void carregarComboBoxType{{data.option.entity}}(){
-		Type{{data.option.entity}}[] {{data.option.entity|lower}}List = Type{{data.option.entity}}.values();
-		List<String> {{data.option.entity|lower}}List = new ArrayList<String>();
-		for(int i=0; i<{{data.option.entity|lower}}List.length; i++){
-			{{data.option.entity|lower}}List.add(i, {{data.option.entity|lower}}List[i].name());
-			comboBoxType{{data.option.entity}}.addItem({{data.option.entity|lower}}List[i].name());
+		Type{{data.option.entity}}[] types = Type{{data.option.entity}}.values();
+		List<String> typescheckingcopys = new ArrayList<String>();
+		for(int i=0; i<types.length; i++){
+			typescheckingcopys.add(i, types[i].name());
+			typeComboBox.addItem(types[i].name());
 		}
 		
 	}
@@ -364,7 +364,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopy.set{{property.name|capitalize}}({{property.name}});	
 						{% endfor %}
 						{% if data.option.categories|length > 0 %}
-							checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity}}.toString()));
+							checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity|lower}}.toString()));
 						{% endif %}
 							
 						//Atualizar JTable

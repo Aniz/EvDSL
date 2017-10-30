@@ -49,6 +49,7 @@ import {{systemName|lower}}.ev.table.AssignmentTableModel;
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.UserNotFoundException;
 import {{systemName|lower}}.ev.data.User;
 
@@ -58,6 +59,7 @@ import {{systemName|lower}}.ev.data.Review.StatusReview;
 import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
 {% endif %}
 {% if extraData.Author is defined %}
+import {{systemName|lower}}.ev.data.SubmissionAuthor;
 import {{systemName|lower}}.ev.data.Author;
 import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
 import {{systemName|lower}}.ev.exception.AuthorNotFoundException;

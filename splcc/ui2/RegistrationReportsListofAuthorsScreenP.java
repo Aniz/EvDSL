@@ -179,7 +179,7 @@ public class RegistrationReportsListOfAuthorsScreenP extends JInternalFrame {
 				int i;
 				i = {{systemName}}MainScreenP.facade.getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				
-				authorsPerActivity = {{systemName}}MainScreenP.getFacade().getRegistrationReportsListofAuthors(i);
+				authorsPerActivity = {{systemName}}MainScreenP.getFacade().getRegistrationReportsListOfAuthors(i);
 				
 				
 				
