@@ -59,7 +59,7 @@ public class LibraryOfDSL {
 	{% endif %}
 	
 	{% if "Review" in extraData and "User" in data %}
-	{% if 'notificationsDeadline' in statments or 'notificationsPaperAssignemnt' in statments or 'notificationsAceptanceRejection' in statments %}
+	{% if 'notificationsDeadline' in statments or 'notificationsPaperAssignemnt' in statments or 'notificationsAceptanceRejection' in statments or "Assignment" in data %}
 	public static void sendNotification(User user, Review review) throws EmailException{
 
 		{% if 'notificationsDeadline' in statments %}

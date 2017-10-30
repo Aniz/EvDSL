@@ -167,6 +167,7 @@ Create table assignement(
 	idReview int(10) NOT NULL,
 	idSubmission int(10) NOT NULL,
 	date varchar(255) NOT NULL, 
+				
 	  
 PRIMARY KEY (idUser, idReview, idSubmission),
 FOREIGN KEY (idUser) REFERENCES Reviewer (idUser) ON DELETE CASCADE,

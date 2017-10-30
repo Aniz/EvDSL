@@ -72,9 +72,12 @@ public class RiseEventsMainScreenP extends JFrame {
 	private ActivityListAllScreenP screenListAllActivity;	
 	private ActivityManagementScreenP screenManagementActivity;	
 	private ActivityReportsListofAuthorsScreenP screenActivityReportsListofAuthors;	
+	private ActivityReportsFrequencyPerActivityScreenP screenActivityReportsFrequencyPerActivity;	
 	private SubmissionSearchScreenP screenSearchSubmission;	
 	private SubmissionRemoveScreenP screenRemoveSubmission;	
 	private SubmissionListAllScreenP screenListAllSubmission;	
+	private SubmissionCompleteInsertScreenP screenSubmissionCompleteInsert;	
+	private SubmissionPartialInsertScreenP screenSubmissionPartialInsert;	
 	private CheckingCopyInsertScreenP screenInsertCheckingCopy;	
 	private CheckingCopyUpdateScreenP screenUpdateCheckingCopy;	
 	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
@@ -125,14 +128,6 @@ public class RiseEventsMainScreenP extends JFrame {
 	private RegistrationManagementScreenP screenManagementRegistration;
 	private RegistrationUpdateScreenP screenUpdateRegistration;
 	private RegistrationRemoveScreenP screenRemoveRegistration;
-
-	private AssignmentInsertScreenP screenInsertAssignment;
-	private AssignmentRemoveScreenP screenRemoveAssignment;
-	private AssignmentListAllScreenP screenListAllAssignment;
-	private AssignmentSearchScreenP screenSearchAssignment;
-	private AssignmentManagementScreenP screenManagementAssignment;
-	
-
 	
 	private static JLabel labelImagem;
 	
@@ -219,9 +214,12 @@ public class RiseEventsMainScreenP extends JFrame {
 		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
 		ManagementActivityMenuAction managementActivityAction = new ManagementActivityMenuAction();	
 		ActivityReportsListofAuthorsMenuAction activityReportsListofAuthorsAction = new ActivityReportsListofAuthorsMenuAction();	
+		ActivityReportsFrequencyPerActivityMenuAction activityReportsFrequencyPerActivityAction = new ActivityReportsFrequencyPerActivityMenuAction();	
 		SearchSubmissionMenuAction searchSubmissionAction = new SearchSubmissionMenuAction();	
 		RemoveSubmissionMenuAction removeSubmissionAction = new RemoveSubmissionMenuAction();	
 		ListAllSubmissionMenuAction listallSubmissionAction = new ListAllSubmissionMenuAction();	
+		SubmissionCompleteInsertMenuAction submissionCompleteInsertAction = new SubmissionCompleteInsertMenuAction();	
+		SubmissionPartialInsertMenuAction submissionPartialInsertAction = new SubmissionPartialInsertMenuAction();	
 		InsertCheckingCopyMenuAction insertCheckingCopyAction = new InsertCheckingCopyMenuAction();	
 		UpdateCheckingCopyMenuAction updateCheckingCopyAction = new UpdateCheckingCopyMenuAction();	
 		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveCheckingCopyMenuAction();	
@@ -414,6 +412,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmActivityReportsListofAuthors = new JMenuItem("reportsListofAuthors");
 		mnActivity.add(mntmActivityReportsListofAuthors);
 		mntmActivityReportsListofAuthors.addActionListener(activityReportsListofAuthorsAction);
+		JMenuItem mntmActivityReportsFrequencyPerActivity = new JMenuItem("reportsFrequencyPerActivity");
+		mnActivity.add(mntmActivityReportsFrequencyPerActivity);
+		mntmActivityReportsFrequencyPerActivity.addActionListener(activityReportsFrequencyPerActivityAction);
 		JMenu mnSubmission = new JMenu("Submission");
 		menuBar.add(mnSubmission);
 		JMenuItem mntmSearchSubmission = new JMenuItem("Search");
@@ -425,8 +426,16 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllSubmission = new JMenuItem("ListAll");
 		mnSubmission.add(mntmListAllSubmission);
 		mntmListAllSubmission.addActionListener(listallSubmissionAction);
+		JMenuItem mntmSubmissionCompleteInsert = new JMenuItem("completeInsert");
+		mnSubmission.add(mntmSubmissionCompleteInsert);
+		mntmSubmissionCompleteInsert.addActionListener(submissionCompleteInsertAction);
+		JMenuItem mntmSubmissionPartialInsert = new JMenuItem("partialInsert");
+		mnSubmission.add(mntmSubmissionPartialInsert);
+		mntmSubmissionPartialInsert.addActionListener(submissionPartialInsertAction);
 		JMenu mnAuthor = new JMenu("Author");
 		menuBar.add(mnAuthor);
+		JMenu mnAssignment = new JMenu("Assignment");
+		menuBar.add(mnAssignment);
 		JMenu mnCheckingCopy = new JMenu("CheckingCopy");
 		menuBar.add(mnCheckingCopy);
 		JMenuItem mntmInsertCheckingCopy = new JMenuItem("Insert");
@@ -1285,6 +1294,22 @@ public class RiseEventsMainScreenP extends JFrame {
 					}
 				}  
 			}
+			private class ActivityReportsFrequencyPerActivityMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenActivityReportsFrequencyPerActivity = ActivityReportsFrequencyPerActivityScreenP.getInstanceActivityReportsFrequencyPerActivityScreenP();
+				if(screenActivityReportsFrequencyPerActivity.getParent() == null){
+					desktopPane.add(screenActivityReportsFrequencyPerActivity);
+				}
+				screenActivityReportsFrequencyPerActivity.setVisible(true);
+				desktopPane.moveToFront(screenActivityReportsFrequencyPerActivity);
+				try {
+					screenActivityReportsFrequencyPerActivity.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
 	private class SearchSubmissionMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -1342,6 +1367,38 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
+			private class SubmissionCompleteInsertMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenSubmissionCompleteInsert = SubmissionCompleteInsertScreenP.getInstanceSubmissionCompleteInsertScreenP();
+				if(screenSubmissionCompleteInsert.getParent() == null){
+					desktopPane.add(screenSubmissionCompleteInsert);
+				}
+				screenSubmissionCompleteInsert.setVisible(true);
+				desktopPane.moveToFront(screenSubmissionCompleteInsert);
+				try {
+					screenSubmissionCompleteInsert.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
+			private class SubmissionPartialInsertMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenSubmissionPartialInsert = SubmissionPartialInsertScreenP.getInstanceSubmissionPartialInsertScreenP();
+				if(screenSubmissionPartialInsert.getParent() == null){
+					desktopPane.add(screenSubmissionPartialInsert);
+				}
+				screenSubmissionPartialInsert.setVisible(true);
+				desktopPane.moveToFront(screenSubmissionPartialInsert);
+				try {
+					screenSubmissionPartialInsert.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}
 	private class InsertCheckingCopyMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {

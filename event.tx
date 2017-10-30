@@ -44,7 +44,7 @@ Category:
 ;
 
 Entity:
-  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy' | 'Receipt'
+  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy' | 'Receipt' | 'Review'
 ;
 
 Property:
@@ -65,8 +65,21 @@ CommandType:
 ;
 
 ActionType:
-  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyPerActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'program' | 'importantDates' | 'reportsFrequencyPerEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
-   | 'notificationsDeadline' | 'insertAttachment' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection' | 'interestConflict'
+   'sendBugTrackEmail' | 
+   'insertAttachment' | 
+   'completeInsert' |
+   'partialInsert' |
+   'interestConflict' |
+   'assigmentChairIndication' | 
+   'assigmentAutomtic' | 
+   'insertAuthors' |
+  'reportsListofAuthors' |
+  'reportsFrequencyPerActivity' |
+  'checkingCopyAtestado' | 'checkingCopyCertificado' | 
+  'program' | 'importantDates' | 'reportsFrequencyPerEvent'| 
+  'generateCarne' | 'generateBoleto' | 'askCardInfo' | 
+  'notificationsDeadline' | 
+  'notificationsPaperAssignemnt' | 'notificationsAceptanceRejection' 
 ;
 
 // Special rule for comments. Comments start with //

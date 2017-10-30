@@ -43,6 +43,8 @@ add Submission
 
 add Author
 
+add Assignment
+
 add CheckingCopy
 show Insert Update Remove Search ListAll Management
 	types Atestado,Certificado.
@@ -54,9 +56,8 @@ types Atestado,Certificado.
 add Receipt
 show Management
 
-if Payment.Credito -> askCardInfo 
-if Payment.Debito -> generateCarne
-if Payment.Avista -> generateBoleto
+def Activity -> reportsListofAuthors
+def Activity -> reportsFrequencyPerActivity
 
 if CheckingCopy.Atestado -> checkingCopyAtestado
 if CheckingCopy.Certificado -> checkingCopyCertificado 
@@ -66,9 +67,23 @@ def Event -> program
 def Event -> importantDates
 def Event -> reportsFrequencyPerEvent 
 
+if Payment.Credito -> askCardInfo 
+if Payment.Debito -> generateCarne
+if Payment.Avista -> generateBoleto
+
+if Assignment -> notificationsDeadline
+if Assignment -> notificationsPaperAssignemnt
+if Assignment -> notificationsAceptanceRejection
+
+//def Assignment -> assigmentChairIndication
+//def Assignment -> assigmentAutomtic
+
+if Assignment -> interestConflict
+
 if Submission.Completa -> insertAttachment
 
 def User -> sendBugTrackEmail
 
-def Activity -> reportsListofAuthors
-
+//def Submission -> insertAuthors
+def Submission -> completeInsert
+def Submission -> partialInsert

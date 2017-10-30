@@ -94,9 +94,9 @@ def main(debug=False):
     dependenceDict = {}
     allStatmentsDict = {}
 
-    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Submission","Review","Author","Receipt","CheckingCopy"]
+    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Submission","Review","Author","Receipt","CheckingCopy","Assignment"]
     avaliableFunctions = ["Insert","Remove","Update","Search","ListAll","Search","Management"]
-    avaliableDependencesArray = ["Review","ActivityUser","ActivitySpeaker","ActivityOrganizer","SubmissionAuthor","SubmissionUser","Registration","Assignment"]
+    avaliableDependencesArray = ["Review","ActivityUser","ActivitySpeaker","ActivityOrganizer","SubmissionAuthor","SubmissionUser","Registration"]
     chosenFunctions = []
     
     #Get options from model
@@ -133,7 +133,7 @@ def main(debug=False):
     dependencesDict["SubmissionAuthor"] = "Submission","Author"
     dependencesDict["SubmissionUser"] = "Submission","User"
     dependencesDict["Registration"] = "User","Event"
-    dependencesDict["Assignment"] = "User","Reviewer","Submission","Author"
+    # dependencesDict["Assignment"] = "User","Reviewer","Submission","Author"
     
     dependenceDict = {} 
     for depK,depV in dependencesDict.items():
@@ -191,7 +191,7 @@ def main(debug=False):
                     #generateFile(templateFolder,tableFolder,'java.tableTemplate',key+"TableModel",jinja_env,value,componentExtraData,systemName)
                     copyCodeFile(tableCodeFolder,tableFolder,key+"TableModel",jinja_env,value,componentExtraData,systemName)
                 
-                if key not in ["Author","Receipt","CheckingCopy"]:
+                if key not in ["Author","Receipt","CheckingCopy","Assignment"]:
                     #generateFile(templateFolder,tableFolder,'java.tableRenderTemplate',key+"TableRender",jinja_env,value,componentExtraData,systemName)
                     copyCodeFile(tableCodeFolder,tableFolder,key+"TableRender",jinja_env,value,componentExtraData,systemName)
                 

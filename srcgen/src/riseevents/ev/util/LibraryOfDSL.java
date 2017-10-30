@@ -54,6 +54,12 @@ import riseevents.ev.exception.AuthorAlreadyInsertedException;
 import riseevents.ev.exception.AuthorNotFoundException;
 import riseevents.ev.repository.AuthorRepository;
 import riseevents.ev.repository.AuthorRepositoryBDR;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.business.AssignmentControl;
+import riseevents.ev.exception.AssignmentAlreadyInsertedException;
+import riseevents.ev.exception.AssignmentNotFoundException;
+import riseevents.ev.repository.AssignmentRepository;
+import riseevents.ev.repository.AssignmentRepositoryBDR;
 import riseevents.ev.data.CheckingCopy;
 import riseevents.ev.business.CheckingCopyControl;
 import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
@@ -114,12 +120,6 @@ import riseevents.ev.exception.RegistrationAlreadyInsertedException;
 import riseevents.ev.exception.RegistrationNotFoundException;
 import riseevents.ev.repository.RegistrationRepository;
 import riseevents.ev.repository.RegistrationRepositoryBDR;
-import riseevents.ev.data.Assignment;
-import riseevents.ev.business.AssignmentControl;
-import riseevents.ev.exception.AssignmentAlreadyInsertedException;
-import riseevents.ev.exception.AssignmentNotFoundException;
-import riseevents.ev.repository.AssignmentRepository;
-import riseevents.ev.repository.AssignmentRepositoryBDR;
 
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
@@ -140,6 +140,81 @@ public class LibraryOfDSL {
 	}	
 
 	
+	public static void sendNotification(User user, Review review) throws EmailException{
+
+		// esta classe eh chamada logo apos o insert do assignment
+		String assunto = "Prazo de entrega de Rivisao";
+		String mensagem = "O prazo de entrega é ate 15 dias antes da data oficial de Inicio do evento. Seu ID para cadastrar a revisao é:" + review.getIdReview() + " Favor usar este ID!" ;
+		String emailDestino = user.getEmail();
+	
+		String assunto2 = "Resultado Revisao Papper!";
+		String mensagem2 = "Seu Papper esta sendo revisado. O resultado sera encaminhado via email.";
+		String emailDestino2 = user.getEmail();
+		
+		String assunto3 = "Pappers para revisao";
+		String mensagem3 = "Seguem em anexos pappers para revisao!";
+		String emailDestino3 = user.getEmail();
+	
+		
+		SimpleEmail email = new SimpleEmail(); 
+		email.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
+		
+		email.addTo(emailDestino, user.getNameUser()); //destinat�rio 
+		email.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
+		email.setSubject(assunto); // assunto do e-mail 
+		email.setMsg(mensagem); //conteudo do e-mail
+		
+		email.setAuthentication("rise.gmail.com", "password");
+		email.setSslSmtpPort( "465" ); //578 ou 465
+		email.setSSLOnConnect(true);
+		email.setStartTLSEnabled(true);
+		email.setStartTLSRequired(true);
+		
+		
+		email.send(); //envia o e-mail
+
+		// AcceptReject email
+		SimpleEmail email2 = new SimpleEmail(); 
+		email2.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
+		
+		email2.addTo(emailDestino2, user.getNameUser()); //destinat�rio 
+		email2.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
+		email2.setSubject(assunto2); // assunto do e-mail 
+		email2.setMsg(mensagem2); //conteudo do e-mail
+		
+		email2.setAuthentication("rise.gmail.com", "password");
+		email2.setSslSmtpPort( "465" ); //578 ou 465
+		email2.setSSLOnConnect(true);
+		email2.setStartTLSEnabled(true);
+		email2.setStartTLSRequired(true);
+		
+		email2.send(); //envia o e-mail
+
+		// assignment email
+		HtmlEmail email3 = new HtmlEmail(); 
+		email3.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
+		
+		email3.addTo(emailDestino3, user.getNameUser()); //destinat�rio 
+		email3.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
+		email3.setSubject(assunto3); // assunto do e-mail 
+		
+		//ESTOU ENVIADO UMA IMAGEM EM ANEXO POIS AINDA NAO CONSEGUI PEGAR DO BANCO E INSERIR AQUI
+		//O ID DO SIBMISSION PARA PEGAR PDF DO BANCO ESTA NO AUTHOR PASSADO AQUI
+		EmailAttachment anexo = new EmailAttachment();
+	    anexo.setPath("/images/riseLabs.png");
+	    anexo.setDisposition(EmailAttachment.ATTACHMENT);
+	    email3.attach(anexo); 
+	    
+		email3.setMsg(mensagem3); //conteudo do e-mail
+		
+		email3.setAuthentication("rise.gmail.com", "password");
+		email3.setSslSmtpPort( "465" ); //578 ou 465
+		email3.setSSLOnConnect(true);
+		email3.setStartTLSEnabled(true);
+		email3.setStartTLSRequired(true);
+	
+		email3.send(); //envia o e-mail
+	}
 	//#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
 	public static void sendRoundNotification(Review review, User user) throws EmailException{
 		
