@@ -371,13 +371,13 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 				
 				NewOption newoption = null;
 				
-				String typeNewoption = typeNewOptionComboBox.getSelectedItem().toString();
+				String typeNewOption = typeNewOptionComboBox.getSelectedItem().toString();
 				
 					newoption.setTypeNewOption(TypeNewOption.valueOf(typeNewOption));
 					
 					try {
 						
-						RiseEventsMainScreenP.facade.updateNewOption(NewOption);
+						RiseEventsMainScreenP.facade.updateNewOption(newoption);
 						NewOptionTableModel model;
 						model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
 						table.setModel(model);
@@ -394,16 +394,14 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 								e1.toString(), "Erro",
 								JOptionPane.INFORMATION_MESSAGE);
 						e1.printStackTrace();
-					}
-					
-				}
-				
+					}		
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
 						e1.toString(), "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			}
+		}
 	}
 	
 	private class SelectButtonAction  implements ActionListener{ 
