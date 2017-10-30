@@ -371,9 +371,9 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 				
 				NewOption newoption = null;
 				
-				String typeNewoption = comboBoxTypeNewOption.getSelectedItem().toString();
+				String typeNewoption = typeNewOptionComboBox.getSelectedItem().toString();
 				
-					NewOption.setTypeNewOption(TypeNewOption.valueOf(typeNewOption));
+					newoption.setTypeNewOption(TypeNewOption.valueOf(typeNewOption));
 					
 					try {
 						
