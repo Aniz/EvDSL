@@ -400,6 +400,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						author = RiseEventsMainScreenP.facade.searchAuthor(sa.getIdAuthor());
 					}
 				}
+				User user = new User();
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
 							

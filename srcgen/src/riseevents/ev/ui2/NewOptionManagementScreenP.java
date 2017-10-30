@@ -360,38 +360,24 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 		}
 	}
 	
-	private class UpdateButtonAction  implements ActionListener{ 
+		private class UpdateButtonAction  implements ActionListener{ 
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-		int rowIndex = table.getSelectedRow();
-			
-			
+			int rowIndex = table.getSelectedRow();
 			try {
 
 				
-				Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
-				TypeNewOption type = TypeNewOption.valueOf(typeNewOptionComboBox.getSelectedItem().toString());
-				String date = textFieldDate.getText();
-				String description  = textFieldDescription.getText();
+				NewOption newoption = null;
 				
-				if (newoptionId.equals("") || type.equals("") || date.equals("")
-						|| description.equals("") ) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"Não pode haver campo vazio.", "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					return;
-
-				} else {
+				String typeNewoption = comboBoxTypeNewOption.getSelectedItem().toString();
+				
+					NewOption.setTypeNewOption(TypeNewOption.valueOf(typeNewOption));
 					
-					NewOption newoptionNew = new NewOption();
-					newoptionNew.setIdNewOption(newoptionId);
-	
-					typeNewOptionComboBox.setSelectedItem(newoptionOld.getTypeNewOption());
-				
 					try {
-						RiseEventsMainScreenP.facade.updateNewOption(newoptionNew);
+						
+						RiseEventsMainScreenP.facade.updateNewOption(NewOption);
 						NewOptionTableModel model;
 						model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
 						table.setModel(model);
@@ -399,8 +385,8 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 						JOptionPane
 						.showMessageDialog(
 								getContentPane(),
-								"Revisao que está tentando alterar não existe!",
-								"Revisao Inexistente",
+								"NewOption que está tentando alterar não existe!",
+								"NewOption Inexistente",
 								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (NewOptionAlreadyInsertedException e1) {
@@ -418,9 +404,6 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			}
-			
-			
-		}
 	}
 	
 	private class SelectButtonAction  implements ActionListener{ 

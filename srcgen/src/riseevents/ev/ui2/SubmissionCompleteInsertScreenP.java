@@ -81,13 +81,13 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 	//retirada de login
 	private JComboBox comboBoxUser;
 	
-	private static SubmissionCompleteInsertScreenP instanceSubmissionInsertScreenP;
+	private static SubmissionCompleteInsertScreenP instanceSubmissionCompleteInsertScreenP;
 	
-	 public static SubmissionCompleteInsertScreenP getInstanceSubmissionInsertScreenP() {
-		 if (instanceSubmissionInsertScreenP == null) {
-			 SubmissionCompleteInsertScreenP.instanceSubmissionInsertScreenP = new SubmissionCompleteInsertScreenP();
+	 public static SubmissionCompleteInsertScreenP getInstanceSubmissionCompleteInsertScreenP() {
+		 if (instanceSubmissionCompleteInsertScreenP == null) {
+			 SubmissionCompleteInsertScreenP.instanceSubmissionCompleteInsertScreenP = new SubmissionCompleteInsertScreenP();
 		 }
-		 return SubmissionCompleteInsertScreenP.instanceSubmissionInsertScreenP;
+		 return SubmissionCompleteInsertScreenP.instanceSubmissionCompleteInsertScreenP;
 	 }
 	 
 	public static void main(String[] args) {
@@ -592,7 +592,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			SubmissionCompleteInsertScreenP.instanceSubmissionInsertScreenP = null;
+			SubmissionCompleteInsertScreenP.instanceSubmissionCompleteInsertScreenP = null;
 		}
 	}
 }

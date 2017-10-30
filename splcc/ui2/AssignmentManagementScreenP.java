@@ -408,9 +408,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					}
 				}
 				{% endif %}
-				{% if "User" in extraData %}
 				User user = new User();
-				{% endif %}
 				{% if "Submission" in extraData %}
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUserList();

@@ -366,39 +366,34 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 		}
 	}
 	
-	private class UpdateButtonAction  implements ActionListener{ 
+		private class UpdateButtonAction  implements ActionListener{ 
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-		int rowIndex = table.getSelectedRow();
-			
-			
+			int rowIndex = table.getSelectedRow();
 			try {
 
 				
-				Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
-				Type{{data.option.entity}} type = Type{{data.option.entity}}.valueOf(type{{data.option.entity}}ComboBox.getSelectedItem().toString());
-				String date = textFieldDate.getText();
-				String description  = textFieldDescription.getText();
+				{{data.option.entity}} {{data.option.entity|lower}} = null;
 				
-				if ({{data.option.entity|lower}}Id.equals("") || type.equals("") || date.equals("")
-						|| description.equals("") ) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"Não pode haver campo vazio.", "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					return;
-
-				} else {
-					
-					{{data.option.entity}} {{data.option.entity|lower}}New = new {{data.option.entity}}();
-					{{data.option.entity|lower}}New.setId{{data.option.entity}}({{data.option.entity|lower}}Id);
-					{% if data.option.categories|length > 0 %}	
-					type{{data.option.entity}}ComboBox.setSelectedItem({{data.option.entity|lower}}Old.getType{{data.option.entity}}());
+				{% for property in data.option.properties %}
+				{{property.type|javatype}} {{property.name}} = {{property.type|capitalize}}.valueOf(textField{{property.name|capitalize}}.getText());	
+				{% endfor %}
+				{% if data.option.categories|length > 0 %}
+				String type{{data.option.entity|capitalize}} = comboBoxType{{data.option.entity}}.getSelectedItem().toString();
+				{% endif %}
+				
+					{% for property in data.option.properties %}
+					{{data.option.entity|lower}}.set{{property.name|capitalize}}({{property.name}});	
+					{% endfor %}
+					{% if data.option.categories|length > 0 %}
+					{{data.option.entity}}.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity}}));
 					{% endif %}
-				
+					
 					try {
-						{{systemName}}MainScreenP.facade.update{{data.option.entity}}({{data.option.entity|lower}}New);
+						
+						{{systemName}}MainScreenP.facade.update{{data.option.entity}}({{data.option.entity}});
 						{{data.option.entity}}TableModel model;
 						model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}List());
 						table.setModel(model);
@@ -406,8 +401,8 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 						JOptionPane
 						.showMessageDialog(
 								getContentPane(),
-								"Revisao que está tentando alterar não existe!",
-								"Revisao Inexistente",
+								"{{data.option.entity}} que está tentando alterar não existe!",
+								"{{data.option.entity}} Inexistente",
 								JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch ({{data.option.entity}}AlreadyInsertedException e1) {
@@ -425,9 +420,6 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			}
-			
-			
-		}
 	}
 	
 	private class SelectButtonAction  implements ActionListener{ 
