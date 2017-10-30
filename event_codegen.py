@@ -160,6 +160,11 @@ def main(debug=False):
         if key in avaliableOptions:
             if key == "Assignment":
                 componentExtraData = {}
+                if componentDict.get("Author"):
+                        componentExtraData["Author"] = True
+                
+                componentExtraData["SubmissionUser"] = True
+                    
                 for n in ["Submission","Reviewer"]:
                     if componentDict.get(n):
                         componentExtraData[n] = True

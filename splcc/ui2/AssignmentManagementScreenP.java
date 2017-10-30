@@ -49,10 +49,25 @@ import {{systemName|lower}}.ev.table.AssignmentTableModel;
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
-{% if extraData.Review is defined %}
-import {{systemName|lower}}.ev.data.Review.StatusReview;
-{% endif %}
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.User;
 
+{% if extraData.Submission is defined and extraData.Reviewer is defined %}
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.data.Review.StatusReview;
+import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
+{% endif %}
+{% if extraData.Author is defined %}
+import {{systemName|lower}}.ev.data.Author;
+import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
+{% endif %}
+{% if extraData.Submission is defined %}
+import {{systemName|lower}}.ev.data.Submission;
+{% endif %}
+{% if extraData.Reviewer is defined %}
+import {{systemName|lower}}.ev.data.Reviewer;
+{% endif %}
 import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.util.LibraryOfDSL;
 

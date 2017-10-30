@@ -28,6 +28,18 @@ import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.mail.EmailException;
 
+import riseevents.ev.data.Author;
+import riseevents.ev.business.AuthorControl;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
+import riseevents.ev.repository.AuthorRepository;
+import riseevents.ev.repository.AuthorRepositoryBDR;
+import riseevents.ev.data.SubmissionUser;
+import riseevents.ev.business.SubmissionUserControl;
+import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionUserNotFoundException;
+import riseevents.ev.repository.SubmissionUserRepository;
+import riseevents.ev.repository.SubmissionUserRepositoryBDR;
 import riseevents.ev.data.Submission;
 import riseevents.ev.business.SubmissionControl;
 import riseevents.ev.exception.SubmissionAlreadyInsertedException;
@@ -51,7 +63,17 @@ import riseevents.ev.table.AssignmentTableModel;
 
 import riseevents.ev.table.ReviewerTableModel;
 
+import riseevents.ev.exception.UserNotFoundException;
+import riseevents.ev.data.User;
 
+import riseevents.ev.data.Review;
+import riseevents.ev.data.Review.StatusReview;
+import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.data.Author;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
+import riseevents.ev.data.Submission;
+import riseevents.ev.data.Reviewer;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.LibraryOfDSL;
 
@@ -367,6 +389,15 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				RiseEventsMainScreenP.facade.insertAssignment(assignment2);
 				RiseEventsMainScreenP.facade.insertAssignment(assignment3);
 				
+				Author author = new Author();
+				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
+				submissionAuthor = RiseEventsMainScreenP.facade.getSubmissionAuthorList();
+							
+				for(SubmissionAuthor sa : submissionAuthor){
+					if(sa.getIdSubmission() == idSubmission){
+						author = RiseEventsMainScreenP.facade.searchAuthor(sa.getIdAuthor());
+					}
+				}
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
 							
@@ -430,6 +461,13 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			} 
+			catch (AuthorNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (AuthorAlreadyInsertedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 					
 			catch (UserNotFoundException e1) {
 				// TODO Auto-generated catch block

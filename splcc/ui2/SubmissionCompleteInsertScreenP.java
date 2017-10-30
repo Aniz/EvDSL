@@ -455,7 +455,7 @@ public class SubmissionCompleteInsertScreenP extends JInternalFrame{
 						submission.setIdActivity({{systemName}}MainScreenP.facade.getActivityIdByName(nameActivity));
 						submission.setKeywords(keywords);
 						submission.setTitle(title);
-						submission.setType(TypeSubmission.valueOf(type));
+						submission.setTypeSubmission(TypeSubmission.valueOf(type));
 						
 						//Inserir na tabela de submissao
 						//estamos inserindo com o update pq usamos o insert para colocar o pdf no banco, attahcment com outros campos vazios,

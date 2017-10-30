@@ -25,6 +25,18 @@ import javax.swing.JTextField;
 
 import org.apache.commons.mail.EmailException;
 
+import riseevents.ev.data.Author;
+import riseevents.ev.business.AuthorControl;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
+import riseevents.ev.repository.AuthorRepository;
+import riseevents.ev.repository.AuthorRepositoryBDR;
+import riseevents.ev.data.SubmissionUser;
+import riseevents.ev.business.SubmissionUserControl;
+import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionUserNotFoundException;
+import riseevents.ev.repository.SubmissionUserRepository;
+import riseevents.ev.repository.SubmissionUserRepositoryBDR;
 import riseevents.ev.data.Submission;
 import riseevents.ev.business.SubmissionControl;
 import riseevents.ev.exception.SubmissionAlreadyInsertedException;
@@ -40,8 +52,15 @@ import riseevents.ev.repository.ReviewerRepositoryBDR;
 
 import riseevents.ev.table.ReviewerTableModel;
 
+import riseevents.ev.exception.UserNotFoundException;
+import riseevents.ev.data.User;
+
 import riseevents.ev.data.Review;
 import riseevents.ev.data.Review.StatusReview;
+import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.data.Author;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
 import riseevents.ev.data.Submission;
 import riseevents.ev.data.Reviewer;
 
@@ -276,6 +295,23 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				RiseEventsMainScreenP.facade.insertAssignment(assignment2);
 				RiseEventsMainScreenP.facade.insertAssignment(assignment3);
 				
+				Author author = new Author();
+				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
+				submissionAuthor = RiseEventsMainScreenP.facade.getSubmissionAuthorList();
+							
+				for(SubmissionAuthor sa : submissionAuthor){
+					if(sa.getIdSubmission() == idSubmission){
+						author = RiseEventsMainScreenP.facade.searchAuthor(sa.getIdAuthor());
+					}
+				}
+				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
+				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
+							
+				for(SubmissionUser su : submissionUser){
+					if(su.getIdSubmission() == idSubmission){
+						user = RiseEventsMainScreenP.facade.searchUser(su.getIdUser());
+					}
+				}
 				
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;

@@ -73,7 +73,7 @@ ActionType:
    'assigmentChairIndication' | 
    'assigmentAutomtic' | 
    'insertAuthors' |
-  'reportsListofAuthors' |
+  'reportsListOfAuthors' |
   'reportsFrequencyPerActivity' |
   'checkingCopyAtestado' | 'checkingCopyCertificado' | 
   'program' | 'importantDates' | 'reportsFrequencyPerEvent'| 

@@ -58,6 +58,9 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	{% for property in data.option.properties %}
 	private JTextField text{{property.name|capitalize}};
 	{% endfor %}
+	{% if data.option.categories|length > 0 %}
+	private JComboBox comboBoxType{{data.option.entity}};
+	{% endif %}
 	
 	 public static CheckingCopyManagementScreenP getInstanceCheckingCopyManagementScreenP() {
 		 if (instanceCheckingCopyManagementScreenP == null) {
@@ -361,7 +364,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopy.set{{property.name|capitalize}}({{property.name}});	
 						{% endfor %}
 						{% if data.option.categories|length > 0 %}
-							checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf({{data.option.entity|capitalize}}));
+							checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity}}.toString()));
 						{% endif %}
 							
 						//Atualizar JTable
@@ -453,8 +456,9 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 					{% for property in data.option.properties %}
 					{{property.type|capitalize}} {{property.name}} = {% if property.type == 'int' %}Integer.parseInt({% endif %}textField{{property.name}}.getText(){% if property.type == 'integer' %}).parseInt({% endif %};
 					{% endfor %}
+
 					{% if data.option.categories|length > 0 %}
-					Type{{data.option.entity}} type{{data.option.entity}} = Type{{data.option.entity}}.valueOf(comboBoxType{{data.option.entity}}.getSelectedItem().toString());
+					String type{{data.option.entity}} = comboBoxType{{data.option.entity}}.getSelectedItem().toString();
 					{% endif %}
 			
 					// ISSO DEVERIA PEGAR O LABEL DE LBLUSERID OU LBLUSERLOGADO? EU ACHO Q O LOGADO
@@ -462,7 +466,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 					Integer userId = Integer.parseInt(lblIdUserLogado.getText());
 					String date = textFieldDate.getText();
 					
-					if (registrationId.equals("") || type.equals("") || userId.equals("")
+					if (registrationId.equals("") || userId.equals("")
 							|| date.equals("") ) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Não pode haver campo vazio.", "Erro",
@@ -478,7 +482,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopyNew.set{{property.name|capitalize}}({{property.name}});
 						{% endfor %}
 						{% if data.option.categories|length > 0 %}
-							checkingCopy.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf({{data.option.entity|capitalize}}));
+							checkingCopyNew.setType{{data.option.entity}}(Type{{data.option.entity}}.valueOf(type{{data.option.entity}}));
 						{% endif %}
 						
 						try {
@@ -528,7 +532,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 				//lblUserId.setText(String.valueOf(checkingCopyOld.getIdUser()));
 				lblIdUserLogado.setText(String.valueOf(checkingCopyOld.getIdUser()));
 				comboBoxRegistrationId.setSelectedItem(checkingCopyOld.getIdRegistration());
-				typeComboBox.setSelectedItem(checkingCopyOld.getCheckingCopyType());
+				typeComboBox.setSelectedItem(checkingCopyOld.getTypeCheckingCopy());
 				textFieldDate.setText(checkingCopyOld.getDateOfIssue());
 				
 			} catch (RepositoryException ex) {

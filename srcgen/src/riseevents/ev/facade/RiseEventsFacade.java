@@ -562,11 +562,6 @@ public class RiseEventsFacade {
 	public int getUserIdByName(String entityName) throws RepositoryException{
 		return userList.getUserIdByName(entityName);
 	}
-
-	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
-		return userList.sendBug(nome, assunto, mensagem);
-	}
-	
 	
 	public int getActivityIdByName(String entityName) throws RepositoryException{
 		return activityList.getActivityIdByName(entityName);
@@ -586,16 +581,6 @@ public class RiseEventsFacade {
 	
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
-	}
-	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
-		return activityuserList.getParticipantsPerActivity(idActivity);
-	}
-	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
-		return activityList.getListOfAuthorsPerActivity(idActivity);
-	}
-	
-	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
-		activity.listOfAuthorsPerActivity(authorsPerActivity);
 	}
 	
 public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
@@ -636,6 +621,12 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
+	public void insertSubmission(Submission submission) throws RepositoryException, SubmissionAlreadyInsertedException{
+		this.submissionList.insert(submission);
+	}
+	public void updateSubmission(Submission submission) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
+		submissionList.update(submission);
+	}	
 	public void removeReceipt(int idReceipt) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
 		receiptList.remove(idReceipt);  
 	}
@@ -645,7 +636,6 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		assignmentList.remove(assignment);  
 	}
-	if 'Search' in data.Assignment.commands %}
 	public Assignment searchAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		return assignmentList.search(assignment);
 	}

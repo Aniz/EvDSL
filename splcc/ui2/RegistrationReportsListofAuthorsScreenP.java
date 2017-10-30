@@ -27,16 +27,16 @@ import {{systemName|lower}}.ev.exception.RepositoryException;
 
 import com.lowagie.text.DocumentException;
 
-public class RegistrationReportsListofAuthorsScreenP extends JInternalFrame {
+public class RegistrationReportsListOfAuthorsScreenP extends JInternalFrame {
 	
 	
-	private static RegistrationReportsListofAuthorsScreenP instanceRegistrationReportsListofAuthorsScreenP;
+	private static RegistrationReportsListOfAuthorsScreenP instanceRegistrationReportsListOfAuthorsScreenP;
 	
-	public static RegistrationReportsListofAuthorsScreenP getInstanceRegistrationReportsListofAuthorsScreenP() {
-		if (instanceRegistrationReportsListofAuthorsScreenP == null) {
-			RegistrationReportsListofAuthorsScreenP.instanceRegistrationReportsListofAuthorsScreenP = new RegistrationReportsListofAuthorsScreenP();
+	public static RegistrationReportsListOfAuthorsScreenP getInstanceRegistrationReportsListOfAuthorsScreenP() {
+		if (instanceRegistrationReportsListOfAuthorsScreenP == null) {
+			RegistrationReportsListOfAuthorsScreenP.instanceRegistrationReportsListOfAuthorsScreenP = new RegistrationReportsListOfAuthorsScreenP();
 		}
-		return RegistrationReportsListofAuthorsScreenP.instanceRegistrationReportsListofAuthorsScreenP;
+		return RegistrationReportsListOfAuthorsScreenP.instanceRegistrationReportsListOfAuthorsScreenP;
 	}
 	
 	JComboBox comboBoxEvent;
@@ -51,7 +51,7 @@ public class RegistrationReportsListofAuthorsScreenP extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegistrationReportsListofAuthorsScreenP frame = new RegistrationReportsListofAuthorsScreenP();
+					RegistrationReportsListOfAuthorsScreenP frame = new RegistrationReportsListOfAuthorsScreenP();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +63,7 @@ public class RegistrationReportsListofAuthorsScreenP extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistrationReportsListofAuthorsScreenP() {
+	public RegistrationReportsListOfAuthorsScreenP() {
 		setTitle("List of Authors");
 		
 		int inset = 30;
@@ -119,7 +119,7 @@ public class RegistrationReportsListofAuthorsScreenP extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dispose();
-			RegistrationReportsListofAuthorsScreenP.instanceRegistrationReportsListofAuthorsScreenP = null;
+			RegistrationReportsListOfAuthorsScreenP.instanceRegistrationReportsListOfAuthorsScreenP = null;
 		}
 	}
 	

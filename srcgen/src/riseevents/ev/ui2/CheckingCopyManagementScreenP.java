@@ -55,6 +55,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	private JLabel lblIdUserLogado;
 	private JTextField textFieldDate;
 	
+	private JComboBox comboBoxTypeCheckingCopy;
 	
 	 public static CheckingCopyManagementScreenP getInstanceCheckingCopyManagementScreenP() {
 		 if (instanceCheckingCopyManagementScreenP == null) {
@@ -336,7 +337,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopy.setIdRegistration(registrationId);
 						checkingCopy.setIdUser(userId);
 						checkingCopy.setDateOfIssue(date);
-							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(Checkingcopy));
+							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(typeCheckingCopy.toString()));
 							
 						//Atualizar JTable
 						CheckingCopyTableModel model = new CheckingCopyTableModel(RiseEventsMainScreenP.facade.getCheckingCopyList());
@@ -424,14 +425,15 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 					
 					Integer registrationId = Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString());
 					
-					TypeCheckingCopy typeCheckingCopy = TypeCheckingCopy.valueOf(comboBoxTypeCheckingCopy.getSelectedItem().toString());
+
+					String typeCheckingCopy = comboBoxTypeCheckingCopy.getSelectedItem().toString();
 			
 					// ISSO DEVERIA PEGAR O LABEL DE LBLUSERID OU LBLUSERLOGADO? EU ACHO Q O LOGADO
 					//Integer userId = Integer.parseInt(lblUserId.getText());
 					Integer userId = Integer.parseInt(lblIdUserLogado.getText());
 					String date = textFieldDate.getText();
 					
-					if (registrationId.equals("") || type.equals("") || userId.equals("")
+					if (registrationId.equals("") || userId.equals("")
 							|| date.equals("") ) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Não pode haver campo vazio.", "Erro",
@@ -443,7 +445,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopyNew.setIdRegistration(registrationId);
 						checkingCopyNew.setIdUser(userId);
 						checkingCopyNew.setDateOfIssue(date);
-							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(Checkingcopy));
+							checkingCopyNew.setTypeCheckingCopy(TypeCheckingCopy.valueOf(typeCheckingCopy));
 						
 						try {
 							RiseEventsMainScreenP.facade.updateCheckingCopy(checkingCopyNew);
@@ -492,7 +494,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 				//lblUserId.setText(String.valueOf(checkingCopyOld.getIdUser()));
 				lblIdUserLogado.setText(String.valueOf(checkingCopyOld.getIdUser()));
 				comboBoxRegistrationId.setSelectedItem(checkingCopyOld.getIdRegistration());
-				typeComboBox.setSelectedItem(checkingCopyOld.getCheckingCopyType());
+				typeComboBox.setSelectedItem(checkingCopyOld.getTypeCheckingCopy());
 				textFieldDate.setText(checkingCopyOld.getDateOfIssue());
 				
 			} catch (RepositoryException ex) {

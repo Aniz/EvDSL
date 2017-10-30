@@ -57,7 +57,7 @@ types Atestado,Certificado.
 add Receipt
 show Management
 
-def Activity -> reportsListofAuthors
+def Activity -> reportsListOfAuthors
 def Activity -> reportsFrequencyPerActivity
 
 if CheckingCopy.Atestado -> checkingCopyAtestado

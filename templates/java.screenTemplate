@@ -45,7 +45,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 	private JButton btnBack;
 	
 	JComboBox<String> {{data.option.entity|lower}}IdcomboBox;
-	JComboBox<String> statusComboBox;
+	JComboBox<String> type{{data.option.entity}}ComboBox;
 	
 	JButton btnInsert;
 	JButton btnRemove;
@@ -139,9 +139,9 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 		panel_1.add(textFieldDate);
 		textFieldDate.setColumns(10);
 		
-		statusComboBox = new JComboBox<String>();
-		statusComboBox.setBounds(262, 45, 134, 27);
-		panel_1.add(statusComboBox);
+		type{{data.option.entity}}ComboBox = new JComboBox<String>();
+		type{{data.option.entity}}ComboBox.setBounds(262, 45, 134, 27);
+		panel_1.add(type{{data.option.entity}}ComboBox);
 		
 		JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setBounds(6, 126, 104, 16);
@@ -215,7 +215,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 		List<String> status{{data.option.entity|lower}}s = new ArrayList<String>();
 		for(int i=0; i<status.length; i++){
 			status{{data.option.entity|lower}}s.add(i, status[i].name());
-			statusComboBox.addItem(status[i].name());
+			type{{data.option.entity}}ComboBox.addItem(status[i].name());
 		}
 	}
 	{% endif %}
@@ -269,7 +269,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			
 			Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
 			{% if data.option.categories|length > 0 %}	
-			Type{{data.option.entity}} status = Type{{data.option.entity}}.valueOf(statusComboBox.getSelectedItem().toString());
+			Type{{data.option.entity}} status = Type{{data.option.entity}}.valueOf(type{{data.option.entity}}ComboBox.getSelectedItem().toString());
 			{% endif %}
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
@@ -338,7 +338,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 			}
 			
 			try {
-				{{data.option.entity}} {{data.option.entity|lower}} = new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}s()).get(rowIndex);
+				{{data.option.entity}} {{data.option.entity|lower}} = new {{data.option.entity}}TableModel(RiseEventsMainScreenP.facade.get{{data.option.entity}}List()).get(rowIndex);
 				RiseEventsMainScreenP.facade.remove{{data.option.entity}}({{data.option.entity|lower}}.getId{{data.option.entity}}());
 				{{data.option.entity}}TableModel model = ({{data.option.entity}}TableModel) table.getModel();
 				model.remove{{data.option.entity}}(rowIndex);
@@ -378,7 +378,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 
 				
 				Integer {{data.option.entity|lower}}Id = Integer.parseInt({{data.option.entity|lower}}IdcomboBox.getSelectedItem().toString());
-				Status{{data.option.entity}} status = Status{{data.option.entity}}.valueOf(statusComboBox.getSelectedItem().toString());
+				Status{{data.option.entity}} status = Status{{data.option.entity}}.valueOf(type{{data.option.entity}}ComboBox.getSelectedItem().toString());
 				String date = textFieldDate.getText();
 				String description  = textFieldDescription.getText();
 				
@@ -393,14 +393,14 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 					
 					{{data.option.entity}} {{data.option.entity|lower}}New = new {{data.option.entity}}();
 					{{data.option.entity|lower}}New.setId{{data.option.entity}}({{data.option.entity|lower}}Id);
-					{{data.option.entity|lower}}New.setDate(date);
-					{{data.option.entity|lower}}New.setDescription(description);
-					{{data.option.entity|lower}}New.setStatus(status);
-					
+					{% if data.option.categories|length > 0 %}	
+					type{{data.option.entity}}ComboBox.setSelectedItem({{data.option.entity|lower}}Old.getType{{data.option.entity}}());
+					{% endif %}
+				
 					try {
 						{{systemName}}MainScreenP.facade.update{{data.option.entity}}({{data.option.entity|lower}}New);
 						{{data.option.entity}}TableModel model;
-						model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}s());
+						model = new {{data.option.entity}}TableModel({{systemName}}MainScreenP.facade.get{{data.option.entity}}List());
 						table.setModel(model);
 					} catch ({{data.option.entity}}NotFoundException e1) {
 						JOptionPane
@@ -445,7 +445,7 @@ public class {{data.option.entity}}ManagementScreenP extends JInternalFrame{
 				{{data.option.entity|lower}}IdcomboBox.setSelectedItem({{data.option.entity|lower}}Old.getId{{data.option.entity}}());
 				
 				{% if data.option.categories|length > 0 %}	
-				statusComboBox.setSelectedItem({{data.option.entity|lower}}Old.getType{{data.option.entity}}());
+				type{{data.option.entity}}ComboBox.setSelectedItem({{data.option.entity|lower}}Old.getType{{data.option.entity}}());
 				{% endif %}
 				
 			} catch (RepositoryException ex) {

@@ -71,7 +71,7 @@ public class RiseEventsMainScreenP extends JFrame {
 	private ActivityRemoveScreenP screenRemoveActivity;	
 	private ActivityListAllScreenP screenListAllActivity;	
 	private ActivityManagementScreenP screenManagementActivity;	
-	private ActivityReportsListofAuthorsScreenP screenActivityReportsListofAuthors;	
+	private ActivityReportsListOfAuthorsScreenP screenActivityReportsListOfAuthors;	
 	private ActivityReportsFrequencyPerActivityScreenP screenActivityReportsFrequencyPerActivity;	
 	private SubmissionSearchScreenP screenSearchSubmission;	
 	private SubmissionRemoveScreenP screenRemoveSubmission;	
@@ -218,7 +218,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveActivityMenuAction removeActivityAction = new RemoveActivityMenuAction();	
 		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
 		ManagementActivityMenuAction managementActivityAction = new ManagementActivityMenuAction();	
-		ActivityReportsListofAuthorsMenuAction activityReportsListofAuthorsAction = new ActivityReportsListofAuthorsMenuAction();	
+		ActivityReportsListOfAuthorsMenuAction activityReportsListOfAuthorsAction = new ActivityReportsListOfAuthorsMenuAction();	
 		ActivityReportsFrequencyPerActivityMenuAction activityReportsFrequencyPerActivityAction = new ActivityReportsFrequencyPerActivityMenuAction();	
 		SearchSubmissionMenuAction searchSubmissionAction = new SearchSubmissionMenuAction();	
 		RemoveSubmissionMenuAction removeSubmissionAction = new RemoveSubmissionMenuAction();	
@@ -419,9 +419,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmManagementActivity = new JMenuItem("Management");
 		mnActivity.add(mntmManagementActivity);
 		mntmManagementActivity.addActionListener(managementActivityAction);
-		JMenuItem mntmActivityReportsListofAuthors = new JMenuItem("reportsListofAuthors");
-		mnActivity.add(mntmActivityReportsListofAuthors);
-		mntmActivityReportsListofAuthors.addActionListener(activityReportsListofAuthorsAction);
+		JMenuItem mntmActivityReportsListOfAuthors = new JMenuItem("reportsListOfAuthors");
+		mnActivity.add(mntmActivityReportsListOfAuthors);
+		mntmActivityReportsListOfAuthors.addActionListener(activityReportsListOfAuthorsAction);
 		JMenuItem mntmActivityReportsFrequencyPerActivity = new JMenuItem("reportsFrequencyPerActivity");
 		mnActivity.add(mntmActivityReportsFrequencyPerActivity);
 		mntmActivityReportsFrequencyPerActivity.addActionListener(activityReportsFrequencyPerActivityAction);
@@ -1303,17 +1303,17 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-			private class ActivityReportsListofAuthorsMenuAction implements ActionListener{
+			private class ActivityReportsListOfAuthorsMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				screenActivityReportsListofAuthors = ActivityReportsListofAuthorsScreenP.getInstanceActivityReportsListofAuthorsScreenP();
-				if(screenActivityReportsListofAuthors.getParent() == null){
-					desktopPane.add(screenActivityReportsListofAuthors);
+				screenActivityReportsListOfAuthors = ActivityReportsListOfAuthorsScreenP.getInstanceActivityReportsListOfAuthorsScreenP();
+				if(screenActivityReportsListOfAuthors.getParent() == null){
+					desktopPane.add(screenActivityReportsListOfAuthors);
 				}
-				screenActivityReportsListofAuthors.setVisible(true);
-				desktopPane.moveToFront(screenActivityReportsListofAuthors);
+				screenActivityReportsListOfAuthors.setVisible(true);
+				desktopPane.moveToFront(screenActivityReportsListOfAuthors);
 				try {
-					screenActivityReportsListofAuthors.setSelected(true);
+					screenActivityReportsListOfAuthors.setSelected(true);
 				} catch (PropertyVetoException e1) {
 					e1.printStackTrace();
 					}

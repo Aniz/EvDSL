@@ -175,12 +175,6 @@ public class {{systemName}}Facade {
 	public int getUserIdByName(String entityName) throws RepositoryException{
 		return userList.getUserIdByName(entityName);
 	}
-
-	{% if 'sendBugTrackEmail' in data.User.statments %}
-	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
-		return userList.sendBug(nome, assunto, mensagem);
-	}
-	{% endif %}	
 {% endif %}	
 {% if 'Activity' in data %}
 	public int getActivityIdByName(String entityName) throws RepositoryException{
@@ -202,9 +196,6 @@ public class {{systemName}}Facade {
 	{% if 'reportsFrequencyPerActivity' in data.Activity.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
-	}
-	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
-		return activityuserList.getParticipantsPerActivity(idActivity);
 	}
 	{% endif %}
 	{% if 'reportsListofAuthors' in data.Activity.statments %}
@@ -259,6 +250,12 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
+	public void insertSubmission(Submission submission) throws RepositoryException, SubmissionAlreadyInsertedException{
+		this.submissionList.insert(submission);
+	}
+	public void updateSubmission(Submission submission) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
+		submissionList.update(submission);
+	}	
 {% endif %}
 {% if 'Receipt' in data %}
 	public void removeReceipt(int idReceipt) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
@@ -289,7 +286,6 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 	{% endif %}
 	{% if 'Search' in data.Assignment.commands %}
-	if 'Search' in data.Assignment.commands %}
 	public Assignment searchAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		return assignmentList.search(assignment);
 	}

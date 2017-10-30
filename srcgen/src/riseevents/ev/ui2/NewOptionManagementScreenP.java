@@ -44,7 +44,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 	private JButton btnBack;
 	
 	JComboBox<String> newoptionIdcomboBox;
-	JComboBox<String> statusComboBox;
+	JComboBox<String> typeNewOptionComboBox;
 	
 	JButton btnInsert;
 	JButton btnRemove;
@@ -138,9 +138,9 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 		panel_1.add(textFieldDate);
 		textFieldDate.setColumns(10);
 		
-		statusComboBox = new JComboBox<String>();
-		statusComboBox.setBounds(262, 45, 134, 27);
-		panel_1.add(statusComboBox);
+		typeNewOptionComboBox = new JComboBox<String>();
+		typeNewOptionComboBox.setBounds(262, 45, 134, 27);
+		panel_1.add(typeNewOptionComboBox);
 		
 		JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setBounds(6, 126, 104, 16);
@@ -212,7 +212,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 		List<String> statusnewoptions = new ArrayList<String>();
 		for(int i=0; i<status.length; i++){
 			statusnewoptions.add(i, status[i].name());
-			statusComboBox.addItem(status[i].name());
+			typeNewOptionComboBox.addItem(status[i].name());
 		}
 	}
 	
@@ -265,7 +265,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 			
 			Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
 	
-			TypeNewOption status = TypeNewOption.valueOf(statusComboBox.getSelectedItem().toString());
+			TypeNewOption status = TypeNewOption.valueOf(typeNewOptionComboBox.getSelectedItem().toString());
 			String date = textFieldDate.getText();
 			String description  = textFieldDescription.getText();
 			
@@ -332,7 +332,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 			}
 			
 			try {
-				NewOption newoption = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions()).get(rowIndex);
+				NewOption newoption = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList()).get(rowIndex);
 				RiseEventsMainScreenP.facade.removeNewOption(newoption.getIdNewOption());
 				NewOptionTableModel model = (NewOptionTableModel) table.getModel();
 				model.removeNewOption(rowIndex);
@@ -372,7 +372,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 
 				
 				Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
-				StatusNewOption status = StatusNewOption.valueOf(statusComboBox.getSelectedItem().toString());
+				StatusNewOption status = StatusNewOption.valueOf(typeNewOptionComboBox.getSelectedItem().toString());
 				String date = textFieldDate.getText();
 				String description  = textFieldDescription.getText();
 				
@@ -387,14 +387,13 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 					
 					NewOption newoptionNew = new NewOption();
 					newoptionNew.setIdNewOption(newoptionId);
-					newoptionNew.setDate(date);
-					newoptionNew.setDescription(description);
-					newoptionNew.setStatus(status);
-					
+	
+					typeNewOptionComboBox.setSelectedItem(newoptionOld.getTypeNewOption());
+				
 					try {
 						RiseEventsMainScreenP.facade.updateNewOption(newoptionNew);
 						NewOptionTableModel model;
-						model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions());
+						model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
 						table.setModel(model);
 					} catch (NewOptionNotFoundException e1) {
 						JOptionPane
@@ -439,7 +438,7 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 				newoptionIdcomboBox.setSelectedItem(newoptionOld.getIdNewOption());
 				
 	
-				statusComboBox.setSelectedItem(newoptionOld.getTypeNewOption());
+				typeNewOptionComboBox.setSelectedItem(newoptionOld.getTypeNewOption());
 				
 			} catch (RepositoryException ex) {
 				JOptionPane.showMessageDialog(getContentPane(),

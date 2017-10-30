@@ -38,9 +38,18 @@ import {{systemName|lower}}.ev.repository.{{key}}RepositoryBDR;
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.User;
+
 {% if extraData.Submission is defined and extraData.Reviewer is defined %}
 import {{systemName|lower}}.ev.data.Review;
 import {{systemName|lower}}.ev.data.Review.StatusReview;
+import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
+{% endif %}
+{% if extraData.Author is defined %}
+import {{systemName|lower}}.ev.data.Author;
+import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
 {% endif %}
 {% if extraData.Submission is defined %}
 import {{systemName|lower}}.ev.data.Submission;
@@ -296,7 +305,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 					}
 				}
 				{% endif %}
-				{% if 'Author' in extraData %}
+				{% if 'User' in extraData %}
 				User user = new User();
 				{% endif %}
 				{% if 'SubmissionUser' in extraData %}
