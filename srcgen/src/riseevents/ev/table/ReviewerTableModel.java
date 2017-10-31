@@ -18,8 +18,8 @@ public class ReviewerTableModel extends AbstractTableModel{
 		private static final int COL_KNOWLEDGEAREA = 3;
 		
 		
-		private static final int COL_TYPEUSER = 5;
-		
+		private static final int COL_TYPEUSER = 4;
+			
 		// Lista de Valores
 		private List<Reviewer> rows;
 		
@@ -78,7 +78,7 @@ public class ReviewerTableModel extends AbstractTableModel{
 					break;
 			
 				default:
-					throw new IllegalArgumentException("Coluna Invalida!");
+					throw new IllegalArgumentException("Coluna Invalida!" + column);
 				}
 				return coluna;
 			}

@@ -17,18 +17,17 @@ public class SpeakerTableModel extends AbstractTableModel{
 		private static final int COL_NAMEUSER = 1;
 		private static final int COL_EMAIL = 2;
 		private static final int COL_BIOGRAPHY = 3;
-		{% for property in data.option.properties %}
-		private static final int COL_{{property.name|upper}} ={{loop.index+3}};
-		{% endfor %}
-		{% if data.option.categories|length > 0 %}
-		private static final int COL_TYPE{{data.option.entity|upper}} = {{4 + data.option.properties|length}};
-		{% endif %}
-		
 		{% for property in extraData.option.properties %}
-		private static final int COL_{{property.name|upper}} ={{loop.index+3 + data.option.properties|length + (data.option.categories is defined)}};
+		private static final int COL_{{property.name|upper}} ={{loop.index+3 + data.option.properties|length }};
 		{% endfor %}
 		{% if extraData.option.categories|length > 0 %}
-		private static final int COL_TYPE{{extraData.option.entity|upper}} = {{4 + extraData.option.properties|length + extraData.option.properties|length  + (data.option.categories is defined)}};
+		private static final int COL_TYPE{{extraData.option.entity|upper}} = {{4 + extraData.option.properties|length }};
+		{% endif %}
+		{% for property in data.option.properties %}
+		private static final int COL_{{property.name|upper}} ={{loop.index+ 3 + extraData.option.properties|length + (extraData.option.categories is defined)}};
+		{% endfor %}
+		{% if data.option.categories|length > 0 %}
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{4 + data.option.properties|length + extraData.option.properties|length + (extraData.option.categories is defined)}};
 		{% endif %}
 		
 		// Lista de Valores
@@ -121,7 +120,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 				{% endif %}
 			
 				default:
-					throw new IllegalArgumentException("Coluna Invalida!");
+					throw new IllegalArgumentException("Coluna Invalida! "+column);
 				}
 				return coluna;
 			}

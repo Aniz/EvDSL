@@ -272,8 +272,8 @@ public class RiseEventsMainScreenP extends JFrame {
 		menuBar.add(mnArchieve);
 		
 		//#if ${Bugs} == "T"		
-		JMenuItem mntmBugtrack = new JMenuItem("Bugtrack");
-		mnArchieve.add(mntmBugtrack);
+		// JMenuItem mntmBugtrack = new JMenuItem("Bugtrack");
+		// mnArchieve.add(mntmBugtrack);
 		//#endif
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");

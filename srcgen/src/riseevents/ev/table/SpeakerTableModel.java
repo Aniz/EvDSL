@@ -17,8 +17,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 		private static final int COL_NAMEUSER = 1;
 		private static final int COL_EMAIL = 2;
 		private static final int COL_BIOGRAPHY = 3;
-		
-		private static final int COL_TYPEUSER = 5;
+		private static final int COL_TYPEUSER = 4;
 		
 		// Lista de Valores
 		private List<Speaker> rows;
@@ -76,7 +75,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 					break;
 			
 				default:
-					throw new IllegalArgumentException("Coluna Invalida!");
+					throw new IllegalArgumentException("Coluna Invalida! "+column);
 				}
 				return coluna;
 			}

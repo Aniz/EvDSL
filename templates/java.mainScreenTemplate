@@ -173,8 +173,8 @@ public class {{systemName}}MainScreenP extends JFrame {
 		menuBar.add(mnArchieve);
 		
 		//#if ${Bugs} == "T"		
-		JMenuItem mntmBugtrack = new JMenuItem("Bugtrack");
-		mnArchieve.add(mntmBugtrack);
+		// JMenuItem mntmBugtrack = new JMenuItem("Bugtrack");
+		// mnArchieve.add(mntmBugtrack);
 		//#endif
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
@@ -203,7 +203,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 		
 		mntmExit.addActionListener(exitMenuAction);
 	{% if 'sendBugTrackEmail' in data.statments %}
-		mntmBugtrack.addActionListener(bugtrackAction);
+		// mntmBugtrack.addActionListener(bugtrackAction);
 	{% endif %}
 	}
 	
