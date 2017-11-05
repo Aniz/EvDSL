@@ -140,9 +140,11 @@ public class SubmissionRepositoryBDR implements SubmissionRepository {
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
             ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EeventDB' AND TABLE_NAME= 'submission'");
-            resultset.first();
-            answer = resultset.getInt("proximo_valor");
-			resultset.close();
+            if(resultset.first()){
+	            resultset.first();
+	            answer = resultset.getInt("proximo_valor");
+				resultset.close();
+			}
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
         } catch (SQLException e) {

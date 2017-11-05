@@ -154,45 +154,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		getContentPane().add(textFieldKeywords);
 		textFieldKeywords.setColumns(10);
 		
-		JLabel label = new JLabel("Author Name:");
-		label.setBounds(43, 357, 87, 16);
-		getContentPane().add(label);
-		
-		textFieldauthorName = new JTextField();
-		textFieldauthorName.setColumns(10);
-		textFieldauthorName.setBounds(139, 351, 352, 27);
-		getContentPane().add(textFieldauthorName);
-		
-		JLabel label_1 = new JLabel("Author Id:");
-		label_1.setBounds(503, 357, 76, 16);
-		getContentPane().add(label_1);
-		
-		lblIdAuthor = new JLabel("0");
-		lblIdAuthor.setBounds(594, 357, 61, 16);
-		getContentPane().add(lblIdAuthor);
-		
-		textFieldFiliation = new JTextField();
-		textFieldFiliation.setColumns(10);
-		textFieldFiliation.setBounds(105, 385, 386, 27);
-		getContentPane().add(textFieldFiliation);
-		
-		JLabel label_3 = new JLabel("Filiation:");
-		label_3.setBounds(48, 391, 61, 16);
-		getContentPane().add(label_3);
-		
-		JLabel label_4 = new JLabel("Email:");
-		label_4.setBounds(43, 423, 61, 16);
-		getContentPane().add(label_4);
-		
-		textFieldEmail = new JTextField();
-		textFieldEmail.setColumns(10);
-		textFieldEmail.setBounds(105, 419, 268, 27);
-		getContentPane().add(textFieldEmail);
-		
-		JButton btnInsertNewAuthor = new JButton("Insert New Author");
-		btnInsertNewAuthor.setBounds(208, 470, 141, 29);
-		getContentPane().add(btnInsertNewAuthor);
-		
 		JButton btnInsert = new JButton("Submit");
 		btnInsert.setBounds(364, 470, 117, 29);
 		getContentPane().add(btnInsert);
@@ -342,7 +303,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							// que serao sempre novas(que nao estao no banco) submissoes q serao inseridas.
 							if(typeComboBox.getSelectedItem().toString().equals("Parcial"))
 								RiseEventsMainScreenP.facade.insertSubmission(submission);
-							
 							
 							//Inserir na tabela de submissionUSER
 							//retirada tela login

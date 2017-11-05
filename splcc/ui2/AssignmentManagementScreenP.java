@@ -400,7 +400,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment2);
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment3);
 				
-				{% if "Author" in availableDict %}
+				{% if 'Author' in avaliableDict %}
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
 				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();

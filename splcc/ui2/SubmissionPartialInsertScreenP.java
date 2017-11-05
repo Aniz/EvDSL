@@ -171,6 +171,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		getContentPane().add(textFieldKeywords);
 		textFieldKeywords.setColumns(10);
 		
+		{% if "Author" in avaliableDict %}
 		JLabel label = new JLabel("Author Name:");
 		label.setBounds(43, 357, 87, 16);
 		getContentPane().add(label);
@@ -209,7 +210,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		JButton btnInsertNewAuthor = new JButton("Insert New Author");
 		btnInsertNewAuthor.setBounds(208, 470, 141, 29);
 		getContentPane().add(btnInsertNewAuthor);
-		
+		{% endif %}
 		JButton btnInsert = new JButton("Submit");
 		btnInsert.setBounds(364, 470, 117, 29);
 		getContentPane().add(btnInsert);
@@ -422,7 +423,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							// que serao sempre novas(que nao estao no banco) submissoes q serao inseridas.
 							if(typeComboBox.getSelectedItem().toString().equals("Parcial"))
 								{{systemName}}MainScreenP.facade.insertSubmission(submission);
-							
 							
 							//Inserir na tabela de submissionUSER
 							//retirada tela login
