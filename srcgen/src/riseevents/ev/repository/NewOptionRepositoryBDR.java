@@ -144,7 +144,7 @@ newoption.getTypeNewOption()+"')");
 			RepositoryException {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
-    	    statement.executeUpdate("UPDATE NewOption SET   typeNewOption = '"+ newoption.getTypeNewOption() +"' WHERE idNewOption = '"+ newoption.getIdNewOption()+"'");
+    	    statement.executeUpdate("UPDATE NewOption SET  typeNewOption = '"+ newoption.getTypeNewOption() +"' WHERE idNewOption = '"+ newoption.getIdNewOption()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -165,9 +165,12 @@ newoption.getTypeNewOption()+"')");
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
             ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EEventDB' AND TABLE_NAME= 'activityorganizer'");
+            
+            if(resultset.first()){
             resultset.first();
             answer = resultset.getInt("proximo_valor");
 			resultset.close();
+			}
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
         } catch (SQLException e) {

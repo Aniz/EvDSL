@@ -26,7 +26,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 
 {% for key in extraData %}
 import {{systemName|lower}}.ev.data.{{key}};
@@ -397,7 +400,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment2);
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment3);
 				
-				{% if "Author" in extraData %}
+				{% if "Author" in availableDict %}
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
 				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
@@ -408,8 +411,8 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					}
 				}
 				{% endif %}
+				{% if "SubmissionUser" in avaliableDict %}
 				User user = new User();
-				{% if "Submission" in extraData %}
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUserList();
 							
@@ -419,14 +422,14 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					}
 				}
 				{% endif %}
+				{% if "interestConflict" in data.statments %}
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				{% if "interestConflict" in data.statments %}
-				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
-				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
-				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
-				{% endif %}
+				
+				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer1);
+				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer2);
+				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer3);
 				
 				if(resultAutomaticConflict1 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
@@ -455,6 +458,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					enviarEmails(reviewer3, submission, review3);
 				{% endif %}
 				}
+				{% endif %}
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),

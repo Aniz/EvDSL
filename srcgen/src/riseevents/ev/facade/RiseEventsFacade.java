@@ -56,12 +56,6 @@ import riseevents.ev.exception.SubmissionAlreadyInsertedException;
 import riseevents.ev.exception.SubmissionNotFoundException;
 import riseevents.ev.repository.SubmissionRepository;
 import riseevents.ev.repository.SubmissionRepositoryBDR;
-import riseevents.ev.data.Author;
-import riseevents.ev.business.AuthorControl;
-import riseevents.ev.exception.AuthorAlreadyInsertedException;
-import riseevents.ev.exception.AuthorNotFoundException;
-import riseevents.ev.repository.AuthorRepository;
-import riseevents.ev.repository.AuthorRepositoryBDR;
 import riseevents.ev.data.Assignment;
 import riseevents.ev.business.AssignmentControl;
 import riseevents.ev.exception.AssignmentAlreadyInsertedException;
@@ -113,12 +107,6 @@ import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
 import riseevents.ev.exception.ActivityOrganizerNotFoundException;
 import riseevents.ev.repository.ActivityOrganizerRepository;
 import riseevents.ev.repository.ActivityOrganizerRepositoryBDR;
-import riseevents.ev.data.SubmissionAuthor;
-import riseevents.ev.business.SubmissionAuthorControl;
-import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
-import riseevents.ev.exception.SubmissionAuthorNotFoundException;
-import riseevents.ev.repository.SubmissionAuthorRepository;
-import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
 import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.business.SubmissionUserControl;
 import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
@@ -142,7 +130,6 @@ public class RiseEventsFacade {
 	private PaymentControl paymentList;
 	private ActivityControl activityList;
 	private SubmissionControl submissionList;
-	private AuthorControl authorList;
 	private AssignmentControl assignmentList;
 	private CheckingCopyControl checkingcopyList;
 	private NewOptionControl newoptionList;
@@ -151,7 +138,6 @@ public class RiseEventsFacade {
 	private ActivityUserControl activityuserList;
 	private ActivitySpeakerControl activityspeakerList;
 	private ActivityOrganizerControl activityorganizerList;
-	private SubmissionAuthorControl submissionauthorList;
 	private SubmissionUserControl submissionuserList;
 	private RegistrationControl registrationList;
 
@@ -166,7 +152,6 @@ public class RiseEventsFacade {
 		PaymentRepository paymentRepository = PaymentRepositoryBDR.getInstance();
 		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
 		SubmissionRepository submissionRepository = SubmissionRepositoryBDR.getInstance();
-		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
 		AssignmentRepository assignmentRepository = AssignmentRepositoryBDR.getInstance();
 		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
 		NewOptionRepository newoptionRepository = NewOptionRepositoryBDR.getInstance();
@@ -180,7 +165,6 @@ public class RiseEventsFacade {
 		paymentList = new PaymentControl(paymentRepository); 
 		activityList = new ActivityControl(activityRepository); 
 		submissionList = new SubmissionControl(submissionRepository); 
-		authorList = new AuthorControl(authorRepository); 
 		assignmentList = new AssignmentControl(assignmentRepository); 
 		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
 		newoptionList = new NewOptionControl(newoptionRepository); 
@@ -191,7 +175,6 @@ public class RiseEventsFacade {
 		ActivityUserRepository activityuserRepository = ActivityUserRepositoryBDR.getInstance();
 		ActivitySpeakerRepository activityspeakerRepository = ActivitySpeakerRepositoryBDR.getInstance();
 		ActivityOrganizerRepository activityorganizerRepository = ActivityOrganizerRepositoryBDR.getInstance();
-		SubmissionAuthorRepository submissionauthorRepository = SubmissionAuthorRepositoryBDR.getInstance();
 		SubmissionUserRepository submissionuserRepository = SubmissionUserRepositoryBDR.getInstance();
 		RegistrationRepository registrationRepository = RegistrationRepositoryBDR.getInstance();
 		
@@ -199,7 +182,6 @@ public class RiseEventsFacade {
 		activityuserList = new ActivityUserControl(activityuserRepository); 
 		activityspeakerList = new ActivitySpeakerControl(activityspeakerRepository); 
 		activityorganizerList = new ActivityOrganizerControl(activityorganizerRepository); 
-		submissionauthorList = new SubmissionAuthorControl(submissionauthorRepository); 
 		submissionuserList = new SubmissionUserControl(submissionuserRepository); 
 		registrationList = new RegistrationControl(registrationRepository); 
 	
@@ -356,15 +338,6 @@ public class RiseEventsFacade {
 	public int getSubmissionLastId() throws RepositoryException{
 		return submissionList.getSubmissionLastId();
 	}
-	public List<Author> getAuthorList() throws RepositoryException{
-		return authorList.getAuthorList();
-	}
-	public int getAuthorLastId() throws RepositoryException{
-		return authorList.getAuthorLastId();
-	}
-	public boolean isThereAuthor(int idEntity) throws RepositoryException{
-		return authorList.isThere(idEntity);
-	}
 	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
 		this.assignmentList.insert(entity);
 	}
@@ -410,8 +383,20 @@ public class RiseEventsFacade {
 	public boolean isThereNewOption(int idEntity) throws RepositoryException{
 		return newoptionList.isThere(idEntity);
 	}
+	public void insertReceipt(Receipt entity) throws ReceiptAlreadyInsertedException, RepositoryException{
+		this.receiptList.insert(entity);
+	}
+	public void removeReceipt(int idEntity) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
+		receiptList.remove(idEntity);  
+	}
+	public void updateReceipt(Receipt Entity) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
+		receiptList.update(Entity);
+	}
 	public List<Receipt> getReceiptList() throws RepositoryException{
 		return receiptList.getReceiptList();
+	}
+	public Receipt searchReceipt(int idEntity) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
+		return receiptList.search(idEntity);
 	}
 	public int getReceiptLastId() throws RepositoryException{
 		return receiptList.getReceiptLastId();
@@ -487,24 +472,6 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereActivityOrganizer(ActivityOrganizer entity) throws RepositoryException{
 		return activityorganizerList.isThere(entity);
-	}
-	public void insertSubmissionAuthor(SubmissionAuthor entity) throws SubmissionAuthorAlreadyInsertedException, RepositoryException{
-		this.submissionauthorList.insert(entity);
-	}
-	public void removeSubmissionAuthor(SubmissionAuthor entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
-		submissionauthorList.remove(entity);  
-	}
-	public void updateSubmissionAuthor(SubmissionAuthor Entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
-		submissionauthorList.update(Entity);
-	}
-	public List<SubmissionAuthor> getSubmissionAuthorList() throws RepositoryException{
-		return submissionauthorList.getSubmissionAuthorList();
-	}
-	public SubmissionAuthor searchSubmissionAuthor(SubmissionAuthor Entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
-		return submissionauthorList.search(Entity);
-	}
-	public boolean isThereSubmissionAuthor(SubmissionAuthor entity) throws RepositoryException{
-		return submissionauthorList.isThere(entity);
 	}
 	public void insertSubmissionUser(SubmissionUser entity) throws SubmissionUserAlreadyInsertedException, RepositoryException{
 		this.submissionuserList.insert(entity);
@@ -590,10 +557,6 @@ public class RiseEventsFacade {
 		activity.listOfAuthorsPerActivity(authorsPerActivity);
 	}
 	
-public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
-	return authorList.search(idAuthor);
-} 
-	
 	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
 		registrationList.removeValue(value, idRegistration);
@@ -634,12 +597,6 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public void updateSubmission(Submission submission) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		submissionList.update(submission);
 	}	
-	public void removeReceipt(int idReceipt) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
-		receiptList.remove(idReceipt);  
-	}
-	public void insertAuthor(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
-		authorList.insert(author);
-	}
 	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		assignmentList.remove(assignment);  
 	}

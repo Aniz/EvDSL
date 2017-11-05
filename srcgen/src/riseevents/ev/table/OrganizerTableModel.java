@@ -33,7 +33,7 @@ public class OrganizerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 4;
+			return 2 +1+1;
 		}
 		
 		//Preenchimento de cada coluna

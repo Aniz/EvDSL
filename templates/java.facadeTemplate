@@ -65,17 +65,17 @@ public class {{systemName}}Facade {
 	}
 	
 {% for key,value in data.items() %}
-	{% if 'Insert' in value.commands %}
+	{% if  'Management' in value.commands or 'Insert' in value.commands %}
 	public void insert{{key}}({{key}} entity) throws {{key}}AlreadyInsertedException, RepositoryException{
 		this.{{key|lower}}List.insert(entity);
 	}
 	{% endif %}
-	{% if 'Remove' in value.commands and key != "Assignment" %}
+	{% if  ('Management' in value.commands or 'Remove' in value.commands) and key != "Assignment" %}
 	public void remove{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.remove(idEntity);  
 	}
 	{% endif %}
-	{% if 'Update' in value.commands %}
+	{% if  ('Management' in value.commands or 'Update' in value.commands) and key != "Assignment" %}
 	public void update{{key}}({{key}} Entity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.update(Entity);
 	}
@@ -83,7 +83,7 @@ public class {{systemName}}Facade {
 	public List<{{key}}> get{{key}}List() throws RepositoryException{
 		return {{key|lower}}List.get{{key}}List();
 	}
-	{% if 'Search' in value.commands and key != "Assignment" %}
+	{% if  ('Management' in value.commands or 'Search' in value.commands) and key != "Assignment" %}
 	public {{key}} search{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		return {{key|lower}}List.search(idEntity);
 	}
@@ -259,11 +259,6 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public void updateSubmission(Submission submission) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		submissionList.update(submission);
 	}	
-{% endif %}
-{% if 'Receipt' in data %}
-	public void removeReceipt(int idReceipt) throws ReceiptNotFoundException, RepositoryException, ReceiptAlreadyInsertedException{
-		receiptList.remove(idReceipt);  
-	}
 {% endif %}
 {% if 'CheckingCopy' in data %}
 	{% if 'checkingCopyAtestado' in data.Reviewer.statments %}

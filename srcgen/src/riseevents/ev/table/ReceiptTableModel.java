@@ -29,7 +29,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 4 ;
 		}
 		
 		//Preenchimento de cada coluna
@@ -66,7 +66,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 					break;
 			
 				default:
-					throw new IllegalArgumentException("Coluna Invalida!");
+					throw new IllegalArgumentException("Coluna Invalida!"+column);
 				}
 				return coluna;
 			}

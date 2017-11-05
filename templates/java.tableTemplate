@@ -17,7 +17,7 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 			private static final int COL_{{property.name|upper}} = {{loop.index}};
 			{% endfor %}
 			{% if data.option.categories|length > 0 %}
-			private static final int COL_TYPE{{data.option.entity|upper}} = {{data.option.categories|length + 1}};
+			private static final int COL_TYPE{{data.option.entity|upper}} = {{data.option.properties|length + 1}};
 			{% endif %}
 			// Lista de Valores
 			private List<{{data.option.entity}}> rows;
@@ -32,7 +32,7 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 			
 			//Quantidade de Colunas
 			public int getColumnCount() {
-				return {{data.option.properties|length}};
+				return {{1+data.option.properties|length}} {% if data.option.categories|length > 0 %}+ 1{% endif %};
 			}
 			
 			//Preenchimento de cada coluna
@@ -46,6 +46,11 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 						return {{data.option.entity|lower}}.get{{property.name|capitalize}}();
 					}  
 					{% endfor %}
+					{% if data.option.categories|length > 0 %}
+					else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+						return {{data.option.entity|lower}}.getType{{data.option.entity}}();
+					}  
+					{% endif %}
 					return null;
 				}
 				
@@ -53,18 +58,23 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				public String getColumnName(int column) {
 					String coluna = "";
 					switch (column) {
+						case COL_{{data.option.entity|upper}}ID:
+						coluna = "{{data.option.entity}} Id";
+						break;
+				
 					{% for property in data.option.entity.properties %}
   						case COL_{{property.name|upper}}
 						coluna = "{{property.label}}";		
   					{% endfor %}
+						
 						{% if data.option.categories|length > 0 %}
-				case COL_TYPE{{data.option.entity|upper}}:
-					coluna = "Tipo";
-					break;
-				{% endif %}
+						case COL_TYPE{{data.option.entity|upper}}:
+						coluna = "Tipo";
+						break;
+						{% endif %}
 			
 					default:
-						throw new IllegalArgumentException(ExceptionMessages.EXC_INVALID_COL);
+						throw new IllegalArgumentException(ExceptionMessages.EXC_INVALID_COL+column);
 					}
 					return coluna;
 				}
@@ -72,8 +82,16 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				//Tipo de valor da colna
 				@Override
 				public Class<?> getColumnClass(int columnIndex) {
+					if (columnIndex == COL_{{data.option.entity|upper}}ID) {
+					return int.class;
+					}
+					{% if data.option.categories|length > 0 %}
+					else if (columnIndex == COL_TYPE{{data.option.entity|upper}}) {
+						return String.class;
+					}
+					{% endif %}
 					{% for property in data.option.entity.properties %}
-					if (columnIndex == {{property.name|upper}}) {
+					else if (columnIndex == {{property.name|upper}}) {
 						return {{property.type.name}}.class;
 					} 
 					{% endfor %}
@@ -97,6 +115,9 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				}
 				
 				public void alterar{{data.option.entity}}(int indiceLinha, {{data.option.entity}} {{data.option.entity|lower}}) {
+					{% if data.option.categories|length > 0 %}
+					rows.get(indiceLinha).setType{{data.option.entity}}({{data.option.entity|lower}}.getType{{data.option.entity}}());		
+					{% endif %}
 					{% for property in data.option.properties %}
 					rows.get(indiceLinha).set{{property.name|capitalize}}({{data.option.entity|lower}}.get{{property.name|capitalize}}());		
 					{% endfor %}
@@ -104,10 +125,10 @@ public class {{data.option.entity}}TableModel extends AbstractTableModel{
 				}
 				
 				//real name listade....
-				public void add{{data.option.entity}}List(List<{{data.option.entity}}> {{data.option.entity|lower}}List) {
+				public void addListaDe{{data.option.entity}}s(List<{{data.option.entity}}> {{data.option.entity|lower}}s) {
 					int indice = getRowCount();
-					rows.addAll({{data.option.entity|lower}}List);
-					fireTableRowsInserted(indice, indice + {{data.option.entity|lower}}List.size());
+					rows.addAll({{data.option.entity|lower}}s);
+					fireTableRowsInserted(indice, indice + {{data.option.entity|lower}}s.size());
 				}
 				
 				public int retornarIndice({{data.option.entity}} {{data.option.entity|lower}}) {

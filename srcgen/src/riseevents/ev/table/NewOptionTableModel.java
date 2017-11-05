@@ -13,7 +13,7 @@ public class NewOptionTableModel extends AbstractTableModel{
 	// Nome das Colunas
 		
 			private static final int COL_NEWOPTIONID = 0;
-			private static final int COL_TYPENEWOPTION = 3;
+			private static final int COL_TYPENEWOPTION = 1;
 			// Lista de Valores
 			private List<NewOption> rows;
 			
@@ -27,7 +27,7 @@ public class NewOptionTableModel extends AbstractTableModel{
 			
 			//Quantidade de Colunas
 			public int getColumnCount() {
-				return 0;
+				return 1 + 1;
 			}
 			
 			//Preenchimento de cada coluna
@@ -36,6 +36,9 @@ public class NewOptionTableModel extends AbstractTableModel{
 					if (columnIndex == COL_NEWOPTIONID) {
 						return newoption.getIdNewOption();
 					}
+					else if (columnIndex == COL_TYPENEWOPTION) {
+						return newoption.getTypeNewOption();
+					}  
 					return null;
 				}
 				
@@ -43,12 +46,17 @@ public class NewOptionTableModel extends AbstractTableModel{
 				public String getColumnName(int column) {
 					String coluna = "";
 					switch (column) {
-				case COL_TYPENEWOPTION:
-					coluna = "Tipo";
-					break;
+						case COL_NEWOPTIONID:
+						coluna = "NewOption Id";
+						break;
+				
+						
+						case COL_TYPENEWOPTION:
+						coluna = "Tipo";
+						break;
 			
 					default:
-						throw new IllegalArgumentException(ExceptionMessages.EXC_INVALID_COL);
+						throw new IllegalArgumentException(ExceptionMessages.EXC_INVALID_COL+column);
 					}
 					return coluna;
 				}
@@ -56,6 +64,12 @@ public class NewOptionTableModel extends AbstractTableModel{
 				//Tipo de valor da colna
 				@Override
 				public Class<?> getColumnClass(int columnIndex) {
+					if (columnIndex == COL_NEWOPTIONID) {
+					return int.class;
+					}
+					else if (columnIndex == COL_TYPENEWOPTION) {
+						return String.class;
+					}
 					return null;
 				}
 				
@@ -76,14 +90,15 @@ public class NewOptionTableModel extends AbstractTableModel{
 				}
 				
 				public void alterarNewOption(int indiceLinha, NewOption newoption) {
+					rows.get(indiceLinha).setTypeNewOption(newoption.getTypeNewOption());		
 					fireTableDataChanged();
 				}
 				
 				//real name listade....
-				public void addNewOptionList(List<NewOption> newoptionList) {
+				public void addListaDeNewOptions(List<NewOption> newoptions) {
 					int indice = getRowCount();
-					rows.addAll(newoptionList);
-					fireTableRowsInserted(indice, indice + newoptionList.size());
+					rows.addAll(newoptions);
+					fireTableRowsInserted(indice, indice + newoptions.size());
 				}
 				
 				public int retornarIndice(NewOption newoption) {

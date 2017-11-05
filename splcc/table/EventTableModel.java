@@ -37,7 +37,7 @@ public class EventTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return {{5 + data.option.properties|length + (data.option.properties is defined)}};
+			return {{5 + data.option.properties|length}} {% if data.option.categories|length > 0 %}+1{% endif %};
 		}
 		
 		//Preenchimento de cada coluna

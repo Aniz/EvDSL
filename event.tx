@@ -79,7 +79,8 @@ ActionType:
   'program' | 'importantDates' | 'reportsFrequencyPerEvent'| 
   'generateCarne' | 'generateBoleto' | 'askCardInfo' | 
   'notificationsDeadline' | 
-  'notificationsPaperAssignemnt' | 'notificationsAceptanceRejection' 
+  'notificationsPaperAssignemnt' | 'notificationsAceptanceRejection' |
+  'reviewRoundofReview'
 ;
 
 // Special rule for comments. Comments start with //

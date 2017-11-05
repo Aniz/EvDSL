@@ -32,7 +32,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return 4 		+1;
 		}
 		
 		//Preenchimento de cada coluna

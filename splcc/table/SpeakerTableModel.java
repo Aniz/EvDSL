@@ -43,7 +43,7 @@ public class SpeakerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return {{4 + data.option.properties|length + (data.option.categories is defined) + extraData.option.properties|length + (extraData.option.categories is defined)}};
+			return {{4 + data.option.properties|length + extraData.option.properties|length }} 	{% if data.option.categories|length > 0 %}+1{% endif %}	{% if extraData.option.categories|length > 0 %}+1{% endif %};
 		}
 		
 		//Preenchimento de cada coluna

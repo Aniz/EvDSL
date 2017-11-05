@@ -13,27 +13,19 @@ import java.util.List;
 import javax.swing.JInternalFrame;
 
 import riseevents.ev.data.Activity;
-//#if ${InsertAuthors} == "T"
-import riseevents.ev.data.Author;
-//#endif
+
+
 import riseevents.ev.data.Submission;
-//#if ${InsertAuthors} == "T"
-import riseevents.ev.data.SubmissionAuthor;
-//#endif
-import riseevents.ev.data.SubmissionUser;
-import riseevents.ev.data.User;
 import riseevents.ev.data.Submission.TypeSubmission;
-//#if ${InsertAuthors} == "T"
-import riseevents.ev.exception.AuthorAlreadyInsertedException;
-//#endif
-import riseevents.ev.exception.RepositoryException;
-
 import riseevents.ev.exception.SubmissionAlreadyInsertedException;
-//#if ${InsertAuthors} == "T"
-import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionNotFoundException;
 
-//#endif
+import riseevents.ev.data.User;
+
+import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
+
+import riseevents.ev.exception.RepositoryException;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -41,10 +33,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class SubmissionPartialInsertScreenP extends JInternalFrame {
-
-	
-	
-	
 	
 	private static SubmissionPartialInsertScreenP instanceSubmissionPartialInsertScreenP;
 	private JTextField textFieldTitle;
@@ -103,7 +91,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		BackButtonAction backAction = new BackButtonAction();
 		
 		//#if ${InsertAuthors} == "T"
-		InsertNewAuthorButtonAction insertNewAuthorAction = new InsertNewAuthorButtonAction();
 		//#endif
 		
 		SelectComboUserAction selectUserAction = new SelectComboUserAction();
@@ -221,19 +208,14 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		btnInsert.addActionListener(insertAction);
 		btnBack.addActionListener(backAction);
 		//#if ${InsertAuthors} == "T"
-		btnInsertNewAuthor.addActionListener(insertNewAuthorAction);
 		//#endif
-		
-
+	
 		// Retirada de Login
 		comboBoxUser.addActionListener(selectUserAction);
 		//Retirada Login
 	    carregarComboUser();
 		
 		loadLastIndex();
-		//#if ${InsertAuthors} == "T"
-		loadLastAuthorIndex();
-		//#endif
 		carregarComboBoxTipo();
 		carregarComboBoxActivity();
 		
@@ -290,16 +272,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 			}
 		}
 		//#if ${InsertAuthors} == "T"
-		private void loadLastAuthorIndex(){
-			try {
-				lblIdAuthor.setText(String.valueOf(RiseEventsMainScreenP.facade.getAuthorLastId()));
-			} catch (RepositoryException e) {
-				JOptionPane.showMessageDialog(getContentPane(),
-						e.toString(), "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-				e.printStackTrace();
-			}
-		}
 		//#endif
 		// retirada ne login
 //		private void pegarUsuarioLogado(){
@@ -332,51 +304,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		}
 		
 		//#if ${InsertAuthors} == "T"
-		private class InsertNewAuthorButtonAction  implements ActionListener{ 
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//clearAuthorFields();
-				loadLastAuthorIndex();
-				
-				Author author = new Author();
-				
-				String nameAuthor = textFieldauthorName.getText();
-				String filiation = textFieldFiliation.getText();
-				String email = textFieldEmail.getText();
-				
-				if ( nameAuthor.equals(" ") || filiation.equals(" ") || email.equals(" ")) {
-					JOptionPane.showMessageDialog(getContentPane(),
-							"Não pode haver campo vazio.", "Erro",
-							JOptionPane.INFORMATION_MESSAGE);
-					return;
-				}else{
-					try {
-					author.setName(nameAuthor);
-					author.setFiliation(filiation);
-					author.setEmail(email);
-					//Insere na tabela de authors
-					RiseEventsMainScreenP.facade.insertAuthor(author);
-					
-					JOptionPane.showMessageDialog(getContentPane(),
-							"Author inserido com sucesso", "Sucesso",
-							JOptionPane.INFORMATION_MESSAGE);
-					
-					
-					} catch (AuthorAlreadyInsertedException e1) {
-						JOptionPane.showMessageDialog(getContentPane(),
-								e1.toString(), "Erro",
-								JOptionPane.INFORMATION_MESSAGE);
-						e1.printStackTrace();
-					} catch (RepositoryException e1) {
-						JOptionPane.showMessageDialog(getContentPane(),
-								e1.toString(), "Erro",
-								JOptionPane.INFORMATION_MESSAGE);
-						e1.printStackTrace();
-					} 
-				}
-			}
-		}
 		//#endif
 		
 		private class InsertButtonAction  implements ActionListener{ 
@@ -428,16 +355,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							submissionUser.setIdActivity(RiseEventsMainScreenP.facade.getActivityIdByName(nameActivity));
 							RiseEventsMainScreenP.facade.insertSubmissionUser(submissionUser);
 							//#if ${InsertAuthors} == "T"
-							//Inserir na tabela de submissionAUTHORS
-							SubmissionAuthor submissionAuthor = new SubmissionAuthor();
-							//retirada tela login
-							//int idCorrespondingAuthor = RiSEEventLoginScreen.usuarioLogado.getIdUser();
-							//retirada tela login
-							int idCorrespondingAuthor = Integer.valueOf(lblIdUserLogado.getText());
-							submissionAuthor.setIdAuthor(idCorrespondingAuthor);
-							submissionAuthor.setIdSubmission(Integer.valueOf(lblLastSubmissionId.getText()));
-							submissionAuthor.setIdActivity(RiseEventsMainScreenP.facade.getActivityIdByName(comboBoxActivityName.getSelectedItem().toString()));
-							RiseEventsMainScreenP.facade.insertSubmissionAuthor(submissionAuthor);
 							//#endif
 							JOptionPane.showMessageDialog(getContentPane(),
 									"Submission inserida com sucesso", "Sucesso",
@@ -461,12 +378,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							e1.printStackTrace();
 						}
 						//#if ${InsertAuthors} == "T"
-						 catch (SubmissionAuthorAlreadyInsertedException e1) {
-							JOptionPane.showMessageDialog(getContentPane(),
-									e1.toString(), "Erro",
-									JOptionPane.INFORMATION_MESSAGE);
-							e1.printStackTrace();
-						}
 						//#endif
 
 

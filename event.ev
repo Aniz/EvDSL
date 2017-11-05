@@ -1,6 +1,6 @@
 //gmail
 
-Create RiseEvents rise password
+	Create RiseEvents rise password
 
 add User
 	show Insert Update Search Remove ListAll
@@ -41,7 +41,7 @@ add Submission
 	show Search Remove ListAll
 	types Completa,Parcial.
 
-add Author
+//add Author
 
 add Assignment
 show Insert Search Remove ListAll Management
@@ -50,9 +50,9 @@ add CheckingCopy
 show Insert Update Remove Search ListAll Management
 	types Atestado,Certificado.
 
-addNew NewOption
-show Insert Update Remove Search ListAll
-types Atestado,Certificado.
+addNew NewOption 
+show Management
+types Type1,Type2.
 
 add Receipt
 show Management
@@ -88,3 +88,5 @@ def User -> sendBugTrackEmail
 //def Submission -> insertAuthors
 def Submission -> completeInsert
 def Submission -> partialInsert
+
+if Reviewer -> reviewRoundofReview

@@ -258,15 +258,15 @@ FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
 
 {% for key,value in data.items() %}
 {% if value.option.new %}
-Create table {{value.option.entity}}(
+Create table {{value.option.entity|lower}}(
 	id{{value.option.entity}} int(10) NOT NULL AUTO_INCREMENT,
-{% if value.categories|length > 0 %}
+{% if value.option.categories|length > 0 %}
 	type{{value.option.entity}} varchar(255) NOT NULL,
 {% endif %}				
 {% if value.option.properties|length > 0 %}{% for property in value.option.properties %}
 	{{property.name}} varchar(255) NOT NULL,
 {% endfor %}{% endif %}
-PRIMARY KEY (id{{value.entity}});
+PRIMARY KEY (id{{value.option.entity}}));
 {% endif %}
 {% endfor %}
 

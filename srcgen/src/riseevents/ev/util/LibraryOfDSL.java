@@ -48,12 +48,6 @@ import riseevents.ev.exception.SubmissionAlreadyInsertedException;
 import riseevents.ev.exception.SubmissionNotFoundException;
 import riseevents.ev.repository.SubmissionRepository;
 import riseevents.ev.repository.SubmissionRepositoryBDR;
-import riseevents.ev.data.Author;
-import riseevents.ev.business.AuthorControl;
-import riseevents.ev.exception.AuthorAlreadyInsertedException;
-import riseevents.ev.exception.AuthorNotFoundException;
-import riseevents.ev.repository.AuthorRepository;
-import riseevents.ev.repository.AuthorRepositoryBDR;
 import riseevents.ev.data.Assignment;
 import riseevents.ev.business.AssignmentControl;
 import riseevents.ev.exception.AssignmentAlreadyInsertedException;
@@ -102,12 +96,6 @@ import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
 import riseevents.ev.exception.ActivityOrganizerNotFoundException;
 import riseevents.ev.repository.ActivityOrganizerRepository;
 import riseevents.ev.repository.ActivityOrganizerRepositoryBDR;
-import riseevents.ev.data.SubmissionAuthor;
-import riseevents.ev.business.SubmissionAuthorControl;
-import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
-import riseevents.ev.exception.SubmissionAuthorNotFoundException;
-import riseevents.ev.repository.SubmissionAuthorRepository;
-import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
 import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.business.SubmissionUserControl;
 import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
@@ -139,19 +127,15 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	public static Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
+	public static Boolean automaticInterestConflict( User usersub, User user){
 		
-		String authorFiliation = null;
 		String reviewerFiliation = null;
-		String userFiliation = null;
-				
-		authorFiliation = authorSubmission.getFiliation();
 		reviewerFiliation = user.getFiliation();
-		userFiliation = user.getFiliation();
 		
-		if(authorFiliation.equals(reviewerFiliation)){
-			return true;
-		}
+		String userFiliation = null;		
+		userFiliation = user.getFiliation();
+
+				
 		if(usersub.equals(userFiliation)){
 			return true;
 		}
@@ -252,7 +236,6 @@ public class LibraryOfDSL {
 			mensagem = "Infelizmente Seu papper nao foi Aceito no evento.";
 		}
 		
-		//#if ${ReviewRoundofReview} == "T" and ${NotificationsAceptanceRejection} == "T" 
 		if(review.getResult().equals("Em Analise")){
 			assunto = "Resultado Round Review Papper!";
 			mensagem = "O round de revisão atual de seu papper é" + review.getRound() + "como resultado deste round seu papper esta em analise seguem observacoes a serem corrigidas: " + review.getDescription() + "  Use este numero de identificacao para atualizar correcoes solicitadas na revisao" + review.getIdReview();

@@ -26,14 +26,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 
-import riseevents.ev.data.Author;
-import riseevents.ev.business.AuthorControl;
-import riseevents.ev.exception.AuthorAlreadyInsertedException;
-import riseevents.ev.exception.AuthorNotFoundException;
-import riseevents.ev.repository.AuthorRepository;
-import riseevents.ev.repository.AuthorRepositoryBDR;
 import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.business.SubmissionUserControl;
 import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
@@ -70,10 +67,6 @@ import riseevents.ev.data.User;
 import riseevents.ev.data.Review;
 import riseevents.ev.data.Review.StatusReview;
 import riseevents.ev.exception.ReviewAlreadyInsertedException;
-import riseevents.ev.data.SubmissionAuthor;
-import riseevents.ev.data.Author;
-import riseevents.ev.exception.AuthorAlreadyInsertedException;
-import riseevents.ev.exception.AuthorNotFoundException;
 import riseevents.ev.data.Submission;
 import riseevents.ev.data.Reviewer;
 import riseevents.ev.exception.RepositoryException;
@@ -391,15 +384,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				RiseEventsMainScreenP.facade.insertAssignment(assignment2);
 				RiseEventsMainScreenP.facade.insertAssignment(assignment3);
 				
-				Author author = new Author();
-				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
-				submissionAuthor = RiseEventsMainScreenP.facade.getSubmissionAuthorList();
-							
-				for(SubmissionAuthor sa : submissionAuthor){
-					if(sa.getIdSubmission() == idSubmission){
-						author = RiseEventsMainScreenP.facade.searchAuthor(sa.getIdAuthor());
-					}
-				}
 				User user = new User();
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
@@ -412,9 +396,10 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
-				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
-				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
+				
+				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(user, reviewer1);
+				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(user, reviewer2);
+				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(user, reviewer3);
 				
 				if(resultAutomaticConflict1 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
@@ -464,13 +449,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			} 
-			catch (AuthorNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (AuthorAlreadyInsertedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 					
 			catch (UserNotFoundException e1) {
 				// TODO Auto-generated catch block

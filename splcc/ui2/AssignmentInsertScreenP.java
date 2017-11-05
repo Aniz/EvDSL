@@ -296,7 +296,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment2);
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment3);
 				
-				{% if 'Author' in extraData %}
+				{% if 'Author' in avaliableDict %}
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
 				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
@@ -308,8 +308,8 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				}
 				{% endif %}
 				
+				{% if 'SubmissionUser' in avaliableDict %}
 				User user = new User();
-				{% if 'SubmissionUser' in extraData %}
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUserList();
 							
@@ -320,14 +320,14 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				}
 				{% endif %}
 				
+				{% if "interestConflict" in data.statments %}
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				{% if "interestConflict" in data.statments %}
-				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
-				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
-				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
-				{% endif %}
+				
+				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer1);
+				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer2);
+				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer3);
 				
 				if(resultAutomaticConflict1 == true){
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -356,6 +356,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 					enviarEmails(reviewer3, submission, review3);
 				{% endif %}
 				}
+				{% endif %}
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -385,6 +386,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				
 			} 
 			//#if ${InsertAuthors} == "T"
+			{% if "Author" in avaliableDict %}
 			catch (AuthorNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -392,6 +394,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			{% endif %}
 			//#endif
 			catch (UserNotFoundException e1) {
 				// TODO Auto-generated catch block

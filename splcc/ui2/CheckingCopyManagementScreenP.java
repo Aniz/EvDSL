@@ -176,41 +176,41 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	{% if 'Insert' in data.commands %}
 		InsertButtonAction insertAction = new InsertButtonAction(); 
 		JButton btnInsert = new JButton("Insert");
-		btnInsert.setBounds(6, 273, 117, 29);
+		btnInsert.setBounds(6, 296, 117, 29);
 		contentPane.add(btnInsert);
 		btnInsert.addActionListener(insertAction);
 	{% endif %}
 	{% if 'Remove' in data.commands %}
 		RemoveButtonAction removeAction = new RemoveButtonAction(); 
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.setBounds(127, 273, 117, 29);
+		btnRemove.setBounds(127, 296, 117, 29);
 		contentPane.add(btnRemove);
 		btnRemove.addActionListener(removeAction);
 	{% endif %}
 	{% if 'Update' in data.commands %}
 		UpdateButtonAction updateAction = new UpdateButtonAction();
 		JButton btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(248, 273, 117, 29);
+		btnUpdate.setBounds(248, 296, 117, 29);
 		contentPane.add(btnUpdate);
 		btnUpdate.addActionListener(updateAction);
 	{% endif %}
 	{% if 'Search' in data.commands %}
 		SelectButtonAction selectAction = new SelectButtonAction(); 
 		JButton btnSelect = new JButton("Select");
-		btnSelect.setBounds(377, 273, 117, 29);
+		btnSelect.setBounds(377, 296, 117, 29);
 		contentPane.add(btnSelect);
 		btnSelect.addActionListener(selectAction);
 	{% endif %}
 		
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		JButton btnClean = new JButton("Clean");
-		btnClean.setBounds(503, 273, 117, 29);
+		btnClean.setBounds(503, 296, 117, 29);
 		contentPane.add(btnClean);
 		btnClean.addActionListener(cleanAction);
 
 		BackButtonAction backAction = new BackButtonAction();
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(611, 273, 117, 29);
+		btnBack.setBounds(621, 237, 117, 29);
 		contentPane.add(btnBack);
 		btnBack.addActionListener(backAction);
 		
