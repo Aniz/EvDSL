@@ -197,7 +197,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 
 		BackButtonAction backAction = new BackButtonAction();
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(621, 237, 117, 29);
+		btnBack.setBounds(621, 296, 117, 29);
 		contentPane.add(btnBack);
 		btnBack.addActionListener(backAction);
 		

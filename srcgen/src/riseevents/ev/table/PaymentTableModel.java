@@ -34,7 +34,7 @@ public class PaymentTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 11 +1;
+			return 7 +1;
 		}
 		
 		//Preenchimento de cada coluna

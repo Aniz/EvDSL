@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -52,7 +53,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 	private JLabel lblData;
 	
 	{% if data.option.categories|length > 0 %}	
-	JComboBox<String> comboBoxTypePayment;
+	JComboBox<String> comboBoxType;
 	{% endif %}
 	JComboBox<String> comboBoxStatusPayment;
 	JComboBox<Integer> comboBoxIdRegistration;
@@ -62,6 +63,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 	JButton btnUpdate;
 	JButton btnSelect;
 	JButton btnClean;
+	JButton btnBack;
 	
 
 	 public static PaymentManagementScreenP getInstancePaymentManagementScreenP() {
@@ -88,13 +90,6 @@ public class PaymentManagementScreenP extends JInternalFrame{
 	 * Create the frame.
 	 */
 	public PaymentManagementScreenP() {
-		
-		InsertButtonAction insertAction = new InsertButtonAction(); 
-		RemoveButtonAction removeAction = new RemoveButtonAction(); 
-		UpdateButtonAction updateAction = new UpdateButtonAction();
-		SelectButtonAction selectAction = new SelectButtonAction(); 
-		CleanButtonAction cleanAction = new CleanButtonAction();
-		BackButtonAction backAction = new BackButtonAction();
 		
 		setTitle("Payment Management");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,9 +118,9 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		
 		{% if data.option.categories|length > 0 %}
 
-		comboBoxType{{data.option.entity}} = new JComboBox<String>();
-		comboBoxType{{data.option.entity}}.setBounds(139, 61, 128, 27);
-		panel_1.add(comboBoxTypePayment);
+		comboBoxType = new JComboBox<String>();
+		comboBoxType.setBounds(139, 61, 128, 27);
+		panel_1.add(comboBoxType);
 		
 		JLabel lblType{{data.option.entity}} = new JLabel("Tipo de Pagamento:");
 		lblType{{data.option.entity}}.setBounds(6, 65, 128, 16);
@@ -182,39 +177,65 @@ public class PaymentManagementScreenP extends JInternalFrame{
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		btnInsert = new JButton("Insert");
-		btnInsert.setBounds(74, 296, 117, 29);
+	{% if 'Insert' in data.commands %}
+		InsertButtonAction insertAction = new InsertButtonAction(); 
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.setBounds(6, 296, 117, 29);
 		contentPane.add(btnInsert);
-		
-		btnRemove = new JButton("Remove");
-		btnRemove.setBounds(214, 296, 117, 29);
-		contentPane.add(btnRemove);
-		
-		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(353, 296, 117, 29);
-		contentPane.add(btnUpdate);
-		
-		btnSelect = new JButton("Selection");
-		btnSelect.setBounds(489, 296, 117, 29);
-		contentPane.add(btnSelect);
-		
-		btnClean = new JButton("Clean");
-		btnClean.setBounds(630, 296, 117, 29);
-		contentPane.add(btnClean);
-		
-		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(320, 237, 117, 29);
-		getContentPane().add(btnBack);
-		
 		btnInsert.addActionListener(insertAction);
+	{% endif %}
+	{% if 'Remove' in data.commands %}
+		RemoveButtonAction removeAction = new RemoveButtonAction(); 
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.setBounds(127, 296, 117, 29);
+		contentPane.add(btnRemove);
 		btnRemove.addActionListener(removeAction);
+	{% endif %}
+	{% if 'Update' in data.commands %}
+		UpdateButtonAction updateAction = new UpdateButtonAction();
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.setBounds(248, 296, 117, 29);
+		contentPane.add(btnUpdate);
 		btnUpdate.addActionListener(updateAction);
+	{% endif %}
+	{% if 'Search' in data.commands %}
+		SelectButtonAction selectAction = new SelectButtonAction(); 
+		JButton btnSelect = new JButton("Select");
+		btnSelect.setBounds(377, 296, 117, 29);
+		contentPane.add(btnSelect);
 		btnSelect.addActionListener(selectAction);
+	{% endif %}
+		
+		CleanButtonAction cleanAction = new CleanButtonAction();
+		JButton btnClean = new JButton("Clean");
+		btnClean.setBounds(503, 296, 117, 29);
+		contentPane.add(btnClean);
 		btnClean.addActionListener(cleanAction);
+
+		BackButtonAction backAction = new BackButtonAction();
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(621, 296, 117, 29);
+		contentPane.add(btnBack);
 		btnBack.addActionListener(backAction);
 		
 		populateTable();
 		
+		TypePayment[] types = TypePayment.values();
+		List<String> names = new ArrayList<String>();
+		for(int i=0; i<types.length; i++){
+			names.add(i, types[i].name());
+			comboBoxType.addItem(types[i].name());
+		}
+
+		StatusPayment[] statusArray = StatusPayment.values();
+		List<String> statusNames = new ArrayList<String>();
+		for(int i=0; i<statusArray.length; i++){
+			statusNames.add(i, statusArray[i].name());
+			comboBoxStatusPayment.addItem(statusArray[i].name());
+		}
+		
+		carregarRegistrationComboBox();
+
 		String data = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		lblData.setText(data);
 		
@@ -351,7 +372,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 				float value = Float.valueOf(textFieldValuePayment.getText());
 				String type = "";
 				{% if data.option.categories|length > 0 %}
-				type = comboBoxType{{data.option.entity}}.getSelectedItem().toString();
+				type = comboBoxType.getSelectedItem().toString();
 				{% endif %}
 
 				//int resultado = 0;
@@ -428,7 +449,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 					Integer registrationId = Integer.parseInt(comboBoxIdRegistration.getSelectedItem().toString());
 					String type = "";
 					{% if data.option.categories|length > 0 %}	
-					type = comboBoxTypePayment.getSelectedItem().toString();
+					type = comboBoxType.getSelectedItem().toString();
 					{% endif %}
 					String status = comboBoxStatusPayment.getSelectedItem().toString();
 					String date = lblData.getText();
@@ -502,7 +523,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 					comboBoxIdRegistration.setSelectedItem(String.valueOf(payment.getIdRegistration()));
 					comboBoxStatusPayment.setSelectedItem(String.valueOf(payment.getStatus()));
 					{% if data.option.categories|length > 0 %}	
-					comboBoxTypePayment.setSelectedItem(String.valueOf(payment.getTypePayment()));
+					comboBoxType.setSelectedItem(String.valueOf(payment.getTypePayment()));
 					{% endif %}
 					lblData.setText(payment.getDate());
 					textFieldBarCode.setText(payment.getBarcode());
@@ -573,7 +594,7 @@ public class PaymentManagementScreenP extends JInternalFrame{
 			
 			comboBoxIdRegistration.setSelectedItem("");
 			{% if data.option.categories|length > 0 %}	
-			comboBoxTypePayment.setSelectedItem("");
+			comboBoxType.setSelectedItem("");
 			{% endif %}
 			comboBoxStatusPayment.setSelectedItem("");
 			lblData.setText("");
@@ -582,6 +603,21 @@ public class PaymentManagementScreenP extends JInternalFrame{
 			
 		}
 		
+		private void carregarRegistrationComboBox(){
+			try {
+				List<Registration> list = {{systemName}}MainScreenP.facade.getRegistrationList();
+				Iterator<Registration> iterator = list.iterator();
+				while(iterator.hasNext()){
+					comboBoxIdRegistration.addItem(iterator.next().getIdRegistration());
+				}
+			} catch (RepositoryException e) {
+				JOptionPane.showMessageDialog(getContentPane(),
+						e.toString(), "Erro",
+						JOptionPane.INFORMATION_MESSAGE);
+				e.printStackTrace();
+			}
+		}
+
 		private class BackButtonAction  implements ActionListener{ 
 
 			@Override
