@@ -12,28 +12,34 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
+{% if "Activity" in avaliableDict %}
 import {{systemName|lower}}.ev.data.Activity;
-//#if ${InsertAuthors} == "T"
+{% endif %}
+
+{% if "Author" in avaliableDict %}
 import {{systemName|lower}}.ev.data.Author;
-//#endif
-import {{systemName|lower}}.ev.data.Submission;
-//#if ${InsertAuthors} == "T"
 import {{systemName|lower}}.ev.data.SubmissionAuthor;
-//#endif
-import {{systemName|lower}}.ev.data.SubmissionUser;
-import {{systemName|lower}}.ev.data.User;
-import {{systemName|lower}}.ev.data.Submission.TypeSubmission;
-//#if ${InsertAuthors} == "T"
 import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
-//#endif
-import {{systemName|lower}}.ev.exception.RepositoryException;
-
-import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
-//#if ${InsertAuthors} == "T"
 import {{systemName|lower}}.ev.exception.SubmissionAuthorAlreadyInsertedException;
+{% endif %}
 
-//#endif
+{% if "Submission" in avaliableDict %}
+import {{systemName|lower}}.ev.data.Submission;
+import {{systemName|lower}}.ev.data.Submission.TypeSubmission;
+import {{systemName|lower}}.ev.exception.SubmissionAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.SubmissionNotFoundException;
+{% endif %}
+
+{% if "User" in avaliableDict %}
+import {{systemName|lower}}.ev.data.User;
+{% endif %}
+
+{% if "SubmissionUser" in avaliableDict %}
+import {{systemName|lower}}.ev.data.SubmissionUser;
 import {{systemName|lower}}.ev.exception.SubmissionUserAlreadyInsertedException;
+{% endif %}
+
+import {{systemName|lower}}.ev.exception.RepositoryException;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -41,10 +47,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class SubmissionPartialInsertScreenP extends JInternalFrame {
-
-	
-	
-	
 	
 	private static SubmissionPartialInsertScreenP instanceSubmissionPartialInsertScreenP;
 	private JTextField textFieldTitle;
@@ -103,7 +105,9 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		BackButtonAction backAction = new BackButtonAction();
 		
 		//#if ${InsertAuthors} == "T"
+		{% if "Author" in avaliableDict %}
 		InsertNewAuthorButtonAction insertNewAuthorAction = new InsertNewAuthorButtonAction();
+		{% endif %}
 		//#endif
 		
 		SelectComboUserAction selectUserAction = new SelectComboUserAction();
@@ -167,6 +171,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		getContentPane().add(textFieldKeywords);
 		textFieldKeywords.setColumns(10);
 		
+		{% if "Author" in avaliableDict %}
 		JLabel label = new JLabel("Author Name:");
 		label.setBounds(43, 357, 87, 16);
 		getContentPane().add(label);
@@ -205,7 +210,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		JButton btnInsertNewAuthor = new JButton("Insert New Author");
 		btnInsertNewAuthor.setBounds(208, 470, 141, 29);
 		getContentPane().add(btnInsertNewAuthor);
-		
+		{% endif %}
 		JButton btnInsert = new JButton("Submit");
 		btnInsert.setBounds(364, 470, 117, 29);
 		getContentPane().add(btnInsert);
@@ -221,19 +226,18 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		btnInsert.addActionListener(insertAction);
 		btnBack.addActionListener(backAction);
 		//#if ${InsertAuthors} == "T"
+		{% if "Author" in avaliableDict %}
 		btnInsertNewAuthor.addActionListener(insertNewAuthorAction);
+		loadLastAuthorIndex();
+		{% endif %}
 		//#endif
-		
-
+	
 		// Retirada de Login
 		comboBoxUser.addActionListener(selectUserAction);
 		//Retirada Login
 	    carregarComboUser();
 		
 		loadLastIndex();
-		//#if ${InsertAuthors} == "T"
-		loadLastAuthorIndex();
-		//#endif
 		carregarComboBoxTipo();
 		carregarComboBoxActivity();
 		
@@ -246,7 +250,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 			private void carregarComboUser(){
 				try {
 					List<User> list;
-					list = {{systemName}}MainScreenP.facade.getUserList);
+					list = {{systemName}}MainScreenP.facade.getUserList();
 					Iterator<User> iterator = list.iterator();
 					while(iterator.hasNext()){
 						comboBoxUser.addItem(iterator.next().getNameUser());
@@ -290,6 +294,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 			}
 		}
 		//#if ${InsertAuthors} == "T"
+		{% if "Author" in avaliableDict %}
 		private void loadLastAuthorIndex(){
 			try {
 				lblIdAuthor.setText(String.valueOf({{systemName}}MainScreenP.facade.getAuthorLastId()));
@@ -300,6 +305,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 				e.printStackTrace();
 			}
 		}
+		{% endif %}
 		//#endif
 		// retirada ne login
 //		private void pegarUsuarioLogado(){
@@ -332,6 +338,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		}
 		
 		//#if ${InsertAuthors} == "T"
+		{% if "Author" in avaliableDict %}
 		private class InsertNewAuthorButtonAction  implements ActionListener{ 
 
 			@Override
@@ -377,6 +384,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 				}
 			}
 		}
+		{% endif %}
 		//#endif
 		
 		private class InsertButtonAction  implements ActionListener{ 
@@ -405,7 +413,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							submission.setIdActivity({{systemName}}MainScreenP.facade.getActivityIdByName(nameActivity));
 							submission.setKeywords(keywords);
 							submission.setTitle(title);
-							submission.setType(TypeSubmission.valueOf(type));
+							submission.setTypeSubmission(TypeSubmission.valueOf(type));
 							
 							//Inserir na tabela de submissao
 							//estamos inserindo com o update pq usamos o insert para colocar o pdf no banco, attahcment com outros campos vazios,
@@ -415,7 +423,6 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							// que serao sempre novas(que nao estao no banco) submissoes q serao inseridas.
 							if(typeComboBox.getSelectedItem().toString().equals("Parcial"))
 								{{systemName}}MainScreenP.facade.insertSubmission(submission);
-							
 							
 							//Inserir na tabela de submissionUSER
 							//retirada tela login
@@ -428,6 +435,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							submissionUser.setIdActivity({{systemName}}MainScreenP.facade.getActivityIdByName(nameActivity));
 							{{systemName}}MainScreenP.facade.insertSubmissionUser(submissionUser);
 							//#if ${InsertAuthors} == "T"
+							{% if "Author" in avaliableDict %}
 							//Inserir na tabela de submissionAUTHORS
 							SubmissionAuthor submissionAuthor = new SubmissionAuthor();
 							//retirada tela login
@@ -438,6 +446,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							submissionAuthor.setIdSubmission(Integer.valueOf(lblLastSubmissionId.getText()));
 							submissionAuthor.setIdActivity({{systemName}}MainScreenP.facade.getActivityIdByName(comboBoxActivityName.getSelectedItem().toString()));
 							{{systemName}}MainScreenP.facade.insertSubmissionAuthor(submissionAuthor);
+							{% endif %}
 							//#endif
 							JOptionPane.showMessageDialog(getContentPane(),
 									"Submission inserida com sucesso", "Sucesso",
@@ -461,12 +470,14 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							e1.printStackTrace();
 						}
 						//#if ${InsertAuthors} == "T"
+						{% if "Author" in avaliableDict %}
 						 catch (SubmissionAuthorAlreadyInsertedException e1) {
 							JOptionPane.showMessageDialog(getContentPane(),
 									e1.toString(), "Erro",
 									JOptionPane.INFORMATION_MESSAGE);
 							e1.printStackTrace();
 						}
+						{% endif %}
 						//#endif
 
 

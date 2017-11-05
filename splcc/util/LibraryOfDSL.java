@@ -35,20 +35,23 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	{% if "Author" in data and 'Assignment' in extraData and 'interestConflict' in statments  %}
-	public static Boolean automaticInterestConflict(Author authorSubmission,  User usersub, User user){
+	{% if 'Assignment' in data and 'interestConflict' in statments  %}
+	public static Boolean automaticInterestConflict({% if "Author" in data %}Author authorSubmission,{% endif %} User usersub, User user){
 		
-		String authorFiliation = null;
 		String reviewerFiliation = null;
-		String userFiliation = null;
-				
-		authorFiliation = authorSubmission.getFiliation();
 		reviewerFiliation = user.getFiliation();
-		userFiliation = user.getFiliation();
 		
+		String userFiliation = null;		
+		userFiliation = user.getFiliation();
+
+		{% if "Author" in data %}
+		String authorFiliation = null;
+		authorFiliation = authorSubmission.getFiliation();
 		if(authorFiliation.equals(reviewerFiliation)){
 			return true;
 		}
+		{% endif%}
+				
 		if(usersub.equals(userFiliation)){
 			return true;
 		}
@@ -59,7 +62,7 @@ public class LibraryOfDSL {
 	{% endif %}
 	
 	{% if "Review" in extraData and "User" in data %}
-	{% if 'notificationsDeadline' in statments or 'notificationsPaperAssignemnt' in statments or 'notificationsAceptanceRejection' in statments %}
+	{% if 'notificationsDeadline' in statments or 'notificationsPaperAssignemnt' in statments or 'notificationsAceptanceRejection' in statments or "Assignment" in data %}
 	public static void sendNotification(User user, Review review) throws EmailException{
 
 		{% if 'notificationsDeadline' in statments %}
@@ -165,11 +168,12 @@ public class LibraryOfDSL {
 			mensagem = "Infelizmente Seu papper nao foi Aceito no evento.";
 		}
 		
-		//#if ${ReviewRoundofReview} == "T" and ${NotificationsAceptanceRejection} == "T" 
+		{% if 'reviewRoundofReview' in statments and 'notificationsAceptanceRejection' in statments %}
 		if(review.getResult().equals("Em Analise")){
 			assunto = "Resultado Round Review Papper!";
 			mensagem = "O round de revisão atual de seu papper é" + review.getRound() + "como resultado deste round seu papper esta em analise seguem observacoes a serem corrigidas: " + review.getDescription() + "  Use este numero de identificacao para atualizar correcoes solicitadas na revisao" + review.getIdReview();
 		}
+		{% endif %}
 		//#endif
 		
 		SimpleEmail email = new SimpleEmail(); 

@@ -31,17 +31,17 @@ public class {{data.option.entity}}Control {
         }
   }
 
-  {% if 'Remove' in data.commands %}
+  {% if 'Remove' in data.commands or 'Management' in data.commands %}
   public void remove(int id{{data.option.entity}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException, {{data.option.entity}}NotFoundException{
     {{data.option.entity|lower}}List.remove(id{{data.option.entity}});
   }
   {% endif %}
-  {% if 'Update' in data.commands %}
+  {% if 'Update' in data.commands or 'Management' in data.commands %}
   public void update({{data.option.entity}} {{data.option.entity}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException, {{data.option.entity}}NotFoundException{
   {{data.option.entity|lower}}List.update({{data.option.entity}});
   }
   {% endif %}
-  {% if 'Search' in data.commands %}
+  {% if 'Search' in data.commands or 'Management' in data.commands %}
   public {{data.option.entity}} search(int id{{data.option.entity}}) throws {{data.option.entity}}AlreadyInsertedException, RepositoryException, {{data.option.entity}}NotFoundException{
     return {{data.option.entity|lower}}List.search(id{{data.option.entity}});
   }
@@ -55,7 +55,7 @@ public class {{data.option.entity}}Control {
     return {{data.option.entity|lower}}List.get{{data.option.entity}}LastId();
   }
   
-  {% if 'ListAll' in data.commands %}
+  {% if 'ListAll' in data.commands or 'Management' in data.commands %}
   public List<{{data.option.entity}}> get{{data.option.entity}}List() throws RepositoryException {
     return {{data.option.entity|lower}}List.get{{data.option.entity}}List();  
   } 

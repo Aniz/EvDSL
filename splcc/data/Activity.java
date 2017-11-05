@@ -199,7 +199,7 @@ public class Activity {
 	}
 	{% endif %}
 
-	{% if 'reportsListofAuthors' in data.statments %}
+	{% if 'reportsListOfAuthors' in data.statments %}
 	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity) throws DocumentException, IOException{
 		
 		List<String> authors = new ArrayList<String>(authorsPerActivity);

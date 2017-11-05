@@ -1,11 +1,11 @@
 package riseevents.ev.ui2;
-import riseevents.ev.util.LibraryOfDSL;
 
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -22,38 +22,34 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import riseevents.ev.data.NewOption;
-import riseevents.ev.business.NewOptionControl;
+import riseevents.ev.data.NewOption.TypeNewOption;
+import riseevents.ev.data.Registration;
+import riseevents.ev.data.User;
 import riseevents.ev.exception.NewOptionAlreadyInsertedException;
 import riseevents.ev.exception.NewOptionNotFoundException;
-import riseevents.ev.repository.NewOptionRepository;
-import riseevents.ev.repository.NewOptionRepositoryBDR;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.table.NewOptionTableModel;
 
 public class NewOptionManagementScreenP extends JInternalFrame{
 
 	private static NewOptionManagementScreenP instanceNewOptionManagementScreenP;
-	private JTextField textFieldDate;
-	private JTextField textFieldDescription;
 	private JPanel contentPane;
 	private JTable table;
 	private JScrollPane scrollPane;
 	
-	private JButton btnBack;
-	
-	JComboBox<String> newoptionIdcomboBox;
-	JComboBox<String> statusComboBox;
+	JComboBox<String> typeComboBox;
 	
 	JButton btnInsert;
 	JButton btnRemove;
 	JButton btnUpdate;
 	JButton btnSelect;
 	JButton btnClean;
+	JButton btnBack;
 	
 	JLabel lblLastNewOptionId;
-	private JTextField textFieldNewOptionId;
 	
-
+	private JComboBox comboBoxTypeNewOption;
+	
 	 public static NewOptionManagementScreenP getInstanceNewOptionManagementScreenP() {
 		 if (instanceNewOptionManagementScreenP == null) {
 			 NewOptionManagementScreenP.instanceNewOptionManagementScreenP = new NewOptionManagementScreenP();
@@ -79,13 +75,6 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 	 */
 	public NewOptionManagementScreenP() {
 		
-		InsertButtonAction insertAction = new InsertButtonAction(); 
-		RemoveButtonAction removeAction = new RemoveButtonAction(); 
-		UpdateButtonAction updateAction = new UpdateButtonAction();
-		SelectButtonAction selectAction = new SelectButtonAction(); 
-		CleanButtonAction cleanAction = new CleanButtonAction();
-		BackButtonAction backAction = new BackButtonAction();
-		
 		setTitle("NewOption Management");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 841, 513);
@@ -107,56 +96,25 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 		panel.add(lblImage);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(6, 99, 789, 189);
+		panel_1.setBounds(6, 99, 829, 189);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
-		JLabel lblNewOptionId = new JLabel("NewOption Id:");
-		lblNewOptionId.setBounds(6, 6, 69, 16);
+	
+		JLabel lblNewOptionId = new JLabel("NewOption ID:");
+		lblNewOptionId.setBounds(6, 20, 120, 16);
 		panel_1.add(lblNewOptionId);
 		
 		lblLastNewOptionId = new JLabel("");
-		lblLastNewOptionId.setBounds(79, 6, 61, 16);
+		lblLastNewOptionId.setBounds(128, 20, 61, 16);
 		panel_1.add(lblLastNewOptionId);
 		
-		JLabel lblNewOptionId = new JLabel("NewOption Id:");
-		lblNewOptionId.setBounds(6, 49, 104, 16);
-		panel_1.add(lblNewOptionId);
+		typeComboBox = new JComboBox<String>();
+		typeComboBox.setBounds(248, 83, 134, 27);
+		panel_1.add(typeComboBox);
 		
-		newoptionIdcomboBox = new JComboBox<String>();
-		newoptionIdcomboBox.setBounds(102, 45, 84, 27);
-		panel_1.add(newoptionIdcomboBox);
-		
-		JLabel lblStatus = new JLabel("Status:");
-		lblStatus.setBounds(205, 49, 61, 16);
-		panel_1.add(lblStatus);
-		
-		JLabel lblDate = new JLabel("Date:");
-		lblDate.setBounds(420, 49, 61, 16);
-		panel_1.add(lblDate);
-		
-		textFieldDate = new JTextField();
-		textFieldDate.setBounds(465, 43, 134, 28);
-		panel_1.add(textFieldDate);
-		textFieldDate.setColumns(10);
-		
-		statusComboBox = new JComboBox<String>();
-		statusComboBox.setBounds(262, 45, 134, 27);
-		panel_1.add(statusComboBox);
-		
-		JLabel lblDescription = new JLabel("Description:");
-		lblDescription.setBounds(6, 126, 104, 16);
-		panel_1.add(lblDescription);
-		
-		textFieldDescription = new JTextField();
-		textFieldDescription.setBounds(95, 120, 504, 28);
-		panel_1.add(textFieldDescription);
-		textFieldDescription.setColumns(10);
-		
-		textFieldNewOptionId = new JTextField();
-		textFieldNewOptionId.setBounds(74, 0, 134, 28);
-		panel_1.add(textFieldNewOptionId);
-		textFieldNewOptionId.setColumns(10);
+		JLabel lblType = new JLabel("Type:");
+		lblType.setBounds(205, 87, 61, 16);
+		panel_1.add(lblType);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(6, 327, 829, 158);
@@ -164,82 +122,79 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 		panel_2.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 6, 800, 121);
+		scrollPane.setBounds(6, 6, 817, 146);
 		panel_2.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		btnInsert = new JButton("Insert");
-		btnInsert.setBounds(26, 296, 117, 29);
+		InsertButtonAction insertAction = new InsertButtonAction(); 
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.setBounds(6, 296, 117, 29);
 		contentPane.add(btnInsert);
-		
-		btnRemove = new JButton("Remove");
-		btnRemove.setBounds(166, 296, 117, 29);
-		contentPane.add(btnRemove);
-		
-		btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(305, 296, 117, 29);
-		contentPane.add(btnUpdate);
-		
-		btnSelect = new JButton("Selection");
-		btnSelect.setBounds(441, 296, 117, 29);
-		contentPane.add(btnSelect);
-		
-		btnClean = new JButton("Clean");
-		btnClean.setBounds(570, 296, 117, 29);
-		contentPane.add(btnClean);
-		
 		btnInsert.addActionListener(insertAction);
+	
+		RemoveButtonAction removeAction = new RemoveButtonAction(); 
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.setBounds(127, 296, 117, 29);
+		contentPane.add(btnRemove);
 		btnRemove.addActionListener(removeAction);
+	
+		UpdateButtonAction updateAction = new UpdateButtonAction();
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.setBounds(248, 296, 117, 29);
+		contentPane.add(btnUpdate);
 		btnUpdate.addActionListener(updateAction);
+	
+		SelectButtonAction selectAction = new SelectButtonAction(); 
+		JButton btnSelect = new JButton("Select");
+		btnSelect.setBounds(377, 296, 117, 29);
+		contentPane.add(btnSelect);
 		btnSelect.addActionListener(selectAction);
+
+		CleanButtonAction cleanAction = new CleanButtonAction();
+		JButton btnClean = new JButton("Clean");
+		btnClean.setBounds(503, 296, 117, 29);
+		contentPane.add(btnClean);
 		btnClean.addActionListener(cleanAction);
-		
-		btnBack = new JButton("Back");
-		btnBack.setBounds(694, 296, 117, 29);
-		getContentPane().add(btnBack);
-		
+
+		BackButtonAction backAction = new BackButtonAction();
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(621, 296, 117, 29);
+		contentPane.add(btnBack);
 		btnBack.addActionListener(backAction);
-
 		
-		carregarComboBoxStatus();
-
-		carregarComboBoxIdNewOption();
+		//Retirada Login
+		loadLastIndex();
+			carregarComboBoxTypeNewOption();
 		populateTable();
 	}
 	
-	private void carregarComboBoxStatus(){
-		TypeNewOption[] status = TypeNewOption.values();
-		List<String> statusnewoptions = new ArrayList<String>();
-		for(int i=0; i<status.length; i++){
-			statusnewoptions.add(i, status[i].name());
-			statusComboBox.addItem(status[i].name());
-		}
-	}
-	
-	private void carregarComboBoxIdNewOption(){
-		List<NewOption> newoption = new ArrayList<NewOption>();
+	private void loadLastIndex(){
 		try {
-			NewOption = RiseEventsMainScreenP.facade.getNewOptionList();
-		} catch (RepositoryException ex) {
+			lblLastNewOptionId.setText(String.valueOf(RiseEventsMainScreenP.facade.getNewOptionLastId()));
+		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
-					ex.toString(), "Erro",
+					e.toString(), "Erro",
 					JOptionPane.INFORMATION_MESSAGE);
-			ex.printStackTrace();
+			e.printStackTrace();
 		}
-		
-		for(NewOption entity : newoption){
-			newoptionIdcomboBox.addItem(String.valueOf(entity.getIdNewOption()));
+	}
+	
+	private void carregarComboBoxTypeNewOption(){
+		TypeNewOption[] types = TypeNewOption.values();
+		List<String> typescheckingcopys = new ArrayList<String>();
+		for(int i=0; i<types.length; i++){
+			typescheckingcopys.add(i, types[i].name());
+			typeComboBox.addItem(types[i].name());
 		}
 		
 	}
-	
 	
 	private void populateTable(){
 		try {
 			NewOptionTableModel model;
-			model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions());
+			model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
 			table.setModel(model);
 		} catch (RepositoryException e) {
 			JOptionPane.showMessageDialog(getContentPane(),
@@ -250,198 +205,147 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 	}
 	
 	private void cleanFields() {
-		textFieldDate.setText("");
-		textFieldDescription.setText("");
+	
 		btnInsert.setEnabled(true);
 	}
 	
-	
-	//INSERINDO UMA REVIEW
-	private class InsertButtonAction  implements ActionListener{ 
+	//INSERINDO UM CHECKING COPY 
+		private class InsertButtonAction  implements ActionListener{ 
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			
-			NewOption newoption = null;
-			
-			Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
-			StatusNewOption status = StatusNewOption.valueOf(statusComboBox.getSelectedItem().toString());
-			String date = textFieldDate.getText();
-			String description  = textFieldDescription.getText();
-			
-			//int resultado = 0;
-			if (newoptionId.equals("") || status.equals("") || date.equals("")
-					|| description.equals("") ) {
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Não pode haver campo vazio.", "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-				return;
-			} else {					
-				try {
-					
-					newoption = new NewOption();
-					newoption.setIdNewOption(newoptionId);
-					newoption.setDate(date);
-					newoption.setDescription(description);
-					newoption.setStatus(status);
-					
-					//Atualizar JTable
-					NewOptionTableModel model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions());
-					
-					RiseEventsMainScreenP.facade.insertNewOption(newoption); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NewOption NewOption = null;
 				
+				TypeNewOption typenewoption = TypeNewOption.valueOf(comboBoxTypeNewOption.getSelectedItem().toString());
+				
+					try {
+						
+						NewOption = new NewOption();
+							NewOption.setTypeNewOption(TypeNewOption.valueOf(typenewoption.toString()));
+							
+						//Atualizar JTable
+						NewOptionTableModel model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
+						
+						RiseEventsMainScreenP.facade.insertNewOption(NewOption); //isso obriga que o programa seja executado a partir da tela main screen, caso ele seja iniciado da tela de login ficaria RISEEVENTLOGINSCREEN.facade....
+					
+						model.addNewOption(NewOption);
+						table.setModel(model);
 
-							//(NewOptionTableModel) table.getModel();
-					model.addNewOption(newoption);
+						// Limpar campos
+						cleanFields();
+
+					} catch (NewOptionAlreadyInsertedException e1) {
+						JOptionPane
+						.showMessageDialog(
+								getContentPane(),
+								"Já existe um Registro!",
+								"Registro Existente",
+								JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					} catch (RepositoryException e1) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								e1.toString(), "Erro",
+								JOptionPane.INFORMATION_MESSAGE);
+						e1.printStackTrace();
+					}
+			}
+		}
+		
+		private class RemoveButtonAction  implements ActionListener{ 
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int rowIndex = table.getSelectedRow();
+				
+				if(rowIndex == -1){
+					JOptionPane.showMessageDialog(getContentPane(),
+							"Selecione o Registro a ser removido!");
+					return;
+				}
+				
+				try {
+					NewOption NewOption = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList()).get(rowIndex);
+					RiseEventsMainScreenP.facade.removeNewOption(NewOption.getIdNewOption());
+					NewOptionTableModel model = (NewOptionTableModel) table.getModel();
+					model.removeNewOption(rowIndex);
 					table.setModel(model);
-
-					// Limpar campos
 					cleanFields();
 
-				} catch (NewOptionAlreadyInsertedException e1) {
-					JOptionPane
-					.showMessageDialog(
-							getContentPane(),
-							"Já existe uma revisao cadastrada com esse Registro!",
-							"Revisao Existente",
-							JOptionPane.ERROR_MESSAGE);
+				} catch (NewOptionNotFoundException e1) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							e1.toString(), "Erro",
+							JOptionPane.INFORMATION_MESSAGE);
 					e1.printStackTrace();
 				} catch (RepositoryException e1) {
 					JOptionPane.showMessageDialog(getContentPane(),
 							e1.toString(), "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
 					e1.printStackTrace();
-				}
-				
-				
-			}
-
-			
-		}
-	}
-	
-	private class RemoveButtonAction  implements ActionListener{ 
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			int rowIndex = table.getSelectedRow();
-			
-			if(rowIndex == -1){
-				JOptionPane.showMessageDialog(getContentPane(),
-						"Selecione a Revisao a ser removida!");
-				return;
-			}
-			
-			try {
-				NewOption newoption = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions()).get(rowIndex);
-				RiseEventsMainScreenP.facade.removeNewOption(newoption.getIdNewOption());
-				NewOptionTableModel model = (NewOptionTableModel) table.getModel();
-				model.removeNewOption(rowIndex);
-				table.setModel(model);
-				
-				cleanFields();
-
-			} catch (NewOptionNotFoundException e1) {
-				JOptionPane.showMessageDialog(getContentPane(),
-						e1.toString(), "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-				e1.printStackTrace();
-			} catch (RepositoryException e1) {
-				JOptionPane.showMessageDialog(getContentPane(),
-						e1.toString(), "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-				e1.printStackTrace();
-			} catch (NewOptionAlreadyInsertedException e1) {
-				JOptionPane.showMessageDialog(getContentPane(),
-						e1.toString(), "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-				e1.printStackTrace();
-			}
-			
-		}
-	}
-	
-	private class UpdateButtonAction  implements ActionListener{ 
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		int rowIndex = table.getSelectedRow();
-			
-			
-			try {
-
-				
-				Integer newoptionId = Integer.parseInt(newoptionIdcomboBox.getSelectedItem().toString());
-				StatusNewOption status = StatusNewOption.valueOf(statusComboBox.getSelectedItem().toString());
-				String date = textFieldDate.getText();
-				String description  = textFieldDescription.getText();
-				
-				if (newoptionId.equals("") || status.equals("") || date.equals("")
-						|| description.equals("") ) {
+				} catch (NewOptionAlreadyInsertedException e1) {
 					JOptionPane.showMessageDialog(getContentPane(),
-							"Não pode haver campo vazio.", "Erro",
+							e1.toString(), "Erro",
 							JOptionPane.INFORMATION_MESSAGE);
-					return;
-
-				} else {
-					
-					NewOption newoptionNew = new NewOption();
-					newoptionNew.setIdNewOption(newoptionId);
-					newoptionNew.setDate(date);
-					newoptionNew.setDescription(description);
-					newoptionNew.setStatus(status);
-					
-					try {
-						RiseEventsMainScreenP.facade.updateNewOption(newoptionNew);
-						NewOptionTableModel model;
-						model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions());
-						table.setModel(model);
-					} catch (NewOptionNotFoundException e1) {
-						JOptionPane
-						.showMessageDialog(
-								getContentPane(),
-								"Revisao que está tentando alterar não existe!",
-								"Revisao Inexistente",
-								JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
-					} catch (NewOptionAlreadyInsertedException e1) {
-						JOptionPane.showMessageDialog(getContentPane(),
-								e1.toString(), "Erro",
-								JOptionPane.INFORMATION_MESSAGE);
-						e1.printStackTrace();
-					}
-					
+					e1.printStackTrace();
 				}
-				
-			} catch (RepositoryException e1) {
-				JOptionPane.showMessageDialog(getContentPane(),
-						e1.toString(), "Erro",
-						JOptionPane.INFORMATION_MESSAGE);
-				e1.printStackTrace();
 			}
-			
-			
 		}
-	}
-	
-	private class SelectButtonAction  implements ActionListener{ 
+		
+		private class UpdateButtonAction  implements ActionListener{ 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			int rowIndex = table.getSelectedRow();
+				
+				try {
 
+					String typeNewOption = comboBoxTypeNewOption.getSelectedItem().toString();
+					if (typeNewOption.equals("") ) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								"Não pode haver campo vazio.", "Erro",
+								JOptionPane.INFORMATION_MESSAGE);
+						return;
+					} else {
+						
+						NewOption NewOptionNew = new NewOption();
+							NewOptionNew.setTypeNewOption(TypeNewOption.valueOf(typeNewOption));
+						
+						try {
+							RiseEventsMainScreenP.facade.updateNewOption(NewOptionNew);
+							NewOptionTableModel model;
+							model = new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList());
+							table.setModel(model);
+						} catch (NewOptionNotFoundException e1) {
+							JOptionPane
+							.showMessageDialog(
+									getContentPane(),
+									"Registro Inexistente!",
+									"Registro Inexistente",
+									JOptionPane.ERROR_MESSAGE);
+							e1.printStackTrace();
+						} catch (NewOptionAlreadyInsertedException e1) {
+							JOptionPane.showMessageDialog(getContentPane(),
+									e1.toString(), "Erro",
+									JOptionPane.INFORMATION_MESSAGE);
+							e1.printStackTrace();
+						}
+					}
+				} catch (RepositoryException e1) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							e1.toString(), "Erro",
+							JOptionPane.INFORMATION_MESSAGE);
+					e1.printStackTrace();
+				}
+			}
+		}
+
+	private class SelectButtonAction  implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
 			int rowIndex = table.getSelectedRow();
-			NewOption newoptionOld = null;
-
+			NewOption NewOptionOld = null;
 			try {
-				newoptionOld=  new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptions()).get(rowIndex);
-			
-				lblLastNewOptionId.setText(String.valueOf(newoptionOld.getIdNewOption()));
-				newoptionIdcomboBox.setSelectedItem(newoptionOld.getIdNewOption());
-				statusComboBox.setSelectedItem(newoptionOld.getStatus());
-				textFieldDate.setText(newoptionOld.getDate());
-				textFieldDescription.setText(newoptionOld.getDescription());
+				NewOptionOld=  new NewOptionTableModel(RiseEventsMainScreenP.facade.getNewOptionList()).get(rowIndex);
+				lblLastNewOptionId.setText(String.valueOf(NewOptionOld.getIdNewOption()));
+				typeComboBox.setSelectedItem(NewOptionOld.getTypeNewOption());
 				
 			} catch (RepositoryException ex) {
 				JOptionPane.showMessageDialog(getContentPane(),
@@ -449,28 +353,24 @@ public class NewOptionManagementScreenP extends JInternalFrame{
 						JOptionPane.INFORMATION_MESSAGE);
 				ex.printStackTrace();
 			}
-			
 		}
 	}
 	
 	private class CleanButtonAction  implements ActionListener{ 
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-		cleanFields();
-			
+			cleanFields();
+			loadLastIndex();		
 		}
 	}
 	
 	private class BackButtonAction  implements ActionListener{ 
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
 			dispose();
 			NewOptionManagementScreenP.instanceNewOptionManagementScreenP = null;
 		}
 	}
-	
 }
 //#endif

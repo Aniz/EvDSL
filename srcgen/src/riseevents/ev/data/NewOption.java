@@ -8,8 +8,8 @@ public class NewOption {
 
   private TypeNewOption typeNewOption;
   public enum TypeNewOption{
-      Atestado,
-      Certificado
+      Type1,
+      Type2
   
   }
 

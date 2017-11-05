@@ -18,19 +18,19 @@ public class ReviewerTableModel extends AbstractTableModel{
 		private static final int COL_KNOWLEDGEAREA = 3;
 		
 		{% for property in data.option.properties %}
-		private static final int COL_{{property.name|upper}} ={{loop.index+3}};
+		private static final int COL_{{property.name|upper}} ={{loop.index+2}};
 		{% endfor %}
 		{% if data.option.categories|length > 0 %}
-		private static final int COL_TYPE{{data.option.entity|upper}} = {{4 + data.option.properties|length}};
+		private static final int COL_TYPE{{data.option.entity|upper}} = {{3 + data.option.properties|length}};
 		{% endif %}
 		
 		{% for property in extraData.option.properties %}
-		private static final int COL_{{property.name|upper}} ={{loop.index+3 + data.option.properties|length + (data.option.categories is defined)}};
+		private static final int COL_{{property.name|upper}} ={{loop.index+2 + data.option.properties|length + (data.option.categories is defined)}};
 		{% endfor %}
 		{% if extraData.option.categories|length > 0 %}
-		private static final int COL_TYPE{{extraData.option.entity|upper}} = {{4 + extraData.option.properties|length + extraData.option.properties|length  + (data.option.categories is defined)}};
+		private static final int COL_TYPE{{extraData.option.entity|upper}} = {{3 + extraData.option.properties|length + extraData.option.properties|length  + (data.option.categories is defined)}};
 		{% endif %}
-		
+			
 		// Lista de Valores
 		private List<Reviewer> rows;
 		
@@ -44,7 +44,7 @@ public class ReviewerTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return {{4 + data.option.properties|length + (data.option.categories is defined) + extraData.option.properties|length + (extraData.option.categories is defined)}};
+			return {{4 + data.option.properties|length + extraData.option.properties|length }} {% if data.option.categories|length > 0 %}+1{% endif %}{% if extraData.option.categories|length > 0 %}+1{% endif %};
 		}
 		
 		//Preenchimento de cada coluna
@@ -123,7 +123,7 @@ public class ReviewerTableModel extends AbstractTableModel{
 				{% endif %}
 			
 				default:
-					throw new IllegalArgumentException("Coluna Invalida!");
+					throw new IllegalArgumentException("Coluna Invalida!" + column);
 				}
 				return coluna;
 			}

@@ -38,16 +38,24 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 	private JTable table;
 	private JScrollPane scrollPane;
 	
-	JComboBox<String> ComboBoxTypeCheckingCopy;
+	JComboBox<String> typeComboBox;
 	JComboBox<String> comboBoxRegistrationId;
 	//Retirada de login
 	JComboBox comboBoxUser;
+	
+	JButton btnInsert;
+	JButton btnRemove;
+	JButton btnUpdate;
+	JButton btnSelect;
+	JButton btnClean;
+	JButton btnBack;
 	
 	JLabel lblLastCheckingCopyId;
 	private JLabel lblUserId;
 	private JLabel lblIdUserLogado;
 	private JTextField textFieldDate;
 	
+	private JComboBox comboBoxTypeCheckingCopy;
 	
 	 public static CheckingCopyManagementScreenP getInstanceCheckingCopyManagementScreenP() {
 		 if (instanceCheckingCopyManagementScreenP == null) {
@@ -162,34 +170,34 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 		
 		InsertButtonAction insertAction = new InsertButtonAction(); 
 		JButton btnInsert = new JButton("Insert");
-		btnInsert.setBounds(6, 273, 117, 29);
+		btnInsert.setBounds(6, 296, 117, 29);
 		contentPane.add(btnInsert);
 		btnInsert.addActionListener(insertAction);
 		RemoveButtonAction removeAction = new RemoveButtonAction(); 
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.setBounds(127, 273, 117, 29);
+		btnRemove.setBounds(127, 296, 117, 29);
 		contentPane.add(btnRemove);
 		btnRemove.addActionListener(removeAction);
 		UpdateButtonAction updateAction = new UpdateButtonAction();
 		JButton btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(248, 273, 117, 29);
+		btnUpdate.setBounds(248, 296, 117, 29);
 		contentPane.add(btnUpdate);
 		btnUpdate.addActionListener(updateAction);
 		SelectButtonAction selectAction = new SelectButtonAction(); 
 		JButton btnSelect = new JButton("Select");
-		btnSelect.setBounds(377, 273, 117, 29);
+		btnSelect.setBounds(377, 296, 117, 29);
 		contentPane.add(btnSelect);
 		btnSelect.addActionListener(selectAction);
 		
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		JButton btnClean = new JButton("Clean");
-		btnClean.setBounds(503, 273, 117, 29);
+		btnClean.setBounds(503, 296, 117, 29);
 		contentPane.add(btnClean);
 		btnClean.addActionListener(cleanAction);
 
 		BackButtonAction backAction = new BackButtonAction();
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(611, 273, 117, 29);
+		btnBack.setBounds(621, 296, 117, 29);
 		contentPane.add(btnBack);
 		btnBack.addActionListener(backAction);
 		
@@ -255,11 +263,11 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 //	}
 	
 	private void carregarComboBoxTypeCheckingCopy(){
-		TypeCheckingCopy[] checkingcopyList = TypeCheckingCopy.values();
-		List<String> checkingcopyList = new ArrayList<String>();
-		for(int i=0; i<checkingcopyList.length; i++){
-			checkingcopyList.add(i, checkingcopyList[i].name());
-			comboBoxTypeCheckingCopy.addItem(checkingcopyList[i].name());
+		TypeCheckingCopy[] types = TypeCheckingCopy.values();
+		List<String> typescheckingcopys = new ArrayList<String>();
+		for(int i=0; i<types.length; i++){
+			typescheckingcopys.add(i, types[i].name());
+			typeComboBox.addItem(types[i].name());
 		}
 		
 	}
@@ -329,7 +337,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopy.setIdRegistration(registrationId);
 						checkingCopy.setIdUser(userId);
 						checkingCopy.setDateOfIssue(date);
-							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(Checkingcopy));
+							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(typecheckingcopy.toString()));
 							
 						//Atualizar JTable
 						CheckingCopyTableModel model = new CheckingCopyTableModel(RiseEventsMainScreenP.facade.getCheckingCopyList());
@@ -417,14 +425,15 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 					
 					Integer registrationId = Integer.parseInt(comboBoxRegistrationId.getSelectedItem().toString());
 					
-					TypeCheckingCopy typeCheckingCopy = TypeCheckingCopy.valueOf(comboBoxTypeCheckingCopy.getSelectedItem().toString());
+
+					String typeCheckingCopy = comboBoxTypeCheckingCopy.getSelectedItem().toString();
 			
 					// ISSO DEVERIA PEGAR O LABEL DE LBLUSERID OU LBLUSERLOGADO? EU ACHO Q O LOGADO
 					//Integer userId = Integer.parseInt(lblUserId.getText());
 					Integer userId = Integer.parseInt(lblIdUserLogado.getText());
 					String date = textFieldDate.getText();
 					
-					if (registrationId.equals("") || type.equals("") || userId.equals("")
+					if (registrationId.equals("") || userId.equals("")
 							|| date.equals("") ) {
 						JOptionPane.showMessageDialog(getContentPane(),
 								"Não pode haver campo vazio.", "Erro",
@@ -436,7 +445,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 						checkingCopyNew.setIdRegistration(registrationId);
 						checkingCopyNew.setIdUser(userId);
 						checkingCopyNew.setDateOfIssue(date);
-							checkingCopy.setTypeCheckingCopy(TypeCheckingCopy.valueOf(Checkingcopy));
+							checkingCopyNew.setTypeCheckingCopy(TypeCheckingCopy.valueOf(typeCheckingCopy));
 						
 						try {
 							RiseEventsMainScreenP.facade.updateCheckingCopy(checkingCopyNew);
@@ -485,7 +494,7 @@ public class CheckingCopyManagementScreenP extends JInternalFrame{
 				//lblUserId.setText(String.valueOf(checkingCopyOld.getIdUser()));
 				lblIdUserLogado.setText(String.valueOf(checkingCopyOld.getIdUser()));
 				comboBoxRegistrationId.setSelectedItem(checkingCopyOld.getIdRegistration());
-				typeComboBox.setSelectedItem(checkingCopyOld.getCheckingCopyType());
+				typeComboBox.setSelectedItem(checkingCopyOld.getTypeCheckingCopy());
 				textFieldDate.setText(checkingCopyOld.getDateOfIssue());
 				
 			} catch (RepositoryException ex) {

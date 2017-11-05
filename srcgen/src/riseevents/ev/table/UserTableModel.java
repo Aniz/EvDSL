@@ -31,9 +31,8 @@ public class UserTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 5;
+			return 4 +1;
 		}
-		
 		//Preenchimento de cada coluna
 			public Object getValueAt(int rowIndex, int columnIndex) {
 				User user = rows.get(rowIndex);

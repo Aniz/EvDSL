@@ -154,7 +154,8 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
 			RepositoryException {
 		try {
     	    Statement statement = (Statement) pm.getCommunicationChannel();
-    	    statement.executeUpdate("UPDATE {{data.option.entity}} SET {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if loop.first %}{{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% else %}"', {{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}()+{% endif %}{% endfor %}{% endif %}{% if data.option.categories|length > 0 %}{% if data.option.properties|length > 0 %} , {% endif %}  type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +{% endif %}"' WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'");
+    	    statement.executeUpdate("UPDATE {{data.option.entity}} SET {% if data.option.properties|length > 0 %}{% for property in data.option.properties %}{% if not loop.first %},{% endif %}{{property.name}} = '"+ {{data.option.entity|lower}}.get{{property.name|capitalize}}(){% endfor %}+"'{% endif %}
+    	    	{% if data.option.categories|length > 0 %}{% if data.option.properties|length > 0 %} , {% endif %} type{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getType{{data.option.entity}}() +{% endif %}"' WHERE id{{data.option.entity}} = '"+ {{data.option.entity|lower}}.getId{{data.option.entity}}()+"'");
 
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
@@ -175,9 +176,12 @@ public class {{data.option.entity}}RepositoryBDR implements {{data.option.entity
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
             ResultSet resultset = statement.executeQuery("SELECT AUTO_INCREMENT as proximo_valor FROM information_schema.tables WHERE TABLE_SCHEMA= 'EEventDB' AND TABLE_NAME= 'activityorganizer'");
+            
+            if(resultset.first()){
             resultset.first();
             answer = resultset.getInt("proximo_valor");
 			resultset.close();
+			}
 		} catch(PersistenceMechanismException e){
             throw new RepositoryException(e);
         } catch (SQLException e) {

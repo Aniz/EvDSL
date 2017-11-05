@@ -26,7 +26,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 
 {% for key in extraData %}
 import {{systemName|lower}}.ev.data.{{key}};
@@ -49,10 +52,27 @@ import {{systemName|lower}}.ev.table.AssignmentTableModel;
 import {{systemName|lower}}.ev.table.ReviewerTableModel;
 {% endif %}
 
-{% if extraData.Review is defined %}
-import {{systemName|lower}}.ev.data.Review.StatusReview;
-{% endif %}
+import {{systemName|lower}}.ev.exception.UserAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.UserNotFoundException;
+import {{systemName|lower}}.ev.data.User;
 
+{% if extraData.Submission is defined and extraData.Reviewer is defined %}
+import {{systemName|lower}}.ev.data.Review;
+import {{systemName|lower}}.ev.data.Review.StatusReview;
+import {{systemName|lower}}.ev.exception.ReviewAlreadyInsertedException;
+{% endif %}
+{% if extraData.Author is defined %}
+import {{systemName|lower}}.ev.data.SubmissionAuthor;
+import {{systemName|lower}}.ev.data.Author;
+import {{systemName|lower}}.ev.exception.AuthorAlreadyInsertedException;
+import {{systemName|lower}}.ev.exception.AuthorNotFoundException;
+{% endif %}
+{% if extraData.Submission is defined %}
+import {{systemName|lower}}.ev.data.Submission;
+{% endif %}
+{% if extraData.Reviewer is defined %}
+import {{systemName|lower}}.ev.data.Reviewer;
+{% endif %}
 import {{systemName|lower}}.ev.exception.RepositoryException;
 import {{systemName|lower}}.ev.util.LibraryOfDSL;
 
@@ -380,7 +400,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment2);
 				{{systemName}}MainScreenP.facade.insertAssignment(assignment3);
 				
-				{% if "Author" in extraData %}
+				{% if 'Author' in avaliableDict %}
 				Author author = new Author();
 				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
 				submissionAuthor = {{systemName}}MainScreenP.facade.getSubmissionAuthorList();
@@ -391,10 +411,8 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					}
 				}
 				{% endif %}
-				{% if "User" in extraData %}
+				{% if "SubmissionUser" in avaliableDict %}
 				User user = new User();
-				{% endif %}
-				{% if "Submission" in extraData %}
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = {{systemName}}MainScreenP.facade.getSubmissionUserList();
 							
@@ -404,14 +422,14 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					}
 				}
 				{% endif %}
+				{% if "interestConflict" in data.statments %}
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
-				{% if "interestConflict" in data.statments %}
-				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer1);
-				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer2);
-				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(author, user, reviewer3);
-				{% endif %}
+				
+				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer1);
+				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer2);
+				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict({% if 'Author' in avaliableDict %}author,{% endif %}user, reviewer3);
 				
 				if(resultAutomaticConflict1 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
@@ -440,6 +458,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					enviarEmails(reviewer3, submission, review3);
 				{% endif %}
 				}
+				{% endif %}
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),

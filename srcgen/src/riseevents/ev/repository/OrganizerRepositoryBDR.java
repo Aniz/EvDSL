@@ -106,7 +106,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 				organizer.setTypeOrganizer(TypeOrganizer.valueOf(resultset.getString("typeOrganizer")));
 			
         
-				organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeOrganizer")));
+				organizer.setTypeUser(TypeUser.valueOf(resultset.getString("typeUser")));
 			
 
             } else {
@@ -133,7 +133,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 		ArrayList<Organizer> list = new ArrayList<Organizer>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, email, filiation from Organizer inner join User on Organizer.idUser = User.idUser;");
+            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, email, filiation,typeOrganizer,typeUser from Organizer inner join User on Organizer.idUser = User.idUser;");
             while (resultset.next()) {
             	organizer = new Organizer();
             	organizer.setIdUser(resultset.getInt("idUser"));

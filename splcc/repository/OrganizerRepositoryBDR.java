@@ -127,7 +127,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 			{% endfor %}{% endif %}			
         
         	{% if extraData.option.categories|length > 0 %}
-				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{data.option.entity}}")));
+				{{data.option.entity|lower}}.setType{{extraData.option.entity}}(Type{{extraData.option.entity}}.valueOf(resultset.getString("type{{extraData.option.entity}}")));
         	{% endif %}
            	{% if extraData.option.properties|length > 0 %}{% for property in extraData.option.properties %}
 				{{data.option.entity|lower}}.set{{property.name|capitalize}}(resultset.get{% if property.type|javatype == 'int' %}Int{% else %}{{property.type|javatype}}{% endif %}("{{property.name}}"));
@@ -157,7 +157,7 @@ public class OrganizerRepositoryBDR implements OrganizerRepository{
 		ArrayList<Organizer> list = new ArrayList<Organizer>();
         try {
             Statement statement = (Statement) pm.getCommunicationChannel();
-            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, email, filiation from Organizer inner join User on Organizer.idUser = User.idUser;");
+            ResultSet resultset = statement.executeQuery("select Organizer.idUser, password, nameUser, email, filiation{% if extraData.option.categories|length > 0 %},typeOrganizer{% endif %}{% if extraData.option.categories|length > 0 %},typeUser{% endif %} from Organizer inner join User on Organizer.idUser = User.idUser;");
             while (resultset.next()) {
             	organizer = new Organizer();
             	organizer.setIdUser(resultset.getInt("idUser"));

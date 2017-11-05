@@ -65,17 +65,17 @@ public class {{systemName}}Facade {
 	}
 	
 {% for key,value in data.items() %}
-	{% if 'Insert' in value.commands %}
+	{% if  'Management' in value.commands or 'Insert' in value.commands %}
 	public void insert{{key}}({{key}} entity) throws {{key}}AlreadyInsertedException, RepositoryException{
 		this.{{key|lower}}List.insert(entity);
 	}
 	{% endif %}
-	{% if 'Remove' in value.commands %}
+	{% if  ('Management' in value.commands or 'Remove' in value.commands) and key != "Assignment" %}
 	public void remove{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.remove(idEntity);  
 	}
 	{% endif %}
-	{% if 'Update' in value.commands %}
+	{% if  ('Management' in value.commands or 'Update' in value.commands) and key != "Assignment" %}
 	public void update{{key}}({{key}} Entity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		{{key|lower}}List.update(Entity);
 	}
@@ -83,17 +83,17 @@ public class {{systemName}}Facade {
 	public List<{{key}}> get{{key}}List() throws RepositoryException{
 		return {{key|lower}}List.get{{key}}List();
 	}
-	{% if 'Search' in value.commands %}
+	{% if  ('Management' in value.commands or 'Search' in value.commands) and key != "Assignment" %}
 	public {{key}} search{{key}}(int idEntity) throws {{key}}NotFoundException, RepositoryException, {{key}}AlreadyInsertedException{
 		return {{key|lower}}List.search(idEntity);
 	}
 	{% endif %}
-	{% if key not in ["User","Reviewer","Organizer","Speaker"] %}
+	{% if key not in ["User","Reviewer","Organizer","Speaker","Assignment"] %}
 	public int get{{key}}LastId() throws RepositoryException{
 		return {{key|lower}}List.get{{key}}LastId();
 	}
 	{% endif %}
-	{% if key not in ["Payment","Submission","CheckingCopy"] %}
+	{% if key not in ["Payment","Submission","CheckingCopy","Assignment","Receipt"] %}
 	public boolean isThere{{key}}(int idEntity) throws RepositoryException{
 		return {{key|lower}}List.isThere(idEntity);
 	}
@@ -149,17 +149,17 @@ public class {{systemName}}Facade {
 		return activityList.getActivitiesByEvent(idEvent);
 	}
 {% if 'Event' in data %}
-	{% if 'program' in data.User.option.statments %}
+	{% if 'program' in data.User.statments %}
 	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{
 		eventList.generateProgram(activityList, event);
 	}
 	{% endif %}
-	{% if 'importantDates' in data.User.option.statments %}
+	{% if 'importantDates' in data.User.statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
 		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
 	{% endif %}
-	{% if 'reportsFrequencyperEvent' in data.User.option.statments %}	
+	{% if 'reportsFrequencyperEvent' in data.User.statments %}	
 	public List<String> getParticipantsPerEvent(int idEvent) throws RepositoryException{
 		return eventList.getParticipantsPerEvent(idEvent);
 	}
@@ -175,12 +175,6 @@ public class {{systemName}}Facade {
 	public int getUserIdByName(String entityName) throws RepositoryException{
 		return userList.getUserIdByName(entityName);
 	}
-
-	{% if 'sendBugTrackEmail' in data.User.option.statments %}
-	public String sendBug(String nome, String assunto, String mensagem) throws EmailException {
-		return userList.sendBug(nome, assunto, mensagem);
-	}
-	{% endif %}	
 {% endif %}	
 {% if 'Activity' in data %}
 	public int getActivityIdByName(String entityName) throws RepositoryException{
@@ -199,13 +193,15 @@ public class {{systemName}}Facade {
 		return activityList.getEventbyActivity(idActivity);
 	}
 	
-	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
+	{% if 'reportsFrequencyPerActivity' in data.Activity.statments %}
 	public void frequencyPerActivity(List<String> ParticipantsPerActivity, Activity activity, String eventName) throws DocumentException, IOException{
 		activityList.frequencyPerActivity(ParticipantsPerActivity, activity, eventName);
 	}
+	public List<String> getParticipantsPerActivity(int idActivity) throws RepositoryException{
+		return activityList.getParticipantsPerActivity(idActivity);
+	}
 	{% endif %}
-
-	{% if 'reportsListofAuthors' in data.Activity.option.statments %}
+	{% if 'reportsListOfAuthors' in data.Activity.statments %}
 	public List<String> getListOfAuthorsPerActivity(int idActivity) throws RepositoryException{
 		return activityList.getListOfAuthorsPerActivity(idActivity);
 	}
@@ -243,7 +239,7 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 {% endif %}	
 {% if 'Submission' in data %}	
-	{% if 'insertAttachment' in data.Submission.option.statments %}
+	{% if 'insertAttachment' in data.Submission.statments %}
 	public void insertAttachment(File attachment, int idActivity) throws RepositoryException, SubmissionAlreadyInsertedException{
 		this.submissionList.inserAttachmanet(attachment, idActivity);
 	}
@@ -257,18 +253,44 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	public int getSubmissionIdByTitle(String submissionTitle) throws RepositoryException{
 		return submissionList.getSubmissionIdByTitle(submissionTitle);
 	}
+	public void insertSubmission(Submission submission) throws RepositoryException, SubmissionAlreadyInsertedException{
+		this.submissionList.insert(submission);
+	}
+	public void updateSubmission(Submission submission) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
+		submissionList.update(submission);
+	}	
 {% endif %}
 {% if 'CheckingCopy' in data %}
-	{% if 'checkingCopyAtestado' in data.Reviewer.option.statments %}
+	{% if 'checkingCopyAtestado' in data.Reviewer.statments %}
 	public void emitirAtestado (String nome, String evento, String periodo, CheckingCopy checkingcopy) throws RepositoryException {
 		checkingcopyList.emitirAtestado(nome, evento, periodo, checkingcopy);
 	}
 	{% endif %}
-	{% if 'checkingCopyCertificado' in data.Reviewer.option.statments %}
+	{% if 'checkingCopyCertificado' in data.Reviewer.statments %}
 	public void emitirCertificado (String nome, String evento, String periodo, String atividade, CheckingCopy checkingcopy) throws RepositoryException, DocumentException, IOException {
 		checkingcopyList.emitirCertificado(nome, evento, periodo, atividade, checkingcopy);
 	}
 	{% endif %}
+{% endif %}
+{% if 'Author' in data %}
+	public void insertAuthor(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
+		authorList.insert(author);
+	}
+{% endif %}
+{% if 'Assignment' in data %}
+	{% if 'Remove' in data.Assignment.commands %}
+	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		assignmentList.remove(assignment);  
+	}
+	{% endif %}
+	{% if 'Search' in data.Assignment.commands %}
+	public Assignment searchAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
+		return assignmentList.search(assignment);
+	}
+	{% endif %}
+	public boolean isThereAssignment(Assignment assignment) throws RepositoryException{
+		return assignmentList.isThere(assignment);
+	}
 {% endif %}
 {% if 'Reviewer' in data %}	
 	public void removeReview(int idReview) throws ReviewNotFoundException, RepositoryException, ReviewAlreadyInsertedException{

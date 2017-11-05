@@ -8,7 +8,7 @@ EventModel:
 ;
 
 Component:  
-     Option | Action | Statment | NewOption
+     Option | Statment | NewOption
 ;
 
 Statment: 
@@ -18,13 +18,13 @@ Statment:
 ;
 
 Condition:
-  "if" | "else" | "def"
+  "if" | "def"
 ;
 
 Option:
   'add' entity=Entity 
   ('+' properties*=Property)*     
-  "show" command=Command
+  ("show" command=Command)*
   ("types" categories*=Category[',']".")*
 ;
 
@@ -36,11 +36,7 @@ NewOption:
 ;
 
 Command:
-  CommandOption | SubCommandInOption
-;
-
-SubCommandInOption:
-  "in" entity=[Entity]
+  commands *= CommandType 
 ;
 
 Category: 
@@ -48,7 +44,7 @@ Category:
 ;
 
 Entity:
-  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy' | 'Receipt'
+  'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy' | 'Receipt' | 'Review'
 ;
 
 Property:
@@ -64,30 +60,27 @@ SimpleType:
     'type' name=ID
 ;
 
-CommandOption:
-  commandsOption *= CommandType 
-;
-
 CommandType:
   'Insert' | 'Remove' | 'Update' | 'Search' | 'ListAll' | 'Search' | 'Management'
 ;
 
-Action:
-  'include' function=[FunctionType]
-  params*=NewData + "."
-;
-
-FunctionType:
-  'InterestConflict'
-;
-
-NewData:
-  name=ID
-;
-
 ActionType:
-  'sendEmailNotification' | 'assigmentConflictResolver' | 'askCardInfo' | 'reportsFrequencyPerActivity' | 'reportsListofAuthors' | 'checkingCopyAtestado' | 'checkingCopyCertificado' | 'program' | 'importantDates' | 'reportsFrequencyPerEvent'| 'generateCarne' | 'generateBoleto' | 'sendBugTrackEmail'
-   | 'notificationsDeadline' | 'insertAttachment' | 'notificationsPaperAssignemnt' |'notificationsAceptanceRejection' | 'interestConflict'
+   'sendBugTrackEmail' | 
+   'insertAttachment' | 
+   'completeInsert' |
+   'partialInsert' |
+   'interestConflict' |
+   'assigmentChairIndication' | 
+   'assigmentAutomtic' | 
+   'insertAuthors' |
+  'reportsListOfAuthors' |
+  'reportsFrequencyPerActivity' |
+  'checkingCopyAtestado' | 'checkingCopyCertificado' | 
+  'program' | 'importantDates' | 'reportsFrequencyPerEvent'| 
+  'generateCarne' | 'generateBoleto' | 'askCardInfo' | 
+  'notificationsDeadline' | 
+  'notificationsPaperAssignemnt' | 'notificationsAceptanceRejection' |
+  'reviewRoundofReview'
 ;
 
 // Special rule for comments. Comments start with //

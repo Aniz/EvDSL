@@ -26,50 +26,29 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 
-import riseevents.ev.data.User;
-import riseevents.ev.business.UserControl;
-import riseevents.ev.exception.UserAlreadyInsertedException;
-import riseevents.ev.exception.UserNotFoundException;
-import riseevents.ev.repository.UserRepository;
-import riseevents.ev.repository.UserRepositoryBDR;
-import riseevents.ev.data.Reviewer;
-import riseevents.ev.business.ReviewerControl;
-import riseevents.ev.exception.ReviewerAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerNotFoundException;
-import riseevents.ev.repository.ReviewerRepository;
-import riseevents.ev.repository.ReviewerRepositoryBDR;
-import riseevents.ev.data.Submission;
-import riseevents.ev.business.SubmissionControl;
-import riseevents.ev.exception.SubmissionAlreadyInsertedException;
-import riseevents.ev.exception.SubmissionNotFoundException;
-import riseevents.ev.repository.SubmissionRepository;
-import riseevents.ev.repository.SubmissionRepositoryBDR;
-import riseevents.ev.data.Author;
-import riseevents.ev.business.AuthorControl;
-import riseevents.ev.exception.AuthorAlreadyInsertedException;
-import riseevents.ev.exception.AuthorNotFoundException;
-import riseevents.ev.repository.AuthorRepository;
-import riseevents.ev.repository.AuthorRepositoryBDR;
 import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.business.SubmissionUserControl;
 import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
 import riseevents.ev.exception.SubmissionUserNotFoundException;
 import riseevents.ev.repository.SubmissionUserRepository;
 import riseevents.ev.repository.SubmissionUserRepositoryBDR;
-import riseevents.ev.data.SubmissionAuthor;
-import riseevents.ev.business.SubmissionAuthorControl;
-import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
-import riseevents.ev.exception.SubmissionAuthorNotFoundException;
-import riseevents.ev.repository.SubmissionAuthorRepository;
-import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
-import riseevents.ev.data.Review;
-import riseevents.ev.business.ReviewControl;
-import riseevents.ev.exception.ReviewAlreadyInsertedException;
-import riseevents.ev.exception.ReviewNotFoundException;
-import riseevents.ev.repository.ReviewRepository;
-import riseevents.ev.repository.ReviewRepositoryBDR;
+import riseevents.ev.data.Submission;
+import riseevents.ev.business.SubmissionControl;
+import riseevents.ev.exception.SubmissionAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionNotFoundException;
+import riseevents.ev.repository.SubmissionRepository;
+import riseevents.ev.repository.SubmissionRepositoryBDR;
+import riseevents.ev.data.Reviewer;
+import riseevents.ev.business.ReviewerControl;
+import riseevents.ev.exception.ReviewerAlreadyInsertedException;
+import riseevents.ev.exception.ReviewerNotFoundException;
+import riseevents.ev.repository.ReviewerRepository;
+import riseevents.ev.repository.ReviewerRepositoryBDR;
 
 import riseevents.ev.data.Assignment;
 import riseevents.ev.business.AssignmentControl;
@@ -81,8 +60,15 @@ import riseevents.ev.table.AssignmentTableModel;
 
 import riseevents.ev.table.ReviewerTableModel;
 
-import riseevents.ev.data.Review.StatusReview;
+import riseevents.ev.exception.UserAlreadyInsertedException;
+import riseevents.ev.exception.UserNotFoundException;
+import riseevents.ev.data.User;
 
+import riseevents.ev.data.Review;
+import riseevents.ev.data.Review.StatusReview;
+import riseevents.ev.exception.ReviewAlreadyInsertedException;
+import riseevents.ev.data.Submission;
+import riseevents.ev.data.Reviewer;
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.LibraryOfDSL;
 
@@ -97,6 +83,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	private JTable tableSelectReviewer;
 	
 	private JButton btnBack;
+	private JButton btnGenerate;
 	private JTextField textFieldDate;
 	private JTable table_1;
 	
@@ -149,6 +136,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		SelectButtonAction selectAction = new SelectButtonAction(); 
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		BackButtonAction backAction = new BackButtonAction();
+		GenerateButtonAction generateAction = new GenerateButtonAction();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 728, 480);
 		contentPane = new JPanel();
@@ -250,6 +238,9 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
+		btnGenerate = new JButton("Generate");
+		btnGenerate.setBounds(248, 273, 117, 29);
+		contentPane.add(btnGenerate);
 		//PASSO 2
 		btnInsert.addActionListener(insertAction);
 		btnRemove.addActionListener(removeAction);
@@ -258,6 +249,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
+		btnGenerate.addActionListener(generateAction);
 
 		populateTable();
 		populateTableReviewer();
@@ -392,15 +384,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				RiseEventsMainScreenP.facade.insertAssignment(assignment2);
 				RiseEventsMainScreenP.facade.insertAssignment(assignment3);
 				
-				Author author = new Author();
-				List<SubmissionAuthor> submissionAuthor = new ArrayList<SubmissionAuthor>();
-				submissionAuthor = RiseEventsMainScreenP.facade.getSubmissionAuthorList();
-							
-				for(SubmissionAuthor sa : submissionAuthor){
-					if(sa.getIdSubmission() == idSubmission){
-						author = RiseEventsMainScreenP.facade.searchAuthor(sa.getIdAuthor());
-					}
-				}
 				User user = new User();
 				List<SubmissionUser> submissionUser = new ArrayList<SubmissionUser>();
 				submissionUser = RiseEventsMainScreenP.facade.getSubmissionUserList();
@@ -414,23 +397,30 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
 				
+				resultAutomaticConflict1 = LibraryOfDSL.automaticInterestConflict(user, reviewer1);
+				resultAutomaticConflict2 = LibraryOfDSL.automaticInterestConflict(user, reviewer2);
+				resultAutomaticConflict3 = LibraryOfDSL.automaticInterestConflict(user, reviewer3);
+				
 				if(resultAutomaticConflict1 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
+					enviarEmails(reviewer1, submission, review1);
 				}
 				if(resultAutomaticConflict2 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
+					enviarEmails(reviewer2, submission, review2);
 				}
 				if(resultAutomaticConflict3 == true){
 					JOptionPane.showMessageDialog(getContentPane(),
 						"Essa atribuicao nao pode ser feita por conflito de interesses", "Erro",
 						JOptionPane.INFORMATION_MESSAGE);
 				}else{
+					enviarEmails(reviewer3, submission, review3);
 				}
 				
 			} catch (RepositoryException e1) {
@@ -459,13 +449,6 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 						JOptionPane.INFORMATION_MESSAGE);
 				e1.printStackTrace();
 			} 
-			catch (AuthorNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (AuthorAlreadyInsertedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 					
 			catch (UserNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -653,6 +636,97 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		}
 	}
 
+	private class GenerateButtonAction  implements ActionListener{ 
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String submissao = comboBoxSubmission.getSelectedItem().toString();
+			List<Reviewer> reviewerList = new ArrayList<Reviewer>();
+			if(submissao.equals("")){
+				JOptionPane.showMessageDialog(getContentPane(),
+						"Selecione uma Submissão", "Erro",
+						JOptionPane.INFORMATION_MESSAGE);
+			}else{
+				try {
+					int subId = RiseEventsMainScreenP.facade.getSubmissionIdByTitle(submissao);
+					Submission sub = RiseEventsMainScreenP.facade.searchSubmission(subId);
+					String keywords = sub.getKeywords();
+					String keywordsSplit[] = keywords.split(Pattern.quote(","));
+					reviewerList = RiseEventsMainScreenP.facade.getReviewerList();
+					boolean flag;
+
+					
+					for(Reviewer r : reviewerList){
+						flag = false;
+						ReviewerTableModel model;
+						String knowledgeAreaSplit[] = r.getKnowledgeArea().split(Pattern.quote(","));						
+						for(String know : knowledgeAreaSplit){
+							flag = false;
+							for(String key : keywordsSplit){
+								if(know.equals(key)){
+									listaRevisoresSelecionados.add(r);
+									model = new ReviewerTableModel(listaRevisoresSelecionados);
+									tableSelectReviewer.setModel(model);
+									flag = true;
+									break;
+								}
+							}
+							if(flag == true){
+								break;
+							}
+						}
+						if(listaRevisoresSelecionados.size() == 3){
+							break;
+						}
+					}
+					
+					if(listaRevisoresSelecionados.size() < 3){
+					
+						if(listaRevisoresSelecionados.isEmpty()){
+							int i = 0;
+							ReviewerTableModel model;
+							while(i<3){
+								listaRevisoresSelecionados.add(reviewerList.get(i));
+								model = new ReviewerTableModel(listaRevisoresSelecionados);
+								tableSelectReviewer.setModel(model);
+								i++;
+							}
+							
+						}else{
+							int i = listaRevisoresSelecionados.size();
+							ReviewerTableModel model;
+							while(i<3){
+								listaRevisoresSelecionados.add(reviewerList.get(i));
+								model = new ReviewerTableModel(listaRevisoresSelecionados);
+								tableSelectReviewer.setModel(model);
+								i++;
+							}
+							
+						}
+						
+					}
+					
+					
+				} catch (RepositoryException e1) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							e1.toString(), "Erro",
+							JOptionPane.INFORMATION_MESSAGE);
+					e1.printStackTrace();
+				} catch (SubmissionNotFoundException e1) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							e1.toString(), "Erro",
+							JOptionPane.INFORMATION_MESSAGE);
+					e1.printStackTrace();
+				} catch (SubmissionAlreadyInsertedException e1) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							e1.toString(), "Erro",
+							JOptionPane.INFORMATION_MESSAGE);
+					e1.printStackTrace();
+				}
+			}
+				
+		}
+	}
 	
 }
 //#endif

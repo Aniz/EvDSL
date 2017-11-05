@@ -35,7 +35,7 @@ public class ActivityTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 10;
+			return 9 +1;
 		}
 		
 		//Preenchimento de cada coluna

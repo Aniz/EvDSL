@@ -104,8 +104,6 @@ CREATE TABLE author(
 	nameAuthor varchar(255) NOT NULL, 
 	filiation varchar(255) NOT NULL, 
 	email varchar(255) NOT NULL, 
-	typeAuthor varchar(255) NOT NULL,
-				
 	  
 PRIMARY KEY (idAuthor));
 
@@ -168,6 +166,7 @@ Create table assignement(
 	idReview int(10) NOT NULL,
 	idSubmission int(10) NOT NULL,
 	date varchar(255) NOT NULL, 
+				
 	  
 PRIMARY KEY (idUser, idReview, idSubmission),
 FOREIGN KEY (idUser) REFERENCES Reviewer (idUser) ON DELETE CASCADE,
@@ -196,7 +195,8 @@ dateOfIssue varchar(255) NOT NULL,
 PRIMARY KEY (idReceipt),
 FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
 
-Create table NewOption(
+Create table newoption(
 	idNewOption int(10) NOT NULL AUTO_INCREMENT,
+	typeNewOption varchar(255) NOT NULL,
 				
-PRIMARY KEY (id);
+PRIMARY KEY (idNewOption));

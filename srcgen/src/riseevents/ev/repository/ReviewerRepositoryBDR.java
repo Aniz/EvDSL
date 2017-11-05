@@ -42,7 +42,7 @@ public class ReviewerRepositoryBDR implements ReviewerRepository{
 	public void insert(Reviewer reviewer) throws RepositoryException {
 		try {
 			Statement statement = (Statement) pm.getCommunicationChannel();
-			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation) Values('"+reviewer.getIdUser()
+			statement.executeUpdate("INSERT INTO User (idUser,password,nameUser,email,filiation,typeUser) Values('"+reviewer.getIdUser()
 				+"','" +reviewer.getPassword()
 				+"', '"+reviewer.getNameUser()
 				+"', '"+reviewer.getEmail() 

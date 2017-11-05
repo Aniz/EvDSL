@@ -31,7 +31,7 @@ public class EventTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return 6;
+			return 5 ;
 		}
 		
 		//Preenchimento de cada coluna

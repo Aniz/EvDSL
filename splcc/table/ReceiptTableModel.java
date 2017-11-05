@@ -35,7 +35,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 		
 		//Quantidade de Colunas
 		public int getColumnCount() {
-			return {{4 + data.option.properties|length + (data.option.properties is defined)}};
+			return {{4 + data.option.properties|length}} {% if data.option.categories|length > 0 %}+1{% endif %};
 		}
 		
 		//Preenchimento de cada coluna
@@ -92,7 +92,7 @@ public class ReceiptTableModel extends AbstractTableModel{
 				{% endif %}
 			
 				default:
-					throw new IllegalArgumentException("Coluna Invalida!");
+					throw new IllegalArgumentException("Coluna Invalida!"+column);
 				}
 				return coluna;
 			}

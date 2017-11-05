@@ -24,7 +24,7 @@ public class AssignmentControl {
 	public AssignmentControl(AssignmentRepository repository){
 		this.assignmentList = repository;
 	}
-	
+	{% if 'Insert' in data.commands %}
 	public void insert(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException{
 		if (assignment != null) {
             if (!assignmentList.isThere(assignment)) {
@@ -36,19 +36,22 @@ public class AssignmentControl {
             throw new IllegalArgumentException();
         }
 	}
-
+	{% endif %}
+	{% if 'Remove' in data.commands %}	
 	public void remove(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException, AssignmentNotFoundException{
 		assignmentList.remove(assignment);
 	}
-	
+	{% endif %}
+	{% if 'Update' in data.commands %}
 	public void update(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException, AssignmentNotFoundException{
 		assignmentList.update(assignment);
 	}
-	
+	{% endif %}
+	{% if 'Search' in data.commands %}
 	public Assignment search(Assignment assignment) throws AssignmentAlreadyInsertedException, RepositoryException, AssignmentNotFoundException{
 		return assignmentList.search(assignment);
 	}
-
+	{% endif %}
 	public boolean isThere(Assignment assignment) throws RepositoryException {
 		return assignmentList.isThere(assignment);
 	}

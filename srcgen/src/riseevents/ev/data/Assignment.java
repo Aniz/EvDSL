@@ -10,6 +10,8 @@ public class Assignment {
 	private int idReviewSubmission;
 	private String date;
 	
+	
+	
 	public int getIdReview() {
 		return idReview;
 	}

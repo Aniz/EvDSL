@@ -152,13 +152,14 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		panel_1.add(textFieldDescription);
 		textFieldDescription.setColumns(10);
 		
-		JLabel lblActivityType = new JLabel("Activity Type:");
-		lblActivityType.setBounds(6, 65, 92, 16);
-		panel_1.add(lblActivityType);
 		
-		comboBoxActivityType = new JComboBox<String>();
-		comboBoxActivityType.setBounds(99, 61, 156, 27);
-		panel_1.add(comboBoxActivityType);
+		JLabel lblTypeActivity  = new JLabel("Activity  Type:");
+		lblTypeActivity .setBounds(6, 65, 92, 16);
+		panel_1.add(lblTypeActivity );
+		
+		comboBoxTypeActivity = new JComboBox<String>();
+		comboBoxTypeActivity.setBounds(99, 61, 156, 27);
+		panel_1.add(comboBoxTypeActivity);
 		
 		JLabel lblStatus = new JLabel("Status:");
 		lblStatus.setBounds(279, 65, 61, 16);
@@ -269,6 +270,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		contentPane.add(btnBack);
 		btnBack.addActionListener(backAction);
 		
+		carregarTypeActivityComboBox();
 		carregarEventComboBox();
 		carregarLastId();
 		populateTable();
@@ -292,15 +294,16 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			Activity activity = null;
 			
 			String nameEvent = comboBoxEvent.getSelectedItem().toString();
-			String nameActivity = textFieldNameActivity.getText();
+			String nameActivity = textFieldActivityName.getText();
 			String descriptionActivity = textFieldDescription.getText();
+			// String activityType = comboBoxActivityType.getSelectedItem().toString();
 			String status = textFieldStatus.getText();
 			float value = Float.valueOf(textFieldValue.getText());
 			float hourlyLoad = Float.valueOf(textFieldHourlyLoad.getText());
 			String date = textFieldDate.getText();
 			String hour = textFieldHour.getText();
-			int numberOfParticipants = Integer.valueOf(textFieldNOParticipants.getText());
-			int registrationLimit = Integer.valueOf(textFieldRegLimit.getText());
+			int numberOfParticipants = Integer.valueOf(textFieldNofParticipants.getText());
+			int registrationLimit = Integer.valueOf(textFieldRegistrationLimit.getText());
 			String typeActivity = comboBoxTypeActivity.getSelectedItem().toString();
 			
 			if (nameEvent.equals("")|| nameActivity.equals("") || descriptionActivity.equals("")
@@ -329,7 +332,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 						activity.setHour(hour);
 						activity.setNumberOfParticipants(numberOfParticipants);
 						activity.setRegistrationLimit(registrationLimit);
-							activity.setTypeActivity(TypeActivity.valueOf(Activity));
+							activity.setTypeActivity(TypeActivity.valueOf(typeActivity));
 						
 						RiseEventsMainScreenP.facade.insertActivity(activity);
 
@@ -366,7 +369,7 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			}
 			
 			try {
-				Activity activity = new ActivityTableModel(RiseEventsMainScreenP.facade.getActivities()).get(rowIndex);
+				Activity activity = new ActivityTableModel(RiseEventsMainScreenP.facade.getActivityList()).get(rowIndex);
 				RiseEventsMainScreenP.facade.removeActivity(activity.getIdActivity());
 				ActivityTableModel model = (ActivityTableModel) table.getModel();
 				model.removeActivity(rowIndex);
@@ -432,15 +435,13 @@ public class ActivityManagementScreenP extends JInternalFrame {
 					activity.setIdEvent(RiseEventsMainScreenP.facade.getEventIdByName(nameEvent));
 					activity.setNameActivity(nameActivity);
 					activity.setDescriptionActivity(descriptionActivity);
-					activity.setTypeActivity(TypeActivity.valueOf(activityType));
-
 					activity.setValue(value);
 					activity.setHourlyLoad(hourlyLoad);
 					activity.setDate(date);
 					activity.setHour(hour);
 					activity.setNumberOfParticipants(numberOfParticipants);
 					activity.setRegistrationLimit(registrationLimit);
-					activity.setTypeActivity(typeActivity);
+					activity.setTypeActivity(TypeActivity.valueOf(typeActivity));
 					
 					try {
 						
@@ -482,13 +483,13 @@ public class ActivityManagementScreenP extends JInternalFrame {
 			Activity activity = null;
 
 			try {
-				activity=  new ActivityTableModel(RiseEventsMainScreenP.facade.getActivities()).get(rowIndex);
+				activity=  new ActivityTableModel(RiseEventsMainScreenP.facade.getActivityList()).get(rowIndex);
 			
 				lblLastIdActivity.setText(String.valueOf(activity.getIdActivity()));
 				comboBoxEvent.setSelectedItem(RiseEventsMainScreenP.facade.searchEvent(activity.getIdEvent()).getEventName());
 				textFieldActivityName.setText(activity.getNameActivity());
 				textFieldDescription.setText(activity.getDescriptionActivity());
-				comboBoxActivityType.setSelectedItem(activity.getTypeActivity().toString());
+				// comboBoxActivityType.setSelectedItem(activity.getTypeActivity().toString());
 				textFieldValue.setText(String.valueOf(activity.getValue()));
 				textFieldHourlyLoad.setText(String.valueOf(activity.getHourlyLoad()));
 				textFieldDate.setText(activity.getDate());
@@ -525,12 +526,14 @@ public class ActivityManagementScreenP extends JInternalFrame {
 		}
 	}
 	
-	private void carregarActivityTypeComboBox(){
+	
+	
+	private void carregarTypeActivityComboBox(){
 		TypeActivity[] types = TypeActivity.values();
 		List<String> names = new ArrayList<String>();
 		for(int i=0; i<types.length; i++){
 			names.add(i, types[i].name());
-			comboBoxActivityType.addItem(types[i].name());
+			comboBoxTypeActivity.addItem(types[i].name());
 		}
 	}
 	
