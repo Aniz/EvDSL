@@ -1,0 +1,75 @@
+
+Create RiseEvents rise password
+
+add User
+		
+	types Associado,Profissional,Estudante.
+		
+	show Insert,Update,Search,Remove,ListAll.
+		 if User->userSendBugTrackEmail
+add Organizer
+		
+	types GeneralChair,ProgramChair,WorkshopChair,TutorialChair,ProceedingsChair,PanelChair.
+		
+	show Insert,Update,Search,Remove,ListAll.
+	
+add Speaker
+		
+	
+		
+	show Insert,Update,Search,Remove,ListAll.
+	
+add Reviewer
+		
+	
+		
+	show Insert,Update,Search,Remove,ListAll.
+		 if Reviewer->reviewerRoundofReview
+add Event
+		
+	
+		
+	show Insert,Update,Search,Remove,ListAll,Management.
+		 def Event->eventImportantDates	 def Event->reportsFrequencyPerEvent	 def Event->eventProgram
+add Activity
+		
+	types MiniCurso ,Tutorial,Painel,Workshop,MainTrack .
+		
+	show Insert,Update,Search,Remove,ListAll,Management.
+		 def Activity->reportsFrequencyPerActivity	 def Activity->reportsListofAuthors
+add Payment
+		
+	types AVista,Credito,Debito.
+		
+	show Insert,Update,Search,Remove,ListAll,Management.
+		 if Payment.Debito->generateCarne	 if Payment.AVista->generateBoleto	 if Payment.Credito->askCardInfo
+add Submission
+		
+	types Parcial,Completa.
+		
+	show Search,Remove,ListAll.
+		 if Submission->submissionCompleteInsert	 def Submission->submissionPartialInsert	 def Submission.Completa->submissionInsertAttachment
+add CheckingCopy
+		
+	types Atestado,Certificado.
+		
+	show Insert,Update,Search,Remove,ListAll,Management.
+		 if CheckingCopy.Certificado->checkingCopyCertificado	 if CheckingCopy.Atestado->checkingCopyAtestado
+add Author
+		
+	
+		
+	
+	
+add Assignment
+		
+	
+		
+	show Insert,Update,Search,Remove,ListAll,Management.
+		 if Assignment->notificationsAceptanceRejection	 if Assignment->notificationPaperAssignment	 if Assignment->assignmentInterestConflict	 if Assignment->notificationsDeadline
+add Receipt
+		
+	
+		
+	show Management.
+	
