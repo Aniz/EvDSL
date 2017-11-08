@@ -24,8 +24,8 @@ Condition:
 Option:
   'add' entity=Entity 
   ('+' properties*=Property)*     
-  ("show" command=Command)*
   ("types" categories*=Category[',']".")*
+  ("show" command=Command)*
 ;
 
 NewOption:
@@ -65,22 +65,21 @@ CommandType:
 ;
 
 ActionType:
-   'sendBugTrackEmail' | 
-   'insertAttachment' | 
-   'completeInsert' |
-   'partialInsert' |
-   'interestConflict' |
+   'userSendBugTrackEmail' | 
+   'submissionInsertAttachment' | 
+   'submissionCompleteInsert' |
+   'submissionPartialInsert' |
+   'assignmentInterestConflict' |
    'assigmentChairIndication' | 
    'assigmentAutomtic' | 
-   'insertAuthors' |
   'reportsListOfAuthors' |
   'reportsFrequencyPerActivity' |
   'checkingCopyAtestado' | 'checkingCopyCertificado' | 
-  'program' | 'importantDates' | 'reportsFrequencyPerEvent'| 
+  'eventProgram' | 'eventImportantDates' | 'reportsFrequencyPerEvent'| 
   'generateCarne' | 'generateBoleto' | 'askCardInfo' | 
   'notificationsDeadline' | 
-  'notificationsPaperAssignemnt' | 'notificationsAceptanceRejection' |
-  'reviewRoundofReview'
+  'notificationPaperAssignment' | 'notificationsAceptanceRejection' |
+  'reviewerRoundofReview'
 ;
 
 // Special rule for comments. Comments start with //

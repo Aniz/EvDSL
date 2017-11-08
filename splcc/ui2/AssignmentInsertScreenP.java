@@ -74,7 +74,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	private JTable tableReviewer;
 	private JTable tableSelectReviewer;
 	
-	{% if 'interestConflict' in data.statments %}
+	{% if 'assignmentInterestConflict' in data.statments %}
 	private JButton btnGenerate;
 	{% endif %}
 	
@@ -177,7 +177,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
-		{% if 'interestConflict' in data.statments %}
+		{% if 'assignmentInterestConflict' in data.statments %}
 		JButton btnGenerate = new JButton("Generate");
 		btnGenerate.setBounds(280, 358, 117, 29);
 		getContentPane().add(btnGenerate);
@@ -188,7 +188,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
 		
-		{% if 'interestConflict' in data.statments %}
+		{% if 'assignmentInterestConflict' in data.statments %}
 		btnGenerate.addActionListener(generateAction);
 		{% endif %}	
 		populateTableReviewer();
@@ -320,7 +320,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 				}
 				{% endif %}
 				
-				{% if "interestConflict" in data.statments %}
+				{% if "assignmentInterestConflict" in data.statments %}
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
@@ -591,7 +591,7 @@ public class AssignmentInsertScreenP extends JInternalFrame{
 	}
 
 	
-	{% if 'interestConflict' in data.statments %}
+	{% if 'assignmentInterestConflict' in data.statments %}
 	private class GenerateButtonAction  implements ActionListener{ 
 
 		@Override

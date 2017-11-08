@@ -20,60 +20,60 @@ import riseevents.ev.exception.OrganizerAlreadyInsertedException;
 import riseevents.ev.exception.OrganizerNotFoundException;
 import riseevents.ev.repository.OrganizerRepository;
 import riseevents.ev.repository.OrganizerRepositoryBDR;
-import riseevents.ev.data.Reviewer;
-import riseevents.ev.business.ReviewerControl;
-import riseevents.ev.exception.ReviewerAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerNotFoundException;
-import riseevents.ev.repository.ReviewerRepository;
-import riseevents.ev.repository.ReviewerRepositoryBDR;
 import riseevents.ev.data.Speaker;
 import riseevents.ev.business.SpeakerControl;
 import riseevents.ev.exception.SpeakerAlreadyInsertedException;
 import riseevents.ev.exception.SpeakerNotFoundException;
 import riseevents.ev.repository.SpeakerRepository;
 import riseevents.ev.repository.SpeakerRepositoryBDR;
+import riseevents.ev.data.Reviewer;
+import riseevents.ev.business.ReviewerControl;
+import riseevents.ev.exception.ReviewerAlreadyInsertedException;
+import riseevents.ev.exception.ReviewerNotFoundException;
+import riseevents.ev.repository.ReviewerRepository;
+import riseevents.ev.repository.ReviewerRepositoryBDR;
 import riseevents.ev.data.Event;
 import riseevents.ev.business.EventControl;
 import riseevents.ev.exception.EventAlreadyInsertedException;
 import riseevents.ev.exception.EventNotFoundException;
 import riseevents.ev.repository.EventRepository;
 import riseevents.ev.repository.EventRepositoryBDR;
-import riseevents.ev.data.Payment;
-import riseevents.ev.business.PaymentControl;
-import riseevents.ev.exception.PaymentAlreadyInsertedException;
-import riseevents.ev.exception.PaymentNotFoundException;
-import riseevents.ev.repository.PaymentRepository;
-import riseevents.ev.repository.PaymentRepositoryBDR;
 import riseevents.ev.data.Activity;
 import riseevents.ev.business.ActivityControl;
 import riseevents.ev.exception.ActivityAlreadyInsertedException;
 import riseevents.ev.exception.ActivityNotFoundException;
 import riseevents.ev.repository.ActivityRepository;
 import riseevents.ev.repository.ActivityRepositoryBDR;
+import riseevents.ev.data.Payment;
+import riseevents.ev.business.PaymentControl;
+import riseevents.ev.exception.PaymentAlreadyInsertedException;
+import riseevents.ev.exception.PaymentNotFoundException;
+import riseevents.ev.repository.PaymentRepository;
+import riseevents.ev.repository.PaymentRepositoryBDR;
 import riseevents.ev.data.Submission;
 import riseevents.ev.business.SubmissionControl;
 import riseevents.ev.exception.SubmissionAlreadyInsertedException;
 import riseevents.ev.exception.SubmissionNotFoundException;
 import riseevents.ev.repository.SubmissionRepository;
 import riseevents.ev.repository.SubmissionRepositoryBDR;
-import riseevents.ev.data.Assignment;
-import riseevents.ev.business.AssignmentControl;
-import riseevents.ev.exception.AssignmentAlreadyInsertedException;
-import riseevents.ev.exception.AssignmentNotFoundException;
-import riseevents.ev.repository.AssignmentRepository;
-import riseevents.ev.repository.AssignmentRepositoryBDR;
 import riseevents.ev.data.CheckingCopy;
 import riseevents.ev.business.CheckingCopyControl;
 import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
 import riseevents.ev.exception.CheckingCopyNotFoundException;
 import riseevents.ev.repository.CheckingCopyRepository;
 import riseevents.ev.repository.CheckingCopyRepositoryBDR;
-import riseevents.ev.data.NewOption;
-import riseevents.ev.business.NewOptionControl;
-import riseevents.ev.exception.NewOptionAlreadyInsertedException;
-import riseevents.ev.exception.NewOptionNotFoundException;
-import riseevents.ev.repository.NewOptionRepository;
-import riseevents.ev.repository.NewOptionRepositoryBDR;
+import riseevents.ev.data.Author;
+import riseevents.ev.business.AuthorControl;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
+import riseevents.ev.repository.AuthorRepository;
+import riseevents.ev.repository.AuthorRepositoryBDR;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.business.AssignmentControl;
+import riseevents.ev.exception.AssignmentAlreadyInsertedException;
+import riseevents.ev.exception.AssignmentNotFoundException;
+import riseevents.ev.repository.AssignmentRepository;
+import riseevents.ev.repository.AssignmentRepositoryBDR;
 import riseevents.ev.data.Receipt;
 import riseevents.ev.business.ReceiptControl;
 import riseevents.ev.exception.ReceiptAlreadyInsertedException;
@@ -107,6 +107,12 @@ import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
 import riseevents.ev.exception.ActivityOrganizerNotFoundException;
 import riseevents.ev.repository.ActivityOrganizerRepository;
 import riseevents.ev.repository.ActivityOrganizerRepositoryBDR;
+import riseevents.ev.data.SubmissionAuthor;
+import riseevents.ev.business.SubmissionAuthorControl;
+import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionAuthorNotFoundException;
+import riseevents.ev.repository.SubmissionAuthorRepository;
+import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
 import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.business.SubmissionUserControl;
 import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
@@ -124,20 +130,21 @@ public class RiseEventsFacade {
 
 	private UserControl userList;
 	private OrganizerControl organizerList;
-	private ReviewerControl reviewerList;
 	private SpeakerControl speakerList;
+	private ReviewerControl reviewerList;
 	private EventControl eventList;
-	private PaymentControl paymentList;
 	private ActivityControl activityList;
+	private PaymentControl paymentList;
 	private SubmissionControl submissionList;
-	private AssignmentControl assignmentList;
 	private CheckingCopyControl checkingcopyList;
-	private NewOptionControl newoptionList;
+	private AuthorControl authorList;
+	private AssignmentControl assignmentList;
 	private ReceiptControl receiptList;
 	private ReviewControl reviewList;
 	private ActivityUserControl activityuserList;
 	private ActivitySpeakerControl activityspeakerList;
 	private ActivityOrganizerControl activityorganizerList;
+	private SubmissionAuthorControl submissionauthorList;
 	private SubmissionUserControl submissionuserList;
 	private RegistrationControl registrationList;
 
@@ -146,28 +153,28 @@ public class RiseEventsFacade {
 	public RiseEventsFacade(){
 		UserRepository userRepository = UserRepositoryBDR.getInstance();
 		OrganizerRepository organizerRepository = OrganizerRepositoryBDR.getInstance();
-		ReviewerRepository reviewerRepository = ReviewerRepositoryBDR.getInstance();
 		SpeakerRepository speakerRepository = SpeakerRepositoryBDR.getInstance();
+		ReviewerRepository reviewerRepository = ReviewerRepositoryBDR.getInstance();
 		EventRepository eventRepository = EventRepositoryBDR.getInstance();
-		PaymentRepository paymentRepository = PaymentRepositoryBDR.getInstance();
 		ActivityRepository activityRepository = ActivityRepositoryBDR.getInstance();
+		PaymentRepository paymentRepository = PaymentRepositoryBDR.getInstance();
 		SubmissionRepository submissionRepository = SubmissionRepositoryBDR.getInstance();
-		AssignmentRepository assignmentRepository = AssignmentRepositoryBDR.getInstance();
 		CheckingCopyRepository checkingcopyRepository = CheckingCopyRepositoryBDR.getInstance();
-		NewOptionRepository newoptionRepository = NewOptionRepositoryBDR.getInstance();
+		AuthorRepository authorRepository = AuthorRepositoryBDR.getInstance();
+		AssignmentRepository assignmentRepository = AssignmentRepositoryBDR.getInstance();
 		ReceiptRepository receiptRepository = ReceiptRepositoryBDR.getInstance();
 		
 		userList = new UserControl(userRepository); 
 		organizerList = new OrganizerControl(organizerRepository); 
-		reviewerList = new ReviewerControl(reviewerRepository); 
 		speakerList = new SpeakerControl(speakerRepository); 
+		reviewerList = new ReviewerControl(reviewerRepository); 
 		eventList = new EventControl(eventRepository); 
-		paymentList = new PaymentControl(paymentRepository); 
 		activityList = new ActivityControl(activityRepository); 
+		paymentList = new PaymentControl(paymentRepository); 
 		submissionList = new SubmissionControl(submissionRepository); 
-		assignmentList = new AssignmentControl(assignmentRepository); 
 		checkingcopyList = new CheckingCopyControl(checkingcopyRepository); 
-		newoptionList = new NewOptionControl(newoptionRepository); 
+		authorList = new AuthorControl(authorRepository); 
+		assignmentList = new AssignmentControl(assignmentRepository); 
 		receiptList = new ReceiptControl(receiptRepository); 
 	
 	
@@ -175,6 +182,7 @@ public class RiseEventsFacade {
 		ActivityUserRepository activityuserRepository = ActivityUserRepositoryBDR.getInstance();
 		ActivitySpeakerRepository activityspeakerRepository = ActivitySpeakerRepositoryBDR.getInstance();
 		ActivityOrganizerRepository activityorganizerRepository = ActivityOrganizerRepositoryBDR.getInstance();
+		SubmissionAuthorRepository submissionauthorRepository = SubmissionAuthorRepositoryBDR.getInstance();
 		SubmissionUserRepository submissionuserRepository = SubmissionUserRepositoryBDR.getInstance();
 		RegistrationRepository registrationRepository = RegistrationRepositoryBDR.getInstance();
 		
@@ -182,6 +190,7 @@ public class RiseEventsFacade {
 		activityuserList = new ActivityUserControl(activityuserRepository); 
 		activityspeakerList = new ActivitySpeakerControl(activityspeakerRepository); 
 		activityorganizerList = new ActivityOrganizerControl(activityorganizerRepository); 
+		submissionauthorList = new SubmissionAuthorControl(submissionauthorRepository); 
 		submissionuserList = new SubmissionUserControl(submissionuserRepository); 
 		registrationList = new RegistrationControl(registrationRepository); 
 	
@@ -230,24 +239,6 @@ public class RiseEventsFacade {
 	public boolean isThereOrganizer(int idEntity) throws RepositoryException{
 		return organizerList.isThere(idEntity);
 	}
-	public void insertReviewer(Reviewer entity) throws ReviewerAlreadyInsertedException, RepositoryException{
-		this.reviewerList.insert(entity);
-	}
-	public void removeReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		reviewerList.remove(idEntity);  
-	}
-	public void updateReviewer(Reviewer Entity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		reviewerList.update(Entity);
-	}
-	public List<Reviewer> getReviewerList() throws RepositoryException{
-		return reviewerList.getReviewerList();
-	}
-	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
-		return reviewerList.search(idEntity);
-	}
-	public boolean isThereReviewer(int idEntity) throws RepositoryException{
-		return reviewerList.isThere(idEntity);
-	}
 	public void insertSpeaker(Speaker entity) throws SpeakerAlreadyInsertedException, RepositoryException{
 		this.speakerList.insert(entity);
 	}
@@ -265,6 +256,24 @@ public class RiseEventsFacade {
 	}
 	public boolean isThereSpeaker(int idEntity) throws RepositoryException{
 		return speakerList.isThere(idEntity);
+	}
+	public void insertReviewer(Reviewer entity) throws ReviewerAlreadyInsertedException, RepositoryException{
+		this.reviewerList.insert(entity);
+	}
+	public void removeReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		reviewerList.remove(idEntity);  
+	}
+	public void updateReviewer(Reviewer Entity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		reviewerList.update(Entity);
+	}
+	public List<Reviewer> getReviewerList() throws RepositoryException{
+		return reviewerList.getReviewerList();
+	}
+	public Reviewer searchReviewer(int idEntity) throws ReviewerNotFoundException, RepositoryException, ReviewerAlreadyInsertedException{
+		return reviewerList.search(idEntity);
+	}
+	public boolean isThereReviewer(int idEntity) throws RepositoryException{
+		return reviewerList.isThere(idEntity);
 	}
 	public void insertEvent(Event entity) throws EventAlreadyInsertedException, RepositoryException{
 		this.eventList.insert(entity);
@@ -287,24 +296,6 @@ public class RiseEventsFacade {
 	public boolean isThereEvent(int idEntity) throws RepositoryException{
 		return eventList.isThere(idEntity);
 	}
-	public void insertPayment(Payment entity) throws PaymentAlreadyInsertedException, RepositoryException{
-		this.paymentList.insert(entity);
-	}
-	public void removePayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
-		paymentList.remove(idEntity);  
-	}
-	public void updatePayment(Payment Entity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
-		paymentList.update(Entity);
-	}
-	public List<Payment> getPaymentList() throws RepositoryException{
-		return paymentList.getPaymentList();
-	}
-	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
-		return paymentList.search(idEntity);
-	}
-	public int getPaymentLastId() throws RepositoryException{
-		return paymentList.getPaymentLastId();
-	}
 	public void insertActivity(Activity entity) throws ActivityAlreadyInsertedException, RepositoryException{
 		this.activityList.insert(entity);
 	}
@@ -326,6 +317,24 @@ public class RiseEventsFacade {
 	public boolean isThereActivity(int idEntity) throws RepositoryException{
 		return activityList.isThere(idEntity);
 	}
+	public void insertPayment(Payment entity) throws PaymentAlreadyInsertedException, RepositoryException{
+		this.paymentList.insert(entity);
+	}
+	public void removePayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		paymentList.remove(idEntity);  
+	}
+	public void updatePayment(Payment Entity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		paymentList.update(Entity);
+	}
+	public List<Payment> getPaymentList() throws RepositoryException{
+		return paymentList.getPaymentList();
+	}
+	public Payment searchPayment(int idEntity) throws PaymentNotFoundException, RepositoryException, PaymentAlreadyInsertedException{
+		return paymentList.search(idEntity);
+	}
+	public int getPaymentLastId() throws RepositoryException{
+		return paymentList.getPaymentLastId();
+	}
 	public void removeSubmission(int idEntity) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		submissionList.remove(idEntity);  
 	}
@@ -337,12 +346,6 @@ public class RiseEventsFacade {
 	}
 	public int getSubmissionLastId() throws RepositoryException{
 		return submissionList.getSubmissionLastId();
-	}
-	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
-		this.assignmentList.insert(entity);
-	}
-	public List<Assignment> getAssignmentList() throws RepositoryException{
-		return assignmentList.getAssignmentList();
 	}
 	public void insertCheckingCopy(CheckingCopy entity) throws CheckingCopyAlreadyInsertedException, RepositoryException{
 		this.checkingcopyList.insert(entity);
@@ -362,26 +365,20 @@ public class RiseEventsFacade {
 	public int getCheckingCopyLastId() throws RepositoryException{
 		return checkingcopyList.getCheckingCopyLastId();
 	}
-	public void insertNewOption(NewOption entity) throws NewOptionAlreadyInsertedException, RepositoryException{
-		this.newoptionList.insert(entity);
+	public List<Author> getAuthorList() throws RepositoryException{
+		return authorList.getAuthorList();
 	}
-	public void removeNewOption(int idEntity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
-		newoptionList.remove(idEntity);  
+	public int getAuthorLastId() throws RepositoryException{
+		return authorList.getAuthorLastId();
 	}
-	public void updateNewOption(NewOption Entity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
-		newoptionList.update(Entity);
+	public boolean isThereAuthor(int idEntity) throws RepositoryException{
+		return authorList.isThere(idEntity);
 	}
-	public List<NewOption> getNewOptionList() throws RepositoryException{
-		return newoptionList.getNewOptionList();
+	public void insertAssignment(Assignment entity) throws AssignmentAlreadyInsertedException, RepositoryException{
+		this.assignmentList.insert(entity);
 	}
-	public NewOption searchNewOption(int idEntity) throws NewOptionNotFoundException, RepositoryException, NewOptionAlreadyInsertedException{
-		return newoptionList.search(idEntity);
-	}
-	public int getNewOptionLastId() throws RepositoryException{
-		return newoptionList.getNewOptionLastId();
-	}
-	public boolean isThereNewOption(int idEntity) throws RepositoryException{
-		return newoptionList.isThere(idEntity);
+	public List<Assignment> getAssignmentList() throws RepositoryException{
+		return assignmentList.getAssignmentList();
 	}
 	public void insertReceipt(Receipt entity) throws ReceiptAlreadyInsertedException, RepositoryException{
 		this.receiptList.insert(entity);
@@ -473,6 +470,24 @@ public class RiseEventsFacade {
 	public boolean isThereActivityOrganizer(ActivityOrganizer entity) throws RepositoryException{
 		return activityorganizerList.isThere(entity);
 	}
+	public void insertSubmissionAuthor(SubmissionAuthor entity) throws SubmissionAuthorAlreadyInsertedException, RepositoryException{
+		this.submissionauthorList.insert(entity);
+	}
+	public void removeSubmissionAuthor(SubmissionAuthor entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
+		submissionauthorList.remove(entity);  
+	}
+	public void updateSubmissionAuthor(SubmissionAuthor Entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
+		submissionauthorList.update(Entity);
+	}
+	public List<SubmissionAuthor> getSubmissionAuthorList() throws RepositoryException{
+		return submissionauthorList.getSubmissionAuthorList();
+	}
+	public SubmissionAuthor searchSubmissionAuthor(SubmissionAuthor Entity) throws SubmissionAuthorNotFoundException, RepositoryException, SubmissionAuthorAlreadyInsertedException{
+		return submissionauthorList.search(Entity);
+	}
+	public boolean isThereSubmissionAuthor(SubmissionAuthor entity) throws RepositoryException{
+		return submissionauthorList.isThere(entity);
+	}
 	public void insertSubmissionUser(SubmissionUser entity) throws SubmissionUserAlreadyInsertedException, RepositoryException{
 		this.submissionuserList.insert(entity);
 	}
@@ -553,9 +568,13 @@ public class RiseEventsFacade {
 		return activityList.getListOfAuthorsPerActivity(idActivity);
 	}
 	
-	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
-		activity.listOfAuthorsPerActivity(authorsPerActivity);
+	public void listofAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
+		activity.listofAuthorsPerActivity(authorsPerActivity);
 	}
+	
+public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, RepositoryException, AuthorAlreadyInsertedException{
+	return authorList.search(idAuthor);
+} 
 	
 	
 	public void removeValue(float value, int idRegistration) throws RepositoryException{
@@ -597,6 +616,9 @@ public class RiseEventsFacade {
 	public void updateSubmission(Submission submission) throws SubmissionNotFoundException, RepositoryException, SubmissionAlreadyInsertedException{
 		submissionList.update(submission);
 	}	
+	public void insertAuthor(Author author) throws AuthorAlreadyInsertedException, RepositoryException{
+		authorList.insert(author);
+	}
 	public void removeAssignment(Assignment assignment) throws AssignmentNotFoundException, RepositoryException, AssignmentAlreadyInsertedException{
 		assignmentList.remove(assignment);  
 	}

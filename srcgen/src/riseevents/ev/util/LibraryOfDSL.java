@@ -12,60 +12,60 @@ import riseevents.ev.exception.OrganizerAlreadyInsertedException;
 import riseevents.ev.exception.OrganizerNotFoundException;
 import riseevents.ev.repository.OrganizerRepository;
 import riseevents.ev.repository.OrganizerRepositoryBDR;
-import riseevents.ev.data.Reviewer;
-import riseevents.ev.business.ReviewerControl;
-import riseevents.ev.exception.ReviewerAlreadyInsertedException;
-import riseevents.ev.exception.ReviewerNotFoundException;
-import riseevents.ev.repository.ReviewerRepository;
-import riseevents.ev.repository.ReviewerRepositoryBDR;
 import riseevents.ev.data.Speaker;
 import riseevents.ev.business.SpeakerControl;
 import riseevents.ev.exception.SpeakerAlreadyInsertedException;
 import riseevents.ev.exception.SpeakerNotFoundException;
 import riseevents.ev.repository.SpeakerRepository;
 import riseevents.ev.repository.SpeakerRepositoryBDR;
+import riseevents.ev.data.Reviewer;
+import riseevents.ev.business.ReviewerControl;
+import riseevents.ev.exception.ReviewerAlreadyInsertedException;
+import riseevents.ev.exception.ReviewerNotFoundException;
+import riseevents.ev.repository.ReviewerRepository;
+import riseevents.ev.repository.ReviewerRepositoryBDR;
 import riseevents.ev.data.Event;
 import riseevents.ev.business.EventControl;
 import riseevents.ev.exception.EventAlreadyInsertedException;
 import riseevents.ev.exception.EventNotFoundException;
 import riseevents.ev.repository.EventRepository;
 import riseevents.ev.repository.EventRepositoryBDR;
-import riseevents.ev.data.Payment;
-import riseevents.ev.business.PaymentControl;
-import riseevents.ev.exception.PaymentAlreadyInsertedException;
-import riseevents.ev.exception.PaymentNotFoundException;
-import riseevents.ev.repository.PaymentRepository;
-import riseevents.ev.repository.PaymentRepositoryBDR;
 import riseevents.ev.data.Activity;
 import riseevents.ev.business.ActivityControl;
 import riseevents.ev.exception.ActivityAlreadyInsertedException;
 import riseevents.ev.exception.ActivityNotFoundException;
 import riseevents.ev.repository.ActivityRepository;
 import riseevents.ev.repository.ActivityRepositoryBDR;
+import riseevents.ev.data.Payment;
+import riseevents.ev.business.PaymentControl;
+import riseevents.ev.exception.PaymentAlreadyInsertedException;
+import riseevents.ev.exception.PaymentNotFoundException;
+import riseevents.ev.repository.PaymentRepository;
+import riseevents.ev.repository.PaymentRepositoryBDR;
 import riseevents.ev.data.Submission;
 import riseevents.ev.business.SubmissionControl;
 import riseevents.ev.exception.SubmissionAlreadyInsertedException;
 import riseevents.ev.exception.SubmissionNotFoundException;
 import riseevents.ev.repository.SubmissionRepository;
 import riseevents.ev.repository.SubmissionRepositoryBDR;
-import riseevents.ev.data.Assignment;
-import riseevents.ev.business.AssignmentControl;
-import riseevents.ev.exception.AssignmentAlreadyInsertedException;
-import riseevents.ev.exception.AssignmentNotFoundException;
-import riseevents.ev.repository.AssignmentRepository;
-import riseevents.ev.repository.AssignmentRepositoryBDR;
 import riseevents.ev.data.CheckingCopy;
 import riseevents.ev.business.CheckingCopyControl;
 import riseevents.ev.exception.CheckingCopyAlreadyInsertedException;
 import riseevents.ev.exception.CheckingCopyNotFoundException;
 import riseevents.ev.repository.CheckingCopyRepository;
 import riseevents.ev.repository.CheckingCopyRepositoryBDR;
-import riseevents.ev.data.NewOption;
-import riseevents.ev.business.NewOptionControl;
-import riseevents.ev.exception.NewOptionAlreadyInsertedException;
-import riseevents.ev.exception.NewOptionNotFoundException;
-import riseevents.ev.repository.NewOptionRepository;
-import riseevents.ev.repository.NewOptionRepositoryBDR;
+import riseevents.ev.data.Author;
+import riseevents.ev.business.AuthorControl;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.AuthorNotFoundException;
+import riseevents.ev.repository.AuthorRepository;
+import riseevents.ev.repository.AuthorRepositoryBDR;
+import riseevents.ev.data.Assignment;
+import riseevents.ev.business.AssignmentControl;
+import riseevents.ev.exception.AssignmentAlreadyInsertedException;
+import riseevents.ev.exception.AssignmentNotFoundException;
+import riseevents.ev.repository.AssignmentRepository;
+import riseevents.ev.repository.AssignmentRepositoryBDR;
 import riseevents.ev.data.Receipt;
 import riseevents.ev.business.ReceiptControl;
 import riseevents.ev.exception.ReceiptAlreadyInsertedException;
@@ -96,6 +96,12 @@ import riseevents.ev.exception.ActivityOrganizerAlreadyInsertedException;
 import riseevents.ev.exception.ActivityOrganizerNotFoundException;
 import riseevents.ev.repository.ActivityOrganizerRepository;
 import riseevents.ev.repository.ActivityOrganizerRepositoryBDR;
+import riseevents.ev.data.SubmissionAuthor;
+import riseevents.ev.business.SubmissionAuthorControl;
+import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionAuthorNotFoundException;
+import riseevents.ev.repository.SubmissionAuthorRepository;
+import riseevents.ev.repository.SubmissionAuthorRepositoryBDR;
 import riseevents.ev.data.SubmissionUser;
 import riseevents.ev.business.SubmissionUserControl;
 import riseevents.ev.exception.SubmissionUserAlreadyInsertedException;
@@ -127,7 +133,7 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	public static Boolean automaticInterestConflict( User usersub, User user){
+	public static Boolean automaticInterestConflict(Author authorSubmission, User usersub, User user){
 		
 		String reviewerFiliation = null;
 		reviewerFiliation = user.getFiliation();
@@ -135,6 +141,11 @@ public class LibraryOfDSL {
 		String userFiliation = null;		
 		userFiliation = user.getFiliation();
 
+		String authorFiliation = null;
+		authorFiliation = authorSubmission.getFiliation();
+		if(authorFiliation.equals(reviewerFiliation)){
+			return true;
+		}
 				
 		if(usersub.equals(userFiliation)){
 			return true;
@@ -155,9 +166,6 @@ public class LibraryOfDSL {
 		String mensagem2 = "Seu Papper esta sendo revisado. O resultado sera encaminhado via email.";
 		String emailDestino2 = user.getEmail();
 		
-		String assunto3 = "Pappers para revisao";
-		String mensagem3 = "Seguem em anexos pappers para revisao!";
-		String emailDestino3 = user.getEmail();
 	
 		
 		SimpleEmail email = new SimpleEmail(); 
@@ -194,30 +202,6 @@ public class LibraryOfDSL {
 		
 		email2.send(); //envia o e-mail
 
-		// assignment email
-		HtmlEmail email3 = new HtmlEmail(); 
-		email3.setHostName("smtp.gmail.com"); // o servidor SMTP para envio do e-mail
-		
-		email3.addTo(emailDestino3, user.getNameUser()); //destinat�rio 
-		email3.setFrom("rise.gmail.com", "Gerenciador de Eventos Rise"); // remetente 
-		email3.setSubject(assunto3); // assunto do e-mail 
-		
-		//ESTOU ENVIADO UMA IMAGEM EM ANEXO POIS AINDA NAO CONSEGUI PEGAR DO BANCO E INSERIR AQUI
-		//O ID DO SIBMISSION PARA PEGAR PDF DO BANCO ESTA NO AUTHOR PASSADO AQUI
-		EmailAttachment anexo = new EmailAttachment();
-	    anexo.setPath("/images/riseLabs.png");
-	    anexo.setDisposition(EmailAttachment.ATTACHMENT);
-	    email3.attach(anexo); 
-	    
-		email3.setMsg(mensagem3); //conteudo do e-mail
-		
-		email3.setAuthentication("rise.gmail.com", "password");
-		email3.setSslSmtpPort( "465" ); //578 ou 465
-		email3.setSSLOnConnect(true);
-		email3.setStartTLSEnabled(true);
-		email3.setStartTLSRequired(true);
-	
-		email3.send(); //envia o e-mail
 	}
 	//#if ${ReviewRoundofReview} == "T" or ${ReviewSimpleReview} == "T"
 	public static void sendRoundNotification(Review review, User user) throws EmailException{

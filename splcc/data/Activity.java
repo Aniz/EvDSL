@@ -200,7 +200,7 @@ public class Activity {
 	{% endif %}
 
 	{% if 'reportsListOfAuthors' in data.statments %}
-	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity) throws DocumentException, IOException{
+	public void listofAuthorsPerActivity(Set<String> authorsPerActivity) throws DocumentException, IOException{
 		
 		List<String> authors = new ArrayList<String>(authorsPerActivity);
         Document documento = new Document();

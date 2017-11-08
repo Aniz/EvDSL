@@ -132,7 +132,7 @@ public class RegistrationReportsListOfAuthorsScreenP extends JInternalFrame {
 				idActivity = {{systemName}}MainScreenP.getFacade().getActivityIdByName(comboBoxActivity.getSelectedItem().toString());
 				Activity activity = {{systemName}}MainScreenP.getFacade().searchActivity(idActivity);
 				Set<String> conjunto = new HashSet<String>(authorsPerActivity);
-				{{systemName}}MainScreenP.getFacade().listOfAuthorsPerActivity(conjunto, activity);
+				{{systemName}}MainScreenP.getFacade().listofAuthorsPerActivity(conjunto, activity);
 				
 			} catch (RepositoryException e1) {
 				JOptionPane.showMessageDialog(getContentPane(),

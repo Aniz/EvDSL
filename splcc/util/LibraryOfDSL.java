@@ -35,7 +35,7 @@ public class LibraryOfDSL {
 		}	
 	}	
 
-	{% if 'Assignment' in data and 'interestConflict' in statments  %}
+	{% if 'Assignment' in data and 'assignmentInterestConflict' in statments  %}
 	public static Boolean automaticInterestConflict({% if "Author" in data %}Author authorSubmission,{% endif %} User usersub, User user){
 		
 		String reviewerFiliation = null;
@@ -168,7 +168,7 @@ public class LibraryOfDSL {
 			mensagem = "Infelizmente Seu papper nao foi Aceito no evento.";
 		}
 		
-		{% if 'reviewRoundofReview' in statments and 'notificationsAceptanceRejection' in statments %}
+		{% if 'reviewerRoundofReview' in statments and 'notificationsAceptanceRejection' in statments %}
 		if(review.getResult().equals("Em Analise")){
 			assunto = "Resultado Round Review Papper!";
 			mensagem = "O round de revisão atual de seu papper é" + review.getRound() + "como resultado deste round seu papper esta em analise seguem observacoes a serem corrigidas: " + review.getDescription() + "  Use este numero de identificacao para atualizar correcoes solicitadas na revisao" + review.getIdReview();
@@ -195,7 +195,7 @@ public class LibraryOfDSL {
 		
 	}
 	{% endif %}
-	{% if 'sendBugTrackEmail' in statments %}
+	{% if 'userSendBugTrackEmail' in statments %}
 	public static String sendBugtrackEmail(String nome, String assunto, String mensagem) throws EmailException{
 		SimpleEmail email = new SimpleEmail();
 		String msg;

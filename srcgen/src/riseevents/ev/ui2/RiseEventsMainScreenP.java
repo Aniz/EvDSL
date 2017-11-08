@@ -39,7 +39,8 @@ public class RiseEventsMainScreenP extends JFrame {
 	private UserSearchScreenP screenSearchUser;	
 	private UserRemoveScreenP screenRemoveUser;	
 	private UserListAllScreenP screenListAllUser;	
-	private UserSendBugTrackEmailScreenP screenUserSendBugTrackEmail;	
+                   
+		private UserSendBugTrackEmailScreenP screenUserSendBugTrackEmail;	
 
 	private OrganizerInsertScreenP screenInsertOrganizer;	
 	private OrganizerUpdateScreenP screenUpdateOrganizer;	
@@ -47,17 +48,17 @@ public class RiseEventsMainScreenP extends JFrame {
 	private OrganizerRemoveScreenP screenRemoveOrganizer;	
 	private OrganizerListAllScreenP screenListAllOrganizer;	
 
-	private ReviewerInsertScreenP screenInsertReviewer;	
-	private ReviewerUpdateScreenP screenUpdateReviewer;	
-	private ReviewerSearchScreenP screenSearchReviewer;	
-	private ReviewerRemoveScreenP screenRemoveReviewer;	
-	private ReviewerListAllScreenP screenListAllReviewer;	
-
 	private SpeakerInsertScreenP screenInsertSpeaker;	
 	private SpeakerUpdateScreenP screenUpdateSpeaker;	
 	private SpeakerSearchScreenP screenSearchSpeaker;	
 	private SpeakerRemoveScreenP screenRemoveSpeaker;	
 	private SpeakerListAllScreenP screenListAllSpeaker;	
+
+	private ReviewerInsertScreenP screenInsertReviewer;	
+	private ReviewerUpdateScreenP screenUpdateReviewer;	
+	private ReviewerSearchScreenP screenSearchReviewer;	
+	private ReviewerRemoveScreenP screenRemoveReviewer;	
+	private ReviewerListAllScreenP screenListAllReviewer;	
 
 	private EventInsertScreenP screenInsertEvent;	
 	private EventUpdateScreenP screenUpdateEvent;	
@@ -65,9 +66,20 @@ public class RiseEventsMainScreenP extends JFrame {
 	private EventRemoveScreenP screenRemoveEvent;	
 	private EventListAllScreenP screenListAllEvent;	
 	private EventManagementScreenP screenManagementEvent;	
-	private EventProgramScreenP screenEventProgram;	
-	private EventImportantDatesScreenP screenEventImportantDates;	
-	private EventReportsFrequencyPerEventScreenP screenEventReportsFrequencyPerEvent;	
+                   
+		private EventImportantDatesScreenP screenEventImportantDates;	
+    	private EventReportsFrequencyPerEventScreenP screenEventReportsFrequencyPerEvent;	
+                   
+		private EventProgramScreenP screenEventProgram;	
+
+	private ActivityInsertScreenP screenInsertActivity;	
+	private ActivityUpdateScreenP screenUpdateActivity;	
+	private ActivitySearchScreenP screenSearchActivity;	
+	private ActivityRemoveScreenP screenRemoveActivity;	
+	private ActivityListAllScreenP screenListAllActivity;	
+	private ActivityManagementScreenP screenManagementActivity;	
+    	private ActivityReportsFrequencyPerActivityScreenP screenActivityReportsFrequencyPerActivity;	
+    	private ActivityReportsListOfAuthorsScreenP screenActivityReportsListOfAuthors;	
 
 	private PaymentInsertScreenP screenInsertPayment;	
 	private PaymentUpdateScreenP screenUpdatePayment;	
@@ -76,35 +88,27 @@ public class RiseEventsMainScreenP extends JFrame {
 	private PaymentListAllScreenP screenListAllPayment;	
 	private PaymentManagementScreenP screenManagementPayment;	
 
-	private ActivityInsertScreenP screenInsertActivity;	
-	private ActivityUpdateScreenP screenUpdateActivity;	
-	private ActivitySearchScreenP screenSearchActivity;	
-	private ActivityRemoveScreenP screenRemoveActivity;	
-	private ActivityListAllScreenP screenListAllActivity;	
-	private ActivityManagementScreenP screenManagementActivity;	
-	private ActivityReportsListOfAuthorsScreenP screenActivityReportsListOfAuthors;	
-	private ActivityReportsFrequencyPerActivityScreenP screenActivityReportsFrequencyPerActivity;	
-
 	private SubmissionSearchScreenP screenSearchSubmission;	
 	private SubmissionRemoveScreenP screenRemoveSubmission;	
 	private SubmissionListAllScreenP screenListAllSubmission;	
-	private SubmissionCompleteInsertScreenP screenSubmissionCompleteInsert;	
-	private SubmissionPartialInsertScreenP screenSubmissionPartialInsert;	
+                   
+		private SubmissionCompleteInsertScreenP screenSubmissionCompleteInsert;	
+                   
+		private SubmissionPartialInsertScreenP screenSubmissionPartialInsert;	
+
+	private CheckingCopyInsertScreenP screenInsertCheckingCopy;	
+	private CheckingCopyUpdateScreenP screenUpdateCheckingCopy;	
+	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
+	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
+	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
+	private CheckingCopyManagementScreenP screenManagementCheckingCopy;	
+
 
 	private AssignmentInsertScreenP screenInsertAssignment;	
 	private AssignmentSearchScreenP screenSearchAssignment;	
 	private AssignmentRemoveScreenP screenRemoveAssignment;	
 	private AssignmentListAllScreenP screenListAllAssignment;	
 	private AssignmentManagementScreenP screenManagementAssignment;	
-
-	private CheckingCopyInsertScreenP screenInsertCheckingCopy;	
-	private CheckingCopyUpdateScreenP screenUpdateCheckingCopy;	
-	private CheckingCopyRemoveScreenP screenRemoveCheckingCopy;	
-	private CheckingCopySearchScreenP screenSearchCheckingCopy;	
-	private CheckingCopyListAllScreenP screenListAllCheckingCopy;	
-	private CheckingCopyManagementScreenP screenManagementCheckingCopy;	
-
-	private NewOptionManagementScreenP screenManagementNewOption;	
 
 	private ReceiptManagementScreenP screenManagementReceipt;	
 
@@ -130,6 +134,9 @@ public class RiseEventsMainScreenP extends JFrame {
 
                
 	private ActivityOrganizerManagementScreenP screenManagementActivityOrganizer;
+
+	
+
 
 	
 
@@ -193,6 +200,7 @@ public class RiseEventsMainScreenP extends JFrame {
 		SearchUserMenuAction searchUserAction = new SearchUserMenuAction();	
 		RemoveUserMenuAction removeUserAction = new RemoveUserMenuAction();	
 		ListAllUserMenuAction listallUserAction = new ListAllUserMenuAction();	
+                   
 		UserSendBugTrackEmailMenuAction userSendBugTrackEmailAction = new UserSendBugTrackEmailMenuAction();	
 
 		InsertOrganizerMenuAction insertOrganizerAction = new InsertOrganizerMenuAction();	
@@ -201,17 +209,17 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveOrganizerMenuAction removeOrganizerAction = new RemoveOrganizerMenuAction();	
 		ListAllOrganizerMenuAction listallOrganizerAction = new ListAllOrganizerMenuAction();	
 
-		InsertReviewerMenuAction insertReviewerAction = new InsertReviewerMenuAction();	
-		UpdateReviewerMenuAction updateReviewerAction = new UpdateReviewerMenuAction();	
-		SearchReviewerMenuAction searchReviewerAction = new SearchReviewerMenuAction();	
-		RemoveReviewerMenuAction removeReviewerAction = new RemoveReviewerMenuAction();	
-		ListAllReviewerMenuAction listallReviewerAction = new ListAllReviewerMenuAction();	
-
 		InsertSpeakerMenuAction insertSpeakerAction = new InsertSpeakerMenuAction();	
 		UpdateSpeakerMenuAction updateSpeakerAction = new UpdateSpeakerMenuAction();	
 		SearchSpeakerMenuAction searchSpeakerAction = new SearchSpeakerMenuAction();	
 		RemoveSpeakerMenuAction removeSpeakerAction = new RemoveSpeakerMenuAction();	
 		ListAllSpeakerMenuAction listallSpeakerAction = new ListAllSpeakerMenuAction();	
+
+		InsertReviewerMenuAction insertReviewerAction = new InsertReviewerMenuAction();	
+		UpdateReviewerMenuAction updateReviewerAction = new UpdateReviewerMenuAction();	
+		SearchReviewerMenuAction searchReviewerAction = new SearchReviewerMenuAction();	
+		RemoveReviewerMenuAction removeReviewerAction = new RemoveReviewerMenuAction();	
+		ListAllReviewerMenuAction listallReviewerAction = new ListAllReviewerMenuAction();	
 
 		InsertEventMenuAction insertEventAction = new InsertEventMenuAction();	
 		UpdateEventMenuAction updateEventAction = new UpdateEventMenuAction();	
@@ -219,9 +227,20 @@ public class RiseEventsMainScreenP extends JFrame {
 		RemoveEventMenuAction removeEventAction = new RemoveEventMenuAction();	
 		ListAllEventMenuAction listallEventAction = new ListAllEventMenuAction();	
 		ManagementEventMenuAction managementEventAction = new ManagementEventMenuAction();	
-		EventProgramMenuAction eventProgramAction = new EventProgramMenuAction();	
+                   
 		EventImportantDatesMenuAction eventImportantDatesAction = new EventImportantDatesMenuAction();	
-		EventReportsFrequencyPerEventMenuAction eventReportsFrequencyPerEventAction = new EventReportsFrequencyPerEventMenuAction();	
+    	EventReportsFrequencyPerEventMenuAction eventReportsFrequencyPerEventAction = new EventReportsFrequencyPerEventMenuAction();	
+                   
+		EventProgramMenuAction eventProgramAction = new EventProgramMenuAction();	
+
+		InsertActivityMenuAction insertActivityAction = new InsertActivityMenuAction();	
+		UpdateActivityMenuAction updateActivityAction = new UpdateActivityMenuAction();	
+		SearchActivityMenuAction searchActivityAction = new SearchActivityMenuAction();	
+		RemoveActivityMenuAction removeActivityAction = new RemoveActivityMenuAction();	
+		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
+		ManagementActivityMenuAction managementActivityAction = new ManagementActivityMenuAction();	
+    	ActivityReportsFrequencyPerActivityMenuAction activityReportsFrequencyPerActivityAction = new ActivityReportsFrequencyPerActivityMenuAction();	
+    	ActivityReportsListOfAuthorsMenuAction activityReportsListOfAuthorsAction = new ActivityReportsListOfAuthorsMenuAction();	
 
 		InsertPaymentMenuAction insertPaymentAction = new InsertPaymentMenuAction();	
 		UpdatePaymentMenuAction updatePaymentAction = new UpdatePaymentMenuAction();	
@@ -230,35 +249,27 @@ public class RiseEventsMainScreenP extends JFrame {
 		ListAllPaymentMenuAction listallPaymentAction = new ListAllPaymentMenuAction();	
 		ManagementPaymentMenuAction managementPaymentAction = new ManagementPaymentMenuAction();	
 
-		InsertActivityMenuAction insertActivityAction = new InsertActivityMenuAction();	
-		UpdateActivityMenuAction updateActivityAction = new UpdateActivityMenuAction();	
-		SearchActivityMenuAction searchActivityAction = new SearchActivityMenuAction();	
-		RemoveActivityMenuAction removeActivityAction = new RemoveActivityMenuAction();	
-		ListAllActivityMenuAction listallActivityAction = new ListAllActivityMenuAction();	
-		ManagementActivityMenuAction managementActivityAction = new ManagementActivityMenuAction();	
-		ActivityReportsListOfAuthorsMenuAction activityReportsListOfAuthorsAction = new ActivityReportsListOfAuthorsMenuAction();	
-		ActivityReportsFrequencyPerActivityMenuAction activityReportsFrequencyPerActivityAction = new ActivityReportsFrequencyPerActivityMenuAction();	
-
 		SearchSubmissionMenuAction searchSubmissionAction = new SearchSubmissionMenuAction();	
 		RemoveSubmissionMenuAction removeSubmissionAction = new RemoveSubmissionMenuAction();	
 		ListAllSubmissionMenuAction listallSubmissionAction = new ListAllSubmissionMenuAction();	
+                   
 		SubmissionCompleteInsertMenuAction submissionCompleteInsertAction = new SubmissionCompleteInsertMenuAction();	
+                   
 		SubmissionPartialInsertMenuAction submissionPartialInsertAction = new SubmissionPartialInsertMenuAction();	
+
+		InsertCheckingCopyMenuAction insertCheckingCopyAction = new InsertCheckingCopyMenuAction();	
+		UpdateCheckingCopyMenuAction updateCheckingCopyAction = new UpdateCheckingCopyMenuAction();	
+		SearchCheckingCopyMenuAction searchCheckingCopyAction = new SearchCheckingCopyMenuAction();	
+		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveCheckingCopyMenuAction();	
+		ListAllCheckingCopyMenuAction listallCheckingCopyAction = new ListAllCheckingCopyMenuAction();	
+		ManagementCheckingCopyMenuAction managementCheckingCopyAction = new ManagementCheckingCopyMenuAction();	
+
 
 		InsertAssignmentMenuAction insertAssignmentAction = new InsertAssignmentMenuAction();	
 		SearchAssignmentMenuAction searchAssignmentAction = new SearchAssignmentMenuAction();	
 		RemoveAssignmentMenuAction removeAssignmentAction = new RemoveAssignmentMenuAction();	
 		ListAllAssignmentMenuAction listallAssignmentAction = new ListAllAssignmentMenuAction();	
 		ManagementAssignmentMenuAction managementAssignmentAction = new ManagementAssignmentMenuAction();	
-
-		InsertCheckingCopyMenuAction insertCheckingCopyAction = new InsertCheckingCopyMenuAction();	
-		UpdateCheckingCopyMenuAction updateCheckingCopyAction = new UpdateCheckingCopyMenuAction();	
-		RemoveCheckingCopyMenuAction removeCheckingCopyAction = new RemoveCheckingCopyMenuAction();	
-		SearchCheckingCopyMenuAction searchCheckingCopyAction = new SearchCheckingCopyMenuAction();	
-		ListAllCheckingCopyMenuAction listallCheckingCopyAction = new ListAllCheckingCopyMenuAction();	
-		ManagementCheckingCopyMenuAction managementCheckingCopyAction = new ManagementCheckingCopyMenuAction();	
-
-		ManagementNewOptionMenuAction managementNewOptionAction = new ManagementNewOptionMenuAction();	
 
 		ManagementReceiptMenuAction managementReceiptAction = new ManagementReceiptMenuAction();	
 
@@ -367,7 +378,9 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllUser = new JMenuItem("ListAll");
 		mnUser.add(mntmListAllUser);
 		mntmListAllUser.addActionListener(listallUserAction);
-		JMenuItem mntmUserSendBugTrackEmail = new JMenuItem("send Bug Track Email");
+		
+                   
+		JMenuItem mntmUserSendBugTrackEmail = new JMenuItem("User Send Bug Track Email");
 		mnUser.add(mntmUserSendBugTrackEmail);
 		mntmUserSendBugTrackEmail.addActionListener(userSendBugTrackEmailAction);
 		JMenu mnOrganizer = new JMenu("Organizer");
@@ -387,23 +400,6 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllOrganizer = new JMenuItem("ListAll");
 		mnOrganizer.add(mntmListAllOrganizer);
 		mntmListAllOrganizer.addActionListener(listallOrganizerAction);
-		JMenu mnReviewer = new JMenu("Reviewer");
-		menuBar.add(mnReviewer);
-		JMenuItem mntmInsertReviewer = new JMenuItem("Insert");
-		mnReviewer.add(mntmInsertReviewer);
-		mntmInsertReviewer.addActionListener(insertReviewerAction);
-		JMenuItem mntmUpdateReviewer = new JMenuItem("Update");
-		mnReviewer.add(mntmUpdateReviewer);
-		mntmUpdateReviewer.addActionListener(updateReviewerAction);
-		JMenuItem mntmSearchReviewer = new JMenuItem("Search");
-		mnReviewer.add(mntmSearchReviewer);
-		mntmSearchReviewer.addActionListener(searchReviewerAction);
-		JMenuItem mntmRemoveReviewer = new JMenuItem("Remove");
-		mnReviewer.add(mntmRemoveReviewer);
-		mntmRemoveReviewer.addActionListener(removeReviewerAction);
-		JMenuItem mntmListAllReviewer = new JMenuItem("ListAll");
-		mnReviewer.add(mntmListAllReviewer);
-		mntmListAllReviewer.addActionListener(listallReviewerAction);
 		JMenu mnSpeaker = new JMenu("Speaker");
 		menuBar.add(mnSpeaker);
 		JMenuItem mntmInsertSpeaker = new JMenuItem("Insert");
@@ -421,6 +417,24 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllSpeaker = new JMenuItem("ListAll");
 		mnSpeaker.add(mntmListAllSpeaker);
 		mntmListAllSpeaker.addActionListener(listallSpeakerAction);
+		JMenu mnReviewer = new JMenu("Reviewer");
+		menuBar.add(mnReviewer);
+		JMenuItem mntmInsertReviewer = new JMenuItem("Insert");
+		mnReviewer.add(mntmInsertReviewer);
+		mntmInsertReviewer.addActionListener(insertReviewerAction);
+		JMenuItem mntmUpdateReviewer = new JMenuItem("Update");
+		mnReviewer.add(mntmUpdateReviewer);
+		mntmUpdateReviewer.addActionListener(updateReviewerAction);
+		JMenuItem mntmSearchReviewer = new JMenuItem("Search");
+		mnReviewer.add(mntmSearchReviewer);
+		mntmSearchReviewer.addActionListener(searchReviewerAction);
+		JMenuItem mntmRemoveReviewer = new JMenuItem("Remove");
+		mnReviewer.add(mntmRemoveReviewer);
+		mntmRemoveReviewer.addActionListener(removeReviewerAction);
+		JMenuItem mntmListAllReviewer = new JMenuItem("ListAll");
+		mnReviewer.add(mntmListAllReviewer);
+		mntmListAllReviewer.addActionListener(listallReviewerAction);
+		
 		JMenu mnEvent = new JMenu("Event");
 		menuBar.add(mnEvent);
 		JMenuItem mntmInsertEvent = new JMenuItem("Insert");
@@ -441,35 +455,20 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmManagementEvent = new JMenuItem("Management");
 		mnEvent.add(mntmManagementEvent);
 		mntmManagementEvent.addActionListener(managementEventAction);
-		JMenuItem mntmEventProgram = new JMenuItem("program");
-		mnEvent.add(mntmEventProgram);
-		mntmEventProgram.addActionListener(eventProgramAction);
-		JMenuItem mntmEventImportantDates = new JMenuItem("important Dates");
+		
+                   
+		JMenuItem mntmEventImportantDates = new JMenuItem("Event Important Dates");
 		mnEvent.add(mntmEventImportantDates);
 		mntmEventImportantDates.addActionListener(eventImportantDatesAction);
-		JMenuItem mntmEventReportsFrequencyPerEvent = new JMenuItem("reports Frequency Per Event");
+		
+		JMenuItem mntmEventReportsFrequencyPerEvent = new JMenuItem("Reports Frequency Per Event");
 		mnEvent.add(mntmEventReportsFrequencyPerEvent);
 		mntmEventReportsFrequencyPerEvent.addActionListener(eventReportsFrequencyPerEventAction);
-		JMenu mnPayment = new JMenu("Payment");
-		menuBar.add(mnPayment);
-		JMenuItem mntmInsertPayment = new JMenuItem("Insert");
-		mnPayment.add(mntmInsertPayment);
-		mntmInsertPayment.addActionListener(insertPaymentAction);
-		JMenuItem mntmUpdatePayment = new JMenuItem("Update");
-		mnPayment.add(mntmUpdatePayment);
-		mntmUpdatePayment.addActionListener(updatePaymentAction);
-		JMenuItem mntmSearchPayment = new JMenuItem("Search");
-		mnPayment.add(mntmSearchPayment);
-		mntmSearchPayment.addActionListener(searchPaymentAction);
-		JMenuItem mntmRemovePayment = new JMenuItem("Remove");
-		mnPayment.add(mntmRemovePayment);
-		mntmRemovePayment.addActionListener(removePaymentAction);
-		JMenuItem mntmListAllPayment = new JMenuItem("ListAll");
-		mnPayment.add(mntmListAllPayment);
-		mntmListAllPayment.addActionListener(listallPaymentAction);
-		JMenuItem mntmManagementPayment = new JMenuItem("Management");
-		mnPayment.add(mntmManagementPayment);
-		mntmManagementPayment.addActionListener(managementPaymentAction);
+		
+                   
+		JMenuItem mntmEventProgram = new JMenuItem("Event Program");
+		mnEvent.add(mntmEventProgram);
+		mntmEventProgram.addActionListener(eventProgramAction);
 		JMenu mnActivity = new JMenu("Activity");
 		menuBar.add(mnActivity);
 		JMenuItem mntmInsertActivity = new JMenuItem("Insert");
@@ -490,12 +489,37 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmManagementActivity = new JMenuItem("Management");
 		mnActivity.add(mntmManagementActivity);
 		mntmManagementActivity.addActionListener(managementActivityAction);
-		JMenuItem mntmActivityReportsListOfAuthors = new JMenuItem("reports List Of Authors");
-		mnActivity.add(mntmActivityReportsListOfAuthors);
-		mntmActivityReportsListOfAuthors.addActionListener(activityReportsListOfAuthorsAction);
-		JMenuItem mntmActivityReportsFrequencyPerActivity = new JMenuItem("reports Frequency Per Activity");
+		
+		JMenuItem mntmActivityReportsFrequencyPerActivity = new JMenuItem("Reports Frequency Per Activity");
 		mnActivity.add(mntmActivityReportsFrequencyPerActivity);
 		mntmActivityReportsFrequencyPerActivity.addActionListener(activityReportsFrequencyPerActivityAction);
+		
+		JMenuItem mntmActivityReportsListOfAuthors = new JMenuItem("Reports List Of Authors");
+		mnActivity.add(mntmActivityReportsListOfAuthors);
+		mntmActivityReportsListOfAuthors.addActionListener(activityReportsListOfAuthorsAction);
+		JMenu mnPayment = new JMenu("Payment");
+		menuBar.add(mnPayment);
+		JMenuItem mntmInsertPayment = new JMenuItem("Insert");
+		mnPayment.add(mntmInsertPayment);
+		mntmInsertPayment.addActionListener(insertPaymentAction);
+		JMenuItem mntmUpdatePayment = new JMenuItem("Update");
+		mnPayment.add(mntmUpdatePayment);
+		mntmUpdatePayment.addActionListener(updatePaymentAction);
+		JMenuItem mntmSearchPayment = new JMenuItem("Search");
+		mnPayment.add(mntmSearchPayment);
+		mntmSearchPayment.addActionListener(searchPaymentAction);
+		JMenuItem mntmRemovePayment = new JMenuItem("Remove");
+		mnPayment.add(mntmRemovePayment);
+		mntmRemovePayment.addActionListener(removePaymentAction);
+		JMenuItem mntmListAllPayment = new JMenuItem("ListAll");
+		mnPayment.add(mntmListAllPayment);
+		mntmListAllPayment.addActionListener(listallPaymentAction);
+		JMenuItem mntmManagementPayment = new JMenuItem("Management");
+		mnPayment.add(mntmManagementPayment);
+		mntmManagementPayment.addActionListener(managementPaymentAction);
+		
+		
+		
 		JMenu mnSubmission = new JMenu("Submission");
 		menuBar.add(mnSubmission);
 		JMenuItem mntmSearchSubmission = new JMenuItem("Search");
@@ -507,12 +531,39 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmListAllSubmission = new JMenuItem("ListAll");
 		mnSubmission.add(mntmListAllSubmission);
 		mntmListAllSubmission.addActionListener(listallSubmissionAction);
-		JMenuItem mntmSubmissionCompleteInsert = new JMenuItem("complete Insert");
+		
+                   
+		JMenuItem mntmSubmissionCompleteInsert = new JMenuItem("Submission Complete Insert");
 		mnSubmission.add(mntmSubmissionCompleteInsert);
 		mntmSubmissionCompleteInsert.addActionListener(submissionCompleteInsertAction);
-		JMenuItem mntmSubmissionPartialInsert = new JMenuItem("partial Insert");
+		
+                   
+		JMenuItem mntmSubmissionPartialInsert = new JMenuItem("Submission Partial Insert");
 		mnSubmission.add(mntmSubmissionPartialInsert);
 		mntmSubmissionPartialInsert.addActionListener(submissionPartialInsertAction);
+		
+		JMenu mnCheckingCopy = new JMenu("Checking Copy");
+		menuBar.add(mnCheckingCopy);
+		JMenuItem mntmInsertCheckingCopy = new JMenuItem("Insert");
+		mnCheckingCopy.add(mntmInsertCheckingCopy);
+		mntmInsertCheckingCopy.addActionListener(insertCheckingCopyAction);
+		JMenuItem mntmUpdateCheckingCopy = new JMenuItem("Update");
+		mnCheckingCopy.add(mntmUpdateCheckingCopy);
+		mntmUpdateCheckingCopy.addActionListener(updateCheckingCopyAction);
+		JMenuItem mntmSearchCheckingCopy = new JMenuItem("Search");
+		mnCheckingCopy.add(mntmSearchCheckingCopy);
+		mntmSearchCheckingCopy.addActionListener(searchCheckingCopyAction);
+		JMenuItem mntmRemoveCheckingCopy = new JMenuItem("Remove");
+		mnCheckingCopy.add(mntmRemoveCheckingCopy);
+		mntmRemoveCheckingCopy.addActionListener(removeCheckingCopyAction);
+		JMenuItem mntmListAllCheckingCopy = new JMenuItem("ListAll");
+		mnCheckingCopy.add(mntmListAllCheckingCopy);
+		mntmListAllCheckingCopy.addActionListener(listallCheckingCopyAction);
+		JMenuItem mntmManagementCheckingCopy = new JMenuItem("Management");
+		mnCheckingCopy.add(mntmManagementCheckingCopy);
+		mntmManagementCheckingCopy.addActionListener(managementCheckingCopyAction);
+		
+		
 		JMenu mnAssignment = new JMenu("Assignment");
 		menuBar.add(mnAssignment);
 		JMenuItem mntmInsertAssignment = new JMenuItem("Insert");
@@ -530,31 +581,10 @@ public class RiseEventsMainScreenP extends JFrame {
 		JMenuItem mntmManagementAssignment = new JMenuItem("Management");
 		mnAssignment.add(mntmManagementAssignment);
 		mntmManagementAssignment.addActionListener(managementAssignmentAction);
-		JMenu mnCheckingCopy = new JMenu("Checking Copy");
-		menuBar.add(mnCheckingCopy);
-		JMenuItem mntmInsertCheckingCopy = new JMenuItem("Insert");
-		mnCheckingCopy.add(mntmInsertCheckingCopy);
-		mntmInsertCheckingCopy.addActionListener(insertCheckingCopyAction);
-		JMenuItem mntmUpdateCheckingCopy = new JMenuItem("Update");
-		mnCheckingCopy.add(mntmUpdateCheckingCopy);
-		mntmUpdateCheckingCopy.addActionListener(updateCheckingCopyAction);
-		JMenuItem mntmRemoveCheckingCopy = new JMenuItem("Remove");
-		mnCheckingCopy.add(mntmRemoveCheckingCopy);
-		mntmRemoveCheckingCopy.addActionListener(removeCheckingCopyAction);
-		JMenuItem mntmSearchCheckingCopy = new JMenuItem("Search");
-		mnCheckingCopy.add(mntmSearchCheckingCopy);
-		mntmSearchCheckingCopy.addActionListener(searchCheckingCopyAction);
-		JMenuItem mntmListAllCheckingCopy = new JMenuItem("ListAll");
-		mnCheckingCopy.add(mntmListAllCheckingCopy);
-		mntmListAllCheckingCopy.addActionListener(listallCheckingCopyAction);
-		JMenuItem mntmManagementCheckingCopy = new JMenuItem("Management");
-		mnCheckingCopy.add(mntmManagementCheckingCopy);
-		mntmManagementCheckingCopy.addActionListener(managementCheckingCopyAction);
-		JMenu mnNewOption = new JMenu("New Option");
-		menuBar.add(mnNewOption);
-		JMenuItem mntmManagementNewOption = new JMenuItem("Management");
-		mnNewOption.add(mntmManagementNewOption);
-		mntmManagementNewOption.addActionListener(managementNewOptionAction);
+		
+		
+		
+		
 		JMenu mnReceipt = new JMenu("Receipt");
 		menuBar.add(mnReceipt);
 		JMenuItem mntmManagementReceipt = new JMenuItem("Management");
@@ -852,7 +882,8 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-			private class UserSendBugTrackEmailMenuAction implements ActionListener{
+                   
+		private class UserSendBugTrackEmailMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				screenUserSendBugTrackEmail = UserSendBugTrackEmailScreenP.getInstanceUserSendBugTrackEmailScreenP();
@@ -867,8 +898,7 @@ public class RiseEventsMainScreenP extends JFrame {
 					e1.printStackTrace();
 					}
 				}  
-			}
-	private class InsertOrganizerMenuAction implements ActionListener{ 
+			}			private class InsertOrganizerMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -956,101 +986,6 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllOrganizer);
 			try {
 				screenListAllOrganizer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class InsertReviewerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenInsertReviewer = ReviewerInsertScreenP.getInstanceReviewerInsertScreenP();
-			if(screenInsertReviewer.getParent() == null){
-				desktopPane.add(screenInsertReviewer);
-			}
-			screenInsertReviewer.setVisible(true);
-			desktopPane.moveToFront(screenInsertReviewer);
-			try {
-				screenInsertReviewer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class UpdateReviewerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenUpdateReviewer = ReviewerUpdateScreenP.getInstanceReviewerUpdateScreenP();
-			if(screenUpdateReviewer.getParent() == null){
-				desktopPane.add(screenUpdateReviewer);
-			}
-			screenUpdateReviewer.setVisible(true);
-			desktopPane.moveToFront(screenUpdateReviewer);
-			try {
-				screenUpdateReviewer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class SearchReviewerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenSearchReviewer = ReviewerSearchScreenP.getInstanceReviewerSearchScreenP();
-			if(screenSearchReviewer.getParent() == null){
-				desktopPane.add(screenSearchReviewer);
-			}
-			screenSearchReviewer.setVisible(true);
-			desktopPane.moveToFront(screenSearchReviewer);
-			try {
-				screenSearchReviewer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class RemoveReviewerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenRemoveReviewer = ReviewerRemoveScreenP.getInstanceReviewerRemoveScreenP();
-			if(screenRemoveReviewer.getParent() == null){
-				desktopPane.add(screenRemoveReviewer);
-			}
-			screenRemoveReviewer.setVisible(true);
-			desktopPane.moveToFront(screenRemoveReviewer);
-			try {
-				screenRemoveReviewer.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ListAllReviewerMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenListAllReviewer = ReviewerListAllScreenP.getInstanceReviewerListAllScreenP();
-			if(screenListAllReviewer.getParent() == null){
-				desktopPane.add(screenListAllReviewer);
-			}
-			screenListAllReviewer.setVisible(true);
-			desktopPane.moveToFront(screenListAllReviewer);
-			try {
-				screenListAllReviewer.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -1146,6 +1081,101 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenListAllSpeaker);
 			try {
 				screenListAllSpeaker.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class InsertReviewerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenInsertReviewer = ReviewerInsertScreenP.getInstanceReviewerInsertScreenP();
+			if(screenInsertReviewer.getParent() == null){
+				desktopPane.add(screenInsertReviewer);
+			}
+			screenInsertReviewer.setVisible(true);
+			desktopPane.moveToFront(screenInsertReviewer);
+			try {
+				screenInsertReviewer.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class UpdateReviewerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenUpdateReviewer = ReviewerUpdateScreenP.getInstanceReviewerUpdateScreenP();
+			if(screenUpdateReviewer.getParent() == null){
+				desktopPane.add(screenUpdateReviewer);
+			}
+			screenUpdateReviewer.setVisible(true);
+			desktopPane.moveToFront(screenUpdateReviewer);
+			try {
+				screenUpdateReviewer.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class SearchReviewerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenSearchReviewer = ReviewerSearchScreenP.getInstanceReviewerSearchScreenP();
+			if(screenSearchReviewer.getParent() == null){
+				desktopPane.add(screenSearchReviewer);
+			}
+			screenSearchReviewer.setVisible(true);
+			desktopPane.moveToFront(screenSearchReviewer);
+			try {
+				screenSearchReviewer.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class RemoveReviewerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenRemoveReviewer = ReviewerRemoveScreenP.getInstanceReviewerRemoveScreenP();
+			if(screenRemoveReviewer.getParent() == null){
+				desktopPane.add(screenRemoveReviewer);
+			}
+			screenRemoveReviewer.setVisible(true);
+			desktopPane.moveToFront(screenRemoveReviewer);
+			try {
+				screenRemoveReviewer.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ListAllReviewerMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenListAllReviewer = ReviewerListAllScreenP.getInstanceReviewerListAllScreenP();
+			if(screenListAllReviewer.getParent() == null){
+				desktopPane.add(screenListAllReviewer);
+			}
+			screenListAllReviewer.setVisible(true);
+			desktopPane.moveToFront(screenListAllReviewer);
+			try {
+				screenListAllReviewer.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -1267,23 +1297,8 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-			private class EventProgramMenuAction implements ActionListener{
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				screenEventProgram = EventProgramScreenP.getInstanceEventProgramScreenP();
-				if(screenEventProgram.getParent() == null){
-					desktopPane.add(screenEventProgram);
-				}
-				screenEventProgram.setVisible(true);
-				desktopPane.moveToFront(screenEventProgram);
-				try {
-					screenEventProgram.setSelected(true);
-				} catch (PropertyVetoException e1) {
-					e1.printStackTrace();
-					}
-				}  
-			}
-			private class EventImportantDatesMenuAction implements ActionListener{
+                   
+		private class EventImportantDatesMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				screenEventImportantDates = EventImportantDatesScreenP.getInstanceEventImportantDatesScreenP();
@@ -1298,8 +1313,7 @@ public class RiseEventsMainScreenP extends JFrame {
 					e1.printStackTrace();
 					}
 				}  
-			}
-			private class EventReportsFrequencyPerEventMenuAction implements ActionListener{
+			}				private class EventReportsFrequencyPerEventMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				screenEventReportsFrequencyPerEvent = EventReportsFrequencyPerEventScreenP.getInstanceEventReportsFrequencyPerEventScreenP();
@@ -1314,122 +1328,23 @@ public class RiseEventsMainScreenP extends JFrame {
 					e1.printStackTrace();
 					}
 				}  
-			}
-	private class InsertPaymentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenInsertPayment = PaymentInsertScreenP.getInstancePaymentInsertScreenP();
-			if(screenInsertPayment.getParent() == null){
-				desktopPane.add(screenInsertPayment);
-			}
-			screenInsertPayment.setVisible(true);
-			desktopPane.moveToFront(screenInsertPayment);
-			try {
-				screenInsertPayment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class UpdatePaymentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenUpdatePayment = PaymentUpdateScreenP.getInstancePaymentUpdateScreenP();
-			if(screenUpdatePayment.getParent() == null){
-				desktopPane.add(screenUpdatePayment);
-			}
-			screenUpdatePayment.setVisible(true);
-			desktopPane.moveToFront(screenUpdatePayment);
-			try {
-				screenUpdatePayment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class SearchPaymentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenSearchPayment = PaymentSearchScreenP.getInstancePaymentSearchScreenP();
-			if(screenSearchPayment.getParent() == null){
-				desktopPane.add(screenSearchPayment);
-			}
-			screenSearchPayment.setVisible(true);
-			desktopPane.moveToFront(screenSearchPayment);
-			try {
-				screenSearchPayment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class RemovePaymentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenRemovePayment = PaymentRemoveScreenP.getInstancePaymentRemoveScreenP();
-			if(screenRemovePayment.getParent() == null){
-				desktopPane.add(screenRemovePayment);
-			}
-			screenRemovePayment.setVisible(true);
-			desktopPane.moveToFront(screenRemovePayment);
-			try {
-				screenRemovePayment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ListAllPaymentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenListAllPayment = PaymentListAllScreenP.getInstancePaymentListAllScreenP();
-			if(screenListAllPayment.getParent() == null){
-				desktopPane.add(screenListAllPayment);
-			}
-			screenListAllPayment.setVisible(true);
-			desktopPane.moveToFront(screenListAllPayment);
-			try {
-				screenListAllPayment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ManagementPaymentMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenManagementPayment = PaymentManagementScreenP.getInstancePaymentManagementScreenP();
-			if(screenManagementPayment.getParent() == null){
-				desktopPane.add(screenManagementPayment);
-			}
-			screenManagementPayment.setVisible(true);
-			desktopPane.moveToFront(screenManagementPayment);
-			try {
-				screenManagementPayment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class InsertActivityMenuAction implements ActionListener{ 
+			}		                   
+		private class EventProgramMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenEventProgram = EventProgramScreenP.getInstanceEventProgramScreenP();
+				if(screenEventProgram.getParent() == null){
+					desktopPane.add(screenEventProgram);
+				}
+				screenEventProgram.setVisible(true);
+				desktopPane.moveToFront(screenEventProgram);
+				try {
+					screenEventProgram.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}			private class InsertActivityMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -1543,23 +1458,7 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-			private class ActivityReportsListOfAuthorsMenuAction implements ActionListener{
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				screenActivityReportsListOfAuthors = ActivityReportsListOfAuthorsScreenP.getInstanceActivityReportsListOfAuthorsScreenP();
-				if(screenActivityReportsListOfAuthors.getParent() == null){
-					desktopPane.add(screenActivityReportsListOfAuthors);
-				}
-				screenActivityReportsListOfAuthors.setVisible(true);
-				desktopPane.moveToFront(screenActivityReportsListOfAuthors);
-				try {
-					screenActivityReportsListOfAuthors.setSelected(true);
-				} catch (PropertyVetoException e1) {
-					e1.printStackTrace();
-					}
-				}  
-			}
-			private class ActivityReportsFrequencyPerActivityMenuAction implements ActionListener{
+		private class ActivityReportsFrequencyPerActivityMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				screenActivityReportsFrequencyPerActivity = ActivityReportsFrequencyPerActivityScreenP.getInstanceActivityReportsFrequencyPerActivityScreenP();
@@ -1574,7 +1473,135 @@ public class RiseEventsMainScreenP extends JFrame {
 					e1.printStackTrace();
 					}
 				}  
+			}				private class ActivityReportsListOfAuthorsMenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screenActivityReportsListOfAuthors = ActivityReportsListOfAuthorsScreenP.getInstanceActivityReportsListOfAuthorsScreenP();
+				if(screenActivityReportsListOfAuthors.getParent() == null){
+					desktopPane.add(screenActivityReportsListOfAuthors);
+				}
+				screenActivityReportsListOfAuthors.setVisible(true);
+				desktopPane.moveToFront(screenActivityReportsListOfAuthors);
+				try {
+					screenActivityReportsListOfAuthors.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}			private class InsertPaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenInsertPayment = PaymentInsertScreenP.getInstancePaymentInsertScreenP();
+			if(screenInsertPayment.getParent() == null){
+				desktopPane.add(screenInsertPayment);
 			}
+			screenInsertPayment.setVisible(true);
+			desktopPane.moveToFront(screenInsertPayment);
+			try {
+				screenInsertPayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class UpdatePaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenUpdatePayment = PaymentUpdateScreenP.getInstancePaymentUpdateScreenP();
+			if(screenUpdatePayment.getParent() == null){
+				desktopPane.add(screenUpdatePayment);
+			}
+			screenUpdatePayment.setVisible(true);
+			desktopPane.moveToFront(screenUpdatePayment);
+			try {
+				screenUpdatePayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class SearchPaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenSearchPayment = PaymentSearchScreenP.getInstancePaymentSearchScreenP();
+			if(screenSearchPayment.getParent() == null){
+				desktopPane.add(screenSearchPayment);
+			}
+			screenSearchPayment.setVisible(true);
+			desktopPane.moveToFront(screenSearchPayment);
+			try {
+				screenSearchPayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class RemovePaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenRemovePayment = PaymentRemoveScreenP.getInstancePaymentRemoveScreenP();
+			if(screenRemovePayment.getParent() == null){
+				desktopPane.add(screenRemovePayment);
+			}
+			screenRemovePayment.setVisible(true);
+			desktopPane.moveToFront(screenRemovePayment);
+			try {
+				screenRemovePayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ListAllPaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenListAllPayment = PaymentListAllScreenP.getInstancePaymentListAllScreenP();
+			if(screenListAllPayment.getParent() == null){
+				desktopPane.add(screenListAllPayment);
+			}
+			screenListAllPayment.setVisible(true);
+			desktopPane.moveToFront(screenListAllPayment);
+			try {
+				screenListAllPayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ManagementPaymentMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementPayment = PaymentManagementScreenP.getInstancePaymentManagementScreenP();
+			if(screenManagementPayment.getParent() == null){
+				desktopPane.add(screenManagementPayment);
+			}
+			screenManagementPayment.setVisible(true);
+			desktopPane.moveToFront(screenManagementPayment);
+			try {
+				screenManagementPayment.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
 	private class SearchSubmissionMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -1632,7 +1659,8 @@ public class RiseEventsMainScreenP extends JFrame {
 			
 		}  
 	}
-			private class SubmissionCompleteInsertMenuAction implements ActionListener{
+                   
+		private class SubmissionCompleteInsertMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				screenSubmissionCompleteInsert = SubmissionCompleteInsertScreenP.getInstanceSubmissionCompleteInsertScreenP();
@@ -1647,8 +1675,8 @@ public class RiseEventsMainScreenP extends JFrame {
 					e1.printStackTrace();
 					}
 				}  
-			}
-			private class SubmissionPartialInsertMenuAction implements ActionListener{
+			}		                   
+		private class SubmissionPartialInsertMenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				screenSubmissionPartialInsert = SubmissionPartialInsertScreenP.getInstanceSubmissionPartialInsertScreenP();
@@ -1663,7 +1691,120 @@ public class RiseEventsMainScreenP extends JFrame {
 					e1.printStackTrace();
 					}
 				}  
+			}			private class InsertCheckingCopyMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenInsertCheckingCopy = CheckingCopyInsertScreenP.getInstanceCheckingCopyInsertScreenP();
+			if(screenInsertCheckingCopy.getParent() == null){
+				desktopPane.add(screenInsertCheckingCopy);
 			}
+			screenInsertCheckingCopy.setVisible(true);
+			desktopPane.moveToFront(screenInsertCheckingCopy);
+			try {
+				screenInsertCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class UpdateCheckingCopyMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenUpdateCheckingCopy = CheckingCopyUpdateScreenP.getInstanceCheckingCopyUpdateScreenP();
+			if(screenUpdateCheckingCopy.getParent() == null){
+				desktopPane.add(screenUpdateCheckingCopy);
+			}
+			screenUpdateCheckingCopy.setVisible(true);
+			desktopPane.moveToFront(screenUpdateCheckingCopy);
+			try {
+				screenUpdateCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class SearchCheckingCopyMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenSearchCheckingCopy = CheckingCopySearchScreenP.getInstanceCheckingCopySearchScreenP();
+			if(screenSearchCheckingCopy.getParent() == null){
+				desktopPane.add(screenSearchCheckingCopy);
+			}
+			screenSearchCheckingCopy.setVisible(true);
+			desktopPane.moveToFront(screenSearchCheckingCopy);
+			try {
+				screenSearchCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class RemoveCheckingCopyMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenRemoveCheckingCopy = CheckingCopyRemoveScreenP.getInstanceCheckingCopyRemoveScreenP();
+			if(screenRemoveCheckingCopy.getParent() == null){
+				desktopPane.add(screenRemoveCheckingCopy);
+			}
+			screenRemoveCheckingCopy.setVisible(true);
+			desktopPane.moveToFront(screenRemoveCheckingCopy);
+			try {
+				screenRemoveCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ListAllCheckingCopyMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenListAllCheckingCopy = CheckingCopyListAllScreenP.getInstanceCheckingCopyListAllScreenP();
+			if(screenListAllCheckingCopy.getParent() == null){
+				desktopPane.add(screenListAllCheckingCopy);
+			}
+			screenListAllCheckingCopy.setVisible(true);
+			desktopPane.moveToFront(screenListAllCheckingCopy);
+			try {
+				screenListAllCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
+	private class ManagementCheckingCopyMenuAction implements ActionListener{ 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			screenManagementCheckingCopy = CheckingCopyManagementScreenP.getInstanceCheckingCopyManagementScreenP();
+			if(screenManagementCheckingCopy.getParent() == null){
+				desktopPane.add(screenManagementCheckingCopy);
+			}
+			screenManagementCheckingCopy.setVisible(true);
+			desktopPane.moveToFront(screenManagementCheckingCopy);
+			try {
+				screenManagementCheckingCopy.setSelected(true);
+			} catch (PropertyVetoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}  
+	}
 	private class InsertAssignmentMenuAction implements ActionListener{ 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -1752,139 +1893,6 @@ public class RiseEventsMainScreenP extends JFrame {
 			desktopPane.moveToFront(screenManagementAssignment);
 			try {
 				screenManagementAssignment.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class InsertCheckingCopyMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenInsertCheckingCopy = CheckingCopyInsertScreenP.getInstanceCheckingCopyInsertScreenP();
-			if(screenInsertCheckingCopy.getParent() == null){
-				desktopPane.add(screenInsertCheckingCopy);
-			}
-			screenInsertCheckingCopy.setVisible(true);
-			desktopPane.moveToFront(screenInsertCheckingCopy);
-			try {
-				screenInsertCheckingCopy.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class UpdateCheckingCopyMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenUpdateCheckingCopy = CheckingCopyUpdateScreenP.getInstanceCheckingCopyUpdateScreenP();
-			if(screenUpdateCheckingCopy.getParent() == null){
-				desktopPane.add(screenUpdateCheckingCopy);
-			}
-			screenUpdateCheckingCopy.setVisible(true);
-			desktopPane.moveToFront(screenUpdateCheckingCopy);
-			try {
-				screenUpdateCheckingCopy.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class RemoveCheckingCopyMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenRemoveCheckingCopy = CheckingCopyRemoveScreenP.getInstanceCheckingCopyRemoveScreenP();
-			if(screenRemoveCheckingCopy.getParent() == null){
-				desktopPane.add(screenRemoveCheckingCopy);
-			}
-			screenRemoveCheckingCopy.setVisible(true);
-			desktopPane.moveToFront(screenRemoveCheckingCopy);
-			try {
-				screenRemoveCheckingCopy.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class SearchCheckingCopyMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenSearchCheckingCopy = CheckingCopySearchScreenP.getInstanceCheckingCopySearchScreenP();
-			if(screenSearchCheckingCopy.getParent() == null){
-				desktopPane.add(screenSearchCheckingCopy);
-			}
-			screenSearchCheckingCopy.setVisible(true);
-			desktopPane.moveToFront(screenSearchCheckingCopy);
-			try {
-				screenSearchCheckingCopy.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ListAllCheckingCopyMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenListAllCheckingCopy = CheckingCopyListAllScreenP.getInstanceCheckingCopyListAllScreenP();
-			if(screenListAllCheckingCopy.getParent() == null){
-				desktopPane.add(screenListAllCheckingCopy);
-			}
-			screenListAllCheckingCopy.setVisible(true);
-			desktopPane.moveToFront(screenListAllCheckingCopy);
-			try {
-				screenListAllCheckingCopy.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ManagementCheckingCopyMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenManagementCheckingCopy = CheckingCopyManagementScreenP.getInstanceCheckingCopyManagementScreenP();
-			if(screenManagementCheckingCopy.getParent() == null){
-				desktopPane.add(screenManagementCheckingCopy);
-			}
-			screenManagementCheckingCopy.setVisible(true);
-			desktopPane.moveToFront(screenManagementCheckingCopy);
-			try {
-				screenManagementCheckingCopy.setSelected(true);
-			} catch (PropertyVetoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		}  
-	}
-	private class ManagementNewOptionMenuAction implements ActionListener{ 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			screenManagementNewOption = NewOptionManagementScreenP.getInstanceNewOptionManagementScreenP();
-			if(screenManagementNewOption.getParent() == null){
-				desktopPane.add(screenManagementNewOption);
-			}
-			screenManagementNewOption.setVisible(true);
-			desktopPane.moveToFront(screenManagementNewOption);
-			try {
-				screenManagementNewOption.setSelected(true);
 			} catch (PropertyVetoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

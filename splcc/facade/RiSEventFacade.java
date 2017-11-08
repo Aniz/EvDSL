@@ -405,8 +405,8 @@ public class {{sy}}Facade {
 		return activities.getListOfAuthorsPerActivity(idActivity);
 	}
 	
-	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
-		activity.listOfAuthorsPerActivity(authorsPerActivity);
+	public void listofAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
+		activity.listofAuthorsPerActivity(authorsPerActivity);
 	}
 	//#endif
 	//#endif

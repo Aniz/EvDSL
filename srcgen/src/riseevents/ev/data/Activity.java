@@ -168,7 +168,7 @@ public class Activity {
             outputStream.flush();
 	}
 
-	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity) throws DocumentException, IOException{
+	public void listofAuthorsPerActivity(Set<String> authorsPerActivity) throws DocumentException, IOException{
 		
 		List<String> authors = new ArrayList<String>(authorsPerActivity);
         Document documento = new Document();

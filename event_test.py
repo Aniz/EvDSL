@@ -42,8 +42,11 @@ def get_event_mm(debug=False):
     return entity_mm
 
 
-def main(debug=False):
+def main(fileName="event.ev",debug=False):
 
+    if sys.argv[1:]:
+        fileName = sys.argv[1]
+    
     entity_mm = get_event_mm(debug)
 
     # Export to .dot file for visualization
@@ -53,7 +56,7 @@ def main(debug=False):
     metamodel_export(entity_mm, join(dot_folder, 'event_meta.dot'))
 
     # Build Person model from event.ev file
-    event_model = entity_mm.model_from_file(join(this_folder, 'event.ev'))
+    event_model = entity_mm.model_from_file(join(this_folder, fileName))
 
     # Export to .dot file for visualization
     model_export(event_model, join(dot_folder, 'event.dot'))

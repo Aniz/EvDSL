@@ -2472,7 +2472,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 				}
 				
 				//BUGTRACK
-				{% if 'sendBugTrackEmail' in data.statments %}
+				{% if 'userSendBugTrackEmail' in data.statments %}
 					private class BugtrackScreenMenuAction  implements ActionListener{ 
 
 					@Override

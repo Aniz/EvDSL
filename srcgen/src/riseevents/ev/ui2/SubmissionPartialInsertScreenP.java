@@ -14,6 +14,10 @@ import javax.swing.JInternalFrame;
 
 import riseevents.ev.data.Activity;
 
+import riseevents.ev.data.Author;
+import riseevents.ev.data.SubmissionAuthor;
+import riseevents.ev.exception.AuthorAlreadyInsertedException;
+import riseevents.ev.exception.SubmissionAuthorAlreadyInsertedException;
 
 import riseevents.ev.data.Submission;
 import riseevents.ev.data.Submission.TypeSubmission;
@@ -91,6 +95,7 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		BackButtonAction backAction = new BackButtonAction();
 		
 		//#if ${InsertAuthors} == "T"
+		InsertNewAuthorButtonAction insertNewAuthorAction = new InsertNewAuthorButtonAction();
 		//#endif
 		
 		SelectComboUserAction selectUserAction = new SelectComboUserAction();
@@ -154,6 +159,44 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		getContentPane().add(textFieldKeywords);
 		textFieldKeywords.setColumns(10);
 		
+		JLabel label = new JLabel("Author Name:");
+		label.setBounds(43, 357, 87, 16);
+		getContentPane().add(label);
+		
+		textFieldauthorName = new JTextField();
+		textFieldauthorName.setColumns(10);
+		textFieldauthorName.setBounds(139, 351, 352, 27);
+		getContentPane().add(textFieldauthorName);
+		
+		JLabel label_1 = new JLabel("Author Id:");
+		label_1.setBounds(503, 357, 76, 16);
+		getContentPane().add(label_1);
+		
+		lblIdAuthor = new JLabel("0");
+		lblIdAuthor.setBounds(594, 357, 61, 16);
+		getContentPane().add(lblIdAuthor);
+		
+		textFieldFiliation = new JTextField();
+		textFieldFiliation.setColumns(10);
+		textFieldFiliation.setBounds(105, 385, 386, 27);
+		getContentPane().add(textFieldFiliation);
+		
+		JLabel label_3 = new JLabel("Filiation:");
+		label_3.setBounds(48, 391, 61, 16);
+		getContentPane().add(label_3);
+		
+		JLabel label_4 = new JLabel("Email:");
+		label_4.setBounds(43, 423, 61, 16);
+		getContentPane().add(label_4);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setColumns(10);
+		textFieldEmail.setBounds(105, 419, 268, 27);
+		getContentPane().add(textFieldEmail);
+		
+		JButton btnInsertNewAuthor = new JButton("Insert New Author");
+		btnInsertNewAuthor.setBounds(208, 470, 141, 29);
+		getContentPane().add(btnInsertNewAuthor);
 		JButton btnInsert = new JButton("Submit");
 		btnInsert.setBounds(364, 470, 117, 29);
 		getContentPane().add(btnInsert);
@@ -169,6 +212,8 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		btnInsert.addActionListener(insertAction);
 		btnBack.addActionListener(backAction);
 		//#if ${InsertAuthors} == "T"
+		btnInsertNewAuthor.addActionListener(insertNewAuthorAction);
+		loadLastAuthorIndex();
 		//#endif
 	
 		// Retirada de Login
@@ -233,6 +278,16 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 			}
 		}
 		//#if ${InsertAuthors} == "T"
+		private void loadLastAuthorIndex(){
+			try {
+				lblIdAuthor.setText(String.valueOf(RiseEventsMainScreenP.facade.getAuthorLastId()));
+			} catch (RepositoryException e) {
+				JOptionPane.showMessageDialog(getContentPane(),
+						e.toString(), "Erro",
+						JOptionPane.INFORMATION_MESSAGE);
+				e.printStackTrace();
+			}
+		}
 		//#endif
 		// retirada ne login
 //		private void pegarUsuarioLogado(){
@@ -265,6 +320,51 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 		}
 		
 		//#if ${InsertAuthors} == "T"
+		private class InsertNewAuthorButtonAction  implements ActionListener{ 
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//clearAuthorFields();
+				loadLastAuthorIndex();
+				
+				Author author = new Author();
+				
+				String nameAuthor = textFieldauthorName.getText();
+				String filiation = textFieldFiliation.getText();
+				String email = textFieldEmail.getText();
+				
+				if ( nameAuthor.equals(" ") || filiation.equals(" ") || email.equals(" ")) {
+					JOptionPane.showMessageDialog(getContentPane(),
+							"Não pode haver campo vazio.", "Erro",
+							JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}else{
+					try {
+					author.setName(nameAuthor);
+					author.setFiliation(filiation);
+					author.setEmail(email);
+					//Insere na tabela de authors
+					RiseEventsMainScreenP.facade.insertAuthor(author);
+					
+					JOptionPane.showMessageDialog(getContentPane(),
+							"Author inserido com sucesso", "Sucesso",
+							JOptionPane.INFORMATION_MESSAGE);
+					
+					
+					} catch (AuthorAlreadyInsertedException e1) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								e1.toString(), "Erro",
+								JOptionPane.INFORMATION_MESSAGE);
+						e1.printStackTrace();
+					} catch (RepositoryException e1) {
+						JOptionPane.showMessageDialog(getContentPane(),
+								e1.toString(), "Erro",
+								JOptionPane.INFORMATION_MESSAGE);
+						e1.printStackTrace();
+					} 
+				}
+			}
+		}
 		//#endif
 		
 		private class InsertButtonAction  implements ActionListener{ 
@@ -315,6 +415,16 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							submissionUser.setIdActivity(RiseEventsMainScreenP.facade.getActivityIdByName(nameActivity));
 							RiseEventsMainScreenP.facade.insertSubmissionUser(submissionUser);
 							//#if ${InsertAuthors} == "T"
+							//Inserir na tabela de submissionAUTHORS
+							SubmissionAuthor submissionAuthor = new SubmissionAuthor();
+							//retirada tela login
+							//int idCorrespondingAuthor = RiSEEventLoginScreen.usuarioLogado.getIdUser();
+							//retirada tela login
+							int idCorrespondingAuthor = Integer.valueOf(lblIdUserLogado.getText());
+							submissionAuthor.setIdAuthor(idCorrespondingAuthor);
+							submissionAuthor.setIdSubmission(Integer.valueOf(lblLastSubmissionId.getText()));
+							submissionAuthor.setIdActivity(RiseEventsMainScreenP.facade.getActivityIdByName(comboBoxActivityName.getSelectedItem().toString()));
+							RiseEventsMainScreenP.facade.insertSubmissionAuthor(submissionAuthor);
 							//#endif
 							JOptionPane.showMessageDialog(getContentPane(),
 									"Submission inserida com sucesso", "Sucesso",
@@ -338,6 +448,12 @@ public class SubmissionPartialInsertScreenP extends JInternalFrame {
 							e1.printStackTrace();
 						}
 						//#if ${InsertAuthors} == "T"
+						 catch (SubmissionAuthorAlreadyInsertedException e1) {
+							JOptionPane.showMessageDialog(getContentPane(),
+									e1.toString(), "Erro",
+									JOptionPane.INFORMATION_MESSAGE);
+							e1.printStackTrace();
+						}
 						//#endif
 
 

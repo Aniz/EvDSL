@@ -149,12 +149,12 @@ public class {{systemName}}Facade {
 		return activityList.getActivitiesByEvent(idEvent);
 	}
 {% if 'Event' in data %}
-	{% if 'program' in data.User.statments %}
+	{% if 'eventProgram' in data.User.statments %}
 	public void generateProgram (List<Activity> activityList, Event event) throws DocumentException, IOException{
 		eventList.generateProgram(activityList, event);
 	}
 	{% endif %}
-	{% if 'importantDates' in data.User.statments %}
+	{% if 'eventImportantDates' in data.User.statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
 		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}
@@ -206,8 +206,8 @@ public class {{systemName}}Facade {
 		return activityList.getListOfAuthorsPerActivity(idActivity);
 	}
 	
-	public void listOfAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
-		activity.listOfAuthorsPerActivity(authorsPerActivity);
+	public void listofAuthorsPerActivity(Set<String> authorsPerActivity, Activity activity) throws DocumentException, IOException{
+		activity.listofAuthorsPerActivity(authorsPerActivity);
 	}
 	{% endif %}
 {% endif %}
@@ -239,7 +239,7 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 	}
 {% endif %}	
 {% if 'Submission' in data %}	
-	{% if 'insertAttachment' in data.Submission.statments %}
+	{% if 'submissionInsertAttachment' in data.Submission.statments %}
 	public void insertAttachment(File attachment, int idActivity) throws RepositoryException, SubmissionAlreadyInsertedException{
 		this.submissionList.inserAttachmanet(attachment, idActivity);
 	}
@@ -309,12 +309,12 @@ public Author searchAuthor(int idAuthor) throws AuthorNotFoundException, Reposit
 		return reviewerList.getReviewerByknowledgeArea(knowledgearea);
 	}
 {% endif %}	
-{% if 'program' in statments %}
+{% if 'eventProgram' in statments %}
 	public void generateProgram (List<Activity> activities, Event event) throws DocumentException, IOException{
 		eventList.generateProgram(activities, event);
 	}
 {% endif %}	
-{% if 'importantDates' in statments %}
+{% if 'eventImportantDates' in statments %}
 	public void generateImportantDates(String abstractDate, String fullPaperDate, String notificationDate, Event event) throws DocumentException, IOException{
 		eventList.generateImportantDates(abstractDate, fullPaperDate, notificationDate, event);
 	}

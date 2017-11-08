@@ -87,7 +87,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 	private JTable tableSelectReviewer;
 	
 	private JButton btnBack;
-	{% if 'interestConflict' in data.statments %}
+	{% if 'assignmentInterestConflict' in data.statments %}
 	private JButton btnGenerate;
 	{% endif %}
 	private JTextField textFieldDate;
@@ -146,7 +146,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		SelectButtonAction selectAction = new SelectButtonAction(); 
 		CleanButtonAction cleanAction = new CleanButtonAction();
 		BackButtonAction backAction = new BackButtonAction();
-		{% if "interestConflict" in data.statments %}
+		{% if "assignmentInterestConflict" in data.statments %}
 		GenerateButtonAction generateAction = new GenerateButtonAction();
 		{% endif %}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -250,7 +250,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		list.setBounds(335, 106, 1, 1);
 		getContentPane().add(list);
 		
-		{% if "interestConflict" in data.statments %}
+		{% if "assignmentInterestConflict" in data.statments %}
 		btnGenerate = new JButton("Generate");
 		btnGenerate.setBounds(248, 273, 117, 29);
 		contentPane.add(btnGenerate);
@@ -263,7 +263,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		btnBack.addActionListener(backAction);
 		buttonInsert.addActionListener(buttonInsertRigthAction);
 		buttonRemove.addActionListener(buttonInsertLeftAction);
-		{% if "interestConflict" in data.statments %}
+		{% if "assignmentInterestConflict" in data.statments %}
 		btnGenerate.addActionListener(generateAction);
 		{% endif %}
 
@@ -422,7 +422,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 					}
 				}
 				{% endif %}
-				{% if "interestConflict" in data.statments %}
+				{% if "assignmentInterestConflict" in data.statments %}
 				boolean resultAutomaticConflict1 = false;
 				boolean resultAutomaticConflict2 = false;
 				boolean resultAutomaticConflict3 = false;
@@ -682,7 +682,7 @@ public class AssignmentManagementScreenP extends JInternalFrame {
 		}
 	}
 
-	{% if "interestConflict" in data.statments %}
+	{% if "assignmentInterestConflict" in data.statments %}
 	private class GenerateButtonAction  implements ActionListener{ 
 
 		@Override

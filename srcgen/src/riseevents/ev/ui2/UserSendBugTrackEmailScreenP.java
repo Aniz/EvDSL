@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
-import org.apache.commons.mail.EmailException;
+// import org.apache.commons.mail.EmailException;
 
 import riseevents.ev.exception.RepositoryException;
 import riseevents.ev.util.LibraryOfDSL;
@@ -193,16 +193,16 @@ public class UserSendBugTrackEmailScreenP extends JInternalFrame {
 			String assunto = comboBoxAssunto.getSelectedItem().toString();
 			String mensagem = textFieldTitulo.getText() + "\n\n" + textPaneObservacoes.getText() + "\n\n\n" + textFieldNome.getText() + "\n" + "Resacher in " + textFieldArea.getText() + "\n" + comboBoxEscolaridade.getSelectedItem().toString() + " - " + textFieldEmail.getText() ; 
 			
-			try {
-				String msg = LibraryOfDSL.sendBugtrackEmail(nome, assunto, mensagem);
-				JOptionPane.showMessageDialog(getContentPane(),
-						msg.toString(), "SUCESSO",
-						JOptionPane.INFORMATION_MESSAGE);
-//				email.sendBugtrackEmail(nome, assunto, mensagem, email);
-			} catch (EmailException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+// 			try {
+// 				String msg = LibraryOfDSL.sendBugtrackEmail(nome, assunto, mensagem);
+// 				JOptionPane.showMessageDialog(getContentPane(),
+// 						msg.toString(), "SUCESSO",
+// 						JOptionPane.INFORMATION_MESSAGE);
+// //				email.sendBugtrackEmail(nome, assunto, mensagem, email);
+// 			} catch (EmailException e1) {
+// 				// TODO Auto-generated catch block
+// 				e1.printStackTrace();
+// 			}
 		}
 	}
 	

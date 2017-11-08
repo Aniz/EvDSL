@@ -104,6 +104,7 @@ CREATE TABLE author(
 	nameAuthor varchar(255) NOT NULL, 
 	filiation varchar(255) NOT NULL, 
 	email varchar(255) NOT NULL, 
+				
 	  
 PRIMARY KEY (idAuthor));
 
@@ -195,8 +196,3 @@ dateOfIssue varchar(255) NOT NULL,
 PRIMARY KEY (idReceipt),
 FOREIGN KEY (idPayment) REFERENCES Payment (idPayment));
 
-Create table newoption(
-	idNewOption int(10) NOT NULL AUTO_INCREMENT,
-	typeNewOption varchar(255) NOT NULL,
-				
-PRIMARY KEY (idNewOption));

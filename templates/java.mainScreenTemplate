@@ -43,7 +43,11 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-	private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|upperfirst}};	
+	 			{% if  actionKey in ["reportsFrequencyPerEvent","reportsFrequencyPerActivity","reportsListOfAuthors"] %}
+    	private {{key}}{{actionKey|upperfirst}}ScreenP screen{{key}}{{actionKey|upperfirst}};	
+    			{% else %}                   
+		private {{actionKey|upperfirst}}ScreenP screen{{actionKey|upperfirst}};	
+				{% endif %}
 			{% endif %}
 		{% endfor %}
 	{% endif %}
@@ -133,14 +137,18 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-		{{key}}{{actionKey|upperfirst}}MenuAction {{key|lower}}{{actionKey|upperfirst}}Action = new {{key}}{{actionKey|upperfirst}}MenuAction();	
+	 			{% if  actionKey in ["reportsFrequencyPerEvent","reportsFrequencyPerActivity","reportsListOfAuthors"] %}
+    	{{key}}{{actionKey|upperfirst}}MenuAction {{key|lower}}{{actionKey|upperfirst}}Action = new {{key}}{{actionKey|upperfirst}}MenuAction();	
+				{% else %}                   
+		{{actionKey|upperfirst}}MenuAction {{actionKey}}Action = new {{actionKey|upperfirst}}MenuAction();	
+				{% endif %}
 			{% endif %}
 		{% endfor %}
 	{% endif %}
 
 {% endfor %}
 
-		{% if 'sendBugTrackEmail' in data.statments %}
+		{% if 'userSendBugTrackEmail' in data.statments %}
 		BugtrackScreenMenuAction bugtrackAction = new BugtrackScreenMenuAction();
 		{% endif %}
 		{{systemName}}MainScreenP.facade = {{systemName}}Facade.getInstance();
@@ -245,11 +253,18 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% endfor %}
 	{% if value.statments %}
 	{% for actionKey,statment in value.statments.items() %}
-		{% if  statment.condition == 'def' %}
+		
+			{% if  statment.condition == 'def' %}
+	 			{% if  actionKey in ["reportsFrequencyPerEvent","reportsFrequencyPerActivity","reportsListOfAuthors"] %}
 		JMenuItem mntm{{key}}{{actionKey|upperfirst}} = new JMenuItem("{{actionKey|splitName}}");
 		mn{{key}}.add(mntm{{key}}{{actionKey|upperfirst}});
 		mntm{{key}}{{actionKey|upperfirst}}.addActionListener({{key|lower}}{{actionKey|upperfirst}}Action);
-		{% endif %}
+    			{% else %}                   
+		JMenuItem mntm{{actionKey|upperfirst}} = new JMenuItem("{{actionKey|splitName}}");
+		mn{{key}}.add(mntm{{actionKey|upperfirst}});
+		mntm{{actionKey|upperfirst}}.addActionListener({{actionKey}}Action);
+				{% endif %}
+			{% endif %}
 	{% endfor %}
 	{% endif %}
 {% endif %}
@@ -258,7 +273,7 @@ public class {{systemName}}MainScreenP extends JFrame {
 		// menuBar.add(mnReports);
 		
 		mntmExit.addActionListener(exitMenuAction);
-	{% if 'sendBugTrackEmail' in data.statments %}
+	{% if 'userSendBugTrackEmail' in data.statments %}
 		// mntmBugtrack.addActionListener(bugtrackAction);
 	{% endif %}
 	}
@@ -479,7 +494,8 @@ public class {{systemName}}MainScreenP extends JFrame {
 	{% if value.statments %}
 		{% for actionKey,statment in value.statments.items() %}
 			{% if  statment.condition == 'def' %}
-			private class {{key}}{{actionKey|upperfirst}}MenuAction implements ActionListener{
+	 			{% if  actionKey in ["reportsFrequencyPerEvent","reportsFrequencyPerActivity","reportsListOfAuthors"] %}
+		private class {{key}}{{actionKey|upperfirst}}MenuAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				screen{{key}}{{actionKey|upperfirst}} = {{key}}{{actionKey|upperfirst}}ScreenP.getInstance{{key}}{{actionKey|upperfirst}}ScreenP();
@@ -494,7 +510,23 @@ public class {{systemName}}MainScreenP extends JFrame {
 					e1.printStackTrace();
 					}
 				}  
-			}
+			}		{% else %}                   
+		private class {{actionKey|upperfirst}}MenuAction implements ActionListener{
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				screen{{actionKey|upperfirst}} = {{actionKey|upperfirst}}ScreenP.getInstance{{actionKey|upperfirst}}ScreenP();
+				if(screen{{actionKey|upperfirst}}.getParent() == null){
+					desktopPane.add(screen{{actionKey|upperfirst}});
+				}
+				screen{{actionKey|upperfirst}}.setVisible(true);
+				desktopPane.moveToFront(screen{{actionKey|upperfirst}});
+				try {
+					screen{{actionKey|upperfirst}}.setSelected(true);
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+					}
+				}  
+			}		{% endif %}
 			{% endif %}
 		{% endfor %}
 	{% endif %}

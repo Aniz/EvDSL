@@ -14,13 +14,16 @@ import re
 from textx.metamodel import metamodel_from_file
 from textx.export import metamodel_export, model_export
 
-def main(debug=False):
+def main(fileName="event.ev",debug=False):
 
     this_folder = dirname(__file__)
     event_mm = get_event_mm(debug)
 
+    if sys.argv[1:]:
+        fileName = sys.argv[1]
+    
     # Build Event model from person.ent file
-    event_model = event_mm.model_from_file(join(this_folder, 'event.ev'))
+    event_model = event_mm.model_from_file(join(this_folder, fileName))
 
     def javatype(s):
         """
@@ -222,7 +225,10 @@ def main(debug=False):
                 if len(value["statments"]) > 0:
                     for keyStatment,viewStatment in value["statments"].items():
                         if (viewStatment.condition == 'def'):
-                           copyCodeFile(viewCodeFolder,viewFolder,key+upperfirst(viewStatment.actionType)+"ScreenP",jinja_env,value,componentExtraData,systemName,avaliableDict)
+                            if viewStatment.actionType in ["reportsFrequencyPerEvent","reportsFrequencyPerActivity","reportsListOfAuthors"]:
+                               copyCodeFile(viewCodeFolder,viewFolder,key+upperfirst(viewStatment.actionType)+"ScreenP",jinja_env,value,componentExtraData,systemName,avaliableDict)
+                            else:
+                               copyCodeFile(viewCodeFolder,viewFolder,upperfirst(viewStatment.actionType)+"ScreenP",jinja_env,value,componentExtraData,systemName,avaliableDict)
         
         else :
             #print("[Option Error] '%s' not found. Option is undefined or their dependences are missing" % key)
@@ -312,6 +318,7 @@ def upperfirst(x):
     return x[0].upper()+x[1:]
 
 def splitName(fullName):
+    fullName = upperfirst(fullName)
     return re.sub('([a-z])([A-Z])',"\g<1> \g<2>",fullName)
 
 def createDotFiles(event_mm,event_model,dotFolder):
