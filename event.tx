@@ -22,15 +22,13 @@ Condition:
 ;
 
 Option:
-  'add' entity=Entity 
-  ('+' properties*=Property)*     
+  'add' entity=Entity   
   ("types" categories*=Category[',']".")*
   ("show" command=Command)*
 ;
 
 NewOption:
-  'addNew' entity=ID 
-  ('+' properties*=Property)*     
+  'addNew' entity=ID   
   ("show" command=Command)*
   ("types" categories*=Category[',']".")*
 ;
@@ -45,10 +43,6 @@ Category:
 
 Entity:
   'Speaker'|'Organizer'|'User'|'Event'|'Payment'| 'Activity' | 'Assignment'|'Submission'|'Reviewer'|'Author' | 'CheckingCopy' | 'Receipt' | 'Review'
-;
-
-Property:
-    name=ID ':' type=[Type] ('='alias=ID)*
 ;
 
 // Type can be SimpleType or Entity
