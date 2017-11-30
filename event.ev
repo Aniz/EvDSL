@@ -1,92 +1,85 @@
-//gmail
 
-	Create RiseEvents rise password
+Create RiseEvents rise password
 
 add User
+		
+	types Associado,Profissional,Estudante.		
 	show Insert Update Search Remove ListAll
-	types Associado,Profissional,Estudante.
 
-    
-add Organizer 
-    show Insert Update Search Remove ListAll
-    types GeneralChair, 
-		ProgramChair, 
-		WorkshopChair, 
+add Organizer
+	types 
+		GeneralChair,
+		ProgramChair,
+		WorkshopChair,
 		TutorialChair,
 		ProceedingsChair,
 		PanelChair.
-
-add Reviewer 
+			
 	show Insert Update Search Remove ListAll
-
-add Speaker 
+	
+add Speaker	
 	show Insert Update Search Remove ListAll
-
-add Event 
-    show Insert Update Search Remove ListAll Management
-		
-add Payment
-	show Insert Update Search Remove ListAll Management 
-	types Avista,Debito,Credito.
-
-add Activity
+	
+add Reviewer	
+	show Insert Update Search Remove ListAll
+		 
+add Event
+					
 	show Insert Update Search Remove ListAll Management
-	types MiniCurso = Mini, 
-		Tutorial, 
-		Painel, 
+
+add Activity		
+	types 
+		MiniCurso,
+		Tutorial,
+		Painel,
 		Workshop,
-		MainTrack = hidden.
+		MainTrack .
+	show Insert Update Search Remove ListAll Management
 
-add Submission
+add Payment		
+	types AVista,Credito,Debito.
+	show Insert Update Search Remove ListAll Management
+		
+add Submission		
+	types Parcial,Completa.
 	show Search Remove ListAll
-	types Completa,Parcial.
-
-//add Author
-
-add Assignment
-show Insert Search Remove ListAll Management
 
 add CheckingCopy
-show Insert Update Remove Search ListAll Management
+		
 	types Atestado,Certificado.
+	show Insert Update Search Remove ListAll Management
+		
+add Author
+			
+add Assignment
+	show Insert Search Remove ListAll Management
 
-addNew NewOption 
-show Management
-types Type1,Type2.
+add Receipt		
+	show Management
+		
+def User->userSendBugTrackEmail
 
-add Receipt
-show Management
+if Reviewer->reviewerRoundofReview
 
-def Activity -> reportsListOfAuthors
-def Activity -> reportsFrequencyPerActivity
+def Event->eventImportantDates	 
+def Event->reportsFrequencyPerEvent	 
+def Event->eventProgram 
 
-if CheckingCopy.Atestado -> checkingCopyAtestado
-if CheckingCopy.Certificado -> checkingCopyCertificado 
-if CheckiCopy.Certificado -> checkingCopyCertificado 
+def Activity->reportsFrequencyPerActivity
+def Activity->reportsListOfAuthors
 
-def Event -> program
-def Event -> importantDates
-def Event -> reportsFrequencyPerEvent 
+if Payment.Debito->generateCarne	 
+if Payment.AVista->generateBoleto	 
+if Payment.Credito->askCardInfo
 
-if Payment.Credito -> askCardInfo 
-if Payment.Debito -> generateCarne
-if Payment.Avista -> generateBoleto
+def Submission->submissionCompleteInsert
+def Submission->submissionPartialInsert
+if Submission.Completa->submissionInsertAttachment
 
-if Assignment -> notificationsDeadline
-if Assignment -> notificationsPaperAssignemnt
-if Assignment -> notificationsAceptanceRejection
+if CheckingCopy.Certificado->checkingCopyCertificado
+if CheckingCopy.Atestado->checkingCopyAtestado
 
-//def Assignment -> assigmentChairIndication
-//def Assignment -> assigmentAutomtic
-
-if Assignment -> interestConflict
-
-if Submission.Completa -> insertAttachment
-
-def User -> sendBugTrackEmail
-
-//def Submission -> insertAuthors
-def Submission -> completeInsert
-def Submission -> partialInsert
-
-if Reviewer -> reviewRoundofReview
+if Assignment->notificationsAceptanceRejection
+if Assignment->notificationPaperAssignment
+if Assignment->assignmentInterestConflict 
+if Assignment->notificationsDeadline
