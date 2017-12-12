@@ -35,10 +35,6 @@ add Activity
 		Workshop,
 		MainTrack .
 	show Insert Update Search Remove ListAll Management
-
-add Payment		
-	types AVista,Credito,Debito.
-	show Insert Update Search Remove ListAll Management
 		
 add Submission		
 	types Parcial,Completa.
@@ -67,10 +63,6 @@ def Event->eventProgram
 
 def Activity->reportsFrequencyPerActivity
 def Activity->reportsListOfAuthors
-
-if Payment.Debito->generateCarne	 
-if Payment.AVista->generateBoleto	 
-if Payment.Credito->askCardInfo
 
 def Submission->submissionCompleteInsert
 def Submission->submissionPartialInsert
